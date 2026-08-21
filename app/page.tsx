@@ -170,6 +170,7 @@ function Cite({ id }: { id: string }) {
 
 export default function Home() {
   const [theme, setTheme] = useState<Theme>("all");
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   const visiblePillars = theme === "all" ? pillarData : pillarData.filter((item) => item.tag === theme);
 
   return (
@@ -210,7 +211,7 @@ export default function Home() {
           </aside>
         </div>
         <figure className="hero-photo">
-          <img src="/laos-freight.jpg" alt="ການຂົນສົ່ງສິນຄ້າຜ່ານຂົວມິດຕະພາບໃນລາວ" />
+          <img src={`${basePath}/laos-freight.jpg`} alt="ການຂົນສົ່ງສິນຄ້າຜ່ານຂົວມິດຕະພາບໃນລາວ" />
           <figcaption>ການເຊື່ອມຕໍ່ແມ່ນທ່າແຮງ—ແຕ່ຕ້ອງປ່ຽນຈາກ “ທາງຜ່ານ” ເປັນມູນຄ່າພາຍໃນ. ຮູບ: World Bank / Phoonsab Thevongsa</figcaption>
         </figure>
       </header>
@@ -336,7 +337,7 @@ export default function Home() {
       </section>
 
       <section className="photo-break">
-        <img src="/laos-weaver.jpg" alt="ແຮງງານລາວກຳລັງທໍຜ້າດ້ວຍເຄື່ອງ" />
+        <img src={`${basePath}/laos-weaver.jpg`} alt="ແຮງງານລາວກຳລັງທໍຜ້າດ້ວຍເຄື່ອງ" />
         <div className="photo-overlay">
           <p>“ທຸລະກິດບໍ່ໄດ້ແຂ່ງຂັນພຽງລາຄາ—ແຕ່ແຂ່ງຂັນເພື່ອຮັກສາຄົນ.”</p>
           <span>ຮູບ: World Bank / Stanislas Fradelizi</span>

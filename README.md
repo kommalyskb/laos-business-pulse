@@ -6,6 +6,9 @@ digital payments, capital-raising risks, and practical recommendations.
 
 The live owner-only deployment is managed separately through OpenAI Sites.
 
+Public GitHub Pages deployment:
+[https://kommalyskb.github.io/laos-business-pulse/](https://kommalyskb.github.io/laos-business-pulse/)
+
 ## What is included
 
 - Lao-language executive summary and detailed analysis
@@ -40,6 +43,15 @@ npm run build
 ```
 
 The Sites-compatible production build is written to `dist/`.
+
+For the GitHub Pages static export:
+
+```bash
+GITHUB_PAGES=true NEXT_PUBLIC_BASE_PATH=/laos-business-pulse npm run build:pages
+```
+
+The static site is written to `out/`. Pushes to `main` automatically publish
+that export through `.github/workflows/deploy-pages.yml`.
 
 ## Reuse and customize
 
