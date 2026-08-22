@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "@fontsource-variable/noto-sans-lao/wght.css";
 import "./globals.css";
 
 const isGitHubPages = process.env.GITHUB_PAGES === "true";

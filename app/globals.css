@@ -18,7 +18,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: "Noto Sans Lao", "Phetsarath OT", "Lao UI", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Noto Sans Lao Variable", "Noto Sans Lao", "Phetsarath OT", "Lao UI", ui-sans-serif, system-ui, sans-serif;
   text-rendering: optimizeLegibility;
 }
 button, input { font: inherit; }
