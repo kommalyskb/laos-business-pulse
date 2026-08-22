@@ -13,6 +13,7 @@ Public GitHub Pages deployment:
 ## What is included
 
 - Lao-language executive summary and detailed analysis
+- Topic-based reading guide and plain-language glossary for general readers
 - Drill-down sections with evidence and recommendations
 - Responsive CSS charts and data cards
 - Sector analysis for finance, lotteries, government projects, digital services,

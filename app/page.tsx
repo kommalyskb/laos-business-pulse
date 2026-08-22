@@ -43,7 +43,7 @@ const sources = [
     year: "2026",
     title: "Lao PDR: 2025 Article IV Consultation",
     url: "https://www.imf.org/en/publications/cr/issues/2026/02/20/lao-peoples-democratic-republic-2025-article-iv-consultation-press-release-staff-report-574181",
-    use: "ຖານະມະຫາພາກ, ລະບົບທະນາຄານ, ໜີ້ສິນ ແລະ governance",
+    use: "ຖານະມະຫາພາກ, ລະບົບທະນາຄານ, ໜີ້ສິນ ແລະການບໍລິຫານ",
   },
   {
     id: "adb-profit26",
@@ -59,7 +59,7 @@ const sources = [
     year: "2026",
     title: "Corruption Perceptions Index 2025",
     url: "https://www.transparency.org/en/cpi/2025",
-    use: "ດັດຊະນີການຮັບຮູ້ corruption ຂອງພາກລັດ",
+    use: "ດັດຊະນີການຮັບຮູ້ການທຸຈະລິດຂອງພາກລັດ",
   },
   {
     id: "ilo25",
@@ -75,7 +75,7 @@ const sources = [
     year: "2026",
     title: "Annual Economic Report 2025",
     url: "https://bol.gov.la/en/fileupload/30-06-2026_1782819835.pdf",
-    use: "ລະບົບຊຳລະເງິນ, QR ຂ້າມແດນ, e-payment ແລະຕະຫຼາດທຶນ",
+    use: "ລະບົບຊຳລະເງິນ, QR ຂ້າມແດນ, ການຊຳລະອອນລາຍ ແລະຕະຫຼາດທຶນ",
   },
   {
     id: "adb-integration",
@@ -83,7 +83,7 @@ const sources = [
     year: "2022",
     title: "Leveraging Benefits of Regional Economic Integration",
     url: "https://www.adb.org/publications/regional-economic-integration-lao-pdr-gms",
-    use: "ການເຊື່ອມຕໍ່ GMS, ການສົ່ງອອກ ແລະການຫັນ land-linked",
+    use: "ການເຊື່ອມຕໍ່ GMS, ການສົ່ງອອກ ແລະການຫັນເປັນປະເທດເຊື່ອມໂຍງ",
   },
   {
     id: "lsc-issuers",
@@ -107,7 +107,7 @@ const sources = [
     year: "2026",
     title: "Disclosure Information",
     url: "https://lsx.com.la/en/disclosure/disclosure",
-    use: "ບົດບາດຂອງ disclosure ຕໍ່ນັກລົງທຶນ ແລະຕະຫຼາດ",
+    use: "ບົດບາດຂອງການເປີດເຜີຍຂໍ້ມູນຕໍ່ນັກລົງທຶນ ແລະຕະຫຼາດ",
   },
   {
     id: "set-lsx",
@@ -115,7 +115,7 @@ const sources = [
     year: "2026",
     title: "GMS Exchanges Overview: Lao Securities Exchange",
     url: "https://www.set.or.th/en/market/index/gms-exchanges/overview",
-    use: "ໂຄງສ້າງຜູ້ຖືຮຸ້ນ, ຜະລິດຕະພັນ ແລະ T+2 settlement ຂອງ LSX",
+    use: "ໂຄງສ້າງຜູ້ຖືຮຸ້ນ, ຜະລິດຕະພັນ ແລະການຊຳລະແບບ T+2 ຂອງ LSX",
   },
   {
     id: "adb-capital26",
@@ -139,7 +139,7 @@ const sources = [
     year: "2026",
     title: "Gold Certificate of Lao Bullion Bank",
     url: "https://laobullionbank.com/product/38d3f9c2-3ca0-48b8-9e28-0a7dff162f4c",
-    use: "ການນຳ Gold Certificate ເປັນຫຼັກຄ້ຳ ແລະຍອດຝາກຄຳຂັ້ນຕ່ຳ 15 ກຣາມ",
+    use: "ການນຳໃບຢັ້ງຢືນຄຳເປັນຫຼັກຄ້ຳ ແລະຍອດຝາກຄຳຂັ້ນຕ່ຳ 15 ກຣາມ",
   },
   {
     id: "kpl-gold-bank",
@@ -147,7 +147,7 @@ const sources = [
     year: "2024",
     title: "BOL Addresses Economic Concerns, Outlines Strategic Measures for 2024",
     url: "https://kpl.gov.la/En/detail.aspx/detail.aspx?id=87567",
-    use: "ບັນຊີອອມຄຳ, gold-backed loans ແລະເປົ້າໝາຍຂະຫຍາຍການເຂົ້າເຖິງທຶນ",
+    use: "ບັນຊີອອມຄຳ, ສິນເຊື່ອຄ້ຳດ້ວຍຄຳ ແລະເປົ້າໝາຍຂະຫຍາຍການເຂົ້າເຖິງທຶນ",
   },
 ];
 
@@ -165,16 +165,16 @@ const pillarData = [
     id: "governance",
     tag: "system" as Theme,
     no: "01",
-    title: "ການແຂ່ງຂັນ ແລະ governance",
+    title: "ການແຂ່ງຂັນ ແລະການບໍລິຫານທີ່ດີ",
     risk: "ສູງ",
     summary: "ຄວາມບໍ່ແນ່ນອນຂອງກົດກາ, ຄ່າໃຊ້ຈ່າຍນອກລະບົບ ແລະໂອກາດທີ່ອາໄສເຄືອຂ່າຍ ເຮັດໃຫ້ຕົ້ນທຶນທີ່ແທ້ຈິງຄາດຄະເນຍາກ.",
     evidence: [
       "ADB ProFIT ຕິດຕາມ 6 ມິຕິ: ການເລີ່ມທຸລະກິດ, ຄວາມໂປ່ງໃສ, ພາລະກົດລະບຽບ, ຄ່ານອກລະບົບ, ຄວາມສະໝ່ຳສະເໝີຂອງນະໂຍບາຍ ແລະການບໍລິຫານທີ່ເປັນມິດ.",
-      "CPI 2025 ໃຫ້ລາວ 34/100 ຄະແນນ, ອັນດັບ 109. ນີ້ແມ່ນດັດຊະນີການຮັບຮູ້—not ການນັບຄະດີໂດຍກົງ.",
-      "IMF ປະເມີນວ່າຊ່ອງຫວ່າງດ້ານ governance ແລະ business regulation ຍັງຈຳກັດສັກກະຍະພາບການເຕີບໂຕ.",
+      "CPI 2025 ໃຫ້ລາວ 34/100 ຄະແນນ, ອັນດັບ 109. ນີ້ແມ່ນດັດຊະນີການຮັບຮູ້—ບໍ່ແມ່ນການນັບຄະດີໂດຍກົງ.",
+      "IMF ປະເມີນວ່າຊ່ອງຫວ່າງດ້ານການບໍລິຫານ ແລະກົດລະບຽບທຸລະກິດ ຍັງຈຳກັດສັກກະຍະພາບການເຕີບໂຕ.",
     ],
-    impact: "ຂັ້ນຕອນບໍ່ແນ່ນອນ → ຕົ້ນທຶນລັບເພີ່ມ → ຜູ້ລົງທຶນເພີ່ມ risk premium → SME ເສຍປຽບ",
-    response: "ໃຊ້ e-licensing ແລະ e-procurement, ເປີດເຜີຍຜູ້ໄດ້ຮັບສັນຍາ, ກຳນົດເວລາອະນຸມັດ ແລະມີຊ່ອງທາງອຸທອນທີ່ກວດສອບໄດ້.",
+    impact: "ຂັ້ນຕອນບໍ່ແນ່ນອນ → ຕົ້ນທຶນລັບເພີ່ມ → ຜູ້ລົງທຶນຄິດຄ່າຄວາມສ່ຽງເພີ່ມ → SME ເສຍປຽບ",
+    response: "ໃຊ້ລະບົບອະນຸຍາດ ແລະຈັດຊື້ອອນລາຍ, ເປີດເຜີຍຜູ້ໄດ້ຮັບສັນຍາ, ກຳນົດເວລາອະນຸມັດ ແລະມີຊ່ອງທາງອຸທອນທີ່ກວດສອບໄດ້.",
     refs: ["adb-profit26", "cpi25", "imf26"],
   },
   {
@@ -187,10 +187,10 @@ const pillarData = [
     evidence: [
       "ແຮງງານລາວທີ່ມີເອກະສານໃນໄທມີຫຼາຍກວ່າ 324,000 ຄົນໃນເດືອນກຸມພາ 2025; ເກົາຫຼີໃຕ້ປະມານ 17,000 ຄົນ.",
       "ສັດສ່ວນວຽກຮັບຄ່າຈ້າງຫຼຸດຈາກ 43.7% ໃນພຶດສະພາ 2022 ເປັນ 36.1% ໃນມິຖຸນາ 2024.",
-      "Enterprise Survey 2024: 36% ຂອງບໍລິສັດລະບຸວ່າທັກສະແຮງງານເປັນອຸປະສັກອັນດັບໜຶ່ງ.",
+      "ການສຳຫຼວດວິສາຫະກິດ 2024: 36% ຂອງບໍລິສັດລະບຸວ່າທັກສະແຮງງານເປັນອຸປະສັກອັນດັບໜຶ່ງ.",
     ],
     impact: "ຄ່າແຮງແທ້ຈິງຫຼຸດ → ແຮງງານຍ້າຍອອກ → ບໍລິສັດຫາຄົນຍາກ → ຜະລິດຕະພາບຕ່ຳ → ຂຶ້ນຄ່າແຮງຍາກ",
-    response: "ໃຫ້ຄ່າຕອບແທນອີງທັກສະ, ສ້າງ career path, ຝຶກງານຮ່ວມລັດ–ເອກະຊົນ ແລະຮັບຮອງທັກສະຂອງແຮງງານທີ່ກັບຄືນຈາກຕ່າງປະເທດ.",
+    response: "ໃຫ້ຄ່າຕອບແທນອີງທັກສະ, ສ້າງເສັ້ນທາງຄວາມກ້າວໜ້າໃນອາຊີບ, ຝຶກງານຮ່ວມລັດ–ເອກະຊົນ ແລະຮັບຮອງທັກສະຂອງແຮງງານທີ່ກັບຄືນຈາກຕ່າງປະເທດ.",
     refs: ["wb-dec25", "wb-private26", "ilo25"],
   },
   {
@@ -201,12 +201,12 @@ const pillarData = [
     risk: "ສູງ",
     summary: "ລະບົບການເງິນອີງທະນາຄານເປັນຫຼັກ; ທຸລະກິດນ້ອຍທີ່ບໍ່ມີດິນຄ້ຳ ຫຼືບັນຊີມາດຕະຖານ ຖືກຕັດອອກຈາກສິນເຊື່ອ.",
     evidence: [
-      "15% ຂອງບໍລິສັດໃນ Enterprise Survey 2024 ເລືອກ access to finance ເປັນອຸປະສັກຫຼັກ.",
-      "World Bank ພົບວ່າ MSME ສ່ວນໃຫຍ່ອາໄສເງິນຕົນເອງ; ບັນຫາແມ່ນຫຼັກຄ້ຳ, ລາຍຮັບບໍ່ສະໝ່ຳສະເໝີ, informality ແລະບັນຊີບໍ່ໜ້າເຊື່ອຖື.",
-      "ການກູ້ຂອງລັດແລະບໍລິສັດໃຫຍ່ສາມາດ crowd out ສິນເຊື່ອຂອງທຸລະກິດນ້ອຍ.",
+      "15% ຂອງບໍລິສັດໃນການສຳຫຼວດວິສາຫະກິດ 2024 ເລືອກການເຂົ້າເຖິງແຫຼ່ງທຶນເປັນອຸປະສັກຫຼັກ.",
+      "World Bank ພົບວ່າ MSME ສ່ວນໃຫຍ່ອາໄສເງິນຕົນເອງ; ບັນຫາແມ່ນຫຼັກຄ້ຳ, ລາຍຮັບບໍ່ສະໝ່ຳສະເໝີ, ການຢູ່ນອກລະບົບ ແລະບັນຊີບໍ່ໜ້າເຊື່ອຖື.",
+      "ການກູ້ຂອງລັດແລະບໍລິສັດໃຫຍ່ ອາດເຮັດໃຫ້ສິນເຊື່ອທີ່ເຫຼືອສຳລັບທຸລະກິດນ້ອຍຫຼຸດລົງ.",
     ],
-    impact: "ບໍ່ມີຫຼັກຄ້ຳ → ບໍ່ໄດ້ສິນເຊື່ອ → ຂະຫຍາຍບໍ່ໄດ້ → ບັນຊີແລະ cash flow ຍັງນ້ອຍ → ກູ້ຍາກຕໍ່ໄປ",
-    response: "ສ້າງ credit bureau ທີ່ເຂັ້ມແຂງ, cash-flow lending, movable collateral, invoice finance ແລະກອງທຶນ MSME ອິດສະຫຼະທີ່ມີ monitoring.",
+    impact: "ບໍ່ມີຫຼັກຄ້ຳ → ບໍ່ໄດ້ສິນເຊື່ອ → ຂະຫຍາຍບໍ່ໄດ້ → ບັນຊີແລະກະແສເງິນສົດຍັງນ້ອຍ → ກູ້ຍາກຕໍ່ໄປ",
+    response: "ສ້າງສູນຂໍ້ມູນສິນເຊື່ອທີ່ເຂັ້ມແຂງ, ໃຫ້ກູ້ຕາມກະແສເງິນສົດ, ຮັບຊັບສິນເຄື່ອນຍ້າຍເປັນຫຼັກຄ້ຳ, ໃຫ້ທຶນຕາມໃບແຈ້ງໜີ້ ແລະສ້າງກອງທຶນ MSME ອິດສະຫຼະທີ່ກວດສອບໄດ້.",
     refs: ["wb-may25", "wb-private26", "imf26"],
   },
   {
@@ -221,8 +221,8 @@ const pillarData = [
       "ເງິນສຳຮອງສາກົນຂຶ້ນເຖິງ $4.2 ຕື້ໃນມີນາ 2026, ເທົ່າກັບ 3.8 ເດືອນຂອງການນຳເຂົ້າ.",
       "World Bank ປະເມີນພາລະຊຳລະໜີ້ 2026 ປະມານ 13% ຂອງ GDP, ຈຳກັດງົບລົງທຶນສາທາລະນະ.",
     ],
-    impact: "ຕົ້ນທຶນນຳເຂົ້າສູງ → ລາຄາຂາຍສູງ → ກຳລັງຊື້ຫຼຸດ → ຍອດຂາຍຊ້າ → cash flow ຕຶງ",
-    response: "ທຸລະກິດຄວນຫຼຸດ currency mismatch, ເຮັດ scenario cash flow 3 ລະດັບ, ເພີ່ມວັດຖຸດິບພາຍໃນ ແລະຫາລາຍຮັບສະກຸນເງິນທີ່ແຂງກວ່າ.",
+    impact: "ຕົ້ນທຶນນຳເຂົ້າສູງ → ລາຄາຂາຍສູງ → ກຳລັງຊື້ຫຼຸດ → ຍອດຂາຍຊ້າ → ກະແສເງິນສົດຕຶງ",
+    response: "ທຸລະກິດຄວນຫຼຸດຊ່ອງຫວ່າງລະຫວ່າງສະກຸນເງິນລາຍຮັບກັບໜີ້, ວາງແຜນກະແສເງິນສົດ 3 ສະຖານະການ, ເພີ່ມວັດຖຸດິບພາຍໃນ ແລະຫາລາຍຮັບສະກຸນເງິນທີ່ແຂງກວ່າ.",
     refs: ["wb-jun26", "imf26"],
   },
   {
@@ -231,14 +231,14 @@ const pillarData = [
     no: "05",
     title: "ຕະຫຼາດທຶນ ແລະ LSX",
     risk: "ປານກາງ–ສູງ",
-    summary: "LSX ເປັນຊ່ອງທາງທຶນທີ່ສຳຄັນ ແຕ່ຈຳນວນຜູ້ອອກຫຼັກຊັບ, ສະພາບຄ່ອງ ແລະ listing readiness ຍັງຈຳກັດການເຂົ້າເຖິງ.",
+    summary: "LSX ເປັນຊ່ອງທາງທຶນທີ່ສຳຄັນ ແຕ່ຈຳນວນຜູ້ອອກຫຼັກຊັບ, ສະພາບຄ່ອງ ແລະຄວາມພ້ອມກ່ອນຈົດທະບຽນ ຍັງຈຳກັດການເຂົ້າເຖິງ.",
     evidence: [
       "BOL ລາຍງານວ່າ LSX ມີ 12 ບໍລິສັດຈົດທະບຽນ ແລະມູນຄ່າຊື້ຂາຍປີ 2025 ຢູ່ທີ່ 216.76 ຕື້ກີບ.",
       "ທຶນສະສົມຈາກຮຸ້ນ, ພັນທະບັດບໍລິສັດ ແລະພັນທະບັດລັດ ບັນລຸ 67,815.55 ຕື້ກີບ ຫຼື 21% ຂອງ GDP ປີ 2024.",
-      "LSX ລະບຸວ່າ disclosure ແມ່ນຂໍ້ມູນສຳຄັນທີ່ຕ້ອງແຈ້ງຕໍ່ຕະຫຼາດແລະສາທາລະນະຕາມລະບຽບຫຼັກຊັບ.",
+      "LSX ລະບຸວ່າຂໍ້ມູນສຳຄັນຕ້ອງຖືກເປີດເຜີຍຕໍ່ຕະຫຼາດແລະສາທາລະນະຕາມລະບຽບຫຼັກຊັບ.",
     ],
-    impact: "ຕົ້ນທຶນການກຽມບັນຊີແລະ governance ສູງ → SME ບໍ່ພ້ອມຈົດທະບຽນ → ຜູ້ອອກຫຼັກຊັບໜ້ອຍ → ສະພາບຄ່ອງຕ່ຳ → ນັກລົງທຶນສົນໃຈຈຳກັດ",
-    response: "ສ້າງ SME/alternative board, ໂຄງການ listing readiness, ຕະຫຼາດ corporate bond, ນັກລົງທຶນສະຖາບັນ ແລະການເປີດເຜີຍທີ່ທັນເວລາ—ໂດຍບໍ່ຫຼຸດມາດຕະຖານຄຸ້ມຄອງ.",
+    impact: "ຕົ້ນທຶນການກຽມບັນຊີແລະການບໍລິຫານສູງ → SME ບໍ່ພ້ອມຈົດທະບຽນ → ຜູ້ອອກຫຼັກຊັບໜ້ອຍ → ສະພາບຄ່ອງຕ່ຳ → ນັກລົງທຶນສົນໃຈຈຳກັດ",
+    response: "ສ້າງກະດານສຳລັບ SME, ໂຄງການກຽມຄວາມພ້ອມຈົດທະບຽນ, ຕະຫຼາດພັນທະບັດບໍລິສັດ, ນັກລົງທຶນສະຖາບັນ ແລະການເປີດເຜີຍທີ່ທັນເວລາ—ໂດຍບໍ່ຫຼຸດມາດຕະຖານຄຸ້ມຄອງ.",
     refs: ["bol25", "lsc-issuers", "lsx-disclosure"],
   },
   {
@@ -247,14 +247,14 @@ const pillarData = [
     no: "06",
     title: "ທະນາຄານຄຳ ແລະສິນເຊື່ອຄ້ຳດ້ວຍຄຳ",
     risk: "ປານກາງ–ສູງ",
-    summary: "ທະນາຄານຄຳສາມາດປ່ຽນຄຳທີ່ຖືຄອງເປັນຫຼັກຄ້ຳໃນລະບົບການເງິນ—ແຕ່ມູນຄ່າກູ້, ດອກເບ້ຍ, haircut ແລະສິດຂາຍຫຼັກຄ້ຳຕ້ອງອ່ານຈາກສັນຍາ.",
+    summary: "ທະນາຄານຄຳສາມາດປ່ຽນຄຳທີ່ຖືຄອງເປັນຫຼັກຄ້ຳໃນລະບົບການເງິນ—ແຕ່ມູນຄ່າກູ້, ດອກເບ້ຍ, ສ່ວນຫຼຸດມູນຄ່າຫຼັກຄ້ຳ ແລະສິດຂາຍຫຼັກຄ້ຳຕ້ອງອ່ານຈາກສັນຍາ.",
     evidence: [
       "BOL ອອກຂໍ້ຕົກລົງເລກທີ 1277/ທຫລ ລົງວັນທີ 29 ພະຈິກ 2024 ເພື່ອກຳນົດຫຼັກການ ແລະມາດຕະການຂອງທຸລະກິດທະນາຄານຄຳ.",
       "Lao Bullion Bank ລະບຸວ່າ Gold Certificate ສາມາດໃຊ້ຄ້ຳສິນເຊື່ອກັບທະນາຄານທຸລະກິດ ແລະສະຖາບັນການເງິນໃນລາວໄດ້.",
       "ເວັບທະນາຄານລະບຸຍອດຝາກຄຳຂັ້ນຕ່ຳ 15 ກຣາມ ສຳລັບການໄດ້ຮັບ Gold Certificate.",
     ],
-    impact: "ຝາກຄຳ → ກວດຄຸນນະພາບ → ອອກ certificate → ປະເມີນມູນຄ່າຫຼັງ haircut → ກູ້ເງິນໄດ້ໂດຍບໍ່ຕ້ອງຂາຍຄຳ",
-    response: "ຜູ້ກູ້ຄວນປຽບທຽບ LTV, ດອກເບ້ຍແລະຄ່າທຳນຽມລວມ, ວິທີຕີລາຄາ, margin call, ສິດຂາຍຄຳເມື່ອຜິດນັດ, ການປະກັນໄພຄັງ ແລະຂັ້ນຕອນຮ້ອງຮຽນ.",
+    impact: "ຝາກຄຳ → ກວດຄຸນນະພາບ → ອອກໃບຢັ້ງຢືນ → ປະເມີນມູນຄ່າຫຼັງຫັກສ່ວນກັນຄວາມສ່ຽງ → ກູ້ເງິນໄດ້ໂດຍບໍ່ຕ້ອງຂາຍຄຳ",
+    response: "ຜູ້ກູ້ຄວນປຽບທຽບ LTV, ດອກເບ້ຍແລະຄ່າທຳນຽມລວມ, ວິທີຕີລາຄາ, ເງື່ອນໄຂເອີ້ນເງິນເພີ່ມ, ສິດຂາຍຄຳເມື່ອຜິດນັດ, ການປະກັນໄພຄັງ ແລະຂັ້ນຕອນຮ້ອງຮຽນ.",
     refs: ["bol-gold-rules", "lbb-certificate", "kpl-gold-bank"],
   },
 ];
@@ -278,6 +278,7 @@ export default function Home() {
             <span>LAOS BUSINESS PULSE</span>
           </a>
           <div className="nav-links">
+            <a href="#reader-guide">ເລືອກອ່ານ</a>
             <a href="#diagnosis">ບັນຫາ</a>
             <a href="#sectors">ຂະແໜງ</a>
             <a href="#capital-market">ຕະຫຼາດທຶນ</a>
@@ -298,11 +299,11 @@ export default function Home() {
             </p>
             <div className="hero-actions">
               <a className="primary-action" href="#summary">ອ່ານບົດສະຫຼຸບ</a>
-              <a className="text-action" href="#diagnosis">Drill down ຂໍ້ມູນ ↓</a>
+              <a className="text-action" href="#reader-guide">ເລືອກຫົວຂໍ້ທີ່ສົນໃຈ ↓</a>
             </div>
           </div>
           <aside className="hero-note">
-            <span className="note-label">THESIS</span>
+            <span className="note-label">ໃຈຄວາມຫຼັກ</span>
             <strong>ບັນຫາບໍ່ແມ່ນ “ບໍ່ມີເງິນ”</strong>
             <p>ແຕ່ແມ່ນເງິນ, ໂອກາດ ແລະອຳນາດຕະຫຼາດ ກະຈຸກຕົວຢູ່ບາງຂະແໜງ.</p>
             <div className="hero-source">ອີງໃສ່ World Bank, IMF, ADB, ILO, BOL, LSC, LSX, KPL ແລະ Transparency International</div>
@@ -316,7 +317,7 @@ export default function Home() {
 
       <section className="section summary-section" id="summary">
         <div className="section-heading">
-          <p className="eyebrow">00 · EXECUTIVE SUMMARY</p>
+          <p className="eyebrow">00 · ບົດສະຫຼຸບ</p>
           <div>
             <h2>ສະຫຼຸບໃນ 90 ວິນາທີ</h2>
             <p className="section-intro">ການເຕີບໂຕຂອງ GDP ບໍ່ໄດ້ໝາຍຄວາມວ່າທຸລະກິດນ້ອຍເຕີບໂຕຕາມ. ການກະຈາຍໂອກາດແມ່ນຄຳຖາມຫຼັກ.</p>
@@ -330,42 +331,77 @@ export default function Home() {
             </p>
           </article>
           <div className="summary-points">
-            <article><b>1</b><div><strong>ຂະໜາດນ້ອຍບໍ່ແມ່ນຈຸດອ່ອນໂດຍຕົວມັນເອງ</strong><p>ຈຸດອ່ອນແມ່ນຜະລິດຕະພາບຕ່ຳ ແລະຍັງປ່ຽນທີ່ຕັ້ງ land-linked ເປັນລາຍຮັບພາຍໃນໄດ້ບໍ່ເຕັມທີ່.</p></div></article>
-            <article><b>2</b><div><strong>ຂາດແຮງງານ ແຕ່ກໍຂາດວຽກຄຸນນະພາບ</strong><p>ຄ່າແຮງແທ້ຈິງແລະ career path ເປັນຕົວກຳນົດວ່າຄົນຈະຢູ່ ຫຼືຍ້າຍອອກ.</p></div></article>
-            <article><b>3</b><div><strong>ທຶນມີ—ແຕ່ບໍ່ໄຫຼຫາຄົນທີ່ບໍ່ມີຫຼັກຄ້ຳ</strong><p>ລະບົບທີ່ອີງດິນຄ້ຳ ບໍ່ເໝາະກັບ startup, ບໍລິການ digital ແລະທຸລະກິດຄົນຮຸ່ນໃໝ່.</p></div></article>
-            <article><b>4</b><div><strong>ທຸລະກິດທີ່ “ເຫັນຊັດ” ບໍ່ເທົ່າກັບທີ່ “ຢູ່ລອດທັງໝົດ”</strong><p>ຂະແໜງມີໃບອະນຸຍາດ ແລະໂຄງການລັດມີ visibility ສູງ, ແຕ່ທຸລະກິດຈຳເປັນຈຳນວນຫຼາຍຢູ່ລອດແບບບໍ່ໂດດເດັ່ນ.</p></div></article>
+            <article><b>1</b><div><strong>ຂະໜາດນ້ອຍບໍ່ແມ່ນຈຸດອ່ອນໂດຍຕົວມັນເອງ</strong><p>ຈຸດອ່ອນແມ່ນຜະລິດຕະພາບຕ່ຳ ແລະຍັງປ່ຽນຈາກປະເທດທາງຜ່ານ ເປັນລາຍຮັບພາຍໃນໄດ້ບໍ່ເຕັມທີ່.</p></div></article>
+            <article><b>2</b><div><strong>ຂາດແຮງງານ ແຕ່ກໍຂາດວຽກຄຸນນະພາບ</strong><p>ຄ່າແຮງແທ້ຈິງ ແລະເສັ້ນທາງຄວາມກ້າວໜ້າໃນອາຊີບ ເປັນຕົວກຳນົດວ່າຄົນຈະຢູ່ ຫຼືຍ້າຍອອກ.</p></div></article>
+            <article><b>3</b><div><strong>ທຶນມີ—ແຕ່ບໍ່ໄຫຼຫາຄົນທີ່ບໍ່ມີຫຼັກຄ້ຳ</strong><p>ລະບົບທີ່ອີງດິນຄ້ຳ ບໍ່ເໝາະກັບທຸລະກິດເລີ່ມໃໝ່, ບໍລິການດິຈິຕອນ ແລະທຸລະກິດຄົນຮຸ່ນໃໝ່.</p></div></article>
+            <article><b>4</b><div><strong>ທຸລະກິດທີ່ “ເຫັນຊັດ” ບໍ່ເທົ່າກັບທີ່ “ຢູ່ລອດທັງໝົດ”</strong><p>ຂະແໜງມີໃບອະນຸຍາດ ແລະໂຄງການລັດອາດຖືກເວົ້າເຖິງຫຼາຍ, ແຕ່ທຸລະກິດຈຳເປັນຈຳນວນຫຼາຍຢູ່ລອດແບບບໍ່ໂດດເດັ່ນ.</p></div></article>
             <article><b>5</b><div><strong>ຕະຫຼາດທຶນມີ—ແຕ່ຍັງບໍ່ເປີດກວ້າງ</strong><p>LSX ມີ 12 ບໍລິສັດອອກຫຼັກຊັບ; ຕະຫຼາດມີຄວາມໝາຍຕໍ່ທຶນໄລຍະຍາວ ແຕ່ SME ສ່ວນໃຫຍ່ຍັງບໍ່ພ້ອມເຂົ້າເຖິງ. <Cite id="bol25" /></p></div></article>
-            <article><b>6</b><div><strong>ຄຳກຳລັງກາຍເປັນຫຼັກຄ້ຳທາງການເງິນ</strong><p>Gold Certificate ເປີດທາງໃຫ້ຜູ້ຖືຄຳຂໍສິນເຊື່ອໂດຍບໍ່ຕ້ອງຂາຍຄຳ; ແຕ່ບໍ່ແມ່ນທຸກບັນຊີຄຳຈະໄດ້ສິນເຊື່ອອັດຕະໂນມັດ. <Cite id="lbb-certificate" /></p></div></article>
+            <article><b>6</b><div><strong>ຄຳກຳລັງກາຍເປັນຫຼັກຄ້ຳທາງການເງິນ</strong><p>ໃບຢັ້ງຢືນຄຳເປີດທາງໃຫ້ຜູ້ຖືຄຳຂໍສິນເຊື່ອໂດຍບໍ່ຕ້ອງຂາຍຄຳ; ແຕ່ບໍ່ແມ່ນທຸກບັນຊີຄຳຈະໄດ້ສິນເຊື່ອອັດຕະໂນມັດ. <Cite id="lbb-certificate" /></p></div></article>
           </div>
+        </div>
+      </section>
+
+      <section className="section reader-guide" id="reader-guide">
+        <div className="section-heading">
+          <p className="eyebrow">ເລືອກອ່ານ</p>
+          <div>
+            <h2>ບໍ່ຈຳເປັນຕ້ອງອ່ານທັງໝົດ</h2>
+            <p className="section-intro">ເລືອກເລີ່ມຈາກຄຳຖາມທີ່ທ່ານສົນໃຈ ແລ້ວກົດໄປຫາພາກນັ້ນໄດ້ເລີຍ.</p>
+          </div>
+        </div>
+        <div className="reader-guide-grid">
+          <a href="#diagnosis"><span>01</span><strong>ທຸລະກິດລາວຕິດບັນຫາຫຍັງ?</strong><small>ເບິ່ງ 6 ບັນຫາຫຼັກ ແລະທາງອອກ</small></a>
+          <a href="#sectors"><span>02</span><strong>ຂະແໜງໃດຢູ່ລອດ?</strong><small>ແຍກຄວາມໂດດເດັ່ນອອກຈາກຄວາມຍືນຍົງ</small></a>
+          <a href="#capital-market"><span>03</span><strong>LSX ຊ່ວຍລະດົມທຶນແນວໃດ?</strong><small>ຮູ້ຈັກໂອກາດ, ຂັ້ນຕອນ ແລະຂໍ້ຈຳກັດ</small></a>
+          <a href="#gold-banking"><span>04</span><strong>ເອົາຄຳໄປຄ້ຳກູ້ໄດ້ແນວໃດ?</strong><small>ອ່ານຂັ້ນຕອນ, ຄວາມສ່ຽງ ແລະ 7 ຄຳຖາມກ່ອນກູ້</small></a>
+          <a href="#scam-check"><span>05</span><strong>ແຍກທຸລະກິດຈິງອອກຈາກການຫຼອກລວງແນວໃດ?</strong><small>ກວດສັນຍານແດງ ແລະຫຼັກຖານທີ່ຄວນມີ</small></a>
+          <a href="#actions"><span>06</span><strong>ແຕ່ລະຝ່າຍຄວນເຮັດຫຍັງ?</strong><small>ຂໍ້ສະເໜີສຳລັບລັດ, ທະນາຄານ, ທຸລະກິດ ແລະນັກລົງທຶນ</small></a>
+        </div>
+
+        <div className="plain-language">
+          <div className="plain-language-heading">
+            <span>ຄຳສັບທີ່ຄວນຮູ້</span>
+            <p>ຄຳອັງກິດບາງຄຳຖືກໃຊ້ໃນວົງການທຸລະກິດໂດຍກົງ. ຄວາມໝາຍໃນບົດນີ້ມີດັ່ງນີ້:</p>
+          </div>
+          <dl className="term-grid">
+            <div><dt>SME / MSME</dt><dd>ທຸລະກິດຂະໜາດຈຸນລະພາກ, ນ້ອຍ ແລະກາງ</dd></div>
+            <div><dt>Cash flow</dt><dd>ກະແສເງິນສົດທີ່ເຂົ້າ ແລະອອກຈາກທຸລະກິດ</dd></div>
+            <div><dt>Governance</dt><dd>ການບໍລິຫານ, ກົດກາ ແລະການກວດສອບທີ່ໂປ່ງໃສ</dd></div>
+            <div><dt>Disclosure</dt><dd>ການເປີດເຜີຍຂໍ້ມູນສຳຄັນໃຫ້ຜູ້ລົງທຶນຮັບຮູ້</dd></div>
+            <div><dt>Liquidity</dt><dd>ຄວາມສາມາດປ່ຽນຊັບສິນເປັນເງິນ ຫຼືຊຳລະໜີ້ໄດ້ທັນເວລາ</dd></div>
+            <div><dt>LTV</dt><dd>ສັດສ່ວນເງິນກູ້ທຽບກັບມູນຄ່າຫຼັກຄ້ຳ</dd></div>
+            <div><dt>Haircut</dt><dd>ສ່ວນຫຼຸດຈາກມູນຄ່າຫຼັກຄ້ຳ ເພື່ອກັນຄວາມສ່ຽງດ້ານລາຄາ</dd></div>
+            <div><dt>APR</dt><dd>ຕົ້ນທຶນການກູ້ລວມຕໍ່ປີ ທີ່ລວມດອກເບ້ຍ ແລະຄ່າທຳນຽມ</dd></div>
+          </dl>
         </div>
       </section>
 
       <section className="section snapshot" aria-labelledby="snapshot-title">
         <div className="section-heading">
-          <p className="eyebrow">DATA SNAPSHOT</p>
+          <p className="eyebrow">ຕົວເລກສຳຄັນ</p>
           <div>
             <h2 id="snapshot-title">ພາບລວມຈາກຕົວເລກ</h2>
             <p className="section-intro">ຕົວເລກແຕ່ລະອັນເຊື່ອມໄປຫາແຫຼ່ງຂໍ້ມູນດ້ານລຸ່ມ.</p>
           </div>
         </div>
         <div className="metric-grid">
-          <article className="metric"><span className="metric-tag">GROWTH</span><b>4.8%</b><span>GDP ເຕີບໂຕໃນ 2025 <Cite id="wb-jun26" /></span></article>
-          <article className="metric"><span className="metric-tag">STRUCTURE</span><b>94%</b><span>ວິສາຫະກິດຈົດທະບຽນເປັນລາຍຍ່ອຍ <Cite id="wb-private26" /></span></article>
-          <article className="metric"><span className="metric-tag">SKILLS</span><b>36%</b><span>ບໍລິສັດເລືອກທັກສະແຮງງານເປັນບັນຫາຫຼັກ <Cite id="wb-private26" /></span></article>
-          <article className="metric"><span className="metric-tag">MIGRATION</span><b>324k+</b><span>ແຮງງານລາວມີເອກະສານຢູ່ໄທ <Cite id="wb-dec25" /></span></article>
-          <article className="metric"><span className="metric-tag">DEBT</span><b>13%</b><span>ປະມານການພາລະຊຳລະໜີ້ຕໍ່ GDP ໃນ 2026 <Cite id="wb-jun26" /></span></article>
-          <article className="metric"><span className="metric-tag">TRUST</span><b>34/100</b><span>CPI 2025; ດັດຊະນີການຮັບຮູ້ <Cite id="cpi25" /></span></article>
+          <article className="metric"><span className="metric-tag">ການເຕີບໂຕ</span><b>4.8%</b><span>GDP ເຕີບໂຕໃນ 2025 <Cite id="wb-jun26" /></span></article>
+          <article className="metric"><span className="metric-tag">ໂຄງສ້າງ</span><b>94%</b><span>ວິສາຫະກິດຈົດທະບຽນເປັນລາຍຍ່ອຍ <Cite id="wb-private26" /></span></article>
+          <article className="metric"><span className="metric-tag">ທັກສະ</span><b>36%</b><span>ບໍລິສັດເລືອກທັກສະແຮງງານເປັນບັນຫາຫຼັກ <Cite id="wb-private26" /></span></article>
+          <article className="metric"><span className="metric-tag">ການຍ້າຍຖິ່ນ</span><b>324k+</b><span>ແຮງງານລາວມີເອກະສານຢູ່ໄທ <Cite id="wb-dec25" /></span></article>
+          <article className="metric"><span className="metric-tag">ໜີ້ສິນ</span><b>13%</b><span>ປະມານການພາລະຊຳລະໜີ້ຕໍ່ GDP ໃນ 2026 <Cite id="wb-jun26" /></span></article>
+          <article className="metric"><span className="metric-tag">ຄວາມເຊື່ອໝັ້ນ</span><b>34/100</b><span>CPI 2025; ດັດຊະນີການຮັບຮູ້ <Cite id="cpi25" /></span></article>
         </div>
       </section>
 
       <section className="section data-story">
         <div className="section-heading">
-          <p className="eyebrow">WHAT THE DATA SAYS</p>
+          <p className="eyebrow">ຂໍ້ມູນບອກຫຍັງ</p>
           <h2>ເຕີບໂຕ—ແຕ່ຂໍ້ຈຳກັດຍັງຢູ່</h2>
         </div>
         <div className="chart-grid">
           <article className="chart-card growth-chart">
-            <header><span>Real GDP growth</span><small>% ຕໍ່ປີ</small></header>
+            <header><span>ການເຕີບໂຕຂອງ GDP ແທ້ຈິງ</span><small>% ຕໍ່ປີ</small></header>
             <div className="columns" aria-label="GDP ເຕີບໂຕ 2024 ຫາ 2026">
               <div className="column-item"><span>4.1%</span><div style={{ height: "68%" }}></div><small>2024</small></div>
               <div className="column-item highlight"><span>4.8%</span><div style={{ height: "80%" }}></div><small>2025</small></div>
@@ -391,7 +427,7 @@ export default function Home() {
 
       <section className="section diagnosis" id="diagnosis">
         <div className="section-heading">
-          <p className="eyebrow">01 · DIAGNOSIS</p>
+          <p className="eyebrow">01 · ວິນິດໄສບັນຫາ</p>
           <div>
             <h2>ກົດເປີດເບິ່ງບັນຫາແຕ່ລະຊັ້ນ</h2>
             <p className="section-intro">ເລືອກມຸມມອງ ຫຼືເປີດອ່ານການວິນິດໄສ, ຫຼັກຖານ, ວົງຈອນຜົນກະທົບ ແລະທາງອອກ.</p>
@@ -446,10 +482,10 @@ export default function Home() {
 
       <section className="section sectors" id="sectors">
         <div className="section-heading">
-          <p className="eyebrow">02 · WHO SURVIVES?</p>
+          <p className="eyebrow">02 · ໃຜຢູ່ລອດ?</p>
           <div>
             <h2>ເປັນຫຍັງບາງທຸລະກິດຈຶ່ງເຫັນວ່າຢູ່ລອດ</h2>
-            <p className="section-intro">ຄຳວ່າ “ຢູ່ລອດ” ຄວນແຍກລະຫວ່າງ cash flow ດີ, ກຳໄລຍືນຍົງ, ມີການປົກປ້ອງ ແລະສ້າງມູນຄ່າໃຫ້ເສດຖະກິດ.</p>
+            <p className="section-intro">ຄຳວ່າ “ຢູ່ລອດ” ຄວນແຍກລະຫວ່າງກະແສເງິນສົດດີ, ກຳໄລຍືນຍົງ, ມີການປົກປ້ອງ ແລະສ້າງມູນຄ່າໃຫ້ເສດຖະກິດ.</p>
           </div>
         </div>
         <div className="sector-grid">
@@ -457,44 +493,44 @@ export default function Home() {
             <span className="sector-index">A</span>
             <h3>ຫວຍ / ການພະນັນ</h3>
             <p>ຮັບເງິນສົດໄວ ແລະຄວາມຕ້ອງການອາດບໍ່ຫຼຸດຕາມລາຍຮັບ. ແຕ່ສ້າງຜະລິດຕະພາບແລະວຽກຄຸນນະພາບຈຳກັດ.</p>
-            <div className="sector-score"><span>Cash flow</span><i className="high"></i><span>Public value</span><i className="low"></i></div>
+            <div className="sector-score"><span>ກະແສເງິນສົດ</span><i className="high"></i><span>ປະໂຫຍດສາທາລະນະ</span><i className="low"></i></div>
           </article>
           <article className="sector-card">
             <span className="sector-index">B</span>
             <h3>ທະນາຄານ / ການເງິນ</h3>
-            <p>ເປັນໂຄງລ່າງຈຳເປັນຂອງເສດຖະກິດ. ແຕ່ລະບົບຍັງກະຈຸກຕົວ ແລະມີຄວາມສ່ຽງ liquidity, FX, credit ແລະ capital buffer. <Cite id="imf26" /></p>
-            <div className="sector-score"><span>Barrier to entry</span><i className="high"></i><span>Systemic role</span><i className="high"></i></div>
+            <p>ເປັນໂຄງລ່າງຈຳເປັນຂອງເສດຖະກິດ. ແຕ່ລະບົບຍັງກະຈຸກຕົວ ແລະມີຄວາມສ່ຽງດ້ານສະພາບຄ່ອງ, ອັດຕາແລກປ່ຽນ, ສິນເຊື່ອ ແລະເງິນກອງທຶນ. <Cite id="imf26" /></p>
+            <div className="sector-score"><span>ຂໍ້ກີດຂວາງການເຂົ້າ</span><i className="high"></i><span>ບົດບາດຕໍ່ລະບົບ</span><i className="high"></i></div>
           </article>
           <article className="sector-card warn">
             <span className="sector-index">C</span>
             <h3>ລະດົມທຶນ</h3>
-            <p>ບໍ່ແມ່ນທຸກການລະດົມທຶນເປັນ scam. ບັນຫາແມ່ນ disclosure, ໃບອະນຸຍາດ, ການນຳເງິນໄປໃຊ້ ແລະຜົນຕອບແທນທີ່ຮັບປະກັນ.</p>
-            <div className="sector-score"><span>Trust risk</span><i className="high"></i><span>Potential value</span><i className="mid"></i></div>
+            <p>ບໍ່ແມ່ນທຸກການລະດົມທຶນເປັນການຫຼອກລວງ. ບັນຫາແມ່ນການເປີດເຜີຍຂໍ້ມູນ, ໃບອະນຸຍາດ, ການນຳເງິນໄປໃຊ້ ແລະຜົນຕອບແທນທີ່ຮັບປະກັນ.</p>
+            <div className="sector-score"><span>ຄວາມສ່ຽງດ້ານຄວາມເຊື່ອໝັ້ນ</span><i className="high"></i><span>ມູນຄ່າທີ່ອາດສ້າງໄດ້</span><i className="mid"></i></div>
           </article>
           <article className="sector-card">
             <span className="sector-index">D</span>
-            <h3>ໂຄງການລັດ / Digital</h3>
-            <p>ມູນຄ່າສັນຍາສູງ ແລະສ້າງໂຄງລ່າງໄດ້. ຄວາມສ່ຽງຢູ່ທີ່ການປະມູນ, ການຈ່າຍຊ້າ, vendor lock-in ແລະເຄືອຂ່າຍ.</p>
-            <div className="sector-score"><span>Contract size</span><i className="high"></i><span>Access equality</span><i className="low"></i></div>
+            <h3>ໂຄງການລັດ / ດິຈິຕອນ</h3>
+            <p>ມູນຄ່າສັນຍາສູງ ແລະສ້າງໂຄງລ່າງໄດ້. ຄວາມສ່ຽງຢູ່ທີ່ການປະມູນ, ການຈ່າຍຊ້າ, ການຜູກຂາດກັບຜູ້ສະໜອງລາຍດຽວ ແລະເຄືອຂ່າຍ.</p>
+            <div className="sector-score"><span>ຂະໜາດສັນຍາ</span><i className="high"></i><span>ຄວາມເທົ່າທຽມໃນການເຂົ້າເຖິງ</span><i className="low"></i></div>
           </article>
         </div>
 
         <aside className="reality-check">
-          <div><span>REALITY CHECK</span><h3>ຂະແໜງທີ່ຢູ່ລອດແບບ “ບໍ່ດັງ”</h3></div>
+          <div><span>ອີກດ້ານຂອງຄວາມຈິງ</span><h3>ຂະແໜງທີ່ຢູ່ລອດແບບ “ບໍ່ດັງ”</h3></div>
           <ul>
             <li>ອາຫານແລະສິນຄ້າຈຳເປັນ</li>
             <li>ສ້ອມແປງແລະບຳລຸງຮັກສາ</li>
-            <li>ກະສິກຳແປຮູບ ແລະ cold chain</li>
-            <li>ຂົນສົ່ງ / logistics ສະເພາະທາງ</li>
+            <li>ກະສິກຳແປຮູບ ແລະລະບົບຮັກສາຄວາມເຢັນ</li>
+            <li>ການຂົນສົ່ງສະເພາະທາງ</li>
             <li>ສຸຂະພາບແລະການສຶກສາ</li>
-            <li>B2B digital ແລະບໍລິການສົ່ງອອກ</li>
+            <li>ບໍລິການດິຈິຕອນໃຫ້ທຸລະກິດ ແລະບໍລິການສົ່ງອອກ</li>
           </ul>
         </aside>
       </section>
 
       <section className="section capital-market" id="capital-market">
         <div className="section-heading">
-          <p className="eyebrow">CAPITAL MARKET · LSX</p>
+          <p className="eyebrow">ຕະຫຼາດທຶນ · LSX</p>
           <div>
             <h2>ຕະຫຼາດທຶນລາວ: ຊ່ອງທາງລະດົມທຶນທີ່ຍັງບໍ່ເຕັມສັກກະຍະພາບ</h2>
             <p className="section-intro">ການມີຕະຫຼາດຫຼັກຊັບບໍ່ໄດ້ໝາຍຄວາມວ່າທຸລະກິດທຸກຂະໜາດສາມາດເຂົ້າເຖິງທຶນໄດ້. ຄຳຖາມຫຼັກແມ່ນ: ໃຜພ້ອມອອກຫຼັກຊັບ, ໃຜພ້ອມລົງທຶນ ແລະຕະຫຼາດຮອງມີສະພາບຄ່ອງພຽງໃດ.</p>
@@ -502,30 +538,30 @@ export default function Home() {
         </div>
 
         <div className="capital-thesis">
-          <span>CORE FINDING</span>
+          <span>ຂໍ້ຄົ້ນພົບຫຼັກ</span>
           <p>LSX ເປັນຊ່ອງທາງທຶນທີ່ສຳຄັນ ແຕ່ຍັງບໍ່ແມ່ນຊ່ອງທາງທຶນທີ່ເປີດກວ້າງສຳລັບຜູ້ປະກອບການລາວສ່ວນໃຫຍ່.</p>
         </div>
 
         <div className="capital-stat-grid">
           <article>
-            <span>LISTED ISSUERS</span>
+            <span>ຜູ້ອອກຫຼັກຊັບ</span>
             <b>12</b>
             <p>ຈຳນວນບໍລິສັດອອກຫຼັກຊັບທີ່ LSC ແລະ BOL ລາຍງານ. <Cite id="lsc-issuers" /></p>
           </article>
           <article className="capital-stat-feature">
-            <span>CUMULATIVE CAPITAL</span>
+            <span>ທຶນສະສົມ</span>
             <b>67,815.55</b>
             <small>ຕື້ກີບ · 21% ຂອງ GDP ປີ 2024</small>
             <p>ທຶນສະສົມຈາກຮຸ້ນ, ພັນທະບັດບໍລິສັດ ແລະພັນທະບັດລັດ. <Cite id="bol25" /></p>
           </article>
           <article>
-            <span>2025 TURNOVER</span>
+            <span>ມູນຄ່າຊື້ຂາຍປີ 2025</span>
             <b>216.76</b>
-            <small>ຕື້ກີບ · +628.07% YoY</small>
+            <small>ຕື້ກີບ · ເພີ່ມ 628.07% ຈາກປີກ່ອນ</small>
             <p>ການເຕີບໄວແມ່ນສັນຍານບວກ, ແຕ່ອາດສະທ້ອນຖານປຽບທຽບທີ່ຕ່ຳ. <Cite id="bol25" /></p>
           </article>
           <article>
-            <span>FOREIGN SHARE</span>
+            <span>ສັດສ່ວນນັກລົງທຶນຕ່າງປະເທດ</span>
             <b>17.84%</b>
             <p>ສັດສ່ວນການຊື້ຂາຍຂອງນັກລົງທຶນຕ່າງປະເທດໃນມູນຄ່າຊື້ຂາຍລວມປີ 2025. <Cite id="bol25" /></p>
           </article>
@@ -533,21 +569,21 @@ export default function Home() {
 
         <div className="capital-columns">
           <article className="capital-case">
-            <span>WHY IT MATTERS</span>
+            <span>ເປັນຫຍັງຈຶ່ງສຳຄັນ</span>
             <h3>ຕະຫຼາດທຶນຊ່ວຍແກ້ຈຸດອ່ອນຂອງລະບົບທີ່ອີງທະນາຄານ</h3>
             <ul>
               <li>ເພີ່ມທຶນໄລຍະຍາວ ໂດຍບໍ່ຕ້ອງອີງດິນຄ້ຳຢ່າງດຽວ</li>
               <li>ຊ່ວຍໃຫ້ລັດແລະບໍລິສັດກະຈາຍແຫຼ່ງລະດົມທຶນ</li>
-              <li>ຜັກດັນບັນຊີ, audit, governance ແລະ disclosure ໃຫ້ເປັນລະບົບ</li>
+              <li>ຜັກດັນບັນຊີ, ການກວດສອບ, ການບໍລິຫານ ແລະການເປີດເຜີຍຂໍ້ມູນໃຫ້ເປັນລະບົບ</li>
               <li>ສ້າງລາຄາອ້າງອີງຂອງທຶນ ແລະພັນທະບັດໃນປະເທດ</li>
             </ul>
           </article>
           <article className="capital-friction">
-            <span>WHY ACCESS STAYS NARROW</span>
+            <span>ເປັນຫຍັງການເຂົ້າເຖິງຍັງຈຳກັດ</span>
             <h3>ຊ່ອງຫວ່າງບໍ່ໄດ້ຢູ່ທີ່ຕະຫຼາດພຽງຢ່າງດຽວ</h3>
             <ul>
               <li>SME ຫຼາຍແຫ່ງຍັງບໍ່ມີບັນຊີມາດຕະຖານ ຫຼືງົບທີ່ກວດສອບໄດ້</li>
-              <li>ຄ່າ audit, legal, advisory ແລະ ongoing disclosure ອາດສູງເມື່ອທຽບກັບຂະໜາດກິດຈະການ</li>
+              <li>ຄ່າກວດສອບບັນຊີ, ກົດໝາຍ, ທີ່ປຶກສາ ແລະການເປີດເຜີຍຕໍ່ເນື່ອງ ອາດສູງເມື່ອທຽບກັບຂະໜາດກິດຈະການ</li>
               <li>ຈຳນວນຫຼັກຊັບໜ້ອຍ ແລະຖານນັກລົງທຶນຈຳກັດ ກະທົບການຊື້ຂາຍຕໍ່ເນື່ອງ</li>
               <li>+628.07% ເປັນອັດຕາເຕີບໂຕ; ບໍ່ຄວນອ່ານເປັນຫຼັກຖານວ່າສະພາບຄ່ອງສູງແລ້ວ</li>
             </ul>
@@ -555,33 +591,33 @@ export default function Home() {
         </div>
 
         <div className="capital-path" aria-label="ເສັ້ນທາງການລະດົມທຶນທີ່ມີການກຳກັບ">
-          <article><b>01</b><h3>Formalize</h3><p>ແຍກບັນຊີ, ພາສີ, ownership ແລະ cash flow ໃຫ້ຊັດ.</p></article>
-          <article><b>02</b><h3>Prepare</h3><p>ກວດສອບງົບ, governance, board ແລະ internal control.</p></article>
-          <article><b>03</b><h3>Approve</h3><p>ຈັດເຮັດ prospectus ແລະຜ່ານຂັ້ນຕອນຜູ້ກຳກັບ.</p></article>
-          <article><b>04</b><h3>Issue</h3><p>ອອກຮຸ້ນ ຫຼືພັນທະບັດຜ່ານຕົວກາງທີ່ມີໃບອະນຸຍາດ.</p></article>
-          <article><b>05</b><h3>Disclose</h3><p>ເປີດເຜີຍຜົນງານແລະເຫດການສຳຄັນຢ່າງຕໍ່ເນື່ອງ.</p></article>
+          <article><b>01</b><h3>ເຂົ້າລະບົບ</h3><p>ແຍກບັນຊີ, ພາສີ, ຄວາມເປັນເຈົ້າຂອງ ແລະກະແສເງິນສົດໃຫ້ຊັດ.</p></article>
+          <article><b>02</b><h3>ກຽມຄວາມພ້ອມ</h3><p>ກວດສອບງົບ, ການບໍລິຫານ, ຄະນະບໍລິຫານ ແລະລະບົບກວດກາພາຍໃນ.</p></article>
+          <article><b>03</b><h3>ຂໍອະນຸມັດ</h3><p>ຈັດເຮັດເອກະສານສະເໜີຂາຍ ແລະຜ່ານຂັ້ນຕອນຜູ້ກຳກັບ.</p></article>
+          <article><b>04</b><h3>ອອກຫຼັກຊັບ</h3><p>ອອກຮຸ້ນ ຫຼືພັນທະບັດຜ່ານຕົວກາງທີ່ມີໃບອະນຸຍາດ.</p></article>
+          <article><b>05</b><h3>ເປີດເຜີຍຂໍ້ມູນ</h3><p>ເປີດເຜີຍຜົນງານແລະເຫດການສຳຄັນຢ່າງຕໍ່ເນື່ອງ.</p></article>
         </div>
 
         <div className="capital-regulated">
           <article>
-            <span>REGULATED FUNDRAISING</span>
+            <span>ການລະດົມທຶນທີ່ມີການກຳກັບ</span>
             <h3>ຄວາມຊອບທຳບໍ່ໄດ້ມາຈາກຄຳໂຄສະນາ</h3>
-            <p>ຄວນມີ prospectus ຫຼືເອກະສານສະເໜີຂາຍ, ການອະນຸມັດ, ຕົວກາງທີ່ມີໃບອະນຸຍາດ, ລະບົບຮັກສາຊັບສິນ ແລະ disclosure ຕໍ່ເນື່ອງ. <Cite id="lsc-securities" /><Cite id="lsx-disclosure" /></p>
+            <p>ຄວນມີໜັງສືຊີ້ຊວນ ຫຼືເອກະສານສະເໜີຂາຍ, ການອະນຸມັດ, ຕົວກາງທີ່ມີໃບອະນຸຍາດ, ລະບົບຮັກສາຊັບສິນ ແລະການເປີດເຜີຍຕໍ່ເນື່ອງ. <Cite id="lsc-securities" /><Cite id="lsx-disclosure" /></p>
           </article>
           <article>
-            <span>MARKET INFRASTRUCTURE</span>
+            <span>ໂຄງລ່າງຕະຫຼາດ</span>
             <h3>LSX ແມ່ນສະຖາບັນຮ່ວມລາວ–ເກົາຫຼີ</h3>
             <p>LSX ເລີ່ມຕັ້ງໃນປີ 2010; BOL ຖື 51% ແລະ Korea Exchange ຖື 49%. ຜະລິດຕະພັນລວມມີຮຸ້ນແລະພັນທະບັດລັດ, ດ້ວຍການຊຳລະແບບ T+2. <Cite id="set-lsx" /></p>
           </article>
         </div>
 
         <div className="capital-agenda">
-          <article><b>01</b><h3>SME / Alternative Board</h3><p>ກຳນົດຂັ້ນຕອນທີ່ເໝາະກັບບໍລິສັດກາງ ໂດຍຍັງຮັກສາ disclosure ແລະ investor protection.</p></article>
-          <article><b>02</b><h3>Listing Readiness</h3><p>ຊ່ວຍບໍລິສັດກຽມບັນຊີ, audit, governance ແລະ data room ກ່ອນເຂົ້າຕະຫຼາດ.</p></article>
-          <article><b>03</b><h3>Corporate Bonds</h3><p>ພັດທະນາ credit rating, trustee, covenant ແລະຂໍ້ມູນລາຄາພັນທະບັດ. <Cite id="adb-capital26" /></p></article>
-          <article><b>04</b><h3>Institutional Investors</h3><p>ຂະຫຍາຍກອງທຶນ, ປະກັນໄພ ແລະເງິນບຳນານທີ່ລົງທຶນໄລຍະຍາວຕາມກອບຄວາມສ່ຽງ.</p></article>
-          <article><b>05</b><h3>Market Data</h3><p>ເປີດຂໍ້ມູນ trading, disclosure, corporate action ແລະ research ໃຫ້ຄົ້ນຫາງ່າຍ.</p></article>
-          <article><b>06</b><h3>Trust & Enforcement</h3><p>ບັງຄັບ disclosure, related-party rules ແລະ governance ຢ່າງສະໝ່ຳສະເໝີ.</p></article>
+          <article><b>01</b><h3>ກະດານສຳລັບ SME</h3><p>ກຳນົດຂັ້ນຕອນທີ່ເໝາະກັບບໍລິສັດກາງ ໂດຍຍັງຮັກສາການເປີດເຜີຍ ແລະການຄຸ້ມຄອງນັກລົງທຶນ.</p></article>
+          <article><b>02</b><h3>ກຽມຄວາມພ້ອມຈົດທະບຽນ</h3><p>ຊ່ວຍບໍລິສັດກຽມບັນຊີ, ການກວດສອບ, ການບໍລິຫານ ແລະຄັງເອກະສານກ່ອນເຂົ້າຕະຫຼາດ.</p></article>
+          <article><b>03</b><h3>ພັນທະບັດບໍລິສັດ</h3><p>ພັດທະນາການຈັດອັນດັບຄວາມໜ້າເຊື່ອຖື, ຜູ້ແທນຜູ້ຖືພັນທະບັດ, ເງື່ອນໄຂສັນຍາ ແລະຂໍ້ມູນລາຄາ. <Cite id="adb-capital26" /></p></article>
+          <article><b>04</b><h3>ນັກລົງທຶນສະຖາບັນ</h3><p>ຂະຫຍາຍກອງທຶນ, ປະກັນໄພ ແລະເງິນບຳນານທີ່ລົງທຶນໄລຍະຍາວຕາມກອບຄວາມສ່ຽງ.</p></article>
+          <article><b>05</b><h3>ຂໍ້ມູນຕະຫຼາດ</h3><p>ເປີດຂໍ້ມູນການຊື້ຂາຍ, ການເປີດເຜີຍ, ເຫດການສຳຄັນຂອງບໍລິສັດ ແລະບົດຄົ້ນຄວ້າໃຫ້ຄົ້ນຫາງ່າຍ.</p></article>
+          <article><b>06</b><h3>ຄວາມເຊື່ອໝັ້ນ ແລະການບັງຄັບ</h3><p>ບັງຄັບການເປີດເຜີຍ, ກົດກາທຸລະກຳກັບພາກສ່ວນກ່ຽວຂ້ອງ ແລະການບໍລິຫານຢ່າງສະໝ່ຳສະເໝີ.</p></article>
         </div>
 
         <p className="capital-note"><b>ຂໍ້ຄວນລະວັງ:</b> ຕົວເລກ +628.07% ແມ່ນຂໍ້ມູນທາງການ; ການຕີຄວາມວ່າອາດມາຈາກຖານປຽບທຽບທີ່ຕ່ຳແມ່ນຂໍ້ວິເຄາະຂອງຜູ້ຂຽນ. ບົດນີ້ບໍ່ແມ່ນຄຳແນະນຳຊື້–ຂາຍຫຼັກຊັບ.</p>
@@ -589,7 +625,7 @@ export default function Home() {
 
       <section className="section gold-banking" id="gold-banking">
         <div className="section-heading">
-          <p className="eyebrow">GOLD BANKING · COLLATERAL</p>
+          <p className="eyebrow">ທະນາຄານຄຳ · ຫຼັກຄ້ຳ</p>
           <div>
             <h2>ທະນາຄານຄຳ: ປ່ຽນຊັບສິນທີ່ເກັບໄວ້ ເປັນຫຼັກຄ້ຳສິນເຊື່ອ</h2>
             <p className="section-intro">ນີ້ແມ່ນນະວັດຕະກຳທາງການເງິນທີ່ໜ້າຈັບຕາ: ຄຳທີ່ເຄີຍນອນຢູ່ນອກລະບົບ ສາມາດຖືກກວດ, ຝາກ, ອອກໃບຢັ້ງຢືນ ແລະນຳໄປຄ້ຳສິນເຊື່ອ. ແຕ່ສິນເຊື່ອຍັງຂຶ້ນກັບການອະນຸມັດແລະສັນຍາຂອງຜູ້ໃຫ້ກູ້.</p>
@@ -598,25 +634,25 @@ export default function Home() {
 
         <div className="gold-thesis">
           <div>
-            <span>WHAT IS CONFIRMED</span>
-            <h3>Gold Certificate ສາມາດໃຊ້ເປັນຫຼັກຄ້ຳໄດ້</h3>
+            <span>ສິ່ງທີ່ຢືນຢັນໄດ້</span>
+            <h3>ໃບຢັ້ງຢືນຄຳສາມາດໃຊ້ເປັນຫຼັກຄ້ຳໄດ້</h3>
           </div>
-          <p>ຂໍ້ມູນສາທາລະນະຂອງ Lao Bullion Bank ລະບຸສະເພາະ Gold Certificate—ບໍ່ໄດ້ຢືນຢັນວ່າຍອດໃນ “ບັນຊີຄຳ” ທຸກປະເພດຈະຄ້ຳກູ້ໄດ້ອັດຕະໂນມັດ. <Cite id="lbb-certificate" /></p>
+          <p>ຂໍ້ມູນສາທາລະນະຂອງ Lao Bullion Bank ລະບຸສະເພາະໃບຢັ້ງຢືນຄຳ (Gold Certificate)—ບໍ່ໄດ້ຢືນຢັນວ່າຍອດໃນ “ບັນຊີຄຳ” ທຸກປະເພດຈະຄ້ຳກູ້ໄດ້ອັດຕະໂນມັດ. <Cite id="lbb-certificate" /></p>
         </div>
 
         <div className="gold-facts">
           <article>
-            <span>REGULATORY BASE</span>
+            <span>ພື້ນຖານທາງກົດໝາຍ</span>
             <b>1277/ທຫລ</b>
             <p>ຂໍ້ຕົກລົງຂອງ BOL ລົງວັນທີ 29 ພະຈິກ 2024 ກຳນົດຫຼັກການ, ລະບຽບການ ແລະມາດຕະການຂອງທຸລະກິດທະນາຄານຄຳ. <Cite id="bol-gold-rules" /></p>
           </article>
           <article className="gold-fact-main">
-            <span>MINIMUM GOLD DEPOSIT</span>
+            <span>ຍອດຝາກຄຳຂັ້ນຕ່ຳ</span>
             <b>15g</b>
-            <p>ຍອດຝາກຄຳຂັ້ນຕ່ຳທີ່ເວັບ Lao Bullion Bank ລະບຸສຳລັບການໄດ້ຮັບ Gold Certificate. <Cite id="lbb-certificate" /></p>
+            <p>ຍອດຝາກຄຳຂັ້ນຕ່ຳທີ່ເວັບ Lao Bullion Bank ລະບຸສຳລັບການໄດ້ຮັບໃບຢັ້ງຢືນຄຳ. <Cite id="lbb-certificate" /></p>
           </article>
           <article>
-            <span>USE CASE</span>
+            <span>ການນຳໃຊ້</span>
             <b>ຄ້ຳກູ້</b>
             <p>ໃບຢັ້ງຢືນສາມາດນຳໄປຄ້ຳສິນເຊື່ອກັບທະນາຄານທຸລະກິດ ແລະສະຖາບັນການເງິນໃນລາວ. <Cite id="lbb-certificate" /></p>
           </article>
@@ -625,38 +661,38 @@ export default function Home() {
         <div className="gold-flow" aria-label="ຂັ້ນຕອນຈາກການຝາກຄຳເຖິງສິນເຊື່ອ">
           <article><b>01</b><h3>ຝາກຄຳ</h3><p>ລູກຄ້ານຳຄຳເຂົ້າສູ່ລະບົບຂອງທະນາຄານຄຳ.</p></article>
           <article><b>02</b><h3>ກວດມາດຕະຖານ</h3><p>ກວດນ້ຳໜັກ, ຄວາມບໍລິສຸດ, ທີ່ມາ ແລະມູນຄ່າ.</p></article>
-          <article><b>03</b><h3>ອອກ Certificate</h3><p>ອອກເອກະສານຮັບຮອງຊັບສິນທີ່ມີຄວາມໃຊ້ໄດ້ທາງກົດໝາຍ.</p></article>
-          <article><b>04</b><h3>ປະເມີນ LTV</h3><p>ຜູ້ໃຫ້ກູ້ຕີລາຄາ ແລະຫັກ haircut ເພື່ອຮອງຮັບລາຄາຜັນຜວນ.</p></article>
+          <article><b>03</b><h3>ອອກໃບຢັ້ງຢືນ</h3><p>ອອກເອກະສານຮັບຮອງຊັບສິນທີ່ມີຄວາມໃຊ້ໄດ້ທາງກົດໝາຍ.</p></article>
+          <article><b>04</b><h3>ປະເມີນວົງເງິນກູ້</h3><p>ຜູ້ໃຫ້ກູ້ຕີລາຄາ ແລະຫັກສ່ວນກັນຄວາມສ່ຽງ ເພື່ອຮອງຮັບລາຄາຜັນຜວນ.</p></article>
           <article><b>05</b><h3>ຮັບ–ຊຳລະສິນເຊື່ອ</h3><p>ໄດ້ເງິນກູ້ໂດຍບໍ່ຂາຍຄຳ; ຄຳຍັງຕິດພາລະຈົນຊຳລະຄົບ.</p></article>
         </div>
 
         <div className="gold-balance">
           <article className="gold-opportunity">
-            <span>THE OPPORTUNITY</span>
+            <span>ໂອກາດ</span>
             <h3>ເພີ່ມຫຼັກຄ້ຳໃຫ້ຄົນທີ່ບໍ່ມີດິນ</h3>
             <ul>
               <li>ເປີດທາງໃຫ້ຄົວເຮືອນແລະທຸລະກິດນ້ອຍນຳຊັບສິນອື່ນມາຄ້ຳ</li>
-              <li>ສ້າງ liquidity ໂດຍບໍ່ຕ້ອງຂາຍຄຳໃນເວລາທີ່ບໍ່ເໝາະ</li>
-              <li>ນຳຄຳຈາກນອກລະບົບເຂົ້າສູ່ການກວດມາດຕະຖານ ແລະ custody</li>
-              <li>ສາມາດສະໜັບສະໜູນ working capital ຂອງ SME ໄດ້ໄວກວ່າການຈຳນອງອະສັງຫາ</li>
+              <li>ສ້າງເງິນໝູນໃຊ້ໂດຍບໍ່ຕ້ອງຂາຍຄຳໃນເວລາທີ່ບໍ່ເໝາະ</li>
+              <li>ນຳຄຳຈາກນອກລະບົບເຂົ້າສູ່ການກວດມາດຕະຖານ ແລະການເກັບຮັກສາ</li>
+              <li>ສາມາດສະໜັບສະໜູນທຶນໝູນວຽນຂອງ SME ໄດ້ໄວກວ່າການຈຳນອງອະສັງຫາ</li>
             </ul>
           </article>
           <article className="gold-risk">
-            <span>THE RISKS</span>
+            <span>ຄວາມສ່ຽງ</span>
             <h3>ຄຳເປັນຫຼັກຄ້ຳ—ບໍ່ແມ່ນການລົບຄວາມສ່ຽງ</h3>
             <ul>
-              <li><b>Price risk:</b> ລາຄາຄຳຫຼຸດອາດເຮັດໃຫ້ LTV ສູງ ຫຼືເກີດ margin call</li>
-              <li><b>Valuation risk:</b> ລາຄາອ້າງອີງ, purity, spread ແລະ haircut ອາດຕ່າງກັນ</li>
-              <li><b>Custody risk:</b> ຕ້ອງຮູ້ວ່າຄຳຖືກເກັບຢູ່ໃສ, ມີປະກັນໄພ ແລະ audit ຫຼືບໍ່</li>
-              <li><b>Default risk:</b> ຖ້າຜິດນັດ ຜູ້ໃຫ້ກູ້ອາດມີສິດຂາຍຄຳຕາມເງື່ອນໄຂສັນຍາ</li>
-              <li><b>Cost risk:</b> ດອກເບ້ຍ, ຄ່າກວດຄຳ, ຄ່າຝາກ, ຄ່າ certificate ແລະຄ່າປິດບັນຊີຕ້ອງຄິດລວມ</li>
+              <li><b>ຄວາມສ່ຽງດ້ານລາຄາ:</b> ລາຄາຄຳຫຼຸດອາດເຮັດໃຫ້ LTV ສູງ ຫຼືຖືກເອີ້ນເງິນເພີ່ມ</li>
+              <li><b>ຄວາມສ່ຽງດ້ານການຕີລາຄາ:</b> ລາຄາອ້າງອີງ, ຄວາມບໍລິສຸດ, ສ່ວນຕ່າງລາຄາ ແລະສ່ວນຫຼຸດຫຼັກຄ້ຳອາດຕ່າງກັນ</li>
+              <li><b>ຄວາມສ່ຽງດ້ານການເກັບຮັກສາ:</b> ຕ້ອງຮູ້ວ່າຄຳຖືກເກັບຢູ່ໃສ, ມີປະກັນໄພ ແລະການກວດສອບຫຼືບໍ່</li>
+              <li><b>ຄວາມສ່ຽງດ້ານການຜິດນັດ:</b> ຖ້າຜິດນັດ ຜູ້ໃຫ້ກູ້ອາດມີສິດຂາຍຄຳຕາມເງື່ອນໄຂສັນຍາ</li>
+              <li><b>ຄວາມສ່ຽງດ້ານຄ່າໃຊ້ຈ່າຍ:</b> ດອກເບ້ຍ, ຄ່າກວດຄຳ, ຄ່າຝາກ, ຄ່າໃບຢັ້ງຢືນ ແລະຄ່າປິດບັນຊີຕ້ອງຄິດລວມ</li>
             </ul>
           </article>
         </div>
 
         <div className="gold-checklist">
           <div>
-            <span>BEFORE BORROWING</span>
+            <span>ກ່ອນຕັດສິນໃຈກູ້</span>
             <h3>7 ຄຳຖາມທີ່ຄວນຖາມກ່ອນເອົາຄຳຄ້ຳ</h3>
           </div>
           <ol>
@@ -664,33 +700,33 @@ export default function Home() {
             <li>LTV ແລະ haircut ເທົ່າໃດ?</li>
             <li>APR ຫຼືຕົ້ນທຶນລວມຫຼັງຄ່າທຳນຽມແມ່ນເທົ່າໃດ?</li>
             <li>ລາຄາຄຳຫຼຸດເຖິງຈຸດໃດຈຶ່ງຖືກເອີ້ນເງິນເພີ່ມ?</li>
-            <li>ເມື່ອຜິດນັດ ມີ grace period ແລະແຈ້ງເຕືອນກ່ອນຂາຍຄຳຫຼືບໍ່?</li>
+            <li>ເມື່ອຜິດນັດ ມີໄລຍະຜ່ອນຜັນ ແລະແຈ້ງເຕືອນກ່ອນຂາຍຄຳຫຼືບໍ່?</li>
             <li>ຄຳຢູ່ໃນຄັງໃດ, ມີປະກັນໄພ ແລະການກວດສອບອິດສະຫຼະຫຼືບໍ່?</li>
             <li>ສາມາດໄຖ່ຖອນເປັນຄຳແທ້ໄດ້ຫຼືບໍ່ ແລະໃຊ້ເວລາຈັກມື້?</li>
           </ol>
         </div>
 
-        <p className="gold-note"><b>ຂໍ້ຈຳກັດຂອງຂໍ້ມູນ:</b> ແຫຼ່ງສາທາລະນະຢືນຢັນການໃຊ້ Gold Certificate ເປັນຫຼັກຄ້ຳ ແລະຍອດຝາກຂັ້ນຕ່ຳ 15 ກຣາມ; ແຕ່ບໍ່ໄດ້ເຜີຍແຜ່ LTV, ດອກເບ້ຍ, haircut ຫຼືຄ່າທຳນຽມສຳລັບທຸກກໍລະນີ. ລູກຄ້າຄວນຂໍ term sheet ແລະສັນຍາສະບັບເຕັມກ່ອນຕັດສິນໃຈ. <Cite id="lbb-certificate" /><Cite id="kpl-gold-bank" /></p>
+        <p className="gold-note"><b>ຂໍ້ຈຳກັດຂອງຂໍ້ມູນ:</b> ແຫຼ່ງສາທາລະນະຢືນຢັນການໃຊ້ໃບຢັ້ງຢືນຄຳເປັນຫຼັກຄ້ຳ ແລະຍອດຝາກຂັ້ນຕ່ຳ 15 ກຣາມ; ແຕ່ບໍ່ໄດ້ເຜີຍແຜ່ LTV, ດອກເບ້ຍ, ສ່ວນຫຼຸດຫຼັກຄ້ຳ ຫຼືຄ່າທຳນຽມສຳລັບທຸກກໍລະນີ. ລູກຄ້າຄວນຂໍໃບສະເໜີເງື່ອນໄຂ ແລະສັນຍາສະບັບເຕັມກ່ອນຕັດສິນໃຈ. <Cite id="lbb-certificate" /><Cite id="kpl-gold-bank" /></p>
       </section>
 
       <section className="section digital">
         <div className="section-heading">
-          <p className="eyebrow">DIGITAL ECONOMY</p>
+          <p className="eyebrow">ເສດຖະກິດດິຈິຕອນ</p>
           <div>
-            <h2>Digital ແມ່ນໂອກາດ—ບໍ່ແມ່ນຄຳຕອບອັດຕະໂນມັດ</h2>
+            <h2>ດິຈິຕອນແມ່ນໂອກາດ—ບໍ່ແມ່ນຄຳຕອບອັດຕະໂນມັດ</h2>
             <p className="section-intro">ລະບົບຊຳລະເງິນເຕີບໄວ ແຕ່ມູນຄ່າຈະເກີດຂຶ້ນກໍ່ຕໍ່ເມື່ອ SME ເຂົ້າໃຊ້, ຂໍ້ມູນເຊື່ອມກັນ ແລະການຈັດຊື້ເປີດກວ້າງ.</p>
           </div>
         </div>
         <div className="digital-grid">
-          <article className="digital-stat"><span>ມູນຄ່າ e-payment</span><b>+43.61%</b><small>ທຽບກັບ 2024</small></article>
+          <article className="digital-stat"><span>ມູນຄ່າການຊຳລະເງິນອອນລາຍ</span><b>+43.61%</b><small>ທຽບກັບ 2024</small></article>
           <article className="digital-stat accent"><span>ຈຳນວນທຸລະກຳ</span><b>+66.49%</b><small>ທຽບກັບ 2024</small></article>
           <article className="digital-text">
             <h3>ສິ່ງທີ່ຄວນຕໍ່ຍອດ</h3>
             <ul>
               <li>QR ຂ້າມແດນໃຫ້ກາຍເປັນລາຍຮັບຂອງຮ້ານນ້ອຍ</li>
-              <li>e-invoice ແລະ transaction history ໃຊ້ປະເມີນສິນເຊື່ອ</li>
-              <li>Open standards ຫຼຸດ vendor lock-in ໃນໂຄງການລັດ</li>
-              <li>Cybersecurity ແລະ consumer protection ຕ້ອງເຕີບຄູ່ກັນ</li>
+              <li>ໃບແຈ້ງໜີ້ອອນລາຍ ແລະປະຫວັດທຸລະກຳ ໃຊ້ປະເມີນສິນເຊື່ອ</li>
+              <li>ມາດຕະຖານເປີດ ຫຼຸດການຜູກຂາດກັບຜູ້ສະໜອງລາຍດຽວໃນໂຄງການລັດ</li>
+              <li>ຄວາມປອດໄພທາງໄຊເບີ ແລະການຄຸ້ມຄອງຜູ້ບໍລິໂພກ ຕ້ອງເຕີບຄູ່ກັນ</li>
             </ul>
             <p>ແຫຼ່ງ: BOL Annual Economic Report 2025 <Cite id="bol25" /></p>
           </article>
@@ -699,15 +735,15 @@ export default function Home() {
 
       <section className="section scam-section" id="scam-check">
         <div className="section-heading">
-          <p className="eyebrow">03 · TRUST & SCAM RISK</p>
+          <p className="eyebrow">03 · ຄວາມເຊື່ອໝັ້ນ ແລະການຫຼອກລວງ</p>
           <div>
             <h2>ການລະດົມທຶນ: ແຍກທຸລະກິດຈິງອອກຈາກກົນລະຍຸດຫຼອກລວງ</h2>
-            <p className="section-intro">ລາຍການກວດສອບນີ້ເປັນ screening tool ເບື້ອງຕົ້ນ—ບໍ່ແທນຄຳແນະນຳກົດໝາຍ ຫຼືການກວດສອບໂດຍຜູ້ຊ່ຽວຊານ.</p>
+            <p className="section-intro">ລາຍການນີ້ເປັນເຄື່ອງມືກວດສອບເບື້ອງຕົ້ນ—ບໍ່ແທນຄຳແນະນຳກົດໝາຍ ຫຼືການກວດສອບໂດຍຜູ້ຊ່ຽວຊານ.</p>
           </div>
         </div>
         <div className="scam-grid">
           <article className="checklist red">
-            <header><span>ສັນຍານແດງ</span><b>STOP</b></header>
+            <header><span>ສັນຍານແດງ</span><b>ຢຸດກ່ອນ</b></header>
             <ul>
               <li>ຮັບປະກັນກຳໄລສູງ ຫຼື “ບໍ່ມີຄວາມສ່ຽງ”</li>
               <li>ລາຍຮັບຫຼັກມາຈາກການຊັກຊວນສະມາຊິກໃໝ່</li>
@@ -718,12 +754,12 @@ export default function Home() {
             </ul>
           </article>
           <article className="checklist green">
-            <header><span>ຫຼັກຖານທີ່ຄວນມີ</span><b>VERIFY</b></header>
+            <header><span>ຫຼັກຖານທີ່ຄວນມີ</span><b>ກວດສອບ</b></header>
             <ul>
               <li>ນິຕິບຸກຄົນ, ໃບອະນຸຍາດ ແລະທີ່ຢູ່ກວດສອບໄດ້</li>
-              <li>ລາຍຊື່ຜູ້ຖືຮຸ້ນແລະ beneficial owner</li>
-              <li>ງົບການເງິນ, bank statement ແລະພາສີສອດຄ່ອງ</li>
-              <li>ສິນຄ້າ, ລູກຄ້າ ແລະ unit economics ເປັນຈິງ</li>
+              <li>ລາຍຊື່ຜູ້ຖືຮຸ້ນ ແລະເຈົ້າຂອງຜົນປະໂຫຍດຕົວຈິງ</li>
+              <li>ງົບການເງິນ, ໃບແຈ້ງຍອດທະນາຄານ ແລະພາສີສອດຄ່ອງ</li>
+              <li>ສິນຄ້າ, ລູກຄ້າ, ລາຍຮັບ ແລະຕົ້ນທຶນຕໍ່ໜ່ວຍເປັນຈິງ</li>
               <li>ສັນຍາລະບຸສິດ, ຄວາມສ່ຽງ ແລະທາງອອກ</li>
               <li>ເງິນນັກລົງທຶນແຍກຈາກເງິນບໍລິສັດ</li>
             </ul>
@@ -733,22 +769,22 @@ export default function Home() {
 
       <section className="section scenarios">
         <div className="section-heading">
-          <p className="eyebrow">04 · SCENARIOS</p>
+          <p className="eyebrow">04 · ສາມສະຖານະການ</p>
           <div>
             <h2>ສາມເສັ້ນທາງສຳລັບ 2026–2028</h2>
-            <p className="section-intro">ນີ້ແມ່ນສະຖານະການວິເຄາະຂອງຜູ້ຂຽນ—not ການຄາດຄະເນທາງການ.</p>
+            <p className="section-intro">ນີ້ແມ່ນສະຖານະການວິເຄາະຂອງຜູ້ຂຽນ—ບໍ່ແມ່ນການຄາດຄະເນທາງການ.</p>
           </div>
         </div>
         <div className="scenario-grid">
-          <article><span className="scenario-label base">BASE</span><h3>ຟື້ນຊ້າ ແລະບໍ່ເທົ່າທຽມ</h3><p>Tourism, logistics, energy ແລະບາງໂຄງການເຕີບ; SME ຍັງຕິດທຶນແລະແຮງງານ. ຄວາມສະຖຽນດີຂຶ້ນ ແຕ່ບອບບາງ.</p><b>ຜູ້ຊະນະ:</b><small>ທຸລະກິດ cash flow ໄວ, ລາຍຮັບ FX, ສິນຄ້າຈຳເປັນ</small></article>
-          <article className="preferred"><span className="scenario-label reform">REFORM</span><h3>ເປີດການແຂ່ງຂັນ</h3><p>e-procurement, credit infrastructure, ການຝຶກທັກສະ ແລະການອະນຸຍາດທີ່ຄາດຄະເນໄດ້ ດຶງທຶນເຂົ້າກິດຈະການຜະລິດ.</p><b>ຜູ້ຊະນະ:</b><small>MSME ທີ່ formal, agro-processing, B2B digital, ຜູ້ສົ່ງອອກ</small></article>
-          <article><span className="scenario-label downside">DOWNSIDE</span><h3>ຄວາມຜັນຜວນກັບຄືນ</h3><p>ລາຄານ້ຳມັນ, FX, ໜີ້ສິນ ຫຼືອຸປະສົງຈາກຄູ່ຄ້າອ່ອນລົງ ກະທົບຕົ້ນທຶນແລະກຳລັງຊື້ພ້ອມກັນ.</p><b>ຜູ້ຢູ່ລອດ:</b><small>ທຸລະກິດໜີ້ຕ່ຳ, inventory ໝູນໄວ, ລູກຄ້າຫຼາກຫຼາຍ</small></article>
+          <article><span className="scenario-label base">ແນວໂນ້ມເດີມ</span><h3>ຟື້ນຊ້າ ແລະບໍ່ເທົ່າທຽມ</h3><p>ການທ່ອງທ່ຽວ, ຂົນສົ່ງ, ພະລັງງານ ແລະບາງໂຄງການເຕີບ; SME ຍັງຕິດທຶນແລະແຮງງານ. ຄວາມສະຖຽນດີຂຶ້ນ ແຕ່ບອບບາງ.</p><b>ຜູ້ຊະນະ:</b><small>ທຸລະກິດທີ່ມີກະແສເງິນສົດໄວ, ລາຍຮັບເງິນຕາຕ່າງປະເທດ ແລະສິນຄ້າຈຳເປັນ</small></article>
+          <article className="preferred"><span className="scenario-label reform">ປະຕິຮູບ</span><h3>ເປີດການແຂ່ງຂັນ</h3><p>ການຈັດຊື້ອອນລາຍ, ໂຄງລ່າງຂໍ້ມູນສິນເຊື່ອ, ການຝຶກທັກສະ ແລະການອະນຸຍາດທີ່ຄາດຄະເນໄດ້ ດຶງທຶນເຂົ້າກິດຈະການຜະລິດ.</p><b>ຜູ້ຊະນະ:</b><small>MSME ທີ່ຢູ່ໃນລະບົບ, ກະສິກຳແປຮູບ, ບໍລິການດິຈິຕອນໃຫ້ທຸລະກິດ ແລະຜູ້ສົ່ງອອກ</small></article>
+          <article><span className="scenario-label downside">ຄວາມສ່ຽງລົງ</span><h3>ຄວາມຜັນຜວນກັບຄືນ</h3><p>ລາຄານ້ຳມັນ, ອັດຕາແລກປ່ຽນ, ໜີ້ສິນ ຫຼືອຸປະສົງຈາກຄູ່ຄ້າອ່ອນລົງ ກະທົບຕົ້ນທຶນແລະກຳລັງຊື້ພ້ອມກັນ.</p><b>ຜູ້ຢູ່ລອດ:</b><small>ທຸລະກິດໜີ້ຕ່ຳ, ສິນຄ້າໝູນໄວ ແລະລູກຄ້າຫຼາກຫຼາຍ</small></article>
         </div>
       </section>
 
       <section className="section actions" id="actions">
         <div className="section-heading">
-          <p className="eyebrow">05 · ACTION AGENDA</p>
+          <p className="eyebrow">05 · ຂໍ້ສະເໜີເພື່ອລົງມື</p>
           <div>
             <h2>ຈາກການວິນິດໄສ ສູ່ການລົງມື</h2>
             <p className="section-intro">ບັນຫາໂຄງສ້າງຕ້ອງແກ້ຫຼາຍຝ່າຍ; ບໍ່ມີມາດຕະການດຽວທີ່ແກ້ທຸກຢ່າງ.</p>
@@ -758,35 +794,35 @@ export default function Home() {
           <article>
             <span>ລັດ / ຜູ້ກຳກັບ</span>
             <h3>ເຮັດໃຫ້ກົດກາຄາດຄະເນໄດ້</h3>
-            <ol><li>e-procurement ແລະ open contracts</li><li>ເວລາອະນຸຍາດທີ່ຊັດເຈນ</li><li>competition policy ທີ່ບັງຄັບໃຊ້ໄດ້</li><li>ກອງທຶນ MSME ອິດສະຫຼະ</li></ol>
+            <ol><li>ການຈັດຊື້ອອນລາຍ ແລະການເປີດເຜີຍສັນຍາ</li><li>ເວລາອະນຸຍາດທີ່ຊັດເຈນ</li><li>ນະໂຍບາຍການແຂ່ງຂັນທີ່ບັງຄັບໃຊ້ໄດ້</li><li>ກອງທຶນ MSME ອິດສະຫຼະ</li></ol>
           </article>
           <article>
             <span>ທະນາຄານ / ຜູ້ໃຫ້ທຶນ</span>
             <h3>ປ່ຽນຈາກດິນຄ້ຳ ສູ່ຂໍ້ມູນ</h3>
-            <ol><li>cash-flow lending</li><li>invoice ແລະ purchase-order finance</li><li>movable collateral</li><li>ເປີດເຜີຍ APR ແລະຄ່າທຳນຽມລວມ</li></ol>
+            <ol><li>ໃຫ້ກູ້ຕາມກະແສເງິນສົດ</li><li>ໃຫ້ທຶນຕາມໃບແຈ້ງໜີ້ ແລະໃບສັ່ງຊື້</li><li>ຮັບຊັບສິນເຄື່ອນຍ້າຍເປັນຫຼັກຄ້ຳ</li><li>ເປີດເຜີຍ APR ແລະຄ່າທຳນຽມລວມ</li></ol>
           </article>
           <article>
             <span>ຜູ້ປະກອບການ</span>
-            <h3>ເຕີບແບບ lean ແລະໂປ່ງໃສ</h3>
-            <ol><li>ແຍກບັນຊີສ່ວນຕົວ–ບໍລິສັດ</li><li>ຄຸ້ມຄອງ cash flow 13 ອາທິດ</li><li>ຫາລູກຄ້ານອກປະເທດ</li><li>ສ້າງລະບົບງານໃຫ້ໃຊ້ຄົນໜ້ອຍລົງ</li></ol>
+            <h3>ເຕີບແບບກະຊັບ ແລະໂປ່ງໃສ</h3>
+            <ol><li>ແຍກບັນຊີສ່ວນຕົວ–ບໍລິສັດ</li><li>ຄຸ້ມຄອງກະແສເງິນສົດລ່ວງໜ້າ 13 ອາທິດ</li><li>ຫາລູກຄ້ານອກປະເທດ</li><li>ສ້າງລະບົບງານໃຫ້ໃຊ້ຄົນໜ້ອຍລົງ</li></ol>
           </article>
           <article>
             <span>ນັກລົງທຶນ</span>
-            <h3>ກວດທັງໂຄງການແລະ governance</h3>
-            <ol><li>ກວດ license ແລະ ownership</li><li>ກວດ cash flow ບໍ່ແມ່ນແຕ່ pitch deck</li><li>ທົດສອບ FX ແລະ downside</li><li>ກຳນົດ reporting rights ໃນສັນຍາ</li></ol>
+            <h3>ກວດທັງໂຄງການ ແລະການບໍລິຫານ</h3>
+            <ol><li>ກວດໃບອະນຸຍາດ ແລະຄວາມເປັນເຈົ້າຂອງ</li><li>ກວດກະແສເງິນສົດ ບໍ່ແມ່ນເບິ່ງແຕ່ເອກະສານນຳສະເໜີ</li><li>ທົດສອບຄວາມສ່ຽງດ້ານອັດຕາແລກປ່ຽນ ແລະສະຖານະການທີ່ບໍ່ດີ</li><li>ກຳນົດສິດຮັບລາຍງານໃນສັນຍາ</li></ol>
           </article>
         </div>
       </section>
 
       <section className="section conclusion">
-        <p className="eyebrow light">CONCLUSION</p>
+        <p className="eyebrow light">ບົດສະຫຼຸບທ້າຍ</p>
         <h2>ທຸລະກິດທີ່ມີໂອກາດຢູ່ລອດ ບໍ່ຈຳເປັນຕ້ອງໃຫຍ່.</h2>
-        <p>ແຕ່ຄວນມີຕົ້ນທຶນຄົງທີ່ຕ່ຳ, cash flow ໄວ, ແກ້ບັນຫາຈຳເປັນ, ບໍ່ອາໄສແຮງງານຫຼາຍ, ມີລາຍຮັບຫຼາຍກວ່າໜຶ່ງຕະຫຼາດ ແລະພິສູດຄວາມໂປ່ງໃສໄດ້.</p>
+        <p>ແຕ່ຄວນມີຕົ້ນທຶນຄົງທີ່ຕ່ຳ, ກະແສເງິນສົດໄວ, ແກ້ບັນຫາຈຳເປັນ, ບໍ່ອາໄສແຮງງານຫຼາຍ, ມີລາຍຮັບຫຼາຍກວ່າໜຶ່ງຕະຫຼາດ ແລະພິສູດຄວາມໂປ່ງໃສໄດ້.</p>
       </section>
 
       <section className="section methodology" id="methodology">
         <div className="section-heading">
-          <p className="eyebrow">METHODOLOGY</p>
+          <p className="eyebrow">ວິທີຈັດເຮັດ</p>
           <div>
             <h2>ວິທີອ່ານລາຍງານນີ້</h2>
             <p className="section-intro">ຂໍ້ມູນຖືກນຳມາປະກອບກັບການວິເຄາະ; ບາງຂໍ້ມູນອາດມີປີອ້າງອີງຕ່າງກັນ.</p>
@@ -794,14 +830,14 @@ export default function Home() {
         </div>
         <div className="method-grid">
           <article><b>1</b><h3>ຫຼັກຖານ</h3><p>ເນັ້ນ World Bank, IMF, ADB, ILO, BOL, LSC, LSX ແລະດັດຊະນີທີ່ເຜີຍແຜ່ວິທີການ.</p></article>
-          <article><b>2</b><h3>Triangulation</h3><p>ບໍ່ໃຊ້ຕົວເລກດຽວສະຫຼຸບທັງລະບົບ; ປຽບທຽບຫຼາຍແຫຼ່ງແລະຫຼາຍຊ່ວງເວລາ.</p></article>
-          <article><b>3</b><h3>ຂໍ້ຈຳກັດ</h3><p>CPI ແມ່ນ perception index; scenario 2026–2028 ແມ່ນຂໍ້ວິເຄາະ; ບໍ່ແມ່ນການກ່າວຫາອົງການໃດ.</p></article>
+          <article><b>2</b><h3>ປຽບທຽບຫຼາຍແຫຼ່ງ</h3><p>ບໍ່ໃຊ້ຕົວເລກດຽວສະຫຼຸບທັງລະບົບ; ປຽບທຽບຫຼາຍແຫຼ່ງແລະຫຼາຍຊ່ວງເວລາ.</p></article>
+          <article><b>3</b><h3>ຂໍ້ຈຳກັດ</h3><p>CPI ແມ່ນດັດຊະນີການຮັບຮູ້; ສະຖານະການ 2026–2028 ແມ່ນຂໍ້ວິເຄາະ; ບໍ່ແມ່ນການກ່າວຫາອົງການໃດ.</p></article>
         </div>
       </section>
 
       <section className="section sources" id="sources">
         <div className="section-heading">
-          <p className="eyebrow">SOURCES</p>
+          <p className="eyebrow">ແຫຼ່ງຂໍ້ມູນ</p>
           <div>
             <h2>ແຫຼ່ງຂໍ້ມູນ</h2>
             <p className="section-intro">ກົດເປີດເອກະສານຕົ້ນສະບັບ. ກວດຄັ້ງຫຼ້າສຸດ: 22 ສິງຫາ 2026.</p>
