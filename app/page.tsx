@@ -149,6 +149,22 @@ const sources = [
     url: "https://kpl.gov.la/En/detail.aspx/detail.aspx?id=87567",
     use: "ບັນຊີອອມຄຳ, ສິນເຊື່ອຄ້ຳດ້ວຍຄຳ ແລະເປົ້າໝາຍຂະຫຍາຍການເຂົ້າເຖິງທຶນ",
   },
+  {
+    id: "adb-outlook26",
+    org: "ADB",
+    year: "2026",
+    title: "Lao PDR’s Economic Growth Moderates Amid External Risks",
+    url: "https://www.adb.org/news/lao-pdr-economic-growth-moderates-amid-external-risks",
+    use: "ແນວໂນ້ມທ່ອງທ່ຽວ, ຂົນສົ່ງ, ໂລຈິສຕິກ ແລະພະລັງງານປີ 2026–2027",
+  },
+  {
+    id: "wb-poverty26",
+    org: "World Bank",
+    year: "2026",
+    title: "Poverty Falls in Laos, but Quality Jobs Remain Scarce",
+    url: "https://www.worldbank.org/en/country/lao/publication/poverty-falls-in-laos-but-quality-jobs-remain-scarce",
+    use: "ກຳລັງຊື້, ກະສິກຳເຊີງການຄ້າ, ການແປຮູບ, ທັກສະ ແລະວຽກຄຸນນະພາບ",
+  },
 ];
 
 const barriers = [
@@ -281,6 +297,7 @@ export default function Home() {
             <a href="#reader-guide">ເລືອກອ່ານ</a>
             <a href="#diagnosis">ບັນຫາ</a>
             <a href="#sectors">ຂະແໜງ</a>
+            <a href="#opportunities">ໂອກາດ</a>
             <a href="#capital-market">ຕະຫຼາດທຶນ</a>
             <a href="#gold-banking">ທະນາຄານຄຳ</a>
             <a href="#actions">ຂໍ້ສະເໜີ</a>
@@ -352,10 +369,11 @@ export default function Home() {
         <div className="reader-guide-grid">
           <a href="#diagnosis"><span>01</span><strong>ທຸລະກິດລາວຕິດບັນຫາຫຍັງ?</strong><small>ເບິ່ງ 6 ບັນຫາຫຼັກ ແລະທາງອອກ</small></a>
           <a href="#sectors"><span>02</span><strong>ຂະແໜງໃດຢູ່ລອດ?</strong><small>ແຍກຄວາມໂດດເດັ່ນອອກຈາກຄວາມຍືນຍົງ</small></a>
-          <a href="#capital-market"><span>03</span><strong>LSX ຊ່ວຍລະດົມທຶນແນວໃດ?</strong><small>ຮູ້ຈັກໂອກາດ, ຂັ້ນຕອນ ແລະຂໍ້ຈຳກັດ</small></a>
-          <a href="#gold-banking"><span>04</span><strong>ເອົາຄຳໄປຄ້ຳກູ້ໄດ້ແນວໃດ?</strong><small>ອ່ານຂັ້ນຕອນ, ຄວາມສ່ຽງ ແລະ 7 ຄຳຖາມກ່ອນກູ້</small></a>
-          <a href="#scam-check"><span>05</span><strong>ແຍກທຸລະກິດຈິງອອກຈາກການຫຼອກລວງແນວໃດ?</strong><small>ກວດສັນຍານແດງ ແລະຫຼັກຖານທີ່ຄວນມີ</small></a>
-          <a href="#actions"><span>06</span><strong>ແຕ່ລະຝ່າຍຄວນເຮັດຫຍັງ?</strong><small>ຂໍ້ສະເໜີສຳລັບລັດ, ທະນາຄານ, ທຸລະກິດ ແລະນັກລົງທຶນ</small></a>
+          <a href="#opportunities"><span>03</span><strong>ທຸລະກິດໃດໜ້າເຮັດ?</strong><small>6 ໂອກາດ, ວິທີເລີ່ມນ້ອຍ ແລະຄວາມສ່ຽງທີ່ຕ້ອງຮູ້</small></a>
+          <a href="#capital-market"><span>04</span><strong>LSX ຊ່ວຍລະດົມທຶນແນວໃດ?</strong><small>ຮູ້ຈັກໂອກາດ, ຂັ້ນຕອນ ແລະຂໍ້ຈຳກັດ</small></a>
+          <a href="#gold-banking"><span>05</span><strong>ເອົາຄຳໄປຄ້ຳກູ້ໄດ້ແນວໃດ?</strong><small>ອ່ານຂັ້ນຕອນ, ຄວາມສ່ຽງ ແລະ 7 ຄຳຖາມກ່ອນກູ້</small></a>
+          <a href="#scam-check"><span>06</span><strong>ແຍກທຸລະກິດຈິງອອກຈາກການຫຼອກລວງແນວໃດ?</strong><small>ກວດສັນຍານແດງ ແລະຫຼັກຖານທີ່ຄວນມີ</small></a>
+          <a href="#actions"><span>07</span><strong>ແຕ່ລະຝ່າຍຄວນເຮັດຫຍັງ?</strong><small>ຂໍ້ສະເໜີສຳລັບລັດ, ທະນາຄານ, ທຸລະກິດ ແລະນັກລົງທຶນ</small></a>
         </div>
 
         <div className="plain-language">
@@ -526,6 +544,86 @@ export default function Home() {
             <li>ບໍລິການດິຈິຕອນໃຫ້ທຸລະກິດ ແລະບໍລິການສົ່ງອອກ</li>
           </ul>
         </aside>
+      </section>
+
+      <section className="section opportunities" id="opportunities">
+        <div className="section-heading">
+          <p className="eyebrow">03 · ໂອກາດທຸລະກິດ</p>
+          <div>
+            <h2>6 ທຸລະກິດທີ່ພໍມີໂອກາດເຕີບໂຕໃນລາວ</h2>
+            <p className="section-intro">ບັນຊີນີ້ບໍ່ແມ່ນການຮັບປະກັນກຳໄລ. ມັນແມ່ນການຄັດເລືອກຈາກຄວາມຕ້ອງການຈຳເປັນ, ທ່າແຮງຂອງຂະແໜງ ແລະຂໍ້ຈຳກັດດ້ານກຳລັງຊື້, ເງິນຕາ ແລະແຮງງານ. <Cite id="wb-jun26" /><Cite id="adb-outlook26" /></p>
+          </div>
+        </div>
+
+        <div className="opportunity-rules" aria-label="ຫຼັກຄັດເລືອກໂອກາດທຸລະກິດ">
+          <article><b>01</b><strong>ແກ້ບັນຫາຈຳເປັນ</strong><span>ລູກຄ້າຍັງຕ້ອງໃຊ້ ເຖິງແມ່ນກຳລັງຊື້ຈະອ່ອນລົງ</span></article>
+          <article><b>02</b><strong>ຮັບເງິນໄວ</strong><span>ຮອບເງິນສັ້ນ ແລະບໍ່ປ່ອຍເຄຣດິດຍາວເກີນໄປ</span></article>
+          <article><b>03</b><strong>ພຶ່ງນຳເຂົ້າໜ້ອຍ</strong><span>ໃຊ້ວັດຖຸດິບພາຍໃນ ຫຼືມີລາຍຮັບເງິນຕາຕ່າງປະເທດ</span></article>
+          <article><b>04</b><strong>ເລີ່ມນ້ອຍໄດ້</strong><span>ຄ່າເຊົ່າ, ໜີ້ ແລະຈຳນວນພະນັກງານຄວນຢູ່ໃນລະດັບຄວບຄຸມໄດ້</span></article>
+        </div>
+
+        <div className="opportunity-grid">
+          <article className="opportunity-card featured">
+            <header><span>01</span><b>ເໝາະກັບຜູ້ເລີ່ມຕົ້ນ</b></header>
+            <h3>ສ້ອມແປງ ແລະບຳລຸງຮັກສາ</h3>
+            <p>ແອ, ຕູ້ເຢັນ, ປ້ຳນ້ຳ, ເຄື່ອງຈັກກະສິກຳ, ລະບົບໄຟ, ໂຊລາ ແລະລົດໄຟຟ້າ ລ້ວນຕ້ອງການຊ່າງທີ່ໄວ້ໃຈໄດ້.</p>
+            <dl><div><dt>ເລີ່ມແນວໃດ</dt><dd>ເລືອກຊ່າງສະເພາະ 1 ຢ່າງ, ອອກບໍລິການນອກສະຖານທີ່ ແລະຂາຍສັນຍາບຳລຸງລາຍປີ.</dd></div><div><dt>ລະວັງ</dt><dd>ອາໄຫຼ່ປອມ, ການຮັບປະກັນງານ ແລະການຫາຊ່າງຝີມື.</dd></div></dl>
+          </article>
+
+          <article className="opportunity-card">
+            <header><span>02</span><b>ສ້າງມູນຄ່າໃນລາວ</b></header>
+            <h3>ກະສິກຳແປຮູບ ແລະບັນຈຸຫີບຫໍ່</h3>
+            <p>ການຄັດຂະໜາດ, ຕາກແຫ້ງ, ແຊ່ເຢັນ, ບັນຈຸ ແລະສົ່ງຫາຕະຫຼາດ ຊ່ວຍຫຼຸດການເສຍຫາຍ ແລະເພີ່ມລາຄາໃຫ້ຜົນຜະລິດ. <Cite id="wb-poverty26" /><Cite id="wb-private26" /></p>
+            <dl><div><dt>ເລີ່ມແນວໃດ</dt><dd>ຫາຜູ້ຊື້ກ່ອນ, ເລືອກພືດພຽງ 1–2 ຊະນິດ ແລະຈ້າງຜະລິດກ່ອນຊື້ເຄື່ອງ.</dd></div><div><dt>ລະວັງ</dt><dd>ຄຸນນະພາບບໍ່ຄົງທີ່, ລະດູການ, ມາດຕະຖານອາຫານ ແລະການຮັບຊື້ທີ່ບໍ່ມີສັນຍາ.</dd></div></dl>
+          </article>
+
+          <article className="opportunity-card">
+            <header><span>03</span><b>ລົງທຶນຄົງທີ່ຕ່ຳ</b></header>
+            <h3>ບໍລິການຫຼັງບ້ານໃຫ້ SME</h3>
+            <p>ຮັບເຮັດບັນຊີ, ພາສີ, ເງິນເດືອນ, ຄຸ້ມສະຕັອກ, POS, ກວດຍອດ QR ແລະວາງແຜນກະແສເງິນສົດ.</p>
+            <dl><div><dt>ເລີ່ມແນວໃດ</dt><dd>ສ້າງແພັກເກດລາຍເດືອນສຳລັບຮ້ານນ້ອຍ ແລະລາຍງານຜົນແບບອ່ານງ່າຍ.</dd></div><div><dt>ລະວັງ</dt><dd>ຄວາມລັບຂອງລູກຄ້າ, ຄວາມຖືກຕ້ອງທາງພາສີ ແລະການເກັບຄ່າບໍລິການ.</dd></div></dl>
+          </article>
+
+          <article className="opportunity-card">
+            <header><span>04</span><b>ເກາະຕາມການເຊື່ອມຕໍ່</b></header>
+            <h3>ໂລຈິສຕິກສະເພາະທາງ</h3>
+            <p>ຮວບຮວມສິນຄ້າ, ສາງຂະໜາດນ້ອຍ, ເອກະສານຂ້າມແດນ, ຂົນສົ່ງເຢັນ ແລະສົ່ງຮອບສຸດທ້າຍ ມີໂອກາດຕາມການຄ້າແລະລົດໄຟ. <Cite id="adb-outlook26" /><Cite id="adb-integration" /></p>
+            <dl><div><dt>ເລີ່ມແນວໃດ</dt><dd>ຈັບລູກຄ້າກຸ່ມດຽວ ແລະເຊົ່າລົດຕາມຖ້ຽວ ກ່ອນຊື້ລົດຈຳນວນຫຼາຍ.</dd></div><div><dt>ລະວັງ</dt><dd>ນ້ຳມັນ, ຖ້ຽວກັບບໍ່ມີສິນຄ້າ, ພາສີ–ດ່ານ ແລະໜີ້ຊື້ລົດ.</dd></div></dl>
+          </article>
+
+          <article className="opportunity-card">
+            <header><span>05</span><b>ຮັບລາຍຮັບຈາກນັກທ່ອງທ່ຽວ</b></header>
+            <h3>ບໍລິການໜູນທ່ອງທ່ຽວ</h3>
+            <p>ປະສົບການທ້ອງຖິ່ນ, ຈອງອອນລາຍ, ເນື້ອຫາຫຼາຍພາສາ, ລົດຮັບສົ່ງ ແລະສິນຄ້າສະໜອງໂຮງແຮມ ສາມາດເກາະກັບການຟື້ນຕົວຂອງການທ່ອງທ່ຽວ. <Cite id="wb-jun26" /><Cite id="adb-outlook26" /></p>
+            <dl><div><dt>ເລີ່ມແນວໃດ</dt><dd>ຮ່ວມກັບໂຮງແຮມ 3–5 ແຫ່ງ, ທົດລອງທົວສັ້ນ ຫຼືສິນຄ້າສະໜອງພຽງຢ່າງດຽວ.</dd></div><div><dt>ລະວັງ</dt><dd>ລະດູການ, ຣີວິວອອນລາຍ, ຄວາມປອດໄພ ແລະການພຶ່ງຕະຫຼາດດຽວ.</dd></div></dl>
+          </article>
+
+          <article className="opportunity-card">
+            <header><span>06</span><b>ແກ້ບັນຫາຂາດຄົນ</b></header>
+            <h3>ຝຶກອາຊີບທີ່ເຊື່ອມກັບວຽກ</h3>
+            <p>ຫຼັກສູດຊ່າງໄຟ, ຄວາມເຢັນ, ບັນຊີ, ຂາຍ, ໂຮງແຮມ ແລະພາສາ ມີຄຸນຄ່າເມື່ອຜູ້ຮຽນເຫັນທາງໄປຫາວຽກຈິງ. <Cite id="wb-private26" /><Cite id="wb-poverty26" /></p>
+            <dl><div><dt>ເລີ່ມແນວໃດ</dt><dd>ຫານາຍຈ້າງຮ່ວມອອກຫຼັກສູດ ແລະຮັບຝຶກງານ ກ່ອນເປີດຮັບນັກຮຽນ.</dd></div><div><dt>ລະວັງ</dt><dd>ຢ່າຮັບປະກັນວຽກຖ້າບໍ່ມີສັນຍາ; ຕ້ອງວັດຜົນຈາກການໄດ້ວຽກແລະລາຍຮັບ.</dd></div></dl>
+          </article>
+        </div>
+
+        <div className="opportunity-bottom">
+          <article className="starter-picks">
+            <span>ຖ້າເລີ່ມເປັນຄັ້ງທຳອິດ</span>
+            <h3>3 ອັນທີ່ຄວນທົດລອງກ່ອນ</h3>
+            <ol><li><b>ສ້ອມແປງ</b> — ເຫັນຄວາມຕ້ອງການຊັດ ແລະຮັບເງິນໄວ</li><li><b>ບໍລິການ SME</b> — ໃຊ້ທັກສະຫຼາຍກວ່າເງິນລົງທຶນ</li><li><b>ກະສິກຳແປຮູບ</b> — ເລີ່ມເມື່ອມີຜູ້ຊື້ທີ່ຢືນຢັນແລ້ວ</li></ol>
+          </article>
+          <article className="caution-list">
+            <span>ຄວນລະວັງ</span>
+            <h3>ຢ່າເລີ່ມຈາກຕົ້ນທຶນໃຫຍ່</h3>
+            <ul><li>ຮ້ານກາເຟ ຫຼືຮ້ານອາຫານທົ່ວໄປທີ່ບໍ່ມີຈຸດຕ່າງ</li><li>ຂາຍຍ່ອຍທີ່ສະຕັອກຂອງນຳເຂົ້າຫຼາຍ</li><li>ຊື້ລົດ ຫຼືສ້າງໂຮງງານດ້ວຍໜີ້ ກ່ອນມີສັນຍາລູກຄ້າ</li><li>ທຸລະກິດໃຊ້ຄົນຫຼາຍແຕ່ກຳໄລບາງ</li><li>ລະດົມທຶນ, ປ່ອຍກູ້ ຫຼື fintech ໂດຍບໍ່ມີໃບອະນຸຍາດ</li></ul>
+          </article>
+        </div>
+
+        <aside className="validation-strip">
+          <strong>ກ່ອນລົງເງິນ:</strong>
+          <span>ສຳພາດລູກຄ້າ 15–20 ຄົນ</span><i>→</i><span>ທົດລອງຂາຍແບບນ້ອຍ</span><i>→</i><span>ເກັບຄຳສັ່ງຊື້ ຫຼືເງິນມັດຈຳ</span><i>→</i><span>ຈຶ່ງຊື້ອຸປະກອນໃຫຍ່</span>
+        </aside>
+        <p className="opportunity-note">ຂໍ້ມູນນີ້ເປັນກອບຄິດເບື້ອງຕົ້ນ ບໍ່ແມ່ນຄຳແນະນຳການລົງທຶນ. ຜົນຈິງຂຶ້ນກັບແຂວງ, ລູກຄ້າ, ຄູ່ແຂ່ງ, ໃບອະນຸຍາດ ແລະຄວາມສາມາດຂອງຜູ້ປະກອບການ.</p>
       </section>
 
       <section className="section capital-market" id="capital-market">

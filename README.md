@@ -2,7 +2,7 @@
 
 An interactive Lao-language report on the business environment in the Lao PDR,
 covering labor and skills, access to finance, governance, macroeconomic risk,
-digital payments, the Lao Securities Exchange and capital markets,
+practical business opportunities, digital payments, the Lao Securities Exchange and capital markets,
 gold-backed lending, capital-raising risks, and practical recommendations.
 
 The live owner-only deployment is managed separately through OpenAI Sites.
@@ -18,6 +18,8 @@ Public GitHub Pages deployment:
 - Responsive CSS charts and data cards
 - Sector analysis for finance, lotteries, government projects, digital services,
   and less-visible resilient businesses
+- Six practical business opportunities with low-cost starting points, key risks,
+  beginner-friendly picks, and a customer-validation checklist
 - LSX capital-market drill-down with 2025 turnover, listed issuers, regulated
   fundraising steps, market constraints, and a six-part development agenda
 - Lao gold-banking analysis covering Gold Certificates, the 15-gram published
@@ -93,6 +95,8 @@ To reuse the report for a different subject or year:
   haircut, or fee schedule for every borrower and lender.
 - The scam checklist is an initial screening tool, not legal or investment
   advice.
+- The business-opportunity section is an initial market-screening framework,
+  not a guarantee of demand, profit, or investment returns.
 - The report does not accuse any named person, company, bank, or institution.
 
 ## License
