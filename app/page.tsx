@@ -75,7 +75,7 @@ const sources = [
     year: "2026",
     title: "Annual Economic Report 2025",
     url: "https://bol.gov.la/en/fileupload/30-06-2026_1782819835.pdf",
-    use: "ລະບົບຊຳລະເງິນ, QR ຂ້າມແດນ ແລະ e-payment",
+    use: "ລະບົບຊຳລະເງິນ, QR ຂ້າມແດນ, e-payment ແລະຕະຫຼາດທຶນ",
   },
   {
     id: "adb-integration",
@@ -84,6 +84,46 @@ const sources = [
     title: "Leveraging Benefits of Regional Economic Integration",
     url: "https://www.adb.org/publications/regional-economic-integration-lao-pdr-gms",
     use: "ການເຊື່ອມຕໍ່ GMS, ການສົ່ງອອກ ແລະການຫັນ land-linked",
+  },
+  {
+    id: "lsc-issuers",
+    org: "Lao Securities Commission",
+    year: "2026",
+    title: "Issuer Information",
+    url: "https://lsc2.gov.la/EN/issuance/issuer_info.php",
+    use: "ລາຍຊື່ 12 ບໍລິສັດອອກຫຼັກຊັບໃນລາວ",
+  },
+  {
+    id: "lsc-securities",
+    org: "Lao Securities Commission",
+    year: "2026",
+    title: "Securities Companies",
+    url: "https://lsc2.gov.la/EN/securities/index.php",
+    use: "ລາຍຊື່ບໍລິສັດຫຼັກຊັບທີ່ຢູ່ພາຍໃຕ້ການກຳກັບ",
+  },
+  {
+    id: "lsx-disclosure",
+    org: "Lao Securities Exchange",
+    year: "2026",
+    title: "Disclosure Information",
+    url: "https://lsx.com.la/en/disclosure/disclosure",
+    use: "ບົດບາດຂອງ disclosure ຕໍ່ນັກລົງທຶນ ແລະຕະຫຼາດ",
+  },
+  {
+    id: "set-lsx",
+    org: "Stock Exchange of Thailand",
+    year: "2026",
+    title: "GMS Exchanges Overview: Lao Securities Exchange",
+    url: "https://www.set.or.th/en/market/index/gms-exchanges/overview",
+    use: "ໂຄງສ້າງຜູ້ຖືຮຸ້ນ, ຜະລິດຕະພັນ ແລະ T+2 settlement ຂອງ LSX",
+  },
+  {
+    id: "adb-capital26",
+    org: "ADB",
+    year: "2026",
+    title: "ADB Launches $6 Billion Initiative to Deepen ASEAN Capital Markets",
+    url: "https://www.adb.org/news/adb-launches-6-billion-initiative-and-institutional-support-deepen-asean-capital-markets",
+    use: "ບໍລິບົດການພັດທະນາພັນທະບັດ ແລະຕະຫຼາດທຶນໃນ ASEAN",
   },
 ];
 
@@ -161,6 +201,22 @@ const pillarData = [
     response: "ທຸລະກິດຄວນຫຼຸດ currency mismatch, ເຮັດ scenario cash flow 3 ລະດັບ, ເພີ່ມວັດຖຸດິບພາຍໃນ ແລະຫາລາຍຮັບສະກຸນເງິນທີ່ແຂງກວ່າ.",
     refs: ["wb-jun26", "imf26"],
   },
+  {
+    id: "capital-market",
+    tag: "business" as Theme,
+    no: "05",
+    title: "ຕະຫຼາດທຶນ ແລະ LSX",
+    risk: "ປານກາງ–ສູງ",
+    summary: "LSX ເປັນຊ່ອງທາງທຶນທີ່ສຳຄັນ ແຕ່ຈຳນວນຜູ້ອອກຫຼັກຊັບ, ສະພາບຄ່ອງ ແລະ listing readiness ຍັງຈຳກັດການເຂົ້າເຖິງ.",
+    evidence: [
+      "BOL ລາຍງານວ່າ LSX ມີ 12 ບໍລິສັດຈົດທະບຽນ ແລະມູນຄ່າຊື້ຂາຍປີ 2025 ຢູ່ທີ່ 216.76 ຕື້ກີບ.",
+      "ທຶນສະສົມຈາກຮຸ້ນ, ພັນທະບັດບໍລິສັດ ແລະພັນທະບັດລັດ ບັນລຸ 67,815.55 ຕື້ກີບ ຫຼື 21% ຂອງ GDP ປີ 2024.",
+      "LSX ລະບຸວ່າ disclosure ແມ່ນຂໍ້ມູນສຳຄັນທີ່ຕ້ອງແຈ້ງຕໍ່ຕະຫຼາດແລະສາທາລະນະຕາມລະບຽບຫຼັກຊັບ.",
+    ],
+    impact: "ຕົ້ນທຶນການກຽມບັນຊີແລະ governance ສູງ → SME ບໍ່ພ້ອມຈົດທະບຽນ → ຜູ້ອອກຫຼັກຊັບໜ້ອຍ → ສະພາບຄ່ອງຕ່ຳ → ນັກລົງທຶນສົນໃຈຈຳກັດ",
+    response: "ສ້າງ SME/alternative board, ໂຄງການ listing readiness, ຕະຫຼາດ corporate bond, ນັກລົງທຶນສະຖາບັນ ແລະການເປີດເຜີຍທີ່ທັນເວລາ—ໂດຍບໍ່ຫຼຸດມາດຕະຖານຄຸ້ມຄອງ.",
+    refs: ["bol25", "lsc-issuers", "lsx-disclosure"],
+  },
 ];
 
 function Cite({ id }: { id: string }) {
@@ -184,6 +240,7 @@ export default function Home() {
           <div className="nav-links">
             <a href="#diagnosis">ບັນຫາ</a>
             <a href="#sectors">ຂະແໜງ</a>
+            <a href="#capital-market">ຕະຫຼາດທຶນ</a>
             <a href="#actions">ຂໍ້ສະເໜີ</a>
             <a href="#sources">ແຫຼ່ງຂໍ້ມູນ</a>
           </div>
@@ -207,7 +264,7 @@ export default function Home() {
             <span className="note-label">THESIS</span>
             <strong>ບັນຫາບໍ່ແມ່ນ “ບໍ່ມີເງິນ”</strong>
             <p>ແຕ່ແມ່ນເງິນ, ໂອກາດ ແລະອຳນາດຕະຫຼາດ ກະຈຸກຕົວຢູ່ບາງຂະແໜງ.</p>
-            <div className="hero-source">ອີງໃສ່ World Bank, IMF, ADB, ILO, BOL ແລະ Transparency International</div>
+            <div className="hero-source">ອີງໃສ່ World Bank, IMF, ADB, ILO, BOL, LSC, LSX ແລະ Transparency International</div>
           </aside>
         </div>
         <figure className="hero-photo">
@@ -236,6 +293,7 @@ export default function Home() {
             <article><b>2</b><div><strong>ຂາດແຮງງານ ແຕ່ກໍຂາດວຽກຄຸນນະພາບ</strong><p>ຄ່າແຮງແທ້ຈິງແລະ career path ເປັນຕົວກຳນົດວ່າຄົນຈະຢູ່ ຫຼືຍ້າຍອອກ.</p></div></article>
             <article><b>3</b><div><strong>ທຶນມີ—ແຕ່ບໍ່ໄຫຼຫາຄົນທີ່ບໍ່ມີຫຼັກຄ້ຳ</strong><p>ລະບົບທີ່ອີງດິນຄ້ຳ ບໍ່ເໝາະກັບ startup, ບໍລິການ digital ແລະທຸລະກິດຄົນຮຸ່ນໃໝ່.</p></div></article>
             <article><b>4</b><div><strong>ທຸລະກິດທີ່ “ເຫັນຊັດ” ບໍ່ເທົ່າກັບທີ່ “ຢູ່ລອດທັງໝົດ”</strong><p>ຂະແໜງມີໃບອະນຸຍາດ ແລະໂຄງການລັດມີ visibility ສູງ, ແຕ່ທຸລະກິດຈຳເປັນຈຳນວນຫຼາຍຢູ່ລອດແບບບໍ່ໂດດເດັ່ນ.</p></div></article>
+            <article><b>5</b><div><strong>ຕະຫຼາດທຶນມີ—ແຕ່ຍັງບໍ່ເປີດກວ້າງ</strong><p>LSX ມີ 12 ບໍລິສັດອອກຫຼັກຊັບ; ຕະຫຼາດມີຄວາມໝາຍຕໍ່ທຶນໄລຍະຍາວ ແຕ່ SME ສ່ວນໃຫຍ່ຍັງບໍ່ພ້ອມເຂົ້າເຖິງ. <Cite id="bol25" /></p></div></article>
           </div>
         </div>
       </section>
@@ -392,6 +450,101 @@ export default function Home() {
         </aside>
       </section>
 
+      <section className="section capital-market" id="capital-market">
+        <div className="section-heading">
+          <p className="eyebrow">CAPITAL MARKET · LSX</p>
+          <div>
+            <h2>ຕະຫຼາດທຶນລາວ: ຊ່ອງທາງລະດົມທຶນທີ່ຍັງບໍ່ເຕັມສັກກະຍະພາບ</h2>
+            <p className="section-intro">ການມີຕະຫຼາດຫຼັກຊັບບໍ່ໄດ້ໝາຍຄວາມວ່າທຸລະກິດທຸກຂະໜາດສາມາດເຂົ້າເຖິງທຶນໄດ້. ຄຳຖາມຫຼັກແມ່ນ: ໃຜພ້ອມອອກຫຼັກຊັບ, ໃຜພ້ອມລົງທຶນ ແລະຕະຫຼາດຮອງມີສະພາບຄ່ອງພຽງໃດ.</p>
+          </div>
+        </div>
+
+        <div className="capital-thesis">
+          <span>CORE FINDING</span>
+          <p>LSX ເປັນຊ່ອງທາງທຶນທີ່ສຳຄັນ ແຕ່ຍັງບໍ່ແມ່ນຊ່ອງທາງທຶນທີ່ເປີດກວ້າງສຳລັບຜູ້ປະກອບການລາວສ່ວນໃຫຍ່.</p>
+        </div>
+
+        <div className="capital-stat-grid">
+          <article>
+            <span>LISTED ISSUERS</span>
+            <b>12</b>
+            <p>ຈຳນວນບໍລິສັດອອກຫຼັກຊັບທີ່ LSC ແລະ BOL ລາຍງານ. <Cite id="lsc-issuers" /></p>
+          </article>
+          <article className="capital-stat-feature">
+            <span>CUMULATIVE CAPITAL</span>
+            <b>67,815.55</b>
+            <small>ຕື້ກີບ · 21% ຂອງ GDP ປີ 2024</small>
+            <p>ທຶນສະສົມຈາກຮຸ້ນ, ພັນທະບັດບໍລິສັດ ແລະພັນທະບັດລັດ. <Cite id="bol25" /></p>
+          </article>
+          <article>
+            <span>2025 TURNOVER</span>
+            <b>216.76</b>
+            <small>ຕື້ກີບ · +628.07% YoY</small>
+            <p>ການເຕີບໄວແມ່ນສັນຍານບວກ, ແຕ່ອາດສະທ້ອນຖານປຽບທຽບທີ່ຕ່ຳ. <Cite id="bol25" /></p>
+          </article>
+          <article>
+            <span>FOREIGN SHARE</span>
+            <b>17.84%</b>
+            <p>ສັດສ່ວນການຊື້ຂາຍຂອງນັກລົງທຶນຕ່າງປະເທດໃນມູນຄ່າຊື້ຂາຍລວມປີ 2025. <Cite id="bol25" /></p>
+          </article>
+        </div>
+
+        <div className="capital-columns">
+          <article className="capital-case">
+            <span>WHY IT MATTERS</span>
+            <h3>ຕະຫຼາດທຶນຊ່ວຍແກ້ຈຸດອ່ອນຂອງລະບົບທີ່ອີງທະນາຄານ</h3>
+            <ul>
+              <li>ເພີ່ມທຶນໄລຍະຍາວ ໂດຍບໍ່ຕ້ອງອີງດິນຄ້ຳຢ່າງດຽວ</li>
+              <li>ຊ່ວຍໃຫ້ລັດແລະບໍລິສັດກະຈາຍແຫຼ່ງລະດົມທຶນ</li>
+              <li>ຜັກດັນບັນຊີ, audit, governance ແລະ disclosure ໃຫ້ເປັນລະບົບ</li>
+              <li>ສ້າງລາຄາອ້າງອີງຂອງທຶນ ແລະພັນທະບັດໃນປະເທດ</li>
+            </ul>
+          </article>
+          <article className="capital-friction">
+            <span>WHY ACCESS STAYS NARROW</span>
+            <h3>ຊ່ອງຫວ່າງບໍ່ໄດ້ຢູ່ທີ່ຕະຫຼາດພຽງຢ່າງດຽວ</h3>
+            <ul>
+              <li>SME ຫຼາຍແຫ່ງຍັງບໍ່ມີບັນຊີມາດຕະຖານ ຫຼືງົບທີ່ກວດສອບໄດ້</li>
+              <li>ຄ່າ audit, legal, advisory ແລະ ongoing disclosure ອາດສູງເມື່ອທຽບກັບຂະໜາດກິດຈະການ</li>
+              <li>ຈຳນວນຫຼັກຊັບໜ້ອຍ ແລະຖານນັກລົງທຶນຈຳກັດ ກະທົບການຊື້ຂາຍຕໍ່ເນື່ອງ</li>
+              <li>+628.07% ເປັນອັດຕາເຕີບໂຕ; ບໍ່ຄວນອ່ານເປັນຫຼັກຖານວ່າສະພາບຄ່ອງສູງແລ້ວ</li>
+            </ul>
+          </article>
+        </div>
+
+        <div className="capital-path" aria-label="ເສັ້ນທາງການລະດົມທຶນທີ່ມີການກຳກັບ">
+          <article><b>01</b><h3>Formalize</h3><p>ແຍກບັນຊີ, ພາສີ, ownership ແລະ cash flow ໃຫ້ຊັດ.</p></article>
+          <article><b>02</b><h3>Prepare</h3><p>ກວດສອບງົບ, governance, board ແລະ internal control.</p></article>
+          <article><b>03</b><h3>Approve</h3><p>ຈັດເຮັດ prospectus ແລະຜ່ານຂັ້ນຕອນຜູ້ກຳກັບ.</p></article>
+          <article><b>04</b><h3>Issue</h3><p>ອອກຮຸ້ນ ຫຼືພັນທະບັດຜ່ານຕົວກາງທີ່ມີໃບອະນຸຍາດ.</p></article>
+          <article><b>05</b><h3>Disclose</h3><p>ເປີດເຜີຍຜົນງານແລະເຫດການສຳຄັນຢ່າງຕໍ່ເນື່ອງ.</p></article>
+        </div>
+
+        <div className="capital-regulated">
+          <article>
+            <span>REGULATED FUNDRAISING</span>
+            <h3>ຄວາມຊອບທຳບໍ່ໄດ້ມາຈາກຄຳໂຄສະນາ</h3>
+            <p>ຄວນມີ prospectus ຫຼືເອກະສານສະເໜີຂາຍ, ການອະນຸມັດ, ຕົວກາງທີ່ມີໃບອະນຸຍາດ, ລະບົບຮັກສາຊັບສິນ ແລະ disclosure ຕໍ່ເນື່ອງ. <Cite id="lsc-securities" /><Cite id="lsx-disclosure" /></p>
+          </article>
+          <article>
+            <span>MARKET INFRASTRUCTURE</span>
+            <h3>LSX ແມ່ນສະຖາບັນຮ່ວມລາວ–ເກົາຫຼີ</h3>
+            <p>LSX ເລີ່ມຕັ້ງໃນປີ 2010; BOL ຖື 51% ແລະ Korea Exchange ຖື 49%. ຜະລິດຕະພັນລວມມີຮຸ້ນແລະພັນທະບັດລັດ, ດ້ວຍການຊຳລະແບບ T+2. <Cite id="set-lsx" /></p>
+          </article>
+        </div>
+
+        <div className="capital-agenda">
+          <article><b>01</b><h3>SME / Alternative Board</h3><p>ກຳນົດຂັ້ນຕອນທີ່ເໝາະກັບບໍລິສັດກາງ ໂດຍຍັງຮັກສາ disclosure ແລະ investor protection.</p></article>
+          <article><b>02</b><h3>Listing Readiness</h3><p>ຊ່ວຍບໍລິສັດກຽມບັນຊີ, audit, governance ແລະ data room ກ່ອນເຂົ້າຕະຫຼາດ.</p></article>
+          <article><b>03</b><h3>Corporate Bonds</h3><p>ພັດທະນາ credit rating, trustee, covenant ແລະຂໍ້ມູນລາຄາພັນທະບັດ. <Cite id="adb-capital26" /></p></article>
+          <article><b>04</b><h3>Institutional Investors</h3><p>ຂະຫຍາຍກອງທຶນ, ປະກັນໄພ ແລະເງິນບຳນານທີ່ລົງທຶນໄລຍະຍາວຕາມກອບຄວາມສ່ຽງ.</p></article>
+          <article><b>05</b><h3>Market Data</h3><p>ເປີດຂໍ້ມູນ trading, disclosure, corporate action ແລະ research ໃຫ້ຄົ້ນຫາງ່າຍ.</p></article>
+          <article><b>06</b><h3>Trust & Enforcement</h3><p>ບັງຄັບ disclosure, related-party rules ແລະ governance ຢ່າງສະໝ່ຳສະເໝີ.</p></article>
+        </div>
+
+        <p className="capital-note"><b>ຂໍ້ຄວນລະວັງ:</b> ຕົວເລກ +628.07% ແມ່ນຂໍ້ມູນທາງການ; ການຕີຄວາມວ່າອາດມາຈາກຖານປຽບທຽບທີ່ຕ່ຳແມ່ນຂໍ້ວິເຄາະຂອງຜູ້ຂຽນ. ບົດນີ້ບໍ່ແມ່ນຄຳແນະນຳຊື້–ຂາຍຫຼັກຊັບ.</p>
+      </section>
+
       <section className="section digital">
         <div className="section-heading">
           <p className="eyebrow">DIGITAL ECONOMY</p>
@@ -512,7 +665,7 @@ export default function Home() {
           </div>
         </div>
         <div className="method-grid">
-          <article><b>1</b><h3>ຫຼັກຖານ</h3><p>ເນັ້ນ World Bank, IMF, ADB, ILO, BOL ແລະດັດຊະນີທີ່ເຜີຍແຜ່ວິທີການ.</p></article>
+          <article><b>1</b><h3>ຫຼັກຖານ</h3><p>ເນັ້ນ World Bank, IMF, ADB, ILO, BOL, LSC, LSX ແລະດັດຊະນີທີ່ເຜີຍແຜ່ວິທີການ.</p></article>
           <article><b>2</b><h3>Triangulation</h3><p>ບໍ່ໃຊ້ຕົວເລກດຽວສະຫຼຸບທັງລະບົບ; ປຽບທຽບຫຼາຍແຫຼ່ງແລະຫຼາຍຊ່ວງເວລາ.</p></article>
           <article><b>3</b><h3>ຂໍ້ຈຳກັດ</h3><p>CPI ແມ່ນ perception index; scenario 2026–2028 ແມ່ນຂໍ້ວິເຄາະ; ບໍ່ແມ່ນການກ່າວຫາອົງການໃດ.</p></article>
         </div>

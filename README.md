@@ -2,7 +2,8 @@
 
 An interactive Lao-language report on the business environment in the Lao PDR,
 covering labor and skills, access to finance, governance, macroeconomic risk,
-digital payments, capital-raising risks, and practical recommendations.
+digital payments, the Lao Securities Exchange and capital markets,
+capital-raising risks, and practical recommendations.
 
 The live owner-only deployment is managed separately through OpenAI Sites.
 
@@ -16,10 +17,13 @@ Public GitHub Pages deployment:
 - Responsive CSS charts and data cards
 - Sector analysis for finance, lotteries, government projects, digital services,
   and less-visible resilient businesses
+- LSX capital-market drill-down with 2025 turnover, listed issuers, regulated
+  fundraising steps, market constraints, and a six-part development agenda
 - Scam-risk due-diligence checklist
 - 2026–2028 analytical scenarios
 - Linked primary sources from the World Bank, IMF, ADB, ILO, Bank of the Lao
-  P.D.R., and Transparency International
+  P.D.R., Lao Securities Commission, Lao Securities Exchange, and Transparency
+  International
 - Licensed-source photo credits displayed in the report
 
 ## Run locally
@@ -79,6 +83,8 @@ To reuse the report for a different subject or year:
 - Statistical reference years differ by source.
 - CPI is a perception index, not a count of proven corruption cases.
 - The 2026–2028 scenarios are editorial analysis, not official forecasts.
+- The interpretation of LSX's 2025 turnover growth as potentially reflecting a
+  low comparison base is editorial analysis, not an official conclusion.
 - The scam checklist is an initial screening tool, not legal or investment
   advice.
 - The report does not accuse any named person, company, bank, or institution.
