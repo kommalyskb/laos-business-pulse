@@ -19,7 +19,9 @@ Public GitHub Pages deployment:
 - Sector analysis for finance, lotteries, government projects, digital services,
   and less-visible resilient businesses
 - Six practical business opportunities with low-cost starting points, key risks,
-  beginner-friendly picks, and a customer-validation checklist
+  beginner-friendly picks, a customer-validation checklist, clear categories
+  for self-employment, small businesses, and entrepreneur-led systems, plus six
+  paths for turning owner-dependent work into scalable operating models
 - LSX capital-market drill-down with 2025 turnover, listed issuers, regulated
   fundraising steps, market constraints, and a six-part development agenda
 - Lao gold-banking analysis covering Gold Certificates, the 15-gram published

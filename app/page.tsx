@@ -369,7 +369,7 @@ export default function Home() {
         <div className="reader-guide-grid">
           <a href="#diagnosis"><span>01</span><strong>ທຸລະກິດລາວຕິດບັນຫາຫຍັງ?</strong><small>ເບິ່ງ 6 ບັນຫາຫຼັກ ແລະທາງອອກ</small></a>
           <a href="#sectors"><span>02</span><strong>ຂະແໜງໃດຢູ່ລອດ?</strong><small>ແຍກຄວາມໂດດເດັ່ນອອກຈາກຄວາມຍືນຍົງ</small></a>
-          <a href="#opportunities"><span>03</span><strong>ທຸລະກິດໃດໜ້າເຮັດ?</strong><small>6 ໂອກາດ, ວິທີເລີ່ມນ້ອຍ ແລະຄວາມສ່ຽງທີ່ຕ້ອງຮູ້</small></a>
+          <a href="#opportunities"><span>03</span><strong>ທຸລະກິດໃດໜ້າເຮັດ?</strong><small>ແບ່ງ 3 ໝວດ: ອາຊີບສ່ວນຕົວ, ທຸລະກິດນ້ອຍ ແລະ entrepreneur</small></a>
           <a href="#capital-market"><span>04</span><strong>LSX ຊ່ວຍລະດົມທຶນແນວໃດ?</strong><small>ຮູ້ຈັກໂອກາດ, ຂັ້ນຕອນ ແລະຂໍ້ຈຳກັດ</small></a>
           <a href="#gold-banking"><span>05</span><strong>ເອົາຄຳໄປຄ້ຳກູ້ໄດ້ແນວໃດ?</strong><small>ອ່ານຂັ້ນຕອນ, ຄວາມສ່ຽງ ແລະ 7 ຄຳຖາມກ່ອນກູ້</small></a>
           <a href="#scam-check"><span>06</span><strong>ແຍກທຸລະກິດຈິງອອກຈາກການຫຼອກລວງແນວໃດ?</strong><small>ກວດສັນຍານແດງ ແລະຫຼັກຖານທີ່ຄວນມີ</small></a>
@@ -555,6 +555,27 @@ export default function Home() {
           </div>
         </div>
 
+        <div className="business-categories" aria-label="3 ໝວດຮູບແບບທຸລະກິດ">
+          <article className="category-self">
+            <span>ໝວດ 01</span>
+            <h3>ອາຊີບສ່ວນຕົວ</h3>
+            <p>ເຈົ້າຂອງຂາຍທັກສະ ແລະເວລາຂອງຕົນເອງ. ເລີ່ມງ່າຍ ແຕ່ລາຍຮັບສ່ວນໃຫຍ່ຢຸດເມື່ອເຈົ້າຂອງພັກ.</p>
+            <b>Holiday test: ລາຍຮັບຢຸດ</b>
+          </article>
+          <article className="category-small">
+            <span>ໝວດ 02</span>
+            <h3>ທຸລະກິດນ້ອຍ</h3>
+            <p>ມີທີມງານ, ໜ້າທີ່ ແລະຂັ້ນຕອນພື້ນຖານ. ເຈົ້າຂອງພັກໄດ້ໄລຍະສັ້ນ ແຕ່ຍັງຕ້ອງກັບມາຕັດສິນໃຈຫຼາຍເລື່ອງ.</p>
+            <b>Holiday test: ຍັງຂາຍໄດ້ໄລຍະສັ້ນ</b>
+          </article>
+          <article className="category-entrepreneur">
+            <span>ໝວດ 03</span>
+            <h3>ທຸລະກິດແບບ entrepreneur</h3>
+            <p>ລາຍຮັບມາຈາກລະບົບ, ທີມ, ຍີ່ຫໍ້, ຂໍ້ມູນ, ເທັກໂນໂລຊີ ຫຼືເຄືອຂ່າຍ ແລະສາມາດຂະຫຍາຍໂດຍບໍ່ເພີ່ມເວລາເຈົ້າຂອງຕາມສັດສ່ວນ.</p>
+            <b>30-day test: ລະບົບຍັງເຮັດວຽກ</b>
+          </article>
+        </div>
+
         <div className="opportunity-rules" aria-label="ຫຼັກຄັດເລືອກໂອກາດທຸລະກິດ">
           <article><b>01</b><strong>ແກ້ບັນຫາຈຳເປັນ</strong><span>ລູກຄ້າຍັງຕ້ອງໃຊ້ ເຖິງແມ່ນກຳລັງຊື້ຈະອ່ອນລົງ</span></article>
           <article><b>02</b><strong>ຮັບເງິນໄວ</strong><span>ຮອບເງິນສັ້ນ ແລະບໍ່ປ່ອຍເຄຣດິດຍາວເກີນໄປ</span></article>
@@ -564,46 +585,65 @@ export default function Home() {
 
         <div className="opportunity-grid">
           <article className="opportunity-card featured">
-            <header><span>01</span><b>ເໝາະກັບຜູ້ເລີ່ມຕົ້ນ</b></header>
+            <header><span>01 · ເໝາະກັບຜູ້ເລີ່ມຕົ້ນ</span><b className="category-chip">ອາຊີບສ່ວນຕົວ</b></header>
             <h3>ສ້ອມແປງ ແລະບຳລຸງຮັກສາ</h3>
             <p>ແອ, ຕູ້ເຢັນ, ປ້ຳນ້ຳ, ເຄື່ອງຈັກກະສິກຳ, ລະບົບໄຟ, ໂຊລາ ແລະລົດໄຟຟ້າ ລ້ວນຕ້ອງການຊ່າງທີ່ໄວ້ໃຈໄດ້.</p>
             <dl><div><dt>ເລີ່ມແນວໃດ</dt><dd>ເລືອກຊ່າງສະເພາະ 1 ຢ່າງ, ອອກບໍລິການນອກສະຖານທີ່ ແລະຂາຍສັນຍາບຳລຸງລາຍປີ.</dd></div><div><dt>ລະວັງ</dt><dd>ອາໄຫຼ່ປອມ, ການຮັບປະກັນງານ ແລະການຫາຊ່າງຝີມື.</dd></div></dl>
           </article>
 
           <article className="opportunity-card">
-            <header><span>02</span><b>ສ້າງມູນຄ່າໃນລາວ</b></header>
+            <header><span>02 · ສ້າງມູນຄ່າໃນລາວ</span><b className="category-chip">ທຸລະກິດນ້ອຍ</b></header>
             <h3>ກະສິກຳແປຮູບ ແລະບັນຈຸຫີບຫໍ່</h3>
             <p>ການຄັດຂະໜາດ, ຕາກແຫ້ງ, ແຊ່ເຢັນ, ບັນຈຸ ແລະສົ່ງຫາຕະຫຼາດ ຊ່ວຍຫຼຸດການເສຍຫາຍ ແລະເພີ່ມລາຄາໃຫ້ຜົນຜະລິດ. <Cite id="wb-poverty26" /><Cite id="wb-private26" /></p>
             <dl><div><dt>ເລີ່ມແນວໃດ</dt><dd>ຫາຜູ້ຊື້ກ່ອນ, ເລືອກພືດພຽງ 1–2 ຊະນິດ ແລະຈ້າງຜະລິດກ່ອນຊື້ເຄື່ອງ.</dd></div><div><dt>ລະວັງ</dt><dd>ຄຸນນະພາບບໍ່ຄົງທີ່, ລະດູການ, ມາດຕະຖານອາຫານ ແລະການຮັບຊື້ທີ່ບໍ່ມີສັນຍາ.</dd></div></dl>
           </article>
 
           <article className="opportunity-card">
-            <header><span>03</span><b>ລົງທຶນຄົງທີ່ຕ່ຳ</b></header>
+            <header><span>03 · ລົງທຶນຄົງທີ່ຕ່ຳ</span><b className="category-chip">ທຸລະກິດນ້ອຍ</b></header>
             <h3>ບໍລິການຫຼັງບ້ານໃຫ້ SME</h3>
             <p>ຮັບເຮັດບັນຊີ, ພາສີ, ເງິນເດືອນ, ຄຸ້ມສະຕັອກ, POS, ກວດຍອດ QR ແລະວາງແຜນກະແສເງິນສົດ.</p>
             <dl><div><dt>ເລີ່ມແນວໃດ</dt><dd>ສ້າງແພັກເກດລາຍເດືອນສຳລັບຮ້ານນ້ອຍ ແລະລາຍງານຜົນແບບອ່ານງ່າຍ.</dd></div><div><dt>ລະວັງ</dt><dd>ຄວາມລັບຂອງລູກຄ້າ, ຄວາມຖືກຕ້ອງທາງພາສີ ແລະການເກັບຄ່າບໍລິການ.</dd></div></dl>
           </article>
 
           <article className="opportunity-card">
-            <header><span>04</span><b>ເກາະຕາມການເຊື່ອມຕໍ່</b></header>
+            <header><span>04 · ເກາະຕາມການເຊື່ອມຕໍ່</span><b className="category-chip">ທຸລະກິດນ້ອຍ</b></header>
             <h3>ໂລຈິສຕິກສະເພາະທາງ</h3>
             <p>ຮວບຮວມສິນຄ້າ, ສາງຂະໜາດນ້ອຍ, ເອກະສານຂ້າມແດນ, ຂົນສົ່ງເຢັນ ແລະສົ່ງຮອບສຸດທ້າຍ ມີໂອກາດຕາມການຄ້າແລະລົດໄຟ. <Cite id="adb-outlook26" /><Cite id="adb-integration" /></p>
             <dl><div><dt>ເລີ່ມແນວໃດ</dt><dd>ຈັບລູກຄ້າກຸ່ມດຽວ ແລະເຊົ່າລົດຕາມຖ້ຽວ ກ່ອນຊື້ລົດຈຳນວນຫຼາຍ.</dd></div><div><dt>ລະວັງ</dt><dd>ນ້ຳມັນ, ຖ້ຽວກັບບໍ່ມີສິນຄ້າ, ພາສີ–ດ່ານ ແລະໜີ້ຊື້ລົດ.</dd></div></dl>
           </article>
 
           <article className="opportunity-card">
-            <header><span>05</span><b>ຮັບລາຍຮັບຈາກນັກທ່ອງທ່ຽວ</b></header>
+            <header><span>05 · ລາຍຮັບຈາກນັກທ່ອງທ່ຽວ</span><b className="category-chip">ທຸລະກິດນ້ອຍ</b></header>
             <h3>ບໍລິການໜູນທ່ອງທ່ຽວ</h3>
             <p>ປະສົບການທ້ອງຖິ່ນ, ຈອງອອນລາຍ, ເນື້ອຫາຫຼາຍພາສາ, ລົດຮັບສົ່ງ ແລະສິນຄ້າສະໜອງໂຮງແຮມ ສາມາດເກາະກັບການຟື້ນຕົວຂອງການທ່ອງທ່ຽວ. <Cite id="wb-jun26" /><Cite id="adb-outlook26" /></p>
             <dl><div><dt>ເລີ່ມແນວໃດ</dt><dd>ຮ່ວມກັບໂຮງແຮມ 3–5 ແຫ່ງ, ທົດລອງທົວສັ້ນ ຫຼືສິນຄ້າສະໜອງພຽງຢ່າງດຽວ.</dd></div><div><dt>ລະວັງ</dt><dd>ລະດູການ, ຣີວິວອອນລາຍ, ຄວາມປອດໄພ ແລະການພຶ່ງຕະຫຼາດດຽວ.</dd></div></dl>
           </article>
 
           <article className="opportunity-card">
-            <header><span>06</span><b>ແກ້ບັນຫາຂາດຄົນ</b></header>
+            <header><span>06 · ແກ້ບັນຫາຂາດຄົນ</span><b className="category-chip">ທຸລະກິດນ້ອຍ</b></header>
             <h3>ຝຶກອາຊີບທີ່ເຊື່ອມກັບວຽກ</h3>
             <p>ຫຼັກສູດຊ່າງໄຟ, ຄວາມເຢັນ, ບັນຊີ, ຂາຍ, ໂຮງແຮມ ແລະພາສາ ມີຄຸນຄ່າເມື່ອຜູ້ຮຽນເຫັນທາງໄປຫາວຽກຈິງ. <Cite id="wb-private26" /><Cite id="wb-poverty26" /></p>
             <dl><div><dt>ເລີ່ມແນວໃດ</dt><dd>ຫານາຍຈ້າງຮ່ວມອອກຫຼັກສູດ ແລະຮັບຝຶກງານ ກ່ອນເປີດຮັບນັກຮຽນ.</dd></div><div><dt>ລະວັງ</dt><dd>ຢ່າຮັບປະກັນວຽກຖ້າບໍ່ມີສັນຍາ; ຕ້ອງວັດຜົນຈາກການໄດ້ວຽກແລະລາຍຮັບ.</dd></div></dl>
           </article>
+        </div>
+
+        <div className="entrepreneur-path">
+          <div className="entrepreneur-heading">
+            <span>ໝວດ 03 · ENTREPRENEUR</span>
+            <div>
+              <h3>ບໍ່ຈຳເປັນຕ້ອງປ່ຽນຂະແໜງ—ແຕ່ຕ້ອງປ່ຽນຈາກ “ເຮັດເອງ” ເປັນ “ສ້າງລະບົບ”</h3>
+              <p>6 ແນວຄິດເດີມສາມາດພັດທະນາໄປເປັນທຸລະກິດແບບ entrepreneur ໄດ້ ຖ້າລາຍຮັບຜູກກັບລະບົບ ແທນທີ່ຈະຜູກກັບເວລາຂອງຜູ້ກໍ່ຕັ້ງ.</p>
+            </div>
+          </div>
+          <div className="entrepreneur-grid">
+            <article><b>01</b><h4>ເຄືອຂ່າຍຊ່າງມາດຕະຖານ</h4><p>ລະບົບຈອງ, ກຳນົດລາຄາ, ກວດຄຸນນະພາບ ແລະສັນຍາບຳລຸງລາຍປີ.</p><small>ລາຍຮັບ: ຄ່າສະມາຊິກ + ສ່ວນແບ່ງຈາກງານ</small></article>
+            <article><b>02</b><h4>ຍີ່ຫໍ້ກະສິກຳແລະເຄືອຂ່າຍຮັບຊື້</h4><p>ມາດຕະຖານຜົນຜະລິດ, ຄູ່ສັນຍາຊາວກະສິກອນ, ຜະລິດ, ບັນຈຸ ແລະກະຈາຍພາຍໃຕ້ຍີ່ຫໍ້ດຽວ.</p><small>ລາຍຮັບ: ອັດຕາກຳໄລຈາກຍີ່ຫໍ້ແລະການກະຈາຍ</small></article>
+            <article><b>03</b><h4>ຊອບແວບໍລິຫານ SME</h4><p>ປ່ຽນບັນຊີ, POS, ສະຕັອກ, QR ແລະເງິນເດືອນ ເປັນບໍລິການມາດຕະຖານທີ່ລູກຄ້າໃຊ້ເອງໄດ້.</p><small>ລາຍຮັບ: subscription ລາຍເດືອນ</small></article>
+            <article><b>04</b><h4>ແພລດຟອມປະສານໂລຈິສຕິກ</h4><p>ເຊື່ອມຜູ້ມີສິນຄ້າ, ລົດ, ສາງ ແລະບໍລິການດ່ານ ໂດຍບໍ່ຈຳເປັນຕ້ອງຖືຄອງລົດທຸກຄັນ.</p><small>ລາຍຮັບ: ຄ່າທຳນຽມຕໍ່ທຸລະກຳ</small></article>
+            <article><b>05</b><h4>ຕະຫຼາດຈອງທ່ອງທ່ຽວລາວ</h4><p>ລວບລວມທີ່ພັກ, ລົດ, ຜູ້ນຳທ່ຽວ ແລະປະສົບການທ້ອງຖິ່ນ ໃຫ້ຈອງແລະຈ່າຍໃນຈຸດດຽວ.</p><small>ລາຍຮັບ: commission ຈາກການຈອງ</small></article>
+            <article><b>06</b><h4>ລະບົບຝຶກທັກສະແລະຈັດຫາງານ</h4><p>ຫຼັກສູດມາດຕະຖານ, ຄູຝຶກ, ໃບຮັບຮອງ ແລະເຄືອຂ່າຍນາຍຈ້າງທີ່ຮັບຄົນຈາກລະບົບ.</p><small>ລາຍຮັບ: ຄ່າຮຽນ + ຄ່າຈັດຫາຄົນ</small></article>
+          </div>
+          <aside className="founder-test"><strong>Founder-independence test</strong><span>ຖ້າຜູ້ກໍ່ຕັ້ງພັກ 30 ມື້ ທີມຍັງຂາຍ, ສົ່ງມອບ, ເກັບເງິນ ແລະແກ້ບັນຫາໄດ້ບໍ?</span></aside>
         </div>
 
         <div className="opportunity-bottom">
