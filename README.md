@@ -3,7 +3,7 @@
 An interactive Lao-language report on the business environment in the Lao PDR,
 covering labor and skills, access to finance, governance, macroeconomic risk,
 digital payments, the Lao Securities Exchange and capital markets,
-capital-raising risks, and practical recommendations.
+gold-backed lending, capital-raising risks, and practical recommendations.
 
 The live owner-only deployment is managed separately through OpenAI Sites.
 
@@ -19,11 +19,13 @@ Public GitHub Pages deployment:
   and less-visible resilient businesses
 - LSX capital-market drill-down with 2025 turnover, listed issuers, regulated
   fundraising steps, market constraints, and a six-part development agenda
+- Lao gold-banking analysis covering Gold Certificates, the 15-gram published
+  minimum, collateral workflow, borrower risks, and a pre-loan checklist
 - Scam-risk due-diligence checklist
 - 2026–2028 analytical scenarios
 - Linked primary sources from the World Bank, IMF, ADB, ILO, Bank of the Lao
   P.D.R., Lao Securities Commission, Lao Securities Exchange, and Transparency
-  International
+  International, with product terms sourced from Lao Bullion Bank
 - Licensed-source photo credits displayed in the report
 
 ## Run locally
@@ -85,6 +87,9 @@ To reuse the report for a different subject or year:
 - The 2026–2028 scenarios are editorial analysis, not official forecasts.
 - The interpretation of LSX's 2025 turnover growth as potentially reflecting a
   low comparison base is editorial analysis, not an official conclusion.
+- Public information confirms that Lao Bullion Bank's Gold Certificate can be
+  used as collateral, but does not publish one universal LTV, interest rate,
+  haircut, or fee schedule for every borrower and lender.
 - The scam checklist is an initial screening tool, not legal or investment
   advice.
 - The report does not accuse any named person, company, bank, or institution.

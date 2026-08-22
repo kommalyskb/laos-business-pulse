@@ -125,6 +125,30 @@ const sources = [
     url: "https://www.adb.org/news/adb-launches-6-billion-initiative-and-institutional-support-deepen-asean-capital-markets",
     use: "ບໍລິບົດການພັດທະນາພັນທະບັດ ແລະຕະຫຼາດທຶນໃນ ASEAN",
   },
+  {
+    id: "bol-gold-rules",
+    org: "Bank of the Lao P.D.R.",
+    year: "2024",
+    title: "ພິທີເປີດທະນາຄານຄຳລາວຢ່າງເປັນທາງການ",
+    url: "https://www.bol.gov.la/fileupload/18-12-2024_1734507235.pdf",
+    use: "ຂອບກົດໝາຍເລກທີ 1277/ທຫລ, ການກຳກັບ ແລະບົດບາດທະນາຄານຄຳ",
+  },
+  {
+    id: "lbb-certificate",
+    org: "Lao Bullion Bank",
+    year: "2026",
+    title: "Gold Certificate of Lao Bullion Bank",
+    url: "https://laobullionbank.com/product/38d3f9c2-3ca0-48b8-9e28-0a7dff162f4c",
+    use: "ການນຳ Gold Certificate ເປັນຫຼັກຄ້ຳ ແລະຍອດຝາກຄຳຂັ້ນຕ່ຳ 15 ກຣາມ",
+  },
+  {
+    id: "kpl-gold-bank",
+    org: "Lao News Agency (KPL)",
+    year: "2024",
+    title: "BOL Addresses Economic Concerns, Outlines Strategic Measures for 2024",
+    url: "https://kpl.gov.la/En/detail.aspx/detail.aspx?id=87567",
+    use: "ບັນຊີອອມຄຳ, gold-backed loans ແລະເປົ້າໝາຍຂະຫຍາຍການເຂົ້າເຖິງທຶນ",
+  },
 ];
 
 const barriers = [
@@ -217,6 +241,22 @@ const pillarData = [
     response: "ສ້າງ SME/alternative board, ໂຄງການ listing readiness, ຕະຫຼາດ corporate bond, ນັກລົງທຶນສະຖາບັນ ແລະການເປີດເຜີຍທີ່ທັນເວລາ—ໂດຍບໍ່ຫຼຸດມາດຕະຖານຄຸ້ມຄອງ.",
     refs: ["bol25", "lsc-issuers", "lsx-disclosure"],
   },
+  {
+    id: "gold-banking",
+    tag: "business" as Theme,
+    no: "06",
+    title: "ທະນາຄານຄຳ ແລະສິນເຊື່ອຄ້ຳດ້ວຍຄຳ",
+    risk: "ປານກາງ–ສູງ",
+    summary: "ທະນາຄານຄຳສາມາດປ່ຽນຄຳທີ່ຖືຄອງເປັນຫຼັກຄ້ຳໃນລະບົບການເງິນ—ແຕ່ມູນຄ່າກູ້, ດອກເບ້ຍ, haircut ແລະສິດຂາຍຫຼັກຄ້ຳຕ້ອງອ່ານຈາກສັນຍາ.",
+    evidence: [
+      "BOL ອອກຂໍ້ຕົກລົງເລກທີ 1277/ທຫລ ລົງວັນທີ 29 ພະຈິກ 2024 ເພື່ອກຳນົດຫຼັກການ ແລະມາດຕະການຂອງທຸລະກິດທະນາຄານຄຳ.",
+      "Lao Bullion Bank ລະບຸວ່າ Gold Certificate ສາມາດໃຊ້ຄ້ຳສິນເຊື່ອກັບທະນາຄານທຸລະກິດ ແລະສະຖາບັນການເງິນໃນລາວໄດ້.",
+      "ເວັບທະນາຄານລະບຸຍອດຝາກຄຳຂັ້ນຕ່ຳ 15 ກຣາມ ສຳລັບການໄດ້ຮັບ Gold Certificate.",
+    ],
+    impact: "ຝາກຄຳ → ກວດຄຸນນະພາບ → ອອກ certificate → ປະເມີນມູນຄ່າຫຼັງ haircut → ກູ້ເງິນໄດ້ໂດຍບໍ່ຕ້ອງຂາຍຄຳ",
+    response: "ຜູ້ກູ້ຄວນປຽບທຽບ LTV, ດອກເບ້ຍແລະຄ່າທຳນຽມລວມ, ວິທີຕີລາຄາ, margin call, ສິດຂາຍຄຳເມື່ອຜິດນັດ, ການປະກັນໄພຄັງ ແລະຂັ້ນຕອນຮ້ອງຮຽນ.",
+    refs: ["bol-gold-rules", "lbb-certificate", "kpl-gold-bank"],
+  },
 ];
 
 function Cite({ id }: { id: string }) {
@@ -241,6 +281,7 @@ export default function Home() {
             <a href="#diagnosis">ບັນຫາ</a>
             <a href="#sectors">ຂະແໜງ</a>
             <a href="#capital-market">ຕະຫຼາດທຶນ</a>
+            <a href="#gold-banking">ທະນາຄານຄຳ</a>
             <a href="#actions">ຂໍ້ສະເໜີ</a>
             <a href="#sources">ແຫຼ່ງຂໍ້ມູນ</a>
           </div>
@@ -264,7 +305,7 @@ export default function Home() {
             <span className="note-label">THESIS</span>
             <strong>ບັນຫາບໍ່ແມ່ນ “ບໍ່ມີເງິນ”</strong>
             <p>ແຕ່ແມ່ນເງິນ, ໂອກາດ ແລະອຳນາດຕະຫຼາດ ກະຈຸກຕົວຢູ່ບາງຂະແໜງ.</p>
-            <div className="hero-source">ອີງໃສ່ World Bank, IMF, ADB, ILO, BOL, LSC, LSX ແລະ Transparency International</div>
+            <div className="hero-source">ອີງໃສ່ World Bank, IMF, ADB, ILO, BOL, LSC, LSX, KPL ແລະ Transparency International</div>
           </aside>
         </div>
         <figure className="hero-photo">
@@ -294,6 +335,7 @@ export default function Home() {
             <article><b>3</b><div><strong>ທຶນມີ—ແຕ່ບໍ່ໄຫຼຫາຄົນທີ່ບໍ່ມີຫຼັກຄ້ຳ</strong><p>ລະບົບທີ່ອີງດິນຄ້ຳ ບໍ່ເໝາະກັບ startup, ບໍລິການ digital ແລະທຸລະກິດຄົນຮຸ່ນໃໝ່.</p></div></article>
             <article><b>4</b><div><strong>ທຸລະກິດທີ່ “ເຫັນຊັດ” ບໍ່ເທົ່າກັບທີ່ “ຢູ່ລອດທັງໝົດ”</strong><p>ຂະແໜງມີໃບອະນຸຍາດ ແລະໂຄງການລັດມີ visibility ສູງ, ແຕ່ທຸລະກິດຈຳເປັນຈຳນວນຫຼາຍຢູ່ລອດແບບບໍ່ໂດດເດັ່ນ.</p></div></article>
             <article><b>5</b><div><strong>ຕະຫຼາດທຶນມີ—ແຕ່ຍັງບໍ່ເປີດກວ້າງ</strong><p>LSX ມີ 12 ບໍລິສັດອອກຫຼັກຊັບ; ຕະຫຼາດມີຄວາມໝາຍຕໍ່ທຶນໄລຍະຍາວ ແຕ່ SME ສ່ວນໃຫຍ່ຍັງບໍ່ພ້ອມເຂົ້າເຖິງ. <Cite id="bol25" /></p></div></article>
+            <article><b>6</b><div><strong>ຄຳກຳລັງກາຍເປັນຫຼັກຄ້ຳທາງການເງິນ</strong><p>Gold Certificate ເປີດທາງໃຫ້ຜູ້ຖືຄຳຂໍສິນເຊື່ອໂດຍບໍ່ຕ້ອງຂາຍຄຳ; ແຕ່ບໍ່ແມ່ນທຸກບັນຊີຄຳຈະໄດ້ສິນເຊື່ອອັດຕະໂນມັດ. <Cite id="lbb-certificate" /></p></div></article>
           </div>
         </div>
       </section>
@@ -543,6 +585,92 @@ export default function Home() {
         </div>
 
         <p className="capital-note"><b>ຂໍ້ຄວນລະວັງ:</b> ຕົວເລກ +628.07% ແມ່ນຂໍ້ມູນທາງການ; ການຕີຄວາມວ່າອາດມາຈາກຖານປຽບທຽບທີ່ຕ່ຳແມ່ນຂໍ້ວິເຄາະຂອງຜູ້ຂຽນ. ບົດນີ້ບໍ່ແມ່ນຄຳແນະນຳຊື້–ຂາຍຫຼັກຊັບ.</p>
+      </section>
+
+      <section className="section gold-banking" id="gold-banking">
+        <div className="section-heading">
+          <p className="eyebrow">GOLD BANKING · COLLATERAL</p>
+          <div>
+            <h2>ທະນາຄານຄຳ: ປ່ຽນຊັບສິນທີ່ເກັບໄວ້ ເປັນຫຼັກຄ້ຳສິນເຊື່ອ</h2>
+            <p className="section-intro">ນີ້ແມ່ນນະວັດຕະກຳທາງການເງິນທີ່ໜ້າຈັບຕາ: ຄຳທີ່ເຄີຍນອນຢູ່ນອກລະບົບ ສາມາດຖືກກວດ, ຝາກ, ອອກໃບຢັ້ງຢືນ ແລະນຳໄປຄ້ຳສິນເຊື່ອ. ແຕ່ສິນເຊື່ອຍັງຂຶ້ນກັບການອະນຸມັດແລະສັນຍາຂອງຜູ້ໃຫ້ກູ້.</p>
+          </div>
+        </div>
+
+        <div className="gold-thesis">
+          <div>
+            <span>WHAT IS CONFIRMED</span>
+            <h3>Gold Certificate ສາມາດໃຊ້ເປັນຫຼັກຄ້ຳໄດ້</h3>
+          </div>
+          <p>ຂໍ້ມູນສາທາລະນະຂອງ Lao Bullion Bank ລະບຸສະເພາະ Gold Certificate—ບໍ່ໄດ້ຢືນຢັນວ່າຍອດໃນ “ບັນຊີຄຳ” ທຸກປະເພດຈະຄ້ຳກູ້ໄດ້ອັດຕະໂນມັດ. <Cite id="lbb-certificate" /></p>
+        </div>
+
+        <div className="gold-facts">
+          <article>
+            <span>REGULATORY BASE</span>
+            <b>1277/ທຫລ</b>
+            <p>ຂໍ້ຕົກລົງຂອງ BOL ລົງວັນທີ 29 ພະຈິກ 2024 ກຳນົດຫຼັກການ, ລະບຽບການ ແລະມາດຕະການຂອງທຸລະກິດທະນາຄານຄຳ. <Cite id="bol-gold-rules" /></p>
+          </article>
+          <article className="gold-fact-main">
+            <span>MINIMUM GOLD DEPOSIT</span>
+            <b>15g</b>
+            <p>ຍອດຝາກຄຳຂັ້ນຕ່ຳທີ່ເວັບ Lao Bullion Bank ລະບຸສຳລັບການໄດ້ຮັບ Gold Certificate. <Cite id="lbb-certificate" /></p>
+          </article>
+          <article>
+            <span>USE CASE</span>
+            <b>ຄ້ຳກູ້</b>
+            <p>ໃບຢັ້ງຢືນສາມາດນຳໄປຄ້ຳສິນເຊື່ອກັບທະນາຄານທຸລະກິດ ແລະສະຖາບັນການເງິນໃນລາວ. <Cite id="lbb-certificate" /></p>
+          </article>
+        </div>
+
+        <div className="gold-flow" aria-label="ຂັ້ນຕອນຈາກການຝາກຄຳເຖິງສິນເຊື່ອ">
+          <article><b>01</b><h3>ຝາກຄຳ</h3><p>ລູກຄ້ານຳຄຳເຂົ້າສູ່ລະບົບຂອງທະນາຄານຄຳ.</p></article>
+          <article><b>02</b><h3>ກວດມາດຕະຖານ</h3><p>ກວດນ້ຳໜັກ, ຄວາມບໍລິສຸດ, ທີ່ມາ ແລະມູນຄ່າ.</p></article>
+          <article><b>03</b><h3>ອອກ Certificate</h3><p>ອອກເອກະສານຮັບຮອງຊັບສິນທີ່ມີຄວາມໃຊ້ໄດ້ທາງກົດໝາຍ.</p></article>
+          <article><b>04</b><h3>ປະເມີນ LTV</h3><p>ຜູ້ໃຫ້ກູ້ຕີລາຄາ ແລະຫັກ haircut ເພື່ອຮອງຮັບລາຄາຜັນຜວນ.</p></article>
+          <article><b>05</b><h3>ຮັບ–ຊຳລະສິນເຊື່ອ</h3><p>ໄດ້ເງິນກູ້ໂດຍບໍ່ຂາຍຄຳ; ຄຳຍັງຕິດພາລະຈົນຊຳລະຄົບ.</p></article>
+        </div>
+
+        <div className="gold-balance">
+          <article className="gold-opportunity">
+            <span>THE OPPORTUNITY</span>
+            <h3>ເພີ່ມຫຼັກຄ້ຳໃຫ້ຄົນທີ່ບໍ່ມີດິນ</h3>
+            <ul>
+              <li>ເປີດທາງໃຫ້ຄົວເຮືອນແລະທຸລະກິດນ້ອຍນຳຊັບສິນອື່ນມາຄ້ຳ</li>
+              <li>ສ້າງ liquidity ໂດຍບໍ່ຕ້ອງຂາຍຄຳໃນເວລາທີ່ບໍ່ເໝາະ</li>
+              <li>ນຳຄຳຈາກນອກລະບົບເຂົ້າສູ່ການກວດມາດຕະຖານ ແລະ custody</li>
+              <li>ສາມາດສະໜັບສະໜູນ working capital ຂອງ SME ໄດ້ໄວກວ່າການຈຳນອງອະສັງຫາ</li>
+            </ul>
+          </article>
+          <article className="gold-risk">
+            <span>THE RISKS</span>
+            <h3>ຄຳເປັນຫຼັກຄ້ຳ—ບໍ່ແມ່ນການລົບຄວາມສ່ຽງ</h3>
+            <ul>
+              <li><b>Price risk:</b> ລາຄາຄຳຫຼຸດອາດເຮັດໃຫ້ LTV ສູງ ຫຼືເກີດ margin call</li>
+              <li><b>Valuation risk:</b> ລາຄາອ້າງອີງ, purity, spread ແລະ haircut ອາດຕ່າງກັນ</li>
+              <li><b>Custody risk:</b> ຕ້ອງຮູ້ວ່າຄຳຖືກເກັບຢູ່ໃສ, ມີປະກັນໄພ ແລະ audit ຫຼືບໍ່</li>
+              <li><b>Default risk:</b> ຖ້າຜິດນັດ ຜູ້ໃຫ້ກູ້ອາດມີສິດຂາຍຄຳຕາມເງື່ອນໄຂສັນຍາ</li>
+              <li><b>Cost risk:</b> ດອກເບ້ຍ, ຄ່າກວດຄຳ, ຄ່າຝາກ, ຄ່າ certificate ແລະຄ່າປິດບັນຊີຕ້ອງຄິດລວມ</li>
+            </ul>
+          </article>
+        </div>
+
+        <div className="gold-checklist">
+          <div>
+            <span>BEFORE BORROWING</span>
+            <h3>7 ຄຳຖາມທີ່ຄວນຖາມກ່ອນເອົາຄຳຄ້ຳ</h3>
+          </div>
+          <ol>
+            <li>ທະນາຄານໃຊ້ລາຄາໃດ ແລະປັບລາຄາເລື້ອຍປານໃດ?</li>
+            <li>LTV ແລະ haircut ເທົ່າໃດ?</li>
+            <li>APR ຫຼືຕົ້ນທຶນລວມຫຼັງຄ່າທຳນຽມແມ່ນເທົ່າໃດ?</li>
+            <li>ລາຄາຄຳຫຼຸດເຖິງຈຸດໃດຈຶ່ງຖືກເອີ້ນເງິນເພີ່ມ?</li>
+            <li>ເມື່ອຜິດນັດ ມີ grace period ແລະແຈ້ງເຕືອນກ່ອນຂາຍຄຳຫຼືບໍ່?</li>
+            <li>ຄຳຢູ່ໃນຄັງໃດ, ມີປະກັນໄພ ແລະການກວດສອບອິດສະຫຼະຫຼືບໍ່?</li>
+            <li>ສາມາດໄຖ່ຖອນເປັນຄຳແທ້ໄດ້ຫຼືບໍ່ ແລະໃຊ້ເວລາຈັກມື້?</li>
+          </ol>
+        </div>
+
+        <p className="gold-note"><b>ຂໍ້ຈຳກັດຂອງຂໍ້ມູນ:</b> ແຫຼ່ງສາທາລະນະຢືນຢັນການໃຊ້ Gold Certificate ເປັນຫຼັກຄ້ຳ ແລະຍອດຝາກຂັ້ນຕ່ຳ 15 ກຣາມ; ແຕ່ບໍ່ໄດ້ເຜີຍແຜ່ LTV, ດອກເບ້ຍ, haircut ຫຼືຄ່າທຳນຽມສຳລັບທຸກກໍລະນີ. ລູກຄ້າຄວນຂໍ term sheet ແລະສັນຍາສະບັບເຕັມກ່ອນຕັດສິນໃຈ. <Cite id="lbb-certificate" /><Cite id="kpl-gold-bank" /></p>
       </section>
 
       <section className="section digital">
