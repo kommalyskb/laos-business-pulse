@@ -157,19 +157,20 @@ export default function PlatformPitch() {
           <div className={styles.phone}>
             <div className={styles.phoneTop}><span>9:41</span><span>● ●</span></div>
             <div
-              className={`${styles.videoScene} ${styles.food}`}
+              className={`${styles.videoScene} ${styles.heroFeed} ${styles.food}`}
               style={{ backgroundImage: `url(${basePath}/platform-food.jpg)` }}
             >
-              <div className={styles.feedHeader}><span>⌕ ຄົ້ນຫາບ່ອນໄປ...</span><b>ວຽງຈັນ⌄</b></div>
+              <div className={styles.feedHeader}><span>ກຳລັງນິຍົມ　 ສຳລັບເຈົ້າ</span><b>⌕</b></div>
               <div className={styles.contentBadge}>ຣີວິວຈາກ creator</div>
               <div className={styles.feedRail}><span>♡<small>1.2K</small></span><span>♧<small>ບັນທຶກ</small></span><span>↗<small>ແຊຣ໌</small></span></div>
               <div className={styles.play}>▶</div>
               <div className={styles.creator}>@lao.food.story · 2 ມື້ກ່ອນ</div>
-            </div>
-            <div className={styles.placeCard}>
-              <div><small>ອາຫານລາວ · ສີສັດຕະນາກ</small><strong>ເຮືອນຄົວວຽງ</strong></div>
-              <div className={styles.quickFacts}><span>ເປີດຢູ່</span><span>₭₭</span><span>2.4 km</span></div>
-              <div className={styles.phoneActions}><button>ໂທຫາ</button><button>ແຜນທີ່</button></div>
+              <div className={styles.placeCard}>
+                <div><small>ອາຫານລາວ · ສີສັດຕະນາກ</small><strong>ເຮືອນຄົວວຽງ　›</strong></div>
+                <div className={styles.quickFacts}><span>ເປີດຢູ່</span><span>₭₭</span><span>2.4 km</span></div>
+                <div className={styles.phoneActions}><button>ໂທຫາ</button><button>ແຜນທີ່</button></div>
+              </div>
+              <div className={styles.bottomNav}><b>⌂<small>ສຳຫຼວດ</small></b><b>⌕<small>ຄົ້ນຫາ</small></b><b>＋</b><b>♧<small>ບັນທຶກ</small></b><b>○<small>ໂປຣໄຟລ໌</small></b></div>
             </div>
           </div>
           <p className={styles.demoNote}>VIDEO <span>+</span> PLACE DATA <span>+</span> ACTION</p>
@@ -220,25 +221,26 @@ export default function PlatformPitch() {
             <div className={styles.demoPhone}>
               <div className={styles.phoneTop}><span>9:41</span><span>● ●</span></div>
               <div
-                className={`${styles.videoScene} ${styles[place.scene]}`}
+                className={`${styles.videoScene} ${styles.productFeed} ${styles[place.scene]}`}
                 style={{ backgroundImage: `url(${basePath}${place.image})` }}
               >
-                <div className={styles.feedHeader}><span>← ລາຍລະອຽດ</span><b>♡</b></div>
+                <div className={styles.feedHeader}><span>ກຳລັງນິຍົມ　 ສຳລັບເຈົ້າ</span><b>⌕</b></div>
                 <div className={styles.contentBadge}>ວິດີໂອຕົ້ນສະບັບ ↗</div>
                 <div className={styles.play}>▶</div>
                 <div className={styles.creator}>{place.creator} · ຣີວິວຕົ້ນສະບັບ</div>
-              </div>
-              <div className={styles.placeCard}>
-                <div><small>{place.meta}</small><strong>{place.name}</strong></div>
-                <div className={styles.quickFacts}><span>ກວດສອບແລ້ວ</span><span>{place.price}</span><span>{place.distance}</span></div>
-                <div className={styles.miniMap}>
-                  <i className={styles.mapRoadOne} /><i className={styles.mapRoadTwo} /><b>●</b>
-                  <span><small>ຈຸດໝາຍ</small>ເບິ່ງເສັ້ນທາງ</span>
+                <div className={styles.placeCard}>
+                  <div><small>{place.meta}</small><strong>{place.name}　›</strong></div>
+                  <div className={styles.quickFacts}><span>ກວດສອບແລ້ວ</span><span>{place.price}</span><span>{place.distance}</span></div>
+                  <div className={styles.miniMap}>
+                    <i className={styles.mapRoadOne} /><i className={styles.mapRoadTwo} /><b>●</b>
+                    <span><small>ຈຸດໝາຍ</small>ເບິ່ງເສັ້ນທາງ</span>
+                  </div>
+                  <div className={styles.phoneActions}>
+                    <button onClick={() => demonstrateAction(place.contact)}>{place.contact}</button>
+                    <button onClick={() => demonstrateAction("ເປີດແຜນທີ່")}>ແຜນທີ່</button>
+                  </div>
                 </div>
-                <div className={styles.phoneActions}>
-                  <button onClick={() => demonstrateAction(place.contact)}>{place.contact}</button>
-                  <button onClick={() => demonstrateAction("ເປີດແຜນທີ່")}>ແຜນທີ່</button>
-                </div>
+                <div className={styles.bottomNav}><b>⌂<small>ສຳຫຼວດ</small></b><b>⌕<small>ຄົ້ນຫາ</small></b><b>＋</b><b>♧<small>ບັນທຶກ</small></b><b>○<small>ໂປຣໄຟລ໌</small></b></div>
               </div>
             </div>
 
