@@ -294,35 +294,33 @@ export default function Home() {
             <span>LAOS BUSINESS PULSE</span>
           </a>
           <div className="nav-links">
-            <a href="#reader-guide">ເລືອກອ່ານ</a>
-            <a href="#diagnosis">ບັນຫາ</a>
-            <a href="#sectors">ຂະແໜງ</a>
+            <a href="#summary">ເລີ່ມທີ່ນີ້</a>
+            <a href="#situation">ສະພາບມື້ນີ້</a>
+            <a href="#diagnosis">ຜົນຕໍ່ທຸລະກິດ</a>
             <a href="#opportunities">ໂອກາດ</a>
-            <a href="#capital-market">ຕະຫຼາດທຶນ</a>
-            <a href="#gold-banking">ທະນາຄານຄຳ</a>
-            <a href="#actions">ຂໍ້ສະເໜີ</a>
-            <a href="#sources">ແຫຼ່ງຂໍ້ມູນ</a>
+            <a href="#actions">ລົງມື</a>
+            <a href="#deep-dives">ອ່ານຕໍ່</a>
           </div>
           <span className="report-date">ສິງຫາ 2026</span>
         </nav>
 
         <div className="hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow light">ບົດລາຍງານເຊີງວິເຄາະ</p>
-            <h1>ທຸລະກິດລາວ<br />ກຳລັງຢູ່ຈຸດໃດ?</h1>
+            <p className="eyebrow light">ຄູ່ມືເຂົ້າໃຈທຸລະກິດລາວ</p>
+            <h1>ໂອກາດຍັງມີ<br />ແຕ່ຕ້ອງເລີ່ມໃຫ້ຖືກ</h1>
             <p className="lede">
-              ເສດຖະກິດຟື້ນຕົວ ແຕ່ຜູ້ປະກອບການຍັງຕິດຢູ່ລະຫວ່າງ
-              ຕົ້ນທຶນສູງ, ແຮງງານຫາຍາກ, ທຶນຈຳກັດ ແລະການແຂ່ງຂັນທີ່ບໍ່ເທົ່າທຽມ.
+              ໃນເວລາທີ່ເສດຖະກິດກຳລັງຟື້ນ ແຕ່ກຳລັງຊື້ຍັງບອບບາງ,
+              ທຸລະກິດທີ່ໜ້າເຮັດຄືທຸລະກິດທີ່ແກ້ບັນຫາຈຳເປັນ, ເລີ່ມນ້ອຍໄດ້ ແລະຄ່ອຍສ້າງເປັນລະບົບ.
             </p>
             <div className="hero-actions">
-              <a className="primary-action" href="#summary">ອ່ານບົດສະຫຼຸບ</a>
-              <a className="text-action" href="#reader-guide">ເລືອກຫົວຂໍ້ທີ່ສົນໃຈ ↓</a>
+              <a className="primary-action" href="#summary">ເລີ່ມອ່ານ 3 ນາທີ</a>
+              <a className="text-action" href="#opportunities">ໄປເບິ່ງໂອກາດ ↓</a>
             </div>
           </div>
           <aside className="hero-note">
-            <span className="note-label">ໃຈຄວາມຫຼັກ</span>
-            <strong>ບັນຫາບໍ່ແມ່ນ “ບໍ່ມີເງິນ”</strong>
-            <p>ແຕ່ແມ່ນເງິນ, ໂອກາດ ແລະອຳນາດຕະຫຼາດ ກະຈຸກຕົວຢູ່ບາງຂະແໜງ.</p>
+            <span className="note-label">ອ່ານໜ້ານີ້ແລ້ວຈະຮູ້</span>
+            <strong>4 ຄຳຕອບທີ່ນຳໄປໃຊ້ໄດ້</strong>
+            <ol><li>ລາວກຳລັງເກີດຫຍັງ?</li><li>ທຸລະກິດຖືກກະທົບແນວໃດ?</li><li>ໂອກາດຢູ່ໃສ?</li><li>ຄວນເລີ່ມແນວໃດ?</li></ol>
             <div className="hero-source">ອີງໃສ່ World Bank, IMF, ADB, ILO, BOL, LSC, LSX, KPL ແລະ Transparency International</div>
           </aside>
         </div>
@@ -334,26 +332,23 @@ export default function Home() {
 
       <section className="section summary-section" id="summary">
         <div className="section-heading">
-          <p className="eyebrow">00 · ບົດສະຫຼຸບ</p>
+          <p className="eyebrow">ເລີ່ມອ່ານຈາກນີ້</p>
           <div>
-            <h2>ສະຫຼຸບໃນ 90 ວິນາທີ</h2>
-            <p className="section-intro">ການເຕີບໂຕຂອງ GDP ບໍ່ໄດ້ໝາຍຄວາມວ່າທຸລະກິດນ້ອຍເຕີບໂຕຕາມ. ການກະຈາຍໂອກາດແມ່ນຄຳຖາມຫຼັກ.</p>
+            <h2>ໜ້ານີ້ຕ້ອງການບອກຫຍັງ?</h2>
+            <p className="section-intro">ຄຳຕອບສັ້ນໆ: ເສດຖະກິດລາວມີສັນຍານຟື້ນຕົວ ແຕ່ຄົນທຳທຸລະກິດຍັງຕ້ອງເລືອກໂອກາດຢ່າງລະມັດລະວັງ.</p>
           </div>
         </div>
         <div className="summary-grid">
           <article className="summary-lead">
-            <span className="kicker">ຄຳວິນິດໄສ</span>
+            <span className="kicker">ໃຈຄວາມດຽວ</span>
             <p>
-              ເສດຖະກິດລາວມີສອງຄວາມຈິງພ້ອມກັນ: ການທ່ອງທ່ຽວ, ຂົນສົ່ງ, ພະລັງງານ ແລະການລົງທຶນຊັບພະຍາກອນຊ່ວຍໃຫ້ຕົວເລກລວມຟື້ນຕົວ; ແຕ່ SME ຍັງຖືກບີບຈາກກຳລັງຊື້, ແຮງງານ, ສິນເຊື່ອ ແລະຄວາມບໍ່ແນ່ນອນ. <Cite id="wb-jun26" /><Cite id="wb-may25" />
+              ຢ່າເລີ່ມຈາກຄຳຖາມວ່າ “ທຸລະກິດໃດກຳລັງດັງ?” ໃຫ້ເລີ່ມຈາກ “ບັນຫາຫຍັງທີ່ລູກຄ້າຈຳເປັນຕ້ອງຈ່າຍເງິນແກ້?”
             </p>
           </article>
           <div className="summary-points">
-            <article><b>1</b><div><strong>ຂະໜາດນ້ອຍບໍ່ແມ່ນຈຸດອ່ອນໂດຍຕົວມັນເອງ</strong><p>ຈຸດອ່ອນແມ່ນຜະລິດຕະພາບຕ່ຳ ແລະຍັງປ່ຽນຈາກປະເທດທາງຜ່ານ ເປັນລາຍຮັບພາຍໃນໄດ້ບໍ່ເຕັມທີ່.</p></div></article>
-            <article><b>2</b><div><strong>ຂາດແຮງງານ ແຕ່ກໍຂາດວຽກຄຸນນະພາບ</strong><p>ຄ່າແຮງແທ້ຈິງ ແລະເສັ້ນທາງຄວາມກ້າວໜ້າໃນອາຊີບ ເປັນຕົວກຳນົດວ່າຄົນຈະຢູ່ ຫຼືຍ້າຍອອກ.</p></div></article>
-            <article><b>3</b><div><strong>ທຶນມີ—ແຕ່ບໍ່ໄຫຼຫາຄົນທີ່ບໍ່ມີຫຼັກຄ້ຳ</strong><p>ລະບົບທີ່ອີງດິນຄ້ຳ ບໍ່ເໝາະກັບທຸລະກິດເລີ່ມໃໝ່, ບໍລິການດິຈິຕອນ ແລະທຸລະກິດຄົນຮຸ່ນໃໝ່.</p></div></article>
-            <article><b>4</b><div><strong>ທຸລະກິດທີ່ “ເຫັນຊັດ” ບໍ່ເທົ່າກັບທີ່ “ຢູ່ລອດທັງໝົດ”</strong><p>ຂະແໜງມີໃບອະນຸຍາດ ແລະໂຄງການລັດອາດຖືກເວົ້າເຖິງຫຼາຍ, ແຕ່ທຸລະກິດຈຳເປັນຈຳນວນຫຼາຍຢູ່ລອດແບບບໍ່ໂດດເດັ່ນ.</p></div></article>
-            <article><b>5</b><div><strong>ຕະຫຼາດທຶນມີ—ແຕ່ຍັງບໍ່ເປີດກວ້າງ</strong><p>LSX ມີ 12 ບໍລິສັດອອກຫຼັກຊັບ; ຕະຫຼາດມີຄວາມໝາຍຕໍ່ທຶນໄລຍະຍາວ ແຕ່ SME ສ່ວນໃຫຍ່ຍັງບໍ່ພ້ອມເຂົ້າເຖິງ. <Cite id="bol25" /></p></div></article>
-            <article><b>6</b><div><strong>ຄຳກຳລັງກາຍເປັນຫຼັກຄ້ຳທາງການເງິນ</strong><p>ໃບຢັ້ງຢືນຄຳເປີດທາງໃຫ້ຜູ້ຖືຄຳຂໍສິນເຊື່ອໂດຍບໍ່ຕ້ອງຂາຍຄຳ; ແຕ່ບໍ່ແມ່ນທຸກບັນຊີຄຳຈະໄດ້ສິນເຊື່ອອັດຕະໂນມັດ. <Cite id="lbb-certificate" /></p></div></article>
+            <article><b>1</b><div><strong>ຕົວເລກເສດຖະກິດດີຂຶ້ນ ແຕ່ກຳລັງຊື້ຍັງອ່ອນ</strong><p>ການທ່ອງທ່ຽວ, ຂົນສົ່ງ ແລະພະລັງງານຊ່ວຍໃຫ້ GDP ເຕີບ; ແຕ່ SME ຍັງຖືກບີບຈາກຕົ້ນທຶນ, ແຮງງານ ແລະສິນເຊື່ອ. <Cite id="wb-jun26" /></p></div></article>
+            <article><b>2</b><div><strong>ໂອກາດຢູ່ທີ່ສິ່ງຈຳເປັນ</strong><p>ການສ້ອມແປງ, ກະສິກຳແປຮູບ, ບໍລິການ SME, ໂລຈິສຕິກ, ທ່ອງທ່ຽວ ແລະທັກສະ ມີທາງທົດລອງແບບນ້ອຍໄດ້.</p></div></article>
+            <article><b>3</b><div><strong>ເປົ້າໝາຍບໍ່ແມ່ນເຮັດວຽກໜັກກວ່າເກົ່າ</strong><p>ເລີ່ມຈາກອາຊີບໄດ້ ແຕ່ຄວນຄ່ອຍສ້າງທີມ, ຂັ້ນຕອນ, ລາຍຮັບຊ້ຳ ແລະລະບົບທີ່ບໍ່ຂຶ້ນກັບເຈົ້າຂອງ.</p></div></article>
           </div>
         </div>
       </section>
@@ -362,25 +357,19 @@ export default function Home() {
         <div className="section-heading">
           <p className="eyebrow">ເລືອກອ່ານ</p>
           <div>
-            <h2>ບໍ່ຈຳເປັນຕ້ອງອ່ານທັງໝົດ</h2>
-            <p className="section-intro">ເລືອກເລີ່ມຈາກຄຳຖາມທີ່ທ່ານສົນໃຈ ແລ້ວກົດໄປຫາພາກນັ້ນໄດ້ເລີຍ.</p>
+            <h2>ອ່ານຕາມ 4 ຂັ້ນນີ້</h2>
+            <p className="section-intro">ເສັ້ນທາງຫຼັກຖືກຮຽງຈາກການເຂົ້າໃຈສະພາບ ໄປສູ່ການຕັດສິນໃຈ. ຫົວຂໍ້ສະເພາະທາງຢູ່ພາກ “ອ່ານຕໍ່”.</p>
           </div>
         </div>
         <div className="reader-guide-grid">
-          <a href="#diagnosis"><span>01</span><strong>ທຸລະກິດລາວຕິດບັນຫາຫຍັງ?</strong><small>ເບິ່ງ 6 ບັນຫາຫຼັກ ແລະທາງອອກ</small></a>
-          <a href="#sectors"><span>02</span><strong>ຂະແໜງໃດຢູ່ລອດ?</strong><small>ແຍກຄວາມໂດດເດັ່ນອອກຈາກຄວາມຍືນຍົງ</small></a>
-          <a href="#opportunities"><span>03</span><strong>ທຸລະກິດໃດໜ້າເຮັດ?</strong><small>ແບ່ງ 3 ໝວດ: ອາຊີບສ່ວນຕົວ, ທຸລະກິດນ້ອຍ ແລະ entrepreneur</small></a>
-          <a href="#capital-market"><span>04</span><strong>LSX ຊ່ວຍລະດົມທຶນແນວໃດ?</strong><small>ຮູ້ຈັກໂອກາດ, ຂັ້ນຕອນ ແລະຂໍ້ຈຳກັດ</small></a>
-          <a href="#gold-banking"><span>05</span><strong>ເອົາຄຳໄປຄ້ຳກູ້ໄດ້ແນວໃດ?</strong><small>ອ່ານຂັ້ນຕອນ, ຄວາມສ່ຽງ ແລະ 7 ຄຳຖາມກ່ອນກູ້</small></a>
-          <a href="#scam-check"><span>06</span><strong>ແຍກທຸລະກິດຈິງອອກຈາກການຫຼອກລວງແນວໃດ?</strong><small>ກວດສັນຍານແດງ ແລະຫຼັກຖານທີ່ຄວນມີ</small></a>
-          <a href="#actions"><span>07</span><strong>ແຕ່ລະຝ່າຍຄວນເຮັດຫຍັງ?</strong><small>ຂໍ້ສະເໜີສຳລັບລັດ, ທະນາຄານ, ທຸລະກິດ ແລະນັກລົງທຶນ</small></a>
+          <a href="#situation"><span>01 · ສະພາບ</span><strong>ລາວກຳລັງເກີດຫຍັງ?</strong><small>ເບິ່ງພາບລວມຜ່ານ 6 ຕົວເລກ ແລະ 2 ກຣາຟ</small></a>
+          <a href="#diagnosis"><span>02 · ຜົນກະທົບ</span><strong>ເປັນຫຍັງທຸລະກິດຍັງລຳບາກ?</strong><small>ເບິ່ງບັນຫາແຮງງານ, ທຶນ, ກຳລັງຊື້ ແລະກົດກາ</small></a>
+          <a href="#opportunities"><span>03 · ໂອກາດ</span><strong>ທຸລະກິດໃດພໍໜ້າເຮັດ?</strong><small>6 ແນວຄິດ, 3 ໝວດທຸລະກິດ ແລະເສັ້ນທາງສູ່ entrepreneur</small></a>
+          <a href="#actions"><span>04 · ລົງມື</span><strong>ຄວນເລີ່ມຈາກຫຍັງ?</strong><small>ທົດລອງລູກຄ້າ, ຄຸ້ມກະແສເງິນ ແລະສ້າງລະບົບ</small></a>
         </div>
 
-        <div className="plain-language">
-          <div className="plain-language-heading">
-            <span>ຄຳສັບທີ່ຄວນຮູ້</span>
-            <p>ຄຳອັງກິດບາງຄຳຖືກໃຊ້ໃນວົງການທຸລະກິດໂດຍກົງ. ຄວາມໝາຍໃນບົດນີ້ມີດັ່ງນີ້:</p>
-          </div>
+        <details className="plain-language">
+          <summary><span>ພົບຄຳສັບທີ່ບໍ່ຄຸ້ນ?</span><strong>ກົດເປີດຄຳອະທິບາຍ</strong></summary>
           <dl className="term-grid">
             <div><dt>SME / MSME</dt><dd>ທຸລະກິດຂະໜາດຈຸນລະພາກ, ນ້ອຍ ແລະກາງ</dd></div>
             <div><dt>Cash flow</dt><dd>ກະແສເງິນສົດທີ່ເຂົ້າ ແລະອອກຈາກທຸລະກິດ</dd></div>
@@ -391,12 +380,12 @@ export default function Home() {
             <div><dt>Haircut</dt><dd>ສ່ວນຫຼຸດຈາກມູນຄ່າຫຼັກຄ້ຳ ເພື່ອກັນຄວາມສ່ຽງດ້ານລາຄາ</dd></div>
             <div><dt>APR</dt><dd>ຕົ້ນທຶນການກູ້ລວມຕໍ່ປີ ທີ່ລວມດອກເບ້ຍ ແລະຄ່າທຳນຽມ</dd></div>
           </dl>
-        </div>
+        </details>
       </section>
 
-      <section className="section snapshot" aria-labelledby="snapshot-title">
+      <section className="section snapshot" id="situation" aria-labelledby="snapshot-title">
         <div className="section-heading">
-          <p className="eyebrow">ຕົວເລກສຳຄັນ</p>
+          <p className="eyebrow">01 · ສະພາບມື້ນີ້</p>
           <div>
             <h2 id="snapshot-title">ພາບລວມຈາກຕົວເລກ</h2>
             <p className="section-intro">ຕົວເລກແຕ່ລະອັນເຊື່ອມໄປຫາແຫຼ່ງຂໍ້ມູນດ້ານລຸ່ມ.</p>
@@ -445,7 +434,7 @@ export default function Home() {
 
       <section className="section diagnosis" id="diagnosis">
         <div className="section-heading">
-          <p className="eyebrow">01 · ວິນິດໄສບັນຫາ</p>
+          <p className="eyebrow">02 · ຜົນຕໍ່ທຸລະກິດ</p>
           <div>
             <h2>ກົດເປີດເບິ່ງບັນຫາແຕ່ລະຊັ້ນ</h2>
             <p className="section-intro">ເລືອກມຸມມອງ ຫຼືເປີດອ່ານການວິນິດໄສ, ຫຼັກຖານ, ວົງຈອນຜົນກະທົບ ແລະທາງອອກ.</p>
@@ -500,7 +489,7 @@ export default function Home() {
 
       <section className="section sectors" id="sectors">
         <div className="section-heading">
-          <p className="eyebrow">02 · ໃຜຢູ່ລອດ?</p>
+          <p className="eyebrow">03 · ກ່ອນເລືອກໂອກາດ</p>
           <div>
             <h2>ເປັນຫຍັງບາງທຸລະກິດຈຶ່ງເຫັນວ່າຢູ່ລອດ</h2>
             <p className="section-intro">ຄຳວ່າ “ຢູ່ລອດ” ຄວນແຍກລະຫວ່າງກະແສເງິນສົດດີ, ກຳໄລຍືນຍົງ, ມີການປົກປ້ອງ ແລະສ້າງມູນຄ່າໃຫ້ເສດຖະກິດ.</p>
@@ -664,6 +653,43 @@ export default function Home() {
           <span>ສຳພາດລູກຄ້າ 15–20 ຄົນ</span><i>→</i><span>ທົດລອງຂາຍແບບນ້ອຍ</span><i>→</i><span>ເກັບຄຳສັ່ງຊື້ ຫຼືເງິນມັດຈຳ</span><i>→</i><span>ຈຶ່ງຊື້ອຸປະກອນໃຫຍ່</span>
         </aside>
         <p className="opportunity-note">ຂໍ້ມູນນີ້ເປັນກອບຄິດເບື້ອງຕົ້ນ ບໍ່ແມ່ນຄຳແນະນຳການລົງທຶນ. ຜົນຈິງຂຶ້ນກັບແຂວງ, ລູກຄ້າ, ຄູ່ແຂ່ງ, ໃບອະນຸຍາດ ແລະຄວາມສາມາດຂອງຜູ້ປະກອບການ.</p>
+      </section>
+
+      <section className="section actions" id="actions">
+        <div className="section-heading">
+          <p className="eyebrow">04 · ລົງມື</p>
+          <div>
+            <h2>ຖ້າສົນໃຈເລີ່ມທຸລະກິດ ຄວນເຮັດຫຍັງກ່ອນ?</h2>
+            <p className="section-intro">ຢ່າເລີ່ມຈາກການເຊົ່າຮ້ານ, ຊື້ລົດ ຫຼືຊື້ເຄື່ອງຈັກ. ເລີ່ມຈາກການພິສູດວ່າມີຄົນຍອມຈ່າຍເງິນ.</p>
+          </div>
+        </div>
+        <div className="action-grid">
+          <article><span>ຂັ້ນ 01</span><h3>ເລືອກລູກຄ້າ 1 ກຸ່ມ</h3><ol><li>ລະບຸວ່າຈະຊ່ວຍໃຜ</li><li>ເລືອກບັນຫາດຽວທີ່ເກີດຊ້ຳ</li><li>ຢ່າພະຍາຍາມຂາຍໃຫ້ທຸກຄົນ</li></ol></article>
+          <article><span>ຂັ້ນ 02</span><h3>ຖາມ ແລະທົດລອງ</h3><ol><li>ສຳພາດລູກຄ້າ 15–20 ຄົນ</li><li>ທົດລອງຂາຍແບບນ້ອຍ</li><li>ຂໍຄຳສັ່ງຊື້ ຫຼືເງິນມັດຈຳ</li></ol></article>
+          <article><span>ຂັ້ນ 03</span><h3>ຄຸ້ມເງິນສົດ</h3><ol><li>ແຍກເງິນສ່ວນຕົວອອກຈາກທຸລະກິດ</li><li>ວາງແຜນເງິນເຂົ້າ–ອອກ 13 ອາທິດ</li><li>ຫຼີກລ້ຽງໜີ້ ແລະຕົ້ນທຶນຄົງທີ່ໃຫຍ່</li></ol></article>
+          <article><span>ຂັ້ນ 04</span><h3>ສ້າງລະບົບຕັ້ງແຕ່ມື້ທຳອິດ</h3><ol><li>ຂຽນຂັ້ນຕອນງານທີ່ເຮັດຊ້ຳ</li><li>ຝຶກໃຫ້ຄົນອື່ນເຮັດແທນໄດ້</li><li>ພະຍາຍາມສ້າງລາຍຮັບຊ້ຳລາຍເດືອນ ຫຼືຕາມສັນຍາ</li></ol></article>
+        </div>
+      </section>
+
+      <section className="section conclusion">
+        <p className="eyebrow light">ຖ້າຈື່ໄດ້ພຽງ 1 ປະໂຫຍກ</p>
+        <h2>ເລີ່ມຈາກບັນຫາທີ່ຄົນຍອມຈ່າຍເງິນແກ້—ແລ້ວຄ່ອຍສ້າງວຽກນັ້ນໃຫ້ເປັນລະບົບ.</h2>
+        <p>ຂະໜາດບໍ່ແມ່ນຈຸດເລີ່ມຕົ້ນ. ການມີລູກຄ້າຈິງ, ກະແສເງິນສົດດີ ແລະລະບົບທີ່ຄົນອື່ນດຳເນີນຕໍ່ໄດ້ ຄືຮາກຖານຂອງທຸລະກິດທີ່ຍືນຍົງ.</p>
+      </section>
+
+      <section className="section deep-dives" id="deep-dives">
+        <div className="section-heading">
+          <p className="eyebrow">ອ່ານຕໍ່ເມື່ອຕ້ອງການ</p>
+          <div><h2>ຫົວຂໍ້ສະເພາະທາງ</h2><p className="section-intro">ພາກຫຼັກສິ້ນສຸດຢູ່ດ້ານເທິງ. ພາກຕໍ່ໄປນີ້ເປັນຂໍ້ມູນເພີ່ມສຳລັບຜູ້ທີ່ສົນໃຈການເງິນ, ຄວາມສ່ຽງ ແລະແຫຼ່ງອ້າງອີງ.</p></div>
+        </div>
+        <nav className="deep-dive-grid" aria-label="ຫົວຂໍ້ອ່ານຕໍ່">
+          <a href="#capital-market"><span>01</span><strong>ຕະຫຼາດທຶນ ແລະ LSX</strong><small>ການລະດົມທຶນ, ຂັ້ນຕອນ ແລະຂໍ້ຈຳກັດ</small></a>
+          <a href="#gold-banking"><span>02</span><strong>ທະນາຄານຄຳ</strong><small>ການໃຊ້ໃບຢັ້ງຢືນຄຳເປັນຫຼັກຄ້ຳ</small></a>
+          <a href="#digital"><span>03</span><strong>ການຊຳລະດິຈິຕອນ</strong><small>QR ເປັນໂຄງລ່າງ ແຕ່ບໍ່ແມ່ນທຶນດ້ວຍຕົວມັນເອງ</small></a>
+          <a href="#scam-check"><span>04</span><strong>ກວດການຫຼອກລວງ</strong><small>ສັນຍານແດງ ແລະຫຼັກຖານທີ່ຄວນມີ</small></a>
+          <a href="#scenarios"><span>05</span><strong>3 ສະຖານະການ</strong><small>ເສັ້ນທາງທີ່ອາດເກີດໃນ 2026–2028</small></a>
+          <a href="#sources"><span>06</span><strong>ວິທີຈັດເຮັດ ແລະແຫຼ່ງຂໍ້ມູນ</strong><small>ເອກະສານຕົ້ນສະບັບທີ່ໃຊ້ໃນລາຍງານ</small></a>
+        </nav>
       </section>
 
       <section className="section capital-market" id="capital-market">
@@ -847,7 +873,7 @@ export default function Home() {
         <p className="gold-note"><b>ຂໍ້ຈຳກັດຂອງຂໍ້ມູນ:</b> ແຫຼ່ງສາທາລະນະຢືນຢັນການໃຊ້ໃບຢັ້ງຢືນຄຳເປັນຫຼັກຄ້ຳ ແລະຍອດຝາກຂັ້ນຕ່ຳ 15 ກຣາມ; ແຕ່ບໍ່ໄດ້ເຜີຍແຜ່ LTV, ດອກເບ້ຍ, ສ່ວນຫຼຸດຫຼັກຄ້ຳ ຫຼືຄ່າທຳນຽມສຳລັບທຸກກໍລະນີ. ລູກຄ້າຄວນຂໍໃບສະເໜີເງື່ອນໄຂ ແລະສັນຍາສະບັບເຕັມກ່ອນຕັດສິນໃຈ. <Cite id="lbb-certificate" /><Cite id="kpl-gold-bank" /></p>
       </section>
 
-      <section className="section digital">
+      <section className="section digital" id="digital">
         <div className="section-heading">
           <p className="eyebrow">ເສດຖະກິດດິຈິຕອນ</p>
           <div>
@@ -905,9 +931,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section scenarios">
+      <section className="section scenarios" id="scenarios">
         <div className="section-heading">
-          <p className="eyebrow">04 · ສາມສະຖານະການ</p>
+          <p className="eyebrow">ອ່ານຕໍ່ · ສາມສະຖານະການ</p>
           <div>
             <h2>ສາມເສັ້ນທາງສຳລັບ 2026–2028</h2>
             <p className="section-intro">ນີ້ແມ່ນສະຖານະການວິເຄາະຂອງຜູ້ຂຽນ—ບໍ່ແມ່ນການຄາດຄະເນທາງການ.</p>
@@ -918,44 +944,6 @@ export default function Home() {
           <article className="preferred"><span className="scenario-label reform">ປະຕິຮູບ</span><h3>ເປີດການແຂ່ງຂັນ</h3><p>ການຈັດຊື້ອອນລາຍ, ໂຄງລ່າງຂໍ້ມູນສິນເຊື່ອ, ການຝຶກທັກສະ ແລະການອະນຸຍາດທີ່ຄາດຄະເນໄດ້ ດຶງທຶນເຂົ້າກິດຈະການຜະລິດ.</p><b>ຜູ້ຊະນະ:</b><small>MSME ທີ່ຢູ່ໃນລະບົບ, ກະສິກຳແປຮູບ, ບໍລິການດິຈິຕອນໃຫ້ທຸລະກິດ ແລະຜູ້ສົ່ງອອກ</small></article>
           <article><span className="scenario-label downside">ຄວາມສ່ຽງລົງ</span><h3>ຄວາມຜັນຜວນກັບຄືນ</h3><p>ລາຄານ້ຳມັນ, ອັດຕາແລກປ່ຽນ, ໜີ້ສິນ ຫຼືອຸປະສົງຈາກຄູ່ຄ້າອ່ອນລົງ ກະທົບຕົ້ນທຶນແລະກຳລັງຊື້ພ້ອມກັນ.</p><b>ຜູ້ຢູ່ລອດ:</b><small>ທຸລະກິດໜີ້ຕ່ຳ, ສິນຄ້າໝູນໄວ ແລະລູກຄ້າຫຼາກຫຼາຍ</small></article>
         </div>
-      </section>
-
-      <section className="section actions" id="actions">
-        <div className="section-heading">
-          <p className="eyebrow">05 · ຂໍ້ສະເໜີເພື່ອລົງມື</p>
-          <div>
-            <h2>ຈາກການວິນິດໄສ ສູ່ການລົງມື</h2>
-            <p className="section-intro">ບັນຫາໂຄງສ້າງຕ້ອງແກ້ຫຼາຍຝ່າຍ; ບໍ່ມີມາດຕະການດຽວທີ່ແກ້ທຸກຢ່າງ.</p>
-          </div>
-        </div>
-        <div className="action-grid">
-          <article>
-            <span>ລັດ / ຜູ້ກຳກັບ</span>
-            <h3>ເຮັດໃຫ້ກົດກາຄາດຄະເນໄດ້</h3>
-            <ol><li>ການຈັດຊື້ອອນລາຍ ແລະການເປີດເຜີຍສັນຍາ</li><li>ເວລາອະນຸຍາດທີ່ຊັດເຈນ</li><li>ນະໂຍບາຍການແຂ່ງຂັນທີ່ບັງຄັບໃຊ້ໄດ້</li><li>ກອງທຶນ MSME ອິດສະຫຼະ</li></ol>
-          </article>
-          <article>
-            <span>ທະນາຄານ / ຜູ້ໃຫ້ທຶນ</span>
-            <h3>ປ່ຽນຈາກດິນຄ້ຳ ສູ່ຂໍ້ມູນ</h3>
-            <ol><li>ໃຫ້ກູ້ຕາມກະແສເງິນສົດ</li><li>ໃຫ້ທຶນຕາມໃບແຈ້ງໜີ້ ແລະໃບສັ່ງຊື້</li><li>ຮັບຊັບສິນເຄື່ອນຍ້າຍເປັນຫຼັກຄ້ຳ</li><li>ເປີດເຜີຍ APR ແລະຄ່າທຳນຽມລວມ</li></ol>
-          </article>
-          <article>
-            <span>ຜູ້ປະກອບການ</span>
-            <h3>ເຕີບແບບກະຊັບ ແລະໂປ່ງໃສ</h3>
-            <ol><li>ແຍກບັນຊີສ່ວນຕົວ–ບໍລິສັດ</li><li>ຄຸ້ມຄອງກະແສເງິນສົດລ່ວງໜ້າ 13 ອາທິດ</li><li>ຫາລູກຄ້ານອກປະເທດ</li><li>ສ້າງລະບົບງານໃຫ້ໃຊ້ຄົນໜ້ອຍລົງ</li></ol>
-          </article>
-          <article>
-            <span>ນັກລົງທຶນ</span>
-            <h3>ກວດທັງໂຄງການ ແລະການບໍລິຫານ</h3>
-            <ol><li>ກວດໃບອະນຸຍາດ ແລະຄວາມເປັນເຈົ້າຂອງ</li><li>ກວດກະແສເງິນສົດ ບໍ່ແມ່ນເບິ່ງແຕ່ເອກະສານນຳສະເໜີ</li><li>ທົດສອບຄວາມສ່ຽງດ້ານອັດຕາແລກປ່ຽນ ແລະສະຖານະການທີ່ບໍ່ດີ</li><li>ກຳນົດສິດຮັບລາຍງານໃນສັນຍາ</li></ol>
-          </article>
-        </div>
-      </section>
-
-      <section className="section conclusion">
-        <p className="eyebrow light">ບົດສະຫຼຸບທ້າຍ</p>
-        <h2>ທຸລະກິດທີ່ມີໂອກາດຢູ່ລອດ ບໍ່ຈຳເປັນຕ້ອງໃຫຍ່.</h2>
-        <p>ແຕ່ຄວນມີຕົ້ນທຶນຄົງທີ່ຕ່ຳ, ກະແສເງິນສົດໄວ, ແກ້ບັນຫາຈຳເປັນ, ບໍ່ອາໄສແຮງງານຫຼາຍ, ມີລາຍຮັບຫຼາຍກວ່າໜຶ່ງຕະຫຼາດ ແລະພິສູດຄວາມໂປ່ງໃສໄດ້.</p>
       </section>
 
       <section className="section methodology" id="methodology">

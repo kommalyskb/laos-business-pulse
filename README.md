@@ -12,8 +12,9 @@ Public GitHub Pages deployment:
 
 ## What is included
 
-- Lao-language executive summary and detailed analysis
-- Topic-based reading guide and plain-language glossary for general readers
+- Lao-language report organized around four questions: the current situation,
+  business impact, practical opportunities, and what to do next
+- Four-step reading path and a collapsible plain-language glossary
 - Drill-down sections with evidence and recommendations
 - Responsive CSS charts and data cards
 - Sector analysis for finance, lotteries, government projects, digital services,
@@ -28,6 +29,8 @@ Public GitHub Pages deployment:
   minimum, collateral workflow, borrower risks, and a pre-loan checklist
 - Scam-risk due-diligence checklist
 - 2026–2028 analytical scenarios
+- Specialist material is separated into a follow-up reading section so the
+  main narrative remains easy to follow
 - Linked primary sources from the World Bank, IMF, ADB, ILO, Bank of the Lao
   P.D.R., Lao Securities Commission, Lao Securities Exchange, and Transparency
   International, with product terms sourced from Lao Bullion Bank
