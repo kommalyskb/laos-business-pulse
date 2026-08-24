@@ -15,6 +15,7 @@ const demoPlaces: Record<PlaceKey, {
   contact: string;
   creator: string;
   scene: PlaceKey;
+  image: string;
   tags: string[];
 }> = {
   food: {
@@ -26,6 +27,7 @@ const demoPlaces: Record<PlaceKey, {
     contact: "ໂທຫາຮ້ານ",
     creator: "@lao.food.story",
     scene: "food",
+    image: "/platform-food.jpg",
     tags: ["ຄອບຄົວ", "ບ່ອນຈອດລົດ", "ອາຫານລາວ"],
   },
   nature: {
@@ -37,6 +39,7 @@ const demoPlaces: Record<PlaceKey, {
     contact: "ເປີດເສັ້ນທາງ",
     creator: "@thiao.laos",
     scene: "nature",
+    image: "/platform-waterfall.jpg",
     tags: ["ໄປເຊົ້າ–ແລງ", "ຖ່າຍຮູບ", "ລົດເກັງໄປໄດ້"],
   },
   cafe: {
@@ -48,6 +51,7 @@ const demoPlaces: Record<PlaceKey, {
     contact: "ສົ່ງຂໍ້ຄວາມ",
     creator: "@slowday.vte",
     scene: "cafe",
+    image: "/platform-cafe.jpg",
     tags: ["Wi‑Fi", "ງຽບ", "ເປີດຮອດ 21:00"],
   },
 };
@@ -85,6 +89,7 @@ const revenueStages: Record<RevenueStage, {
 const formatKip = (value: number) => `${new Intl.NumberFormat("en-US").format(value)} ₭`;
 
 export default function PlatformPitch() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   const [selectedPlace, setSelectedPlace] = useState<PlaceKey>("food");
   const [activeStage, setActiveStage] = useState<RevenueStage>("launch");
   const [actionMessage, setActionMessage] = useState("ລອງກົດການກະທຳໃນຕົວຢ່າງ");
@@ -151,9 +156,13 @@ export default function PlatformPitch() {
         <div className={styles.demoWrap} aria-label="ຕົວຢ່າງໜ້າວິດີໂອ">
           <div className={styles.phone}>
             <div className={styles.phoneTop}><span>9:41</span><span>● ●</span></div>
-            <div className={`${styles.videoScene} ${styles.food}`}>
-              <div className={styles.sceneSun} />
-              <div className={styles.scenePlate}><i /><i /><i /></div>
+            <div
+              className={`${styles.videoScene} ${styles.food}`}
+              style={{ backgroundImage: `url(${basePath}/platform-food.jpg)` }}
+            >
+              <div className={styles.feedHeader}><span>⌕ ຄົ້ນຫາບ່ອນໄປ...</span><b>ວຽງຈັນ⌄</b></div>
+              <div className={styles.contentBadge}>ຣີວິວຈາກ creator</div>
+              <div className={styles.feedRail}><span>♡<small>1.2K</small></span><span>♧<small>ບັນທຶກ</small></span><span>↗<small>ແຊຣ໌</small></span></div>
               <div className={styles.play}>▶</div>
               <div className={styles.creator}>@lao.food.story · 2 ມື້ກ່ອນ</div>
             </div>
@@ -210,15 +219,22 @@ export default function PlatformPitch() {
           <div className={styles.liveDemo}>
             <div className={styles.demoPhone}>
               <div className={styles.phoneTop}><span>9:41</span><span>● ●</span></div>
-              <div className={`${styles.videoScene} ${styles[place.scene]}`}>
-                <div className={styles.sceneSun} />
-                <div className={styles.scenePlate}><i /><i /><i /></div>
+              <div
+                className={`${styles.videoScene} ${styles[place.scene]}`}
+                style={{ backgroundImage: `url(${basePath}${place.image})` }}
+              >
+                <div className={styles.feedHeader}><span>← ລາຍລະອຽດ</span><b>♡</b></div>
+                <div className={styles.contentBadge}>ວິດີໂອຕົ້ນສະບັບ ↗</div>
                 <div className={styles.play}>▶</div>
                 <div className={styles.creator}>{place.creator} · ຣີວິວຕົ້ນສະບັບ</div>
               </div>
               <div className={styles.placeCard}>
                 <div><small>{place.meta}</small><strong>{place.name}</strong></div>
                 <div className={styles.quickFacts}><span>ກວດສອບແລ້ວ</span><span>{place.price}</span><span>{place.distance}</span></div>
+                <div className={styles.miniMap}>
+                  <i className={styles.mapRoadOne} /><i className={styles.mapRoadTwo} /><b>●</b>
+                  <span><small>ຈຸດໝາຍ</small>ເບິ່ງເສັ້ນທາງ</span>
+                </div>
                 <div className={styles.phoneActions}>
                   <button onClick={() => demonstrateAction(place.contact)}>{place.contact}</button>
                   <button onClick={() => demonstrateAction("ເປີດແຜນທີ່")}>ແຜນທີ່</button>
