@@ -54,8 +54,8 @@ export default function RevenueKpiDocument({ basePath }: { basePath: string }) {
   return (
     <article className={`${styles.detailBody} ${styles.revenueBody}`}>
       <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>0.1</strong></div>
-        <div><small>ສະຖານະ</small><strong>ຮ່າງສຳລັບທົບທວນ</strong></div>
+        <div><small>ສະບັບ</small><strong>1.0</strong></div>
+        <div><small>ສະຖານະ</small><strong>ອະນຸມັດແລ້ວ</strong></div>
         <div><small>ວັນທີປັບປຸງ</small><strong>25 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>Canvas 1.0 + Feasibility 1.0 + FS 1.0</strong></div>
       </section>
@@ -75,8 +75,8 @@ export default function RevenueKpiDocument({ basePath }: { basePath: string }) {
             <h3>ສ້າງຖານຮ້ານ ແລະທົດສອບວ່າຮ້ານຍອມຈ່າຍຫຼືບໍ່</h3>
             <ul>
               <li><strong>Free Business Profile:</strong> ທຸກຮ້ານມີໜ້າຂໍ້ມູນພື້ນຖານໄດ້ຟຣີ. ສ່ວນນີ້ບໍ່ສ້າງລາຍຮັບ ແຕ່ຊ່ວຍສ້າງຖານຂໍ້ມູນ.</li>
-              <li><strong>Founding Partner Pilot:</strong> ຮ້ານຈ່າຍຄ່າທົດລອງ 200,000 ກີບຕໍ່ເດືອນ ເພື່ອຮັບການກວດຂໍ້ມູນ, ສະເໜີແກ້ໄຂ ແລະຮັບ Performance Summary.</li>
-              <li><strong>Sponsored Campaign:</strong> ຮ້ານຈ່າຍ 1,000,000 ກີບຕໍ່ Campaign ເພື່ອສະແດງໃນພື້ນທີ່ໂຄສະນາທີ່ມີປ້າຍ “Sponsored” ຊັດເຈນ.</li>
+              <li><strong>Founding Partner Pilot:</strong> ຮ້ານຈ່າຍຄ່າທົດລອງ 200,000 ກີບຕໍ່ເດືອນ ເພື່ອຮັບ Verified Business Information, ສິດສະເໜີແກ້ໄຂ, Onboarding Support, Performance Summary ແລະປ້າຍ Founding Partner.</li>
+              <li><strong>Sponsored Campaign:</strong> 1,000,000 ກີບຕໍ່ Campaign ຍັງເປັນ Price Hypothesis. ຍັງບໍ່ເປີດຂາຍຈົນກວ່າຈະລະບຸໄລຍະເວລາ, ພື້ນທີ່ສະແດງ, ລາຍງານ ແລະເງື່ອນໄຂໃຫ້ຊັດເຈນ.</li>
             </ul>
             <p>Platform ນັບລາຍຮັບເມື່ອຮັບເງິນແລ້ວ; ຄຳເວົ້າວ່າ “ສົນໃຈ” ບໍ່ນັບ.</p>
           </article>
@@ -101,7 +101,7 @@ export default function RevenueKpiDocument({ basePath }: { basePath: string }) {
             <p>ບໍ່ມີການຊື້ຂາຍ ຫຼືວ່າຈ້າງສຳເລັດ = Platform ບໍ່ໄດ້ Commission. ລາຍຮັບກຸ່ມນີ້ບໍ່ແມ່ນຂອບເຂດຂອງ MVP.</p>
           </article>
         </div>
-        <p className={styles.priceHypothesis}><b>ລາຄາສຳລັບທົດສອບ—ບໍ່ແມ່ນລາຄາຂາຍສຸດທ້າຍ</b><span>ຮ້ານຮ່ວມທົດລອງ 200,000 ກີບຕໍ່ເດືອນ · ການໂຄສະນາ 1,000,000 ກີບຕໍ່ຄັ້ງ. ຕ້ອງປັບຈາກຜົນການສະເໜີຂາຍຈິງ.</span></p>
+        <p className={styles.priceHypothesis}><b>ສະຖານະລາຄາທີ່ອະນຸມັດ</b><span>Founding Partner Pilot 200,000 ກີບຕໍ່ເດືອນ — ອະນຸມັດໃຫ້ໃຊ້ໃນ Pilot. Sponsored Campaign 1,000,000 ກີບຕໍ່ຄັ້ງ — ຍັງເປັນ Price Hypothesis ແລະຕ້ອງກຳນົດຂອບເຂດຂອງ Campaign ກ່ອນເປີດຂາຍ.</span></p>
       </section>
 
       <section>
@@ -128,12 +128,13 @@ export default function RevenueKpiDocument({ basePath }: { basePath: string }) {
 
       <section>
         <span>05 · ຕົວຊີ້ວັດຫຼັກ</span>
-        <h2>ຄົນບໍ່ຊ້ຳທີ່ກົດເພື່ອໄປ ຕໍ່ອາທິດ</h2>
+        <h2>Weekly Unique Users with Decision Action</h2>
         <div className={styles.northStar}>
           <div><small>ຕົວຊີ້ວັດຫຼັກຂອງ PRODUCT</small><strong>ແຜນທີ່ + ໂທ + ຂໍ້ຄວາມ</strong></div>
-          <p>ນັບຈຳນວນຜູ້ໃຊ້ບໍ່ຊ້ຳທີ່ກົດຢ່າງໜ້ອຍໜຶ່ງການກະທຳພາຍໃນ 7 ມື້. ຕົວເລກນີ້ສະທ້ອນພາລະກິດ “ຊ່ວຍຄົນຕັດສິນໃຈໄປ” ໄດ້ດີກວ່າຍອດເບິ່ງ ຫຼືເວລາທີ່ຢູ່ໃນແອັບ.</p>
+          <p>ນັບຈຳນວນຜູ້ໃຊ້ບໍ່ຊ້ຳທີ່ກົດຢ່າງໜ້ອຍໜຶ່ງການກະທຳພາຍໃນ 7 ມື້. ການກົດນີ້ເອີ້ນວ່າ Decision Intent: ສະແດງເຈດຕະນາໄປ ຫຼືຕິດຕໍ່ຮ້ານ ແຕ່ບໍ່ຢືນຢັນວ່າໄດ້ໄປຮ້ານ ຫຼືຊື້ສິນຄ້າແລ້ວ.</p>
         </div>
         <div className={styles.formulaBlock}><b>ສູດປະກອບ</b><p>ອັດຕາເປີດໜ້າຮ້ານ = ຜູ້ເປີດໜ້າຮ້ານ ÷ ຜູ້ເຫັນວິດີໂອ</p><p>ອັດຕາການກົດເພື່ອໄປ = ຜູ້ກົດແຜນທີ່/ໂທ/ຂໍ້ຄວາມ ÷ ຜູ້ເປີດໜ້າຮ້ານ</p><p>ອັດຕາຮ້ານທີ່ຈ່າຍ = ຮ້ານທີ່ຊຳລະ ຫຼືວາງມັດຈຳ ÷ ຮ້ານທີ່ເຂົ້າຫາ</p></div>
+        <p className={styles.metricNote}>ການໄປຮ້ານຈິງຈະກວດແບບ Manual ດ້ວຍການສອບຖາມຜູ້ທົດສອບ ແລະຮ້ານຮ່ວມ Pilot; ອາດທົດສອບ QR Code ຫຼືລະຫັດສ່ວນຫຼຸດກັບຮ້ານຈຳນວນໜ້ອຍ. ບໍ່ສ້າງ Location Tracking, Booking ຫຼື Payment ສຳລັບຈຸດປະສົງນີ້ໃນ MVP.</p>
       </section>
 
       <section>
@@ -184,7 +185,7 @@ export default function RevenueKpiDocument({ basePath }: { basePath: string }) {
           <div role="row"><strong>ຮ້ານ</strong><p>ເຂົ້າຫາ 30 ຮ້ານ; 3 ຊຳລະ/ວາງມັດຈຳ + 2 ໜັງສືສະແດງເຈດຈຳນົງ.</p><span>ຫຼັກຖານເງິນ ຫຼືເອກະສານທີ່ລົງນາມ.</span><em>ປັບຊຸດບໍລິການ, ລາຄາ ຫຼືກຸ່ມຮ້ານ; ບໍ່ຂະຫຍາຍທີມ.</em></div>
           <div role="row"><strong>ການເງິນ</strong><p>ລາຍຈ່າຍຢູ່ໃນເພດານ 25 ລ້ານກີບ.</p><span>ທະບຽນລາຍຈ່າຍ, ໃບຮັບເງິນ ແລະເງິນຄົງເຫຼືອ.</span><em>ຢຸດງົບ ແລະຫຼຸດຂອບເຂດກ່ອນສືບຕໍ່.</em></div>
         </div>
-        <p className={styles.metricNote}>ຍັງບໍ່ກຳນົດເປົ້າອັດຕາການກົດແບບຖາວອນ ເພາະຍັງບໍ່ມີຄ່າຕັ້ງຕົ້ນຈາກຜູ້ໃຊ້ຈິງ. Pilot ຈະໃຊ້ເພື່ອສ້າງຄ່າຕັ້ງຕົ້ນ ແລ້ວຈຶ່ງກຳນົດເປົ້າໝາຍສະບັບ 1.0.</p>
+        <p className={styles.metricNote}>ຍັງບໍ່ກຳນົດເປົ້າອັດຕາການກົດແບບຖາວອນ ເພາະຍັງບໍ່ມີຄ່າຕັ້ງຕົ້ນຈາກຜູ້ໃຊ້ຈິງ. Pilot ຈະສ້າງຄ່າຕັ້ງຕົ້ນ ແລ້ວຈຶ່ງບັນທຶກເປົ້າໝາຍຕົວເລກໃນສະບັບ 1.1.</p>
       </section>
 
       <section>
@@ -216,20 +217,20 @@ export default function RevenueKpiDocument({ basePath }: { basePath: string }) {
       </section>
 
       <section>
-        <span>12 · ຈຸດທີ່ຕ້ອງທົບທວນ</span>
-        <h2>5 ຂໍ້ກ່ອນອະນຸມັດສະບັບ 1.0</h2>
+        <span>12 · ຂໍ້ຕັດສິນ</span>
+        <h2>5 ຂໍ້ທີ່ອະນຸມັດແລ້ວ</h2>
         <ol className={styles.openQuestions}>
-          <li><b>01</b><p>ເຫັນດີບໍວ່າ ຕົວຊີ້ວັດຫຼັກແມ່ນ “ຜູ້ໃຊ້ບໍ່ຊ້ຳທີ່ກົດແຜນທີ່, ໂທ ຫຼືຂໍ້ຄວາມຕໍ່ອາທິດ”?</p></li>
-          <li><b>02</b><p>ຊຸດຮ້ານຮ່ວມທົດລອງຄວນໃຫ້ສິດຫຍັງແດ່ ໂດຍບໍ່ກະທົບຄວາມໜ້າເຊື່ອຖື?</p></li>
-          <li><b>03</b><p>ຍັງເຫັນດີໃຊ້ 200,000 ກີບຕໍ່ເດືອນ ແລະ 1,000,000 ກີບຕໍ່ການໂຄສະນາເປັນລາຄາທົດສອບຫຼືບໍ່?</p></li>
-          <li><b>04</b><p>ເກນ 3 ຮ້ານຊຳລະ/ວາງມັດຈຳ + 2 ໜັງສືສະແດງເຈດຈຳນົງ ຈາກ 30 ຮ້ານ ພຽງພໍສຳລັບໄປຕໍ່ຫຼືບໍ່?</p></li>
-          <li><b>05</b><p>ຄວນຕ້ອງມີການຢືນຢັນວ່າຜູ້ໃຊ້ໄປຮ້ານຈິງໃນ pilot ຫຼືການກົດເພື່ອໄປພຽງພໍແລ້ວ?</p></li>
+          <li><b>01</b><p>ອະນຸມັດ Weekly Unique Users with Decision Action ເປັນຕົວຊີ້ວັດຫຼັກ.</p></li>
+          <li><b>02</b><p>ອະນຸມັດຂອບເຂດ Founding Partner Pilot: ກວດຂໍ້ມູນ, ສະເໜີແກ້ໄຂ, Onboarding Support, Performance Summary ແລະປ້າຍ Founding Partner; ບໍ່ລວມ Sponsored, ອັນດັບ, ຄະແນນຣີວິວ ຫຼືການຮັບປະກັນຍອດຂາຍ.</p></li>
+          <li><b>03</b><p>ອະນຸມັດ 200,000 ກີບຕໍ່ເດືອນສຳລັບ Founding Partner Pilot. Sponsored Campaign 1,000,000 ກີບຍັງເປັນ Price Hypothesis.</p></li>
+          <li><b>04</b><p>ອະນຸມັດເກນ Pilot: ເຂົ້າຫາ 30 ຮ້ານ, ຢ່າງໜ້ອຍ 3 ຮ້ານຊຳລະ/ວາງມັດຈຳ ແລະ 2 ຮ້ານລົງນາມ Letter of Intent. ເກນນີ້ອະນຸຍາດໃຫ້ທົດສອບຕໍ່ ບໍ່ໄດ້ອະນຸຍາດໃຫ້ຂະຫຍາຍທີມ.</p></li>
+          <li><b>05</b><p>ໃຊ້ Decision Intent ເປັນຫຼັກໃນ MVP; ກວດການໄປຮ້ານຈິງແບບ Manual ເປັນຂໍ້ມູນປະກອບ ໂດຍບໍ່ສ້າງ Location Tracking.</p></li>
         </ol>
       </section>
 
       <aside className={styles.approvalGate}>
-        <div><span>ລໍຖ້າການທົບທວນ</span><h2>ລາຍຮັບ ແລະຕົວຊີ້ວັດ 0.1</h2></div>
-        <ul><li>ຕົວຊີ້ວັດຫຼັກ — ລໍຖ້າຢືນຢັນ</li><li>ຊຸດບໍລິການໄລຍະທົດລອງ — ລໍຖ້າຢືນຢັນ</li><li>ລາຄາທົດສອບ — ລໍຖ້າຢືນຢັນ</li><li>ເກນ 3 + 2 ຈາກ 30 ຮ້ານ — ລໍຖ້າຢືນຢັນ</li><li>ວິທີຢືນຢັນການໄປຮ້ານ — ລໍຖ້າຄຳຕັດສິນ</li></ul>
+        <div><span>ອະນຸມັດແລ້ວ</span><h2>ລາຍຮັບ ແລະຕົວຊີ້ວັດ 1.0</h2></div>
+        <ul><li>Weekly Unique Decision Action — ອະນຸມັດແລ້ວ</li><li>ຂອບເຂດ Founding Partner Pilot — ອະນຸມັດແລ້ວ</li><li>200,000 ກີບຕໍ່ເດືອນ — ອະນຸມັດສຳລັບ Pilot</li><li>Sponsored 1,000,000 ກີບ — ຍັງເປັນ Price Hypothesis</li><li>ເກນ 3 + 2 ຈາກ 30 ຮ້ານ — ອະນຸມັດສຳລັບ Pilot</li><li>ກວດການໄປຮ້ານແບບ Manual — ອະນຸມັດແລ້ວ</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
