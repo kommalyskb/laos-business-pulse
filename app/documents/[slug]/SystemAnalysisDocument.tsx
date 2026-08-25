@@ -43,7 +43,7 @@ const useCases = [
     title: "ບໍລິຫານ Place, Source ແລະ Campaign",
     actor: "Admin",
     trigger: "ມີ Place/Source ໃໝ່, Correction/Takedown Request ຫຼື Sponsored Campaign.",
-    preconditions: ["Admin ຜ່ານການຢືນຢັນຕົວຕົນ", "ທຸກການປ່ຽນທີ່ກະທົບ Public Data ຖືກບັນທຶກ"],
+    preconditions: ["Admin ຜ່ານການຢືນຢັນຕົວຕົນດ້ວຍ Account ຂອງຕົນເອງ; ຫ້າມໃຊ້ Account ຮ່ວມກັນ", "ທຸກການປ່ຽນທີ່ກະທົບ Public Data ຖືກບັນທຶກ"],
     mainFlow: ["Admin ຄົ້ນກ່ອນສ້າງ Place ເພື່ອຫຼີກລ່ຽງຂໍ້ມູນຊ້ຳ", "ປ້ອນ Required Field, Source ແລະຜົນການກວດ", "Preview Record ແລະປ່ຽນສະຖານະເປັນ Published", "ຕິດຕາມ Correction, Takedown, Source Availability ແລະ Campaign Period"],
     exceptions: ["ພົບ Place ຊ້ຳ: Merge ຫຼືເຊື່ອມໄປ Canonical Place", "Source ຖືກລົບ: ປິດ Source ໂດຍບໍ່ລົບ Place ອັດຕະໂນມັດ", "Campaign ໝົດອາຍຸ: ຍຸດ Sponsored Placement ແລະຮັກສາລາຍງານ"],
     outcome: "Public Data, Trust Label ແລະ Campaign Status ສອດຄ່ອງກັບຫຼັກຖານ ແລະກົດທຸລະກິດ.",
@@ -61,11 +61,16 @@ const businessRules = [
   ["BR-08", "Anonymous Analytics", "Core Journey ຕ້ອງໃຊ້ໄດ້ເມື່ອຜູ້ໃຊ້ປະຕິເສດ Optional Analytics; Event ຫ້າມມີ PII ທີ່ບໍ່ຈຳເປັນ.", "ຫຼຸດການເກັບຂໍ້ມູນ ແລະຮັກສາ Guest-first."],
   ["BR-09", "Decision Intent", "Map/Call/Message ຖືກນັບເປັນເຈດຕະນາ; ຫ້າມລາຍງານເປັນການໄປຮ້ານ ຫຼືຍອດຂາຍຖ້າບໍ່ມີຫຼັກຖານອື່ນ.", "ປ້ອງກັນລາຍງານ Performance ເກີນຄວາມຈິງ."],
   ["BR-10", "No Transaction", "MVP ບໍ່ຮັບ Booking, Payment, Refund ຫຼື Order; ຜູ້ໃຊ້ ແລະຮ້ານຕິດຕໍ່ກັນເອງ.", "ຮັກສາ System Boundary ແລະຫຼຸດ Operational Risk."],
+  ["BR-11", "Admin Identity", "Pilot ໃຊ້ Full Admin ບົດບາດດຽວ, ແຕ່ Admin ແຕ່ລະຄົນຕ້ອງໃຊ້ Account ຂອງຕົນເອງ; ຫ້າມແບ່ງປັນ Account. ທຸກການປ່ຽນສຳຄັນຕ້ອງມີ Audit Log.", "ຮູ້ໄດ້ວ່າໃຜປ່ຽນຫຍັງ ແລະສາມາດທວນຄືນເຫດການໄດ້."],
+  ["BR-12", "Correction SLA", "ຢືນຢັນການຮັບຄຳຮ້ອງພາຍໃນ 1 ວັນເຮັດວຽກ ແລະຕັດສິນພາຍໃນ 3 ວັນເຮັດວຽກນັບຈາກຫຼັກຖານຄົບ. ຖ້າຫຼັກຖານບໍ່ຄົບ ໃຫ້ຢຸດນັບເວລາໄວ້ທີ່ Needs Evidence.", "ກຳນົດຄວາມຄາດຫວັງຂອງຮ້ານ ແລະຊ່ວຍໃຫ້ Admin ຈັດລຳດັບວຽກ."],
+  ["BR-13", "Data Freshness", "ກວດ Contact, Map, Hours, ສະຖານະກິດຈະການ ແລະຊ່ວງລາຄາຂອງ Founding Partner ທຸກ 30 ວັນ ແລະ Free Listing ທຸກ 60 ວັນ. ເມື່ອກາຍກຳນົດໃຫ້ສະແດງ “ຂໍ້ມູນຄວນກວດຄືນ”.", "ຫຼຸດການນຳໃຊ້ຂໍ້ມູນເກົ່າໂດຍບໍ່ລົບ Place ໄວເກີນໄປ."],
+  ["BR-14", "Duplicate Merge", "ລະບົບສາມາດແຈ້ງ Duplicate Candidate ຈາກຊື່, ເບີໂທ, ພິກັດ ແລະ Social Page, ແຕ່ Merge ໄດ້ໂດຍ Admin ເທົ່ານັ້ນ. Source, Request, Campaign ແລະ Analytics ຕ້ອງຍ້າຍໄປ Canonical Place ແລະ URL ເກົ່າຕ້ອງ Redirect.", "ປ້ອງກັນການ Merge ຜິດສາຂາ ແລະຮັກສາ Shared Link/ປະຫວັດ."],
+  ["BR-15", "Source Availability", "ແຍກ Temporary Failure, Confirmed Unavailable ແລະ Takedown. Failure ຄັ້ງດຽວໃຊ້ Fallback ແລະ Retry; 404/ຖືກລົບ/Private ຫຼືລົ້ມຫຼາຍຄັ້ງຈຶ່ງຖອນຈາກ Feed. Takedown ຖອນຈາກ Public View ທັນທີ; Source Unavailable ກວດຄືນພາຍໃນ 7 ວັນ.", "ບໍ່ລົງໂທດ Source ຈາກບັນຫາຊົ່ວຄາວ ແຕ່ຕອບສະໜອງສິດ Takedown ທັນເວລາ."],
 ] as const;
 
 const states = [
   ["Place", "Draft", "In Review", "Published", "Suspended / Archived", "ສ້າງ → ກວດ Required Field/Source → ເຜີຍແຜ່ → ຢຸດຊົ່ວຄາວ ຫຼືເກັບເມື່ອປິດກິດຈະການ"],
-  ["Content Source", "Proposed", "Checked", "Published", "Unavailable / Removed", "ຮັບ URL → ກວດ Creator/Place/ສິດ → ສະແດງ → ປິດເມື່ອລິ້ງເສຍ ຫຼືມີ Takedown"],
+  ["Content Source", "Proposed", "Checked / Temporary Failure", "Published", "Unavailable / Removed", "ຮັບ URL → ກວດ Creator/Place/ສິດ → ສະແດງ → Retry ເມື່ອລົ້ມຊົ່ວຄາວ → ປິດເມື່ອຢືນຢັນວ່າລິ້ງເສຍ ຫຼືມີ Takedown"],
   ["Correction", "Submitted", "Under Review", "Approved / Rejected", "Closed", "ຮັບຄຳຮ້ອງ → ກວດຫຼັກຖານ → ຕັດສິນ → ອັບເດດ/ແຈ້ງຜົນ → ປິດ"],
   ["Campaign", "Draft", "Scheduled", "Active", "Paused / Ended", "ກຳນົດຮ້ານ/ພື້ນທີ່/ໄລຍະ → ກວດປ້າຍ → ເລີ່ມ → ຢຸດ ຫຼືສິ້ນສຸດ"],
 ] as const;
@@ -103,9 +108,9 @@ const traceability = [
 
 const edgeCases = [
   ["ບໍ່ພົບ Search Result", "ສະແດງຄຳຄົ້ນ/Filter ທີ່ໃຊ້, ປຸ່ມລ້າງ Filter ແລະໝວດທາງເລືອກ; ບໍ່ສະແດງຜົນທີ່ບໍ່ກົງໂດຍບໍ່ບອກ."],
-  ["Official Embed ລົ້ມເຫຼວ", "ໃຊ້ Preview/Fallback, Attribution ແລະ Link ຕົ້ນສະບັບ; Place Data ຕ້ອງຍັງອ່ານໄດ້."],
-  ["Source URL ຖືກລົບ", "ປ່ຽນ Source ເປັນ Unavailable, ຖອນອອກຈາກ Feed ແລະຮັກສາ Place ຖ້າຍັງຜ່ານ Publish Gate."],
-  ["Place ຊ້ຳ", "ບໍ່ Publish Record ໃໝ່ຈົນກວ່າ Admin ກວດຊື່, ເບີໂທ, ພິກັດ ແລະ Source; ຈາກນັ້ນ Merge ໄປ Canonical Place."],
+  ["Official Embed ລົ້ມເຫຼວ", "Failure ຄັ້ງດຽວຖືເປັນ Temporary Failure: ໃຊ້ Preview/Fallback, Attribution ແລະ Link ຕົ້ນສະບັບ ພ້ອມ Retry; Place Data ຕ້ອງຍັງອ່ານໄດ້."],
+  ["Source URL ຖືກລົບ", "404, Content ຖືກລົບ/Private ຫຼື Retry ບໍ່ຜ່ານຈຶ່ງປ່ຽນ Source ເປັນ Confirmed Unavailable ແລະຖອນຈາກ Feed; ກວດຄືນພາຍໃນ 7 ວັນ. Takedown ຖອນ Public View ທັນທີ."],
+  ["Place ຊ້ຳ", "ລະບົບແຈ້ງ Duplicate Candidate ຈາກຊື່, ເບີໂທ, ພິກັດ ແລະ Social Page; Admin ເທົ່ານັ້ນທີ່ Merge ໄດ້. ຂໍ້ມູນສຳພັນຖືກຍ້າຍ ແລະ URL ເກົ່າ Redirect ໄປ Canonical Place."],
   ["ຮ້ານປິດຊົ່ວຄາວ/ຖາວອນ", "ຊົ່ວຄາວໃຊ້ Suspended ພ້ອມເຫດຜົນ; ຖາວອນໃຊ້ Archived ແລະບໍ່ປາກົດໃນ Feed/Search."],
   ["External App ບໍ່ມີ", "ສະແດງຂໍ້ມູນໃຫ້ Copy ຫຼືທາງເລືອກ Web; ບໍ່ຄວນປ່ອຍຜູ້ໃຊ້ຢູ່ Error Page ທີ່ບໍ່ມີທາງອອກ."],
   ["ຜູ້ໃຊ້ປະຕິເສດ Analytics", "ບັນທຶກສະເພາະສິ່ງຈຳເປັນຕໍ່ການເຮັດວຽກ/ຄວາມປອດໄພ ແລະບໍ່ຂັດຂວາງ Core Journey."],
@@ -118,8 +123,8 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
   return (
     <article className={`${styles.detailBody} ${styles.systemAnalysisBody} ${styles.businessDocument}`}>
       <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>0.1</strong></div>
-        <div><small>ສະຖານະ</small><strong>ຮ່າງສຳລັບທົບທວນ</strong></div>
+        <div><small>ສະບັບ</small><strong>1.0</strong></div>
+        <div><small>ສະຖານະ</small><strong>ອະນຸມັດແລ້ວ</strong></div>
         <div><small>ວັນທີປັບປຸງ</small><strong>26 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>PRO-01 Product Requirements 1.0</strong></div>
       </section>
@@ -145,7 +150,7 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
           <li><a href="#sa-permissions">ສິດ ແລະການຄວບຄຸມ</a></li>
           <li><a href="#sa-errors">Exception ແລະ Edge Cases</a></li>
           <li><a href="#sa-traceability">Traceability</a></li>
-          <li><a href="#sa-review">5 ຂໍ້ສຳລັບທົບທວນ</a></li>
+          <li><a href="#sa-review">5 ຂໍ້ຕັດສິນທີ່ອະນຸມັດ</a></li>
         </ol>
       </nav>
 
@@ -322,20 +327,20 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
 
       <section className={styles.documentArticleSection} id="sa-review">
         <span>12 · REVIEW DECISIONS</span>
-        <h2>5 ຂໍ້ທີ່ຕ້ອງທົບທວນກ່ອນປ່ຽນ PRO-02 ເປັນສະບັບ 1.0</h2>
-        <p className={styles.documentQuestion}>ຈຸດໃດຍັງເປັນຄຳແນະນຳ ແລະຕ້ອງໄດ້ຄຳຕັດສິນຈາກເຈົ້າຂອງໂຄງການ?</p>
+        <h2>5 ຂໍ້ຕັດສິນສຳລັບ System Analysis 1.0</h2>
+        <p className={styles.documentQuestion}>ຂໍ້ຕັດສິນໃດຈະໃຊ້ເປັນ Baseline ສຳລັບ Design, Development, Operation ແລະ Test?</p>
         <ol className={styles.reviewDecisions}>
-          <li><b>01 · ADMIN ROLE</b><div><strong>ຂໍ້ສະເໜີ:</strong><p>Pilot ເລີ່ມດ້ວຍ Admin ບົດບາດດຽວທີ່ຈັດການ Place, Source, Request ແລະ Campaign ໄດ້ທັງໝົດ; ທຸກການປ່ຽນສຳຄັນຕ້ອງມີ Audit Log. ແຍກ Reviewer/Publisher ເມື່ອທີມມີຫຼາຍກວ່າ 1 ຄົນ.</p></div></li>
-          <li><b>02 · CORRECTION SLA</b><div><strong>ຂໍ້ສະເໜີ:</strong><p>ຮັບຄຳຮ້ອງພາຍໃນ 1 ວັນເຮັດວຽກ ແລະຕັດສິນພາຍໃນ 3 ວັນເຮັດວຽກເມື່ອຫຼັກຖານຄົບ. ກໍລະນີຂໍ້ມູນເສຍຫາຍຮ້າຍແຮງ ຫຼື Takedown ໃຫ້ Suspend ຊົ່ວຄາວກ່ອນກວດ.</p></div></li>
-          <li><b>03 · DATA FRESHNESS</b><div><strong>ຂໍ້ສະເໜີ:</strong><p>ໃນ Pilot ໃຫ້ກວດ Contact, Map ແລະ Hours ຂອງ Founding Partner ທຸກ 30 ວັນ; Free Listing ທຸກ 60 ວັນ. ຖ້າກາຍກຳນົດ ໃຫ້ປ້າຍ “ຄວນກວດຄືນ” ແທນການລົບທັນທີ.</p></div></li>
-          <li><b>04 · DUPLICATE PLACE</b><div><strong>ຂໍ້ສະເໜີ:</strong><p>ໃຫ້ລະບົບແຈ້ງ Duplicate Candidate ເມື່ອຊື່/ເບີໂທ/ພິກັດໃກ້ກັນ, ແຕ່ການ Merge ຕ້ອງໃຫ້ Admin ຢືນຢັນ. Record ເກົ່າເກັບ Redirect ໄປ Canonical Place ເພື່ອບໍ່ໃຫ້ Shared Link ເສຍ.</p></div></li>
-          <li><b>05 · SOURCE UNAVAILABLE</b><div><strong>ຂໍ້ສະເໜີ:</strong><p>ເມື່ອກວດພົບ Source ເປີດບໍ່ໄດ້ ໃຫ້ຖອນອອກຈາກ Feed ທັນທີ, ປ່ຽນເປັນ Unavailable ແລະລອງກວດຄືນ 1 ຄັ້ງພາຍໃນ 7 ວັນ. Place Page ຍັງຢູ່ຖ້າຂໍ້ມູນຫຼັກຍັງຜ່ານ Publish Gate.</p></div></li>
+          <li><b>01 · ADMIN ROLE</b><div><strong>ອະນຸມັດ:</strong><p>Pilot ເລີ່ມດ້ວຍ Full Admin ບົດບາດດຽວ. ຫ້າມໃຊ້ Admin Account ຮ່ວມກັນ; ທຸກການປ່ຽນສຳຄັນຕ້ອງບັນທຶກຜູ້ປ່ຽນ, ຂໍ້ມູນກ່ອນ–ຫຼັງ, ເຫດຜົນ ແລະເວລາ. ເມື່ອມີ Admin ຕັ້ງແຕ່ 2 ຄົນຂຶ້ນໄປ ໃຫ້ແຍກ Operator ແລະ Approver.</p></div></li>
+          <li><b>02 · CORRECTION SLA</b><div><strong>ອະນຸມັດ:</strong><p>ຢືນຢັນການຮັບຄຳຮ້ອງພາຍໃນ 1 ວັນເຮັດວຽກ ແລະຕັດສິນພາຍໃນ 3 ວັນເຮັດວຽກນັບຈາກຫຼັກຖານຄົບ. ໄລຍະ 3 ວັນຢຸດນັບໃນສະຖານະ Needs Evidence. ແຜນທີ່/ເບີໂທຜິດ, ຮ້ານປິດ ຫຼື Takedown ເປັນຄຳຮ້ອງດ່ວນທີ່ຕ້ອງກວດພາຍໃນ 24 ຊົ່ວໂມງ.</p></div></li>
+          <li><b>03 · DATA FRESHNESS</b><div><strong>ອະນຸມັດ:</strong><p>ກວດ Contact, Hours, Map, ສະຖານະກິດຈະການ ແລະຊ່ວງລາຄາຂອງ Founding Partner ທຸກ 30 ວັນ ແລະ Free Listing ທຸກ 60 ວັນ. ເມື່ອກາຍກຳນົດໃຫ້ສະແດງ “ຂໍ້ມູນຄວນກວດຄືນ”; ຖ້າກາຍກຳນົດຫຼາຍ ແລະຢືນຢັນບໍ່ໄດ້ ຈຶ່ງ Suspend ຈາກ Feed/Search.</p></div></li>
+          <li><b>04 · DUPLICATE PLACE</b><div><strong>ອະນຸມັດ:</strong><p>ລະບົບແຈ້ງ Duplicate Candidate ຈາກຊື່, ເບີໂທ, ພິກັດ ແລະ Social Page; Admin ເທົ່ານັ້ນທີ່ Merge ໄດ້. Content Source, Correction, Campaign ແລະ Analytics ຕ້ອງຍ້າຍໄປ Canonical Place; URL ເກົ່າຕ້ອງ Redirect ແລະມີ Audit Log.</p></div></li>
+          <li><b>05 · SOURCE UNAVAILABLE</b><div><strong>ອະນຸມັດ:</strong><p>ແຍກ Temporary Failure, Confirmed Unavailable ແລະ Takedown. Failure ຄັ້ງດຽວໃຊ້ Fallback ແລະ Retry; 404, Content ຖືກລົບ/Private ຫຼື Retry ບໍ່ຜ່ານຈຶ່ງຖອນຈາກ Feed. Takedown ຖອນຈາກ Public View ທັນທີ. Source Unavailable ກວດຄືນພາຍໃນ 7 ວັນ; Place Page ຍັງຢູ່ໄດ້ຖ້າຜ່ານ Publish Gate.</p></div></li>
         </ol>
       </section>
 
       <aside className={styles.draftApprovalGate}>
-        <div><span>ຮ່າງສຳລັບທົບທວນ</span><h2>PRO-02 · System Analysis 0.1</h2><p>ໂຄງສ້າງ Actor, Use Case, Process, Rule, State, Data Entity, Permission ແລະ Traceability ຖືກຈັດເຮັດແລ້ວ. ຍັງບໍ່ຖືວ່າເປັນ Baseline 1.0 ຈົນກວ່າ 5 ຂໍ້ທ້າຍຈະຖືກທົບທວນ.</p></div>
-        <ul><li>Actors & Boundary — ຮ່າງແລ້ວ</li><li>Use Cases & Process — ຮ່າງແລ້ວ</li><li>Business Rules & States — ຮ່າງແລ້ວ</li><li>Data & Permission — ຮ່າງແລ້ວ</li><li>5 Review Decisions — ລໍຖ້າທົບທວນ</li></ul>
+        <div><span>ອະນຸມັດແລ້ວ</span><h2>PRO-02 · System Analysis 1.0</h2><p>Actors, Boundary, Use Cases, Process, Business Rules, States, Data Entities, Permissions, Edge Cases ແລະ Traceability ເປັນ Baseline ສຳລັບເອກະສານ Product, UX, Technical ແລະ Delivery ຖັດໄປ.</p></div>
+        <ul><li>Actors & Boundary — ອະນຸມັດ</li><li>Use Cases & Process — ອະນຸມັດ</li><li>Business Rules & States — ອະນຸມັດ</li><li>Data & Permission — ອະນຸມັດ</li><li>5 Review Decisions — ອະນຸມັດ</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
