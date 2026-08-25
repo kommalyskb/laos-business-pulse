@@ -172,9 +172,8 @@ export default function ProductVisionDocument({ basePath }: { basePath: string }
 
       <nav className={styles.docPagination} aria-label="ເອກະສານຕໍ່ໄປ">
         <span />
-        <a href={`${basePath}/documents/market-competitor`}><small>NEXT →</small><strong>ຕະຫຼາດ ແລະ ຄູ່ແຂ່ງ</strong></a>
+        <a href={`${basePath}/documents/business-canvas`}><small>NEXT PRIORITY →</small><strong>ແຜນພາບທຸລະກິດ</strong></a>
       </nav>
     </article>
   );
 }
-
