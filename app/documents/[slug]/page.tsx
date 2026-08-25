@@ -5,6 +5,7 @@ import styles from "../documents.module.css";
 import BusinessCanvasDocument from "./BusinessCanvasDocument";
 import FeasibilityStudyDocument from "./FeasibilityStudyDocument";
 import FinancialStructureDocument from "./FinancialStructureDocument";
+import ProductRequirementsDocument from "./ProductRequirementsDocument";
 import ProductVisionDocument from "./ProductVisionDocument";
 import RevenueKpiDocument from "./RevenueKpiDocument";
 
@@ -81,6 +82,8 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
                 ? <FinancialStructureDocument basePath={basePath} />
                 : document.slug === "revenue-kpi"
                   ? <RevenueKpiDocument basePath={basePath} />
+                  : document.slug === "prd"
+                    ? <ProductRequirementsDocument basePath={basePath} />
                 : <article className={styles.detailBody}>
           <section>
             <span>01 · PURPOSE</span>
