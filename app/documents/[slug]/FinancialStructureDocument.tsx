@@ -31,7 +31,7 @@ function CountInput({ label, value, onChange }: { label: string; value: number; 
 }
 
 export default function FinancialStructureDocument({ basePath }: { basePath: string }) {
-  const [cashCeiling, setCashCeiling] = useState(20_000_000);
+  const [cashCeiling, setCashCeiling] = useState(25_000_000);
   const [monthlyFixed, setMonthlyFixed] = useState(6_000_000);
   const [monthlyVariable, setMonthlyVariable] = useState(2_000_000);
   const [partners, setPartners] = useState(3);
@@ -55,8 +55,8 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
   return (
     <article className={`${styles.detailBody} ${styles.financialBody}`}>
       <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>0.2</strong></div>
-        <div><small>ສະຖານະ</small><strong>ຮ່າງ — ລໍຖ້າຕົວເລກຈິງ</strong></div>
+        <div><small>ສະບັບ</small><strong>0.3</strong></div>
+        <div><small>ສະຖານະ</small><strong>ຮ່າງ — ລໍຖ້າ 2 ຕົວເລກ</strong></div>
         <div><small>ວັນທີປັບປຸງ</small><strong>25 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>ການສຶກສາຄວາມເປັນໄປໄດ້ 1.0</strong></div>
       </section>
@@ -83,6 +83,7 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
           <article><b>ຄ່າຄອງຊີບຜູ້ກໍ່ຕັ້ງ</b><strong>ລາຍຈ່າຍຈຳເປັນ</strong><p>ແມ່ນເງິນຂັ້ນຕ່ຳສຳລັບລາຍຈ່າຍຈຳເປັນໃນຊ່ວງທົດລອງ 6 ອາທິດ. ຖ້າຜູ້ກໍ່ຕັ້ງມີລາຍຮັບອື່ນ ສາມາດກຳນົດເປັນ 0 ກີບ ແຕ່ຍັງຕ້ອງບັນທຶກເວລາເຮັດວຽກ.</p></article>
           <article><b>ຄວາມສຳພັນຂອງສອງຈຳນວນ</b><strong>ບໍ່ບວກເພີ່ມ</strong><p>ຖ້າໂຄງການຈ່າຍຄ່າຄອງຊີບໃຫ້ຜູ້ກໍ່ຕັ້ງ ຈຳນວນນັ້ນຕ້ອງນັບຢູ່ພາຍໃນເພດານງົບທົດລອງ ບໍ່ແມ່ນເງິນເພີ່ມນອກງົບ.</p></article>
         </div>
+        <p className={`${styles.fundingExplanation} ${styles.confirmedBudget}`}><strong>ການແບ່ງເງິນທີ່ຢືນຢັນແລ້ວ</strong>ເງິນທັງໝົດ 100 ລ້ານກີບ ແບ່ງເປັນເງິນສຳຮອງຄ່າຄອງຊີບສ່ວນຕົວ 60 ລ້ານກີບ, ເງິນສຳລັບພັນທະສ່ວນຕົວອື່ນ 15 ລ້ານກີບ ແລະເພດານງົບໂຄງການ 25 ລ້ານກີບ. ເງິນສ່ວນຕົວ 75 ລ້ານກີບຫ້າມນຳມາໃຊ້ໃນໂຄງການ.</p>
       </section>
 
       <section>
@@ -202,22 +203,22 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
           <li><b>04</b><span>ຜູ້ກໍ່ຕັ້ງທີ່ມີລາຍຮັບອື່ນສາມາດບໍ່ຮັບເງິນສົດໃນ 6 ອາທິດ; ຖ້າເຮັດເຕັມເວລາຕ້ອງມີຄ່າຄອງຊີບຂັ້ນຕ່ຳ.</span></li>
           <li><b>05</b><span>ລາຍຈ່າຍລາຍການໃດເກີນ 10% ຂອງງົບລວມ ຕ້ອງປຽບທຽບລາຄາຢ່າງໜ້ອຍ 2 ແຫຼ່ງ.</span></li>
           <li><b>06</b><span>ຕ້ອງມີເງິນຮອງຮັບ 3 ເດືອນເພື່ອສືບຕໍ່ທົດສອບ ແລະ 6 ເດືອນກ່ອນສ້າງລະບົບສົມບູນ ຫຼືຈ້າງທີມຖາວອນ.</span></li>
+          <li><b>07</b><span>ຢືນຢັນເພດານງົບໂຄງການ 25 ລ້ານກີບ ແລະກັນເງິນສ່ວນຕົວ 75 ລ້ານກີບອອກຈາກໂຄງການ.</span></li>
         </ul>
       </section>
 
       <section>
         <span>13 · ຕົວເລກທີ່ຍັງລໍຖ້າ</span>
-        <h2>3 ຕົວເລກກ່ອນຂຶ້ນສະບັບ 1.0</h2>
+        <h2>2 ຕົວເລກກ່ອນຂຶ້ນສະບັບ 1.0</h2>
         <ol className={styles.openQuestions}>
-          <li><b>01</b><p>ເພດານງົບທົດລອງຕົວຈິງທີ່ສາມາດເສຍໄດ້ທັງໝົດ ໂດຍບໍ່ແຕະເງິນສຳຮອງສ່ວນຕົວ.</p></li>
-          <li><b>02</b><p>ຈຳນວນຄ່າຄອງຊີບຂັ້ນຕ່ຳຂອງຜູ້ກໍ່ຕັ້ງ ຫຼືຢືນຢັນວ່າບໍ່ຮັບເງິນສົດໃນ 6 ອາທິດ.</p></li>
-          <li><b>03</b><p>ລາຍຈ່າຍຕົວຈິງສຳລັບການທົດລອງ 6 ອາທິດ ໂດຍອ້າງອີງຈາກລາຄາທີ່ສອບຖາມຈາກຜູ້ໃຫ້ບໍລິການດ້ານເຕັກນິກ, ຂໍ້ມູນ, ການເດີນທາງ, ເຄື່ອງມື ແລະການບັນຊີ.</p></li>
+          <li><b>01</b><p>ຈຳນວນຄ່າຄອງຊີບຂັ້ນຕ່ຳທີ່ໂຄງການຈະຈ່າຍໃຫ້ຜູ້ກໍ່ຕັ້ງ ຫຼືຢືນຢັນວ່າບໍ່ຮັບເງິນສົດໃນ 6 ອາທິດ.</p></li>
+          <li><b>02</b><p>ລາຍຈ່າຍຕົວຈິງສຳລັບການທົດລອງ 6 ອາທິດ ໂດຍອ້າງອີງຈາກລາຄາທີ່ສອບຖາມຈາກຜູ້ໃຫ້ບໍລິການດ້ານເຕັກນິກ, ຂໍ້ມູນ, ການເດີນທາງ, ເຄື່ອງມື ແລະການບັນຊີ.</p></li>
         </ol>
       </section>
 
       <aside className={styles.approvalGate}>
-        <div><span>ຍັງບໍ່ພ້ອມສຳລັບ 1.0</span><h2>ໂຄງສ້າງການເງິນ 0.2</h2></div>
-        <ul><li>ກົດການເງິນ — ອະນຸມັດແລ້ວ</li><li>ເພດານງົບຕົວຈິງ — ລໍຖ້າ</li><li>ຄ່າຄອງຊີບຜູ້ກໍ່ຕັ້ງ — ລໍຖ້າ</li><li>ລາຍຈ່າຍທົດລອງຕົວຈິງ — ລໍຖ້າ</li></ul>
+        <div><span>ຍັງບໍ່ພ້ອມສຳລັບ 1.0</span><h2>ໂຄງສ້າງການເງິນ 0.3</h2></div>
+        <ul><li>ກົດການເງິນ — ອະນຸມັດແລ້ວ</li><li>ເພດານງົບ 25 ລ້ານກີບ — ອະນຸມັດແລ້ວ</li><li>ຄ່າຄອງຊີບທີ່ໂຄງການຈະຈ່າຍ — ລໍຖ້າ</li><li>ລາຍຈ່າຍທົດລອງຕົວຈິງ — ລໍຖ້າ</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
