@@ -1,4 +1,5 @@
 import styles from "../documents.module.css";
+import BusinessDocumentReaderGuide from "./BusinessDocumentReaderGuide";
 
 const assumptions = [
   ["Demand", "ຜູ້ໃຊ້ຈະເລືອກ feed ທີ່ຈັດຕາມ place/category ແທນການຄົ້ນຊ້ຳໃນຫຼາຍ social app.", "Prototype + concierge MVP", "Video → Place Page"],
@@ -17,6 +18,8 @@ export default function BusinessCanvasDocument({ basePath }: { basePath: string 
         <div><small>UPDATED</small><strong>25 ສິງຫາ 2026</strong></div>
         <div><small>INPUT</small><strong>Product Vision 1.0</strong></div>
       </section>
+
+      <BusinessDocumentReaderGuide code="BUS-03" />
 
       <section>
         <span>01 · BUSINESS MODEL STATEMENT</span>
@@ -137,7 +140,7 @@ export default function BusinessCanvasDocument({ basePath }: { basePath: string 
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
-        <a href={`${basePath}/documents/product-vision`}><small>← APPROVED INPUT</small><strong>ວິໄສທັດຜະລິດຕະພັນ</strong></a>
+        <a href={`${basePath}/documents/market-competitor`}><small>← PREVIOUS DOCUMENT</small><strong>ຕະຫຼາດ ແລະຄູ່ແຂ່ງ</strong></a>
         <a href={`${basePath}/documents/feasibility-study`}><small>NEXT PRIORITY →</small><strong>ການສຶກສາຄວາມເປັນໄປໄດ້</strong></a>
       </nav>
     </article>

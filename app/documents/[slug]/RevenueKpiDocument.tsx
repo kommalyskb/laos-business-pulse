@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import styles from "../documents.module.css";
+import BusinessDocumentReaderGuide from "./BusinessDocumentReaderGuide";
 
 const LAK = new Intl.NumberFormat("lo-LA", { maximumFractionDigits: 0 });
 const formatLak = (value: number) => `${LAK.format(Math.max(0, Math.round(value)))} ₭`;
@@ -59,6 +60,8 @@ export default function RevenueKpiDocument({ basePath }: { basePath: string }) {
         <div><small>ວັນທີປັບປຸງ</small><strong>25 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>Canvas 1.0 + Feasibility 1.0 + FS 1.0</strong></div>
       </section>
+
+      <BusinessDocumentReaderGuide code="BUS-06" />
 
       <section>
         <span>01 · ຈຸດຢືນ</span>

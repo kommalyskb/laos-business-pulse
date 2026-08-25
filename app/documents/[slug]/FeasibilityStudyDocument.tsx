@@ -1,4 +1,5 @@
 import styles from "../documents.module.css";
+import BusinessDocumentReaderGuide from "./BusinessDocumentReaderGuide";
 
 const dimensions = [
   ["01", "Market", "ທົດສອບໄດ້", "ພຶດຕິກຳຄົ້ນຫາຜ່ານວິດີໂອມີຢູ່ແລ້ວ ແຕ່ຍັງຕ້ອງພິສູດວ່າຜູ້ໃຊ້ຈະຍ້າຍມາໃຊ້ portal ສະເພາະ.", "ທົດສອບ", "User prototype test"],
@@ -27,6 +28,8 @@ export default function FeasibilityStudyDocument({ basePath }: { basePath: strin
         <div><small>UPDATED</small><strong>25 ສິງຫາ 2026</strong></div>
         <div><small>INPUT</small><strong>Vision 1.0 + Canvas 1.0</strong></div>
       </section>
+
+      <BusinessDocumentReaderGuide code="BUS-04" />
 
       <section>
         <span>01 · EXECUTIVE VERDICT</span>

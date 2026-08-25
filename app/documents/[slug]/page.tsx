@@ -5,6 +5,7 @@ import styles from "../documents.module.css";
 import BusinessCanvasDocument from "./BusinessCanvasDocument";
 import FeasibilityStudyDocument from "./FeasibilityStudyDocument";
 import FinancialStructureDocument from "./FinancialStructureDocument";
+import MarketCompetitorDocument from "./MarketCompetitorDocument";
 import ProductRequirementsDocument from "./ProductRequirementsDocument";
 import ProductVisionDocument from "./ProductVisionDocument";
 import RevenueKpiDocument from "./RevenueKpiDocument";
@@ -74,7 +75,9 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
 
         {document.slug === "product-vision"
           ? <ProductVisionDocument basePath={basePath} />
-          : document.slug === "business-canvas"
+          : document.slug === "market-competitor"
+            ? <MarketCompetitorDocument basePath={basePath} />
+            : document.slug === "business-canvas"
             ? <BusinessCanvasDocument basePath={basePath} />
             : document.slug === "feasibility-study"
               ? <FeasibilityStudyDocument basePath={basePath} />
