@@ -1,5 +1,5 @@
 import styles from "../documents.module.css";
-import BusinessDocumentReaderGuide from "./BusinessDocumentReaderGuide";
+import BusinessDocumentDeepDive from "./BusinessDocumentDeepDive";
 
 const dimensions = [
   ["01", "Market", "ທົດສອບໄດ້", "ພຶດຕິກຳຄົ້ນຫາຜ່ານວິດີໂອມີຢູ່ແລ້ວ ແຕ່ຍັງຕ້ອງພິສູດວ່າຜູ້ໃຊ້ຈະຍ້າຍມາໃຊ້ portal ສະເພາະ.", "ທົດສອບ", "User prototype test"],
@@ -21,7 +21,7 @@ const risks = [
 
 export default function FeasibilityStudyDocument({ basePath }: { basePath: string }) {
   return (
-    <article className={`${styles.detailBody} ${styles.feasibilityBody}`}>
+    <article className={`${styles.detailBody} ${styles.feasibilityBody} ${styles.businessDocument}`}>
       <section className={styles.documentControl}>
         <div><small>VERSION</small><strong>1.0</strong></div>
         <div><small>STATUS</small><strong>Approved</strong></div>
@@ -29,7 +29,7 @@ export default function FeasibilityStudyDocument({ basePath }: { basePath: strin
         <div><small>INPUT</small><strong>Vision 1.0 + Canvas 1.0</strong></div>
       </section>
 
-      <BusinessDocumentReaderGuide code="BUS-04" />
+      <BusinessDocumentDeepDive code="BUS-04" />
 
       <section>
         <span>01 · EXECUTIVE VERDICT</span>

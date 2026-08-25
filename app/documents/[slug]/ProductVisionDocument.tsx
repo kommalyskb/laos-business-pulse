@@ -1,5 +1,5 @@
 import styles from "../documents.module.css";
-import BusinessDocumentReaderGuide from "./BusinessDocumentReaderGuide";
+import BusinessDocumentDeepDive from "./BusinessDocumentDeepDive";
 
 const principles = [
   ["Video-first", "ວິດີໂອແນວຕັ້ງເຕັມຈໍເປັນຈຸດເລີ່ມຕົ້ນ ເພາະຜູ້ໃຊ້ຕັດສິນຄວາມສົນໃຈຈາກພາບກ່ອນ."],
@@ -33,7 +33,7 @@ const nonGoals = [
 
 export default function ProductVisionDocument({ basePath }: { basePath: string }) {
   return (
-    <article className={`${styles.detailBody} ${styles.visionBody}`}>
+    <article className={`${styles.detailBody} ${styles.visionBody} ${styles.businessDocument}`}>
       <section className={styles.documentControl}>
         <div><small>VERSION</small><strong>1.0</strong></div>
         <div><small>STATUS</small><strong>Approved</strong></div>
@@ -41,7 +41,7 @@ export default function ProductVisionDocument({ basePath }: { basePath: string }
         <div><small>DECISION OWNER</small><strong>Founder / Product</strong></div>
       </section>
 
-      <BusinessDocumentReaderGuide code="BUS-01" />
+      <BusinessDocumentDeepDive code="BUS-01" />
 
       <section>
         <span>01 · VISION STATEMENT</span>

@@ -1,5 +1,5 @@
 import styles from "../documents.module.css";
-import BusinessDocumentReaderGuide from "./BusinessDocumentReaderGuide";
+import BusinessDocumentDeepDive from "./BusinessDocumentDeepDive";
 
 const alternatives = [
   ["TikTok / Facebook / YouTube", "ວິດີໂອຫຼາຍ, ເຂົ້າເຖິງງ່າຍ ແລະມີ Creator ຢູ່ແລ້ວ", "ຂໍ້ມູນກະແຈກກະຈາຍ, ຄົ້ນຫາຊ້ຳຍາກ ແລະຂາດຂໍ້ມູນຮ້ານທີ່ເປັນມາດຕະຖານ", "ໃຊ້ເປັນ Source ແລະສົ່ງ Traffic ກັບຄືນ; ບໍ່ແຂ່ງຂັນດ້ານ Creator feed"],
@@ -19,7 +19,7 @@ const risks = [
 
 export default function MarketCompetitorDocument({ basePath }: { basePath: string }) {
   return (
-    <article className={`${styles.detailBody} ${styles.marketBody}`}>
+    <article className={`${styles.detailBody} ${styles.marketBody} ${styles.businessDocument}`}>
       <section className={styles.documentControl}>
         <div><small>ສະບັບ</small><strong>0.1</strong></div>
         <div><small>ສະຖານະ</small><strong>ຮ່າງສຳລັບທົບທວນ</strong></div>
@@ -27,7 +27,7 @@ export default function MarketCompetitorDocument({ basePath }: { basePath: strin
         <div><small>ຂໍ້ມູນຕົ້ນທາງ</small><strong>Vision 1.0 + Founder observations</strong></div>
       </section>
 
-      <BusinessDocumentReaderGuide code="BUS-02" />
+      <BusinessDocumentDeepDive code="BUS-02" />
 
       <section>
         <span>01 · ຂໍ້ສະຫຼຸບ</span>

@@ -1,5 +1,5 @@
 import styles from "../documents.module.css";
-import BusinessDocumentReaderGuide from "./BusinessDocumentReaderGuide";
+import BusinessDocumentDeepDive from "./BusinessDocumentDeepDive";
 
 const assumptions = [
   ["Demand", "ຜູ້ໃຊ້ຈະເລືອກ feed ທີ່ຈັດຕາມ place/category ແທນການຄົ້ນຊ້ຳໃນຫຼາຍ social app.", "Prototype + concierge MVP", "Video → Place Page"],
@@ -11,7 +11,7 @@ const assumptions = [
 
 export default function BusinessCanvasDocument({ basePath }: { basePath: string }) {
   return (
-    <article className={`${styles.detailBody} ${styles.canvasBody}`}>
+    <article className={`${styles.detailBody} ${styles.canvasBody} ${styles.businessDocument}`}>
       <section className={styles.documentControl}>
         <div><small>VERSION</small><strong>1.0</strong></div>
         <div><small>STATUS</small><strong>Approved</strong></div>
@@ -19,7 +19,7 @@ export default function BusinessCanvasDocument({ basePath }: { basePath: string 
         <div><small>INPUT</small><strong>Product Vision 1.0</strong></div>
       </section>
 
-      <BusinessDocumentReaderGuide code="BUS-03" />
+      <BusinessDocumentDeepDive code="BUS-03" />
 
       <section>
         <span>01 · BUSINESS MODEL STATEMENT</span>

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import styles from "../documents.module.css";
-import BusinessDocumentReaderGuide from "./BusinessDocumentReaderGuide";
+import BusinessDocumentDeepDive from "./BusinessDocumentDeepDive";
 
 const LAK = new Intl.NumberFormat("lo-LA", { maximumFractionDigits: 0 });
 const formatLak = (value: number) => `${LAK.format(Math.max(0, Math.round(value)))} ₭`;
@@ -60,7 +60,7 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
   }, [cashCeiling, monthlyFounderLiving, pilotOperatingBudget, monthlyFixed, monthlyVariable, partners, subscription, campaigns, campaignPrice]);
 
   return (
-    <article className={`${styles.detailBody} ${styles.financialBody}`}>
+    <article className={`${styles.detailBody} ${styles.financialBody} ${styles.businessDocument}`}>
       <section className={styles.documentControl}>
         <div><small>ສະບັບ</small><strong>1.0</strong></div>
         <div><small>ສະຖານະ</small><strong>ອະນຸມັດແລ້ວ</strong></div>
@@ -68,7 +68,7 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>ການສຶກສາຄວາມເປັນໄປໄດ້ 1.0</strong></div>
       </section>
 
-      <BusinessDocumentReaderGuide code="BUS-05" />
+      <BusinessDocumentDeepDive code="BUS-05" />
 
       <section>
         <span>01 · ຈຸດຢືນດ້ານການເງິນ</span>
