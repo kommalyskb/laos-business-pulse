@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import styles from "../documents.module.css";
+import ProductRequirementsDeepDive from "./ProductRequirementsDeepDive";
 
 const journeyAreas = [
   {
@@ -70,13 +71,15 @@ export default function ProductRequirementsDocument({ basePath }: { basePath: st
   const journey = journeyAreas.find((item) => item.id === activeJourney) ?? journeyAreas[0];
 
   return (
-    <article className={`${styles.detailBody} ${styles.prdBody}`}>
+    <article className={`${styles.detailBody} ${styles.prdBody} ${styles.businessDocument}`}>
       <section className={styles.documentControl}>
         <div><small>ສະບັບ</small><strong>1.0</strong></div>
         <div><small>ສະຖານະ</small><strong>ອະນຸມັດແລ້ວ</strong></div>
-        <div><small>ວັນທີປັບປຸງ</small><strong>25 ສິງຫາ 2026</strong></div>
+        <div><small>ວັນທີປັບປຸງ</small><strong>26 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>Vision 1.0 + Feasibility 1.0 + Revenue & KPI 1.0</strong></div>
       </section>
+
+      <ProductRequirementsDeepDive />
 
       <section>
         <span>01 · ຈຸດປະສົງ</span>
