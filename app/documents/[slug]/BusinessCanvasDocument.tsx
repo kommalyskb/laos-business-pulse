@@ -12,8 +12,8 @@ export default function BusinessCanvasDocument({ basePath }: { basePath: string 
   return (
     <article className={`${styles.detailBody} ${styles.canvasBody}`}>
       <section className={styles.documentControl}>
-        <div><small>VERSION</small><strong>0.1</strong></div>
-        <div><small>STATUS</small><strong>Draft for review</strong></div>
+        <div><small>VERSION</small><strong>1.0</strong></div>
+        <div><small>STATUS</small><strong>Approved</strong></div>
         <div><small>UPDATED</small><strong>25 ສິງຫາ 2026</strong></div>
         <div><small>INPUT</small><strong>Product Vision 1.0</strong></div>
       </section>
@@ -63,7 +63,7 @@ export default function BusinessCanvasDocument({ basePath }: { basePath: string 
           <article><b>02 · GROWTH</b><h3>Recurring revenue</h3><ul><li>Pro Business profile</li><li>Traffic/contact analytics</li><li>Creator campaign marketplace</li></ul><p>Gate: map/call/message ແລະ repeat usage ວັດໄດ້.</p></article>
           <article><b>03 · SCALE</b><h3>Transaction revenue</h3><ul><li>Affiliate</li><li>Sponsored collections</li><li>Booking ສະເພາະຈຸດ</li></ul><p>Gate: transaction intent ເກີດຊ້ຳແລະມີ partner ຮອງຮັບ.</p></article>
         </div>
-        <aside className={styles.priceHypothesis}><b>PRICING HYPOTHESIS — NOT APPROVED</b><p>Pro/Founding Partner: 200,000 ₭ ຕໍ່ເດືອນ · Sponsored campaign: 1,000,000 ₭ ຕໍ່ campaign. ຕົວເລກນີ້ໃຊ້ສຳລັບທົດສອບ ແລະຕ້ອງຜ່ານ customer interview, pre-sell ແລະ Financial Structure.</p></aside>
+        <aside className={styles.priceHypothesis}><b>APPROVED VALIDATION HYPOTHESIS — PRICE NOT FINAL</b><p>Pro/Founding Partner: 200,000 ₭ ຕໍ່ເດືອນ · Sponsored campaign: 1,000,000 ₭ ຕໍ່ campaign. ຕົວເລກນີ້ຖືກອະນຸມັດໃຫ້ໃຊ້ທົດສອບ; ລາຄາຂາຍຈິງຈະຕ້ອງຜ່ານ customer interview, pre-sell ແລະ Financial Structure.</p></aside>
       </section>
 
       <section>
@@ -120,20 +120,20 @@ export default function BusinessCanvasDocument({ basePath }: { basePath: string 
       </section>
 
       <section>
-        <span>10 · OPEN DECISIONS</span>
-        <h2>ສິ່ງທີ່ຕ້ອງຢືນຢັນ</h2>
+        <span>10 · APPROVED VALIDATION RULES</span>
+        <h2>ກົດສຳລັບທົດສອບຮູບແບບທຸລະກິດ</h2>
         <ol className={styles.openQuestions}>
-          <li><b>01</b><p>Founding Partner package ຄວນໃຫ້ benefit ຫຍັງແດ່ ໂດຍບໍ່ທຳລາຍຄວາມໜ້າເຊື່ອຖື?</p></li>
-          <li><b>02</b><p>ລາຄາ 200,000 ₭/ເດືອນ ແລະ 1,000,000 ₭/campaign ເໝາະສົມສຳລັບການທົດສອບຫຼືບໍ່?</p></li>
-          <li><b>03</b><p>Sponsored placement ຈະມີຂອບເຂດ, label ແລະ ranking rule ແນວໃດ?</p></li>
-          <li><b>04</b><p>ເປົ້າໝາຍ pre-sell ກ່ອນ launch ຄວນເປັນຈັກຮ້ານ?</p></li>
-          <li><b>05</b><p>ຄ່າໃຊ້ຈ່າຍຕໍ່ເດືອນສູງສຸດທີ່ founder ຮັບໄດ້ໃນຊ່ວງ pilot ແມ່ນເທົ່າໃດ?</p></li>
+          <li><b>01</b><p>Founding Partner ໄດ້ verified profile, ສິດອັບເດດຂໍ້ມູນ, performance summary ແລະປ້າຍ partner—ແຕ່ບໍ່ຊື້ຄະແນນຣີວິວ.</p></li>
+          <li><b>02</b><p>ໃຊ້ 200,000 ₭/ເດືອນ ແລະ 1,000,000 ₭/campaign ເປັນລາຄາທົດສອບ ບໍ່ແມ່ນລາຄາຂາຍສຸດທ້າຍ.</p></li>
+          <li><b>03</b><p>Sponsored placement ຕ້ອງມີປ້າຍຊັດເຈນ, ຈຳກັດຈຳນວນ ແລະບໍ່ປ່ຽນຄະແນນຣີວິວ ຫຼືປິດບັງ organic result.</p></li>
+          <li><b>04</b><p>ຕັ້ງເປົ້າ pre-sell 5–10 Founding Partners ກ່ອນຕັດສິນໃຈຂະຫຍາຍ.</p></li>
+          <li><b>05</b><p>ເພດານລາຍຈ່າຍ pilot, runway ແລະ break-even ຈະກຳນົດໃນ Financial Structure ກ່ອນເລີ່ມພັດທະນາ.</p></li>
         </ol>
       </section>
 
       <aside className={styles.approvalGate}>
-        <div><span>REVIEW GATE</span><h2>Business Model Canvas 0.1</h2></div>
-        <ul><li>Customer versus paying customer</li><li>Free versus paid boundary</li><li>Revenue sequence</li><li>Pricing hypotheses</li><li>Open decisions 5 ຂໍ້</li></ul>
+        <div><span>APPROVAL RECORDED</span><h2>Business Model Canvas 1.0</h2></div>
+        <ul><li>Customer versus paying customer — Approved</li><li>Free versus paid boundary — Approved</li><li>Revenue sequence — Approved</li><li>Pricing validation hypothesis — Approved</li><li>Validation rules — Approved</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
@@ -143,4 +143,3 @@ export default function BusinessCanvasDocument({ basePath }: { basePath: string 
     </article>
   );
 }
-
