@@ -72,8 +72,8 @@ export default function ProductRequirementsDocument({ basePath }: { basePath: st
   return (
     <article className={`${styles.detailBody} ${styles.prdBody}`}>
       <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>0.1</strong></div>
-        <div><small>ສະຖານະ</small><strong>ຮ່າງສຳລັບທົບທວນ</strong></div>
+        <div><small>ສະບັບ</small><strong>1.0</strong></div>
+        <div><small>ສະຖານະ</small><strong>ອະນຸມັດແລ້ວ</strong></div>
         <div><small>ວັນທີປັບປຸງ</small><strong>25 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>Vision 1.0 + Feasibility 1.0 + Revenue & KPI 1.0</strong></div>
       </section>
@@ -195,20 +195,20 @@ export default function ProductRequirementsDocument({ basePath }: { basePath: st
       </section>
 
       <section>
-        <span>13 · ຈຸດທີ່ຕ້ອງທົບທວນ</span>
-        <h2>5 ຂໍ້ກ່ອນອະນຸມັດ PRD 1.0</h2>
+        <span>13 · ຄຳຕັດສິນທີ່ອະນຸມັດ</span>
+        <h2>5 ຂໍ້ກຳນົດສຳລັບ PRD 1.0</h2>
         <ol className={styles.openQuestions}>
-          <li><b>01</b><p>ຖ້າ Official Embed ໃຊ້ບໍ່ໄດ້ ຄວນສະແດງ Preview + Link ໄປຫາ Source ຫຼືບໍ່ສະແດງ Content ນັ້ນ?</p></li>
-          <li><b>02</b><p>Field ໃດແດ່ຕ້ອງຄົບກ່ອນອະນຸຍາດໃຫ້ Place Page ເຜີຍແຜ່?</p></li>
-          <li><b>03</b><p>Filter ສຳລັບ Launch ຄວນມີພຽງ Category, ເຂດ ແລະຊ່ວງລາຄາ ຫຼືຄວນເພີ່ມ Open now ແລະ Distance?</p></li>
-          <li><b>04</b><p>ໃນ Pilot ຮ້ານຄວນສົ່ງ Correction request ຜ່ານ Form ໃນເວັບ ຫຼືຜ່ານຊ່ອງທາງສື່ສານທີ່ມີຢູ່?</p></li>
-          <li><b>05</b><p>ການເກັບ Anonymous Analytics ໂດຍບໍ່ມີ Account ຄວນແຈ້ງ ແລະຂໍ Consent ຈາກຜູ້ໃຊ້ແນວໃດ?</p></li>
+          <li><b>01 · CONTENT FALLBACK</b><p>ຖ້າ Official Embed ໃຊ້ບໍ່ໄດ້ ໃຫ້ສະແດງ Preview, ຊື່ Creator, Source ແລະ Link ໄປຫາຕົ້ນສະບັບ. ຖ້ານຳຮູບປົກມາໃຊ້ບໍ່ໄດ້ ໃຫ້ໃຊ້ຮູບສຳຮອງ; ຫ້າມສຳເນົາວິດີໂອມາເກັບໂດຍບໍ່ມີສິດ.</p></li>
+          <li><b>02 · REQUIRED PLACE DATA</b><p>ກ່ອນເຜີຍແຜ່ຕ້ອງມີຊື່, ໝວດ, ເຂດ, ຕຳແໜ່ງແຜນທີ່, ຊ່ອງທາງຕິດຕໍ່ຢ່າງໜ້ອຍໜຶ່ງຊ່ອງທາງ, Source link, ວັນທີກວດ ແລະການອະນຸມັດຈາກ Admin. ເວລາເປີດ–ປິດ ແລະຊ່ວງລາຄາທີ່ຍັງກວດບໍ່ໄດ້ ຕ້ອງສະແດງວ່າ “ຍັງບໍ່ຢືນຢັນ”.</p></li>
+          <li><b>03 · LAUNCH FILTERS</b><p>MVP ໃຊ້ Filter ພຽງໝວດ, ເຂດ ແລະຊ່ວງລາຄາ. “ເປີດຢູ່ຕອນນີ້” ແລະ “ຮ້ານໃກ້ຂ້ອຍ” ເພີ່ມພາຍຫຼັງເມື່ອຂໍ້ມູນເວລາ ແລະຕຳແໜ່ງມີຄວາມໜ້າເຊື່ອຖື.</p></li>
+          <li><b>04 · CORRECTION REQUEST</b><p>ໃນ Pilot ໃຫ້ປຸ່ມ “ແຈ້ງແກ້ໄຂຂໍ້ມູນ” ພາໄປຫາຊ່ອງທາງສື່ສານທີ່ໂຄງການໃຊ້ຢູ່ ພ້ອມຂໍ້ຄວາມມາດຕະຖານ; Admin ບັນທຶກ, ກວດຫຼັກຖານ ແລະອະນຸມັດແບບ Manual.</p></li>
+          <li><b>05 · ANALYTICS CONSENT</b><p>ໃນການເຂົ້າໃຊ້ຄັ້ງທຳອິດ ໃຫ້ແຈ້ງການເກັບ Anonymous Product Analytics ແລະໃຫ້ເລືອກ “ຍອມຮັບ” ຫຼື “ໃຊ້ສະເພາະຟັງຊັນຈຳເປັນ”. ການປະຕິເສດຕ້ອງບໍ່ຂັດຂວາງການໃຊ້ງານຫຼັກ ແລະຕ້ອງມີ Privacy Notice ອະທິບາຍຊັດເຈນ.</p></li>
         </ol>
       </section>
 
       <aside className={styles.approvalGate}>
-        <div><span>ລໍຖ້າການທົບທວນ</span><h2>Product Requirements 0.1</h2></div>
-        <ul><li>Product journey — ລໍຖ້າຢືນຢັນ</li><li>MVP feature scope — ລໍຖ້າຢືນຢັນ</li><li>Core acceptance — ລໍຖ້າຢືນຢັນ</li><li>Required place fields — ລໍຖ້າຄຳຕັດສິນ</li><li>Content fallback, Filter, Correction ແລະ Analytics consent — ລໍຖ້າຄຳຕັດສິນ</li></ul>
+        <div><span>ອະນຸມັດແລ້ວ</span><h2>Product Requirements 1.0</h2></div>
+        <ul><li>Product journey — ຢືນຢັນແລ້ວ</li><li>MVP feature scope — ຢືນຢັນແລ້ວ</li><li>Core acceptance — ຢືນຢັນແລ້ວ</li><li>Required place fields — ກຳນົດແລ້ວ</li><li>Content fallback, Filter, Correction ແລະ Analytics consent — ກຳນົດແລ້ວ</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
