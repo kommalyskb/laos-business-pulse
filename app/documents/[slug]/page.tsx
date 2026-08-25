@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { categories, documents, getDocument } from "../documentData";
 import styles from "../documents.module.css";
 import BusinessCanvasDocument from "./BusinessCanvasDocument";
+import FeasibilityStudyDocument from "./FeasibilityStudyDocument";
 import ProductVisionDocument from "./ProductVisionDocument";
 
 export function generateStaticParams() {
@@ -72,7 +73,9 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
           ? <ProductVisionDocument basePath={basePath} />
           : document.slug === "business-canvas"
             ? <BusinessCanvasDocument basePath={basePath} />
-            : <article className={styles.detailBody}>
+            : document.slug === "feasibility-study"
+              ? <FeasibilityStudyDocument basePath={basePath} />
+              : <article className={styles.detailBody}>
           <section>
             <span>01 · PURPOSE</span>
             <h2>ຈຸດປະສົງ</h2>

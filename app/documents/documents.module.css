@@ -242,8 +242,73 @@
 .canvasDecisions li { min-height:150px; padding:23px; background:#fbf9f3; }
 .canvasDecisions b { color:#17644f; font-size:9px; }
 .canvasDecisions p { margin:38px 0 0; font-size:15px; font-weight:800; line-height:1.65; }
+.feasibilityBody { max-width:1240px; }
+.feasibilityVerdict { display:grid; grid-template-columns:.7fr 1.3fr; gap:45px; padding:38px; color:white; background:linear-gradient(135deg,var(--navy),#17413f); border-top:7px solid var(--aqua); }
+.feasibilityVerdict>div { display:flex; flex-direction:column; }
+.feasibilityVerdict small { color:var(--aqua); font-size:8px; font-weight:900; letter-spacing:.13em; }
+.feasibilityVerdict strong { margin:42px 0 8px; color:var(--orange); font-size:clamp(30px,4vw,52px); letter-spacing:-.04em; }
+.feasibilityVerdict b { font-size:13px; }
+.feasibilityVerdict p { margin:0; color:rgba(255,255,255,.72); font-size:17px; line-height:1.85; }
+.feasibilityVerdict p strong { margin:0; color:white; font-size:inherit; letter-spacing:0; }
+.feasibilityInputs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; padding:1px; background:var(--line); }
+.feasibilityInputs>div { min-height:310px; padding:25px; background:#fbf9f3; }
+.feasibilityInputs>div:nth-child(2) { background:#dff2df; }
+.feasibilityInputs>div:last-child { background:#f0ddd4; }
+.feasibilityInputs b { color:var(--orange); font-size:8px; letter-spacing:.12em; }
+.feasibilityInputs ul { margin:55px 0 0; padding-left:18px; }
+.feasibilityInputs li { padding:6px 0; line-height:1.55; }
+.feasibilityScorecard { border-top:1px solid var(--navy); }
+.feasibilityScorecard>div { min-height:105px; padding:17px 14px; display:grid; grid-template-columns:35px .7fr 2.3fr .6fr .8fr; gap:18px; align-items:center; border-bottom:1px solid var(--line); }
+.feasibilityScorecard>div:first-child { min-height:0; color:white; background:var(--navy); font-size:8px; letter-spacing:.09em; }
+.feasibilityScorecard>div>b:first-child { color:var(--orange); font-size:9px; }
+.feasibilityScorecard p { margin:0; color:#5d6763; line-height:1.6; }
+.feasibilityScorecard p em { display:block; margin-bottom:5px; color:var(--navy); font-size:12px; font-style:normal; font-weight:900; }
+.feasibilityScorecard span { padding:7px 8px; color:#773713; background:#ffd9c6; font-size:8px; font-weight:900; text-align:center; }
+.feasibilityScorecard small { color:#17644f; font-size:10px; font-weight:800; line-height:1.5; }
+.feasibilityGrid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; padding:1px; background:var(--line); }
+.feasibilityGrid article { min-height:330px; padding:25px; background:#fbf9f3; }
+.feasibilityGrid article:nth-child(2) { background:#e7e1d4; }
+.feasibilityGrid article:last-child { color:white; background:var(--navy); }
+.feasibilityGrid b { color:var(--orange); font-size:8px; letter-spacing:.12em; }
+.feasibilityGrid h3 { margin:52px 0 9px; font-size:12px; }
+.feasibilityGrid p { margin:0; color:#66706c; line-height:1.7; }
+.feasibilityGrid article:last-child p { color:rgba(255,255,255,.65); }
+.feasibilityTable { border-top:1px solid var(--navy); }
+.feasibilityTable>div { min-height:95px; padding:16px 14px; display:grid; grid-template-columns:.8fr 1.7fr 1.25fr 1.25fr; gap:20px; align-items:center; border-bottom:1px solid var(--line); }
+.feasibilityTable>div:first-child { min-height:0; color:white; background:var(--navy); font-size:8px; letter-spacing:.08em; }
+.feasibilityTable p { margin:0; line-height:1.65; }
+.feasibilityTable span { color:#5f6965; font-size:11px; line-height:1.55; }
+.feasibilityTable em { color:#8a3f20; font-size:11px; font-style:normal; line-height:1.55; }
+.financialLogic { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; padding:1px; background:var(--line); }
+.financialLogic article { min-height:245px; padding:25px; display:flex; flex-direction:column; background:#fbf9f3; }
+.financialLogic article:nth-child(2) { background:#dff2df; }
+.financialLogic article:last-child { color:white; background:var(--navy); }
+.financialLogic b { color:var(--orange); font-size:8px; letter-spacing:.12em; }
+.financialLogic strong { margin:auto 0 12px; font-size:clamp(25px,3vw,38px); }
+.financialLogic p { margin:0; color:#65706b; line-height:1.65; }
+.financialLogic article:last-child p { color:rgba(255,255,255,.65); }
+.formulaBlock { margin-top:18px; padding:26px 28px; background:#e7e1d4; border-left:5px solid var(--aqua); }
+.formulaBlock b { color:#17644f; font-size:8px; letter-spacing:.12em; }
+.formulaBlock p { margin:14px 0 0; font:700 12px/1.65 ui-monospace,monospace; }
+.pilotTimeline { margin:0; padding:0; list-style:none; border-top:1px solid var(--navy); }
+.pilotTimeline li { min-height:100px; padding:18px 0; display:grid; grid-template-columns:80px 1fr; gap:22px; align-items:center; border-bottom:1px solid var(--line); }
+.pilotTimeline li>b { color:var(--orange); font-size:12px; }
+.pilotTimeline strong { font-size:18px; }
+.pilotTimeline p { margin:8px 0 0; color:#64706a; line-height:1.65; }
+.gateTable { border-top:1px solid var(--navy); }
+.gateTable>div { min-height:115px; padding:16px 14px; display:grid; grid-template-columns:.7fr 1.3fr 1.3fr 1.3fr; gap:18px; align-items:center; border-bottom:1px solid var(--line); }
+.gateTable>div:first-child { min-height:0; color:white; background:var(--navy); font-size:8px; letter-spacing:.1em; }
+.gateTable p,.gateTable span,.gateTable em { margin:0; padding:10px; font-size:11px; line-height:1.6; font-style:normal; }
+.gateTable p { color:#155c49; background:#dff2df; }
+.gateTable span { color:#6f4d17; background:#f3e8bf; }
+.gateTable em { color:#8a3f20; background:#f0ddd4; }
+.sourcePlan { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; padding:1px; background:var(--line); }
+.sourcePlan article { min-height:160px; padding:22px; background:#fbf9f3; }
+.sourcePlan article:nth-child(even) { background:#e7e1d4; }
+.sourcePlan b { color:var(--orange); font-size:8px; letter-spacing:.12em; }
+.sourcePlan p { margin:48px 0 0; color:#606b66; font-weight:800; line-height:1.6; }
 @media(max-width:1100px){.docGrid{grid-template-columns:repeat(2,minmax(0,1fr));}.directory{grid-template-columns:240px minmax(0,1fr);}}
 @media(max-width:780px){.topbar{grid-template-columns:1fr}.topbar nav{display:none}.hero{grid-template-columns:1fr;gap:36px;padding-top:64px}.directory,.detailLayout{grid-template-columns:1fr}.sidebar{position:static;min-height:0;padding:18px;display:flex;overflow-x:auto;gap:5px;border-right:0;border-bottom:1px solid var(--line)}.sidebar>span{display:none}.sidebar button{flex:0 0 155px;border:1px solid var(--line)}.content{padding:30px 18px 80px}.tools{grid-template-columns:1fr}.tools>b{display:none}.tools input{width:100%}.category>header,.detailTitle{grid-template-columns:1fr;gap:16px}.docGrid{grid-template-columns:1fr}.docCard{min-height:270px}.detailMeta{position:static;min-height:0;padding:28px 20px;display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.detailMeta>div{margin:0}.detailMeta>p{grid-column:1/-1;margin:10px 0 0}.detailBody{padding:55px 20px 80px}.doneGrid{grid-template-columns:1fr}.docPagination{grid-template-columns:1fr}.docPagination span{display:none}}
-@media(max-width:1000px){.canvasBoard{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"segments value" "channels relationships" "activities resources" "partners partners" "costs revenue"}.canvasCosts ul,.canvasRevenue ul{columns:1}.exchangeGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.canvasFlywheel{grid-template-columns:1fr}.canvasFlywheel>i{text-align:center;transform:rotate(90deg)}.assumptionTable>div{grid-template-columns:.55fr 1.8fr 1fr}.assumptionTable>div>:last-child{grid-column:2/-1}}
-@media(max-width:900px){.userGroups,.revenuePath,.signalGrid,.canvasRevenueLadder,.canvasMetrics{grid-template-columns:1fr}.valueFlow{grid-template-columns:1fr}.valueFlow>i{text-align:center;transform:rotate(90deg)}.riskList li{grid-template-columns:75px 1fr}.riskList span{grid-column:2}.documentControl{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.problemCards,.scopeColumns,.openQuestions,.approvalGate,.exchangeGrid,.costColumns,.canvasDecisions{grid-template-columns:1fr}.canvasBoard{display:block;padding:1px}.canvasBoard article{margin-bottom:1px}.canvasStatement{padding:28px 22px}.assumptionTable>div,.assumptionTable>div:first-child{grid-template-columns:1fr;gap:8px}.assumptionTable>div:first-child{display:none}.assumptionTable>div>:last-child{grid-column:auto}.comparison>div{grid-template-columns:1fr;gap:7px}.comparison>div:first-child{display:none}.documentControl{grid-template-columns:1fr}.visionStatement{padding:28px 22px}.approvalGate h2{margin-top:25px}.signalGrid>div{min-height:110px}}
+@media(max-width:1000px){.canvasBoard{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"segments value" "channels relationships" "activities resources" "partners partners" "costs revenue"}.canvasCosts ul,.canvasRevenue ul{columns:1}.exchangeGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.canvasFlywheel{grid-template-columns:1fr}.canvasFlywheel>i{text-align:center;transform:rotate(90deg)}.assumptionTable>div{grid-template-columns:.55fr 1.8fr 1fr}.assumptionTable>div>:last-child{grid-column:2/-1}.feasibilityScorecard>div{grid-template-columns:35px .7fr 2fr .7fr}.feasibilityScorecard>div>:last-child{grid-column:3/-1}.feasibilityTable>div,.gateTable>div{grid-template-columns:.7fr 1.5fr 1fr}.feasibilityTable>div>:last-child,.gateTable>div>:last-child{grid-column:2/-1}}
+@media(max-width:900px){.userGroups,.revenuePath,.signalGrid,.canvasRevenueLadder,.canvasMetrics,.feasibilityInputs,.feasibilityGrid,.financialLogic,.sourcePlan{grid-template-columns:1fr}.valueFlow{grid-template-columns:1fr}.valueFlow>i{text-align:center;transform:rotate(90deg)}.riskList li{grid-template-columns:75px 1fr}.riskList span{grid-column:2}.documentControl{grid-template-columns:repeat(2,1fr)}.feasibilityVerdict{grid-template-columns:1fr}.feasibilityVerdict strong{margin-top:25px}}
+@media(max-width:600px){.problemCards,.scopeColumns,.openQuestions,.approvalGate,.exchangeGrid,.costColumns,.canvasDecisions{grid-template-columns:1fr}.canvasBoard{display:block;padding:1px}.canvasBoard article{margin-bottom:1px}.canvasStatement{padding:28px 22px}.assumptionTable>div,.assumptionTable>div:first-child,.feasibilityScorecard>div,.feasibilityScorecard>div:first-child,.feasibilityTable>div,.feasibilityTable>div:first-child,.gateTable>div,.gateTable>div:first-child{grid-template-columns:1fr;gap:8px}.assumptionTable>div:first-child,.feasibilityScorecard>div:first-child,.feasibilityTable>div:first-child,.gateTable>div:first-child{display:none}.assumptionTable>div>:last-child,.feasibilityScorecard>div>:last-child,.feasibilityTable>div>:last-child,.gateTable>div>:last-child{grid-column:auto}.feasibilityVerdict{padding:28px 22px}.pilotTimeline li{grid-template-columns:55px 1fr}.comparison>div{grid-template-columns:1fr;gap:7px}.comparison>div:first-child{display:none}.documentControl{grid-template-columns:1fr}.visionStatement{padding:28px 22px}.approvalGate h2{margin-top:25px}.signalGrid>div{min-height:110px}}
