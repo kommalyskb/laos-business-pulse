@@ -4,6 +4,12 @@ import { useMemo, useState } from "react";
 import { categories, documents } from "./documentData";
 import styles from "./documents.module.css";
 
+const statusView = {
+  draft: { label: "ຮ່າງສຳລັບທົບທວນ", className: styles.draft },
+  next: { label: "ລຳດັບຕໍ່ໄປ", className: styles.next },
+  planned: { label: "ວາງແຜນ", className: styles.planned },
+};
+
 export default function DocumentDirectory() {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
@@ -70,7 +76,7 @@ export default function DocumentDirectory() {
                 <div className={styles.docGrid}>
                   {categoryDocuments.map((document) => (
                     <a href={`${basePath}/documents/${document.slug}`} className={styles.docCard} key={document.slug}>
-                      <div><code>{document.code}</code><span className={document.status === "next" ? styles.next : styles.planned}>{document.status === "next" ? "ລຳດັບຕໍ່ໄປ" : "ວາງແຜນ"}</span></div>
+                      <div><code>{document.code}</code><span className={statusView[document.status].className}>{statusView[document.status].label}</span></div>
                       <h3>{document.title}</h3>
                       <small>{document.english}</small>
                       <p>{document.summary}</p>
@@ -88,4 +94,3 @@ export default function DocumentDirectory() {
     </main>
   );
 }
-

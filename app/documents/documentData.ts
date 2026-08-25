@@ -1,4 +1,4 @@
-export type DocumentStatus = "next" | "planned";
+export type DocumentStatus = "draft" | "next" | "planned";
 
 export type ProjectDocument = {
   slug: string;
@@ -21,7 +21,7 @@ export const categories = [
 ] as const;
 
 export const documents: ProjectDocument[] = [
-  { slug: "product-vision", code: "BUS-01", title: "ວິໄສທັດຜະລິດຕະພັນ", english: "Product Vision", category: "business", summary: "ກຳນົດບັນຫາ, ກຸ່ມເປົ້າໝາຍ, ຄຸນຄ່າຫຼັກ ແລະຂອບເຂດທີ່ platform ຈະບໍ່ເຮັດ.", status: "next", sections: ["Problem & target user", "Value proposition", "Product principles", "In scope / out of scope"] },
+  { slug: "product-vision", code: "BUS-01", title: "ວິໄສທັດຜະລິດຕະພັນ", english: "Product Vision", category: "business", summary: "ກຳນົດບັນຫາ, ກຸ່ມເປົ້າໝາຍ, ຄຸນຄ່າຫຼັກ ແລະຂອບເຂດທີ່ platform ຈະບໍ່ເຮັດ.", status: "draft", sections: ["Problem & target user", "Value proposition", "Product principles", "In scope / out of scope"] },
   { slug: "market-competitor", code: "BUS-02", title: "ຕະຫຼາດ ແລະ ຄູ່ແຂ່ງ", english: "Market & Competitor Analysis", category: "business", summary: "ວິເຄາະພຶດຕິກຳຜູ້ໃຊ້, ທາງເລືອກເດີມ ແລະຊ່ອງວ່າງຂອງຕະຫຼາດລາວ.", status: "planned", sections: ["User behavior", "Direct and indirect competitors", "Market gap", "Risks and assumptions"] },
   { slug: "business-canvas", code: "BUS-03", title: "ແຜນພາບທຸລະກິດ", english: "Business Model Canvas", category: "business", summary: "ສະຫຼຸບ customer segment, value, channel, partner, cost ແລະ revenue ໄວ້ໃນໜ້າດຽວ.", status: "next", sections: ["Customer segments", "Value and channels", "Key activities and partners", "Cost and revenue"] },
   { slug: "feasibility-study", code: "BUS-04", title: "ການສຶກສາຄວາມເປັນໄປໄດ້", english: "Feasibility Study", category: "business", summary: "ປະເມີນຄວາມເປັນໄປໄດ້ດ້ານຕະຫຼາດ, content, ເຕັກນິກ, ການເງິນ ແລະກົດໝາຍ.", status: "next", sections: ["Market feasibility", "Operational feasibility", "Technical feasibility", "Go / no-go criteria"] },
@@ -60,4 +60,3 @@ export const documents: ProjectDocument[] = [
 ];
 
 export const getDocument = (slug: string) => documents.find((document) => document.slug === slug);
-

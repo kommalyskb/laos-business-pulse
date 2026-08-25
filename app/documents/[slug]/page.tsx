@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { categories, documents, getDocument } from "../documentData";
 import styles from "../documents.module.css";
+import ProductVisionDocument from "./ProductVisionDocument";
 
 export function generateStaticParams() {
   return documents.map((document) => ({ slug: document.slug }));
@@ -30,6 +31,11 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
   const previous = categoryDocuments[currentIndex - 1];
   const next = categoryDocuments[currentIndex + 1];
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  const status = document.status === "draft"
+    ? { label: "ຮ່າງສຳລັບທົບທວນ", className: styles.statusDraft }
+    : document.status === "next"
+      ? { label: "ລຳດັບຕໍ່ໄປ", className: styles.statusNext }
+      : { label: "ວາງແຜນ", className: styles.statusPlanned };
 
   return (
     <main className={styles.site}>
@@ -52,14 +58,14 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
 
       <section className={styles.detailLayout}>
         <aside className={styles.detailMeta}>
-          <div><small>STATUS</small><strong className={document.status === "next" ? styles.statusNext : styles.statusPlanned}>{document.status === "next" ? "ລຳດັບຕໍ່ໄປ" : "ວາງແຜນ"}</strong></div>
+          <div><small>STATUS</small><strong className={status.className}>{status.label}</strong></div>
           <div><small>CATEGORY</small><strong>{category?.lao}</strong></div>
           <div><small>DOCUMENT ID</small><strong>{document.code}</strong></div>
           <div><small>FORMAT</small><strong>Living Web Document</strong></div>
           <p>ເອກະສານນີ້ຈະຖືກປັບປຸງຕາມການຕັດສິນໃຈ ແລະຫຼັກຖານໃໝ່ຂອງໂຄງການ.</p>
         </aside>
 
-        <article className={styles.detailBody}>
+        {document.slug === "product-vision" ? <ProductVisionDocument basePath={basePath} /> : <article className={styles.detailBody}>
           <section>
             <span>01 · PURPOSE</span>
             <h2>ຈຸດປະສົງ</h2>
@@ -94,7 +100,7 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
             {previous ? <a href={`${basePath}/documents/${previous.slug}`}><small>← PREVIOUS</small><strong>{previous.title}</strong></a> : <span />}
             {next ? <a href={`${basePath}/documents/${next.slug}`}><small>NEXT →</small><strong>{next.title}</strong></a> : <span />}
           </nav>
-        </article>
+        </article>}
       </section>
     </main>
   );
