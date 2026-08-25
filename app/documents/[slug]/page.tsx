@@ -9,6 +9,7 @@ import MarketCompetitorDocument from "./MarketCompetitorDocument";
 import ProductRequirementsDocument from "./ProductRequirementsDocument";
 import ProductVisionDocument from "./ProductVisionDocument";
 import RevenueKpiDocument from "./RevenueKpiDocument";
+import SystemAnalysisDocument from "./SystemAnalysisDocument";
 
 export function generateStaticParams() {
   return documents.map((document) => ({ slug: document.slug }));
@@ -87,6 +88,8 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
                   ? <RevenueKpiDocument basePath={basePath} />
                   : document.slug === "prd"
                     ? <ProductRequirementsDocument basePath={basePath} />
+                    : document.slug === "system-analysis"
+                      ? <SystemAnalysisDocument basePath={basePath} />
                 : <article className={styles.detailBody}>
           <section>
             <span>01 · PURPOSE</span>
