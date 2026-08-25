@@ -22,8 +22,8 @@ export default function FeasibilityStudyDocument({ basePath }: { basePath: strin
   return (
     <article className={`${styles.detailBody} ${styles.feasibilityBody}`}>
       <section className={styles.documentControl}>
-        <div><small>VERSION</small><strong>0.1</strong></div>
-        <div><small>STATUS</small><strong>Draft for review</strong></div>
+        <div><small>VERSION</small><strong>1.0</strong></div>
+        <div><small>STATUS</small><strong>Approved</strong></div>
         <div><small>UPDATED</small><strong>25 ສິງຫາ 2026</strong></div>
         <div><small>INPUT</small><strong>Vision 1.0 + Canvas 1.0</strong></div>
       </section>
@@ -32,7 +32,7 @@ export default function FeasibilityStudyDocument({ basePath }: { basePath: strin
         <span>01 · EXECUTIVE VERDICT</span>
         <h2>ຂໍ້ສະຫຼຸບເບື້ອງຕົ້ນ</h2>
         <div className={styles.feasibilityVerdict}>
-          <div><small>PRELIMINARY DECISION</small><strong>CONDITIONAL GO</strong><b>ໄປຕໍ່ແບບມີເງື່ອນໄຂ</b></div>
+          <div><small>APPROVED DECISION</small><strong>CONDITIONAL GO</strong><b>ໄປຕໍ່ແບບມີເງື່ອນໄຂ</b></div>
           <p>ແນະນຳໃຫ້ລົງທຶນໃນ <strong>validation pilot 6 ອາທິດ</strong> ເທົ່ານັ້ນ. ຫຼັກຖານປັດຈຸບັນພຽງພໍສຳລັບການທົດສອບ ແຕ່ຍັງບໍ່ພຽງພໍສຳລັບອະນຸມັດ full MVP development. ຈຸດສ່ຽງທີ່ສຸດແມ່ນ content operation, willingness-to-pay ແລະ monthly cost ceiling—ບໍ່ແມ່ນການຂຽນ software.</p>
         </div>
       </section>
@@ -108,7 +108,7 @@ export default function FeasibilityStudyDocument({ basePath }: { basePath: strin
         <span>08 · FINANCIAL FEASIBILITY</span>
         <h2>ພິສູດວ່າລາຍຮັບສາມາດຮອງຮັບ operation</h2>
         <div className={styles.financialLogic}>
-          <article><b>REVENUE TEST</b><strong>5–10</strong><p>Founding Partners ທີ່ມີ paid pilot, deposit ຫຼືຫຼັກຖານ commitment.</p></article>
+          <article><b>REVENUE TEST</b><strong>3 + 2</strong><p>ຢ່າງໜ້ອຍ 3 paid/deposit ແລະ 2 signed LOI; verbal interest ບໍ່ນັບ.</p></article>
           <article><b>PRICE HYPOTHESIS</b><strong>200K / 1M ₭</strong><p>ຕໍ່ເດືອນ / ຕໍ່ campaign ສຳລັບທົດສອບ; ບໍ່ແມ່ນລາຄາສຸດທ້າຍ.</p></article>
           <article><b>COST CONTROL</b><strong>STOP-LOSS</strong><p>Founder ຕ້ອງກຳນົດເພດານ pilot ແລະ monthly burn ໃນ Financial Structure.</p></article>
         </div>
@@ -119,30 +119,40 @@ export default function FeasibilityStudyDocument({ basePath }: { basePath: strin
         <span>09 · SIX-WEEK VALIDATION PLAN</span>
         <h2>ແຜນທົດສອບກ່ອນສ້າງ MVP</h2>
         <ol className={styles.pilotTimeline}>
-          <li><b>W1</b><div><strong>Problem interviews</strong><p>ສຳພາດຜູ້ໃຊ້ 15–20 ຄົນ ແລະ place owners 10 ຮ້ານ.</p></div></li>
-          <li><b>W2</b><div><strong>Supply sprint</strong><p>ສ້າງ 100 place records ແລະວັດຕົ້ນທຶນ/ເວລາຕໍ່ record.</p></div></li>
+          <li><b>W1</b><div><strong>Problem interviews</strong><p>ສຳພາດຜູ້ໃຊ້ 20 ຄົນທີ່ມີພຶດຕິກຳ social search ແລະ place owners 15 ຮ້ານ.</p></div></li>
+          <li><b>W2</b><div><strong>Supply sprint</strong><p>ສ້າງ place records ແບບ 30 → 60 → 100; ກວດ workflow ໃນແຕ່ລະ gate ກ່ອນໄປຕໍ່.</p></div></li>
           <li><b>W3</b><div><strong>Clickable prototype</strong><p>ທົດສອບ feed → search → place → map/call/message ກັບຜູ້ໃຊ້.</p></div></li>
           <li><b>W4</b><div><strong>Technical & policy spike</strong><p>ກວດ embed/link, mobile performance, analytics ແລະ content policy.</p></div></li>
-          <li><b>W5</b><div><strong>Pre-sell</strong><p>ນຳສະເໜີ Founding Partner package ແລະຂໍ commitment ທີ່ພິສູດໄດ້.</p></div></li>
+          <li><b>W5</b><div><strong>Pre-sell</strong><p>ສະເໜີ Founding Partner package ຫາ 30 ຮ້ານ; ເປົ້າໝາຍຢ່າງໜ້ອຍ 3 paid/deposit + 2 signed LOI.</p></div></li>
           <li><b>W6</b><div><strong>Decision review</strong><p>ລວບລວມ evidence, cost model ແລະຕັດສິນ GO / PIVOT / NO-GO.</p></div></li>
         </ol>
       </section>
 
       <section>
-        <span>10 · GO / NO-GO GATES</span>
+        <span>10 · PILOT CONTROL</span>
+        <h2>Owner, ງົບ ແລະສິດຢຸດ</h2>
+        <div className={styles.costColumns}>
+          <div><h3>ACCOUNTABLE OWNERS</h3><ul><li>Founder — decision, budget, place interview ແລະ pre-sell</li><li>Content/Research Operator — user interview, curation ແລະ verification</li><li>Technical Builder — prototype, technical spike ແລະ analytics</li><li>Legal adviser — policy checkpoint ກ່ອນ public launch</li></ul></div>
+          <div><h3>BUDGET RELEASE</h3><ul><li>30% — ອາທິດ 1–2</li><li>35% — ອາທິດ 3–4 ຫຼັງຜ່ານ supply gate</li><li>35% — ອາທິດ 5–6 ຫຼັງຜ່ານ user-value gate</li><li>ບໍ່ຜ່ານ gate = ຢຸດງົບ, ທົບທວນ ຫຼື pivot</li></ul></div>
+        </div>
+        <p className={styles.metricNote}>ຈຳນວນ cash ceiling ແລະ monthly stop-loss ຕ້ອງຖືກອະນຸມັດໃນ Financial Structure ກ່ອນປ່ອຍງົບງວດທຳອິດ.</p>
+      </section>
+
+      <section>
+        <span>11 · GO / NO-GO GATES</span>
         <h2>ເກນຕັດສິນທີ່ບໍ່ໃຊ້ຄວາມຮູ້ສຶກ</h2>
         <div className={styles.gateTable} role="table" aria-label="Go no-go criteria">
           <div role="row"><b>GATE</b><b>GO</b><b>PIVOT</b><b>NO-GO</b></div>
           <div role="row"><strong>User value</strong><p>ຜູ້ທົດສອບສ່ວນໃຫຍ່ຫາ place ແລະ action ໄດ້ໂດຍບໍ່ຊ່ວຍ.</p><span>ເຫັນຄຸນຄ່າ ແຕ່ flow/category ຍັງບໍ່ຖືກ.</span><em>ກັບໄປ social search ແລະບໍ່ຢາກໃຊ້ຊ້ຳ.</em></div>
           <div role="row"><strong>Supply</strong><p>100 records ມີຂໍ້ມູນຫຼັກຄົບ ແລະມີ workflow ຊ້ຳໄດ້.</p><span>ຫາ content ໄດ້ ແຕ່ຕ້ອງຫຼຸດ category/area.</span><em>ຂໍ້ມູນບໍ່ຄົບ, rights ບໍ່ຊັດ ຫຼືຕົ້ນທຶນຮັບບໍ່ໄດ້.</em></div>
-          <div role="row"><strong>Revenue</strong><p>5–10 partners ມີ paid/committed pilot.</p><span>ສົນໃຈແທ້ ແຕ່ package/price ຕ້ອງປັບ.</span><em>ບໍ່ມີ commitment ຫຼັງຈາກສະເໜີຄຸນຄ່າຊັດເຈນ.</em></div>
+          <div role="row"><strong>Revenue</strong><p>ຢ່າງໜ້ອຍ 3 paid/deposit + 2 signed LOI ຈາກ 30 ຮ້ານທີ່ເຂົ້າຫາ.</p><span>ມີ commitment ແຕ່ package/price ຕ້ອງປັບ.</span><em>ມີພຽງ verbal interest ຫຼືບໍ່ມີ commitment.</em></div>
           <div role="row"><strong>Economics</strong><p>Pilot ຢູ່ໃນ stop-loss ແລະມີທາງຫຼຸດ cost/place.</p><span>ຕ້ອງຫຼຸດ scope ຫຼືປ່ຽນ operation.</span><em>Cost ເຕີບຕາມ content/user ໂດຍບໍ່ມີທາງຮອງຮັບ.</em></div>
           <div role="row"><strong>Trust & rights</strong><p>Link/embed, attribution, takedown ແລະ sponsored policy ໃຊ້ງານໄດ້.</p><span>ຈຳກັດ source/platform ເພື່ອຫຼຸດຄວາມສ່ຽງ.</span><em>Model ຕ້ອງພຶ່ງການນຳ content ມາໃຊ້ໂດຍບໍ່ມີສິດ.</em></div>
         </div>
       </section>
 
       <section>
-        <span>11 · RISK REGISTER</span>
+        <span>12 · RISK REGISTER</span>
         <h2>ຄວາມສ່ຽງທີ່ຕ້ອງຈັດການກ່ອນ</h2>
         <ol className={styles.riskList}>
           {risks.map(([level, risk, mitigation]) => <li key={level}><b>{level}</b><p>{risk}</p><span>{mitigation}</span></li>)}
@@ -150,7 +160,7 @@ export default function FeasibilityStudyDocument({ basePath }: { basePath: strin
       </section>
 
       <section>
-        <span>12 · EVIDENCE REGISTER</span>
+        <span>13 · EVIDENCE REGISTER</span>
         <h2>ຂໍ້ມູນທີ່ຍັງຕ້ອງເກັບ</h2>
         <div className={styles.sourcePlan}>
           <article><b>USER</b><p>Interview note, task result, action click, repeat intent</p></article>
@@ -163,20 +173,20 @@ export default function FeasibilityStudyDocument({ basePath }: { basePath: strin
       </section>
 
       <section>
-        <span>13 · OPEN DECISIONS</span>
-        <h2>5 ຂໍ້ທີ່ຢາກໃຫ້ທ່ານທົບທວນ</h2>
+        <span>14 · APPROVED PILOT PARAMETERS</span>
+        <h2>ຂໍ້ກຳນົດທີ່ອະນຸມັດແລ້ວ</h2>
         <ol className={styles.openQuestions}>
-          <li><b>01</b><p>ເຫັນດີກັບຂໍ້ສະຫຼຸບ “Conditional Go” ສຳລັບ validation pilot 6 ອາທິດຫຼືບໍ່?</p></li>
-          <li><b>02</b><p>100 place records, user 15–20 ຄົນ ແລະ place owners 10 ຮ້ານ ເໝາະສົມກັບ pilot ຫຼືບໍ່?</p></li>
-          <li><b>03</b><p>Pre-sell gate 5–10 Founding Partners ຄວນໃຊ້ paid pilot, deposit ຫຼື letter of intent ແບບໃດ?</p></li>
-          <li><b>04</b><p>Monthly stop-loss ແລະງົບລວມສູງສຸດຂອງ pilot ທີ່ຍອມຮັບໄດ້ແມ່ນເທົ່າໃດ?</p></li>
-          <li><b>05</b><p>ໃຜຈະເປັນ owner ຂອງ user interview, content curation, place sales ແລະ technical spike?</p></li>
+          <li><b>01</b><p>Conditional Go ສຳລັບ validation pilot 6 ອາທິດ ມີ review gate ທ້າຍອາທິດ 2, 4 ແລະ 6.</p></li>
+          <li><b>02</b><p>Place records 30 → 60 → 100, user test 20 ຄົນ, owner interview 15 ຮ້ານ ແລະ sales outreach 30 ຮ້ານ.</p></li>
+          <li><b>03</b><p>Revenue gate ແມ່ນ 3 paid/deposit + 2 signed LOI; verbal interest ບໍ່ນັບເປັນຫຼັກຖານ.</p></li>
+          <li><b>04</b><p>ປ່ອຍງົບ 30%/35%/35% ຕາມ gate; cash ceiling ແລະ stop-loss ກຳນົດໃນ Financial Structure.</p></li>
+          <li><b>05</b><p>Founder ເປັນ decision/budget/sales owner; Content/Research Operator ແລະ Technical Builder ເປັນ execution owners.</p></li>
         </ol>
       </section>
 
       <aside className={styles.approvalGate}>
-        <div><span>REVIEW GATE</span><h2>Feasibility Study 0.1</h2></div>
-        <ul><li>Preliminary verdict</li><li>Six feasibility assessments</li><li>Six-week validation plan</li><li>GO / PIVOT / NO-GO gates</li><li>Open decisions 5 ຂໍ້</li></ul>
+        <div><span>APPROVAL RECORDED</span><h2>Feasibility Study 1.0</h2></div>
+        <ul><li>Conditional Go — Approved</li><li>Six-week pilot — Approved</li><li>Sample and supply targets — Approved</li><li>Revenue evidence gate — Approved</li><li>Budget control and ownership — Approved</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
