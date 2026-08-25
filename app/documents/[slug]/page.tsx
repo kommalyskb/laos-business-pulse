@@ -6,6 +6,7 @@ import BusinessCanvasDocument from "./BusinessCanvasDocument";
 import FeasibilityStudyDocument from "./FeasibilityStudyDocument";
 import FinancialStructureDocument from "./FinancialStructureDocument";
 import ProductVisionDocument from "./ProductVisionDocument";
+import RevenueKpiDocument from "./RevenueKpiDocument";
 
 export function generateStaticParams() {
   return documents.map((document) => ({ slug: document.slug }));
@@ -78,6 +79,8 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
               ? <FeasibilityStudyDocument basePath={basePath} />
               : document.slug === "financial-structure"
                 ? <FinancialStructureDocument basePath={basePath} />
+                : document.slug === "revenue-kpi"
+                  ? <RevenueKpiDocument basePath={basePath} />
                 : <article className={styles.detailBody}>
           <section>
             <span>01 · PURPOSE</span>
