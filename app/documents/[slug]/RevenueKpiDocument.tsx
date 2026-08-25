@@ -68,11 +68,38 @@ export default function RevenueKpiDocument({ basePath }: { basePath: string }) {
 
       <section>
         <span>02 · ແຫຼ່ງລາຍຮັບ</span>
-        <h2>ເລີ່ມຈາກ 2 ຮູບແບບກ່ອນ</h2>
+        <h2>ລາຍຮັບ 3 ໄລຍະ: ທົດລອງ → ລາຍເດືອນ → ຄ່າທຳນຽມ</h2>
         <div className={styles.canvasRevenueLadder}>
-          <article><b>ໄລຍະທົດລອງ</b><h3>ລາຍຮັບທຳອິດ</h3><ul><li>ລາຍຊື່ຮ້ານພື້ນຖານໃຊ້ຟຣີ</li><li>ຊຸດຮ້ານຮ່ວມທົດລອງ</li><li>ການສະແດງຜົນແບບມີຜູ້ອຸປະຖຳ</li></ul><p>ຈຸດກວດ: 3 ຮ້ານຊຳລະ/ວາງມັດຈຳ + 2 ໜັງສືສະແດງເຈດຈຳນົງ.</p></article>
-          <article><b>ຫຼັງພິສູດຄຸນຄ່າ</b><h3>ລາຍຮັບປະຈຳ</h3><ul><li>ສະມາຊິກຮ້ານແບບມືອາຊີບ</li><li>ລາຍງານການເຂົ້າເຖິງ/ການຕິດຕໍ່</li><li>ຕະຫຼາດເຊື່ອມ creator ກັບຮ້ານ</li></ul><p>ເປີດເມື່ອການກົດເພື່ອໄປ ແລະການກັບມາໃຊ້ຊ້ຳວັດໄດ້.</p></article>
-          <article><b>ອະນາຄົດ</b><h3>ລາຍຮັບຈາກທຸລະກຳ</h3><ul><li>ຄ່ານາຍໜ້າຈາກພາກສ່ວນພາຍນອກ</li><li>ຊຸດການໂຄສະນາຮ່ວມ</li><li>ການຈອງສະເພາະຈຸດ</li></ul><p>ບໍ່ແມ່ນຂອບເຂດຂອງ MVP; ພິຈາລະນາຫຼັງມີຄວາມຕ້ອງການຊ້ຳ.</p></article>
+          <article>
+            <b>ໄລຍະທົດລອງ 6 ອາທິດ</b>
+            <h3>ສ້າງຖານຮ້ານ ແລະທົດສອບວ່າຮ້ານຍອມຈ່າຍຫຼືບໍ່</h3>
+            <ul>
+              <li><strong>Free Business Profile:</strong> ທຸກຮ້ານມີໜ້າຂໍ້ມູນພື້ນຖານໄດ້ຟຣີ. ສ່ວນນີ້ບໍ່ສ້າງລາຍຮັບ ແຕ່ຊ່ວຍສ້າງຖານຂໍ້ມູນ.</li>
+              <li><strong>Founding Partner Pilot:</strong> ຮ້ານຈ່າຍຄ່າທົດລອງ 200,000 ກີບຕໍ່ເດືອນ ເພື່ອຮັບການກວດຂໍ້ມູນ, ສະເໜີແກ້ໄຂ ແລະຮັບ Performance Summary.</li>
+              <li><strong>Sponsored Campaign:</strong> ຮ້ານຈ່າຍ 1,000,000 ກີບຕໍ່ Campaign ເພື່ອສະແດງໃນພື້ນທີ່ໂຄສະນາທີ່ມີປ້າຍ “Sponsored” ຊັດເຈນ.</li>
+            </ul>
+            <p>Platform ນັບລາຍຮັບເມື່ອຮັບເງິນແລ້ວ; ຄຳເວົ້າວ່າ “ສົນໃຈ” ບໍ່ນັບ.</p>
+          </article>
+          <article>
+            <b>ຫຼັງຈາກ PILOT ພິສູດຄຸນຄ່າ</b>
+            <h3>ຄ່າສະມາຊິກທີ່ຮ້ານຈ່າຍທຸກເດືອນ</h3>
+            <ul>
+              <li><strong>Pro Business Subscription:</strong> ຮ້ານຈ່າຍຄ່າສະມາຊິກລາຍເດືອນ.</li>
+              <li>ຮ້ານໄດ້ Verified Profile, ສິດສະເໜີແກ້ໄຂຂໍ້ມູນ ແລະການຊ່ວຍເຫຼືອ.</li>
+              <li><strong>Performance Analytics:</strong> ລາຍງານຈຳນວນຄົນເປີດໜ້າຮ້ານ, ກົດແຜນທີ່, ໂທ ຫຼືສົ່ງຂໍ້ຄວາມ. ນີ້ແມ່ນ Feature ໃນຊຸດ Pro ບໍ່ແມ່ນຄ່າບໍລິການອີກລາຍການໜຶ່ງ.</li>
+            </ul>
+            <p>Platform ຈະມີລາຍຮັບປະຈຳກໍ່ຕໍ່ເມື່ອຮ້ານຕໍ່ອາຍຸສະມາຊິກ. ຈຶ່ງຕ້ອງວັດ Monthly Recurring Revenue ແລະອັດຕາຮ້ານທີ່ຕໍ່ອາຍຸ.</p>
+          </article>
+          <article>
+            <b>ໄລຍະອະນາຄົດ</b>
+            <h3>ເກັບຄ່າທຳນຽມເມື່ອມີການຊື້ຂາຍ ຫຼືວ່າຈ້າງສຳເລັດ</h3>
+            <ul>
+              <li><strong>Creator Marketplace Commission:</strong> ຮ້ານຈ້າງ Creator ຜ່ານ Platform; Platform ເກັບ Commission ເມື່ອຕົກລົງວ່າຈ້າງສຳເລັດ.</li>
+              <li><strong>Affiliate Commission:</strong> Partner ຈ່າຍ Commission ເມື່ອຜູ້ໃຊ້ກົດອອກຈາກ Platform ແລະເຮັດທຸລະກຳສຳເລັດກັບ Partner.</li>
+              <li><strong>Booking Commission:</strong> ໃນອະນາຄົດ Platform ອາດເກັບຄ່າທຳນຽມຕໍ່ການຈອງທີ່ສຳເລັດ.</li>
+            </ul>
+            <p>ບໍ່ມີການຊື້ຂາຍ ຫຼືວ່າຈ້າງສຳເລັດ = Platform ບໍ່ໄດ້ Commission. ລາຍຮັບກຸ່ມນີ້ບໍ່ແມ່ນຂອບເຂດຂອງ MVP.</p>
+          </article>
         </div>
         <p className={styles.priceHypothesis}><b>ລາຄາສຳລັບທົດສອບ—ບໍ່ແມ່ນລາຄາຂາຍສຸດທ້າຍ</b><span>ຮ້ານຮ່ວມທົດລອງ 200,000 ກີບຕໍ່ເດືອນ · ການໂຄສະນາ 1,000,000 ກີບຕໍ່ຄັ້ງ. ຕ້ອງປັບຈາກຜົນການສະເໜີຂາຍຈິງ.</span></p>
       </section>
