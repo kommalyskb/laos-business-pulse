@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { categories, documents, getDocument } from "../documentData";
 import styles from "../documents.module.css";
+import BusinessCanvasDocument from "./BusinessCanvasDocument";
 import ProductVisionDocument from "./ProductVisionDocument";
 
 export function generateStaticParams() {
@@ -67,7 +68,11 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
           <p>ເອກະສານນີ້ຈະຖືກປັບປຸງຕາມການຕັດສິນໃຈ ແລະຫຼັກຖານໃໝ່ຂອງໂຄງການ.</p>
         </aside>
 
-        {document.slug === "product-vision" ? <ProductVisionDocument basePath={basePath} /> : <article className={styles.detailBody}>
+        {document.slug === "product-vision"
+          ? <ProductVisionDocument basePath={basePath} />
+          : document.slug === "business-canvas"
+            ? <BusinessCanvasDocument basePath={basePath} />
+            : <article className={styles.detailBody}>
           <section>
             <span>01 · PURPOSE</span>
             <h2>ຈຸດປະສົງ</h2>
