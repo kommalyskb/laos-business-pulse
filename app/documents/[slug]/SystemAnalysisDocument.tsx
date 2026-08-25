@@ -123,11 +123,19 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
   return (
     <article className={`${styles.detailBody} ${styles.systemAnalysisBody} ${styles.businessDocument}`}>
       <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>1.0</strong></div>
-        <div><small>ສະຖານະ</small><strong>ອະນຸມັດແລ້ວ</strong></div>
+        <div><small>ສະບັບ</small><strong>0.2</strong></div>
+        <div><small>ສະຖານະ</small><strong>ກຳລັງຈັດເຮັດ</strong></div>
         <div><small>ວັນທີປັບປຸງ</small><strong>26 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>PRO-01 Product Requirements 1.0</strong></div>
       </section>
+
+      <aside className={styles.saReconstructionNotice}>
+        <div><span>ປັບສະຖານະເອກະສານ</span><h2>ເນື້ອຫາປັດຈຸບັນແມ່ນພາກ A — System Context & Business Rules</h2></div>
+        <div>
+          <p>PRO-02 ຖືກຖອນຈາກສະຖານະ 1.0 ເພາະຍັງບໍ່ພຽງພໍສຳລັບ Developer Handoff. Actor, Boundary, Use Case ລະດັບສູງ ແລະ Business Rules ຈະຖືກເກັບເປັນພາກພື້ນຖານ.</p>
+          <p>ກ່ອນກັບໄປສູ່ສະບັບ 1.0 ຕ້ອງເພີ່ມ Functional Decomposition, Function Catalog, Workflow/Sequence, Logical ERD, State Transition, Function Algorithms, Interface/Error Contract, Traceability ແລະ Development Dependency Order.</p>
+        </div>
+      </aside>
 
       <header className={styles.documentReadingHeader}>
         <span>PRO-02 · SYSTEM ANALYSIS</span>
@@ -327,8 +335,8 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
 
       <section className={styles.documentArticleSection} id="sa-review">
         <span>12 · REVIEW DECISIONS</span>
-        <h2>5 ຂໍ້ຕັດສິນສຳລັບ System Analysis 1.0</h2>
-        <p className={styles.documentQuestion}>ຂໍ້ຕັດສິນໃດຈະໃຊ້ເປັນ Baseline ສຳລັບ Design, Development, Operation ແລະ Test?</p>
+        <h2>5 ຂໍ້ຕັດສິນທີ່ຢືນຢັນເພື່ອນຳໄປຂະຫຍາຍ SA</h2>
+        <p className={styles.documentQuestion}>ຂໍ້ຕັດສິນໃດຖືກຢືນຢັນແລ້ວ ແຕ່ຍັງຕ້ອງແປຕໍ່ເປັນ Function, Workflow, Data Constraint ແລະ Testable Logic?</p>
         <ol className={styles.reviewDecisions}>
           <li><b>01 · ADMIN ROLE</b><div><strong>ອະນຸມັດ:</strong><p>Pilot ເລີ່ມດ້ວຍ Full Admin ບົດບາດດຽວ. ຫ້າມໃຊ້ Admin Account ຮ່ວມກັນ; ທຸກການປ່ຽນສຳຄັນຕ້ອງບັນທຶກຜູ້ປ່ຽນ, ຂໍ້ມູນກ່ອນ–ຫຼັງ, ເຫດຜົນ ແລະເວລາ. ເມື່ອມີ Admin ຕັ້ງແຕ່ 2 ຄົນຂຶ້ນໄປ ໃຫ້ແຍກ Operator ແລະ Approver.</p></div></li>
           <li><b>02 · CORRECTION SLA</b><div><strong>ອະນຸມັດ:</strong><p>ຢືນຢັນການຮັບຄຳຮ້ອງພາຍໃນ 1 ວັນເຮັດວຽກ ແລະຕັດສິນພາຍໃນ 3 ວັນເຮັດວຽກນັບຈາກຫຼັກຖານຄົບ. ໄລຍະ 3 ວັນຢຸດນັບໃນສະຖານະ Needs Evidence. ແຜນທີ່/ເບີໂທຜິດ, ຮ້ານປິດ ຫຼື Takedown ເປັນຄຳຮ້ອງດ່ວນທີ່ຕ້ອງກວດພາຍໃນ 24 ຊົ່ວໂມງ.</p></div></li>
@@ -339,8 +347,8 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
       </section>
 
       <aside className={styles.draftApprovalGate}>
-        <div><span>ອະນຸມັດແລ້ວ</span><h2>PRO-02 · System Analysis 1.0</h2><p>Actors, Boundary, Use Cases, Process, Business Rules, States, Data Entities, Permissions, Edge Cases ແລະ Traceability ເປັນ Baseline ສຳລັບເອກະສານ Product, UX, Technical ແລະ Delivery ຖັດໄປ.</p></div>
-        <ul><li>Actors & Boundary — ອະນຸມັດ</li><li>Use Cases & Process — ອະນຸມັດ</li><li>Business Rules & States — ອະນຸມັດ</li><li>Data & Permission — ອະນຸມັດ</li><li>5 Review Decisions — ອະນຸມັດ</li></ul>
+        <div><span>ກຳລັງຈັດເຮັດ</span><h2>PRO-02 · System Analysis 0.2</h2><p>ພາກ A ເກັບ System Context ແລະ Business Decisions ທີ່ຢືນຢັນແລ້ວ. ເອກະສານຍັງບໍ່ເປັນ Developer-ready SA ຈົນກວ່າພາກ B–J ຈະຄົບ.</p></div>
+        <ul><li>ພາກ A · Context & Rules — ມີແລ້ວ</li><li>ພາກ B · Function Catalog — ຖັດໄປ</li><li>ພາກ C–F · Workflow, ERD, State, Algorithm — ຍັງຕ້ອງເຮັດ</li><li>ພາກ G–I · Contract & Traceability — ຍັງຕ້ອງເຮັດ</li><li>ພາກ J · Developer Handoff — ຍັງຕ້ອງເຮັດ</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">

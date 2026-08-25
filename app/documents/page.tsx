@@ -6,6 +6,7 @@ import styles from "./documents.module.css";
 
 const statusView = {
   approved: { label: "ອະນຸມັດແລ້ວ", className: styles.approved },
+  in_progress: { label: "ກຳລັງຈັດເຮັດ", className: styles.inProgress },
   draft: { label: "ຮ່າງສຳລັບທົບທວນ", className: styles.draft },
   next: { label: "ລຳດັບຕໍ່ໄປ", className: styles.next },
   planned: { label: "ວາງແຜນ", className: styles.planned },

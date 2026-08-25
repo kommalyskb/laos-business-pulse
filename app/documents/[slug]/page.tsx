@@ -40,6 +40,8 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   const status = document.status === "approved"
     ? { label: "ອະນຸມັດແລ້ວ", className: styles.statusApproved }
+    : document.status === "in_progress"
+      ? { label: "ກຳລັງຈັດເຮັດ", className: styles.statusInProgress }
     : document.status === "draft"
       ? { label: "ຮ່າງສຳລັບທົບທວນ", className: styles.statusDraft }
       : document.status === "next"
