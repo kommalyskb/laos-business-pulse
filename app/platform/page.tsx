@@ -135,6 +135,7 @@ export default function PlatformPitch() {
           <a href="#standard">ມາດຕະຖານ</a>
           <a href="#revenue">ລາຍຮັບ</a>
           <a href="#roadmap">Roadmap</a>
+          <a href={`${basePath}/documents`}>ເອກະສານ</a>
         </nav>
         <a className={styles.reportLink} href="../">ກັບໄປບົດລາຍງານ ↗</a>
       </header>

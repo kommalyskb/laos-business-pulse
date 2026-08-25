@@ -299,6 +299,7 @@ export default function Home() {
             <a href="#diagnosis">ຜົນຕໍ່ທຸລະກິດ</a>
             <a href="#opportunities">ໂອກາດ</a>
             <a href={`${basePath}/platform`}>ບົດນຳສະເໜີ Platform</a>
+            <a href={`${basePath}/documents`}>ເອກະສານໂຄງການ</a>
             <a href="#actions">ລົງມື</a>
             <a href="#deep-dives">ອ່ານຕໍ່</a>
           </div>
