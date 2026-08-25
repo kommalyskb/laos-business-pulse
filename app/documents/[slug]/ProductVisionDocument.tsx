@@ -11,10 +11,11 @@ const principles = [
 
 const scope = [
   "Full-screen vertical discovery feed",
-  "ການຈັດໝວດ: ອາຫານ, ຄາເຟ, ທີ່ພັກ ແລະສະຖານທີ່ທ່ອງທ່ຽວ",
+  "Launch ທີ່ວຽງຈັນ ໂດຍເນັ້ນໝວດອາຫານ ແລະຄາເຟ",
   "Place Page ທີ່ມີ map, contact, hours, price range, tags ແລະວັນກວດສອບ",
   "Link ຫາ content ແລະ creator ຕົ້ນສະບັບ",
   "Search, filter, save ແລະ share",
+  "Guest-first: ເຂົ້າໃຊ້ໄດ້ໂດຍບໍ່ສ້າງ account ແລະ save ໃນອຸປະກອນ",
   "Admin workflow ສຳລັບກວດ place data ແລະ moderation",
   "Analytics ຕັ້ງແຕ່ video view ຫາ map/call/message click",
 ];
@@ -23,16 +24,18 @@ const nonGoals = [
   "ບໍ່ຮັບຈອງ ຫຼືຮັບຊຳລະເງິນໃນ MVP",
   "ບໍ່ດາວໂຫຼດແລະເກັບວິດີໂອຂອງ creator ໂດຍບໍ່ມີສິດ",
   "ບໍ່ສ້າງ social network ທີ່ແຂ່ງຂັນດ້ວຍ follower ແລະ watch time",
+  "ບໍ່ມີ comment, follower ແລະ community feature ໃນ MVP",
   "ບໍ່ເລີ່ມດ້ວຍ AI ທີ່ຊັບຊ້ອນກ່ອນພິສູດຄຸນນະພາບ data",
   "ບໍ່ເປີດ creator marketplace ແລະ affiliate ຈົນກວ່າຈະມີ traffic ທີ່ວັດແທກໄດ້",
+  "ບໍ່ເປີດທົ່ວປະເທດພ້ອມກັນ; ທີ່ພັກ ແລະບ່ອນທ່ຽວເປັນ Phase 2",
 ];
 
 export default function ProductVisionDocument({ basePath }: { basePath: string }) {
   return (
     <article className={`${styles.detailBody} ${styles.visionBody}`}>
       <section className={styles.documentControl}>
-        <div><small>VERSION</small><strong>0.1</strong></div>
-        <div><small>STATUS</small><strong>Draft for review</strong></div>
+        <div><small>VERSION</small><strong>1.0</strong></div>
+        <div><small>STATUS</small><strong>Approved</strong></div>
         <div><small>UPDATED</small><strong>25 ສິງຫາ 2026</strong></div>
         <div><small>DECISION OWNER</small><strong>Founder / Product</strong></div>
       </section>
@@ -41,9 +44,10 @@ export default function ProductVisionDocument({ basePath }: { basePath: string }
         <span>01 · VISION STATEMENT</span>
         <h2>ວິໄສທັດ</h2>
         <blockquote className={styles.visionStatement}>
-          “ພ້ອມໄປ” ຈະປ່ຽນວິດີໂອຣີວິວທີ່ກະແຈກກະຈາຍໃນ social media
-          ໃຫ້ເປັນຂໍ້ມູນທີ່ຄົ້ນຫາໄດ້, ໜ້າເຊື່ອຖື ແລະພ້ອມສຳລັບການຕັດສິນໃຈ—
-          ເພື່ອໃຫ້ຜູ້ໃຊ້ເຮັດທຸກຢ່າງກ່ອນອອກເດີນທາງ ແລະເຫຼືອພຽງແຕ່ “ໄປ”.
+          “ພ້ອມໄປ” ແມ່ນ platform ຄົ້ນຫາສະຖານທີ່ໃນລາວແບບ video-first
+          ທີ່ຮວບຮວມຣີວິວຈາກ social media ແລະເຊື່ອມກັບຂໍ້ມູນສະຖານທີ່,
+          ແຜນທີ່ ແລະການຕິດຕໍ່—ເພື່ອພາຜູ້ໃຊ້ຈາກ “ເຫັນແລ້ວສົນໃຈ”
+          ໄປສູ່ “ຮູ້ພໍທີ່ຈະໄປ”.
         </blockquote>
       </section>
 
@@ -62,9 +66,9 @@ export default function ProductVisionDocument({ basePath }: { basePath: string }
         <span>03 · TARGET USERS</span>
         <h2>ຜູ້ໃຊ້ເປົ້າໝາຍ</h2>
         <div className={styles.userGroups}>
-          <article><small>PRIMARY</small><h3>ຜູ້ຊອກຫາບ່ອນໄປ</h3><p>ຄົນລາວທີ່ໃຊ້ມືຖືເພື່ອຊອກຮ້ານອາຫານ, ຄາເຟ, ທີ່ພັກ ແລະບ່ອນທ່ຽວ.</p></article>
-          <article><small>SECONDARY</small><h3>ນັກທ່ອງທ່ຽວ</h3><p>ຜູ້ເດີນທາງພາຍໃນ ແລະຕ່າງປະເທດທີ່ຕ້ອງການຂໍ້ມູນສັ້ນ, ເຫັນພາບ ແລະໄປເຖິງໄດ້.</p></article>
-          <article><small>ECOSYSTEM</small><h3>Place owner ແລະ Creator</h3><p>ຮ້ານ/ສະຖານທີ່ທີ່ຕ້ອງການ traffic ທີ່ວັດໄດ້ ແລະ creator ທີ່ຕ້ອງການການອ້າງອີງທີ່ຖືກຕ້ອງ.</p></article>
+          <article><small>PRIMARY · LAUNCH</small><h3>ຜູ້ຊອກຮ້ານໃນວຽງຈັນ</h3><p>ຄົນລາວທີ່ໃຊ້ TikTok, Facebook ຫຼື YouTube ເພື່ອຊອກຮ້ານອາຫານ ແລະຄາເຟ.</p></article>
+          <article><small>SUPPLY SIDE</small><h3>Place Owner ແລະ Creator</h3><p>ຮ້ານທີ່ຕ້ອງການ traffic ທີ່ວັດໄດ້ ແລະ creator ທີ່ຕ້ອງການ attribution ທີ່ຖືກຕ້ອງ.</p></article>
+          <article><small>FUTURE</small><h3>ນັກທ່ອງທ່ຽວ</h3><p>ຜູ້ເດີນທາງພາຍໃນ ແລະຕ່າງປະເທດ ລວມເຖິງທີ່ພັກ ແລະຜູ້ປະກອບການທ່ອງທ່ຽວໃນ Phase 2.</p></article>
         </div>
       </section>
 
@@ -124,7 +128,7 @@ export default function ProductVisionDocument({ basePath }: { basePath: string }
         <span>09 · ASSUMPTIONS & RISKS</span>
         <h2>ສົມມຸດຖານທີ່ຕ້ອງພິສູດ</h2>
         <ol className={styles.riskList}>
-          <li><b>CONTENT</b><p>ສາມາດຫາ link ຣີວິວທີ່ມີຄຸນນະພາບໄດ້ພໍສຳລັບ cold start.</p><span>ທົດສອບ: ສ້າງ inventory ຂອງ 1 ເມືອງ</span></li>
+          <li><b>CONTENT</b><p>ສາມາດຫາ link ຣີວິວທີ່ມີຄຸນນະພາບໄດ້ພໍສຳລັບ cold start.</p><span>ທົດສອບ: ສ້າງ inventory 100–200 places ໃນວຽງຈັນ</span></li>
           <li><b>USAGE</b><p>ຜູ້ໃຊ້ຈະເລືອກ search/category ທີ່ຈັດລຽງແລ້ວ ແທນການຄົ້ນໃນຫຼາຍ social app.</p><span>ທົດສອບ: prototype ແລະ concierge MVP</span></li>
           <li><b>DATA</b><p>Place owner ແລະ admin ສາມາດຮັກສາຂໍ້ມູນໃຫ້ທັນສະໄໝໄດ້.</p><span>ທົດສອບ: freshness workflow 30–60 ມື້</span></li>
           <li><b>REVENUE</b><p>ທຸລະກິດຈະຍອມຈ່າຍເມື່ອເຫັນ map, call ແລະ message click ທີ່ວັດໄດ້.</p><span>ທົດສອບ: pre-sell 5–10 founding partners</span></li>
@@ -150,24 +154,28 @@ export default function ProductVisionDocument({ basePath }: { basePath: string }
           <li><b>✓</b><span>ເຊື່ອມຫາ content ຕົ້ນສະບັບ ແລະບໍ່ນຳວິດີໂອມາເກັບໂດຍບໍ່ມີສິດ.</span></li>
           <li><b>✓</b><span>MVP ໃຫ້ຜູ້ໃຊ້ຕິດຕໍ່ place owner ໂດຍກົງ; ບໍ່ເຮັດ booking.</span></li>
           <li><b>✓</b><span>ລາຍຮັບໃນອະນາຄົດມາຈາກ Pro, sponsored, creator marketplace ແລະ affiliate.</span></li>
+          <li><b>✓</b><span>Launch market ແມ່ນວຽງຈັນ; primary categories ແມ່ນອາຫານ ແລະຄາເຟ.</span></li>
+          <li><b>✓</b><span>Platform ເປັນ owner ຂອງ canonical place record; place owner ສະເໜີແກ້ໄຂ ແລະ admin ອະນຸມັດ.</span></li>
+          <li><b>✓</b><span>ແຍກປ້າຍ Source linked, Place verified ແລະ Sponsored ອອກຈາກກັນ.</span></li>
+          <li><b>✓</b><span>“ພ້ອມໄປ” ຍັງເປັນ working name ຈົນກວ່າຈະກວດ domain, social handle ແລະຊື່ທາງການ.</span></li>
         </ul>
       </section>
 
       <section>
-        <span>12 · OPEN QUESTIONS</span>
-        <h2>ສິ່ງທີ່ຕ້ອງຕັດສິນໃຈຕໍ່</h2>
+        <span>12 · APPROVED LAUNCH MODEL</span>
+        <h2>ຂໍ້ສະຫຼຸບສຳລັບ Launch</h2>
         <ol className={styles.openQuestions}>
-          <li><b>01</b><p>ເມືອງ ແລະ category ໃດຄວນເປັນ launch market?</p></li>
-          <li><b>02</b><p>ມາດຕະຖານໃດຈະໃຊ້ຕັດສິນວ່າ content ແລະ place ຜ່ານການກວດສອບ?</p></li>
-          <li><b>03</b><p>Preview ແລະ link ຮູບແບບໃດທີ່ຖືກຕ້ອງທາງສິດ ແລະຍັງໃຊ້ງານງ່າຍ?</p></li>
-          <li><b>04</b><p>ໃຜຈະເປັນ owner ຂອງ place data ແລະຮັບຜິດຊອບການກວດຄືນ?</p></li>
-          <li><b>05</b><p>“ພ້ອມໄປ” ເປັນຊື່ທາງການ ຫຼືເປັນ working name?</p></li>
+          <li><b>01</b><p>ເລີ່ມທີ່ວຽງຈັນ ດ້ວຍອາຫານ ແລະຄາເຟ; 100–200 places ເປັນສົມມຸດຖານສຳລັບ Feasibility.</p></li>
+          <li><b>02</b><p>ໃຊ້ 3 ສະຖານະທີ່ບໍ່ປົນກັນ: Source linked, Place verified ແລະ Sponsored.</p></li>
+          <li><b>03</b><p>ເກັບ canonical URL, ໃຊ້ official embed/preview ເມື່ອອະນຸຍາດ, ບໍ່ re-host video ແລະມີ takedown process.</p></li>
+          <li><b>04</b><p>Platform ຮັກສາ canonical data; place owner ສະເໜີ, admin ອະນຸມັດ ແລະທຸກ field ມີ source/verified date.</p></li>
+          <li><b>05</b><p>“ພ້ອມໄປ” ເປັນ working name ຈົນກວ່າຈະຜ່ານ brand, domain ແລະ legal checks.</p></li>
         </ol>
       </section>
 
       <aside className={styles.approvalGate}>
-        <div><span>REVIEW GATE</span><h2>ສິ່ງທີ່ຕ້ອງອະນຸມັດ</h2></div>
-        <ul><li>Vision statement</li><li>Target users</li><li>Product principles</li><li>MVP scope / non-goals</li><li>Open questions ທີ່ຕ້ອງວິໄຈ</li></ul>
+        <div><span>APPROVAL RECORDED</span><h2>Product Vision 1.0</h2></div>
+        <ul><li>Vision statement — Approved</li><li>Target users — Approved</li><li>Product principles — Approved</li><li>MVP scope / non-goals — Approved</li><li>Launch model — Approved</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານຕໍ່ໄປ">

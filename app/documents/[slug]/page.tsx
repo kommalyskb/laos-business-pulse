@@ -31,11 +31,13 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
   const previous = categoryDocuments[currentIndex - 1];
   const next = categoryDocuments[currentIndex + 1];
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-  const status = document.status === "draft"
-    ? { label: "ຮ່າງສຳລັບທົບທວນ", className: styles.statusDraft }
-    : document.status === "next"
-      ? { label: "ລຳດັບຕໍ່ໄປ", className: styles.statusNext }
-      : { label: "ວາງແຜນ", className: styles.statusPlanned };
+  const status = document.status === "approved"
+    ? { label: "ອະນຸມັດແລ້ວ", className: styles.statusApproved }
+    : document.status === "draft"
+      ? { label: "ຮ່າງສຳລັບທົບທວນ", className: styles.statusDraft }
+      : document.status === "next"
+        ? { label: "ລຳດັບຕໍ່ໄປ", className: styles.statusNext }
+        : { label: "ວາງແຜນ", className: styles.statusPlanned };
 
   return (
     <main className={styles.site}>
