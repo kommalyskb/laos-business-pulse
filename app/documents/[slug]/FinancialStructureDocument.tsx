@@ -6,6 +6,16 @@ import styles from "../documents.module.css";
 const LAK = new Intl.NumberFormat("lo-LA", { maximumFractionDigits: 0 });
 const formatLak = (value: number) => `${LAK.format(Math.max(0, Math.round(value)))} ₭`;
 
+const operatingAllocations = [
+  ["ສຳພາດ ແລະເດີນທາງ", 12, "ຄ່າເດີນທາງ, ໂທລະສັບ ແລະການພົບຜູ້ໃຊ້ກັບເຈົ້າຂອງຮ້ານ"],
+  ["ສ້າງ ແລະກວດຂໍ້ມູນ", 22, "ສະຖານທີ່, ແຜນທີ່, ເບີໂທ, ເວລາເປີດ–ປິດ ແລະລິ້ງວິດີໂອ"],
+  ["ສ້າງຕົວຢ່າງລະບົບ", 20, "ໂດເມນ, ເຊີເວີ, ເຄື່ອງມື ແລະຜູ້ຊ່ວຍສະເພາະຈຸດທີ່ຈຳເປັນ"],
+  ["ທົດສອບກັບຜູ້ໃຊ້", 10, "ຈັດການທົດສອບ, ເດີນທາງ ແລະເກັບຜົນການໃຊ້ງານ"],
+  ["ທົດສອບການຫາລາຍຮັບ", 10, "ເອກະສານສະເໜີຮ້ານ, ຕົວຢ່າງຊຸດບໍລິການ ແລະການເຂົ້າຫາຮ້ານ"],
+  ["ບັນຊີ ແລະນະໂຍບາຍເນື້ອຫາ", 5, "ປຶກສາໃບຮັບເງິນ, ພາສີ ແລະການໃຊ້ລິ້ງເນື້ອຫາ"],
+  ["ເງິນສຳຮອງ", 21, "ໃຊ້ສະເພາະບັນຫາຈຳເປັນທີ່ຄາດບໍ່ເຖິງ ແລະມີບັນທຶກເຫດຜົນ"],
+] as const;
+
 const financialRisks = [
   ["F1 · ສູງ", "ເລີ່ມຈ້າງທີມ ຫຼືສ້າງລະບົບສົມບູນກ່ອນພິສູດລາຍຮັບ.", "ອະນຸຍາດສະເພາະລາຍຈ່າຍຂອງໄລຍະທົດລອງ ແລະປ່ອຍງົບຕາມຈຸດກວດສອບ."],
   ["F2 · ສູງ", "ນັບຄຳເວົ້າວ່າສົນໃຈເປັນລາຍຮັບທີ່ຄາດໄດ້.", "ແຍກເງິນທີ່ຮັບແລ້ວ, ເງິນມັດຈຳ ແລະໜັງສືສະແດງເຈດຈຳນົງອອກຈາກກັນ."],
@@ -25,11 +35,12 @@ function CountInput({ label, value, onChange }: { label: string; value: number; 
 export default function FinancialStructureDocument({ basePath }: { basePath: string }) {
   const [cashCeiling, setCashCeiling] = useState(25_000_000);
   const [monthlyFounderLiving, setMonthlyFounderLiving] = useState(10_000_000);
+  const [pilotOperatingBudget, setPilotOperatingBudget] = useState(10_000_000);
   const [monthlyFixed, setMonthlyFixed] = useState(6_000_000);
   const [monthlyVariable, setMonthlyVariable] = useState(2_000_000);
-  const [partners, setPartners] = useState(3);
+  const [partners, setPartners] = useState(0);
   const [subscription, setSubscription] = useState(200_000);
-  const [campaigns, setCampaigns] = useState(1);
+  const [campaigns, setCampaigns] = useState(0);
   const [campaignPrice, setCampaignPrice] = useState(1_000_000);
 
   const model = useMemo(() => {
@@ -37,22 +48,20 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
     const monthlyCost = monthlyFounderLiving + monthlyFixed + monthlyVariable;
     const netBurn = Math.max(0, monthlyCost - monthlyRevenue);
     const runway = netBurn > 0 ? cashCeiling / netBurn : Infinity;
-    const pilotCost = monthlyCost * 1.5;
     const founderPilotLiving = monthlyFounderLiving * 1.5;
-    const operatingBudget = Math.max(0, cashCeiling - founderPilotLiving);
-    const founderShare = cashCeiling > 0 ? Math.min(100, founderPilotLiving / cashCeiling * 100) : 0;
-    const operatingShare = cashCeiling > 0 ? Math.min(100, operatingBudget / cashCeiling * 100) : 0;
+    const operatingBudget = Math.max(0, Math.min(pilotOperatingBudget, cashCeiling - founderPilotLiving));
+    const pilotCost = founderPilotLiving + pilotOperatingBudget;
     const pilotRevenue = monthlyRevenue * 1.5;
     const cashAfterPilot = cashCeiling - Math.max(0, pilotCost - pilotRevenue);
     const partnerContributionNeeded = Math.max(0, monthlyCost - campaigns * campaignPrice);
     const breakEvenPartners = subscription > 0 ? Math.ceil(partnerContributionNeeded / subscription) : 0;
-    return { monthlyRevenue, monthlyCost, netBurn, runway, pilotCost, founderPilotLiving, operatingBudget, founderShare, operatingShare, pilotRevenue, cashAfterPilot, breakEvenPartners };
-  }, [cashCeiling, monthlyFounderLiving, monthlyFixed, monthlyVariable, partners, subscription, campaigns, campaignPrice]);
+    return { monthlyRevenue, monthlyCost, netBurn, runway, pilotCost, founderPilotLiving, operatingBudget, pilotRevenue, cashAfterPilot, breakEvenPartners };
+  }, [cashCeiling, monthlyFounderLiving, pilotOperatingBudget, monthlyFixed, monthlyVariable, partners, subscription, campaigns, campaignPrice]);
 
   return (
     <article className={`${styles.detailBody} ${styles.financialBody}`}>
       <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>0.4</strong></div>
+        <div><small>ສະບັບ</small><strong>0.5</strong></div>
         <div><small>ສະຖານະ</small><strong>ຮ່າງ — ລໍຖ້າລາຍຈ່າຍທົດລອງ</strong></div>
         <div><small>ວັນທີປັບປຸງ</small><strong>25 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>ການສຶກສາຄວາມເປັນໄປໄດ້ 1.0</strong></div>
@@ -73,7 +82,7 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
           <li><b>03</b><p>ໄລຍະທົດລອງໃຊ້ສະເພາະທຶນທີ່ຜູ້ກໍ່ຕັ້ງແຍກໄວ້, ລາຍຮັບຈາກການທົດລອງທີ່ລູກຄ້າຊຳລະຈິງ ຫຼືເງິນຊ່ວຍເຫຼືອທີ່ບໍ່ຕ້ອງຊຳລະຄືນ ແລະບໍ່ມີເງື່ອນໄຂທີ່ເສຍປຽບ. ຫ້າມໃຊ້ເງິນກູ້, ບັດເຄຣດິດ ຫຼືໜີ້ທີ່ມີດອກເບ້ຍ.</p></li>
           <li><b>04</b><p>ແບ່ງຂີດຈຳກັດການອະນຸຍາດໃຊ້ເງິນເປັນ 30%/35%/35%; ອະນຸຍາດງວດຕໍ່ໄປສະເພາະເມື່ອວຽກງວດກ່ອນຜ່ານຈຸດກວດສອບ.</p></li>
           <li><b>05</b><p>ຜູ້ກໍ່ຕັ້ງບໍ່ມີລາຍຮັບອື່ນ; ໂຄງການຈຶ່ງຕ້ອງກັນຄ່າຄອງຊີບ 10 ລ້ານກີບຕໍ່ເດືອນ ຫຼື 15 ລ້ານກີບສຳລັບ 6 ອາທິດໄວ້ພາຍໃນເພດານງົບ.</p></li>
-          <li><b>06</b><p>ທຸກລາຍຈ່າຍຕ້ອງລະບຸສິ່ງທີ່ຕ້ອງການພິສູດ, ຜູ້ຮັບຜິດຊອບ ແລະຫຼັກຖານທີ່ຈະໄດ້. ລາຍຈ່າຍລາຍການໃດເກີນ 10% ຂອງງົບລວມ ຕ້ອງປຽບທຽບລາຄາຢ່າງໜ້ອຍ 2 ແຫຼ່ງ.</p></li>
+          <li><b>06</b><p>ທຸກລາຍຈ່າຍຕ້ອງລະບຸສິ່ງທີ່ຕ້ອງການພິສູດ, ຜູ້ຮັບຜິດຊອບ ແລະຫຼັກຖານທີ່ຈະໄດ້. ລາຍຈ່າຍຕັ້ງແຕ່ 1 ລ້ານກີບຂຶ້ນໄປ ຕ້ອງປຽບທຽບລາຄາຢ່າງໜ້ອຍ 2 ແຫຼ່ງ.</p></li>
         </ol>
         <div className={styles.financialLogic}>
           <article><b>ເພດານງົບທົດລອງ</b><strong>ຈຳນວນສູງສຸດ</strong><p>ແມ່ນຈຳນວນເງິນສູງສຸດທີ່ໂຄງການສາມາດໃຊ້ໃນ 6 ອາທິດ ໂດຍບໍ່ແຕະເງິນສຳຮອງສ່ວນຕົວ ແລະບໍ່ກະທົບຄ່າຄອງຊີບ. ນີ້ແມ່ນຂີດຈຳກັດ ບໍ່ແມ່ນເປົ້າໃຫ້ໃຊ້ເງິນໝົດ.</p></article>
@@ -91,6 +100,7 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
             <header><b>ຕົວເລກທີ່ນຳເຂົ້າ</b><p>ເພດານງົບ ແລະຄ່າຄອງຊີບແມ່ນຕົວເລກທີ່ຢືນຢັນແລ້ວ; ລາຍຈ່າຍ ແລະລາຍຮັບອື່ນຍັງເປັນຕົວຢ່າງສຳລັບຄິດ.</p></header>
             <MoneyInput label="ເພດານງົບທົດລອງ" value={cashCeiling} onChange={setCashCeiling} />
             <MoneyInput label="ຄ່າຄອງຊີບຜູ້ກໍ່ຕັ້ງຕໍ່ເດືອນ" value={monthlyFounderLiving} onChange={setMonthlyFounderLiving} />
+            <MoneyInput label="ເພດານງົບວຽກທົດລອງ 6 ອາທິດ" value={pilotOperatingBudget} onChange={setPilotOperatingBudget} />
             <MoneyInput label="ລາຍຈ່າຍຄົງທີ່ອື່ນຕໍ່ເດືອນ" value={monthlyFixed} onChange={setMonthlyFixed} />
             <MoneyInput label="ລາຍຈ່າຍຜັນແປຕໍ່ເດືອນ" value={monthlyVariable} onChange={setMonthlyVariable} />
             <CountInput label="ຮ້ານທີ່ຈ່າຍຄ່າບໍລິການ" value={partners} onChange={setPartners} />
@@ -103,6 +113,7 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
             <div><small>ລາຍຮັບຕໍ່ເດືອນ</small><strong>{formatLak(model.monthlyRevenue)}</strong></div>
             <div><small>ລາຍຈ່າຍເງິນສົດຕໍ່ເດືອນ</small><strong>{formatLak(model.monthlyCost)}</strong></div>
             <div><small>ຄ່າຄອງຊີບໃນ 6 ອາທິດ</small><strong>{formatLak(model.founderPilotLiving)}</strong></div>
+            <div><small>ເພດານງົບວຽກທົດລອງ</small><strong>{formatLak(pilotOperatingBudget)}</strong></div>
             <div><small>ລາຍຈ່າຍລວມໃນ 6 ອາທິດ</small><strong className={model.pilotCost > cashCeiling ? styles.negativeValue : ""}>{formatLak(model.pilotCost)}</strong></div>
             <div><small>ເງິນທີ່ຂາດຕໍ່ເດືອນ</small><strong>{formatLak(model.netBurn)}</strong></div>
             <div><small>ໄລຍະທີ່ເງິນຮອງຮັບໄດ້</small><strong>{Number.isFinite(model.runway) ? `${model.runway.toFixed(1)} ເດືອນ` : "ລາຍຮັບບໍ່ຕ່ຳກວ່າລາຍຈ່າຍ"}</strong></div>
@@ -117,10 +128,9 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
         <span>04 · ການແບ່ງງົບທົດລອງ</span>
         <h2>ເຫຼືອ 10 ລ້ານກີບສຳລັບວຽກທົດລອງ</h2>
         <div className={styles.allocationPlan}>
-          <article><div><b>ຄ່າຄອງຊີບຜູ້ກໍ່ຕັ້ງ</b><strong>{model.founderShare.toFixed(0)}%</strong></div><i><span style={{ width: `${model.founderShare}%` }} /></i><p>10 ລ້ານກີບຕໍ່ເດືອນ × 1.5 ເດືອນ; ເປັນລາຍຈ່າຍທີ່ຢືນຢັນແລ້ວ.</p><small>{formatLak(model.founderPilotLiving)}</small></article>
-          <article><div><b>ງົບສູງສຸດສຳລັບວຽກທົດລອງ</b><strong>{model.operatingShare.toFixed(0)}%</strong></div><i><span style={{ width: `${model.operatingShare}%` }} /></i><p>ຄົ້ນຄວ້າ, ຂໍ້ມູນ, ຕົວຢ່າງລະບົບ, ການຂາຍ, ເຄື່ອງມື ແລະເງິນສຳຮອງ; ລໍຖ້າລາຄາຕົວຈິງກ່ອນແບ່ງລາຍລະອຽດ.</p><small>{formatLak(model.operatingBudget)}</small></article>
+          {operatingAllocations.map(([name, percent, detail]) => <article key={name}><div><b>{name}</b><strong>{percent}%</strong></div><i><span style={{ width: `${percent}%` }} /></i><p>{detail}</p><small>{formatLak(model.operatingBudget * percent / 100)}</small></article>)}
         </div>
-        <p className={styles.metricNote}>10 ລ້ານກີບແມ່ນເພດານສູງສຸດຂອງວຽກທົດລອງ ບໍ່ແມ່ນເປົ້າໃຫ້ໃຊ້ໝົດ. ຖ້າລາຄາຕົວຈິງເກີນຈຳນວນນີ້ ຕ້ອງຫຼຸດຂອບເຂດ ຫຼືຊະລໍໂຄງການ.</p>
+        <p className={styles.metricNote}>ວາງແຜນໃຊ້ງານ 7.9 ລ້ານກີບ ແລະກັນ 2.1 ລ້ານກີບເປັນເງິນສຳຮອງ. ຖ້າລາຄາຕົວຈິງເກີນ 10 ລ້ານກີບ ຕ້ອງຫຼຸດຂອບເຂດ ຫຼືຊະລໍໂຄງການ.</p>
       </section>
 
       <section>
@@ -129,10 +139,18 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
         <p className={styles.fundingExplanation}><strong>ບໍ່ແມ່ນງວດຈ່າຍໃຫ້ຜູ້ຮັບເໝົາ ແລະບໍ່ແມ່ນເປົ້າວ່າຕ້ອງໃຊ້ໃຫ້ໝົດ.</strong> ມັນແມ່ນຂີດຈຳກັດການອະນຸຍາດໃຊ້ເງິນໃນແຕ່ລະໄລຍະ. ງວດຕໍ່ໄປຈະຖືກເປີດໃຫ້ໃຊ້ສະເພາະເມື່ອວຽກຂອງງວດກ່ອນຜ່ານຈຸດກວດສອບ. ຖ້າບໍ່ຜ່ານ ໃຫ້ຢຸດໃຊ້ເງິນ, ທົບທວນ ຫຼືປ່ຽນແນວທາງ.</p>
         <p className={styles.metricNote}>ແຕ່ລະງວດ 2 ອາທິດຕ້ອງກັນຄ່າຄອງຊີບ 5 ລ້ານກີບກ່ອນ. ງວດທີ 1 ຈຶ່ງເຫຼືອສູງສຸດ 2.5 ລ້ານກີບສຳລັບວຽກ ແລະງວດທີ 2–3 ເຫຼືອງວດລະ 3.75 ລ້ານກີບ.</p>
         <div className={styles.fundingStages}>
-          <article><b>ງວດທີ 1 · 30% · ອາທິດ 1–2</b><strong>{formatLak(cashCeiling * .30)}</strong><h3>ກວດບັນຫາ ແລະແຫຼ່ງຂໍ້ມູນ</h3><p>ສຳພາດຜູ້ໃຊ້ 20 ຄົນ, ເຈົ້າຂອງຮ້ານ 15 ຮ້ານ ແລະສ້າງຂໍ້ມູນສະຖານທີ່ຊຸດທຳອິດ 30 ແຫ່ງ.</p><small>ເປີດໃຊ້ຫຼັງຈາກອະນຸມັດເພດານງົບທົດລອງ</small></article>
-          <article><b>ງວດທີ 2 · 35% · ອາທິດ 3–4</b><strong>{formatLak(cashCeiling * .35)}</strong><h3>ກວດຄຸນຄ່າຕໍ່ຜູ້ໃຊ້ ແລະເຕັກນິກ</h3><p>ຂະຫຍາຍຂໍ້ມູນເປັນ 60 → 100 ແຫ່ງ, ທົດສອບຕົວຢ່າງ, ຄວາມໄວ ແລະການເກັບສະຖິຕິ.</p><small>ເປີດໃຊ້ເມື່ອການສ້າງຂໍ້ມູນເຮັດຊ້ຳໄດ້ ແລະງວດທີ 1 ບໍ່ເກີນງົບ</small></article>
-          <article><b>ງວດທີ 3 · 35% · ອາທິດ 5–6</b><strong>{formatLak(cashCeiling * .35)}</strong><h3>ກວດລາຍຮັບ ແລະຕັດສິນໃຈ</h3><p>ເຂົ້າຫາ 30 ຮ້ານ, ຫາ 3 ຮ້ານທີ່ຈ່າຍ/ວາງມັດຈຳ + 2 ໜັງສືສະແດງເຈດຈຳນົງ ແລະຕັດສິນໄປຕໍ່, ປັບ ຫຼືຢຸດ.</p><small>ເປີດໃຊ້ເມື່ອຜູ້ໃຊ້ສະແດງພຶດຕິກຳຕັດສິນໃຈຜ່ານຕົວຢ່າງ</small></article>
+          <article><b>ງວດທີ 1 · 30% · ອາທິດ 1–2</b><strong>{formatLak(cashCeiling * .30)}</strong><h3>ກວດບັນຫາ ແລະແຫຼ່ງຂໍ້ມູນ</h3><p>ງົບວຽກ 2.5 ລ້ານກີບ: ສຳພາດ/ເດີນທາງ 1.2 ລ້ານ, ຂໍ້ມູນ 0.8 ລ້ານ, ເຄື່ອງມື 0.2 ລ້ານ ແລະສຳຮອງ 0.3 ລ້ານ.</p><small>ຖ້າບັນຫາ ຫຼືແຫຼ່ງຂໍ້ມູນບໍ່ຊັດ ໃຫ້ຢຸດກ່ອນເປີດງວດທີ 2</small></article>
+          <article><b>ງວດທີ 2 · 35% · ອາທິດ 3–4</b><strong>{formatLak(cashCeiling * .35)}</strong><h3>ກວດຄຸນຄ່າຕໍ່ຜູ້ໃຊ້ ແລະເຕັກນິກ</h3><p>ງົບວຽກ 3.75 ລ້ານກີບ: ຂໍ້ມູນ 1.4 ລ້ານ, ຕົວຢ່າງລະບົບ 1.5 ລ້ານ, ທົດສອບ 0.5 ລ້ານ ແລະສຳຮອງ 0.35 ລ້ານ.</p><small>ເປີດໃຊ້ເມື່ອຂໍ້ມູນຊຸດທຳອິດສ້າງໄດ້ຈິງ ແລະຜູ້ໃຊ້ຢືນຢັນບັນຫາ</small></article>
+          <article><b>ງວດທີ 3 · 35% · ອາທິດ 5–6</b><strong>{formatLak(cashCeiling * .35)}</strong><h3>ກວດລາຍຮັບ ແລະຕັດສິນໃຈ</h3><p>ງົບວຽກ 3.75 ລ້ານກີບ: ທົດສອບລາຍຮັບ 1 ລ້ານ, ປັບລະບົບ 0.3 ລ້ານ, ທົດສອບຜູ້ໃຊ້ 0.5 ລ້ານ, ບັນຊີ/ນະໂຍບາຍ 0.5 ລ້ານ ແລະສຳຮອງ 1.45 ລ້ານ.</p><small>ເງິນສຳຮອງບໍ່ຈຳເປັນຕ້ອງໃຊ້; ໃຊ້ສະເພາະເມື່ອມີເຫດຜົນຈຳເປັນ</small></article>
         </div>
+        <h3>ລາຍຈ່າຍທີ່ບໍ່ອະນຸມັດໃນ 6 ອາທິດ</h3>
+        <ul className={styles.decisionList}>
+          <li><b>01</b><span>ຈ້າງສ້າງແອັບ ຫຼືລະບົບສົມບູນ.</span></li>
+          <li><b>02</b><span>ເຊົ່າຫ້ອງການ ຫຼືຊື້ອຸປະກອນລາຄາສູງ.</span></li>
+          <li><b>03</b><span>ຈ້າງພະນັກງານປະຈຳ ຫຼືຜູ້ສ້າງເນື້ອຫາຈຳນວນຫຼາຍ.</span></li>
+          <li><b>04</b><span>ຈ່າຍຄ່າໂຄສະນາຂະໜາດໃຫຍ່.</span></li>
+          <li><b>05</b><span>ສ້າງລະບົບຈອງ, ຊຳລະເງິນ ຫຼືປັນຍາປະດິດເຕັມຮູບແບບ.</span></li>
+        </ul>
       </section>
 
       <section>
@@ -203,9 +221,10 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
           <li><b>02</b><span>ບໍ່ໃຊ້ໜີ້; ຮັບສະເພາະທຶນຜູ້ກໍ່ຕັ້ງ, ລາຍຮັບທົດລອງທີ່ຊຳລະຈິງ ຫຼືເງິນຊ່ວຍເຫຼືອທີ່ບໍ່ຕ້ອງຊຳລະຄືນ.</span></li>
           <li><b>03</b><span>ແບ່ງຂີດຈຳກັດການອະນຸຍາດໃຊ້ເງິນເປັນ 30%/35%/35% ແລະເປີດງວດຕໍ່ໄປເມື່ອວຽກງວດກ່ອນຜ່ານຈຸດກວດສອບ.</span></li>
           <li><b>04</b><span>ຜູ້ກໍ່ຕັ້ງບໍ່ມີລາຍຮັບອື່ນ; ອະນຸມັດຄ່າຄອງຊີບ 10 ລ້ານກີບຕໍ່ເດືອນ ຫຼື 15 ລ້ານກີບສຳລັບ 6 ອາທິດ.</span></li>
-          <li><b>05</b><span>ລາຍຈ່າຍລາຍການໃດເກີນ 10% ຂອງງົບລວມ ຕ້ອງປຽບທຽບລາຄາຢ່າງໜ້ອຍ 2 ແຫຼ່ງ.</span></li>
+          <li><b>05</b><span>ລາຍຈ່າຍຕັ້ງແຕ່ 1 ລ້ານກີບຂຶ້ນໄປ ຕ້ອງປຽບທຽບລາຄາຢ່າງໜ້ອຍ 2 ແຫຼ່ງ; ທຸກລາຍຈ່າຍຕ້ອງມີໃບຮັບເງິນ ຫຼືບັນທຶກຫຼັກຖານ.</span></li>
           <li><b>06</b><span>ຕ້ອງມີເງິນຮອງຮັບ 3 ເດືອນເພື່ອສືບຕໍ່ທົດສອບ ແລະ 6 ເດືອນກ່ອນສ້າງລະບົບສົມບູນ ຫຼືຈ້າງທີມຖາວອນ.</span></li>
           <li><b>07</b><span>ຢືນຢັນເພດານງົບໂຄງການ 25 ລ້ານກີບ ແລະກັນເງິນສ່ວນຕົວ 75 ລ້ານກີບອອກຈາກໂຄງການ.</span></li>
+          <li><b>08</b><span>ອະນຸມັດແຜນງົບວຽກທົດລອງ 10 ລ້ານກີບ: ວາງແຜນໃຊ້ 7.9 ລ້ານກີບ ແລະກັນ 2.1 ລ້ານກີບເປັນເງິນສຳຮອງ.</span></li>
         </ul>
       </section>
 
@@ -218,8 +237,8 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
       </section>
 
       <aside className={styles.approvalGate}>
-        <div><span>ຍັງບໍ່ພ້ອມສຳລັບ 1.0</span><h2>ໂຄງສ້າງການເງິນ 0.4</h2></div>
-        <ul><li>ກົດການເງິນ — ອະນຸມັດແລ້ວ</li><li>ເພດານງົບ 25 ລ້ານກີບ — ອະນຸມັດແລ້ວ</li><li>ຄ່າຄອງຊີບ 15 ລ້ານກີບ — ອະນຸມັດແລ້ວ</li><li>ລາຍຈ່າຍທົດລອງສູງສຸດ 10 ລ້ານກີບ — ລໍຖ້າລາຍລະອຽດ</li></ul>
+        <div><span>ຍັງບໍ່ພ້ອມສຳລັບ 1.0</span><h2>ໂຄງສ້າງການເງິນ 0.5</h2></div>
+        <ul><li>ກົດການເງິນ — ອະນຸມັດແລ້ວ</li><li>ເພດານງົບ 25 ລ້ານກີບ — ອະນຸມັດແລ້ວ</li><li>ຄ່າຄອງຊີບ 15 ລ້ານກີບ — ອະນຸມັດແລ້ວ</li><li>ແຜນແບ່ງງົບທົດລອງ 10 ລ້ານກີບ — ອະນຸມັດແລ້ວ</li><li>ລາຄາຕົວຈິງ ແລະຫຼັກຖານລາຍຈ່າຍ — ລໍຖ້າ</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
