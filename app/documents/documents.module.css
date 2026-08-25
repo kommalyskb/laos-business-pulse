@@ -307,8 +307,68 @@
 .sourcePlan article:nth-child(even) { background:#e7e1d4; }
 .sourcePlan b { color:var(--orange); font-size:8px; letter-spacing:.12em; }
 .sourcePlan p { margin:48px 0 0; color:#606b66; font-weight:800; line-height:1.6; }
+.financialBody { max-width:1240px; }
+.financialStatement { margin:0; padding:42px; color:white; background:linear-gradient(135deg,var(--navy),#173c3c); border-left:7px solid var(--orange); font-size:clamp(21px,2.5vw,34px); font-weight:900; line-height:1.65; letter-spacing:-.02em; }
+.financialPrinciples { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; margin:0; padding:1px; list-style:none; background:var(--line); }
+.financialPrinciples li { min-height:155px; padding:23px; background:#fbf9f3; }
+.financialPrinciples li:nth-child(2),.financialPrinciples li:nth-child(5) { background:#e7e1d4; }
+.financialPrinciples b { color:var(--orange); font-size:9px; }
+.financialPrinciples p { margin:38px 0 0; font-size:15px; font-weight:800; line-height:1.65; }
+.financialCalculator { display:grid; grid-template-columns:1fr 1fr; gap:1px; padding:1px; background:var(--line); }
+.financialInputs,.financialOutputs { padding:26px; background:#fbf9f3; }
+.financialOutputs { color:white; background:var(--navy); }
+.financialInputs header,.financialOutputs header { min-height:78px; margin-bottom:16px; border-bottom:1px solid var(--line); }
+.financialOutputs header { border-color:rgba(255,255,255,.18); }
+.financialInputs header b,.financialOutputs header b { color:var(--orange); font-size:8px; letter-spacing:.12em; }
+.financialInputs header p,.financialOutputs header p { margin:10px 0 0; color:#68716d; font-size:11px; line-height:1.6; }
+.financialOutputs header p { color:rgba(255,255,255,.55); }
+.financialInputs label { min-height:66px; display:grid; grid-template-columns:1fr minmax(120px,.7fr) 42px; gap:12px; align-items:center; border-bottom:1px solid var(--line); }
+.financialInputs label span { font-size:12px; font-weight:800; }
+.financialInputs input { width:100%; padding:10px; border:1px solid var(--line); color:var(--navy); background:white; font:800 13px/1 ui-monospace,monospace; text-align:right; }
+.financialInputs label small { color:#6c7470; font-size:9px; }
+.financialOutputs>div:not(header) { min-height:66px; display:grid; grid-template-columns:1fr auto; align-items:center; gap:20px; border-bottom:1px solid rgba(255,255,255,.16); }
+.financialOutputs small { color:var(--aqua); font-size:8px; font-weight:900; letter-spacing:.1em; }
+.financialOutputs strong { color:white; font-size:19px; }
+.financialOutputs .negativeValue { color:var(--orange); }
+.financialDisclaimer { margin:18px 0 0; padding:18px; color:#6f4d17; background:#f3e8bf; font-size:11px; line-height:1.65; }
+.allocationPlan { border-top:1px solid var(--navy); }
+.allocationPlan article { min-height:108px; padding:18px 0; display:grid; grid-template-columns:1.05fr 1.2fr 1fr; grid-template-areas:"title bar amount" "detail bar amount"; gap:7px 24px; align-items:center; border-bottom:1px solid var(--line); }
+.allocationPlan article>div { grid-area:title; display:flex; justify-content:space-between; gap:15px; }
+.allocationPlan article>div b { font-size:13px; }
+.allocationPlan article>div strong { color:var(--orange); font-size:12px; }
+.allocationPlan i { grid-area:bar; height:9px; display:block; background:#d9d5cb; }
+.allocationPlan i span { height:100%; display:block; background:var(--aqua); }
+.allocationPlan p { grid-area:detail; margin:0; color:#68716d; font-size:11px; line-height:1.55; }
+.allocationPlan article>small { grid-area:amount; justify-self:end; font:900 16px/1 ui-monospace,monospace; }
+.fundingStages { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; padding:1px; background:var(--line); }
+.fundingStages article { min-height:330px; padding:25px; display:flex; flex-direction:column; background:#fbf9f3; }
+.fundingStages article:nth-child(2) { background:#e7e1d4; }
+.fundingStages article:last-child { color:white; background:var(--navy); }
+.fundingStages b { color:var(--orange); font-size:8px; letter-spacing:.12em; }
+.fundingStages>article>strong { margin:35px 0 0; font-size:24px; }
+.fundingStages h3 { margin:auto 0 10px; font-size:18px; }
+.fundingStages p { margin:0; color:#65706b; line-height:1.65; }
+.fundingStages article:last-child p { color:rgba(255,255,255,.65); }
+.fundingStages small { margin-top:28px; color:#17644f; font-size:7px; font-weight:900; letter-spacing:.08em; }
+.fundingStages article:last-child small { color:var(--aqua); }
+.revenueEvidence { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; padding:1px; background:var(--line); }
+.revenueEvidence>div { min-height:280px; padding:23px; background:#fbf9f3; }
+.revenueEvidence>div:nth-child(2) { background:#dff2df; }
+.revenueEvidence>div:nth-child(3) { background:#e7e1d4; }
+.revenueEvidence>div:last-child { color:white; background:var(--navy); }
+.revenueEvidence b { color:var(--orange); font-size:8px; letter-spacing:.12em; }
+.revenueEvidence strong { display:block; margin:70px 0 12px; font-size:18px; }
+.revenueEvidence p { margin:0; color:#65706b; line-height:1.65; }
+.revenueEvidence>div:last-child p { color:rgba(255,255,255,.65); }
+.financialMetrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; padding:1px; background:var(--line); }
+.financialMetrics article { min-height:260px; padding:25px; background:#fbf9f3; }
+.financialMetrics article:nth-child(2) { background:#e7e1d4; }
+.financialMetrics article:last-child { color:white; background:var(--navy); }
+.financialMetrics b { color:var(--orange); font-size:8px; letter-spacing:.12em; }
+.financialMetrics ul { margin:55px 0 0; padding-left:18px; }
+.financialMetrics li { padding:6px 0; line-height:1.55; }
 @media(max-width:1100px){.docGrid{grid-template-columns:repeat(2,minmax(0,1fr));}.directory{grid-template-columns:240px minmax(0,1fr);}}
 @media(max-width:780px){.topbar{grid-template-columns:1fr}.topbar nav{display:none}.hero{grid-template-columns:1fr;gap:36px;padding-top:64px}.directory,.detailLayout{grid-template-columns:1fr}.sidebar{position:static;min-height:0;padding:18px;display:flex;overflow-x:auto;gap:5px;border-right:0;border-bottom:1px solid var(--line)}.sidebar>span{display:none}.sidebar button{flex:0 0 155px;border:1px solid var(--line)}.content{padding:30px 18px 80px}.tools{grid-template-columns:1fr}.tools>b{display:none}.tools input{width:100%}.category>header,.detailTitle{grid-template-columns:1fr;gap:16px}.docGrid{grid-template-columns:1fr}.docCard{min-height:270px}.detailMeta{position:static;min-height:0;padding:28px 20px;display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.detailMeta>div{margin:0}.detailMeta>p{grid-column:1/-1;margin:10px 0 0}.detailBody{padding:55px 20px 80px}.doneGrid{grid-template-columns:1fr}.docPagination{grid-template-columns:1fr}.docPagination span{display:none}}
 @media(max-width:1000px){.canvasBoard{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"segments value" "channels relationships" "activities resources" "partners partners" "costs revenue"}.canvasCosts ul,.canvasRevenue ul{columns:1}.exchangeGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.canvasFlywheel{grid-template-columns:1fr}.canvasFlywheel>i{text-align:center;transform:rotate(90deg)}.assumptionTable>div{grid-template-columns:.55fr 1.8fr 1fr}.assumptionTable>div>:last-child{grid-column:2/-1}.feasibilityScorecard>div{grid-template-columns:35px .7fr 2fr .7fr}.feasibilityScorecard>div>:last-child{grid-column:3/-1}.feasibilityTable>div,.gateTable>div{grid-template-columns:.7fr 1.5fr 1fr}.feasibilityTable>div>:last-child,.gateTable>div>:last-child{grid-column:2/-1}}
-@media(max-width:900px){.userGroups,.revenuePath,.signalGrid,.canvasRevenueLadder,.canvasMetrics,.feasibilityInputs,.feasibilityGrid,.financialLogic,.sourcePlan{grid-template-columns:1fr}.valueFlow{grid-template-columns:1fr}.valueFlow>i{text-align:center;transform:rotate(90deg)}.riskList li{grid-template-columns:75px 1fr}.riskList span{grid-column:2}.documentControl{grid-template-columns:repeat(2,1fr)}.feasibilityVerdict{grid-template-columns:1fr}.feasibilityVerdict strong{margin-top:25px}}
-@media(max-width:600px){.problemCards,.scopeColumns,.openQuestions,.approvalGate,.exchangeGrid,.costColumns,.canvasDecisions{grid-template-columns:1fr}.canvasBoard{display:block;padding:1px}.canvasBoard article{margin-bottom:1px}.canvasStatement{padding:28px 22px}.assumptionTable>div,.assumptionTable>div:first-child,.feasibilityScorecard>div,.feasibilityScorecard>div:first-child,.feasibilityTable>div,.feasibilityTable>div:first-child,.gateTable>div,.gateTable>div:first-child{grid-template-columns:1fr;gap:8px}.assumptionTable>div:first-child,.feasibilityScorecard>div:first-child,.feasibilityTable>div:first-child,.gateTable>div:first-child{display:none}.assumptionTable>div>:last-child,.feasibilityScorecard>div>:last-child,.feasibilityTable>div>:last-child,.gateTable>div>:last-child{grid-column:auto}.feasibilityVerdict{padding:28px 22px}.pilotTimeline li{grid-template-columns:55px 1fr}.comparison>div{grid-template-columns:1fr;gap:7px}.comparison>div:first-child{display:none}.documentControl{grid-template-columns:1fr}.visionStatement{padding:28px 22px}.approvalGate h2{margin-top:25px}.signalGrid>div{min-height:110px}}
+@media(max-width:900px){.userGroups,.revenuePath,.signalGrid,.canvasRevenueLadder,.canvasMetrics,.feasibilityInputs,.feasibilityGrid,.financialLogic,.sourcePlan,.fundingStages,.financialMetrics{grid-template-columns:1fr}.valueFlow{grid-template-columns:1fr}.valueFlow>i{text-align:center;transform:rotate(90deg)}.riskList li{grid-template-columns:75px 1fr}.riskList span{grid-column:2}.documentControl{grid-template-columns:repeat(2,1fr)}.feasibilityVerdict,.financialCalculator{grid-template-columns:1fr}.feasibilityVerdict strong{margin-top:25px}.revenueEvidence{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.problemCards,.scopeColumns,.openQuestions,.approvalGate,.exchangeGrid,.costColumns,.canvasDecisions,.financialPrinciples,.revenueEvidence{grid-template-columns:1fr}.canvasBoard{display:block;padding:1px}.canvasBoard article{margin-bottom:1px}.canvasStatement,.financialStatement{padding:28px 22px}.assumptionTable>div,.assumptionTable>div:first-child,.feasibilityScorecard>div,.feasibilityScorecard>div:first-child,.feasibilityTable>div,.feasibilityTable>div:first-child,.gateTable>div,.gateTable>div:first-child{grid-template-columns:1fr;gap:8px}.assumptionTable>div:first-child,.feasibilityScorecard>div:first-child,.feasibilityTable>div:first-child,.gateTable>div:first-child{display:none}.assumptionTable>div>:last-child,.feasibilityScorecard>div>:last-child,.feasibilityTable>div>:last-child,.gateTable>div>:last-child{grid-column:auto}.feasibilityVerdict{padding:28px 22px}.pilotTimeline li{grid-template-columns:55px 1fr}.allocationPlan article{grid-template-columns:1fr;grid-template-areas:"title" "bar" "detail" "amount"}.allocationPlan article>small{justify-self:start}.financialInputs label{grid-template-columns:1fr}.financialInputs label small{display:none}.comparison>div{grid-template-columns:1fr;gap:7px}.comparison>div:first-child{display:none}.documentControl{grid-template-columns:1fr}.visionStatement{padding:28px 22px}.approvalGate h2{margin-top:25px}.signalGrid>div{min-height:110px}}
