@@ -61,8 +61,8 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
   return (
     <article className={`${styles.detailBody} ${styles.financialBody}`}>
       <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>0.5</strong></div>
-        <div><small>ສະຖານະ</small><strong>ຮ່າງ — ລໍຖ້າລາຍຈ່າຍທົດລອງ</strong></div>
+        <div><small>ສະບັບ</small><strong>1.0</strong></div>
+        <div><small>ສະຖານະ</small><strong>ອະນຸມັດແລ້ວ</strong></div>
         <div><small>ວັນທີປັບປຸງ</small><strong>25 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>ການສຶກສາຄວາມເປັນໄປໄດ້ 1.0</strong></div>
       </section>
@@ -229,16 +229,18 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
       </section>
 
       <section>
-        <span>13 · ຕົວເລກທີ່ຍັງລໍຖ້າ</span>
-        <h2>ເຫຼືອ 1 ຕົວເລກກ່ອນຂຶ້ນສະບັບ 1.0</h2>
+        <span>13 · ການກວດລາຄາ ແລະຫຼັກຖານ</span>
+        <h2>ບັນທຶກຕາມເວລາທີ່ເກີດຂຶ້ນ</h2>
         <ol className={styles.openQuestions}>
-          <li><b>01</b><p>ລາຍຈ່າຍຕົວຈິງສຳລັບການທົດລອງ 6 ອາທິດ ໂດຍອ້າງອີງຈາກລາຄາທີ່ສອບຖາມຈາກຜູ້ໃຫ້ບໍລິການດ້ານເຕັກນິກ, ຂໍ້ມູນ, ການເດີນທາງ, ເຄື່ອງມື ແລະການບັນຊີ. ລາຍຈ່າຍລວມສ່ວນນີ້ຕ້ອງບໍ່ເກີນ 10 ລ້ານກີບ.</p></li>
+          <li><b>01</b><p>ກ່ອນຊື້ ຫຼືຈ້າງແຕ່ລະລາຍການ ຕ້ອງມີຫຼັກຖານລາຄາ. ລາຍຈ່າຍຕັ້ງແຕ່ 1 ລ້ານກີບຂຶ້ນໄປ ຕ້ອງປຽບທຽບຢ່າງໜ້ອຍ 2 ແຫຼ່ງ.</p></li>
+          <li><b>02</b><p>ຫຼັງຈາກຈ່າຍເງິນ ຕ້ອງເກັບໃບຮັບເງິນ ຫຼືໃບແຈ້ງໜີ້, ຫຼັກຖານໂອນ ແລະຫຼັກຖານວ່າໄດ້ຮັບສິນຄ້າ ຫຼືຜົນງານແລ້ວ.</p></li>
+          <li><b>03</b><p>ລາຄາຕົວຈິງບໍ່ແມ່ນຕົວເລກຄົງທີ່ໃນເອກະສານນີ້. ມັນຈະຖືກບັນທຶກໃນທະບຽນລາຍຈ່າຍ ແລະຕ້ອງບໍ່ເກີນເພດານຂອງໝວດງົບ.</p></li>
         </ol>
       </section>
 
       <aside className={styles.approvalGate}>
-        <div><span>ຍັງບໍ່ພ້ອມສຳລັບ 1.0</span><h2>ໂຄງສ້າງການເງິນ 0.5</h2></div>
-        <ul><li>ກົດການເງິນ — ອະນຸມັດແລ້ວ</li><li>ເພດານງົບ 25 ລ້ານກີບ — ອະນຸມັດແລ້ວ</li><li>ຄ່າຄອງຊີບ 15 ລ້ານກີບ — ອະນຸມັດແລ້ວ</li><li>ແຜນແບ່ງງົບທົດລອງ 10 ລ້ານກີບ — ອະນຸມັດແລ້ວ</li><li>ລາຄາຕົວຈິງ ແລະຫຼັກຖານລາຍຈ່າຍ — ລໍຖ້າ</li></ul>
+        <div><span>ອະນຸມັດແລ້ວ</span><h2>ໂຄງສ້າງການເງິນ 1.0</h2></div>
+        <ul><li>ກົດການເງິນ — ອະນຸມັດແລ້ວ</li><li>ເພດານງົບ 25 ລ້ານກີບ — ອະນຸມັດແລ້ວ</li><li>ຄ່າຄອງຊີບ 15 ລ້ານກີບ — ອະນຸມັດແລ້ວ</li><li>ແຜນແບ່ງງົບທົດລອງ 10 ລ້ານກີບ — ອະນຸມັດແລ້ວ</li><li>ລາຄາຕົວຈິງ — ບັນທຶກກ່ອນຊື້ ຫຼືຈ້າງ</li><li>ຫຼັກຖານລາຍຈ່າຍ — ບັນທຶກຫຼັງຈ່າຍ</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
