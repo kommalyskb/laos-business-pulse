@@ -7,19 +7,19 @@ const LAK = new Intl.NumberFormat("lo-LA", { maximumFractionDigits: 0 });
 const formatLak = (value: number) => `${LAK.format(Math.max(0, Math.round(value)))} ₭`;
 
 const allocations = [
-  ["Research & content", 30, "User interview, place records, curation ແລະ verification"],
-  ["Prototype & technical", 25, "Prototype, technical spike, analytics ແລະ QA"],
-  ["Sales & onboarding", 15, "Place-owner outreach, pre-sell ແລະ onboarding"],
-  ["Tools, hosting & legal", 15, "Hosting, software tools, policy/accounting checkpoint"],
-  ["Contingency", 15, "ສຳຮອງສະເພາະບັນຫາທີ່ບັນທຶກແລະອະນຸມັດ"],
+  ["ຄົ້ນຄວ້າ ແລະເນື້ອຫາ", 30, "ສຳພາດຜູ້ໃຊ້, ສ້າງຂໍ້ມູນສະຖານທີ່, ຄັດເລືອກ ແລະກວດສອບ"],
+  ["ຕົວຢ່າງລະບົບ ແລະເຕັກນິກ", 25, "ສ້າງຕົວຢ່າງ, ທົດສອບເຕັກນິກ, ເກັບສະຖິຕິ ແລະກວດຄຸນນະພາບ"],
+  ["ການຂາຍ ແລະຮັບຮ້ານເຂົ້າລະບົບ", 15, "ເຂົ້າຫາເຈົ້າຂອງຮ້ານ, ທົດສອບການຂາຍ ແລະຊ່ວຍຮ້ານເລີ່ມໃຊ້"],
+  ["ເຄື່ອງມື, ເຊີເວີ ແລະທີ່ປຶກສາ", 15, "ຄ່າເຊີເວີ, ໂປຣແກຣມ, ການກວດນະໂຍບາຍ ແລະບັນຊີ"],
+  ["ເງິນສຳຮອງ", 15, "ໃຊ້ສະເພາະບັນຫາທີ່ບັນທຶກເຫດຜົນ ແລະໄດ້ຮັບອະນຸມັດ"],
 ] as const;
 
 const financialRisks = [
-  ["F1 · HIGH", "ເລີ່ມຈ້າງທີມ ຫຼືສ້າງ full MVP ກ່ອນພິສູດ revenue.", "ອະນຸຍາດພຽງ pilot expense ແລະປ່ອຍງົບຕາມ gate."],
-  ["F2 · HIGH", "ນັບ verbal interest ເປັນລາຍຮັບທີ່ຄາດໄດ້.", "ນັບສະເພາະ cash collected, deposit ແລະ signed LOI ແຍກກັນ."],
-  ["F3 · HIGH", "ປົນເງິນໂຄງການກັບເງິນຄ່າຄອງຊີບສ່ວນຕົວ.", "ແຍກບັນຊີ/ledger ແລະຫ້າມໃຊ້ emergency reserve."],
-  ["F4 · MED", "ບໍ່ນັບມູນຄ່າເວລາຂອງ founder ເຮັດໃຫ້ unit economics ເບິ່ງດີເກີນຈິງ.", "ແຍກ cash cost ແລະ shadow cost ໃນລາຍງານ."],
-  ["F5 · MED", "Hosting, support ແລະ content cost ເຕີບຕາມ usage ໄວກວ່າລາຍຮັບ.", "ວັດ cost/user, cost/place ແລະ contribution margin ທຸກອາທິດ."],
+  ["F1 · ສູງ", "ເລີ່ມຈ້າງທີມ ຫຼືສ້າງລະບົບສົມບູນກ່ອນພິສູດລາຍຮັບ.", "ອະນຸຍາດສະເພາະລາຍຈ່າຍຂອງໄລຍະທົດລອງ ແລະປ່ອຍງົບຕາມຈຸດກວດສອບ."],
+  ["F2 · ສູງ", "ນັບຄຳເວົ້າວ່າສົນໃຈເປັນລາຍຮັບທີ່ຄາດໄດ້.", "ແຍກເງິນທີ່ຮັບແລ້ວ, ເງິນມັດຈຳ ແລະໜັງສືສະແດງເຈດຈຳນົງອອກຈາກກັນ."],
+  ["F3 · ສູງ", "ປົນເງິນໂຄງການກັບເງິນຄ່າຄອງຊີບສ່ວນຕົວ.", "ແຍກບັນຊີ ຫຼືສົມຸດລາຍຮັບລາຍຈ່າຍ ແລະຫ້າມໃຊ້ເງິນສຳຮອງສຸກເສີນ."],
+  ["F4 · ກາງ", "ບໍ່ນັບມູນຄ່າເວລາຂອງຜູ້ກໍ່ຕັ້ງ ເຮັດໃຫ້ຕົ້ນທຶນຕໍ່ລູກຄ້າເບິ່ງຕ່ຳເກີນຈິງ.", "ແຍກລາຍຈ່າຍເງິນສົດ ແລະມູນຄ່າເວລາທີ່ບໍ່ໄດ້ຈ່າຍເປັນເງິນສົດ."],
+  ["F5 · ກາງ", "ຄ່າເຊີເວີ, ຊ່ວຍເຫຼືອລູກຄ້າ ແລະເນື້ອຫາເຕີບໄວກວ່າລາຍຮັບ.", "ວັດຕົ້ນທຶນຕໍ່ຜູ້ໃຊ້, ຕໍ່ສະຖານທີ່ ແລະກຳໄລຫຼັງຫັກລາຍຈ່າຍຜັນແປທຸກອາທິດ."],
 ];
 
 function MoneyInput({ label, value, onChange, step = 100000 }: { label: string; value: number; onChange: (value: number) => void; step?: number }) {
@@ -55,156 +55,157 @@ export default function FinancialStructureDocument({ basePath }: { basePath: str
   return (
     <article className={`${styles.detailBody} ${styles.financialBody}`}>
       <section className={styles.documentControl}>
-        <div><small>VERSION</small><strong>0.1</strong></div>
-        <div><small>STATUS</small><strong>Draft for review</strong></div>
-        <div><small>UPDATED</small><strong>25 ສິງຫາ 2026</strong></div>
-        <div><small>INPUT</small><strong>Feasibility Study 1.0</strong></div>
+        <div><small>ສະບັບ</small><strong>0.1</strong></div>
+        <div><small>ສະຖານະ</small><strong>ຮ່າງສຳລັບທົບທວນ</strong></div>
+        <div><small>ວັນທີປັບປຸງ</small><strong>25 ສິງຫາ 2026</strong></div>
+        <div><small>ເອກະສານຕົ້ນທາງ</small><strong>ການສຶກສາຄວາມເປັນໄປໄດ້ 1.0</strong></div>
       </section>
 
       <section>
-        <span>01 · FINANCIAL POSITION</span>
+        <span>01 · ຈຸດຢືນດ້ານການເງິນ</span>
         <h2>ຊື້ຫຼັກຖານ ບໍ່ແມ່ນຊື້ລະບົບ</h2>
-        <blockquote className={styles.financialStatement}>ຈຸດປະສົງຂອງທຶນໄລຍະທຳອິດແມ່ນພິສູດ user value, content operation ແລະ willingness-to-pay ພາຍໃນ stop-loss ທີ່ຮັບໄດ້—ບໍ່ແມ່ນສ້າງ full production platform.</blockquote>
+        <blockquote className={styles.financialStatement}>ຈຸດປະສົງຂອງທຶນໄລຍະທຳອິດແມ່ນພິສູດວ່າຜູ້ໃຊ້ໄດ້ປະໂຫຍດ, ການຈັດຫາເນື້ອຫາເຮັດຊ້ຳໄດ້ ແລະຮ້ານຍອມຈ່າຍ ໂດຍບໍ່ໃຊ້ເງິນເກີນວົງເງິນທີ່ຍອມເສຍໄດ້—ບໍ່ແມ່ນການສ້າງລະບົບສົມບູນ.</blockquote>
       </section>
 
       <section>
-        <span>02 · CAPITAL RULES</span>
+        <span>02 · ກົດການໃຊ້ທຶນ</span>
         <h2>ກົດ 6 ຂໍ້ກ່ອນໃຊ້ເງິນ</h2>
         <ol className={styles.financialPrinciples}>
-          <li><b>01</b><p>ແຍກ personal emergency reserve ອອກຈາກ project capital ຢ່າງຊັດເຈນ.</p></li>
-          <li><b>02</b><p>Pilot cash ceiling ແມ່ນຈຳນວນທີ່ສາມາດເສຍທັງໝົດໄດ້ໂດຍບໍ່ກະທົບຄ່າຄອງຊີບ.</p></li>
-          <li><b>03</b><p>ບໍ່ແນະນຳໃຫ້ກູ້ຢືມເພື່ອ validation pilot ທີ່ຍັງບໍ່ພິສູດລາຍຮັບ.</p></li>
-          <li><b>04</b><p>ປ່ອຍງົບ 30%/35%/35% ເມື່ອຜ່ານ gate; ບໍ່ໃຊ້ງົບລ່ວງໜ້າ.</p></li>
-          <li><b>05</b><p>ບັນທຶກ cash cost ແລະ founder shadow cost ແຍກກັນ.</p></li>
-          <li><b>06</b><p>ທຸກລາຍຈ່າຍຕ້ອງຜູກກັບ hypothesis, owner ແລະ evidence ທີ່ຈະໄດ້.</p></li>
+          <li><b>01</b><p>ແຍກເງິນສຳຮອງສຸກເສີນສ່ວນຕົວອອກຈາກທຶນຂອງໂຄງການຢ່າງຊັດເຈນ.</p></li>
+          <li><b>02</b><p>ເພດານງົບທົດລອງແມ່ນຈຳນວນສູງສຸດທີ່ສາມາດເສຍທັງໝົດໄດ້ໂດຍບໍ່ກະທົບຄ່າຄອງຊີບ.</p></li>
+          <li><b>03</b><p>ບໍ່ແນະນຳໃຫ້ກູ້ຢືມເພື່ອທົດສອບໂຄງການທີ່ຍັງບໍ່ພິສູດລາຍຮັບ.</p></li>
+          <li><b>04</b><p>ແບ່ງຂີດຈຳກັດການອະນຸຍາດໃຊ້ເງິນເປັນ 30%/35%/35%; ອະນຸຍາດງວດຕໍ່ໄປສະເພາະເມື່ອວຽກງວດກ່ອນຜ່ານຈຸດກວດສອບ.</p></li>
+          <li><b>05</b><p>ບັນທຶກລາຍຈ່າຍເງິນສົດ ແລະມູນຄ່າເວລາຂອງຜູ້ກໍ່ຕັ້ງແຍກກັນ.</p></li>
+          <li><b>06</b><p>ທຸກລາຍຈ່າຍຕ້ອງລະບຸສິ່ງທີ່ຕ້ອງການພິສູດ, ຜູ້ຮັບຜິດຊອບ ແລະຫຼັກຖານທີ່ຈະໄດ້.</p></li>
         </ol>
       </section>
 
       <section>
-        <span>03 · INTERACTIVE MODEL</span>
+        <span>03 · ແບບຈຳລອງທີ່ປັບຕົວເລກໄດ້</span>
         <h2>ປັບຕົວເລກ ແລະເບິ່ງຜົນທັນທີ</h2>
         <div className={styles.financialCalculator}>
           <div className={styles.financialInputs}>
-            <header><b>MODEL INPUTS</b><p>ຕົວເລກເລີ່ມຕົ້ນແມ່ນຕົວຢ່າງສຳລັບຄິດ ບໍ່ແມ່ນງົບທີ່ອະນຸມັດ.</p></header>
-            <MoneyInput label="Pilot cash ceiling" value={cashCeiling} onChange={setCashCeiling} />
-            <MoneyInput label="Monthly fixed cash cost" value={monthlyFixed} onChange={setMonthlyFixed} />
-            <MoneyInput label="Monthly variable cost" value={monthlyVariable} onChange={setMonthlyVariable} />
-            <CountInput label="Paying partners" value={partners} onChange={setPartners} />
-            <MoneyInput label="Subscription / partner / month" value={subscription} onChange={setSubscription} />
-            <CountInput label="Sponsored campaigns / month" value={campaigns} onChange={setCampaigns} />
-            <MoneyInput label="Revenue / campaign" value={campaignPrice} onChange={setCampaignPrice} />
+            <header><b>ຕົວເລກທີ່ນຳເຂົ້າ</b><p>ຕົວເລກເລີ່ມຕົ້ນແມ່ນຕົວຢ່າງສຳລັບຄິດ ບໍ່ແມ່ນງົບທີ່ອະນຸມັດ.</p></header>
+            <MoneyInput label="ເພດານງົບທົດລອງ" value={cashCeiling} onChange={setCashCeiling} />
+            <MoneyInput label="ລາຍຈ່າຍຄົງທີ່ຕໍ່ເດືອນ" value={monthlyFixed} onChange={setMonthlyFixed} />
+            <MoneyInput label="ລາຍຈ່າຍຜັນແປຕໍ່ເດືອນ" value={monthlyVariable} onChange={setMonthlyVariable} />
+            <CountInput label="ຮ້ານທີ່ຈ່າຍຄ່າບໍລິການ" value={partners} onChange={setPartners} />
+            <MoneyInput label="ຄ່າສະມາຊິກຕໍ່ຮ້ານຕໍ່ເດືອນ" value={subscription} onChange={setSubscription} />
+            <CountInput label="ຈຳນວນການໂຄສະນາຕໍ່ເດືອນ" value={campaigns} onChange={setCampaigns} />
+            <MoneyInput label="ລາຍຮັບຕໍ່ການໂຄສະນາໜຶ່ງຄັ້ງ" value={campaignPrice} onChange={setCampaignPrice} />
           </div>
           <div className={styles.financialOutputs} aria-live="polite">
-            <header><b>MODEL OUTPUTS</b><p>6-week pilot = 1.5 ເດືອນ</p></header>
-            <div><small>MONTHLY REVENUE</small><strong>{formatLak(model.monthlyRevenue)}</strong></div>
-            <div><small>MONTHLY CASH COST</small><strong>{formatLak(model.monthlyCost)}</strong></div>
-            <div><small>NET MONTHLY BURN</small><strong>{formatLak(model.netBurn)}</strong></div>
-            <div><small>RUNWAY</small><strong>{Number.isFinite(model.runway) ? `${model.runway.toFixed(1)} ເດືອນ` : "Cash-positive"}</strong></div>
-            <div><small>CASH AFTER PILOT</small><strong className={model.cashAfterPilot < 0 ? styles.negativeValue : ""}>{model.cashAfterPilot < 0 ? "−" : ""}{formatLak(Math.abs(model.cashAfterPilot))}</strong></div>
-            <div><small>BREAK-EVEN PARTNERS</small><strong>{model.breakEvenPartners}</strong></div>
+            <header><b>ຜົນການຄຳນວນ</b><p>ໄລຍະທົດລອງ 6 ອາທິດ ເທົ່າກັບ 1.5 ເດືອນ</p></header>
+            <div><small>ລາຍຮັບຕໍ່ເດືອນ</small><strong>{formatLak(model.monthlyRevenue)}</strong></div>
+            <div><small>ລາຍຈ່າຍເງິນສົດຕໍ່ເດືອນ</small><strong>{formatLak(model.monthlyCost)}</strong></div>
+            <div><small>ເງິນທີ່ຂາດຕໍ່ເດືອນ</small><strong>{formatLak(model.netBurn)}</strong></div>
+            <div><small>ໄລຍະທີ່ເງິນຮອງຮັບໄດ້</small><strong>{Number.isFinite(model.runway) ? `${model.runway.toFixed(1)} ເດືອນ` : "ລາຍຮັບບໍ່ຕ່ຳກວ່າລາຍຈ່າຍ"}</strong></div>
+            <div><small>ເງິນຄົງເຫຼືອຫຼັງທົດລອງ</small><strong className={model.cashAfterPilot < 0 ? styles.negativeValue : ""}>{model.cashAfterPilot < 0 ? "−" : ""}{formatLak(Math.abs(model.cashAfterPilot))}</strong></div>
+            <div><small>ຈຳນວນຮ້ານສຳລັບຈຸດຄຸ້ມທຶນ</small><strong>{model.breakEvenPartners}</strong></div>
           </div>
         </div>
-        <p className={styles.financialDisclaimer}>Calculator ນີ້ເປັນ planning tool ສຳລັບ project decision. ບໍ່ລວມພາສີ, ຄ່າແລກປ່ຽນ, debt service ຫຼືລາຍລະອຽດບັນຊີ; ຕ້ອງກວດກັບນັກບັນຊີ/ຜູ້ຊ່ຽວຊານໃນລາວກ່ອນນຳໃຊ້ຈິງ.</p>
+        <p className={styles.financialDisclaimer}>ເຄື່ອງຄຳນວນນີ້ໃຊ້ສຳລັບວາງແຜນ ແລະຕັດສິນໃຈພາຍໃນໂຄງການ. ຍັງບໍ່ລວມພາສີ, ຄ່າແລກປ່ຽນ, ຄ່າດອກເບ້ຍ ຫຼືລາຍລະອຽດບັນຊີ; ຕ້ອງກວດກັບນັກບັນຊີ ຫຼືຜູ້ຊ່ຽວຊານໃນລາວກ່ອນນຳໃຊ້ຈິງ.</p>
       </section>
 
       <section>
-        <span>04 · PILOT ALLOCATION</span>
-        <h2>ແບ່ງ cash ceiling ຕາມວຽກ</h2>
+        <span>04 · ການແບ່ງງົບທົດລອງ</span>
+        <h2>ແບ່ງເພດານງົບຕາມໝວດວຽກ</h2>
         <div className={styles.allocationPlan}>
           {allocations.map(([name, percent, detail]) => <article key={name}><div><b>{name}</b><strong>{percent}%</strong></div><i><span style={{ width: `${percent}%` }} /></i><p>{detail}</p><small>{formatLak(cashCeiling * percent / 100)}</small></article>)}
         </div>
-        <p className={styles.metricNote}>Allocation ເປັນ policy ceiling ບໍ່ແມ່ນເປົ້າໃຫ້ໃຊ້ໝົດ. ເງິນທີ່ບໍ່ໄດ້ໃຊ້ຕ້ອງກັບເຂົ້າ reserve.</p>
+        <p className={styles.metricNote}>ຈຳນວນຂອງແຕ່ລະໝວດແມ່ນເພດານສູງສຸດ ບໍ່ແມ່ນເປົ້າໃຫ້ໃຊ້ໝົດ. ເງິນທີ່ບໍ່ໄດ້ໃຊ້ຕ້ອງກັບເຂົ້າເງິນສຳຮອງ.</p>
       </section>
 
       <section>
-        <span>05 · STAGED FUNDING</span>
-        <h2>ປ່ອຍງົບຕາມຫຼັກຖານ</h2>
+        <span>05 · ການອະນຸຍາດໃຊ້ງົບເປັນງວດ</span>
+        <h2>30%/35%/35% ໝາຍເຖິງຫຍັງ</h2>
+        <p className={styles.fundingExplanation}><strong>ບໍ່ແມ່ນງວດຈ່າຍໃຫ້ຜູ້ຮັບເໝົາ ແລະບໍ່ແມ່ນເປົ້າວ່າຕ້ອງໃຊ້ໃຫ້ໝົດ.</strong> ມັນແມ່ນຂີດຈຳກັດການອະນຸຍາດໃຊ້ເງິນໃນແຕ່ລະໄລຍະ. ງວດຕໍ່ໄປຈະຖືກເປີດໃຫ້ໃຊ້ສະເພາະເມື່ອວຽກຂອງງວດກ່ອນຜ່ານຈຸດກວດສອບ. ຖ້າບໍ່ຜ່ານ ໃຫ້ຢຸດໃຊ້ເງິນ, ທົບທວນ ຫຼືປ່ຽນແນວທາງ.</p>
         <div className={styles.fundingStages}>
-          <article><b>30% · W1–W2</b><strong>{formatLak(cashCeiling * .30)}</strong><h3>Problem + Supply Gate</h3><p>20 user interviews, 15 owner interviews ແລະ place records ຊຸດທຳອິດ 30 ແຫ່ງ.</p><small>RELEASE CONDITION: approved pilot budget</small></article>
-          <article><b>35% · W3–W4</b><strong>{formatLak(cashCeiling * .35)}</strong><h3>User-value + Technical Gate</h3><p>ຂະຫຍາຍ 60 → 100 places, prototype test, embed/performance/analytics spike.</p><small>RELEASE CONDITION: supply workflow repeats</small></article>
-          <article><b>35% · W5–W6</b><strong>{formatLak(cashCeiling * .35)}</strong><h3>Revenue + Decision Gate</h3><p>Outreach 30 ຮ້ານ, 3 paid/deposit + 2 LOI ແລະ final GO/PIVOT/NO-GO review.</p><small>RELEASE CONDITION: user-value signal</small></article>
+          <article><b>ງວດທີ 1 · 30% · ອາທິດ 1–2</b><strong>{formatLak(cashCeiling * .30)}</strong><h3>ກວດບັນຫາ ແລະແຫຼ່ງຂໍ້ມູນ</h3><p>ສຳພາດຜູ້ໃຊ້ 20 ຄົນ, ເຈົ້າຂອງຮ້ານ 15 ຮ້ານ ແລະສ້າງຂໍ້ມູນສະຖານທີ່ຊຸດທຳອິດ 30 ແຫ່ງ.</p><small>ເປີດໃຊ້ຫຼັງຈາກອະນຸມັດເພດານງົບທົດລອງ</small></article>
+          <article><b>ງວດທີ 2 · 35% · ອາທິດ 3–4</b><strong>{formatLak(cashCeiling * .35)}</strong><h3>ກວດຄຸນຄ່າຕໍ່ຜູ້ໃຊ້ ແລະເຕັກນິກ</h3><p>ຂະຫຍາຍຂໍ້ມູນເປັນ 60 → 100 ແຫ່ງ, ທົດສອບຕົວຢ່າງ, ຄວາມໄວ ແລະການເກັບສະຖິຕິ.</p><small>ເປີດໃຊ້ເມື່ອການສ້າງຂໍ້ມູນເຮັດຊ້ຳໄດ້ ແລະງວດທີ 1 ບໍ່ເກີນງົບ</small></article>
+          <article><b>ງວດທີ 3 · 35% · ອາທິດ 5–6</b><strong>{formatLak(cashCeiling * .35)}</strong><h3>ກວດລາຍຮັບ ແລະຕັດສິນໃຈ</h3><p>ເຂົ້າຫາ 30 ຮ້ານ, ຫາ 3 ຮ້ານທີ່ຈ່າຍ/ວາງມັດຈຳ + 2 ໜັງສືສະແດງເຈດຈຳນົງ ແລະຕັດສິນໄປຕໍ່, ປັບ ຫຼືຢຸດ.</p><small>ເປີດໃຊ້ເມື່ອຜູ້ໃຊ້ສະແດງພຶດຕິກຳຕັດສິນໃຈຜ່ານຕົວຢ່າງ</small></article>
         </div>
       </section>
 
       <section>
-        <span>06 · REVENUE LOGIC</span>
+        <span>06 · ຫຼັກຖານຂອງລາຍຮັບ</span>
         <h2>ແຍກຫຼັກຖານລາຍຮັບອອກຈາກຄວາມສົນໃຈ</h2>
         <div className={styles.revenueEvidence}>
-          <div><b>A · CASH</b><strong>Paid pilot</strong><p>ຫຼັກຖານແຂງທີ່ສຸດ; ບັນທຶກ cash collected ແລະ service obligation.</p></div>
-          <div><b>B · COMMITMENT</b><strong>Refundable deposit</strong><p>ສະແດງ willingness-to-pay ແຕ່ຕ້ອງແຍກເປັນ liability ຈົນກວ່າຈະສົ່ງມອບ.</p></div>
-          <div><b>C · INTENT</b><strong>Signed LOI</strong><p>ໃຊ້ປະກອບການຕັດສິນ ແຕ່ບໍ່ນັບເປັນ cash ຫຼື revenue.</p></div>
-          <div><b>D · SIGNAL ONLY</b><strong>Verbal interest</strong><p>ເກັບເປັນ interview note; ບໍ່ນັບໃນ revenue gate.</p></div>
+          <div><b>A · ຮັບເງິນແລ້ວ</b><strong>ຊຳລະຄ່າທົດລອງ</strong><p>ເປັນຫຼັກຖານແຂງທີ່ສຸດ; ຕ້ອງບັນທຶກເງິນທີ່ຮັບ ແລະບໍລິການທີ່ຕ້ອງສົ່ງມອບ.</p></div>
+          <div><b>B · ມີຂໍ້ຜູກມັດ</b><strong>ເງິນມັດຈຳທີ່ຄືນໄດ້</strong><p>ສະແດງວ່າລູກຄ້າມີຄວາມພ້ອມຈ່າຍ ແຕ່ຍັງຕ້ອງແຍກໄວ້ເປັນເງິນທີ່ອາດຕ້ອງຄືນ.</p></div>
+          <div><b>C · ສະແດງເຈດຈຳນົງ</b><strong>ໜັງສືສະແດງເຈດຈຳນົງ</strong><p>ໃຊ້ປະກອບການຕັດສິນ ແຕ່ບໍ່ນັບເປັນເງິນສົດ ຫຼືລາຍຮັບ.</p></div>
+          <div><b>D · ພຽງສັນຍານ</b><strong>ຄຳເວົ້າວ່າສົນໃຈ</strong><p>ເກັບໄວ້ເປັນບັນທຶກການສຳພາດ ແຕ່ບໍ່ນັບໃນເກນພິສູດລາຍຮັບ.</p></div>
         </div>
       </section>
 
       <section>
-        <span>07 · CASH FLOW VIEW</span>
+        <span>07 · ການຕິດຕາມເງິນສົດ</span>
         <h2>ຕົວເລກທີ່ຕ້ອງລາຍງານທຸກອາທິດ</h2>
         <div className={styles.financialMetrics}>
-          <article><b>CASH CONTROL</b><ul><li>Opening cash</li><li>Cash spent this week</li><li>Committed but unpaid</li><li>Cash remaining</li><li>Stop-loss remaining</li></ul></article>
-          <article><b>OPERATING COST</b><ul><li>Cash cost / place</li><li>Minutes / verified place</li><li>Cost / user test</li><li>Cost / owner acquired</li><li>Hosting cost / active user</li></ul></article>
-          <article><b>REVENUE QUALITY</b><ul><li>Cash collected</li><li>Deposits held</li><li>Signed LOI</li><li>Monthly recurring revenue</li><li>Contribution margin</li></ul></article>
+          <article><b>ຄວບຄຸມເງິນສົດ</b><ul><li>ເງິນຕົ້ນອາທິດ</li><li>ເງິນທີ່ໃຊ້ໃນອາທິດ</li><li>ລາຍຈ່າຍທີ່ຕົກລົງແລ້ວແຕ່ຍັງບໍ່ຈ່າຍ</li><li>ເງິນຄົງເຫຼືອ</li><li>ວົງເງິນທີ່ຍັງອະນຸຍາດໃຫ້ເສຍໄດ້</li></ul></article>
+          <article><b>ຕົ້ນທຶນການດຳເນີນງານ</b><ul><li>ຕົ້ນທຶນເງິນສົດຕໍ່ສະຖານທີ່</li><li>ເວລາກວດສອບຕໍ່ສະຖານທີ່</li><li>ຕົ້ນທຶນຕໍ່ຜູ້ທົດສອບ</li><li>ຕົ້ນທຶນຕໍ່ຮ້ານທີ່ໄດ້ມາ</li><li>ຄ່າເຊີເວີຕໍ່ຜູ້ໃຊ້</li></ul></article>
+          <article><b>ຄຸນນະພາບຂອງລາຍຮັບ</b><ul><li>ເງິນທີ່ຮັບແລ້ວ</li><li>ເງິນມັດຈຳທີ່ຖືໄວ້</li><li>ໜັງສືສະແດງເຈດຈຳນົງ</li><li>ລາຍຮັບປະຈຳຕໍ່ເດືອນ</li><li>ກຳໄລຫຼັງຫັກລາຍຈ່າຍຜັນແປ</li></ul></article>
         </div>
       </section>
 
       <section>
-        <span>08 · UNIT ECONOMICS</span>
+        <span>08 · ຕົ້ນທຶນ ແລະລາຍຮັບຕໍ່ໜ່ວຍ</span>
         <h2>ສູດສຳລັບຕັດສິນໃຈ</h2>
-        <div className={styles.formulaBlock}><b>CORE FORMULAS</b><p>MRR = paying partners × monthly price</p><p>Campaign revenue = campaigns × campaign price</p><p>Contribution / partner = subscription price − variable service cost / partner</p><p>Net burn = monthly cash cost − monthly cash revenue</p><p>Runway = available project cash ÷ net monthly burn</p><p>Break-even partners = (fixed cost − campaign contribution) ÷ contribution per partner</p></div>
-        <p className={styles.metricNote}>ຖ້າ contribution per partner ຍັງບໍ່ຮູ້ ບໍ່ຄວນໃຊ້ break-even result ເປັນຄຳສັນຍາ; ຕ້ອງວັດຈາກ paid pilot.</p>
+        <div className={styles.formulaBlock}><b>ສູດຫຼັກ</b><p>ລາຍຮັບປະຈຳຕໍ່ເດືອນ = ຈຳນວນຮ້ານທີ່ຈ່າຍ × ຄ່າສະມາຊິກຕໍ່ເດືອນ</p><p>ລາຍຮັບຈາກໂຄສະນາ = ຈຳນວນການໂຄສະນາ × ລາຄາຕໍ່ຄັ້ງ</p><p>ເງິນທີ່ເຫຼືອຈາກແຕ່ລະຮ້ານ = ຄ່າສະມາຊິກ − ລາຍຈ່າຍຜັນແປໃນການບໍລິການຮ້ານນັ້ນ</p><p>ເງິນທີ່ຂາດຕໍ່ເດືອນ = ລາຍຈ່າຍເງິນສົດຕໍ່ເດືອນ − ລາຍຮັບເງິນສົດຕໍ່ເດືອນ</p><p>ໄລຍະທີ່ເງິນຮອງຮັບໄດ້ = ເງິນໂຄງການທີ່ມີ ÷ ເງິນທີ່ຂາດຕໍ່ເດືອນ</p><p>ຈຳນວນຮ້ານສຳລັບຄຸ້ມທຶນ = (ລາຍຈ່າຍຄົງທີ່ − ລາຍຮັບສຸດທິຈາກໂຄສະນາ) ÷ ເງິນທີ່ເຫຼືອຈາກແຕ່ລະຮ້ານ</p></div>
+        <p className={styles.metricNote}>ຖ້າຍັງບໍ່ຮູ້ລາຍຈ່າຍຜັນແປຕໍ່ຮ້ານ ບໍ່ຄວນໃຊ້ຜົນຄຳນວນຈຸດຄຸ້ມທຶນເປັນຄຳສັນຍາ; ຕ້ອງວັດຈາກຮ້ານທີ່ຊຳລະຄ່າທົດລອງຈິງ.</p>
       </section>
 
       <section>
-        <span>09 · FINANCIAL GATES</span>
-        <h2>GO / HOLD / STOP</h2>
-        <div className={styles.gateTable} role="table" aria-label="Financial decision gates">
-          <div role="row"><b>GATE</b><b>GO</b><b>HOLD / PIVOT</b><b>STOP</b></div>
-          <div role="row"><strong>Capital safety</strong><p>Pilot cash ແຍກຈາກ personal reserve ແລະຢູ່ໃນ ceiling.</p><span>ຕ້ອງຫຼຸດ scope ຫຼືຍືດເວລາ.</span><em>ຕ້ອງໃຊ້ emergency fund ຫຼື debt.</em></div>
-          <div role="row"><strong>Milestone spend</strong><p>ລາຍຈ່າຍບໍ່ເກີນ tranche ແລະ gate ຜ່ານ.</p><span>ລາຍຈ່າຍສູງ ແຕ່ມີວິທີຫຼຸດທີ່ທົດສອບໄດ້.</span><em>ເກີນ ceiling ແລະບໍ່ມີ evidence ໃໝ່.</em></div>
-          <div role="row"><strong>Revenue proof</strong><p>3 paid/deposit + 2 signed LOI ພາຍໃນ outreach 30 ຮ້ານ.</p><span>ມີ commitment ແຕ່ price/package ຕ້ອງປັບ.</span><em>ມີແຕ່ verbal interest.</em></div>
-          <div role="row"><strong>Post-pilot runway</strong><p>ມີ cash runway ຢ່າງໜ້ອຍ 3 ເດືອນສຳລັບຂັ້ນຕໍ່ໄປ.</p><span>ຢຸດພັດທະນາ ແລະຫາທຶນ/ລາຍຮັບກ່ອນ.</span><em>Cash runway ເປັນສູນ ຫຼືຕິດລົບ.</em></div>
+        <span>09 · ຈຸດກວດສອບດ້ານການເງິນ</span>
+        <h2>ໄປຕໍ່ / ພັກໄວ້ / ຢຸດ</h2>
+        <div className={styles.gateTable} role="table" aria-label="ຈຸດກວດສອບດ້ານການເງິນ">
+          <div role="row"><b>ຈຸດກວດ</b><b>ໄປຕໍ່</b><b>ພັກໄວ້ ຫຼືປັບ</b><b>ຢຸດ</b></div>
+          <div role="row"><strong>ຄວາມປອດໄພຂອງທຶນ</strong><p>ເງິນທົດລອງແຍກຈາກເງິນສຳຮອງສ່ວນຕົວ ແລະບໍ່ເກີນເພດານ.</p><span>ຕ້ອງຫຼຸດຂອບເຂດວຽກ ຫຼືຍືດເວລາ.</span><em>ຕ້ອງໃຊ້ເງິນສຳຮອງສຸກເສີນ ຫຼືເງິນກູ້.</em></div>
+          <div role="row"><strong>ລາຍຈ່າຍແຕ່ລະງວດ</strong><p>ລາຍຈ່າຍບໍ່ເກີນຈຳນວນທີ່ອະນຸຍາດ ແລະວຽກຜ່ານຈຸດກວດ.</p><span>ລາຍຈ່າຍສູງ ແຕ່ມີວິທີຫຼຸດທີ່ທົດສອບໄດ້.</span><em>ເກີນເພດານ ແລະບໍ່ໄດ້ຫຼັກຖານໃໝ່.</em></div>
+          <div role="row"><strong>ຫຼັກຖານລາຍຮັບ</strong><p>3 ຮ້ານຊຳລະ/ວາງມັດຈຳ + 2 ໜັງສືສະແດງເຈດຈຳນົງ ຈາກ 30 ຮ້ານທີ່ເຂົ້າຫາ.</p><span>ມີຂໍ້ຜູກມັດ ແຕ່ຕ້ອງປັບລາຄາ ຫຼືຊຸດບໍລິການ.</span><em>ມີພຽງຄຳເວົ້າວ່າສົນໃຈ.</em></div>
+          <div role="row"><strong>ເງິນສຳລັບຫຼັງການທົດລອງ</strong><p>ມີເງິນຮອງຮັບຢ່າງໜ້ອຍ 3 ເດືອນສຳລັບຂັ້ນຕໍ່ໄປ.</p><span>ຢຸດພັດທະນາ ແລະຫາທຶນ ຫຼືລາຍຮັບກ່ອນ.</span><em>ເງິນຄົງເຫຼືອບໍ່ພໍ ຫຼືຕິດລົບ.</em></div>
         </div>
       </section>
 
       <section>
-        <span>10 · FINANCIAL CONTROL</span>
+        <span>10 · ການຄວບຄຸມບັນຊີ</span>
         <h2>ບັນທຶກທີ່ຕ້ອງມີ</h2>
         <ul className={styles.decisionList}>
-          <li><b>01</b><span>ແຍກ project account/ledger ອອກຈາກບັນຊີສ່ວນຕົວ.</span></li>
-          <li><b>02</b><span>ທຸກລາຍຈ່າຍມີ date, vendor, category, owner, receipt ແລະ hypothesis.</span></li>
-          <li><b>03</b><span>ທຸກລາຍຮັບແຍກ cash, deposit, deferred obligation ແລະ LOI.</span></li>
-          <li><b>04</b><span>ປິດ cash report ທຸກອາທິດ ແລະທົບທວນ gate ທ້າຍອາທິດ 2, 4, 6.</span></li>
-          <li><b>05</b><span>ການປ່ຽນ ceiling ຫຼື tranche ຕ້ອງມີ written decision ແລະເຫດຜົນ.</span></li>
-          <li><b>06</b><span>ກວດ tax, invoice, deposit ແລະ accounting treatment ກັບນັກບັນຊີໃນລາວ.</span></li>
+          <li><b>01</b><span>ແຍກບັນຊີ ຫຼືສົມຸດລາຍຮັບລາຍຈ່າຍຂອງໂຄງການອອກຈາກບັນຊີສ່ວນຕົວ.</span></li>
+          <li><b>02</b><span>ທຸກລາຍຈ່າຍມີວັນທີ, ຜູ້ຮັບເງິນ, ໝວດ, ຜູ້ອະນຸມັດ, ໃບຮັບເງິນ ແລະສິ່ງທີ່ຕ້ອງການພິສູດ.</span></li>
+          <li><b>03</b><span>ທຸກລາຍຮັບຕ້ອງແຍກເປັນເງິນທີ່ຮັບແລ້ວ, ເງິນມັດຈຳ, ພັນທະບໍລິການທີ່ຍັງຄ້າງ ແລະໜັງສືສະແດງເຈດຈຳນົງ.</span></li>
+          <li><b>04</b><span>ສະຫຼຸບເງິນສົດທຸກອາທິດ ແລະທົບທວນຈຸດກວດສອບທ້າຍອາທິດ 2, 4 ແລະ 6.</span></li>
+          <li><b>05</b><span>ການປ່ຽນເພດານງົບ ຫຼືຈຳນວນແຕ່ລະງວດ ຕ້ອງມີບັນທຶກການຕັດສິນໃຈ ແລະເຫດຜົນ.</span></li>
+          <li><b>06</b><span>ກວດພາສີ, ໃບແຈ້ງໜີ້, ເງິນມັດຈຳ ແລະວິທີລົງບັນຊີກັບນັກບັນຊີໃນລາວ.</span></li>
         </ul>
       </section>
 
       <section>
-        <span>11 · FINANCIAL RISKS</span>
+        <span>11 · ຄວາມສ່ຽງດ້ານການເງິນ</span>
         <h2>ຄວາມສ່ຽງທີ່ຕ້ອງຄຸມ</h2>
         <ol className={styles.riskList}>{financialRisks.map(([level, risk, control]) => <li key={level}><b>{level}</b><p>{risk}</p><span>{control}</span></li>)}</ol>
       </section>
 
       <section>
-        <span>12 · OPEN DECISIONS</span>
+        <span>12 · ຈຸດທີ່ຕ້ອງຕັດສິນໃຈ</span>
         <h2>5 ຂໍ້ທີ່ຢາກໃຫ້ທ່ານທົບທວນ</h2>
         <ol className={styles.openQuestions}>
-          <li><b>01</b><p>Pilot cash ceiling ທີ່ສາມາດເສຍໄດ້ທັງໝົດ ໂດຍບໍ່ແຕະ personal emergency reserve ແມ່ນເທົ່າໃດ?</p></li>
-          <li><b>02</b><p>ເຫັນດີໃຫ້ໃຊ້ founder equity/cash ເທົ່ານັ້ນໃນ pilot ແລະບໍ່ໃຊ້ debt ຫຼືບໍ່?</p></li>
-          <li><b>03</b><p>Founder ຈະບໍ່ຮັບເງິນເດືອນໃນ 6 ອາທິດ ຫຼືຕ້ອງມີ minimum allowance?</p></li>
-          <li><b>04</b><p>Monthly fixed/variable cash cost ຈິງທີ່ຈະໃຊ້ໃນ model ແມ່ນເທົ່າໃດ ຫຼັງຈາກຂໍ quotation?</p></li>
-          <li><b>05</b><p>ເຫັນດີກັບ post-pilot runway ຢ່າງໜ້ອຍ 3 ເດືອນ ກ່ອນອະນຸມັດ full MVP ຫຼືບໍ່?</p></li>
+          <li><b>01</b><p>ເພດານງົບທົດລອງທີ່ສາມາດເສຍໄດ້ທັງໝົດ ໂດຍບໍ່ແຕະເງິນສຳຮອງສຸກເສີນສ່ວນຕົວ ແມ່ນເທົ່າໃດ?</p></li>
+          <li><b>02</b><p>ເຫັນດີໃຫ້ໃຊ້ສະເພາະເງິນທຶນຂອງຜູ້ກໍ່ຕັ້ງໃນໄລຍະທົດລອງ ແລະບໍ່ໃຊ້ເງິນກູ້ ຫຼືບໍ່?</p></li>
+          <li><b>03</b><p>ຜູ້ກໍ່ຕັ້ງຈະບໍ່ຮັບເງິນເດືອນໃນ 6 ອາທິດ ຫຼືຕ້ອງມີເງິນຄ່າຄອງຊີບຂັ້ນຕ່ຳ?</p></li>
+          <li><b>04</b><p>ລາຍຈ່າຍຄົງທີ່ ແລະລາຍຈ່າຍຜັນແປຕໍ່ເດືອນທີ່ຈະໃຊ້ໃນການຄຳນວນແມ່ນເທົ່າໃດ ຫຼັງຈາກໄດ້ໃບສະເໜີລາຄາ?</p></li>
+          <li><b>05</b><p>ເຫັນດີໃຫ້ມີເງິນຄົງເຫຼືອຮອງຮັບຢ່າງໜ້ອຍ 3 ເດືອນ ກ່ອນອະນຸມັດສ້າງລະບົບສະບັບໃຊ້ງານຈິງ ຫຼືບໍ່?</p></li>
         </ol>
       </section>
 
       <aside className={styles.approvalGate}>
-        <div><span>REVIEW GATE</span><h2>Financial Structure 0.1</h2></div>
-        <ul><li>Pilot cash ceiling</li><li>Capital source / no-debt rule</li><li>Founder compensation</li><li>Cost assumptions</li><li>Post-pilot runway</li></ul>
+        <div><span>ຈຸດທົບທວນ</span><h2>ໂຄງສ້າງການເງິນ 0.1</h2></div>
+        <ul><li>ເພດານງົບທົດລອງ</li><li>ແຫຼ່ງທຶນ ແລະກົດບໍ່ໃຊ້ເງິນກູ້</li><li>ຄ່າຕອບແທນຜູ້ກໍ່ຕັ້ງ</li><li>ສົມມຸດຖານລາຍຈ່າຍ</li><li>ເງິນສຳລັບຫຼັງການທົດລອງ</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
-        <a href={`${basePath}/documents/feasibility-study`}><small>← APPROVED INPUT</small><strong>ການສຶກສາຄວາມເປັນໄປໄດ້</strong></a>
-        <a href={`${basePath}/documents/revenue-kpi`}><small>NEXT PRIORITY →</small><strong>ລາຍຮັບ ແລະຕົວຊີ້ວັດ</strong></a>
+        <a href={`${basePath}/documents/feasibility-study`}><small>← ເອກະສານຕົ້ນທາງທີ່ອະນຸມັດແລ້ວ</small><strong>ການສຶກສາຄວາມເປັນໄປໄດ້</strong></a>
+        <a href={`${basePath}/documents/revenue-kpi`}><small>ເອກະສານລຳດັບຕໍ່ໄປ →</small><strong>ລາຍຮັບ ແລະຕົວຊີ້ວັດ</strong></a>
       </nav>
     </article>
   );
