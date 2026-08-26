@@ -260,7 +260,7 @@ export default function SystemAnalysisDataModel() {
         <article><small>LOGICAL ENTITIES</small><strong>{entities.length}</strong><p>6 Data Domains ທີ່ແຍກຂອບເຂດຊັດເຈນ</p></article>
         <article><small>ATTRIBUTES</small><strong>{totalAttributes}</strong><p>ລະບຸ Type, Key, Required ແລະ Constraint</p></article>
         <article><small>RELATIONSHIPS</small><strong>{relationships.length}</strong><p>Cardinality ແລະ Referential Rule ທຸກຄູ່</p></article>
-        <article><small>NEXT STEP</small><strong>03</strong><p>Workflow & Sequence ຂອງແຕ່ລະ Module</p></article>
+        <article><small>STEP STATUS</small><strong>DONE</strong><p>Workflow & Sequence ຖືກຈັດເຮັດຕໍ່ໃນພາກ D</p></article>
       </div>
 
       <section className={styles.documentArticleSection}>
@@ -381,8 +381,8 @@ export default function SystemAnalysisDataModel() {
       </section>
 
       <aside className={styles.saNextStep}>
-        <small>ສະຖານະ SA</small><h2>ຂັ້ນ 1–2 ຈັດເຮັດແລ້ວ · ຂັ້ນ 3 ແມ່ນ Workflow/Sequence ຂອງແຕ່ລະ Module</h2>
-        <p>Entity ແລະ Relationship ໃນພາກ C ຈະເປັນ Data Contract ພື້ນຖານຂອງ Workflow. ຂັ້ນ 3 ຈະລະບຸ Actor/Module call order, Transaction boundary, Alternate Flow ແລະຈຸດທີ່ Entity ແຕ່ລະອັນຖືກອ່ານ ຫຼືປ່ຽນ.</p>
+        <small>ສະຖານະ SA</small><h2>ຂັ້ນ 1–2 ຈັດເຮັດແລ້ວ · ອ່ານຕໍ່ຂັ້ນ 3 Workflow/Sequence</h2>
+        <p>Entity ແລະ Relationship ໃນພາກ C ເປັນ Data Contract ພື້ນຖານຂອງ Workflow. ພາກ D ດ້ານລຸ່ມຈະລະບຸ Actor/Module call order, Transaction boundary, Alternate Flow ແລະຈຸດທີ່ Entity ແຕ່ລະອັນຖືກອ່ານ ຫຼືປ່ຽນ.</p>
       </aside>
     </section>
   );

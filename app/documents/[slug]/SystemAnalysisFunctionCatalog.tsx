@@ -174,6 +174,7 @@ const modules: Module[] = [
 ];
 
 const totalFunctions = modules.reduce((sum, module) => sum + module.functions.length, 0);
+export const systemFunctionIds = modules.flatMap((module) => module.functions.map((item) => item.id));
 const typeCounts = modules.flatMap((module) => module.functions).reduce<Record<string, number>>((counts, item) => ({ ...counts, [item.type]: (counts[item.type] ?? 0) + 1 }), {});
 
 export default function SystemAnalysisFunctionCatalog() {
