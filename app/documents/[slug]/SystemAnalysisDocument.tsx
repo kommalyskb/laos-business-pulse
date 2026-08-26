@@ -7,6 +7,7 @@ import SystemAnalysisDataModel from "./SystemAnalysisDataModel";
 import SystemAnalysisWorkflows from "./SystemAnalysisWorkflows";
 import SystemAnalysisFunctionSpecifications from "./SystemAnalysisFunctionSpecifications";
 import SystemAnalysisStateErrors from "./SystemAnalysisStateErrors";
+import SystemAnalysisTraceability from "./SystemAnalysisTraceability";
 
 const useCases = [
   {
@@ -128,7 +129,7 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
   return (
     <article className={`${styles.detailBody} ${styles.systemAnalysisBody} ${styles.businessDocument}`}>
       <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>0.7</strong></div>
+        <div><small>ສະບັບ</small><strong>0.8</strong></div>
         <div><small>ສະຖານະ</small><strong>ກຳລັງຈັດເຮັດ</strong></div>
         <div><small>ວັນທີປັບປຸງ</small><strong>26 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>PRO-01 Product Requirements 1.0</strong></div>
@@ -138,7 +139,7 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
         <div><span>ປັບສະຖານະເອກະສານ</span><h2>PRO-02 ກຳລັງຖືກສ້າງຄືນຕາມ 7 ຂັ້ນຂອງ System Analysis</h2></div>
         <div>
           <p>PRO-02 ຖືກຖອນຈາກສະຖານະ 1.0 ເພາະຍັງບໍ່ພຽງພໍສຳລັບ Developer Handoff. Actor, Boundary, Use Case ລະດັບສູງ ແລະ Business Rules ຈະຖືກເກັບເປັນພາກພື້ນຖານ.</p>
-          <p>Functional Decomposition/Catalog ເປັນພາກ B; Logical Data Model/ERD ເປັນພາກ C; Workflow/Sequence ເປັນພາກ D; Function Specification/Algorithm ເປັນພາກ E; State Transition/Error Handling ເປັນພາກ F ແລ້ວ. ກ່ອນກັບໄປສູ່ສະບັບ 1.0 ຍັງຕ້ອງເພີ່ມ Traceability Matrix ແລະ Development Dependency Order.</p>
+          <p>Functional Decomposition/Catalog ເປັນພາກ B; Logical Data Model/ERD ເປັນພາກ C; Workflow/Sequence ເປັນພາກ D; Function Specification/Algorithm ເປັນພາກ E; State Transition/Error Handling ເປັນພາກ F; Requirement Traceability Matrix ເປັນພາກ G ແລ້ວ. ກ່ອນກັບໄປສູ່ສະບັບ 1.0 ຍັງຕ້ອງເພີ່ມ Development Starting Point & Dependency Order.</p>
         </div>
       </aside>
 
@@ -165,6 +166,7 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
           <li><a href="#sa-traceability">Traceability</a></li>
           <li><a href="#sa-review">5 ຂໍ້ຕັດສິນທີ່ອະນຸມັດ</a></li>
           <li><a href="#sa-state-error-specification">State Transition & Error Handling</a></li>
+          <li><a href="#sa-full-traceability">Full Traceability Matrix</a></li>
         </ol>
       </nav>
 
@@ -362,9 +364,11 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
 
       <SystemAnalysisStateErrors />
 
+      <SystemAnalysisTraceability />
+
       <aside className={styles.draftApprovalGate}>
-        <div><span>ກຳລັງຈັດເຮັດ</span><h2>PRO-02 · System Analysis 0.7</h2><p>ຂັ້ນ 1–5 ຈັດເຮັດແລ້ວ: 64 Functions ມີ Catalog, Data Model, Workflow, Specification/Algorithm ແລະ Error Policy ຄົບ. 7 State Machines ກຳນົດ Transition, Guard, Atomic Write, Retry ແລະ Failure Result ແລ້ວ. ເອກະສານຍັງບໍ່ເປັນ Developer-ready SA ຈົນກວ່າຂັ້ນ 6–7 ຈະຄົບ.</p></div>
-        <ul><li>ພາກ A · Context & Rules — ມີແລ້ວ</li><li>ຂັ້ນ 1 · Functional Decomposition & Catalog — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 2 · Logical Data Model & ERD — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 3 · Workflow/Sequence — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 4 · Function Specification & Algorithm — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 5 · State Transition & Error Handling — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 6 · Traceability Matrix — ຍັງຕ້ອງເຮັດ</li><li>ຂັ້ນ 7 · Developer Handoff — ຍັງຕ້ອງເຮັດ</li></ul>
+        <div><span>ກຳລັງຈັດເຮັດ</span><h2>PRO-02 · System Analysis 0.8</h2><p>ຂັ້ນ 1–6 ຈັດເຮັດແລ້ວ. Traceability ເຊື່ອມ PRO-01 13 Requirements ຄົບຫາ 64 Functions, 27 Entities, 16 Workflows, 7 State Machines, 30 Error Codes ແລະ Acceptance/Test Evidence ເບື້ອງຕົ້ນ. ເອກະສານຍັງບໍ່ເປັນ Developer-ready SA ຈົນກວ່າຂັ້ນ 7 ຈະກຳນົດ Development Starting Point ແລະ Dependency Order.</p></div>
+        <ul><li>ພາກ A · Context & Rules — ມີແລ້ວ</li><li>ຂັ້ນ 1 · Functional Decomposition & Catalog — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 2 · Logical Data Model & ERD — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 3 · Workflow/Sequence — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 4 · Function Specification & Algorithm — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 5 · State Transition & Error Handling — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 6 · Traceability Matrix — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 7 · Developer Handoff — ຍັງຕ້ອງເຮັດ</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">

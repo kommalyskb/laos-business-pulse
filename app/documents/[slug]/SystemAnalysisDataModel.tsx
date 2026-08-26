@@ -232,6 +232,7 @@ const relationships: Relationship[] = [
 
 const groupOrder = ["PLACE CATALOG", "CONTENT", "TRUST & OPERATIONS", "COMMERCIAL", "PLATFORM CONTROL", "MEASUREMENT"];
 const totalAttributes = entities.reduce((sum, entity) => sum + entity.attributes.length, 0);
+export const systemEntityIds = entities.map((entity) => entity.id);
 
 const moduleCoverage = [
   ["MOD-01 Discovery Feed", "Place, Content Source, Creator, Sponsored Campaign", "Read Model ສ້າງຈາກ Published/Active records; ບໍ່ມີ Feed Item table ໃນ Logical Source of Truth"],

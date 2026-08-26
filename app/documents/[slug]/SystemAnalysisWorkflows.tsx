@@ -321,6 +321,7 @@ const coveredFunctions = Array.from(new Set(workflows.flatMap((workflow) => work
 const missingFunctions = systemFunctionIds.filter((functionId) => !coveredFunctions.includes(functionId));
 const totalSteps = workflows.reduce((sum, workflow) => sum + workflow.steps.length, 0);
 const coveragePercent = Math.round((coveredFunctions.length / systemFunctionIds.length) * 100);
+export const systemWorkflowIds = workflows.map((workflow) => workflow.id);
 
 export default function SystemAnalysisWorkflows() {
   return (

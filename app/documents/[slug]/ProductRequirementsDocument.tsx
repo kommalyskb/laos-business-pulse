@@ -51,6 +51,11 @@ const requirements = [
   ["ANA-01", "Must", "Product Analytics", "ບັນທຶກ Feed view, Place open, Search, Filter, Map, Call, Message, Save ແລະ Share."],
 ] as const;
 
+export const productRequirementIds = [
+  ...requirements.map(([id]) => id),
+  "NFR-01", "NFR-02", "NFR-03", "NFR-04",
+];
+
 const userStories = [
   ["ຜູ້ຊອກຮ້ານ", "ເມື່ອບໍ່ຮູ້ຈະໄປກິນຫຍັງ ຂ້ອຍຢາກເລື່ອນເບິ່ງວິດີໂອຕາມໝວດ ເພື່ອພົບຮ້ານທີ່ສົນໃຈ."],
   ["ຜູ້ກຳລັງຕັດສິນໃຈ", "ເມື່ອສົນໃຈຮ້ານ ຂ້ອຍຢາກເຫັນລາຄາ, ເວລາ, ທີ່ຢູ່ ແລະ Review source ໃນໜ້າດຽວ."],

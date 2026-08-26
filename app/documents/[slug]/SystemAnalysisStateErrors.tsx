@@ -279,6 +279,8 @@ const missingCoverage = systemFunctionCatalog.filter((fn) => !(moduleErrorPolici
 const totalTransitions = stateMachines.reduce((sum, machine) => sum + machine.transitions.length, 0);
 const uniqueErrorCodes = new Set(errors.map((item) => item.code));
 const unknownPolicyCodes = Array.from(new Set(Object.values(moduleErrorPolicies).flat())).filter((code) => !uniqueErrorCodes.has(code));
+export const systemStateMachineIds = stateMachines.map((machine) => machine.id);
+export const systemErrorCodes = errors.map((error) => error.code);
 
 export default function SystemAnalysisStateErrors() {
   const coveragePass = missingCoverage.length === 0 && unknownPolicyCodes.length === 0;
