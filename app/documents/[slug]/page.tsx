@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { categories, documents, getDocument } from "../documentData";
 import styles from "../documents.module.css";
 import BusinessCanvasDocument from "./BusinessCanvasDocument";
+import ContentDesignDocument from "./ContentDesignDocument";
 import FeasibilityStudyDocument from "./FeasibilityStudyDocument";
 import FinancialStructureDocument from "./FinancialStructureDocument";
 import MarketCompetitorDocument from "./MarketCompetitorDocument";
@@ -96,8 +97,10 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
                       ? <SystemAnalysisDocument basePath={basePath} />
                       : document.slug === "mvp-scope"
                         ? <MvpScopeDocument basePath={basePath} />
-                        : document.slug === "requirements-acceptance"
+                      : document.slug === "requirements-acceptance"
                           ? <RequirementsAcceptanceDocument basePath={basePath} />
+                          : document.category === "content" || document.category === "design"
+                            ? <ContentDesignDocument slug={document.slug} basePath={basePath} />
                 : <article className={styles.detailBody}>
           <section>
             <span>01 · PURPOSE</span>
