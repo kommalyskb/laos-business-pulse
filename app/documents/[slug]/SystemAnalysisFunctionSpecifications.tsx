@@ -185,7 +185,7 @@ export default function SystemAnalysisFunctionSpecifications() {
         <span>E4 · SPECIFICATION COVERAGE GATE</span>
         <h2>Function Catalog → Specification Coverage</h2>
         <div className={missingSpecs.length + unknownSpecs.length + duplicateSpecs.length === 0 ? styles.saCoveragePass : styles.saCoverageFail}>
-          <strong>{specs.length}/{systemFunctionCatalog.length}</strong><div><b>{missingSpecs.length + unknownSpecs.length + duplicateSpecs.length === 0 ? "PASS — ONE SPEC PER FUNCTION" : "SPECIFICATION MISMATCH"}</b><p>{missingSpecs.length + unknownSpecs.length + duplicateSpecs.length === 0 ? "Function Catalog ທຸກອັນມີ Specification ໜຶ່ງອັນພອດີ; ບໍ່ຂາດ, ບໍ່ເກີນ ແລະບໍ່ຊ້ຳ ID." : `Missing: ${missingSpecs.join(", ") || "—"}; Unknown: ${unknownSpecs.join(", ") || "—"}; Duplicate: ${duplicateSpecs.join(", ") || "—"}`}</p></div>
+          <strong>{specs.length}/{systemFunctionCatalog.length}</strong><div><b>{missingSpecs.length + unknownSpecs.length + duplicateSpecs.length === 0 ? "PASS — ONE SPEC PER FUNCTION" : "SPECIFICATION MISMATCH"}</b><p>{missingSpecs.length + unknownSpecs.length + duplicateSpecs.length === 0 ? "Function Catalog ທຸກອັນມີ Specification ໜຶ່ງອັນພໍດີ; ບໍ່ຂາດ, ບໍ່ເກີນ ແລະບໍ່ຊ້ຳ ID." : `Missing: ${missingSpecs.join(", ") || "—"}; Unknown: ${unknownSpecs.join(", ") || "—"}; Duplicate: ${duplicateSpecs.join(", ") || "—"}`}</p></div>
         </div>
         <ul className={styles.decisionList}>
           <li><b>01</b><span>64 Function IDs ມີ Specification 1:1 ແລະອ້າງ Workflow.</span></li>

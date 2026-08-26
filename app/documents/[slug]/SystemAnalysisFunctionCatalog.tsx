@@ -184,7 +184,7 @@ export default function SystemAnalysisFunctionCatalog() {
       <header className={styles.saPartHeader}>
         <span>ພາກ B · ຂັ້ນ 1 ຂອງ SA</span>
         <h2>Functional Decomposition & Function Catalog</h2>
-        <p>ພາກນີ້ແຕກ System Boundary ຈາກພາກ A ອອກເປັນ 10 Modules ແລະ {totalFunctions} Logical Functions. “Function” ໃນ Catalog ໝາຍເຖິງຄວາມຮັບຜິດຊອບໜຶ່ງທີ່ມີ Caller, Input, Output, Data Impact, Rules ແລະ Dependency ຊັດເຈນ; ບໍ່ໄດ້ໝາຍຄວາມວ່າຈະຕ້ອງກາຍເປັນ Code Function ໜຶ່ງອັນພອດີ.</p>
+        <p>ພາກນີ້ແຕກ System Boundary ຈາກພາກ A ອອກເປັນ 10 Modules ແລະ {totalFunctions} Logical Functions. “Function” ໃນ Catalog ໝາຍເຖິງຄວາມຮັບຜິດຊອບໜຶ່ງທີ່ມີ Caller, Input, Output, Data Impact, Rules ແລະ Dependency ຊັດເຈນ; ບໍ່ໄດ້ໝາຍຄວາມວ່າຈະຕ້ອງກາຍເປັນ Code Function ໜຶ່ງອັນພໍດີ.</p>
         <p>Catalog ນີ້ແມ່ນ Baseline ສຳລັບຂັ້ນ 2 Logical Data Model: Entity ແລະ Relationship ຈະຖືກສ້າງຈາກ Data Read/Write ຂອງ Function ເຫຼົ່ານີ້. Algorithm ແບບລະອຽດຍັງບໍ່ຂຽນໃນຂັ້ນນີ້ ເພາະເປັນຂັ້ນ 4.</p>
       </header>
 
