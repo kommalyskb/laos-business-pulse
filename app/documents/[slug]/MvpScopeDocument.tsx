@@ -96,7 +96,7 @@ export default function MvpScopeDocument({ basePath }: { basePath: string }) {
   return (
     <article className={`${styles.detailBody} ${styles.businessDocument} ${styles.mvpScopeBody}`}>
       <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>0.1</strong></div>
+        <div><small>ສະບັບ</small><strong>0.2</strong></div>
         <div><small>ສະຖານະ</small><strong>ຮ່າງສຳລັບທົບທວນ</strong></div>
         <div><small>ວັນທີປັບປຸງ</small><strong>26 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>PRO-01 1.0 + PRO-02 1.0 + BUS-04/06 1.0</strong></div>
@@ -104,27 +104,28 @@ export default function MvpScopeDocument({ basePath }: { basePath: string }) {
 
       <header className={styles.documentReadingHeader}>
         <span>PRO-03 · MVP SCOPE & PRIORITIZATION</span>
-        <h2>ຂອບເຂດ MVP ທີ່ພິສູດທຸລະກິດໄດ້ ໂດຍບໍ່ສ້າງເກີນຄວາມຈຳເປັນ</h2>
-        <p>PRO-03 ຕອບ 4 ຄຳຖາມ: ສິ່ງໃດຂາດບໍ່ໄດ້ກ່ອນ Validation Pilot, ສິ່ງໃດໃຊ້ Manual/Concierge ແທນໄດ້, ສິ່ງໃດຕ້ອງເລື່ອນຈົນມີຫຼັກຖານ ແລະ Gate ໃດອະນຸຍາດໃຫ້ໄປສູ່ Public MVP.</p>
-        <p>ເອກະສານນີ້ບໍ່ອະນຸມັດ Full Development ໂດຍອັດຕະໂນມັດ. Feasibility Study ຍັງກຳນົດ Conditional Go ສຳລັບ Validation Pilot 6 ອາທິດ; ການຂະຫຍາຍຕ້ອງອີງ User, Supply, Revenue, Economics ແລະ Trust evidence.</p>
+        <h2>ສະບັບທຳອິດຂອງ “ພ້ອມໄປ” ຈະເຮັດຫຍັງ ແລະຍັງບໍ່ເຮັດຫຍັງ</h2>
+        <p>ເອກະສານນີ້ໃຊ້ກຳນົດຂອບເຂດການພັດທະນາສະບັບທຳອິດ: Function ໃດຕ້ອງມີ, Function ໃດໃຊ້ຄົນຈັດການໄປກ່ອນໄດ້, Function ໃດຄວນເຮັດພາຍຫຼັງ ແລະຫຼັກຖານແບບໃດຈຶ່ງອະນຸຍາດໃຫ້ໂຄງການຂະຫຍາຍຕໍ່.</p>
+        <p>ເປົ້າໝາຍບໍ່ແມ່ນສ້າງ Platform ໃຫ້ຄົບທຸກແນວຄິດ. ເປົ້າໝາຍແມ່ນສ້າງສ່ວນທີ່ພຽງພໍໃຫ້ຜູ້ໃຊ້ທົດລອງໄດ້ຈິງ, ຮ້ານເຫັນຄຸນຄ່າ ແລະທີມວັດໄດ້ວ່າຄວນໄປຕໍ່ ຫຼືປັບແນວທາງ.</p>
       </header>
 
       <nav className={styles.documentToc} aria-label="ສາລະບານ PRO-03"><b>ສາລະບານ</b><ol>
-        <li><a href="#mvp-decision">MVP Decision Statement</a></li><li><a href="#mvp-baseline">Approved Pilot Baseline</a></li><li><a href="#mvp-priority">Priority Definitions</a></li><li><a href="#mvp-milestones">Milestone Boundary</a></li><li><a href="#mvp-catalog">Scope Catalog</a></li><li><a href="#mvp-manual">Manual vs Automation</a></li><li><a href="#mvp-release">Release Gates</a></li><li><a href="#mvp-change">Scope Change Control</a></li><li><a href="#mvp-review">5 ຈຸດທົບທວນ</a></li>
+        <li><a href="#mvp-purpose">ເອກະສານນີ້ໃຊ້ເພື່ອຫຍັງ</a></li><li><a href="#mvp-first-version">ພາບລວມສະບັບທຳອິດ</a></li><li><a href="#mvp-user">ຜູ້ໃຊ້ເຮັດຫຍັງໄດ້</a></li><li><a href="#mvp-build">ທີມຕ້ອງສ້າງຫຍັງ</a></li><li><a href="#mvp-not-now">ສິ່ງທີ່ຍັງບໍ່ສ້າງ</a></li><li><a href="#mvp-milestones">ລຳດັບການພັດທະນາ</a></li><li><a href="#mvp-evidence">ເງື່ອນໄຂການໄປຕໍ່</a></li><li><a href="#mvp-reference">ພາກລາຍລະອຽດອ້າງອີງ</a></li><li><a href="#mvp-review">5 ຈຸດທົບທວນ</a></li>
       </ol></nav>
 
-      <section className={styles.documentArticleSection} id="mvp-decision">
-        <span>01 · DECISION STATEMENT</span><h2>MVP ຕ້ອງພິສູດ 3 ສິ່ງ ບໍ່ແມ່ນສ້າງ Feature ໃຫ້ຫຼາຍທີ່ສຸດ</h2>
-        <blockquote className={styles.prdStatement}>“ພ້ອມໄປ” MVP ຕ້ອງພິສູດວ່າ (1) ຜູ້ໃຊ້ສາມາດໄປຈາກ Video → Place → Action, (2) ທີມສາມາດສ້າງ ແລະຮັກສາ inventory ທີ່ໜ້າເຊື່ອຖື, ແລະ (3) ຮ້ານຍອມຈ່າຍເພື່ອຂໍ້ມູນ/traffic ທີ່ວັດແທກໄດ້.”</blockquote>
-        <div className={styles.mvpProofGrid}>
-          <article><b>USER VALUE</b><h3>Video → Place → Action</h3><p>ຜູ້ທົດສອບຄົ້ນພົບ, ກວດຂໍ້ມູນ ແລະກົດ Map/Call/Message ໄດ້ໂດຍບໍ່ຕ້ອງກັບໄປຄົ້ນ Social ຊ້ຳ.</p></article>
-          <article><b>OPERABILITY</b><h3>100 Places ທີ່ຮັກສາໄດ້</h3><p>Admin ສ້າງ Place/Source, ກວດ, ແກ້, takedown ແລະວັດເວລາ/ຕົ້ນທຶນຕໍ່ record ໄດ້.</p></article>
-          <article><b>WILLINGNESS TO PAY</b><h3>ຫຼັກຖານເງິນ ບໍ່ແມ່ນຄຳວ່າສົນໃຈ</h3><p>ເຂົ້າຫາ 30 ຮ້ານ ແລະມີຢ່າງໜ້ອຍ 3 paid/deposit + 2 signed LOI ພ້ອມຕົ້ນທຶນຢູ່ໃນ stop-loss.</p></article>
+      <section className={styles.documentArticleSection} id="mvp-purpose">
+        <span>01 · PURPOSE</span><h2>PRO-03 ແມ່ນເອກະສານສຳລັບ “ຈຳກັດ ແລະຈັດລຳດັບວຽກ”</h2>
+        <blockquote className={styles.mvpPurposeStatement}>ເອກະສານນີ້ຕ້ອງເຮັດໃຫ້ Product Owner, Developer, Designer ແລະຜູ້ສະໜັບສະໜູນເຂົ້າໃຈກົງກັນວ່າ: <strong>ສະບັບທຳອິດຈະສ້າງຫຍັງ, ບໍ່ສ້າງຫຍັງ ແລະໃຊ້ຫຼັກຖານໃດຕັດສິນການພັດທະນາຕໍ່.</strong></blockquote>
+        <div className={styles.mvpDocumentMap}>
+          <article><b>PRO-01</b><h3>ຕ້ອງການຫຍັງ?</h3><p>ອະທິບາຍບັນຫາ, ຜູ້ໃຊ້ ແລະຄວາມຕ້ອງການຂອງ Platform.</p></article>
+          <article><b>PRO-02</b><h3>ລະບົບເຮັດວຽກແນວໃດ?</h3><p>ອະທິບາຍ Function, Workflow, Data, Algorithm ແລະລຳດັບສຳລັບ Developer.</p></article>
+          <article><b>PRO-03</b><h3>ສິ່ງໃດເຮັດກ່ອນ?</h3><p>ເລືອກສ່ວນທີ່ຈະສ້າງໃນສະບັບທຳອິດ ແລະກັນສ່ວນທີ່ຍັງບໍ່ຈຳເປັນອອກ.</p></article>
         </div>
       </section>
 
-      <section className={styles.documentArticleSection} id="mvp-baseline">
-        <span>02 · APPROVED BASELINE</span><h2>ຂອບເຂດທີ່ສືບທອດຈາກເອກະສານ 1.0</h2>
+      <section className={styles.documentArticleSection} id="mvp-first-version">
+        <span>02 · FIRST VERSION AT A GLANCE</span><h2>ພາບລວມລະບົບສະບັບທຳອິດ</h2>
+        <div className={styles.documentProse}><p>“ພ້ອມໄປ” ສະບັບທຳອິດແມ່ນ Mobile Web ສຳລັບຄົນທີ່ກຳລັງຊອກຫາຮ້ານອາຫານ ຫຼືຄາເຟໃນວຽງຈັນ. ຜູ້ໃຊ້ເບິ່ງວິດີໂອຣີວິວ, ກວດຂໍ້ມູນຮ້ານ ແລະຕິດຕໍ່ ຫຼືເປີດແຜນທີ່ໄປຮ້ານໄດ້. Platform ບໍ່ຮັບຈອງ ແລະບໍ່ຮັບເງິນໃນໄລຍະນີ້.</p></div>
         <div className={styles.mvpBaselineGrid}>
           <article><b>WHERE</b><strong>ວຽງຈັນ</strong><p>ບໍ່ Launch ຫຼາຍແຂວງພ້ອມກັນ.</p></article>
           <article><b>WHAT</b><strong>ອາຫານ + ຄາເຟ</strong><p>2 ໝວດທຳອິດ; inventory 30 → 60 → 100.</p></article>
@@ -135,23 +136,70 @@ export default function MvpScopeDocument({ basePath }: { basePath: string }) {
         </div>
       </section>
 
-      <section className={styles.documentArticleSection} id="mvp-priority">
-        <span>03 · PRIORITY POLICY</span><h2>Must, Should, Later ແລະ Out ມີຄວາມໝາຍແນວໃດ</h2>
-        <div className={styles.mvpPriorityGrid}>
-          <article data-priority="Must"><b>MUST</b><h3>ຂາດບໍ່ໄດ້</h3><p>ຂາດແລ້ວພິສູດ Core Hypothesis ບໍ່ໄດ້, ຂັດ Trust/Safety ຫຼື Pilot ດຳເນີນງານບໍ່ໄດ້. Must ທຸກຂໍ້ຕ້ອງມີ Test Evidence.</p></article>
-          <article data-priority="Should"><b>SHOULD</b><h3>ມີຄຸນຄ່າ ແຕ່ເລື່ອນໄດ້</h3><p>ຊ່ວຍ Pilot ໃຫ້ດີຂຶ້ນ ແຕ່ມີ Manual Fallback ຫຼື Core Hypothesis ຍັງພິສູດໄດ້ຖ້າຂາດ.</p></article>
-          <article data-priority="Later"><b>LATER</b><h3>ລໍຫຼັກຖານ</h3><p>ມີ dependency ກັບ data volume, operation learning, repeat demand ຫຼື business model ທີ່ Pilot ຍັງບໍ່ພິສູດ.</p></article>
-          <article data-priority="Out"><b>OUT</b><h3>ບໍ່ຢູ່ໃນ MVP</h3><p>ບໍ່ນຳໄປອອກແບບ, ຄາດເວລາ ຫຼືໃຊ້ເປັນເກນຮັບມອບ. ການເພີ່ມກັບຕ້ອງຜ່ານ Change Control.</p></article>
+      <section className={styles.documentArticleSection} id="mvp-user">
+        <span>03 · USER EXPERIENCE</span><h2>ຜູ້ໃຊ້ຈະເຮັດຫຍັງໄດ້ໃນສະບັບທຳອິດ</h2>
+        <div className={styles.mvpJourneyFlow}>
+          <article><b>01 · ຄົ້ນພົບ</b><h3>ເບິ່ງ ຫຼືຄົ້ນຫາ</h3><p>ເບິ່ງ Feed ວິດີໂອເຕັມຈໍ ຫຼືຄົ້ນຫາຕາມຊື່, ໝວດ, ເຂດ ແລະຊ່ວງລາຄາ.</p></article><i>→</i>
+          <article><b>02 · ຕັດສິນໃຈ</b><h3>ເບິ່ງຂໍ້ມູນຮ້ານ</h3><p>ເບິ່ງທີ່ຢູ່, ເວລາເປີດ, ລາຄາ, ແຫຼ່ງຣີວິວ ແລະວັນທີກວດຂໍ້ມູນລ່າສຸດ.</p></article><i>→</i>
+          <article><b>03 · ລົງມື</b><h3>Map, Call ຫຼື Message</h3><p>ເປີດແຜນທີ່, ໂທ ຫຼືສົ່ງຂໍ້ຄວາມຫາຮ້ານໂດຍກົງ. ບໍ່ຕ້ອງສະໝັກ Account.</p></article>
+        </div>
+      </section>
+
+      <section className={styles.documentArticleSection} id="mvp-build">
+        <span>04 · WHAT THE TEAM BUILDS</span><h2>ສິ່ງທີ່ທີມຕ້ອງສ້າງໃຫ້ຄົບກ່ອນທົດລອງ</h2>
+        <div className={styles.mvpBuildScope}>
+          <article><b>ສ່ວນຜູ້ໃຊ້</b><h3>Feed, Search, Place, Action</h3><p>ສ້າງເສັ້ນທາງຫຼັກຕັ້ງແຕ່ຄົ້ນພົບວິດີໂອ ຈົນເຖິງກົດ Map, Call ຫຼື Message.</p></article>
+          <article><b>ສ່ວນຂໍ້ມູນ</b><h3>100 ຮ້ານທີ່ກວດແລ້ວ</h3><p>ຮ້ານອາຫານ ແລະຄາເຟໃນວຽງຈັນ ຕ້ອງມີຂໍ້ມູນຫຼັກ, ແຫຼ່ງອ້າງອີງ ແລະວັນທີກວດ.</p></article>
+          <article><b>ສ່ວນບໍລິຫານ</b><h3>Admin ຈັດການຮ້ານ ແລະ Source</h3><p>ສ້າງ, ແກ້, ກວດ, ເຜີຍແຜ່, ລະງັບ ແລະຖອນຂໍ້ມູນໄດ້ ພ້ອມປະຫວັດການປ່ຽນແປງ.</p></article>
+          <article><b>ສ່ວນຄວາມໜ້າເຊື່ອຖື</b><h3>Source, Attribution ແລະ Takedown</h3><p>ຊີ້ກັບຫາຕົ້ນສະບັບ, ບໍ່ Re-host ວິດີໂອ ແລະມີວິທີຖອນ Content ເມື່ອມີການແຈ້ງ.</p></article>
+          <article><b>ສ່ວນວັດຜົນ</b><h3>Decision Intent Analytics</h3><p>ວັດ Feed View, Place Open, Map, Call ແລະ Message ໂດຍບໍ່ນັບວ່າ Click ເທົ່າກັບການໄປຮ້ານ ຫຼືການຊື້.</p></article>
+          <article><b>ສ່ວນທົດສອບລາຍຮັບ</b><h3>Founding Partner Pilot</h3><p>ຮ້ານຈ່າຍ 200,000 ກີບ/ເດືອນ ເພື່ອຮັບການກວດຂໍ້ມູນ, ຊ່ວຍແກ້ໄຂ ແລະລາຍງານຜົນພື້ນຖານ.</p></article>
+        </div>
+      </section>
+
+      <section className={styles.documentArticleSection} id="mvp-not-now">
+        <span>05 · NOT IN THE FIRST VERSION</span><h2>ສິ່ງທີ່ຍັງບໍ່ສ້າງ ແລະເຫດຜົນ</h2>
+        <div className={styles.documentProse}><p>ລາຍການຕໍ່ໄປບໍ່ແມ່ນໄອເດຍທີ່ບໍ່ດີ. ແຕ່ຍັງບໍ່ຈຳເປັນຕໍ່ການພິສູດວ່າຜູ້ໃຊ້ຕ້ອງການ Platform ແລະຮ້ານຍອມຈ່າຍ. ການສ້າງໄວເກີນໄປຈະເພີ່ມເວລາ, ຕົ້ນທຶນ ແລະພາລະການດູແລ.</p></div>
+        <div className={styles.mvpExcludedList}>
+          <article><b>01</b><div><h3>Booking, Order ແລະ Payment</h3><p>ໄລຍະທຳອິດໃຫ້ຜູ້ໃຊ້ຕິດຕໍ່ຮ້ານໂດຍກົງ; ຫຼີກລ້ຽງລະບົບຊຳລະ, refund ແລະ dispute.</p></div></article>
+          <article><b>02</b><div><h3>Native Mobile Application</h3><p>Mobile Web ພຽງພໍສຳລັບທົດສອບ; ບໍ່ຕ້ອງສ້າງ iOS ແລະ Android ແຍກກັນ.</p></div></article>
+          <article><b>03</b><div><h3>User Account ແລະ Social Features</h3><p>ຜູ້ໃຊ້ບໍ່ຕ້ອງມີ Profile, Follow, Comment ຫຼື Notification ເພື່ອຄົ້ນຫາຮ້ານ.</p></div></article>
+          <article><b>04</b><div><h3>AI Recommendation</h3><p>ໃຊ້ການຈັດລຳດັບພື້ນຖານໄປກ່ອນ; AI ຕ້ອງລໍໃຫ້ມີຂໍ້ມູນ ແລະພຶດຕິກຳຜູ້ໃຊ້ພຽງພໍ.</p></div></article>
+          <article><b>05</b><div><h3>Creator Marketplace</h3><p>ຕ້ອງລໍໃຫ້ມີທັງຮ້ານ ແລະ Creator ພຽງພໍກ່ອນສ້າງຕະຫຼາດເຊື່ອມສອງຝ່າຍ.</p></div></article>
+          <article><b>06</b><div><h3>ການ Copy ຫຼື Re-host ວິດີໂອ</h3><p>ບໍ່ດາວໂຫຼດ ຫຼືເກັບວິດີໂອຂອງຜູ້ອື່ນ; ໃຊ້ Link, Embed ແລະ Attribution ຕາມສິດທີ່ອະນຸຍາດ.</p></div></article>
         </div>
       </section>
 
       <section className={styles.documentArticleSection} id="mvp-milestones">
-        <span>04 · MILESTONE BOUNDARY</span><h2>ຢ່າປະປົນ First Slice, Validation Pilot ແລະ Public MVP</h2>
+        <span>06 · DEVELOPMENT ORDER</span><h2>ລຳດັບການພັດທະນາ: ຈາກທົດສອບພາຍໃນ ໄປຫາການຂະຫຍາຍ</h2>
+        <div className={styles.documentProse}><p>ທີມບໍ່ຄວນສ້າງທຸກສ່ວນພ້ອມກັນ. ແຕ່ລະຂັ້ນຕ້ອງສົ່ງຜົນທີ່ທົດສອບໄດ້ ແລ້ວຈຶ່ງຂະຫຍາຍໄປຂັ້ນຕໍ່ໄປ.</p></div>
         <div className={styles.mvpMilestones}>{milestones.map(([id, name, status, detail]) => <article key={id}><b>{id}</b><div><small>{status}</small><h3>{name}</h3><p>{detail}</p></div></article>)}</div>
       </section>
 
+      <section className={styles.documentArticleSection} id="mvp-evidence">
+        <span>07 · CONTINUE OR STOP</span><h2>ຕ້ອງເຫັນຫຼັກຖານຫຍັງ ຈຶ່ງພັດທະນາຕໍ່</h2>
+        <p className={styles.documentQuestion}>ການສ້າງ Software ສຳເລັດ ບໍ່ແມ່ນຫຼັກຖານວ່າທຸລະກິດຈະສຳເລັດ. ໂຄງການຄວນໄປຕໍ່ເມື່ອພົບ 3 ຫຼັກຖານຕໍ່ໄປນີ້.</p>
+        <div className={styles.mvpProofGrid}>
+          <article><b>ຜູ້ໃຊ້</b><h3>ໃຊ້ແລ້ວຊ່ວຍຕັດສິນໃຈ</h3><p>ທົດສອບກັບ 20 ຄົນ ແລະພົບວ່າສາມາດໄປຈາກວິດີໂອ → ຂໍ້ມູນຮ້ານ → Map/Call/Message ໂດຍບໍ່ກັບໄປຄົ້ນ Social ຊ້ຳ.</p></article>
+          <article><b>ການດຳເນີນງານ</b><h3>100 ຮ້ານທີ່ຮັກສາໄດ້</h3><p>ທີມສາມາດສ້າງ, ກວດ, ແກ້ ແລະຮັກສາຂໍ້ມູນຮ້ານໄດ້ໂດຍຕົ້ນທຶນ ແລະເວລາບໍ່ເກີນຂອບເຂດ.</p></article>
+          <article><b>ລາຍຮັບ</b><h3>ມີການຈ່າຍ ບໍ່ແມ່ນພຽງຄຳວ່າສົນໃຈ</h3><p>ເຂົ້າຫາ 30 ຮ້ານ ແລະຕ້ອງມີຢ່າງໜ້ອຍ 3 ຮ້ານຈ່າຍ/ວາງມັດຈຳ ພ້ອມ 2 ຮ້ານເຊັນໜັງສືຢືນຢັນຄວາມຕັ້ງໃຈ.</p></article>
+        </div>
+      </section>
+
+      <div className={styles.mvpReferenceDivider} id="mvp-reference"><span>ພາກລາຍລະອຽດອ້າງອີງ</span><h2>ສຳລັບ Product Owner, SA, Developer ແລະ QA</h2><p>ສ່ວນຕໍ່ໄປນີ້ໃຊ້ກວດລາຍການລະອຽດ. ຜູ້ອ່ານທີ່ຕ້ອງການພຽງພາບລວມສາມາດຂ້າມໄປຫາ “5 ຈຸດທົບທວນ” ໄດ້.</p></div>
+
+      <section className={styles.documentArticleSection} id="mvp-priority">
+        <span>A · PRIORITY POLICY</span><h2>ວິທີອ່ານ Must, Should, Later ແລະ Out</h2>
+        <div className={styles.mvpPriorityGrid}>
+          <article data-priority="Must"><b>MUST</b><h3>ຂາດບໍ່ໄດ້</h3><p>ຖ້າຂາດ ຈະທົດສອບຄຸນຄ່າຫຼັກບໍ່ໄດ້, ລະບົບບໍ່ປອດໄພ ຫຼື Pilot ດຳເນີນງານບໍ່ໄດ້.</p></article>
+          <article data-priority="Should"><b>SHOULD</b><h3>ຄວນມີ ແຕ່ເລື່ອນໄດ້</h3><p>ຊ່ວຍໃຫ້ Pilot ດີຂຶ້ນ ແຕ່ຖ້າເວລາ ຫຼືງົບບໍ່ພໍ ສາມາດເລື່ອນໄດ້.</p></article>
+          <article data-priority="Later"><b>LATER</b><h3>ເຮັດຫຼັງມີຫຼັກຖານ</h3><p>ລໍໃຫ້ຮູ້ປະລິມານວຽກ, ພຶດຕິກຳຜູ້ໃຊ້ ຫຼືຄວາມຕ້ອງການຈິງກ່ອນ.</p></article>
+          <article data-priority="Out"><b>OUT</b><h3>ບໍ່ຢູ່ໃນສະບັບທຳອິດ</h3><p>ບໍ່ນຳໄປຄິດໄລ່ເວລາ, ງົບ ຫຼືເກນຮັບມອບ ຈົນກວ່າຈະອະນຸມັດໃໝ່.</p></article>
+        </div>
+      </section>
+
       <section className={styles.documentArticleSection} id="mvp-catalog">
-        <span>05 · SCOPE CATALOG</span><h2>31 ລາຍການທີ່ແຍກສະຖານະ ແລະເຫດຜົນຊັດເຈນ</h2>
+        <span>B · SCOPE CATALOG</span><h2>31 ລາຍການລະອຽດສຳລັບອ້າງອີງ</h2>
         <p className={styles.documentQuestion}>ກົດ Filter ເພື່ອເບິ່ງສະເພາະລາຍການຂອງແຕ່ລະ Priority.</p>
         <div className={styles.mvpScopeFilters} role="tablist" aria-label="Filter MVP scope by priority">
           {(["All", "Must", "Should", "Later", "Out"] as const).map((value) => <button key={value} type="button" role="tab" aria-selected={priority === value} className={priority === value ? styles.mvpScopeFilterActive : ""} onClick={() => setPriority(value)}><b>{priorityLabels[value]}</b><span>{value === "All" ? scopeItems.length : counts(value)}</span></button>)}
@@ -163,24 +211,24 @@ export default function MvpScopeDocument({ basePath }: { basePath: string }) {
       </section>
 
       <section className={styles.documentArticleSection} id="mvp-manual">
-        <span>06 · MANUAL VS AUTOMATION</span><h2>Manual ບໍ່ແມ່ນຂໍ້ບົກພ່ອງ ຖ້າມັນຊ່ວຍຮຽນຮູ້ກ່ອນສ້າງ Automation</h2>
+        <span>C · MANUAL VS AUTOMATION</span><h2>ວຽກໃດໃຊ້ຄົນຈັດການໄປກ່ອນ ແລະວຽກໃດຈຶ່ງສ້າງລະບົບພາຍຫຼັງ</h2>
         <div className={styles.documentProse}><p>Validation Pilot ຕ້ອງບັນທຶກ time-per-place, support load, correction volume, source failure ແລະ report preparation time. ຂໍ້ມູນນີ້ຈະບອກວ່າຄວນ automate ຈຸດໃດ ບໍ່ແມ່ນຄາດເດົາກ່ອນເລີ່ມ.</p></div>
         <div className={styles.mvpManualTable} role="table" aria-label="Manual and automated scope"><div role="row"><b>PROCESS</b><b>M1 · MANUAL/CONCIERGE</b><b>M2+ · AUTOMATION</b><b>TRIGGER</b></div>{manualPlan.map(([process, manual, automated, trigger]) => <div role="row" key={process}><strong>{process}</strong><p>{manual}</p><p>{automated}</p><span>{trigger}</span></div>)}</div>
       </section>
 
       <section className={styles.documentArticleSection} id="mvp-release">
-        <span>07 · RELEASE GATES</span><h2>Software ສ້າງສຳເລັດ ບໍ່ເທົ່າກັບທຸລະກິດພ້ອມເປີດ</h2>
+        <span>D · RELEASE GATES</span><h2>ລາຍລະອຽດຈຸດກວດກ່ອນເປີດໃຫ້ຄົນທົ່ວໄປໃຊ້</h2>
         <div className={styles.mvpReleaseTable} role="table" aria-label="MVP release gates"><div role="row"><b>GATE</b><b>ຈຸດກວດ</b><b>PASS EVIDENCE</b><b>STOP / PIVOT CONDITION</b></div>{releaseGates.map(([id, gate, pass, stop]) => <div role="row" key={id}><strong>{id}</strong><b>{gate}</b><p>{pass}</p><em>{stop}</em></div>)}</div>
       </section>
 
       <section className={styles.documentArticleSection} id="mvp-change">
-        <span>08 · CHANGE CONTROL</span><h2>ທຸກ Feature ໃໝ່ຕ້ອງຕອບວ່າ “ເພີ່ມແລ້ວພິສູດຫຍັງ?”</h2>
+        <span>E · CHANGE CONTROL</span><h2>ຖ້າຈະເພີ່ມ Function ໃໝ່ ຕ້ອງຕັດສິນແນວໃດ</h2>
         <div className={styles.mvpChangeFormula}><b>ເຂົ້າ M1 ໄດ້ ເມື່ອ</b><code>(ພິສູດ Core Hypothesis ຫຼືປິດ Release Blocker) + (ບໍ່ມີ Manual Fallback ທີ່ປອດໄພ) + (Dependency/Test/Cost ຊັດ) + (Product Owner ອະນຸມັດ)</code><p>ຖ້າບໍ່ຄົບ 4 ເງື່ອນໄຂ ໃຫ້ຢູ່ Should, Later ຫຼື Out ຕາມຫຼັກຖານ.</p></div>
         <ol className={styles.mvpChangeRules}>{changeRules.map(([id, title, detail]) => <li key={id}><b>{id}</b><div><strong>{title}</strong><p>{detail}</p></div></li>)}</ol>
       </section>
 
       <section className={styles.documentArticleSection} id="mvp-review">
-        <span>09 · REVIEW REQUIRED</span><h2>5 ຈຸດທີ່ຕ້ອງຕັດສິນກ່ອນ PRO-03 ຂຶ້ນເປັນ 1.0</h2>
+        <span>08 · REVIEW REQUIRED</span><h2>5 ຈຸດທີ່ຕ້ອງຕັດສິນກ່ອນ PRO-03 ຂຶ້ນເປັນ 1.0</h2>
         <ol className={styles.saReviewChecklist}>
           <li><b>Pilot Inventory:</b><p>ຢືນຢັນ 100 Places, ວຽງຈັນ, 2 ໝວດ “ອາຫານ ແລະຄາເຟ” ເປັນ M1 Baseline ຫຼືຈະປັບຈຳນວນ/ເຂດ/ໝວດ?</p></li>
           <li><b>Supported Social Sources:</b><p>ຈະເລີ່ມ TikTok, Facebook ແລະ YouTube ພ້ອມກັນ ຫຼືຈຳກັດ platform ຕາມຜົນ Technical/Rights Spike?</p></li>
@@ -190,7 +238,7 @@ export default function MvpScopeDocument({ basePath }: { basePath: string }) {
         </ol>
       </section>
 
-      <aside className={styles.draftApprovalGate}><div><span>ຮ່າງສຳລັບທົບທວນ</span><h2>PRO-03 · MVP Scope 0.1</h2><p>Scope Catalog ແຍກ 31 ລາຍການເປັນ Must 16, Should 4, Later 6 ແລະ Out 5; ແຍກ M0/M1/M2/M3 ແລະ Release Gates ຊັດເຈນ. ຍັງບໍ່ເປັນ 1.0 ຈົນກວ່າ 5 ຈຸດທົບທວນຈະຖືກອະນຸມັດ.</p></div><ul><li>Approved baseline — ນຳມາຈາກ PRO-01/BUS-04</li><li>Must/Should/Later/Out — ຈັດແລ້ວ</li><li>Manual vs Automation — ກຳນົດແລ້ວ</li><li>Release Gates — ກຳນົດແລ້ວ</li><li>5 review decisions — ລໍການອະນຸມັດ</li></ul></aside>
+      <aside className={styles.draftApprovalGate}><div><span>ຮ່າງສຳລັບທົບທວນ</span><h2>PRO-03 · MVP Scope 0.2</h2><p>ສະບັບ 0.2 ຮຽບຮຽງໃໝ່ໃຫ້ເຫັນຈຸດປະສົງ, ພາບລວມສະບັບທຳອິດ, ສິ່ງທີ່ຜູ້ໃຊ້ເຮັດໄດ້, ສິ່ງທີ່ທີມຕ້ອງສ້າງ ແລະສິ່ງທີ່ຍັງບໍ່ສ້າງ. ລາຍການທາງເຕັກນິກຖືກຍ້າຍໄປພາກອ້າງອີງ.</p></div><ul><li>ຈຸດປະສົງ — ອະທິບາຍແລ້ວ</li><li>ຂອບເຂດສະບັບທຳອິດ — ອະທິບາຍແລ້ວ</li><li>ສິ່ງທີ່ບໍ່ເຮັດ — ອະທິບາຍແລ້ວ</li><li>31 ລາຍການ — ຢູ່ພາກອ້າງອີງ</li><li>5 ຈຸດທົບທວນ — ລໍການອະນຸມັດ</li></ul></aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
         <a href={`${basePath}/documents/system-analysis`}><small>← ເອກະສານຕົ້ນທາງ</small><strong>System Analysis 1.0</strong></a>
