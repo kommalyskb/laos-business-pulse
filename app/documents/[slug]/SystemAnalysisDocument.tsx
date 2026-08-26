@@ -8,6 +8,7 @@ import SystemAnalysisWorkflows from "./SystemAnalysisWorkflows";
 import SystemAnalysisFunctionSpecifications from "./SystemAnalysisFunctionSpecifications";
 import SystemAnalysisStateErrors from "./SystemAnalysisStateErrors";
 import SystemAnalysisTraceability from "./SystemAnalysisTraceability";
+import SystemAnalysisDevelopmentHandoff from "./SystemAnalysisDevelopmentHandoff";
 
 const useCases = [
   {
@@ -129,17 +130,17 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
   return (
     <article className={`${styles.detailBody} ${styles.systemAnalysisBody} ${styles.businessDocument}`}>
       <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>0.8</strong></div>
-        <div><small>ສະຖານະ</small><strong>ກຳລັງຈັດເຮັດ</strong></div>
+        <div><small>ສະບັບ</small><strong>0.9</strong></div>
+        <div><small>ສະຖານະ</small><strong>ພ້ອມທົບທວນ</strong></div>
         <div><small>ວັນທີປັບປຸງ</small><strong>26 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>PRO-01 Product Requirements 1.0</strong></div>
       </section>
 
       <aside className={styles.saReconstructionNotice}>
-        <div><span>ປັບສະຖານະເອກະສານ</span><h2>PRO-02 ກຳລັງຖືກສ້າງຄືນຕາມ 7 ຂັ້ນຂອງ System Analysis</h2></div>
+        <div><span>ສະຖານະເອກະສານ</span><h2>PRO-02 ຈັດເຮັດຄົບ 7 ຂັ້ນ ແລະພ້ອມສຳລັບການທົບທວນ</h2></div>
         <div>
           <p>PRO-02 ຖືກຖອນຈາກສະຖານະ 1.0 ເພາະຍັງບໍ່ພຽງພໍສຳລັບ Developer Handoff. Actor, Boundary, Use Case ລະດັບສູງ ແລະ Business Rules ຈະຖືກເກັບເປັນພາກພື້ນຖານ.</p>
-          <p>Functional Decomposition/Catalog ເປັນພາກ B; Logical Data Model/ERD ເປັນພາກ C; Workflow/Sequence ເປັນພາກ D; Function Specification/Algorithm ເປັນພາກ E; State Transition/Error Handling ເປັນພາກ F; Requirement Traceability Matrix ເປັນພາກ G ແລ້ວ. ກ່ອນກັບໄປສູ່ສະບັບ 1.0 ຍັງຕ້ອງເພີ່ມ Development Starting Point & Dependency Order.</p>
+          <p>Functional Decomposition/Catalog ເປັນພາກ B; Logical Data Model/ERD ເປັນພາກ C; Workflow/Sequence ເປັນພາກ D; Function Specification/Algorithm ເປັນພາກ E; State Transition/Error Handling ເປັນພາກ F; Requirement Traceability Matrix ເປັນພາກ G; ແລະ Development Starting Point/Dependency Order ເປັນພາກ H. ສະບັບ 0.9 ຈະຂຶ້ນເປັນ 1.0 ຫຼັງຈາກທົບທວນ 5 ຈຸດທ້າຍເອກະສານ ແລະໄດ້ຮັບອະນຸມັດ.</p>
         </div>
       </aside>
 
@@ -167,6 +168,7 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
           <li><a href="#sa-review">5 ຂໍ້ຕັດສິນທີ່ອະນຸມັດ</a></li>
           <li><a href="#sa-state-error-specification">State Transition & Error Handling</a></li>
           <li><a href="#sa-full-traceability">Full Traceability Matrix</a></li>
+          <li><a href="#sa-development-handoff">Development Starting Point & Dependency Order</a></li>
         </ol>
       </nav>
 
@@ -366,9 +368,11 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
 
       <SystemAnalysisTraceability />
 
+      <SystemAnalysisDevelopmentHandoff />
+
       <aside className={styles.draftApprovalGate}>
-        <div><span>ກຳລັງຈັດເຮັດ</span><h2>PRO-02 · System Analysis 0.8</h2><p>ຂັ້ນ 1–6 ຈັດເຮັດແລ້ວ. Traceability ເຊື່ອມ PRO-01 13 Requirements ຄົບຫາ 64 Functions, 27 Entities, 16 Workflows, 7 State Machines, 30 Error Codes ແລະ Acceptance/Test Evidence ເບື້ອງຕົ້ນ. ເອກະສານຍັງບໍ່ເປັນ Developer-ready SA ຈົນກວ່າຂັ້ນ 7 ຈະກຳນົດ Development Starting Point ແລະ Dependency Order.</p></div>
-        <ul><li>ພາກ A · Context & Rules — ມີແລ້ວ</li><li>ຂັ້ນ 1 · Functional Decomposition & Catalog — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 2 · Logical Data Model & ERD — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 3 · Workflow/Sequence — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 4 · Function Specification & Algorithm — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 5 · State Transition & Error Handling — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 6 · Traceability Matrix — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 7 · Developer Handoff — ຍັງຕ້ອງເຮັດ</li></ul>
+        <div><span>ພ້ອມທົບທວນ</span><h2>PRO-02 · System Analysis 0.9</h2><p>ຂັ້ນ 1–7 ຈັດເຮັດຄົບແລ້ວ. ສະບັບນີ້ເຊື່ອມ PRO-01 13 Requirements ຫາ 64 Functions, 27 Entities, 16 Workflows, 7 State Machines ແລະ 30 Error Codes; ພ້ອມຈັດ 64 Functions ເຂົ້າ 9 Work Packages ແບບບໍ່ຊ້ຳ. ຍັງບໍ່ໃຊ້ສະຖານະ 1.0 ຈົນກວ່າ 5 ຈຸດທົບທວນຈະໄດ້ຮັບອະນຸມັດ.</p></div>
+        <ul><li>ພາກ A · Context & Rules — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 1 · Functional Decomposition & Catalog — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 2 · Logical Data Model & ERD — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 3 · Workflow/Sequence — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 4 · Function Specification & Algorithm — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 5 · State Transition & Error Handling — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 6 · Traceability Matrix — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 7 · Developer Handoff — ຈັດເຮັດແລ້ວ</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
