@@ -130,17 +130,17 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
   return (
     <article className={`${styles.detailBody} ${styles.systemAnalysisBody} ${styles.businessDocument}`}>
       <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>0.9</strong></div>
-        <div><small>ສະຖານະ</small><strong>ພ້ອມທົບທວນ</strong></div>
+        <div><small>ສະບັບ</small><strong>1.0</strong></div>
+        <div><small>ສະຖານະ</small><strong>ອະນຸມັດແລ້ວ</strong></div>
         <div><small>ວັນທີປັບປຸງ</small><strong>26 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>PRO-01 Product Requirements 1.0</strong></div>
       </section>
 
       <aside className={styles.saReconstructionNotice}>
-        <div><span>ສະຖານະເອກະສານ</span><h2>PRO-02 ຈັດເຮັດຄົບ 7 ຂັ້ນ ແລະພ້ອມສຳລັບການທົບທວນ</h2></div>
+        <div><span>ສະຖານະເອກະສານ</span><h2>PRO-02 ຈັດເຮັດຄົບ 7 ຂັ້ນ ແລະອະນຸມັດເປັນສະບັບ 1.0</h2></div>
         <div>
-          <p>PRO-02 ຖືກຖອນຈາກສະຖານະ 1.0 ເພາະຍັງບໍ່ພຽງພໍສຳລັບ Developer Handoff. Actor, Boundary, Use Case ລະດັບສູງ ແລະ Business Rules ຈະຖືກເກັບເປັນພາກພື້ນຖານ.</p>
-          <p>Functional Decomposition/Catalog ເປັນພາກ B; Logical Data Model/ERD ເປັນພາກ C; Workflow/Sequence ເປັນພາກ D; Function Specification/Algorithm ເປັນພາກ E; State Transition/Error Handling ເປັນພາກ F; Requirement Traceability Matrix ເປັນພາກ G; ແລະ Development Starting Point/Dependency Order ເປັນພາກ H. ສະບັບ 0.9 ຈະຂຶ້ນເປັນ 1.0 ຫຼັງຈາກທົບທວນ 5 ຈຸດທ້າຍເອກະສານ ແລະໄດ້ຮັບອະນຸມັດ.</p>
+          <p>PRO-02 ເຄີຍຖືກຖອນຈາກ 1.0 ເພື່ອສ້າງຄືນໃຫ້ພຽງພໍສຳລັບ Developer Handoff. ປັດຈຸບັນ Actor, Boundary, Use Case, Business Rules, Function, Data, Workflow, Algorithm, State, Error ແລະ Traceability ຖືກຈັດເຮັດຄົບ.</p>
+          <p>Development Starting Point ໄດ້ປັບຕາມຄຳຕັດສິນ: WP-02A Draft → WP-03 Source → WP-02B Readiness; First Vertical Slice ມີ 10 ຂັ້ນ; Access/Audit ມາກ່ອນ mutation; Analytics Capture ມາໄວແຕ່ Reporting ມາພາຍຫຼັງ. ສະນັ້ນສະບັບ 1.0 ນີ້ແມ່ນ Logical SA Baseline ທີ່ອະນຸມັດແລ້ວ.</p>
         </div>
       </aside>
 
@@ -371,7 +371,7 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
       <SystemAnalysisDevelopmentHandoff />
 
       <aside className={styles.draftApprovalGate}>
-        <div><span>ພ້ອມທົບທວນ</span><h2>PRO-02 · System Analysis 0.9</h2><p>ຂັ້ນ 1–7 ຈັດເຮັດຄົບແລ້ວ. ສະບັບນີ້ເຊື່ອມ PRO-01 13 Requirements ຫາ 64 Functions, 27 Entities, 16 Workflows, 7 State Machines ແລະ 30 Error Codes; ພ້ອມຈັດ 64 Functions ເຂົ້າ 9 Work Packages ແບບບໍ່ຊ້ຳ. ຍັງບໍ່ໃຊ້ສະຖານະ 1.0 ຈົນກວ່າ 5 ຈຸດທົບທວນຈະໄດ້ຮັບອະນຸມັດ.</p></div>
+        <div><span>ອະນຸມັດແລ້ວ</span><h2>PRO-02 · System Analysis 1.0</h2><p>ຂັ້ນ 1–7 ຈັດເຮັດຄົບ ແລະ 5 ຄຳຕັດສິນສຳລັບ Developer Handoff ໄດ້ຮັບອະນຸມັດ. ສະບັບນີ້ເຊື່ອມ PRO-01 13 Requirements ຫາ 64 Functions, 27 Entities, 16 Workflows, 7 State Machines ແລະ 30 Error Codes; ພ້ອມຈັດ 64 Functions ເຂົ້າ 9 Work Packages ແບບບໍ່ຊ້ຳ. ທີມສາມາດນຳໄປເລີ່ມ Technical Architecture ແລະ Development Planning ໄດ້.</p></div>
         <ul><li>ພາກ A · Context & Rules — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 1 · Functional Decomposition & Catalog — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 2 · Logical Data Model & ERD — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 3 · Workflow/Sequence — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 4 · Function Specification & Algorithm — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 5 · State Transition & Error Handling — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 6 · Traceability Matrix — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 7 · Developer Handoff — ຈັດເຮັດແລ້ວ</li></ul>
       </aside>
 

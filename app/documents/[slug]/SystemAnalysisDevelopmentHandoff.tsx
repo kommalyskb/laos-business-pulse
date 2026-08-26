@@ -27,24 +27,24 @@ const workPackages: WorkPackage[] = [
     evidence: "Unit test authorization + integration test business write/audit atomicity + security log ທີ່ບໍ່ເປີດເຜີຍ secret.", parallel: "Frontend ສາມາດເຮັດ sign-in/error state ຈາກ contract; ຫ້າມເລີ່ມ mutation ອື່ນກ່ອນ guard ແລະ audit interface ຄົງທີ່.",
   },
   {
-    id: "WP-02", title: "Place Draft Core", goal: "ໃຫ້ Admin ສ້າງ ແລະປັບ Place Draft ທີ່ມີ canonical identity, required data ແລະ duplicate warning.",
-    dependsOn: "WP-01 + reference data for Category/Area/Price", functionIds: ["FN-PADM-001", "FN-PADM-002", "FN-PADM-003", "FN-PADM-004", "FN-PADM-008"],
-    entities: "Place, PlaceContact, PlaceCategory, Category, Area, PriceRange, DuplicateCandidate", deliverables: ["Create/update draft service", "Required-field validator", "Duplicate candidate search", "Admin draft form ທີ່ບໍ່ສ້າງ Place ຊ້ຳແບບງຽບໆ"],
-    entry: "WP-01 ຜ່ານ; field dictionary ແລະ canonical-place rule ຖືກຢືນຢັນ.", exit: "Draft ຖືກສ້າງ/ແກ້ໄຂພ້ອມ audit; validator ບອກ field ທີ່ຂາດ; duplicate candidate ຖືກເຕືອນແຕ່ບໍ່ merge ອັດຕະໂນມັດ.",
+    id: "WP-02", title: "Place Draft Core", goal: "ໃຫ້ Admin ສ້າງ ແລະປັບ Place Draft ທີ່ມີ canonical identity, required data ແລະ duplicate warning; ຫຼັງຈາກ WP-03 ຈຶ່ງກັບມາກວດ Publish Readiness.",
+    dependsOn: "WP-01 + reference data; ແບ່ງເປັນ WP-02A Draft ກ່ອນ WP-03 ແລະ WP-02B Readiness ຫຼັງ WP-03", functionIds: ["FN-PADM-001", "FN-PADM-002", "FN-PADM-003", "FN-PADM-004", "FN-PADM-008"],
+    entities: "Place, PlaceContact, PlaceCategory, Category, Area, PriceRange, DuplicateCandidate", deliverables: ["WP-02A: Create/update draft service", "WP-02A: Required-field validator ແລະ duplicate candidate search", "WP-02A: Admin draft form ທີ່ບໍ່ສ້າງ Place ຊ້ຳແບບງຽບໆ", "WP-02B: Publish-readiness evaluator ຫຼັງ Source ຖືກເຊື່ອມແລ້ວ"],
+    entry: "WP-01 ຜ່ານ; field dictionary ແລະ canonical-place rule ຖືກຢືນຢັນ. FN-PADM-004 ເລີ່ມໄດ້ຫຼັງ WP-03 ມີ Source contract.", exit: "WP-02A ສຳເລັດເມື່ອ Draft/validation/duplicate warning ໃຊ້ໄດ້; WP-02B ສຳເລັດເມື່ອ readiness ກວດ required fields, Source, duplicate resolution ແລະ Admin approval ຄົບ.",
     evidence: "Schema constraint test + unit test validation/duplicate scoring + integration test create/edit draft + audit record.", parallel: "Reference-data seed, admin form ແລະ duplicate test fixture ເຮັດຄູ່ຂະໜານໄດ້ຫຼັງ contract ຄົງທີ່.",
   },
   {
     id: "WP-03", title: "Content Source Core", goal: "ຮັບ social review link, ກວດ URL/metadata, ອ້າງອີງ creator ແລະເຊື່ອມ Source ກັບ Canonical Place.",
-    dependsOn: "WP-01 + WP-02 minimal Place Draft + external-platform spike", functionIds: range("FN-SRC-", 1, 5),
+    dependsOn: "WP-01 + WP-02A minimal Place Draft + external-platform spike", functionIds: range("FN-SRC-", 1, 5),
     entities: "ContentSource, Creator, SourceCheck, Place, AuditLog", deliverables: ["Register/validate/read permitted metadata", "Link Source to Place", "Publish/unpublish Source gate", "Fallback contract ໂດຍບໍ່ download ຫຼື re-host ວິດີໂອ"],
     entry: "ຮູ້ policy ຂອງແຕ່ລະ platform, URL normalization ແລະ metadata ທີ່ອະນຸຍາດໃຫ້ເກັບ.", exit: "Source ຊ້ຳຖືກປະຕິເສດ; validation ແຍກ invalid/temporary; Source ບໍ່ Published ຈົນກວ່າ attribution ແລະ Place link ຄົບ.",
     evidence: "Contract test ຕໍ່ platform adapter + fixture URLs + integration test source lifecycle + copyright/attribution checklist.", parallel: "Platform adapters ແຍກເຮັດໄດ້; ແຕ່ຕ້ອງໃຊ້ availability classification ແລະ normalized result ດຽວກັນ.",
   },
   {
     id: "WP-04", title: "Publish & Public Place", goal: "ປ່ຽນ Place/Source ທີ່ກວດຄົບໃຫ້ເປັນ public canonical page ພ້ອມ trust, freshness ແລະ contact action.",
-    dependsOn: "WP-01, WP-02, WP-03", functionIds: ["FN-PADM-005", "FN-PADM-009", "FN-PADM-010", ...range("FN-PLC-", 1, 4)],
-    entities: "Place, ContentSource, Verification, PlaceRedirect, Campaign, FreshnessStatus", deliverables: ["Publish-readiness evaluator", "Place publish/suspend/archive command", "Canonical Place detail query", "Independent Trust/Freshness/Partner/Sponsored labels", "Contact-action builder ແລະ redirect ຈາກ merged slug"],
-    entry: "Place/Source state machine, required fields, trust-label rules ແລະ public response contract ຄົງທີ່.", exit: "ມີພຽງ Published Place ທີ່ public ເຫັນ; label ບໍ່ປະປົນ; suspended/archived ບໍ່ຮົ່ວໄປ search/feed contract.",
+    dependsOn: "WP-01, WP-02A, WP-03, WP-02B; Merge/Redirect ເຮັດຫຼັງ First Place Publish", functionIds: ["FN-PADM-005", "FN-PADM-009", "FN-PADM-010", ...range("FN-PLC-", 1, 4)],
+    entities: "Place, ContentSource, Verification, PlaceRedirect, Campaign, FreshnessStatus", deliverables: ["Core: Place publish command ແລະ Canonical Place detail query", "Core: Independent Trust/Freshness/Partner/Sponsored labels", "Core: Contact-action builder", "Follow-up: Duplicate Merge ແລະ redirect ຈາກ merged slug ໂດຍບໍ່ຂັດຂວາງ First Vertical Slice"],
+    entry: "Place/Source state machine, WP-02B readiness, trust-label rules ແລະ public response contract ຄົງທີ່.", exit: "Core ຜ່ານເມື່ອ Published Place ເທົ່ານັ້ນທີ່ public ເຫັນ; WP-04 ປິດຄົບເມື່ອ merge ຍ້າຍ relation ແລະ old URL redirect ໄດ້.",
     evidence: "Publish-gate decision table + state-transition tests + public authorization tests + canonical redirect E2E.", parallel: "Public UI ໃຊ້ fixture ຈາກ approved PlaceDetail contract; backend publish/query ເຮັດຄູ່ຂະໜານໄດ້.",
   },
   {
@@ -86,7 +86,7 @@ const workPackages: WorkPackage[] = [
 
 const dependencyStages = [
   ["0", "Contract & Technical Spikes", "ລັອກ logical contract, error/state IDs, Lao search normalization, social embed/metadata, mobile deep link, anonymous dedupe ແລະ audit atomicity."],
-  ["1", "Core Walking Skeleton", "WP-01 → WP-02 → WP-03 → WP-04 ສ້າງເສັ້ນທາງ Admin ສ້າງ Place/Source ຫາ Public Place."],
+  ["1", "Core Walking Skeleton", "WP-01 → WP-02A Draft → WP-03 Source → WP-02B Readiness → WP-04 Core Publish ສ້າງເສັ້ນທາງ Admin ຫາ Public Place; Merge/Redirect ຕາມຫຼັງ."],
   ["2", "User Journey & Measurement", "WP-05 ແລະ WP-06 ເພີ່ມ Feed/Search/Action ພ້ອມ event ທີ່ບໍ່ block journey."],
   ["3", "Pilot Operations", "WP-07 ແລະ WP-08 ຮອງຮັບ Correction, Takedown, Freshness, Retry ແລະ daily queue."],
   ["4", "Commercial & Reporting", "WP-09 ເປີດ Sponsored Campaign ແລະ Performance Summary ຫຼັງ public/measurement ນິ່ງ."],
@@ -115,8 +115,8 @@ const backlog = [
   ["DEV-006", "Required fields ແລະ duplicate candidate", "DEV-005", "Decision-table/unit fixtures ຜ່ານ"],
   ["DEV-007", "Register/validate Source", "DEV-004, DEV-005", "Adapter contract + URL fixtures ຜ່ານ"],
   ["DEV-008", "Read metadata, link ແລະ publish Source", "DEV-007", "Attribution/place-link gate ຜ່ານ"],
-  ["DEV-009", "Place publish-readiness, lifecycle, merge ແລະ redirect", "DEV-006, DEV-008", "Transition/authorization/audit + referential-integrity tests ຜ່ານ"],
-  ["DEV-010", "Public canonical Place Detail", "DEV-009", "Published-only query + redirect E2E"],
+  ["DEV-009", "Place publish-readiness ແລະ core lifecycle", "DEV-006, DEV-008", "Transition/authorization/audit tests ຜ່ານ"],
+  ["DEV-010", "Public canonical Place Detail", "DEV-009", "Published-only query + canonical URL E2E"],
   ["DEV-011", "Feed eligible item ແລະ media fallback", "DEV-010", "First-card E2E + unavailable preview fallback"],
   ["DEV-012", "Map action ແລະ fallback", "DEV-010", "Device/deep-link matrix ຜ່ານ"],
   ["DEV-013", "Consent ແລະ anonymous session", "DEV-001", "Opt-in/opt-out/expiry tests ຜ່ານ"],
@@ -124,8 +124,9 @@ const backlog = [
   ["DEV-015", "First Vertical Slice automated E2E", "DEV-002—014", "10 ຂັ້ນຂອງ slice ຜ່ານໃນ test environment"],
   ["DEV-016", "Search, filter ແລະ feed pagination", "DEV-015", "Lao fixtures + no-leak + cursor tests"],
   ["DEV-017", "Correction, evidence, suspend ແລະ archive", "DEV-015", "SLA/transaction/public-visibility E2E"],
-  ["DEV-018", "Freshness, source retry ແລະ maintenance queue", "DEV-017", "Clock/idempotency/retry tests"],
-  ["DEV-019", "Campaign lifecycle, placement ແລະ report", "DEV-016, DEV-014", "Time-boundary + sponsored label + report reconciliation"],
+  ["DEV-018", "Duplicate Place merge ແລະ redirect", "DEV-010, DEV-017", "Referential-integrity + old URL redirect E2E"],
+  ["DEV-019", "Freshness, source retry ແລະ maintenance queue", "DEV-017", "Clock/idempotency/retry tests"],
+  ["DEV-020", "Campaign lifecycle, placement ແລະ report", "DEV-016, DEV-014", "Time-boundary + sponsored label + report reconciliation"],
 ] as const;
 
 const ready = ["ມີ Requirement/Function ID ແລະອ້າງເອກະສານຕົ້ນທາງ", "Input, output, precondition, algorithm, business rule ແລະ acceptance ຊັດ", "Entity, state transition ແລະ error/fallback ທີ່ກ່ຽວຂ້ອງຖືກລະບຸ", "Dependency ພ້ອມ ຫຼືມີ approved mock/adapter contract", "ມີ test scenario, expected evidence ແລະ owner ຮັບຄຳຕອບ", "ປະເມີນ privacy, security, accessibility ແລະ performance impact"];
@@ -135,8 +136,8 @@ const releaseGates = [
   ["GATE-01", "Contract & Data", "DEV-001—004", "Contract, migration, access ແລະ audit atomicity ຜ່ານ; ຈຶ່ງເປີດ business mutation."],
   ["GATE-02", "First Place Publish", "DEV-005—010", "Place/Source ຈາກ Draft ຫາ Public ໄດ້ ແລະ public data ບໍ່ຮົ່ວ."],
   ["GATE-03", "Core Journey", "DEV-011—016", "Discover → Decide → Map intent ຜ່ານ E2E; analytics failure ບໍ່ block journey."],
-  ["GATE-04", "Pilot Operations", "DEV-017—018", "Correction, takedown, retry, freshness ແລະ daily queue ດຳເນີນງານໄດ້."],
-  ["GATE-05", "Commercial", "DEV-019", "Sponsored label/time/eligibility/report reconciliation ຜ່ານ; ບໍ່ປະປົນ paid ກັບ verification."],
+  ["GATE-04", "Pilot Operations", "DEV-017—019", "Correction, merge/redirect, takedown, retry, freshness ແລະ daily queue ດຳເນີນງານໄດ້."],
+  ["GATE-05", "Commercial", "DEV-020", "Sponsored label/time/eligibility/report reconciliation ຜ່ານ; ບໍ່ປະປົນ paid ກັບ verification."],
   ["GATE-06", "Release Candidate", "All", "Regression, performance, security, accessibility, backup/rollback ແລະ UAT evidence ຜ່ານ."],
 ] as const;
 
@@ -179,7 +180,7 @@ export default function SystemAnalysisDevelopmentHandoff() {
       <h3 className={styles.documentSubheading}>Dependency Graph ແລະວິທີຕັດວົງຈອນ</h3>
       <div className={styles.saDependencyGraph}>
         <div><b>FOUNDATION</b><strong>WP-01 Access & Audit</strong><p>Contract · identity · authorization · audit · core schema</p></div><i>→</i>
-        <div><b>CORE DATA</b><strong>WP-02 Place Draft<br/>WP-03 Source Core</strong><p>ສ້າງ Place ຂັ້ນຕ່ຳ → link Source → publish gate</p></div><i>→</i>
+        <div><b>CORE DATA</b><strong>WP-02A Draft → WP-03 Source → WP-02B Readiness</strong><p>ສ້າງ Place ຂັ້ນຕ່ຳ → link Source → ກວດ publish gate</p></div><i>→</i>
         <div><b>PUBLIC CORE</b><strong>WP-04 Public Place</strong><p>Canonical detail · trust · contact actions</p></div><i>→</i>
         <div><b>EXPERIENCE</b><strong>WP-05 + WP-06</strong><p>Feed/Search · action · anonymous measurement</p></div><i>→</i>
         <div><b>OPERATE & EARN</b><strong>WP-07—09</strong><p>Correction · quality · campaign · reporting</p></div>
@@ -238,13 +239,13 @@ export default function SystemAnalysisDevelopmentHandoff() {
       <div className={styles.saOwnershipTable}>{owners.map(([role, responsibility]) => <article key={role}><b>{role}</b><p>{responsibility}</p></article>)}</div>
       <div className={styles.documentSectionCaution}><b>ກົດຂອງການເຮັດຄູ່ຂະໜານ:</b> ທີມສາມາດແຍກ Frontend, Backend, Adapter ແລະ QA ໄດ້ຫຼັງ shared contract ຜ່ານ GATE-01. Frontend ໃຊ້ fixture ຈາກ contract, QA ຂຽນ test ຈາກ acceptance ໄດ້ທັນທີ, ແຕ່ຫ້າມແຕ່ລະທີມສ້າງຊື່ state/error/field ຂອງຕົນເອງ.</div>
 
-      <h3 className={styles.documentSubheading}>5 ຈຸດທີ່ຕ້ອງທົບທວນກ່ອນອະນຸມັດ PRO-02 1.0</h3>
+      <h3 className={styles.documentSubheading}>5 ຄຳຕັດສິນທີ່ອະນຸມັດສຳລັບ PRO-02 1.0</h3>
       <ol className={styles.saReviewChecklist}>
-        <li><b>Work Package Order:</b><p>ເຫັນດີຫຼືບໍ່ວ່າ Access/Audit → Place/Source → Public → Discovery/Measurement → Operations/Commercial ແມ່ນລຳດັບທີ່ຖືກຕ້ອງ?</p></li>
-        <li><b>First Vertical Slice:</b><p>10 ຂັ້ນ Admin create ຫາ Map Decision Intent ພໍດີສຳລັບພິສູດ architecture ຫຼືຄວນຕັດ/ເພີ່ມຫຍັງ?</p></li>
-        <li><b>Access & Audit First:</b><p>ຢືນຢັນວ່າ Admin identity, authorization ແລະ audit atomicity ຕ້ອງມາກ່ອນ business mutation ທັງໝົດ.</p></li>
-        <li><b>Analytics Boundary:</b><p>ເຫັນດີໃຫ້ event contract/capture ເຂົ້າໄວໃນ vertical slice ແຕ່ຍ້າຍ performance reporting ໄປ WP-09 ຫຼືບໍ່?</p></li>
-        <li><b>Approval Status:</b><p>ຖ້າ 4 ຂໍ້ຂ້າງເທິງບໍ່ມີການປ່ຽນສາລະສຳຄັນ ຈຶ່ງອະນຸມັດ PRO-02 ຈາກ 0.9 “ພ້ອມທົບທວນ” ເປັນ 1.0 “ອະນຸມັດແລ້ວ”.</p></li>
+        <li><b>Work Package Order — ອະນຸມັດພ້ອມປັບ:</b><p>ໃຊ້ WP-01 → WP-02A Draft → WP-03 Source → WP-02B Readiness → WP-04 Core Publish. Duplicate Merge/Redirect ເຮັດຫຼັງ First Place Publish ແລະບໍ່ຂັດຂວາງ First Vertical Slice.</p></li>
+        <li><b>First Vertical Slice — ອະນຸມັດ:</b><p>ຮັກສາ 10 ຂັ້ນຈາກ Admin create ຫາ Map Decision Intent. Search, Call, Message, Save, Share, Correction, Campaign ແລະ Reporting ບໍ່ຢູ່ໃນ slice ທຳອິດ.</p></li>
+        <li><b>Access & Audit First — ອະນຸມັດ:</b><p>ໃຊ້ Full Admin Role ດຽວໃນ Pilot ແຕ່ Admin ແຕ່ລະຄົນມີ Account ຕົນເອງ. Business mutation ສຳຄັນ ແລະ Audit Log ຕ້ອງ commit ຫຼື rollback ພ້ອມກັນ.</p></li>
+        <li><b>Analytics Boundary — ອະນຸມັດ:</b><p>ສ້າງ Consent, Anonymous Session, Event Contract, Validation ແລະ Deduplication ໃນຊ່ວງຕົ້ນ; Funnel/Performance Reporting ຢູ່ WP-09. Analytics failure ຫ້າມ block Core Journey.</p></li>
+        <li><b>Approval Status — ອະນຸມັດ:</b><p>PRO-02 ເປັນສະບັບ 1.0 “ອະນຸມັດແລ້ວ”. ຖ້າ logical requirement ປ່ຽນຫຼັງ Pilot ໃຫ້ອອກ 1.1 ຫຼື 2.0 ພ້ອມບັນທຶກເຫດຜົນ.</p></li>
       </ol>
     </section>
   );
