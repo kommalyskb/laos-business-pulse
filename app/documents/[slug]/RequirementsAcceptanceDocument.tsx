@@ -1,17 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import styles from "../documents.module.css";
 import { traceRows } from "./SystemAnalysisTraceability";
-
-type RequirementFilter = "All" | "Guest" | "Operations" | "Quality";
-
-const filterLabels: Record<RequirementFilter, string> = {
-  All: "ທັງໝົດ",
-  Guest: "Guest Journey",
-  Operations: "Operations & Trust",
-  Quality: "Non-functional",
-};
 
 const acceptanceRules = [
   ["01", "ກວດເຫັນໄດ້", "Criterion ຕ້ອງລະບຸຜົນທີ່ຄົນ ຫຼື Test ກວດໄດ້; ຫ້າມໃຊ້ຄຳວ່າ “ດີ”, “ໄວ”, “ໃຊ້ງ່າຍ” ໂດຍບໍ່ມີເກນ."],
@@ -48,135 +38,134 @@ const passPolicy = [
   ["EVIDENCE", "ຄຳວ່າ “ທົດສອບແລ້ວ” ບໍ່ພຽງພໍ; ຕ້ອງມີ Test Run, Result, Environment, Build Version, Data Fixture ແລະຜູ້ຮັບຮອງ."],
 ] as const;
 
-function getFilter(id: string): Exclude<RequirementFilter, "All"> {
-  if (id.startsWith("USR-")) return "Guest";
-  if (id.startsWith("NFR-")) return "Quality";
-  return "Operations";
-}
-
 export default function RequirementsAcceptanceDocument({ basePath }: { basePath: string }) {
-  const [filter, setFilter] = useState<RequirementFilter>("All");
-  const visibleRows = filter === "All" ? traceRows : traceRows.filter((row) => getFilter(row.id) === filter);
   const acceptanceCount = traceRows.reduce((total, row) => total + row.acceptance.length, 0);
   const linkedFunctions = new Set(traceRows.flatMap((row) => row.functionIds)).size;
   const linkedWorkflows = new Set(traceRows.flatMap((row) => row.workflowIds)).size;
   const linkedErrors = new Set(traceRows.flatMap((row) => row.errorCodes)).size;
 
   return (
-    <article className={`${styles.detailBody} ${styles.businessDocument} ${styles.racBody}`}>
-      <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>0.1</strong></div>
-        <div><small>ສະຖານະ</small><strong>ຮ່າງສຳລັບທົບທວນ</strong></div>
-        <div><small>ວັນທີປັບປຸງ</small><strong>26 ສິງຫາ 2026</strong></div>
-        <div><small>ເອກະສານຕົ້ນທາງ</small><strong>PRO-01 1.0 + PRO-02 1.0 + PRO-03 1.0</strong></div>
-      </section>
-
-      <header className={styles.documentReadingHeader}>
-        <span>PRO-04 · REQUIREMENTS & ACCEPTANCE CRITERIA</span>
-        <h2>ລະບົບຕ້ອງເຮັດຫຍັງ ແລະຈະຕັດສິນແນວໃດວ່າ “ສຳເລັດ”</h2>
-        <p>PRO-04 ແປຂອບເຂດທີ່ອະນຸມັດໃນ PRO-03 ໃຫ້ເປັນ Requirement ແລະ Acceptance Criteria ທີ່ກວດໄດ້. Developer ໃຊ້ມັນເພື່ອຮູ້ Behavior ທີ່ຕ້ອງສ້າງ; QA ໃຊ້ເພື່ອຂຽນ Test Case; Product Owner ໃຊ້ເພື່ອຮັບ ຫຼືບໍ່ຮັບການສົ່ງມອບ.</p>
-        <p>Requirement ຈະບໍ່ຖືວ່າສຳເລັດເພາະໜ້າຈໍເບິ່ງໄດ້ ຫຼື Code ຖືກ Merge. ຕ້ອງຜ່ານ Criterion ທີ່ກຳນົດ ແລະມີຫຼັກຖານການທົດສອບ.</p>
+    <article className={`${styles.detailBody} ${styles.formalDocument}`}>
+      <header className={styles.formalDocumentHeader}>
+        <p>PRO-04 · PRODUCT &amp; ANALYSIS</p>
+        <h1>Requirements &amp; Acceptance Criteria</h1>
+        <h2>ຂໍ້ກຳນົດຂອງລະບົບ ແລະເງື່ອນໄຂການຮັບມອບ</h2>
+        <div className={`${styles.formalStatus} ${styles.formalDraftStatus}`}>ສະບັບ 0.1 · ຮ່າງສຳລັບທົບທວນ · 26 ສິງຫາ 2026</div>
       </header>
 
-      <nav className={styles.documentToc} aria-label="ສາລະບານ PRO-04"><b>ສາລະບານ</b><ol>
-        <li><a href="#rac-purpose">ຈຸດປະສົງ</a></li><li><a href="#rac-language">ພາສາຮ່ວມ</a></li><li><a href="#rac-baseline">Baseline ທີ່ຮັບມາ</a></li><li><a href="#rac-rules">ຫຼັກການຂຽນ Criterion</a></li><li><a href="#rac-catalog">13 Requirements / 46 Criteria</a></li><li><a href="#rac-testing">ລະດັບການທົດສອບ</a></li><li><a href="#rac-data">Test Data</a></li><li><a href="#rac-pass">Pass/Fail Policy</a></li><li><a href="#rac-coverage">Traceability Coverage</a></li><li><a href="#rac-review">5 ຈຸດທົບທວນ</a></li>
+      <section className={styles.formalSection} id="rac-control">
+        <h2><span>1.</span> ຂໍ້ມູນຄວບຄຸມເອກະສານ</h2>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><tbody>
+          <tr><th>ລະຫັດເອກະສານ</th><td>PRO-04</td><th>ສະບັບ</th><td>0.1</td></tr>
+          <tr><th>ຊື່ເອກະສານ</th><td>Requirements &amp; Acceptance Criteria</td><th>ສະຖານະ</th><td>ຮ່າງສຳລັບທົບທວນ</td></tr>
+          <tr><th>ເຈົ້າຂອງເອກະສານ</th><td>Product Owner / System Analyst</td><th>ຜູ້ທົບທວນ</th><td>Tech Lead · QA Lead · Operations</td></tr>
+          <tr><th>ເອກະສານຕົ້ນທາງ</th><td colSpan={3}>PRO-01 1.0 · PRO-02 1.0 · PRO-03 1.0</td></tr>
+        </tbody></table></div>
+        <h3>1.1 ປະຫວັດການແກ້ໄຂ</h3>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ສະບັບ</th><th>ວັນທີ</th><th>ລາຍລະອຽດ</th><th>ຜູ້ຈັດທຳ</th></tr></thead><tbody><tr><td>0.1</td><td>26 ສິງຫາ 2026</td><td>ຈັດທຳ 13 Requirements, {acceptanceCount} Acceptance Criteria, Test Policy ແລະ Traceability ສຳລັບທົບທວນ</td><td>System Analyst</td></tr></tbody></table></div>
+      </section>
+
+      <nav className={styles.formalToc} aria-label="ສາລະບານ PRO-04"><h2>ສາລະບານ</h2><ol>
+        <li><a href="#rac-control">ຂໍ້ມູນຄວບຄຸມເອກະສານ</a></li><li><a href="#rac-purpose">ຈຸດປະສົງ ແລະຂອບເຂດ</a></li><li><a href="#rac-reference">ເອກະສານອ້າງອີງ</a></li><li><a href="#rac-language">ຄຳສັບ ແລະຫຼັກການຂຽນ</a></li><li><a href="#rac-catalog">ບັນຊີ Requirements ແລະ Criteria</a></li><li><a href="#rac-testing">ວິທີການກວດສອບ</a></li><li><a href="#rac-data">ຂໍ້ມູນທົດສອບ</a></li><li><a href="#rac-pass">Pass/Fail ແລະ Defect Policy</a></li><li><a href="#rac-uat">UAT ແລະການອະນຸມັດ</a></li><li><a href="#rac-coverage">Traceability Matrix</a></li><li><a href="#rac-review">ຂໍ້ຕ້ອງຕັດສິນ</a></li>
       </ol></nav>
 
-      <section className={styles.documentArticleSection} id="rac-purpose">
-        <span>01 · PURPOSE</span><h2>PRO-04 ເປັນສັນຍາການຮັບມອບລະຫວ່າງ Product, Development ແລະ QA</h2>
-        <blockquote className={styles.racPurpose}>ກ່ອນເລີ່ມພັດທະນາ ທຸກຝ່າຍຕ້ອງຕົກລົງກັນກ່ອນວ່າ <strong>Input ແບບໃດ, ຢູ່ State ໃດ, ເມື່ອຜູ້ໃຊ້ເຮັດຫຍັງ ແລ້ວລະບົບຕ້ອງໃຫ້ຜົນແບບໃດ.</strong></blockquote>
-        <div className={styles.racPurposeMap}>
-          <article><b>PRODUCT OWNER</b><h3>ກຳນົດຜົນທີ່ຍອມຮັບ</h3><p>ຢືນຢັນ Business Rule, Priority, User Outcome ແລະຜົນ UAT.</p></article>
-          <article><b>DEVELOPER</b><h3>ສ້າງ Behavior ຕາມ Contract</h3><p>ນຳ Requirement, Function, Workflow, State ແລະ Error Contract ໄປ Implement.</p></article>
-          <article><b>QA</b><h3>ສ້າງຫຼັກຖານ Pass/Fail</h3><p>ແປ Acceptance Criterion ເປັນ Test Case, Test Data, Expected Result ແລະ Evidence.</p></article>
-        </div>
+      <section className={styles.formalSection} id="rac-purpose">
+        <h2><span>2.</span> ຈຸດປະສົງ ແລະຂອບເຂດ</h2>
+        <p>PRO-04 ແປຂອບເຂດທີ່ອະນຸມັດໃນ PRO-03 ໃຫ້ເປັນ Requirement ແລະ Acceptance Criteria ທີ່ກວດໄດ້. Developer ໃຊ້ເອກະສານນີ້ເພື່ອຮູ້ Behavior ທີ່ຕ້ອງສ້າງ; QA ໃຊ້ຂຽນ Test Case ແລະ Expected Result; Product Owner ໃຊ້ຮັບ ຫຼືປະຕິເສດການສົ່ງມອບ.</p>
+        <p>Requirement ຈະບໍ່ຖືວ່າສຳເລັດເພາະໜ້າຈໍເປີດໄດ້ ຫຼື Code ຖືກ Merge. ຕ້ອງຜ່ານ Acceptance Criteria ທີ່ກຳນົດ, ບໍ່ມີ Defect ທີ່ຂັດຂວາງ Release ແລະມີ Evidence ທີ່ຕາມກັບຫາ Build ແລະ Test Data ໄດ້.</p>
+        <div className={styles.formalNote}><strong>ຂອບເຂດ:</strong> ເອກະສານນີ້ກວມ Requirement statement, rationale, acceptance criteria, evidence, verification level, controlled test data, pass/fail policy, UAT ແລະ traceability. ບໍ່ກຳນົດ UX layout ລະອຽດ, API schema ສຸດທ້າຍ, Framework, Test Automation Code ຫຼື Production Runbook.</div>
       </section>
 
-      <section className={styles.documentArticleSection} id="rac-language">
-        <span>02 · SHARED LANGUAGE</span><h2>Requirement, Acceptance Criterion, Test Case ແລະ Evidence ບໍ່ແມ່ນສິ່ງດຽວກັນ</h2>
-        <div className={styles.racDefinitions}>
-          <article><b>REQUIREMENT</b><h3>ລະບົບຕ້ອງເຮັດຫຍັງ</h3><p>ກຳນົດ Capability, Actor, Boundary ແລະຜົນທີ່ຕ້ອງໄດ້. ຕົວຢ່າງ: Guest ກົດ Map ໄປຫາ Place ຖືກຕ້ອງ.</p></article>
-          <article><b>ACCEPTANCE CRITERION</b><h3>ເງື່ອນໄຂການຮັບ</h3><p>ລະບຸ Given/State, Action ແລະ Expected Result ທີ່ຕັດສິນ Pass ຫຼື Fail ໄດ້.</p></article>
-          <article><b>TEST CASE</b><h3>ວິທີກວດ Criterion</h3><p>ລະບຸ Environment, Precondition, Test Data, Steps, Expected Result ແລະ Cleanup.</p></article>
-          <article><b>EVIDENCE</b><h3>ຫຼັກຖານວ່າກວດແລ້ວ</h3><p>Test result, log, query, screenshot ເມື່ອຈຳເປັນ, build version, ວັນທີ ແລະຜູ້ຮັບຮອງ.</p></article>
-        </div>
+      <section className={styles.formalSection} id="rac-reference">
+        <h2><span>3.</span> ເອກະສານອ້າງອີງ ແລະ Baseline</h2>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ເອກະສານ</th><th>ສິ່ງທີ່ PRO-04 ຮັບມາ</th><th>ວິທີນຳໃຊ້</th></tr></thead><tbody>
+          <tr><td><strong>PRO-01 · PRD</strong></td><td>Actors, user outcomes, business rules ແລະ high-level requirements</td><td>ໃຊ້ເປັນ Requirement source</td></tr>
+          <tr><td><strong>PRO-02 · System Analysis</strong></td><td>Functions, entities, workflows, states, errors ແລະ algorithms</td><td>ໃຊ້ກວດ Behavior ແລະ Traceability</td></tr>
+          <tr><td><strong>PRO-03 · MVP Scope</strong></td><td>Priority, milestone, manual boundary ແລະ release gates</td><td>ໃຊ້ກຳນົດວ່າ Requirement ໃດຕ້ອງຜ່ານກ່ອນ Pilot</td></tr>
+        </tbody></table></div>
+        <p>Baseline ປັດຈຸບັນປະກອບມີ <strong>{traceRows.length} Requirements</strong>, <strong>{acceptanceCount} Acceptance Criteria</strong>, <strong>{linkedFunctions} Functions</strong>, <strong>{linkedWorkflows} Workflows</strong> ແລະ <strong>{linkedErrors} Error Codes</strong> ທີ່ຖືກອ້າງອີງ.</p>
       </section>
 
-      <section className={styles.documentArticleSection} id="rac-baseline">
-        <span>03 · APPROVED BASELINE</span><h2>PRO-04 ບໍ່ສ້າງ Scope ໃໝ່</h2>
-        <p className={styles.documentQuestion}>ເອກະສານນີ້ສືບທອດ Requirement ຈາກ PRO-01, Analysis Contract ຈາກ PRO-02 ແລະ Priority/Release Boundary ຈາກ PRO-03.</p>
-        <div className={styles.racSummary}>
-          <article><small>REQUIREMENTS</small><strong>{traceRows.length}</strong><p>9 Functional + 4 Non-functional</p></article>
-          <article><small>ACCEPTANCE CRITERIA</small><strong>{acceptanceCount}</strong><p>ທຸກຂໍ້ມີ ID ແລະ Expected Result</p></article>
-          <article><small>LINKED FUNCTIONS</small><strong>{linkedFunctions}</strong><p>Logical Functions ຈາກ PRO-02</p></article>
-          <article><small>WORKFLOWS / ERRORS</small><strong>{linkedWorkflows}/{linkedErrors}</strong><p>Workflow IDs / Error Codes ທີ່ອ້າງອີງ</p></article>
-        </div>
-        <div className={styles.racBoundary}>
-          <div><b>ຢູ່ໃນ PRO-04</b><ul><li>Requirement statement ແລະ rationale</li><li>Acceptance Criteria ລະດັບ Product/System</li><li>Test level, data fixture ແລະ evidence</li><li>Pass/Fail, defect ແລະ sign-off policy</li><li>Traceability ຫາ Function/Workflow/Error</li></ul></div>
-          <div><b>ບໍ່ຢູ່ໃນ PRO-04</b><ul><li>UX layout ລະອຽດທຸກໜ້າ</li><li>API endpoint/schema ສຸດທ້າຍ</li><li>Programming framework/infrastructure</li><li>Test automation code</li><li>Production operation runbook ສະບັບເຕັມ</li></ul></div>
-        </div>
+      <section className={styles.formalSection} id="rac-language">
+        <h2><span>4.</span> ຄຳສັບ ແລະຫຼັກການຂຽນ</h2>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ຄຳສັບ</th><th>ຄວາມໝາຍ</th><th>ຕົວຢ່າງການນຳໃຊ້</th></tr></thead><tbody>
+          <tr><td><strong>Requirement</strong></td><td>ຂໍ້ກຳນົດວ່າ Actor ຫຼືລະບົບຕ້ອງເຮັດຫຍັງ ແລະໄດ້ຜົນຫຍັງ.</td><td>Guest ກົດ Map ໄປຫາ Place ຖືກຕ້ອງ.</td></tr>
+          <tr><td><strong>Acceptance Criterion</strong></td><td>ເງື່ອນໄຂທີ່ລະບຸ State/Input, Action ແລະ Expected Result ເພື່ອຕັດສິນ Pass/Fail.</td><td>Given Place ມີພິກັດ, when Guest ກົດ Map, then ເປີດປາຍທາງກົງກັບ Place.</td></tr>
+          <tr><td><strong>Test Case</strong></td><td>ຂັ້ນຕອນການກວດ Criterion ທີ່ລະບຸ Environment, Data, Steps, Expected Result ແລະ Cleanup.</td><td>TC-USR-04-01 ໃຊ້ DATA-01 ໃນ Test Environment.</td></tr>
+          <tr><td><strong>Evidence</strong></td><td>ຫຼັກຖານວ່າກວດແລ້ວ ແລະຜົນເປັນຫຍັງ.</td><td>Test run, log/query, build version, ວັນທີ ແລະຜູ້ຮັບຮອງ.</td></tr>
+        </tbody></table></div>
+        <h3>4.1 ຫຼັກການຂຽນ Acceptance Criteria</h3>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ຂໍ້</th><th>ຫຼັກການ</th><th>ຄຳອະທິບາຍ</th></tr></thead><tbody>{acceptanceRules.map(([id, title, detail]) => <tr key={id}><td>{id}</td><td><strong>{title}</strong></td><td>{detail}</td></tr>)}</tbody></table></div>
       </section>
 
-      <section className={styles.documentArticleSection} id="rac-rules">
-        <span>04 · ACCEPTANCE WRITING RULES</span><h2>Criterion ທີ່ດີຕ້ອງລົບຄວາມຄຸມເຄືອ</h2>
-        <ol className={styles.racAcceptanceRules}>{acceptanceRules.map(([id, title, detail]) => <li key={id}><b>{id}</b><div><strong>{title}</strong><p>{detail}</p></div></li>)}</ol>
+      <section className={styles.formalSection} id="rac-catalog">
+        <h2><span>5.</span> ບັນຊີ Requirements ແລະ Acceptance Criteria</h2>
+        <p>Requirement ທັງ {traceRows.length} ຂໍ້ສະແດງເນື້ອຫາຄົບໂດຍບໍ່ເຊື່ອງໄວ້ຫຼັງ Filter ຫຼືປຸ່ມເປີດ-ປິດ. ແຕ່ລະຂໍ້ມີ Statement, Rationale, Acceptance Criteria, Evidence ແລະ Traceability ໃນຮູບແບບດຽວກັນ.</p>
+        <div className={styles.formalRequirementList}>{traceRows.map((row) => <section className={styles.formalRequirement} key={row.id} id={`req-${row.id.toLowerCase()}`}>
+          <header><div><code>{row.id}</code><span className={styles.formalPriority} data-priority={row.priority}>{row.priority}</span><span>{row.kind}</span></div><h3>{row.title}</h3></header>
+          <div className={styles.formalTableWrap}><table className={styles.formalTable}><tbody>
+            <tr><th>Requirement Statement</th><td>{row.requirement}</td></tr>
+            <tr><th>Rationale</th><td>{row.rationale}</td></tr>
+            <tr><th>Priority / Type</th><td>{row.priority} · {row.kind}</td></tr>
+            <tr><th>Acceptance Criteria</th><td><ol className={styles.formalCriteria}>{row.acceptance.map((criterion) => { const [id, ...detail] = criterion.split(" · "); return <li key={id}><code>{id}</code><span>{detail.join(" · ")}</span></li>; })}</ol></td></tr>
+            <tr><th>Required Evidence</th><td><ul className={styles.formalPlainList}>{row.evidence.map((item) => <li key={item}>{item}</li>)}</ul></td></tr>
+            <tr><th>Use Cases / Rules</th><td><code>{[...row.useCases, ...row.rules].join(" · ") || "—"}</code></td></tr>
+            <tr><th>Functions</th><td><code>{row.functionIds.join(" · ") || "—"}</code></td></tr>
+            <tr><th>Entities / Workflows</th><td><code>{[...row.entityIds, ...row.workflowIds].join(" · ") || "—"}</code></td></tr>
+            <tr><th>States / Errors</th><td><code>{[...row.stateIds, ...row.errorCodes].join(" · ") || "—"}</code></td></tr>
+          </tbody></table></div>
+        </section>)}</div>
       </section>
 
-      <section className={styles.documentArticleSection} id="rac-catalog">
-        <span>05 · REQUIREMENT & ACCEPTANCE CATALOG</span><h2>13 Requirements ແລະ 46 Acceptance Criteria</h2>
-        <p className={styles.documentQuestion}>ໃຊ້ Filter ເພື່ອເບິ່ງ Guest Journey, Operations/Trust ຫຼື Non-functional Requirement. ກົດ Requirement ເພື່ອເປີດ Criteria, Evidence ແລະ Traceability.</p>
-        <div className={styles.racFilters} role="tablist" aria-label="Filter requirements">
-          {(["All", "Guest", "Operations", "Quality"] as const).map((value) => <button type="button" role="tab" aria-selected={filter === value} className={filter === value ? styles.racFilterActive : ""} key={value} onClick={() => setFilter(value)}><b>{filterLabels[value]}</b><span>{value === "All" ? traceRows.length : traceRows.filter((row) => getFilter(row.id) === value).length}</span></button>)}
-        </div>
-        <div className={styles.racRequirementList}>
-          {visibleRows.map((row, index) => <details key={row.id} open={index === 0 && filter === "All"}>
-            <summary><div><code>{row.id}</code><span data-priority={row.priority}>{row.priority}</span><span>{row.kind}</span></div><strong>{row.title}</strong><small>{row.acceptance.length} Criteria · {row.functionIds.length} Functions · {row.workflowIds.length} Workflows</small></summary>
-            <div className={styles.racRequirementBody}>
-              <section><b>REQUIREMENT</b><p>{row.requirement}</p></section>
-              <section><b>RATIONALE</b><p>{row.rationale}</p></section>
-              <section className={styles.racAcceptanceBlock}><b>ACCEPTANCE CRITERIA</b><ol>{row.acceptance.map((criterion) => { const [id, ...detail] = criterion.split(" · "); return <li key={id}><code>{id}</code><p>{detail.join(" · ")}</p></li>; })}</ol></section>
-              <section><b>REQUIRED EVIDENCE</b><ul>{row.evidence.map((item) => <li key={item}>{item}</li>)}</ul></section>
-              <section className={styles.racTraceBlock}><b>TRACEABILITY</b><dl><div><dt>Use Case / Rules</dt><dd>{[...row.useCases, ...row.rules].join(" · ") || "—"}</dd></div><div><dt>Functions</dt><dd>{row.functionIds.join(" · ") || "—"}</dd></div><div><dt>Entities / Workflows</dt><dd>{[...row.entityIds, ...row.workflowIds].join(" · ") || "—"}</dd></div><div><dt>States / Errors</dt><dd>{[...row.stateIds, ...row.errorCodes].join(" · ") || "—"}</dd></div></dl></section>
-            </div>
-          </details>)}
-        </div>
+      <section className={styles.formalSection} id="rac-testing">
+        <h2><span>6.</span> ວິທີການກວດສອບ</h2>
+        <p>Acceptance Criterion ໜຶ່ງຂໍ້ອາດຕ້ອງມີຫຼາຍກວ່າໜຶ່ງ Test Level. ຕົວຢ່າງ: Authorization Rule ອາດຕ້ອງມີ Unit Test, API Contract Test, Integration Test ແລະ End-to-End Test.</p>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Level</th><th>ປະເພດ</th><th>ສິ່ງທີ່ກວດ</th><th>ຜູ້ຮັບຜິດຊອບ</th><th>Evidence</th></tr></thead><tbody>{testLevels.map(([id, type, purpose, owner, evidence]) => <tr key={id}><td>{id}</td><td><strong>{type}</strong></td><td>{purpose}</td><td>{owner}</td><td>{evidence}</td></tr>)}</tbody></table></div>
       </section>
 
-      <section className={styles.documentArticleSection} id="rac-testing">
-        <span>06 · VERIFICATION LEVELS</span><h2>Criterion ແຕ່ລະຂໍ້ອາດຕ້ອງມີຫຼາຍກວ່າໜຶ່ງ Test</h2>
-        <div className={styles.racTestLevels} role="table" aria-label="Test levels"><div role="row"><b>LEVEL</b><b>TYPE</b><b>ກວດຫຍັງ</b><b>OWNER</b><b>EVIDENCE</b></div>{testLevels.map(([id, type, purpose, owner, evidence]) => <div role="row" key={id}><strong>{id}</strong><b>{type}</b><p>{purpose}</p><span>{owner}</span><code>{evidence}</code></div>)}</div>
+      <section className={styles.formalSection} id="rac-data">
+        <h2><span>7.</span> ຂໍ້ມູນທົດສອບທີ່ຄວບຄຸມໄດ້</h2>
+        <p>Test Environment ຕ້ອງມີ Dataset ທີ່ສ້າງຊ້ຳໄດ້ ແລະບໍ່ໃຊ້ Production Personal Data ໂດຍກົງ. Test Case ຕ້ອງອ້າງ Fixture ID ເພື່ອໃຫ້ທີມສາມາດສ້າງ State ເກົ່າ ແລະກວດຜົນຊ້ຳໄດ້.</p>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Fixture</th><th>State / Data</th><th>ໃຊ້ກວດ</th></tr></thead><tbody>{fixtures.map(([id, name, data, use]) => <tr key={id}><td><code>{id}</code></td><td><strong>{name}</strong></td><td>{data}</td><td>{use}</td></tr>)}</tbody></table></div>
       </section>
 
-      <section className={styles.documentArticleSection} id="rac-data">
-        <span>07 · CONTROLLED TEST DATA</span><h2>ຫ້າມທົດສອບດ້ວຍ Place ທີ່ສົມບູນພຽງແບບດຽວ</h2>
-        <div className={styles.documentProse}><p>Test Environment ຕ້ອງມີ Dataset ທີ່ສ້າງຊ້ຳໄດ້ ແລະບໍ່ມີຂໍ້ມູນສ່ວນບຸກຄົນຈິງທີ່ບໍ່ຈຳເປັນ. Fixture ID ຕ້ອງຖືກອ້າງໃນ Test Case ເພື່ອໃຫ້ຜົນທົດສອບຊ້ຳໄດ້.</p></div>
-        <div className={styles.racFixtureTable} role="table" aria-label="Required test fixtures"><div role="row"><b>ID</b><b>FIXTURE</b><b>STATE / DATA</b><b>USED TO VERIFY</b></div>{fixtures.map(([id, name, data, use]) => <div role="row" key={id}><strong>{id}</strong><b>{name}</b><p>{data}</p><span>{use}</span></div>)}</div>
+      <section className={styles.formalSection} id="rac-pass">
+        <h2><span>8.</span> Pass/Fail ແລະ Defect Policy</h2>
+        <p>ຄຳວ່າ “ໃຊ້ໄດ້ສ່ວນໃຫຍ່” ບໍ່ແມ່ນເກນຮັບມອບ. ການຕັດສິນຕ້ອງອ້າງ Acceptance Criteria, Priority ແລະ Defect Severity.</p>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Policy</th><th>ກົດການຮັບມອບ</th></tr></thead><tbody>{passPolicy.map(([type, rule]) => <tr key={type}><td><strong>{type}</strong></td><td>{rule}</td></tr>)}</tbody></table></div>
+        <h3>8.1 Defect Severity</h3>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ລະດັບ</th><th>ຄວາມໝາຍ</th><th>ຜົນຕໍ່ Release</th></tr></thead><tbody>
+          <tr><td>Critical</td><td>ລະບົບໃຊ້ບໍ່ໄດ້, data/security/rights ເສຍຫາຍຮ້າຍແຮງ ຫຼືບໍ່ມີ workaround.</td><td>Block Release</td></tr>
+          <tr><td>High</td><td>Core Journey ຫຼື Must Requirement ລົ້ມເຫຼວ ແລະ workaround ບໍ່ປອດໄພ.</td><td>Block Release</td></tr>
+          <tr><td>Medium</td><td>Behavior ຜິດບາງສ່ວນ ແຕ່ມີ workaround ທີ່ກວດແລ້ວ.</td><td>ຮັບໄດ້ສະເພາະມີ owner, due date ແລະ approved deviation</td></tr>
+          <tr><td>Low</td><td>ບັນຫານ້ອຍທີ່ບໍ່ກະທົບຜົນລັບ, security, trust ຫຼືການໃຊ້ງານຫຼັກ.</td><td>ບັນທຶກເຂົ້າ Backlog</td></tr>
+        </tbody></table></div>
       </section>
 
-      <section className={styles.documentArticleSection} id="rac-pass">
-        <span>08 · PASS, FAIL & DEFECT POLICY</span><h2>“ໃຊ້ໄດ້ສ່ວນໃຫຍ່” ບໍ່ແມ່ນເກນຮັບມອບ</h2>
-        <div className={styles.racPassPolicy}>{passPolicy.map(([type, rule]) => <article key={type} data-policy={type}><b>{type}</b><p>{rule}</p></article>)}</div>
-        <div className={styles.racSignoffFlow}><div><b>01</b><span>QA ຕິດ Evidence ກັບ Requirement/Build</span></div><i>→</i><div><b>02</b><span>Tech Lead ຢືນຢັນ Technical/Regression Result</span></div><i>→</i><div><b>03</b><span>Product Owner ກວດ UAT ແລະ Business Outcome</span></div><i>→</i><div><b>04</b><span>ບັນທຶກ Accepted, Rejected ຫຼື Accepted with Approved Deviation</span></div></div>
+      <section className={styles.formalSection} id="rac-uat">
+        <h2><span>9.</span> UAT ແລະການອະນຸມັດຮັບມອບ</h2>
+        <ol className={styles.formalNumberList}><li><strong>QA:</strong> ກວດ Test Run ແລະຕິດ Evidence ກັບ Requirement, Build Version ແລະ Fixture.</li><li><strong>Tech Lead:</strong> ຢືນຢັນ Technical Result, Regression, Security ແລະຂໍ້ຈຳກັດທີ່ຮູ້ແລ້ວ.</li><li><strong>Product Owner / Business User:</strong> ກວດ UAT Scenario ແລະຢືນຢັນວ່າ User/Business Outcome ກົງກັບຂອບເຂດ.</li><li><strong>Decision Record:</strong> ບັນທຶກຜົນເປັນ Accepted, Rejected ຫຼື Accepted with Approved Deviation.</li></ol>
+        <div className={styles.formalNote}><strong>ຫຼັກຖານຂັ້ນຕ່ຳ:</strong> Requirement ID, Test Case ID, Environment, Build Version, Fixture ID, Expected/Actual Result, Defect Link, ວັນທີ, ຜູ້ທົດສອບ ແລະຜູ້ອະນຸມັດ.</div>
       </section>
 
-      <section className={styles.documentArticleSection} id="rac-coverage">
-        <span>09 · TRACEABILITY COVERAGE</span><h2>Requirement ທຸກຂໍ້ຕ້ອງຕາມຫາ Analysis ແລະ Test ໄດ້</h2>
-        <div className={styles.racCoverageTable} role="table" aria-label="Requirement acceptance coverage"><div role="row"><b>REQ</b><b>PRIORITY</b><b>AC</b><b>FUNCTIONS</b><b>ENTITIES</b><b>WORKFLOWS</b><b>STATES</b><b>ERRORS</b></div>{traceRows.map((row) => <div role="row" key={row.id}><strong>{row.id}</strong><span>{row.priority}</span><b>{row.acceptance.length}</b><span>{row.functionIds.length}</span><span>{row.entityIds.length}</span><span>{row.workflowIds.length}</span><span>{row.stateIds.length}</span><span>{row.errorCodes.length}</span></div>)}</div>
-        <div className={styles.racChangeRule}><b>CHANGE RULE</b><p>ຖ້າ Requirement ຫຼື Criterion ປ່ຽນ ຜູ້ຂໍປ່ຽນຕ້ອງກວດ PRO-02 Function/Entity/Workflow/State/Error, PRO-03 Priority/Milestone, UX Flow, API/Data Design, Test Case ແລະ Release Plan ທີ່ຖືກກະທົບ. ຫ້າມແກ້ Criterion ໃຫ້ຜ່ານຫຼັງ Test ລົ້ມ ໂດຍບໍ່ມີ Change Decision.</p></div>
+      <section className={styles.formalSection} id="rac-coverage">
+        <h2><span>10.</span> Traceability Matrix</h2>
+        <p>Matrix ນີ້ໃຊ້ກວດວ່າ Requirement ທຸກຂໍ້ມີ Acceptance Criteria ແລະສາມາດຕາມກັບຫາ Analysis Element ໄດ້. ຕົວເລກສະແດງຈຳນວນ Link; ລາຍລະອຽດ ID ຢູ່ໃນຂໍ້ 5.</p>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Requirement</th><th>Priority</th><th>Criteria</th><th>Functions</th><th>Entities</th><th>Workflows</th><th>States</th><th>Errors</th></tr></thead><tbody>{traceRows.map((row) => <tr key={row.id}><td><code>{row.id}</code></td><td>{row.priority}</td><td>{row.acceptance.length}</td><td>{row.functionIds.length}</td><td>{row.entityIds.length}</td><td>{row.workflowIds.length}</td><td>{row.stateIds.length}</td><td>{row.errorCodes.length}</td></tr>)}</tbody></table></div>
+        <div className={styles.formalDecision}><strong>Change Rule</strong><p>ຖ້າ Requirement ຫຼື Criterion ປ່ຽນ ຜູ້ຂໍປ່ຽນຕ້ອງກວດ PRO-02 Function/Entity/Workflow/State/Error, PRO-03 Priority/Milestone, UX Flow, API/Data Design, Test Case ແລະ Release Plan. ຫ້າມຫຼຸດ Criterion ໃຫ້ຜ່ານຫຼັງ Test ລົ້ມໂດຍບໍ່ມີ Change Decision.</p></div>
       </section>
 
-      <section className={styles.documentArticleSection} id="rac-review">
-        <span>10 · REVIEW REQUIRED</span><h2>5 ຈຸດທີ່ຕ້ອງຕັດສິນກ່ອນ PRO-04 ຂຶ້ນເປັນ 1.0</h2>
-        <ol className={styles.saReviewChecklist}>
-          <li><b>Acceptance Authority:</b><p>ໃຜເປັນຜູ້ມີສິດຮັບມອບສຸດທ້າຍສຳລັບ Business/UAT, Technical Quality ແລະ Operational Readiness?</p></li>
-          <li><b>Test Environment & Data:</b><p>ອະນຸມັດໃຫ້ມີ Test Environment ແຍກ, 8 Controlled Fixtures ແລະຫ້າມນຳ Production Personal Data ມາທົດສອບໂດຍກົງຫຼືບໍ່?</p></li>
-          <li><b>Defect Severity & Release Block:</b><p>Critical/High ຕ້ອງ Block Release; Medium ອາດຮັບໄດ້ສະເພາະມີ workaround, owner ແລະ due date; Low ເຂົ້າ backlog—ຂອບເຂດນີ້ເໝາະສົມຫຼືບໍ່?</p></li>
-          <li><b>Performance Target:</b><p>NFR-02 ຍັງຕ້ອງລະບຸ Mobile Network/Device baseline, response/render target ແລະ External Media timeout ໃນ Technical Proposal ກ່ອນ Pilot; ຈະໃຫ້ PRO-04 ອະນຸມັດແບບມີເງື່ອນໄຂ ຫຼືລໍຕົວເລກກ່ອນ?</p></li>
-          <li><b>UAT & Sign-off Evidence:</b><p>ຈະໃຊ້ Journey/Scenario ໃດເປັນ UAT ບັງຄັບ, ໃຜຕ້ອງລົງນາມ ແລະຈະເກັບ Evidence/Approved Deviation ໄວ້ບ່ອນໃດ?</p></li>
-        </ol>
+      <section className={styles.formalSection} id="rac-review">
+        <h2><span>11.</span> ຂໍ້ຕ້ອງຕັດສິນກ່ອນອະນຸມັດສະບັບ 1.0</h2>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>ຫົວຂໍ້</th><th>ຄຳຖາມທີ່ຕ້ອງຕັດສິນ</th><th>ສະຖານະ</th></tr></thead><tbody>
+          <tr><td>REV-01</td><td><strong>Acceptance Authority</strong></td><td>ໃຜມີສິດຮັບມອບສຸດທ້າຍສຳລັບ Business/UAT, Technical Quality ແລະ Operational Readiness?</td><td>ລໍຕັດສິນ</td></tr>
+          <tr><td>REV-02</td><td><strong>Test Environment &amp; Data</strong></td><td>ອະນຸມັດ Test Environment ແຍກ, 8 Controlled Fixtures ແລະກົດຫ້າມໃຊ້ Production Personal Data ໂດຍກົງຫຼືບໍ່?</td><td>ລໍຕັດສິນ</td></tr>
+          <tr><td>REV-03</td><td><strong>Defect Severity</strong></td><td>ອະນຸມັດໃຫ້ Critical/High Block Release; Medium ຮັບໄດ້ສະເພາະມີ workaround, owner, due date ແລະ deviation; Low ເຂົ້າ Backlog ຫຼືບໍ່?</td><td>ລໍຕັດສິນ</td></tr>
+          <tr><td>REV-04</td><td><strong>Performance Target</strong></td><td>ຈະໃຫ້ PRO-04 ອະນຸມັດແບບມີເງື່ອນໄຂ ຫຼືລໍ Mobile baseline, response/render target ແລະ external-media timeout ຈາກ Technical Proposal ກ່ອນ?</td><td>ລໍຕັດສິນ</td></tr>
+          <tr><td>REV-05</td><td><strong>UAT &amp; Sign-off Evidence</strong></td><td>Journey ໃດເປັນ UAT ບັງຄັບ, ໃຜລົງນາມ ແລະເກັບ Evidence/Approved Deviation ໄວ້ບ່ອນໃດ?</td><td>ລໍຕັດສິນ</td></tr>
+        </tbody></table></div>
+        <div className={styles.formalDraftNotice}><strong>ສະຖານະຮ່າງ 0.1</strong><p>PRO-04 ຍັງບໍ່ເປັນ Baseline 1.0 ຈົນກວ່າ REV-01 ຫາ REV-05 ຈະຖືກຕັດສິນ, ບັນທຶກຜູ້ອະນຸມັດ ແລະອັບເດດ Revision History.</p></div>
       </section>
-
-      <aside className={styles.draftApprovalGate}><div><span>ຮ່າງສຳລັບທົບທວນ</span><h2>PRO-04 · Requirements & Acceptance 0.1</h2><p>ຮ່າງນີ້ກວມ 13 Requirements, 46 Acceptance Criteria, Test Levels, Controlled Fixtures, Pass/Fail Policy ແລະ Traceability Coverage. ຍັງບໍ່ເປັນ 1.0 ຈົນກວ່າ 5 ຈຸດທົບທວນຈະຖືກຕັດສິນ.</p></div><ul><li>Requirements — 13/13</li><li>Acceptance Criteria — 46</li><li>Test Fixtures — 8</li><li>Traceability — ຜູກກັບ PRO-02</li><li>Review decisions — ລໍອະນຸມັດ</li></ul></aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
         <a href={`${basePath}/documents/mvp-scope`}><small>← ເອກະສານຕົ້ນທາງ</small><strong>MVP Scope & Prioritization 1.0</strong></a>
