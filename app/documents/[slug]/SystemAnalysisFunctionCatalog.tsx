@@ -79,7 +79,7 @@ const modules: Module[] = [
       f("FN-SRC-001", "Command", "Register Content Source", "Admin", "canonicalUrl, platform, creator, proposedPlace", "sourceId in Proposed", "W: ContentSource, Creator?", "URL ແລະ Platform ບັງຄັບ; ຫ້າມສ້າງ canonicalUrl ຊ້ຳ", "FN-SRC-002, FN-ADM-004"),
       f("FN-SRC-002", "Integration", "Validate Source URL", "Admin/Background", "sourceId or URL", "validity, availability class, reason", "R/W: Source check result", "ແຍກ Temporary/Confirmed/Takedown; ຫ້າມ Download video", "External Social Platform"),
       f("FN-SRC-003", "Integration", "Read Permitted Source Metadata", "Admin", "validated URL", "creator/title/preview/embed metadata", "W: permitted metadata only", "ເກັບສະເພາະ Metadata ທີ່ Source ອະນຸຍາດ", "FN-SRC-002"),
-      f("FN-SRC-004", "Command", "Link Source to Canonical Place", "Admin", "sourceId, placeId", "linked source", "W: PlaceSource relation", "Source ໜຶ່ງຊີ້ Place ຫຼັກໜຶ່ງໃນ MVP", "FN-PADM-008"),
+      f("FN-SRC-004", "Command", "Link Source to Canonical Place", "Admin", "sourceId, placeId", "linked source", "W: ContentSource.place_id", "Source ໜຶ່ງຊີ້ Place ຫຼັກໜຶ່ງໃນ MVP", "FN-PADM-008"),
       f("FN-SRC-005", "Command", "Publish or Unpublish Source", "Admin", "sourceId, targetStatus, reason", "new source status", "W: ContentSource.status, AuditLog", "Publish ຕ້ອງຜ່ານ URL/Attribution/Place checks", "FN-SRC-002—004, FN-ADM-004"),
       f("FN-SRC-006", "Background", "Check Source Availability", "Scheduler/Admin", "sourceId", "availability status, checkedAt, nextAction", "R/W: ContentSource availability", "Temporary ໃຊ້ Retry; Confirmed ຖອນ Feed; recheck 7 ວັນ", "FN-SRC-002, MOD-10"),
       f("FN-SRC-007", "Command", "Process Source Takedown", "Admin", "requestId, sourceId, decision", "source hidden/removed, request result", "W: Source, TakedownRequest, AuditLog", "ຖອນ Public View ທັນທີໃນລະຫວ່າງກວດ", "MOD-06, FN-ADM-004"),
@@ -109,7 +109,7 @@ const modules: Module[] = [
     responsibilities: ["Register/triage request", "Needs Evidence", "Approve/Reject/Close", "Urgent handling ແລະ SLA"],
     prd: "BUS-01, ADM-01, TRU-01", dependencies: "MOD-04, MOD-05, MOD-08, MOD-10",
     functions: [
-      f("FN-REQ-001", "Command", "Register Correction Request", "Place Owner/Admin", "placeId, requested changes, contact, evidence", "requestId, Submitted", "W: CorrectionRequest, RequestItem, Evidence reference", "ບັນທຶກ receivedAt; Pilot ອາດຮັບຈາກ external channel", "FN-REQ-002"),
+      f("FN-REQ-001", "Command", "Register Correction Request", "Place Owner/Admin", "placeId, requested changes, contact, evidence", "requestId, Submitted", "W: CorrectionRequest, CorrectionItem, RequestEvidence", "ບັນທຶກ receivedAt; Pilot ອາດຮັບຈາກ external channel", "FN-REQ-002"),
       f("FN-REQ-002", "Control", "Validate & Triage Request", "Admin", "requestId", "priority, completeness, SLA clock", "R/W: Request status/priority", "Urgent: map/phone/closed/takedown; incomplete → Needs Evidence", "BR-12"),
       f("FN-REQ-003", "Command", "Request Additional Evidence", "Admin", "requestId, missing evidence, message", "Needs Evidence, requester notice", "W: Request status, communication log", "3-day decision clock ຢຸດຈົນຫຼັກຖານຄົບ", "FN-REQ-002, FN-ADM-004"),
       f("FN-REQ-004", "Command", "Approve Correction", "Admin", "requestId, approved items, reason", "Place updated, Approved", "W: Place fields, Verification, Request, AuditLog", "ແກ້ສະເພາະ approved items; revalidate publish state", "FN-PADM-002—004, FN-ADM-004"),
@@ -175,6 +175,7 @@ const modules: Module[] = [
 
 const totalFunctions = modules.reduce((sum, module) => sum + module.functions.length, 0);
 export const systemFunctionIds = modules.flatMap((module) => module.functions.map((item) => item.id));
+export const systemFunctionCatalog = modules.flatMap((module) => module.functions.map((item) => ({ ...item, moduleId: module.id, moduleName: module.name, moduleLao: module.lao })));
 const typeCounts = modules.flatMap((module) => module.functions).reduce<Record<string, number>>((counts, item) => ({ ...counts, [item.type]: (counts[item.type] ?? 0) + 1 }), {});
 
 export default function SystemAnalysisFunctionCatalog() {

@@ -419,8 +419,8 @@ export default function SystemAnalysisWorkflows() {
       </section>
 
       <aside className={styles.saNextStep}>
-        <small>ສະຖານະ SA</small><h2>ຂັ້ນ 1–3 ຈັດເຮັດແລ້ວ · ຂັ້ນ 4 ແມ່ນ Function Specification & Algorithm</h2>
-        <p>ຂັ້ນ 4 ຈະເປີດ Function Catalog ແຕ່ລະອັນແລ້ວກຳນົດ Preconditions, Input Contract, Processing Rules/Pseudocode, Output Contract, Data Operation, Complexity/Limit, Security ແລະ Testable Result. Workflow ໃນພາກ D ຈະເປັນ Caller/Call-order baseline ຂອງ Specification ເຫຼົ່ານັ້ນ.</p>
+        <small>ສະຖານະ SA</small><h2>ຂັ້ນ 1–3 ຈັດເຮັດແລ້ວ · ອ່ານຕໍ່ຂັ້ນ 4 Function Specification & Algorithm</h2>
+        <p>ພາກ E ດ້ານລຸ່ມຈະເປີດ Function Catalog ແຕ່ລະອັນແລ້ວກຳນົດ Preconditions, Input/Output Contract, Processing Algorithm, Data Operation, Security/Performance ແລະ Testable Result. Workflow ໃນພາກ D ເປັນ Caller/Call-order baseline ຂອງ Specification ເຫຼົ່ານັ້ນ.</p>
       </aside>
     </section>
   );

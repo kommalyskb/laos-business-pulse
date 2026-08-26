@@ -5,6 +5,7 @@ import styles from "../documents.module.css";
 import SystemAnalysisFunctionCatalog from "./SystemAnalysisFunctionCatalog";
 import SystemAnalysisDataModel from "./SystemAnalysisDataModel";
 import SystemAnalysisWorkflows from "./SystemAnalysisWorkflows";
+import SystemAnalysisFunctionSpecifications from "./SystemAnalysisFunctionSpecifications";
 
 const useCases = [
   {
@@ -126,7 +127,7 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
   return (
     <article className={`${styles.detailBody} ${styles.systemAnalysisBody} ${styles.businessDocument}`}>
       <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>0.5</strong></div>
+        <div><small>ສະບັບ</small><strong>0.6</strong></div>
         <div><small>ສະຖານະ</small><strong>ກຳລັງຈັດເຮັດ</strong></div>
         <div><small>ວັນທີປັບປຸງ</small><strong>26 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>PRO-01 Product Requirements 1.0</strong></div>
@@ -136,7 +137,7 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
         <div><span>ປັບສະຖານະເອກະສານ</span><h2>PRO-02 ກຳລັງຖືກສ້າງຄືນຕາມ 7 ຂັ້ນຂອງ System Analysis</h2></div>
         <div>
           <p>PRO-02 ຖືກຖອນຈາກສະຖານະ 1.0 ເພາະຍັງບໍ່ພຽງພໍສຳລັບ Developer Handoff. Actor, Boundary, Use Case ລະດັບສູງ ແລະ Business Rules ຈະຖືກເກັບເປັນພາກພື້ນຖານ.</p>
-          <p>Functional Decomposition/Function Catalog ຖືກເພີ່ມເປັນພາກ B; Logical Data Model/ERD ເປັນພາກ C; Module Workflow/Sequence ເປັນພາກ D ແລ້ວ. ກ່ອນກັບໄປສູ່ສະບັບ 1.0 ຍັງຕ້ອງເພີ່ມ Function Algorithms, State Transition/Error Contract, Traceability Matrix ແລະ Development Dependency Order.</p>
+          <p>Functional Decomposition/Catalog ເປັນພາກ B; Logical Data Model/ERD ເປັນພາກ C; Workflow/Sequence ເປັນພາກ D; Function Specification/Algorithm ເປັນພາກ E ແລ້ວ. ກ່ອນກັບໄປສູ່ສະບັບ 1.0 ຍັງຕ້ອງເພີ່ມ State Transition/Error Contract, Traceability Matrix ແລະ Development Dependency Order.</p>
         </div>
       </aside>
 
@@ -355,9 +356,11 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
 
       <SystemAnalysisWorkflows />
 
+      <SystemAnalysisFunctionSpecifications />
+
       <aside className={styles.draftApprovalGate}>
-        <div><span>ກຳລັງຈັດເຮັດ</span><h2>PRO-02 · System Analysis 0.5</h2><p>ຂັ້ນ 1–3 ຈັດເຮັດແລ້ວ: 10 Modules/64 Functions, 27 Entities/43 Relationships ແລະ 16 End-to-end Workflows ທີ່ລະບຸ Sequence/Transaction/Alternate Flow. ເອກະສານຍັງບໍ່ເປັນ Developer-ready SA ຈົນກວ່າຂັ້ນ 4–7 ຈະຄົບ.</p></div>
-        <ul><li>ພາກ A · Context & Rules — ມີແລ້ວ</li><li>ຂັ້ນ 1 · Functional Decomposition & Catalog — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 2 · Logical Data Model & ERD — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 3 · Workflow/Sequence — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 4–6 · Algorithm, State/Error, Traceability — ຍັງຕ້ອງເຮັດ</li><li>ຂັ້ນ 7 · Developer Handoff — ຍັງຕ້ອງເຮັດ</li></ul>
+        <div><span>ກຳລັງຈັດເຮັດ</span><h2>PRO-02 · System Analysis 0.6</h2><p>ຂັ້ນ 1–4 ຈັດເຮັດແລ້ວ: 64 Functions ມີ Catalog, Data Model, Workflow ແລະ Specification/Algorithm ຄົບ 1:1. ເອກະສານຍັງບໍ່ເປັນ Developer-ready SA ຈົນກວ່າຂັ້ນ 5–7 ຈະຄົບ.</p></div>
+        <ul><li>ພາກ A · Context & Rules — ມີແລ້ວ</li><li>ຂັ້ນ 1 · Functional Decomposition & Catalog — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 2 · Logical Data Model & ERD — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 3 · Workflow/Sequence — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 4 · Function Specification & Algorithm — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 5–6 · State/Error ແລະ Traceability — ຍັງຕ້ອງເຮັດ</li><li>ຂັ້ນ 7 · Developer Handoff — ຍັງຕ້ອງເຮັດ</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
