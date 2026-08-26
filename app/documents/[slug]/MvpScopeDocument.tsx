@@ -15,11 +15,11 @@ type ScopeItem = {
 };
 
 const scopeItems: ScopeItem[] = [
-  { id: "MVP-001", priority: "Must", milestone: "M1", capability: "Pilot inventory", scope: "ມີ 100 Place Records ໃນວຽງຈັນ ຈາກ 2 ໝວດທຳອິດ: ຮ້ານອາຫານ ແລະຄາເຟ; Required Field, Source ແລະ Checked Date ຕ້ອງຄົບຕາມ policy.", reason: "ຖ້າ inventory ບໍ່ພໍ ຈະທົດສອບ Search, Feed ແລະຄຸນຄ່າຕໍ່ຜູ້ໃຊ້ບໍ່ໄດ້.", source: "BUS-04 · PRO-01" },
+  { id: "MVP-001", priority: "Must", milestone: "M1", capability: "Pilot inventory", scope: "ສ້າງ inventory ເປັນ 3 ຂັ້ນ 30 → 60 → 100 Place Records ໃນວຽງຈັນ ຈາກ 2 ໝວດທຳອິດ: ຮ້ານອາຫານ ແລະຄາເຟ; Required Field, Map, Contact, Source ແລະ Checked Date ຕ້ອງຄົບຕາມ policy.", reason: "ການແບ່ງ 30 → 60 → 100 ຊ່ວຍກວດ workflow ກ່ອນລົງແຮງຄົບ 100; inventory ຕ້ອງພໍທົດສອບ Search, Feed ແລະຄຸນຄ່າຕໍ່ຜູ້ໃຊ້.", source: "BUS-04 · PRO-01 · PRO-03 Decision 01" },
   { id: "MVP-002", priority: "Must", milestone: "M0/M1", capability: "Responsive Guest Web", scope: "Guest ເຂົ້າ Feed, Search, Place ແລະ Action ໄດ້ໃນ Mobile Web/PWA ໂດຍບໍ່ສະໝັກ Account.", reason: "ຫຼຸດອຸປະສັກກ່ອນພິສູດວ່າ Core Journey ມີຄຸນຄ່າ.", source: "USR-01—04 · NFR-01" },
   { id: "MVP-003", priority: "Must", milestone: "M0", capability: "Admin Access & Audit", scope: "Admin ແຕ່ລະຄົນໃຊ້ Account ຕົນເອງ; authorization ແລະ Audit Log ຕ້ອງມາກ່ອນ business mutation.", reason: "ຂໍ້ມູນ Public ຕ້ອງຕາມຮອຍຜູ້ປ່ຽນ ແລະເຫດຜົນໄດ້.", source: "ADM-01 · PRO-02 WP-01" },
   { id: "MVP-004", priority: "Must", milestone: "M0/M1", capability: "Place Data Admin", scope: "ສ້າງ/ແກ້ Place Draft, validate Required Field, ເຕືອນ Duplicate, ກວດ Publish Readiness ແລະ Publish/Suspend/Archive.", reason: "Admin workflow ແມ່ນກົນໄກຜະລິດ inventory ບໍ່ແມ່ນ back-office ເສີມ.", source: "ADM-01 · PRO-02 WP-02/04" },
-  { id: "MVP-005", priority: "Must", milestone: "M0/M1", capability: "Content Source Curation", scope: "ລົງທະບຽນ, validate, ອ່ານ metadata ທີ່ອະນຸຍາດ, ເຊື່ອມ Source ກັບ Place ແລະ Publish ພ້ອມ Creator attribution.", reason: "Platform ຕ້ອງຊີ້ກັບຫາຕົ້ນສະບັບ ແລະບໍ່ Re-host ວິດີໂອ.", source: "TRU-01 · PRO-02 WP-03" },
+  { id: "MVP-005", priority: "Must", milestone: "M0/M1", capability: "Content Source Curation", scope: "TikTok ແລະ Facebook ເປັນ Source ຫຼັກ; YouTube ເປັນ Source ເສີມ. ລະບົບລົງທະບຽນ, validate, ອ່ານ metadata ທີ່ອະນຸຍາດ, ເຊື່ອມ Source ກັບ Place ແລະ Publish ພ້ອມ Creator attribution; ທຸກ Source ຕ້ອງມີ External Link fallback.", reason: "ຈຳກັດ Source ຫຼັກເພື່ອຄວບຄຸມ Pilot; Platform ຕ້ອງຊີ້ກັບຫາຕົ້ນສະບັບ ແລະບໍ່ Re-host ວິດີໂອ.", source: "TRU-01 · PRO-02 WP-03 · PRO-03 Decision 02" },
   { id: "MVP-006", priority: "Must", milestone: "M0/M1", capability: "Full-screen Discovery Feed", scope: "Feed ແນວຕັ້ງເຕັມຈໍໃນ Mobile, ສະແດງ Source/Creator/Place ແລະມີ Preview/Fallback ເມື່ອ official embed ລົ້ມ.", reason: "Video-first ແມ່ນຈຸດດຶງຄວາມສົນໃຈ ແຕ່ Card ຕ້ອງພາໄປ Place Page.", source: "USR-01 · NFR-02" },
   { id: "MVP-007", priority: "Must", milestone: "M1", capability: "Search & Launch Filters", scope: "ຄົ້ນດ້ວຍຊື່/ຄຳສຳຄັນ ແລະກອງດ້ວຍໝວດ, ເຂດ ແລະຊ່ວງລາຄາ; ມີ Empty State ແລະ Clear Filter.", reason: "ແກ້ pain point ທີ່ຄົ້ນ Review ໃນ Social Platform ຍາກ.", source: "USR-02 · PRO-01 Decision 03" },
   { id: "MVP-008", priority: "Must", milestone: "M0/M1", capability: "Canonical Place Page", scope: "ໜຶ່ງ Place ມີໜ້າຫຼັກດຽວ ລວມຊື່, ໝວດ, ທີ່ຢູ່, Map, Contact, Hours, Price, Sources, Checked Date ແລະ Trust Labels.", reason: "ເປັນຈຸດປ່ຽນຈາກການເບິ່ງ Content ໄປຫາການຕັດສິນໃຈ.", source: "USR-03 · TRU-01" },
@@ -68,7 +68,7 @@ const releaseGates = [
   ["G0", "Scope baseline", "PRO-01 1.0 ແລະ PRO-02 1.0 ອະນຸມັດ; Must/Should/Later/Out ມີ owner ແລະ trace ID.", "ຍັງມີ Feature ບໍ່ຮູ້ວ່າຈຳເປັນຕໍ່ Pilot ຫຼືບໍ່."],
   ["G1", "First Vertical Slice", "10 ຂັ້ນ Admin → Map Intent ຜ່ານ automated E2E; audit/event failure ຈັດການຕາມ contract.", "Place ເຜີຍແຜ່ບໍ່ໄດ້, Public ເຫັນ data ຜິດ ຫຼື Map/Event ບໍ່ຖືກ."],
   ["G2", "Pilot readiness", "Must scope ທັງໝົດມີ test; 100 Places ຄົບ; Mobile Feed → Place → Action ໃຊ້ໄດ້; Source/Trust/Takedown/Analytics/Admin gates ຜ່ານ.", "Core Journey ຂາດ, critical place data ຜິດ, attribution/rights ບໍ່ຊັດ ຫຼື event ກວດບໍ່ໄດ້."],
-  ["G3", "Validation evidence", "ທົດສອບ 20 ຄົນ, ສຳພາດ owner 15 ຮ້ານ, ເຂົ້າຫາ 30 ຮ້ານ; ມີຢ່າງໜ້ອຍ 3 paid/deposit + 2 LOI; supply workflow ຊ້ຳໄດ້ ແລະຢູ່ໃນ stop-loss.", "ມີພຽງ verbal interest, user ກັບໄປ social search, data/right cost ຮັບບໍ່ໄດ້ ຫຼືເກີນ stop-loss."],
+  ["G3", "Validation evidence", "ທົດສອບ 20 ຄົນ, ສຳພາດ owner 15 ຮ້ານ, ເຂົ້າຫາ 30 ຮ້ານ; ມີຢ່າງໜ້ອຍ 3 paid/deposit + 2 LOI; supply workflow ຊ້ຳໄດ້; ລາຍຈ່າຍທົດລອງບໍ່ເກີນ 25 ລ້ານກີບ ແລະຕິດຕາມຄ່າຄອງຊີບຜູ້ກໍ່ຕັ້ງແຍກຕ່າງຫາກ.", "ມີພຽງ verbal interest, user ກັບໄປ social search, data/right cost ຮັບບໍ່ໄດ້, ວຽກ Manual ເກີນກຳລັງ ຫຼືລາຍຈ່າຍທົດລອງເກີນ 25 ລ້ານກີບ."],
   ["G4", "Public MVP authorization", "Product Owner ບັນທຶກ Go/Pivot/No-go ຈາກ 5 gates: User Value, Supply, Revenue, Economics, Trust & Rights.", "ຫ້າມໃຊ້ການສ້າງ software ສຳເລັດເປັນເຫດຜົນດຽວໃນການເປີດ Public MVP."],
 ] as const;
 
@@ -96,8 +96,8 @@ export default function MvpScopeDocument({ basePath }: { basePath: string }) {
   return (
     <article className={`${styles.detailBody} ${styles.businessDocument} ${styles.mvpScopeBody}`}>
       <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>0.2</strong></div>
-        <div><small>ສະຖານະ</small><strong>ຮ່າງສຳລັບທົບທວນ</strong></div>
+        <div><small>ສະບັບ</small><strong>1.0</strong></div>
+        <div><small>ສະຖານະ</small><strong>ອະນຸມັດແລ້ວ</strong></div>
         <div><small>ວັນທີປັບປຸງ</small><strong>26 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>PRO-01 1.0 + PRO-02 1.0 + BUS-04/06 1.0</strong></div>
       </section>
@@ -110,7 +110,7 @@ export default function MvpScopeDocument({ basePath }: { basePath: string }) {
       </header>
 
       <nav className={styles.documentToc} aria-label="ສາລະບານ PRO-03"><b>ສາລະບານ</b><ol>
-        <li><a href="#mvp-purpose">ເອກະສານນີ້ໃຊ້ເພື່ອຫຍັງ</a></li><li><a href="#mvp-first-version">ພາບລວມສະບັບທຳອິດ</a></li><li><a href="#mvp-user">ຜູ້ໃຊ້ເຮັດຫຍັງໄດ້</a></li><li><a href="#mvp-build">ທີມຕ້ອງສ້າງຫຍັງ</a></li><li><a href="#mvp-not-now">ສິ່ງທີ່ຍັງບໍ່ສ້າງ</a></li><li><a href="#mvp-milestones">ລຳດັບການພັດທະນາ</a></li><li><a href="#mvp-evidence">ເງື່ອນໄຂການໄປຕໍ່</a></li><li><a href="#mvp-reference">ພາກລາຍລະອຽດອ້າງອີງ</a></li><li><a href="#mvp-review">5 ຈຸດທົບທວນ</a></li>
+        <li><a href="#mvp-purpose">ເອກະສານນີ້ໃຊ້ເພື່ອຫຍັງ</a></li><li><a href="#mvp-first-version">ພາບລວມສະບັບທຳອິດ</a></li><li><a href="#mvp-user">ຜູ້ໃຊ້ເຮັດຫຍັງໄດ້</a></li><li><a href="#mvp-build">ທີມຕ້ອງສ້າງຫຍັງ</a></li><li><a href="#mvp-not-now">ສິ່ງທີ່ຍັງບໍ່ສ້າງ</a></li><li><a href="#mvp-milestones">ລຳດັບການພັດທະນາ</a></li><li><a href="#mvp-evidence">ເງື່ອນໄຂການໄປຕໍ່</a></li><li><a href="#mvp-reference">ພາກລາຍລະອຽດອ້າງອີງ</a></li><li><a href="#mvp-review">5 ຂໍ້ຕົກລົງທີ່ອະນຸມັດ</a></li>
       </ol></nav>
 
       <section className={styles.documentArticleSection} id="mvp-purpose">
@@ -212,7 +212,7 @@ export default function MvpScopeDocument({ basePath }: { basePath: string }) {
 
       <section className={styles.documentArticleSection} id="mvp-manual">
         <span>C · MANUAL VS AUTOMATION</span><h2>ວຽກໃດໃຊ້ຄົນຈັດການໄປກ່ອນ ແລະວຽກໃດຈຶ່ງສ້າງລະບົບພາຍຫຼັງ</h2>
-        <div className={styles.documentProse}><p>Validation Pilot ຕ້ອງບັນທຶກ time-per-place, support load, correction volume, source failure ແລະ report preparation time. ຂໍ້ມູນນີ້ຈະບອກວ່າຄວນ automate ຈຸດໃດ ບໍ່ແມ່ນຄາດເດົາກ່ອນເລີ່ມ.</p></div>
+        <div className={styles.documentProse}><p>Validation Pilot ຕ້ອງບັນທຶກ time-per-place, support load, correction volume, source failure ແລະ report preparation time. ຖ້າວຽກ Manual ລວມເກີນ 20 ຊົ່ວໂມງຕໍ່ອາທິດຕິດຕໍ່ກັນ 2 ອາທິດ ໃຫ້ຢຸດເພີ່ມ inventory ຊົ່ວຄາວ ແລະທົບທວນວຽກທີ່ຄວນ automate. ຂໍ້ມູນຈິງຈະບອກວ່າຄວນ automate ຈຸດໃດ ບໍ່ແມ່ນຄາດເດົາກ່ອນເລີ່ມ.</p></div>
         <div className={styles.mvpManualTable} role="table" aria-label="Manual and automated scope"><div role="row"><b>PROCESS</b><b>M1 · MANUAL/CONCIERGE</b><b>M2+ · AUTOMATION</b><b>TRIGGER</b></div>{manualPlan.map(([process, manual, automated, trigger]) => <div role="row" key={process}><strong>{process}</strong><p>{manual}</p><p>{automated}</p><span>{trigger}</span></div>)}</div>
       </section>
 
@@ -228,17 +228,17 @@ export default function MvpScopeDocument({ basePath }: { basePath: string }) {
       </section>
 
       <section className={styles.documentArticleSection} id="mvp-review">
-        <span>08 · REVIEW REQUIRED</span><h2>5 ຈຸດທີ່ຕ້ອງຕັດສິນກ່ອນ PRO-03 ຂຶ້ນເປັນ 1.0</h2>
+        <span>08 · APPROVED DECISION RECORD</span><h2>5 ຂໍ້ຕົກລົງທີ່ໃຊ້ເປັນຂອບເຂດທາງການຂອງ PRO-03 1.0</h2>
         <ol className={styles.saReviewChecklist}>
-          <li><b>Pilot Inventory:</b><p>ຢືນຢັນ 100 Places, ວຽງຈັນ, 2 ໝວດ “ອາຫານ ແລະຄາເຟ” ເປັນ M1 Baseline ຫຼືຈະປັບຈຳນວນ/ເຂດ/ໝວດ?</p></li>
-          <li><b>Supported Social Sources:</b><p>ຈະເລີ່ມ TikTok, Facebook ແລະ YouTube ພ້ອມກັນ ຫຼືຈຳກັດ platform ຕາມຜົນ Technical/Rights Spike?</p></li>
-          <li><b>Revenue Scope:</b><p>ຢືນຢັນ Founding Partner + Basic Performance Summary ເປັນ Must; Sponsored Campaign ເປັນ Should ແລະດຳເນີນງານແບບ Manual ໃນ Pilot.</p></li>
-          <li><b>Manual Operation Boundary:</b><p>ຢືນຢັນ Correction, verification, source recheck, partner onboarding/payment ແລະ report delivery ເຮັດແບບ Concierge ກ່ອນ; Automation ເຂົ້າ M2 ຫຼັງຮູ້ volume/cost.</p></li>
-          <li><b>Public MVP Gate:</b><p>ຢືນຢັນວ່າ G3 ຕ້ອງມີ 20 user tests, 15 owner interviews, 30 sales outreach, 3 paid/deposit + 2 LOI, supply workflow ຊ້ຳໄດ້ ແລະບໍ່ເກີນ stop-loss ກ່ອນອະນຸຍາດ M2.</p></li>
+          <li><b>ອະນຸມັດ Pilot Inventory:</b><p>ວຽງຈັນເປັນພື້ນທີ່ທຳອິດ; ໝວດຮ້ານອາຫານ ແລະຄາເຟ; ສ້າງ inventory ຕາມຂັ້ນ 30 → 60 → 100. ທຸກ Place ຕ້ອງມີ Required Field, Map, Contact, Source ແລະ Checked Date ຄົບ.</p></li>
+          <li><b>ອະນຸມັດ Social Sources ແບບຈຳກັດ:</b><p>TikTok ແລະ Facebook ເປັນ Source ຫຼັກ; YouTube ເປັນ Source ເສີມ. ໃຊ້ Link/Official Embed/Attribution ແລະທຸກ Source ຕ້ອງມີ External Link fallback; ຫ້າມ Download ຫຼື Re-host ໂດຍບໍ່ມີສິດ.</p></li>
+          <li><b>ອະນຸມັດ Revenue Scope:</b><p>Founding Partner 200,000 ກີບ/ເດືອນ ແລະ Basic Performance Summary ເປັນ Must. Sponsored Campaign ເປັນ Should, ດຳເນີນງານແບບ Manual, ຕິດປ້າຍ “Sponsored” ຊັດເຈນ ແລະ 1,000,000 ກີບຍັງເປັນລາຄາທົດສອບ.</p></li>
+          <li><b>ອະນຸມັດ Manual Operation Boundary:</b><p>Correction, verification, source recheck, partner onboarding/payment, performance summary ແລະ sponsored placement ເຮັດແບບ Manual ໃນ Pilot. ຕ້ອງບັນທຶກ volume, time, error ແລະ cost; ຖ້າເກີນ 20 ຊົ່ວໂມງ/ອາທິດຕິດຕໍ່ກັນ 2 ອາທິດ ໃຫ້ທົບທວນ Automation.</p></li>
+          <li><b>ອະນຸມັດ Public MVP Gate:</b><p>ຕ້ອງຜ່ານທຸກດ້ານ: 100 Places, 20 user tests, 15 owner interviews, 30 sales outreach, 3 paid/deposit + 2 LOI, Core Journey/Trust/Supply ໃຊ້ງານໄດ້ ແລະລາຍຈ່າຍທົດລອງບໍ່ເກີນ 25 ລ້ານກີບ. ຄ່າຄອງຊີບຜູ້ກໍ່ຕັ້ງຕິດຕາມແຍກຕ່າງຫາກ; ຜົນຕັດສິນເປັນ Go, Pivot ຫຼື No-go.</p></li>
         </ol>
       </section>
 
-      <aside className={styles.draftApprovalGate}><div><span>ຮ່າງສຳລັບທົບທວນ</span><h2>PRO-03 · MVP Scope 0.2</h2><p>ສະບັບ 0.2 ຮຽບຮຽງໃໝ່ໃຫ້ເຫັນຈຸດປະສົງ, ພາບລວມສະບັບທຳອິດ, ສິ່ງທີ່ຜູ້ໃຊ້ເຮັດໄດ້, ສິ່ງທີ່ທີມຕ້ອງສ້າງ ແລະສິ່ງທີ່ຍັງບໍ່ສ້າງ. ລາຍການທາງເຕັກນິກຖືກຍ້າຍໄປພາກອ້າງອີງ.</p></div><ul><li>ຈຸດປະສົງ — ອະທິບາຍແລ້ວ</li><li>ຂອບເຂດສະບັບທຳອິດ — ອະທິບາຍແລ້ວ</li><li>ສິ່ງທີ່ບໍ່ເຮັດ — ອະທິບາຍແລ້ວ</li><li>31 ລາຍການ — ຢູ່ພາກອ້າງອີງ</li><li>5 ຈຸດທົບທວນ — ລໍການອະນຸມັດ</li></ul></aside>
+      <aside className={styles.approvalGate}><div><span>APPROVED · 26 AUGUST 2026</span><h2>PRO-03 · MVP Scope 1.0</h2></div><ul><li>✓ Pilot scope: ວຽງຈັນ · ອາຫານ/ຄາເຟ · 30 → 60 → 100 Places</li><li>✓ Source scope: TikTok/Facebook ຫຼັກ · YouTube ເສີມ</li><li>✓ Revenue: Founding Partner Must · Sponsored Should/Manual</li><li>✓ Manual operation ມີ workload threshold ແລະການວັດຕົ້ນທຶນ</li><li>✓ Public MVP ຕ້ອງຜ່ານ User, Supply, Revenue, Economics ແລະ Trust gates</li></ul></aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
         <a href={`${basePath}/documents/system-analysis`}><small>← ເອກະສານຕົ້ນທາງ</small><strong>System Analysis 1.0</strong></a>
