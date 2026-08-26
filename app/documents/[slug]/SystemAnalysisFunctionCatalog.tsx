@@ -190,7 +190,7 @@ export default function SystemAnalysisFunctionCatalog() {
         <article><small>MODULES</small><strong>{modules.length}</strong><p>Public, Content, Place, Monetization, Control ແລະ Measurement</p></article>
         <article><small>LOGICAL FUNCTIONS</small><strong>{totalFunctions}</strong><p>ທຸກ Function ມີ ID ຖາວອນສຳລັບ Traceability</p></article>
         <article><small>FUNCTION TYPES</small><strong>{Object.keys(typeCounts).length}</strong><p>Query · Command · Control · Client · Integration · Background · Report</p></article>
-        <article><small>NEXT STEP</small><strong>02</strong><p>Logical Data Model & ERD</p></article>
+        <article><small>STEP STATUS</small><strong>DONE</strong><p>Logical Data Model & ERD ຖືກຈັດເຮັດຕໍ່ໃນພາກ C</p></article>
       </div>
 
       <section className={styles.documentArticleSection}>
@@ -267,8 +267,8 @@ export default function SystemAnalysisFunctionCatalog() {
       </section>
 
       <aside className={styles.saNextStep}>
-        <small>ສະຖານະ SA</small><h2>ຂັ້ນ 1 ຈັດເຮັດແລ້ວ · ຂັ້ນ 2 ແມ່ນ Logical Data Model & ERD</h2>
-        <p>PRO-02 ຍັງຢູ່ສະຖານະ “ກຳລັງຈັດເຮັດ”. Function Catalog ຈະບໍ່ຖືກອ້າງເປັນ Physical API ຫຼື Code Structure ຈົນກວ່າ Workflow, Algorithm ແລະ Technical Design ຈະສຳເລັດ.</p>
+        <small>ສະຖານະ SA</small><h2>ຂັ້ນ 1 ຈັດເຮັດແລ້ວ · ອ່ານຕໍ່ຂັ້ນ 2 Logical Data Model & ERD</h2>
+        <p>PRO-02 ຍັງຢູ່ສະຖານະ “ກຳລັງຈັດເຮັດ”. Function Catalog ຈະບໍ່ຖືກອ້າງເປັນ Physical API ຫຼື Code Structure; ພາກ C ດ້ານລຸ່ມຈະກຳນົດ Entity, Attribute, Key ແລະ Relationship ຈາກ Data Impact ຂອງ Catalog.</p>
       </aside>
     </section>
   );

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import styles from "../documents.module.css";
 import SystemAnalysisFunctionCatalog from "./SystemAnalysisFunctionCatalog";
+import SystemAnalysisDataModel from "./SystemAnalysisDataModel";
 
 const useCases = [
   {
@@ -124,17 +125,17 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
   return (
     <article className={`${styles.detailBody} ${styles.systemAnalysisBody} ${styles.businessDocument}`}>
       <section className={styles.documentControl}>
-        <div><small>ສະບັບ</small><strong>0.3</strong></div>
+        <div><small>ສະບັບ</small><strong>0.4</strong></div>
         <div><small>ສະຖານະ</small><strong>ກຳລັງຈັດເຮັດ</strong></div>
         <div><small>ວັນທີປັບປຸງ</small><strong>26 ສິງຫາ 2026</strong></div>
         <div><small>ເອກະສານຕົ້ນທາງ</small><strong>PRO-01 Product Requirements 1.0</strong></div>
       </section>
 
       <aside className={styles.saReconstructionNotice}>
-        <div><span>ປັບສະຖານະເອກະສານ</span><h2>ເນື້ອຫາປັດຈຸບັນແມ່ນພາກ A — System Context & Business Rules</h2></div>
+        <div><span>ປັບສະຖານະເອກະສານ</span><h2>PRO-02 ກຳລັງຖືກສ້າງຄືນຕາມ 7 ຂັ້ນຂອງ System Analysis</h2></div>
         <div>
           <p>PRO-02 ຖືກຖອນຈາກສະຖານະ 1.0 ເພາະຍັງບໍ່ພຽງພໍສຳລັບ Developer Handoff. Actor, Boundary, Use Case ລະດັບສູງ ແລະ Business Rules ຈະຖືກເກັບເປັນພາກພື້ນຖານ.</p>
-          <p>Functional Decomposition ແລະ Function Catalog ຖືກເພີ່ມເປັນພາກ B ແລ້ວ. ກ່ອນກັບໄປສູ່ສະບັບ 1.0 ຍັງຕ້ອງເພີ່ມ Logical ERD, Workflow/Sequence, State Transition, Function Algorithms, Interface/Error Contract, Traceability ແລະ Development Dependency Order.</p>
+          <p>Functional Decomposition ແລະ Function Catalog ຖືກເພີ່ມເປັນພາກ B; Logical Data Model ແລະ ERD ຖືກເພີ່ມເປັນພາກ C ແລ້ວ. ກ່ອນກັບໄປສູ່ສະບັບ 1.0 ຍັງຕ້ອງເພີ່ມ Workflow/Sequence, State Transition, Function Algorithms, Interface/Error Contract, Traceability ແລະ Development Dependency Order.</p>
         </div>
       </aside>
 
@@ -349,9 +350,11 @@ export default function SystemAnalysisDocument({ basePath }: { basePath: string 
 
       <SystemAnalysisFunctionCatalog />
 
+      <SystemAnalysisDataModel />
+
       <aside className={styles.draftApprovalGate}>
-        <div><span>ກຳລັງຈັດເຮັດ</span><h2>PRO-02 · System Analysis 0.3</h2><p>ພາກ A ເກັບ Context/Rules ແລະພາກ B ແຕກລະບົບເປັນ 10 Modules, 64 Logical Functions. ເອກະສານຍັງບໍ່ເປັນ Developer-ready SA ຈົນກວ່າຂັ້ນ 2–7 ຈະຄົບ.</p></div>
-        <ul><li>ພາກ A · Context & Rules — ມີແລ້ວ</li><li>ພາກ B · Functional Decomposition & Catalog — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 2 · Logical Data Model & ERD — ຖັດໄປ</li><li>ຂັ້ນ 3–6 · Workflow, Algorithm, Error, Traceability — ຍັງຕ້ອງເຮັດ</li><li>ຂັ້ນ 7 · Developer Handoff — ຍັງຕ້ອງເຮັດ</li></ul>
+        <div><span>ກຳລັງຈັດເຮັດ</span><h2>PRO-02 · System Analysis 0.4</h2><p>ພາກ A ເກັບ Context/Rules, ພາກ B ແຕກລະບົບເປັນ 10 Modules/64 Logical Functions ແລະພາກ C ກຳນົດ Logical Data Model 27 Entities/43 Relationships. ເອກະສານຍັງບໍ່ເປັນ Developer-ready SA ຈົນກວ່າຂັ້ນ 3–7 ຈະຄົບ.</p></div>
+        <ul><li>ພາກ A · Context & Rules — ມີແລ້ວ</li><li>ຂັ້ນ 1 · Functional Decomposition & Catalog — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 2 · Logical Data Model & ERD — ຈັດເຮັດແລ້ວ</li><li>ຂັ້ນ 3–6 · Workflow, Algorithm, Error, Traceability — ຍັງຕ້ອງເຮັດ</li><li>ຂັ້ນ 7 · Developer Handoff — ຍັງຕ້ອງເຮັດ</li></ul>
       </aside>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
