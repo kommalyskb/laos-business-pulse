@@ -5,7 +5,7 @@ import { systemEntityIds } from "./SystemAnalysisDataModel";
 import { systemWorkflowIds } from "./SystemAnalysisWorkflows";
 import { systemErrorCodes, systemStateMachineIds } from "./SystemAnalysisStateErrors";
 
-type TraceRow = {
+export type TraceRow = {
   id: string;
   priority: "Must" | "Should";
   kind: "Functional" | "Non-functional";
@@ -27,7 +27,7 @@ type TraceRow = {
 const functionsByModule = (...moduleIds: string[]) => systemFunctionCatalog.filter((fn) => moduleIds.includes(fn.moduleId)).map((fn) => fn.id);
 const unique = (items: string[]) => Array.from(new Set(items));
 
-const traceRows: TraceRow[] = [
+export const traceRows: TraceRow[] = [
   {
     id: "USR-01", priority: "Must", kind: "Functional", title: "Discovery Feed",
     requirement: "ສະແດງວິດີໂອ/Preview ແນວຕັ້ງເຕັມຈໍ ພ້ອມຊື່ຮ້ານ, Source, Creator/Attribution ແລະປຸ່ມໄປ Place Page.",

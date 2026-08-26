@@ -10,6 +10,7 @@ import MvpScopeDocument from "./MvpScopeDocument";
 import ProductRequirementsDocument from "./ProductRequirementsDocument";
 import ProductVisionDocument from "./ProductVisionDocument";
 import RevenueKpiDocument from "./RevenueKpiDocument";
+import RequirementsAcceptanceDocument from "./RequirementsAcceptanceDocument";
 import SystemAnalysisDocument from "./SystemAnalysisDocument";
 
 export function generateStaticParams() {
@@ -95,6 +96,8 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
                       ? <SystemAnalysisDocument basePath={basePath} />
                       : document.slug === "mvp-scope"
                         ? <MvpScopeDocument basePath={basePath} />
+                        : document.slug === "requirements-acceptance"
+                          ? <RequirementsAcceptanceDocument basePath={basePath} />
                 : <article className={styles.detailBody}>
           <section>
             <span>01 · PURPOSE</span>
