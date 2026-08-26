@@ -6,6 +6,7 @@ import BusinessCanvasDocument from "./BusinessCanvasDocument";
 import FeasibilityStudyDocument from "./FeasibilityStudyDocument";
 import FinancialStructureDocument from "./FinancialStructureDocument";
 import MarketCompetitorDocument from "./MarketCompetitorDocument";
+import MvpScopeDocument from "./MvpScopeDocument";
 import ProductRequirementsDocument from "./ProductRequirementsDocument";
 import ProductVisionDocument from "./ProductVisionDocument";
 import RevenueKpiDocument from "./RevenueKpiDocument";
@@ -92,6 +93,8 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
                     ? <ProductRequirementsDocument basePath={basePath} />
                     : document.slug === "system-analysis"
                       ? <SystemAnalysisDocument basePath={basePath} />
+                      : document.slug === "mvp-scope"
+                        ? <MvpScopeDocument basePath={basePath} />
                 : <article className={styles.detailBody}>
           <section>
             <span>01 · PURPOSE</span>
