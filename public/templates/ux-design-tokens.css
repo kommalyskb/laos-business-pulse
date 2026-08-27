@@ -22,13 +22,25 @@
   --ux-color-text: #17221f;
   --ux-color-text-inverse: #fff;
   --ux-color-primary: #17644f;
+  --ux-color-on-primary: #fff;
   --ux-color-accent: #f27a45;
+  --ux-color-on-accent: #17221f;
   --ux-color-info: #284b8f;
+  --ux-color-on-info: #fff;
   --ux-color-sponsored-surface: #ffd09f;
   --ux-color-sponsored-text: #351b06;
+  --ux-color-success-surface: #e2f4ec;
+  --ux-color-success-text: #124c3d;
+  --ux-color-warning-surface: #fff0dc;
+  --ux-color-warning-text: #67441f;
+  --ux-color-error-surface: #fde7e7;
+  --ux-color-error-text: #7d1d1d;
+  --ux-color-disabled-surface: #e6ebe8;
+  --ux-color-disabled-text: #5d6964;
+  --ux-color-muted-text: #61706a;
   --ux-color-border: #cfd8d4;
   --ux-color-focus: #7cc4ff;
   --ux-touch-target-min: 44px;
 }
 
-/* Candidate values: do not mark UX-04 1.0 until contrast and component-state QA pass. */
+/* Contrast QA passed for defined text/background pairs. White on accent is prohibited; use --ux-color-on-accent. */

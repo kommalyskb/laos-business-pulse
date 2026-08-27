@@ -7,6 +7,8 @@
 .tasks ol { margin: 12px 0 0; padding-left: 24px; }
 .tasks li { margin: 8px 0; }
 .device { position: relative; width: min(390px, calc(100vw - 32px)); height: min(780px, calc(100svh - 150px)); min-height: 620px; margin: 0 auto; overflow: hidden; color: #121b18; background: #fffdf8; border: 8px solid #17221f; border-radius: 38px; box-shadow: 0 28px 100px #0009; }
+.prototypeSurface { display: contents; }
+.stage :is(button, a, input):focus-visible { outline: 3px solid #7cc4ff; outline-offset: 3px; }
 .statusBar { position: absolute; z-index: 12; top: 0; left: 0; right: 0; height: 30px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; color: white; background: linear-gradient(#0008, transparent); font: 700 11px/1 system-ui; }
 .feed { position: absolute; inset: 0; color: white; background-position: center; background-size: cover; }
 .feedTop { position: absolute; z-index: 2; top: 30px; left: 0; right: 0; display: flex; align-items: center; justify-content: center; padding: 14px 18px; }
@@ -84,4 +86,7 @@
   .device { width: 100%; height: calc(100svh - 92px); min-height: 560px; border-width: 0; border-radius: 0; }
   .notice { margin: 7px 12px 0; }
   .tasks { top: 66px; right: 12px; width: calc(100vw - 24px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage *, .stage *::before, .stage *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }

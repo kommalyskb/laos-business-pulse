@@ -1,7 +1,7 @@
 {
   "document": "UX-04",
-  "version": "0.9",
-  "palette_status": "candidate_pending_contrast_qa",
+  "version": "0.9.1",
+  "palette_status": "contrast_qa_passed_for_defined_pairs",
   "font": { "primary": "Noto Sans Lao Variable", "fallback": "system-ui, sans-serif", "body_mobile_min_px": 16 },
   "type_px": { "caption": 12, "small": 14, "body": 16, "title_small": 20, "title": 24, "display": 32 },
   "space_px": [4, 8, 12, 16, 24, 32, 48],
@@ -12,14 +12,27 @@
     "text": "#17221F",
     "text_inverse": "#FFFFFF",
     "primary": "#17644F",
+    "on_primary": "#FFFFFF",
     "accent": "#F27A45",
+    "on_accent": "#17221F",
     "info": "#284B8F",
+    "on_info": "#FFFFFF",
     "sponsored_surface": "#FFD09F",
     "sponsored_text": "#351B06",
+    "success_surface": "#E2F4EC",
+    "success_text": "#124C3D",
+    "warning_surface": "#FFF0DC",
+    "warning_text": "#67441F",
+    "error_surface": "#FDE7E7",
+    "error_text": "#7D1D1D",
+    "disabled_surface": "#E6EBE8",
+    "disabled_text": "#5D6964",
+    "muted_text": "#61706A",
     "border": "#CFD8D4",
     "focus": "#7CC4FF"
   },
   "touch_target_min_px": 44,
   "viewport_validation_px": [360, 390, 768, 1024, 1440],
-  "accessibility_target": "WCAG 2.2 AA internal target"
+  "accessibility_target": "WCAG 2.2 AA internal target",
+  "usage_rule": "Never use white text on accent #F27A45; use on_accent #17221F. Border color is structural and must not be the only state indicator."
 }

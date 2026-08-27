@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./prototype.module.css";
 
 type Screen = "discover" | "search" | "place";
@@ -36,6 +36,11 @@ export default function InteractivePrototype() {
   const [notice, setNotice] = useState("Prototype ພ້ອມສຳລັບລອງ 5 tasks");
   const [analytics, setAnalytics] = useState<"pending" | "essential" | "allowed">("pending");
   const [showTasks, setShowTasks] = useState(false);
+  const essentialConsentRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (analytics === "pending") essentialConsentRef.current?.focus();
+  }, [analytics]);
 
   const selected = places.find((place) => place.id === selectedId) ?? places[0];
   const feedPlace = places[feedIndex];
@@ -66,6 +71,11 @@ export default function InteractivePrototype() {
 
   const act = (label: string, place: Place) => setNotice(`${label}: ${place.name} — Prototype ບໍ່ເປີດແອັບພາຍນອກ`);
 
+  const chooseAnalytics = (choice: "essential" | "allowed") => {
+    setAnalytics(choice);
+    setNotice(choice === "essential" ? "ເລືອກໃຊ້ສະເພາະຂໍ້ມູນທີ່ຈຳເປັນ" : "ອະນຸຍາດ Analytics ສຳລັບ Prototype");
+  };
+
   return <main className={styles.stage}>
     <header className={styles.prototypeHeader}>
       <div><strong>ພ້ອມໄປ · UX-03</strong><span>INTERACTIVE TEST PROTOTYPE · NOT PRODUCTION</span></div>
@@ -75,6 +85,7 @@ export default function InteractivePrototype() {
     {showTasks ? <aside className={styles.tasks} aria-label="Usability test tasks"><strong>ລອງໂດຍບໍ່ມີຄົນບອກປຸ່ມ</strong><ol><li>ຫາຮ້ານກາເຟຕາມເຂດ/ລາຄາ</li><li>ກວດເວລາ ແລະສະຖານທີ່</li><li>ກົດເປີດແຜນທີ່</li><li>ຊີ້ວ່າລາຍການໃດເປັນໂຄສະນາ</li><li>ໄປຕໍ່ເມື່ອວິດີໂອເບິ່ງບໍ່ໄດ້</li></ol></aside> : null}
 
     <section className={styles.device} aria-label="Mobile application prototype">
+      <div className={styles.prototypeSurface} inert={analytics === "pending"} aria-hidden={analytics === "pending"}>
       <div className={styles.statusBar}><span>9:41</span><span>● ●</span></div>
 
       {screen === "discover" ? <section className={styles.feed} style={{ backgroundImage: `linear-gradient(180deg, rgba(5,12,17,.08), rgba(5,12,17,.9)), url(${basePath}${feedPlace.image})` }}>
@@ -103,7 +114,8 @@ export default function InteractivePrototype() {
       </section> : null}
 
       {screen !== "place" ? <nav className={styles.bottomNav} aria-label="Prototype navigation"><button className={screen === "discover" ? styles.navActive : ""} onClick={() => setScreen("discover")}><b>⌂</b><span>ສຳຫຼວດ</span></button><button className={screen === "search" ? styles.navActive : ""} onClick={() => setScreen("search")}><b>⌕</b><span>ຄົ້ນຫາ</span></button></nav> : null}
-      {analytics === "pending" ? <div className={styles.consent}><strong>ການວັດການນຳໃຊ້</strong><p>Prototype ຈະຈຳລອງ analytics choice; ບໍ່ໄດ້ບັນທຶກ task ຂອງທ່ານ.</p><div><button onClick={() => setAnalytics("essential")}>ໃຊ້ສະເພາະທີ່ຈຳເປັນ</button><button onClick={() => setAnalytics("allowed")}>ອະນຸຍາດ Analytics</button></div></div> : null}
+      </div>
+      {analytics === "pending" ? <div className={styles.consent} role="dialog" aria-modal="true" aria-labelledby="analytics-consent-title"><strong id="analytics-consent-title">ການວັດການນຳໃຊ້</strong><p>Prototype ຈະຈຳລອງ analytics choice; ບໍ່ໄດ້ບັນທຶກ task ຂອງທ່ານ.</p><div><button ref={essentialConsentRef} onClick={() => chooseAnalytics("essential")}>ໃຊ້ສະເພາະທີ່ຈຳເປັນ</button><button onClick={() => chooseAnalytics("allowed")}>ອະນຸຍາດ Analytics</button></div></div> : null}
     </section>
 
     <p className={styles.notice} role="status">{notice} · Consent: {analytics}</p>

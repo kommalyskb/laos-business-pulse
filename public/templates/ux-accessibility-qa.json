@@ -1,0 +1,32 @@
+{
+  "document": "UX-04",
+  "version": "0.9.1",
+  "reviewed_at": "2026-08-27",
+  "target": "WCAG 2.2 AA internal target",
+  "contrast_pairs": [
+    { "pair": "text/surface", "ratio": 16.08, "minimum": 4.5, "status": "pass" },
+    { "pair": "text_inverse/surface_inverse", "ratio": 17.62, "minimum": 4.5, "status": "pass" },
+    { "pair": "on_primary/primary", "ratio": 7.07, "minimum": 4.5, "status": "pass" },
+    { "pair": "on_accent/accent", "ratio": 5.95, "minimum": 4.5, "status": "pass" },
+    { "pair": "on_info/info", "ratio": 8.42, "minimum": 4.5, "status": "pass" },
+    { "pair": "sponsored_text/sponsored_surface", "ratio": 11.27, "minimum": 4.5, "status": "pass" },
+    { "pair": "success_text/success_surface", "ratio": 8.64, "minimum": 4.5, "status": "pass" },
+    { "pair": "warning_text/warning_surface", "ratio": 7.74, "minimum": 4.5, "status": "pass" },
+    { "pair": "error_text/error_surface", "ratio": 8.60, "minimum": 4.5, "status": "pass" },
+    { "pair": "disabled_text/disabled_surface", "ratio": 4.74, "minimum": 4.5, "status": "pass" },
+    { "pair": "focus/surface_inverse", "ratio": 9.40, "minimum": 3.0, "status": "pass" }
+  ],
+  "prohibited_pair": { "pair": "white/accent", "ratio": 2.75, "status": "fail", "resolution": "Use on_accent #17221F." },
+  "prototype_checks": {
+    "consent_dialog_initial_focus": "passed_browser_retest_390x844",
+    "background_inert_while_consent_pending": "passed_browser_retest_390x844",
+    "focus_visible": "passed_browser_retest_390x844",
+    "core_touch_targets_44px": "passed_390x844",
+    "reduced_motion_css": "implemented_pending_retest",
+    "lao_text_200_percent": "pending_browser_retest",
+    "screen_reader_manual": "pending_voiceover_or_nvda",
+    "full_component_and_admin_states": "pending"
+  },
+  "document_status": "in_progress",
+  "remaining_gate": "VoiceOver/NVDA baseline, 200% Lao text verification, and full component/admin state QA are still required before UX-04 1.0."
+}

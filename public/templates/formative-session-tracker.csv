@@ -1,0 +1,6 @@
+participant_id,target_cohort,recruitment_status,contact_channel,screened_at,scheduled_date,scheduled_time,session_mode,device,moderator,note_taker,consent_status,session_status,record_file_reference,follow_up
+F-01,frequent_social_searcher,not_contacted,,,,,,,,pending,not_started,,
+F-02,frequent_social_searcher,not_contacted,,,,,,,,pending,not_started,,
+F-03,search_map_first,not_contacted,,,,,,,,pending,not_started,,
+F-04,low_confidence_digital_user,not_contacted,,,,,,,,pending,not_started,,
+F-05,place_owner,not_contacted,,,,,,,,pending,not_started,,
