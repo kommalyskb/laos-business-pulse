@@ -1,6 +1,6 @@
 {
   "document": "UX-02",
-  "version": "1.0",
+  "version": "1.1",
   "required_screens": ["SCR-G01", "SCR-G02", "SCR-G03", "SCR-G05", "SCR-A01", "SCR-A02", "SCR-A03"],
   "should_screens": ["SCR-G04"],
   "checks_per_screen": [
@@ -18,8 +18,8 @@
   "review": {
     "visual_reviewer": "Internal Product Design review",
     "accessibility_reviewer": "Internal prototype baseline review",
-    "product_owner": "Approved to proceed in sequence",
-    "reviewed_at": "2026-08-27",
+    "product_owner": "Founder Review R1 approved Search and Place direction revision",
+    "reviewed_at": "2026-08-28",
     "status": "approved",
     "evidence": [
       "mobile_390x844_no_horizontal_overflow",
@@ -27,7 +27,9 @@
       "core_touch_targets_at_least_44px",
       "search_context_preserved_after_place_back",
       "sponsored_disclosure_visible",
-      "unavailable_video_has_place_fallback"
+      "unavailable_video_has_place_fallback",
+      "search_supports_intent_and_video_list_map_views",
+      "place_page_includes_review_collection_category_details_freshness_and_related_places"
     ],
     "boundary": "Internal wireframe/prototype review only; real-user usability results remain pending in UX-03."
   }

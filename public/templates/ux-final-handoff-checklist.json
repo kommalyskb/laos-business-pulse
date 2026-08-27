@@ -3,7 +3,7 @@
   "version": "0.5",
   "final_design_complete": false,
   "gates": [
-    { "id": "G-UX1", "name": "Structure", "requires": ["UX-01 1.0", "UX-02 1.0", "screen_route_state_traceability"], "status": "pending_ux02" },
+    { "id": "G-UX1", "name": "Structure", "requires": ["UX-01 1.0", "UX-02 1.1", "screen_route_state_traceability"], "status": "passed_structure_baseline" },
     { "id": "G-UX2", "name": "User evidence", "requires": ["UX-03 1.0", "task_results", "findings", "S1_S2_retests"], "status": "pending_real_user_test" },
     { "id": "G-UX3", "name": "Design system", "requires": ["UX-04 1.0", "token_files", "component_states", "accessibility_qa"], "status": "pending_qa" },
     { "id": "G-UX4", "name": "Content and trust", "requires": ["PRO-04 1.0", "CON-02 1.0", "CON-04 1.0", "CON-01_03_05_ui_decisions"], "status": "partially_pending" },

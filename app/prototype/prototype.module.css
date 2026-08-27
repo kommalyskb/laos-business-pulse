@@ -6,6 +6,7 @@
 .tasks { position: fixed; z-index: 20; top: 78px; right: 24px; width: min(340px, calc(100vw - 48px)); padding: 18px; color: #17221f; background: #fffdf8; border-radius: 18px; box-shadow: 0 22px 70px #0008; }
 .tasks ol { margin: 12px 0 0; padding-left: 24px; }
 .tasks li { margin: 8px 0; }
+.tasks p { margin: 12px 0 0; padding-top: 10px; color: #496159; border-top: 1px solid #dfe7e3; font-size: 11px; }
 .device { position: relative; width: min(390px, calc(100vw - 32px)); height: min(780px, calc(100svh - 150px)); min-height: 620px; margin: 0 auto; overflow: hidden; color: #121b18; background: #fffdf8; border: 8px solid #17221f; border-radius: 38px; box-shadow: 0 28px 100px #0009; }
 .prototypeSurface { display: contents; }
 .stage :is(button, a, input):focus-visible { outline: 3px solid #7cc4ff; outline-offset: 3px; }
@@ -31,40 +32,97 @@
 .feedPager span { font-size: 10px; }
 .lightScreen { position: absolute; inset: 0 0 60px; overflow-y: auto; padding-top: 30px; background: #fffdf8; }
 .screenHeader { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px 8px; }
-.screenHeader h1 { margin: 0; font-size: 26px; }
+.screenHeader > div { display: grid; gap: 2px; }
+.screenHeader span { color: #c55f2e; font-size: 10px; font-weight: 900; letter-spacing: .06em; }
+.screenHeader h1 { margin: 0; font-size: 25px; line-height: 1.25; }
 .screenHeader button { min-width: 44px; min-height: 44px; border: 0; background: transparent; font: inherit; }
-.searchBox { margin: 10px 18px; padding: 4px 6px 4px 13px; display: flex; border: 1px solid #c9d1ce; border-radius: 12px; background: white; }
+.searchBox { margin: 10px 18px; padding: 4px 6px 4px 13px; display: flex; align-items: center; gap: 8px; border: 1px solid #b9c7c2; border-radius: 16px; background: white; box-shadow: 0 8px 25px #17362d0d; }
+.searchBox > b { color: #17644f; font-size: 20px; }
 .searchBox input { min-width: 0; flex: 1; padding: 10px 0; border: 0; outline: 0; font: inherit; }
 .searchBox button { width: 44px; min-height: 44px; border: 0; background: transparent; font-size: 22px; }
+.intentRail { display: flex; gap: 8px; padding: 2px 18px 10px; overflow-x: auto; scrollbar-width: none; }
+.intentRail::-webkit-scrollbar { display: none; }
+.intentRail button { min-height: 42px; padding: 8px 12px; white-space: nowrap; border: 1px solid #e3c4a7; border-radius: 12px; color: #6a3a1e; background: #fff2e5; font: inherit; font-size: 11px; font-weight: 800; }
 .chips { display: flex; gap: 7px; padding: 4px 18px; overflow-x: auto; }
 .chips button { min-height: 44px; white-space: nowrap; padding: 8px 11px; border: 1px solid #b6c3be; border-radius: 999px; background: white; font: inherit; }
 .chips .activeChip { color: white; background: #17644f; border-color: #17644f; }
-.resultCount { margin: 13px 18px 7px; color: #62706b; font-size: 12px; }
+.resultTools { margin: 13px 18px 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.resultTools p { margin: 0; display: grid; gap: 1px; }
+.resultTools p strong { font-size: 13px; }
+.resultTools p span { color: #62706b; font-size: 10px; }
+.resultTools > div { padding: 3px; display: flex; border: 1px solid #d8dfdc; border-radius: 10px; background: white; }
+.resultTools button { width: 34px; height: 32px; border: 0; border-radius: 7px; color: #61706a; background: transparent; }
+.resultTools .activeView { color: white; background: #17644f; }
 .results { padding: 0 18px 22px; display: grid; gap: 10px; }
 .resultCard { width: 100%; min-height: 92px; padding: 8px; display: grid; grid-template-columns: 86px 1fr; gap: 11px; text-align: left; border: 1px solid #dfe4e1; border-radius: 14px; background: white; font: inherit; }
 .resultImage { width: 86px; height: 76px; display: block; background-position: center; background-size: cover; border-radius: 9px; }
 .resultCard span { min-width: 0; display: grid; align-content: center; gap: 3px; }
 .resultCard strong { font-size: 15px; }
 .resultCard small, .resultCard em { color: #61706a; font-size: 11px; font-style: normal; }
+.resultCard span > i { color: #17644f; font-size: 10px; font-style: normal; font-weight: 800; }
 .resultCard b { width: max-content; padding: 2px 5px; color: #6c3609; background: #ffe0bd; border-radius: 4px; font-size: 9px; }
+.videoResults { padding: 0 18px 22px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.videoResultCard { min-width: 0; padding: 0; overflow: hidden; display: grid; text-align: left; border: 1px solid #dfe4e1; border-radius: 16px; background: white; font: inherit; }
+.videoResultCard .resultImage { position: relative; width: 100%; height: 150px; border-radius: 0; }
+.videoResultCard .resultImage em { position: absolute; left: 10px; bottom: 9px; width: 32px; height: 32px; display: grid; place-items: center; color: white; background: #07120fbf; border: 1px solid #ffffff55; border-radius: 50%; font-style: normal; }
+.videoResultCard > span { min-width: 0; padding: 10px; display: grid; gap: 3px; }
+.videoResultCard strong { font-size: 13px; }
+.videoResultCard small, .videoResultCard span > em, .videoResultCard span > i { overflow: hidden; color: #61706a; font-size: 9px; font-style: normal; text-overflow: ellipsis; white-space: nowrap; }
+.videoResultCard span > i { color: #17644f; font-weight: 800; }
+.videoResultCard b { width: max-content; padding: 2px 5px; color: #6c3609; background: #ffe0bd; border-radius: 4px; font-size: 9px; }
+.mapPreview { position: relative; height: 310px; margin: 0 18px 24px; overflow: hidden; background: linear-gradient(35deg, transparent 48%, #fff 49% 52%, transparent 53%), linear-gradient(-42deg, transparent 47%, #fff 48% 51%, transparent 52%), #dce9df; border: 1px solid #c8d7ce; border-radius: 18px; }
+.mapPreview > span { position: absolute; top: 12px; left: 12px; padding: 5px 8px; color: #426157; background: #ffffffe8; border-radius: 7px; font-size: 10px; font-weight: 800; }
+.mapPreview button { position: absolute; width: 42px; height: 42px; border: 0; border-radius: 50% 50% 50% 8px; transform: rotate(-45deg); color: white; background: #17644f; font-size: 19px; }
+.mapPreview button small { position: absolute; left: 32px; top: 22px; width: max-content; max-width: 120px; padding: 5px 7px; transform: rotate(45deg); overflow: hidden; color: #17221f; background: white; border-radius: 7px; box-shadow: 0 5px 15px #17362d2b; font: 800 9px/1.2 "Noto Sans Lao", system-ui; text-overflow: ellipsis; white-space: nowrap; }
 .empty { padding: 34px 18px; text-align: center; border: 1px dashed #b6c3be; border-radius: 14px; }
 .empty button { min-height: 44px; padding: 9px 12px; border: 0; border-radius: 9px; color: white; background: #17644f; font: inherit; }
-.placeHero { min-height: 270px; padding: 38px 18px 18px; display: flex; flex-direction: column; justify-content: space-between; color: white; background-position: center; background-size: cover; }
+.placeHero { position: relative; min-height: 330px; padding: 38px 18px 20px; display: flex; flex-direction: column; justify-content: space-between; color: white; background-position: center; background-size: cover; }
 .placeHero > button { align-self: flex-start; min-height: 44px; padding: 8px 11px; border: 1px solid #ffffff44; border-radius: 999px; color: white; background: #0007; font: inherit; }
 .placeHero > span { position: absolute; right: 18px; top: 43px; padding: 5px 8px; color: #351b06; background: #ffd09f; border-radius: 6px; font-size: 10px; font-weight: 800; }
+.placeHero .heroPlay { position: absolute; top: 43%; left: 50%; width: 58px; height: 58px; min-height: 58px; display: grid; place-items: center; transform: translate(-50%, -50%); border-color: #ffffff88; background: #07120fb8; font-size: 20px; }
 .placeHero h1 { margin: 3px 0; font-size: 27px; }
 .placeHero p { margin: 0; }
-.placeActions { position: sticky; z-index: 3; top: 0; padding: 9px 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; background: #fffdf8; box-shadow: 0 5px 16px #17221f12; }
-.placeActions button { min-height: 46px; border: 0; border-radius: 10px; color: white; background: #17644f; font: inherit; font-size: 12px; font-weight: 800; }
+.placeHero div > b { margin-top: 8px; display: block; color: #ffd49f; font-size: 13px; }
+.placeHero div > b span { color: #e8eeeb; font-size: 9px; font-weight: 600; }
+.placeActions { position: sticky; z-index: 3; top: 0; padding: 9px 12px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; background: #fffdf8; box-shadow: 0 5px 16px #17221f12; }
+.placeActions button { min-height: 52px; display: grid; place-content: center; gap: 2px; border: 0; border-radius: 10px; color: white; background: #17644f; font: inherit; font-size: 16px; font-weight: 800; }
+.placeActions button span { font-size: 9px; }
 .placeBody { padding: 6px 18px 30px; }
 .placeBody section { padding: 12px 0; border-bottom: 1px solid #e1e6e3; }
 .placeBody h2 { margin: 4px 0 10px; font-size: 16px; }
-.placeBody dl { margin: 0; }
-.placeBody dl div { padding: 7px 0; display: flex; justify-content: space-between; gap: 12px; }
-.placeBody dt { color: #65726d; }
-.placeBody dd { margin: 0; text-align: right; }
-.sourceCard { width: 100%; padding: 12px; display: flex; justify-content: space-between; border: 1px solid #cfd8d4; border-radius: 10px; background: white; font: inherit; }
+.placeBody .decisionCard { margin-top: 8px; padding: 13px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: #edf6f1; border: 1px solid #cfe1d7; border-radius: 15px; }
+.decisionCard div { display: grid; gap: 2px; }
+.decisionCard span { color: #62706b; font-size: 9px; }
+.decisionCard strong { font-size: 11px; }
+.decisionCard small { grid-column: 1 / -1; padding-top: 8px; color: #62706b; border-top: 1px solid #d5e5dc; font-size: 9px; }
+.sectionTitle { display: flex; align-items: end; justify-content: space-between; gap: 10px; }
+.sectionTitle > div { display: grid; gap: 2px; }
+.sectionTitle > div > span { color: #c55f2e; font-size: 8px; font-weight: 900; letter-spacing: .08em; }
+.sectionTitle button { min-height: 38px; border: 0; color: #17644f; background: transparent; font: inherit; font-size: 9px; font-weight: 800; }
+.reviewRail { display: grid; grid-auto-columns: 138px; grid-auto-flow: column; gap: 9px; overflow-x: auto; scroll-snap-type: x proximity; }
+.reviewRail button { position: relative; height: 190px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; scroll-snap-align: start; color: white; text-align: left; background-position: center; background-size: cover; border: 0; border-radius: 14px; }
+.reviewRail button > i { width: 34px; height: 34px; display: grid; place-items: center; align-self: center; margin-top: 48px; background: #07120fbb; border: 1px solid #ffffff66; border-radius: 50%; font-style: normal; }
+.reviewRail button > span { display: grid; gap: 1px; }
+.reviewRail strong { font-size: 10px; }
+.reviewRail small { color: #dce6e2; font-size: 8px; }
+.menuList { display: grid; gap: 0; }
+.menuList div { min-height: 42px; padding: 8px 0; display: flex; align-items: center; justify-content: space-between; gap: 10px; border-bottom: 1px dashed #d8dfdc; }
+.menuList span { font-size: 12px; }
+.menuList strong { color: #17644f; font-size: 11px; }
+.freshness { margin: 8px 0 0; color: #7b6250; font-size: 9px; }
+.tagList { display: flex; flex-wrap: wrap; gap: 7px; }
+.tagList span { padding: 7px 9px; color: #265b4c; background: #eaf4ef; border-radius: 999px; font-size: 9px; font-weight: 800; }
+.sourceCard { width: 100%; padding: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; text-align: left; border: 1px solid #cfd8d4; border-radius: 12px; background: white; font: inherit; }
+.sourceCard > span { display: grid; gap: 2px; }
+.sourceCard small { color: #61706a; font-size: 9px; }
+.sourceCard > b { color: #17644f; font-size: 9px; }
 .sourceMissing { padding: 12px; display: grid; gap: 4px; color: #67441f; background: #fff0dc; border-radius: 10px; font-size: 12px; }
+.relatedGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+.relatedGrid button { min-width: 0; padding: 0; overflow: hidden; display: grid; text-align: left; border: 1px solid #dfe4e1; border-radius: 12px; background: white; font: inherit; }
+.relatedGrid button > i { height: 88px; background-position: center; background-size: cover; }
+.relatedGrid button > span { padding: 8px; display: grid; gap: 2px; }
+.relatedGrid strong { overflow: hidden; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.relatedGrid small { color: #61706a; font-size: 8px; }
 .correction { min-height: 44px; margin-top: 16px; padding: 10px 0; border: 0; color: #17644f; background: transparent; font: inherit; text-decoration: underline; }
 .bottomNav { position: absolute; z-index: 10; left: 0; right: 0; bottom: 0; height: 62px; display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid #dfe4e1; background: #fffdf8f5; }
 .bottomNav button { display: grid; place-content: center; gap: 1px; border: 0; color: #78847f; background: transparent; font: inherit; }

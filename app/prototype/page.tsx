@@ -15,14 +15,20 @@ type Place = {
   checked: string;
   creator: string;
   image: string;
+  rating: string;
+  reviewCount: number;
+  distance: string;
+  tags: string[];
+  reviewCreators: string[];
+  menu: { name: string; price: string }[];
   sponsored?: boolean;
   sourceAvailable?: boolean;
 };
 
 const places: Place[] = [
-  { id: "p01", name: "ເຮືອນຄົວວຽງ", category: "restaurant", categoryLabel: "ຮ້ານອາຫານລາວ", district: "ສີສັດຕະນາກ", price: "₭₭", hours: "ເປີດຮອດ 21:30", checked: "ກວດຫຼ້າສຸດ 20 ສິງຫາ", creator: "@lao.food.story", image: "/platform-food.jpg", sourceAvailable: true },
-  { id: "p02", name: "ຄາເຟແຄມຂອງ", category: "cafe", categoryLabel: "ຮ້ານກາເຟ", district: "ຈັນທະບູລີ", price: "₭₭", hours: "ເປີດຮອດ 21:00", checked: "ກວດຫຼ້າສຸດ 18 ສິງຫາ", creator: "@slowday.vte", image: "/platform-cafe.jpg", sponsored: true, sourceAvailable: true },
-  { id: "p03", name: "ສວນກາເຟເຊົ້າ", category: "cafe", categoryLabel: "ຮ້ານກາເຟ", district: "ໄຊເສດຖາ", price: "ຍັງບໍ່ຮູ້ລາຄາ", hours: "ຂໍ້ມູນເວລາອາດເກົ່າ", checked: "ກວດຫຼ້າສຸດ 2 ເດືອນກ່ອນ", creator: "@morning.lao", image: "/laos-weaver.jpg", sourceAvailable: false },
+  { id: "p01", name: "ເຮືອນຄົວວຽງ", category: "restaurant", categoryLabel: "ຮ້ານອາຫານລາວ", district: "ສີສັດຕະນາກ", price: "₭₭", hours: "ເປີດຮອດ 21:30", checked: "ກວດຫຼ້າສຸດ 20 ສິງຫາ", creator: "@lao.food.story", image: "/platform-food.jpg", rating: "4.6", reviewCount: 128, distance: "2.4 km", tags: ["ອາຫານລາວ", "ຄອບຄົວ", "ມີບ່ອນຈອດລົດ"], reviewCreators: ["@lao.food.story", "@kinyang.vte", "@where2eat.la"], menu: [{ name: "ເອາະຫຼາມ", price: "65,000 ₭" }, { name: "ລາບປານ້ຳຂອງ", price: "75,000 ₭" }, { name: "ຕຳໝາກຫຸ່ງ", price: "35,000 ₭" }], sourceAvailable: true },
+  { id: "p02", name: "ຄາເຟແຄມຂອງ", category: "cafe", categoryLabel: "ຮ້ານກາເຟ", district: "ຈັນທະບູລີ", price: "₭₭", hours: "ເປີດຮອດ 21:00", checked: "ກວດຫຼ້າສຸດ 18 ສິງຫາ", creator: "@slowday.vte", image: "/platform-cafe.jpg", rating: "4.4", reviewCount: 86, distance: "1.1 km", tags: ["ວິວແຄມຂອງ", "ນັ່ງເຮັດວຽກ", "ເປີດເດິກ"], reviewCreators: ["@slowday.vte", "@cafehopping.la", "@vte.weekend"], menu: [{ name: "Lao Cold Brew", price: "38,000 ₭" }, { name: "Coconut Latte", price: "42,000 ₭" }, { name: "Croissant", price: "28,000 ₭" }], sponsored: true, sourceAvailable: true },
+  { id: "p03", name: "ສວນກາເຟເຊົ້າ", category: "cafe", categoryLabel: "ຮ້ານກາເຟ", district: "ໄຊເສດຖາ", price: "ຍັງບໍ່ຮູ້ລາຄາ", hours: "ຂໍ້ມູນເວລາອາດເກົ່າ", checked: "ກວດຫຼ້າສຸດ 2 ເດືອນກ່ອນ", creator: "@morning.lao", image: "/laos-weaver.jpg", rating: "4.1", reviewCount: 34, distance: "4.8 km", tags: ["ສວນ", "ງຽບ", "ກາເຟເຊົ້າ"], reviewCreators: ["@morning.lao"], menu: [{ name: "Americano", price: "ລໍກວດສອບ" }, { name: "ຊາດອກໄມ້", price: "ລໍກວດສອບ" }], sourceAvailable: false },
 ];
 
 export default function InteractivePrototype() {
@@ -33,7 +39,8 @@ export default function InteractivePrototype() {
   const [feedIndex, setFeedIndex] = useState(0);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<"all" | "restaurant" | "cafe">("all");
-  const [notice, setNotice] = useState("Prototype ພ້ອມສຳລັບລອງ 5 tasks");
+  const [resultView, setResultView] = useState<"video" | "list" | "map">("video");
+  const [notice, setNotice] = useState("Prototype R2 ພ້ອມສຳລັບ Founder Review 5 ຂໍ້");
   const [analytics, setAnalytics] = useState<"pending" | "essential" | "allowed">("pending");
   const [showTasks, setShowTasks] = useState(false);
   const essentialConsentRef = useRef<HTMLButtonElement>(null);
@@ -43,11 +50,17 @@ export default function InteractivePrototype() {
   }, [analytics]);
 
   const selected = places.find((place) => place.id === selectedId) ?? places[0];
+  const relatedPlaces = places.filter((place) => place.id !== selected.id).slice(0, 2);
   const feedPlace = places[feedIndex];
   const results = useMemo(() => places.filter((place) => {
     const matchesFilter = filter === "all" || place.category === filter;
     const normalized = query.trim().toLowerCase();
-    const matchesQuery = !normalized || `${place.name} ${place.categoryLabel} ${place.district}`.toLowerCase().includes(normalized);
+    const intentMatch = normalized === "ໃກ້ຂ້ອຍ"
+      || (normalized === "ເປີດເດິກ" && place.tags.includes("ເປີດເດິກ"))
+      || (normalized === "ຄອບຄົວ" && place.tags.includes("ຄອບຄົວ"))
+      || (normalized === "ງົບ ₭₭" && place.price === "₭₭");
+    const searchable = `${place.name} ${place.categoryLabel} ${place.district} ${place.price} ${place.hours} ${place.tags.join(" ")}`.toLowerCase();
+    const matchesQuery = !normalized || intentMatch || searchable.includes(normalized);
     return matchesFilter && matchesQuery;
   }), [filter, query]);
 
@@ -79,10 +92,10 @@ export default function InteractivePrototype() {
   return <main className={styles.stage}>
     <header className={styles.prototypeHeader}>
       <div><strong>ພ້ອມໄປ · UX-03</strong><span>INTERACTIVE TEST PROTOTYPE · NOT PRODUCTION</span></div>
-      <nav><button onClick={() => setShowTasks((value) => !value)}>{showTasks ? "ປິດ Tasks" : "ເບິ່ງ 5 Tasks"}</button><a href={`${basePath}/documents/interactive-prototype`}>ກັບເອກະສານ</a></nav>
+      <nav><button onClick={() => setShowTasks((value) => !value)}>{showTasks ? "ປິດຄຳຖາມ" : "Founder Review · 5 ຂໍ້"}</button><a href={`${basePath}/documents/interactive-prototype`}>ກັບເອກະສານ</a></nav>
     </header>
 
-    {showTasks ? <aside className={styles.tasks} aria-label="Usability test tasks"><strong>ລອງໂດຍບໍ່ມີຄົນບອກປຸ່ມ</strong><ol><li>ຫາຮ້ານກາເຟຕາມເຂດ/ລາຄາ</li><li>ກວດເວລາ ແລະສະຖານທີ່</li><li>ກົດເປີດແຜນທີ່</li><li>ຊີ້ວ່າລາຍການໃດເປັນໂຄສະນາ</li><li>ໄປຕໍ່ເມື່ອວິດີໂອເບິ່ງບໍ່ໄດ້</li></ol></aside> : null}
+    {showTasks ? <aside className={styles.tasks} aria-label="Founder review questions"><strong>Founder Review R2 · ຕອບຫຼັງຈາກລອງໃຊ້</strong><ol><li>ຮູ້ທັນທີບໍ່ວ່າ Platform ຕ່າງຈາກ Facebook/TikTok/Google ແນວໃດ?</li><li>Search ຊ່ວຍຄົ້ນຕາມເຈດຕະນາ ແລະປຽບທຽບໄດ້ດີພໍບໍ່?</li><li>Place Page ມີຂໍ້ມູນພໍໃຫ້ຕັດສິນໃຈໄປ/ບໍ່ໄປບໍ່?</li><li>Sponsored, rating/source ແລະ checked date ແຍກກັນຊັດບໍ່?</li><li>ຂໍ້ມູນໃດຂາດ, ເກີນ ຫຼືຄວນເລື່ອນໄປຫຼັງ MVP?</li></ol><p>ຕອບແຕ່ລະຂໍ້: ຜ່ານ / ຕ້ອງປັບ / ຍັງບໍ່ແນ່ໃຈ.</p></aside> : null}
 
     <section className={styles.device} aria-label="Mobile application prototype">
       <div className={styles.prototypeSurface} inert={analytics === "pending"} aria-hidden={analytics === "pending"}>
@@ -100,17 +113,26 @@ export default function InteractivePrototype() {
       </section> : null}
 
       {screen === "search" ? <section className={styles.lightScreen}>
-        <header className={styles.screenHeader}><h1>ຄົ້ນຫາ</h1><button onClick={() => setScreen("discover")}>ປິດ</button></header>
-        <label className={styles.searchBox}><span className={styles.srOnly}>ຄົ້ນຫາຊື່ຮ້ານ ຫຼືເຂດ</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="ຊື່ຮ້ານ, ເຂດ..."/><button onClick={() => setQuery("")} aria-label="ລຶບຄຳຄົ້ນ">×</button></label>
+        <header className={styles.screenHeader}><div><span>ຄົ້ນຫາຈາກຣີວິວຈິງ</span><h1>ມື້ນີ້ຢາກໄປໃສ?</h1></div><button onClick={() => setScreen("discover")}>ປິດ</button></header>
+        <label className={styles.searchBox}><span className={styles.srOnly}>ຄົ້ນຫາຊື່ຮ້ານ ເຂດ ຫຼືຄວາມຕ້ອງການ</span><b aria-hidden="true">⌕</b><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="ເຊັ່ນ: ຮ້ານຄອບຄົວ ເປີດເດິກ..."/><button onClick={() => setQuery("")} aria-label="ລຶບຄຳຄົ້ນ">×</button></label>
+        <div className={styles.intentRail} aria-label="ຄຳຄົ້ນແນະນຳ"><button onClick={() => setQuery("ໃກ້ຂ້ອຍ")}>⌖ ໃກ້ຂ້ອຍ</button><button onClick={() => setQuery("ເປີດເດິກ")}>☾ ເປີດເດິກ</button><button onClick={() => setQuery("ຄອບຄົວ")}>♙ ສຳລັບຄອບຄົວ</button><button onClick={() => setQuery("ງົບ ₭₭")}>₭ ງົບ ₭₭</button></div>
         <div className={styles.chips} aria-label="ກອງປະເພດ">{(["all", "restaurant", "cafe"] as const).map((value) => <button key={value} className={filter === value ? styles.activeChip : ""} onClick={() => setFilter(value)}>{value === "all" ? "ທັງໝົດ" : value === "restaurant" ? "ຮ້ານອາຫານ" : "ຮ້ານກາເຟ"}</button>)}</div>
-        <p className={styles.resultCount}>{results.length} ຜົນການຄົ້ນຫາ</p>
-        <div className={styles.results}>{results.length ? results.map((place) => <button className={styles.resultCard} key={place.id} onClick={() => openPlace(place)}><i className={styles.resultImage} aria-hidden="true" style={{ backgroundImage: `url(${basePath}${place.image})` }}/><span><strong>{place.name}</strong><small>{place.categoryLabel} · {place.district}</small><em>{place.price} · {place.checked}</em>{place.sponsored ? <b>ໂຄສະນາ</b> : null}</span></button>) : <div className={styles.empty}><strong>ບໍ່ພົບຮ້ານທີ່ກົງ</strong><p>ລອງລຶບຄຳຄົ້ນ ຫຼືປ່ຽນປະເພດ.</p><button onClick={() => { setQuery(""); setFilter("all"); }}>ລ້າງຕົວກອງ</button></div>}</div>
+        <div className={styles.resultTools}><p><strong>ແນະນຳສຳລັບທ່ານ</strong><span>{results.length} ສະຖານທີ່</span></p><div aria-label="ຮູບແບບຜົນຄົ້ນຫາ">{(["video", "list", "map"] as const).map((view) => <button key={view} className={resultView === view ? styles.activeView : ""} onClick={() => setResultView(view)}>{view === "video" ? "▶" : view === "list" ? "☷" : "⌖"}<span className={styles.srOnly}>{view}</span></button>)}</div></div>
+        {resultView === "map" ? <div className={styles.mapPreview}><span>ແຜນທີ່ຈຳລອງ</span>{results.map((place, index) => <button key={place.id} style={{ left: `${20 + index * 28}%`, top: `${25 + (index % 2) * 35}%` }} onClick={() => openPlace(place)}>⌖<small>{place.name}</small></button>)}</div> : <div className={resultView === "video" ? styles.videoResults : styles.results}>{results.length ? results.map((place) => <button className={resultView === "video" ? styles.videoResultCard : styles.resultCard} key={place.id} onClick={() => openPlace(place)}><i className={styles.resultImage} aria-hidden="true" style={{ backgroundImage: `linear-gradient(180deg, transparent, rgba(5,12,17,.82)), url(${basePath}${place.image})` }}>{resultView === "video" ? <em>▶</em> : null}</i><span><strong>{place.name}</strong><small>{place.categoryLabel} · {place.district}</small><em>★ {place.rating} · {place.reviewCount} ຄຳເຫັນ · {place.distance}</em><small>{place.price} · {place.checked}</small>{place.sponsored ? <b>ໂຄສະນາ</b> : <i>{place.tags.slice(0, 2).join(" · ")}</i>}</span></button>) : <div className={styles.empty}><strong>ບໍ່ພົບຮ້ານທີ່ກົງ</strong><p>ລອງລຶບຄຳຄົ້ນ ຫຼືປ່ຽນປະເພດ.</p><button onClick={() => { setQuery(""); setFilter("all"); }}>ລ້າງຕົວກອງ</button></div>}</div>}
       </section> : null}
 
       {screen === "place" ? <section className={styles.lightScreen}>
-        <header className={styles.placeHero} style={{ backgroundImage: `linear-gradient(180deg, rgba(5,12,17,.1), rgba(5,12,17,.85)), url(${basePath}${selected.image})` }}><button onClick={returnFromPlace}>← ກັບ</button>{selected.sponsored ? <span>ໂຄສະນາ</span> : null}<div><small>{selected.categoryLabel}</small><h1>{selected.name}</h1><p>{selected.district} · {selected.price}</p></div></header>
-        <div className={styles.placeActions}><button onClick={() => act("ແຜນທີ່", selected)}>⌖ ແຜນທີ່</button><button onClick={() => act("ໂທ", selected)}>☎ ໂທ</button><button onClick={() => act("ຂໍ້ຄວາມ", selected)}>◫ ຂໍ້ຄວາມ</button></div>
-        <div className={styles.placeBody}><section><h2>ຂໍ້ມູນສຳລັບຕັດສິນໃຈ</h2><dl><div><dt>ເວລາ</dt><dd>{selected.hours}</dd></div><div><dt>ລາຄາ</dt><dd>{selected.price}</dd></div><div><dt>ຄວາມສົດໃໝ່</dt><dd>{selected.checked}</dd></div></dl></section><section><h2>ແຫຼ່ງຣີວິວ</h2>{selected.sourceAvailable ? <button className={styles.sourceCard} onClick={() => setNotice(`ເປີດ original source ຂອງ ${selected.creator}`)}><strong>{selected.creator}</strong><span>Original social source ↗</span></button> : <div className={styles.sourceMissing}><strong>Source ຖືກລົບ ຫຼືເບິ່ງບໍ່ໄດ້</strong><span>Place facts ຍັງສະແດງຕາມຫຼັກຖານທີ່ກວດໄດ້.</span></div>}</section><button className={styles.correction} onClick={() => setNotice("Correction form → ຈະສ້າງ Case ID; ບໍ່ auto-publish")}>ແຈ້ງຂໍ້ມູນຜິດ</button></div>
+        <header className={styles.placeHero} style={{ backgroundImage: `linear-gradient(180deg, rgba(5,12,17,.08), rgba(5,12,17,.9)), url(${basePath}${selected.image})` }}><button onClick={returnFromPlace}>← ກັບ</button>{selected.sponsored ? <span>ໂຄສະນາ — ຮ້ານຈ່າຍ</span> : null}<button className={styles.heroPlay} onClick={() => setNotice(`ຫຼິ້ນຣີວິວຫຼັກຈາກ ${selected.creator}`)} aria-label="ຫຼິ້ນວິດີໂອຣີວິວ">▶</button><div><small>{selected.categoryLabel}</small><h1>{selected.name}</h1><p>{selected.district} · {selected.price} · {selected.distance}</p><b>★ {selected.rating} <span>({selected.reviewCount} ຄຳເຫັນຈາກແຫຼ່ງອ້າງອີງ)</span></b></div></header>
+        <div className={styles.placeActions}><button onClick={() => act("ແຜນທີ່", selected)}>⌖<span>ແຜນທີ່</span></button><button onClick={() => act("ໂທ", selected)}>☎<span>ໂທ</span></button><button onClick={() => act("ຂໍ້ຄວາມ", selected)}>◫<span>ຂໍ້ຄວາມ</span></button><button onClick={() => act("ບັນທຶກ", selected)}>♡<span>ບັນທຶກ</span></button></div>
+        <div className={styles.placeBody}>
+          <section className={styles.decisionCard}><div><span>ສະຖານະ</span><strong>{selected.hours}</strong></div><div><span>ລາຄາ</span><strong>{selected.price}</strong></div><div><span>ໄລຍະທາງ</span><strong>{selected.distance}</strong></div><small>{selected.checked} · ລາຄາແມ່ນຂໍ້ມູນອ້າງອີງ</small></section>
+          <section><div className={styles.sectionTitle}><div><span>VIDEO REVIEWS</span><h2>ຄົນອື່ນເວົ້າແນວໃດ?</h2></div><button onClick={() => setNotice("ສະແດງຣີວິວທັງໝົດ")}>ເບິ່ງທັງໝົດ</button></div><div className={styles.reviewRail}>{selected.reviewCreators.map((creator, index) => <button key={creator} onClick={() => setNotice(`ເປີດ original source ຂອງ ${creator}`)} style={{ backgroundImage: `linear-gradient(180deg, transparent, rgba(5,12,17,.86)), url(${basePath}${index % 2 ? "/platform-cafe.jpg" : selected.image})` }}><i>▶</i><span><strong>{creator}</strong><small>Original review ↗</small></span></button>)}</div></section>
+          <section><div className={styles.sectionTitle}><div><span>DETAILS</span><h2>{selected.category === "restaurant" ? "ເມນູ ແລະລາຄາ" : "ເມນູແນະນຳ"}</h2></div><button onClick={() => setNotice("ສະແດງເມນູທັງໝົດ")}>ເບິ່ງເມນູ</button></div><div className={styles.menuList}>{selected.menu.map((item) => <div key={item.name}><span>{item.name}</span><strong>{item.price}</strong></div>)}</div><p className={styles.freshness}>ລາຄາອາດປ່ຽນແປງ · {selected.checked}</p></section>
+          <section><h2>ເໝາະກັບໃຜ?</h2><div className={styles.tagList}>{selected.tags.map((tag) => <span key={tag}>✓ {tag}</span>)}</div></section>
+          <section><h2>ແຫຼ່ງຣີວິວ ແລະຄວາມໂປ່ງໃສ</h2>{selected.sourceAvailable ? <button className={styles.sourceCard} onClick={() => setNotice(`ເປີດ original source ຂອງ ${selected.creator}`)}><span><strong>{selected.creator}</strong><small>ຜູ້ສ້າງຣີວິວຕົ້ນສະບັບ</small></span><b>ເປີດຕົ້ນສະບັບ ↗</b></button> : <div className={styles.sourceMissing}><strong>Source ຖືກລົບ ຫຼືເບິ່ງບໍ່ໄດ້</strong><span>Place facts ຍັງສະແດງຕາມຫຼັກຖານທີ່ກວດໄດ້.</span></div>}</section>
+          <section><div className={styles.sectionTitle}><div><span>DISCOVER MORE</span><h2>ຮ້ານທີ່ຄ້າຍຄືກັນ</h2></div></div><div className={styles.relatedGrid}>{relatedPlaces.map((place) => <button key={place.id} onClick={() => openPlace(place)}><i style={{ backgroundImage: `url(${basePath}${place.image})` }}/><span><strong>{place.name}</strong><small>★ {place.rating} · {place.distance}</small></span></button>)}</div></section>
+          <button className={styles.correction} onClick={() => setNotice("Correction form → ຈະສ້າງ Case ID; ບໍ່ auto-publish")}>ຂໍ້ມູນບໍ່ຖືກຕ້ອງ? ແຈ້ງໃຫ້ພວກເຮົາ</button>
+        </div>
       </section> : null}
 
       {screen !== "place" ? <nav className={styles.bottomNav} aria-label="Prototype navigation"><button className={screen === "discover" ? styles.navActive : ""} onClick={() => setScreen("discover")}><b>⌂</b><span>ສຳຫຼວດ</span></button><button className={screen === "search" ? styles.navActive : ""} onClick={() => setScreen("search")}><b>⌕</b><span>ຄົ້ນຫາ</span></button></nav> : null}
