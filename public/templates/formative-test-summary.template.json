@@ -1,0 +1,34 @@
+{
+  "document": "UX-03",
+  "round": "Formative Round 1",
+  "prototype_version": null,
+  "test_window": {
+    "started_at": null,
+    "ended_at": null
+  },
+  "participant_count": 0,
+  "expected_participant_count": 5,
+  "participant_ids": [],
+  "task_results": {
+    "T-01": { "completed": 0, "attempted": 0, "success_rate": null },
+    "T-02": { "completed": 0, "attempted": 0, "success_rate": null },
+    "T-03": { "completed": 0, "attempted": 0, "success_rate": null },
+    "T-04": { "completed": 0, "attempted": 0, "success_rate": null, "sponsored_comprehension_rate": null },
+    "T-05": { "completed": 0, "attempted": 0, "success_rate": null }
+  },
+  "findings": [],
+  "severity_count": { "S1": 0, "S2": 0, "S3": 0, "S4": 0 },
+  "revisions": [],
+  "retests": [],
+  "gate": {
+    "core_task_target": 0.8,
+    "map_action_target": 0.9,
+    "sponsored_comprehension_target": 0.8,
+    "unresolved_s1_required": 0,
+    "all_s2_fixed_and_retested": false,
+    "decision": "not_evaluated",
+    "decision_reason": "No real-user evidence has been entered."
+  },
+  "approved_by": null,
+  "approved_at": null
+}

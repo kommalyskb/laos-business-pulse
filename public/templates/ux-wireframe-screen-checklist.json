@@ -1,6 +1,6 @@
 {
   "document": "UX-02",
-  "version": "0.9",
+  "version": "1.0",
   "required_screens": ["SCR-G01", "SCR-G02", "SCR-G03", "SCR-G05", "SCR-A01", "SCR-A02", "SCR-A03"],
   "should_screens": ["SCR-G04"],
   "checks_per_screen": [
@@ -16,10 +16,19 @@
     "requirement_and_screen_id_traceability"
   ],
   "review": {
-    "visual_reviewer": null,
-    "accessibility_reviewer": null,
-    "product_owner": null,
-    "reviewed_at": null,
-    "status": "pending"
+    "visual_reviewer": "Internal Product Design review",
+    "accessibility_reviewer": "Internal prototype baseline review",
+    "product_owner": "Approved to proceed in sequence",
+    "reviewed_at": "2026-08-27",
+    "status": "approved",
+    "evidence": [
+      "mobile_390x844_no_horizontal_overflow",
+      "desktop_1440x900_layout_review",
+      "core_touch_targets_at_least_44px",
+      "search_context_preserved_after_place_back",
+      "sponsored_disclosure_visible",
+      "unavailable_video_has_place_fallback"
+    ],
+    "boundary": "Internal wireframe/prototype review only; real-user usability results remain pending in UX-03."
   }
 }

@@ -28,6 +28,7 @@ const places: Place[] = [
 export default function InteractivePrototype() {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   const [screen, setScreen] = useState<Screen>("discover");
+  const [returnScreen, setReturnScreen] = useState<Exclude<Screen, "place">>("discover");
   const [selectedId, setSelectedId] = useState("p01");
   const [feedIndex, setFeedIndex] = useState(0);
   const [query, setQuery] = useState("");
@@ -47,8 +48,20 @@ export default function InteractivePrototype() {
 
   const openPlace = (place: Place) => {
     setSelectedId(place.id);
+    if (screen !== "place") setReturnScreen(screen);
     setScreen("place");
     setNotice(`ເປີດ Place: ${place.name}`);
+  };
+
+  const returnFromPlace = () => {
+    setScreen(returnScreen);
+    setNotice(returnScreen === "search" ? "ກັບຄືນຫາ Search — ຄຳຄົ້ນ ແລະຕົວກອງຍັງຢູ່" : "ກັບຄືນຫາ Discover");
+  };
+
+  const moveFeed = (direction: -1 | 1) => {
+    const nextIndex = (feedIndex + direction + places.length) % places.length;
+    setFeedIndex(nextIndex);
+    setNotice(`ເລື່ອນໄປລາຍການ ${nextIndex + 1} ຈາກ ${places.length}`);
   };
 
   const act = (label: string, place: Place) => setNotice(`${label}: ${place.name} — Prototype ບໍ່ເປີດແອັບພາຍນອກ`);
@@ -71,7 +84,7 @@ export default function InteractivePrototype() {
           {feedPlace.sponsored ? <span className={styles.sponsored}>ໂຄສະນາ — ຮ້ານຈ່າຍເພື່ອສະແດງ</span> : <span className={styles.source}>ແຫຼ່ງຣີວິວ · {feedPlace.creator}</span>}
           <button className={styles.placeTitle} onClick={() => openPlace(feedPlace)}><strong>{feedPlace.name}</strong><span>{feedPlace.categoryLabel} · {feedPlace.district} · {feedPlace.price}</span><small>{feedPlace.checked}</small></button>
           <div className={styles.actionRow}><button onClick={() => act("ແຜນທີ່", feedPlace)}>⌖<span>ແຜນທີ່</span></button><button onClick={() => act("ໂທ", feedPlace)}>☎<span>ໂທ</span></button><button onClick={() => act("ຂໍ້ຄວາມ", feedPlace)}>◫<span>ຂໍ້ຄວາມ</span></button><button onClick={() => openPlace(feedPlace)}>ⓘ<span>ຂໍ້ມູນ</span></button></div>
-          <div className={styles.feedPager}><button aria-label="ລາຍການກ່ອນ" onClick={() => setFeedIndex((feedIndex + places.length - 1) % places.length)}>↑</button><span>{feedIndex + 1}/{places.length}</span><button aria-label="ລາຍການຖັດໄປ" onClick={() => setFeedIndex((feedIndex + 1) % places.length)}>↓</button></div>
+          <div className={styles.feedPager}><button aria-label="ລາຍການກ່ອນ" onClick={() => moveFeed(-1)}>↑</button><span>{feedIndex + 1}/{places.length}</span><button aria-label="ລາຍການຖັດໄປ" onClick={() => moveFeed(1)}>↓</button></div>
         </div>
       </section> : null}
 
@@ -84,7 +97,7 @@ export default function InteractivePrototype() {
       </section> : null}
 
       {screen === "place" ? <section className={styles.lightScreen}>
-        <header className={styles.placeHero} style={{ backgroundImage: `linear-gradient(180deg, rgba(5,12,17,.1), rgba(5,12,17,.85)), url(${basePath}${selected.image})` }}><button onClick={() => setScreen("discover")}>← ກັບ</button>{selected.sponsored ? <span>ໂຄສະນາ</span> : null}<div><small>{selected.categoryLabel}</small><h1>{selected.name}</h1><p>{selected.district} · {selected.price}</p></div></header>
+        <header className={styles.placeHero} style={{ backgroundImage: `linear-gradient(180deg, rgba(5,12,17,.1), rgba(5,12,17,.85)), url(${basePath}${selected.image})` }}><button onClick={returnFromPlace}>← ກັບ</button>{selected.sponsored ? <span>ໂຄສະນາ</span> : null}<div><small>{selected.categoryLabel}</small><h1>{selected.name}</h1><p>{selected.district} · {selected.price}</p></div></header>
         <div className={styles.placeActions}><button onClick={() => act("ແຜນທີ່", selected)}>⌖ ແຜນທີ່</button><button onClick={() => act("ໂທ", selected)}>☎ ໂທ</button><button onClick={() => act("ຂໍ້ຄວາມ", selected)}>◫ ຂໍ້ຄວາມ</button></div>
         <div className={styles.placeBody}><section><h2>ຂໍ້ມູນສຳລັບຕັດສິນໃຈ</h2><dl><div><dt>ເວລາ</dt><dd>{selected.hours}</dd></div><div><dt>ລາຄາ</dt><dd>{selected.price}</dd></div><div><dt>ຄວາມສົດໃໝ່</dt><dd>{selected.checked}</dd></div></dl></section><section><h2>ແຫຼ່ງຣີວິວ</h2>{selected.sourceAvailable ? <button className={styles.sourceCard} onClick={() => setNotice(`ເປີດ original source ຂອງ ${selected.creator}`)}><strong>{selected.creator}</strong><span>Original social source ↗</span></button> : <div className={styles.sourceMissing}><strong>Source ຖືກລົບ ຫຼືເບິ່ງບໍ່ໄດ້</strong><span>Place facts ຍັງສະແດງຕາມຫຼັກຖານທີ່ກວດໄດ້.</span></div>}</section><button className={styles.correction} onClick={() => setNotice("Correction form → ຈະສ້າງ Case ID; ບໍ່ auto-publish")}>ແຈ້ງຂໍ້ມູນຜິດ</button></div>
       </section> : null}

@@ -25,17 +25,17 @@
 .actionRow button { min-height: 50px; display: grid; place-content: center; gap: 2px; border: 1px solid #ffffff35; border-radius: 12px; color: white; background: #07120fc4; font: inherit; font-size: 17px; cursor: pointer; }
 .actionRow span { font-size: 10px; }
 .feedPager { position: absolute; right: 14px; bottom: 113px; display: grid; justify-items: center; gap: 3px; }
-.feedPager button { width: 42px; height: 42px; border: 1px solid #ffffff33; border-radius: 50%; color: white; background: #0007; font-size: 20px; }
+.feedPager button { width: 44px; height: 44px; border: 1px solid #ffffff33; border-radius: 50%; color: white; background: #0007; font-size: 20px; }
 .feedPager span { font-size: 10px; }
 .lightScreen { position: absolute; inset: 0 0 60px; overflow-y: auto; padding-top: 30px; background: #fffdf8; }
 .screenHeader { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px 8px; }
 .screenHeader h1 { margin: 0; font-size: 26px; }
-.screenHeader button { border: 0; background: transparent; font: inherit; }
+.screenHeader button { min-width: 44px; min-height: 44px; border: 0; background: transparent; font: inherit; }
 .searchBox { margin: 10px 18px; padding: 4px 6px 4px 13px; display: flex; border: 1px solid #c9d1ce; border-radius: 12px; background: white; }
 .searchBox input { min-width: 0; flex: 1; padding: 10px 0; border: 0; outline: 0; font: inherit; }
-.searchBox button { width: 40px; border: 0; background: transparent; font-size: 22px; }
+.searchBox button { width: 44px; min-height: 44px; border: 0; background: transparent; font-size: 22px; }
 .chips { display: flex; gap: 7px; padding: 4px 18px; overflow-x: auto; }
-.chips button { white-space: nowrap; padding: 8px 11px; border: 1px solid #b6c3be; border-radius: 999px; background: white; font: inherit; }
+.chips button { min-height: 44px; white-space: nowrap; padding: 8px 11px; border: 1px solid #b6c3be; border-radius: 999px; background: white; font: inherit; }
 .chips .activeChip { color: white; background: #17644f; border-color: #17644f; }
 .resultCount { margin: 13px 18px 7px; color: #62706b; font-size: 12px; }
 .results { padding: 0 18px 22px; display: grid; gap: 10px; }
@@ -46,7 +46,7 @@
 .resultCard small, .resultCard em { color: #61706a; font-size: 11px; font-style: normal; }
 .resultCard b { width: max-content; padding: 2px 5px; color: #6c3609; background: #ffe0bd; border-radius: 4px; font-size: 9px; }
 .empty { padding: 34px 18px; text-align: center; border: 1px dashed #b6c3be; border-radius: 14px; }
-.empty button { padding: 9px 12px; border: 0; border-radius: 9px; color: white; background: #17644f; font: inherit; }
+.empty button { min-height: 44px; padding: 9px 12px; border: 0; border-radius: 9px; color: white; background: #17644f; font: inherit; }
 .placeHero { min-height: 270px; padding: 38px 18px 18px; display: flex; flex-direction: column; justify-content: space-between; color: white; background-position: center; background-size: cover; }
 .placeHero > button { align-self: flex-start; min-height: 44px; padding: 8px 11px; border: 1px solid #ffffff44; border-radius: 999px; color: white; background: #0007; font: inherit; }
 .placeHero > span { position: absolute; right: 18px; top: 43px; padding: 5px 8px; color: #351b06; background: #ffd09f; border-radius: 6px; font-size: 10px; font-weight: 800; }
@@ -63,7 +63,7 @@
 .placeBody dd { margin: 0; text-align: right; }
 .sourceCard { width: 100%; padding: 12px; display: flex; justify-content: space-between; border: 1px solid #cfd8d4; border-radius: 10px; background: white; font: inherit; }
 .sourceMissing { padding: 12px; display: grid; gap: 4px; color: #67441f; background: #fff0dc; border-radius: 10px; font-size: 12px; }
-.correction { margin-top: 16px; padding: 10px 0; border: 0; color: #17644f; background: transparent; font: inherit; text-decoration: underline; }
+.correction { min-height: 44px; margin-top: 16px; padding: 10px 0; border: 0; color: #17644f; background: transparent; font: inherit; text-decoration: underline; }
 .bottomNav { position: absolute; z-index: 10; left: 0; right: 0; bottom: 0; height: 62px; display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid #dfe4e1; background: #fffdf8f5; }
 .bottomNav button { display: grid; place-content: center; gap: 1px; border: 0; color: #78847f; background: transparent; font: inherit; }
 .bottomNav b { font-size: 19px; }
@@ -72,7 +72,7 @@
 .consent { position: absolute; z-index: 15; left: 12px; right: 12px; bottom: 74px; padding: 14px; background: #fffdf8; border-radius: 14px; box-shadow: 0 12px 40px #0006; }
 .consent p { margin: 5px 0 10px; font-size: 11px; }
 .consent div { display: flex; gap: 6px; }
-.consent button { flex: 1; min-height: 42px; padding: 6px; border: 1px solid #17644f; border-radius: 9px; background: transparent; font: inherit; font-size: 10px; }
+.consent button { flex: 1; min-height: 44px; padding: 6px; border: 1px solid #17644f; border-radius: 9px; background: transparent; font: inherit; font-size: 10px; }
 .consent button:last-child { color: white; background: #17644f; }
 .notice { max-width: 680px; margin: 18px auto 0; color: #b8c8c2; text-align: center; font-size: 12px; }
 .srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }

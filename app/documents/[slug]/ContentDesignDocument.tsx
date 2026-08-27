@@ -352,8 +352,8 @@ const specs: Record<string, DocumentSpec> = {
 
   "ux-ui-wireframe": {
     code: "UX-02", title: "ໂຄງຮ່າງ UX/UI", english: "UX/UI Wireframe", owner: "Product Designer",
-    version: "0.9", status: "pending", statusLabel: "Wireframe baseline ພ້ອມ · ລໍ Visual Review",
-    approvalNote: "Information hierarchy ແລະ interaction decisions ຖືກອະນຸມັດແລ້ວ. UX-02 ຈະຂຶ້ນ 1.0 ເມື່ອ Wireframe ຂອງ SCR-G01—G05 ແລະ SCR-A01—A03 ຖືກກວດຄົບທັງ Mobile/Desktop, keyboard/touch flow ແລະ Loading/Empty/Error/Fallback states.",
+    version: "1.0", status: "approved", statusLabel: "ອະນຸມັດ Wireframe Baseline",
+    approvalNote: "Wireframe contract ແລະ Interactive Prototype ຖືກກວດຮອບ Visual/Interaction ວັນທີ 27 ສິງຫາ 2026 ທີ່ Mobile 390×844 ແລະ Desktop 1440×900. ແກ້ໄຂ touch target ໃຫ້ຢ່າງໜ້ອຍ 44px, ຮັກສາ Search context ເມື່ອກັບຈາກ Place ແລະປັບ status feedback ໃຫ້ກົງກັບ Feed state ແລ້ວ. UX-02 1.0 ເປັນ Wireframe Baseline; ບໍ່ແທນຜົນທົດສອບຄົນຈິງຂອງ UX-03.",
     sources: ["UX-01 1.0", "PRO-03 1.0", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-04 1.0", "CON-05 0.9"],
     purpose: ["ກຳນົດ Layout, Information Hierarchy, Interaction ແລະ System State ກ່ອນເລືອກສີ ຫຼືຮູບພາບສຸດທ້າຍ. Wireframe ເນັ້ນວ່າຜູ້ໃຊ້ເຫັນຫຍັງກ່ອນ, ກົດຢູ່ໃສ ແລະກັບຄືນ Context ໄດ້ແນວໃດ.", "Mobile-first width ເປັນ baseline. Discovery Feed ໃຊ້ວິດີໂອເຕັມ viewport; Place identity, trust label ແລະ action ຕ້ອງອ່ານໄດ້ໂດຍບໍ່ບັງເນື້ອຫາຫຼັກ."],
     sections: [
@@ -383,6 +383,15 @@ const specs: Record<string, DocumentSpec> = {
         ["Place editor", "field form + inline validation", "source/evidence panel", "save draft / request review"],
         ["Review", "before/after + readiness failures", "audit/source history", "approve/reject with reason"],
         ["Case", "claim/evidence/timeline", "related place/source", "suspend/remove/restore with confirmation"]
+      ]},
+      { title: "Visual Review & Interaction Verification", intro: "ການກວດນີ້ເປັນ Internal Wireframe Review ກ່ອນສົ່ງໃຫ້ຜູ້ໃຊ້ຈິງ. ມັນຢືນຢັນວ່າ layout, state ແລະ interaction ຂັ້ນພື້ນຖານນຳໄປທົດສອບໄດ້; ບໍ່ໄດ້ອ້າງວ່າ usability ຜ່ານແລ້ວ.", headers: ["Review ID", "ຂອບເຂດທີ່ກວດ", "ຫຼັກຖານ/ຜົນ", "ສະຖານະ"], rows: [
+        ["VR-01", "Mobile 390×844", "ບໍ່ມີ horizontal overflow; Feed, Search, Place, Consent ແລະ bottom navigation ບໍ່ຊ້ອນກັນ", "Passed · 27 Aug 2026"],
+        ["VR-02", "Desktop 1440×900", "Prototype device 390×750 ຢູ່ກາງ viewport; header/task controls ແລະ status ສະແດງຄົບ", "Passed · 27 Aug 2026"],
+        ["VR-03", "Discover → Place → Map/Call/Message", "Action ແຍກກັນ, accessible name ຊັດ ແລະ Prototype ບອກວ່າບໍ່ເປີດ external app", "Passed"],
+        ["VR-04", "Search → Filter → Place → Back", "ຄຳຄົ້ນ, ຕົວກອງ ແລະ result context ຍັງຢູ່ຫຼັງກົດກັບ", "Passed after correction"],
+        ["VR-05", "Sponsored comprehension surface", "ປ້າຍ ‘ໂຄສະນາ — ຮ້ານຈ່າຍເພື່ອສະແດງ’ ຢູ່ຕິດກັບ content; ບໍ່ໃຊ້ Verified ແທນ", "Passed"],
+        ["VR-06", "Unavailable video fallback", "ສະແດງສາເຫດ, Place facts ແລະປຸ່ມໄປຕໍ່; ບໍ່ເປັນ dead end", "Passed"],
+        ["VR-07", "Touch/accessibility baseline", "ປຸ່ມທີ່ສຳຄັນໃນ Mobile view ສູງຢ່າງໜ້ອຍ 44px; landmark, heading, label ແລະ role=status ຖືກລະບຸ", "Passed for prototype scope"]
       ]}
     ],
     wireframes: [
@@ -404,7 +413,7 @@ const specs: Record<string, DocumentSpec> = {
     code: "UX-03", title: "ຕົວຢ່າງໂຕ້ຕອບ ແລະການທົດສອບ", english: "Interactive Prototype & Usability Test", owner: "Product Designer / Research Lead",
     version: "0.9", status: "pending", statusLabel: "Test plan/prototype ພ້ອມ · ລໍທົດສອບຄົນຈິງ",
     approvalNote: "Prototype scope, participant mix, tasks, severity ແລະ pass threshold ຖືກອະນຸມັດ. UX-03 ຍັງຫ້າມຂຶ້ນ 1.0 ຈົນກວ່າຈະມີ session records, task-level results, S1/S2 findings, revision links ແລະ retest evidence ຈາກຜູ້ໃຊ້ຈິງ.",
-    sources: ["UX-01 1.0", "UX-02 0.9", "PRO-03 G3", "PRO-04 0.9 UAT", "CON-04 1.0", "CON-05 0.9"],
+    sources: ["UX-01 1.0", "UX-02 1.0", "PRO-03 G3", "PRO-04 0.9 UAT", "CON-04 1.0", "CON-05 0.9"],
     purpose: ["ກຳນົດ Prototype Scope, Scenario, Participant, Task, Metric ແລະວິທີປ່ຽນ Finding ເປັນ Design Decision. Prototype ບໍ່ຕ້ອງເຊື່ອມ backend ແຕ່ຕ້ອງຮັກສາ navigation, state ແລະ content ທີ່ໃກ້ຂອງຈິງ.", "ແຜນທົດສອບລວມ 2 ຮອບ: formative 5 ຄົນເພື່ອຫາບັນຫາຫຼັກ ແລະ validation ລວມ 20 ຄົນຕາມ PRO-03. ບໍ່ຄວນສະຫຼຸບຈາກຄຳວ່າ “ມັກ” ໂດຍບໍ່ເບິ່ງ task behavior."],
     sections: [
       { title: "Prototype Scope ແລະ Fidelity", intro: "Prototype ຕ້ອງກວມ Core Journey ແລະ failure state ທີ່ກະທົບການຕັດສິນໃຈ.", headers: ["Scenario", "Screens", "Interaction", "ບໍ່ຈຳເປັນ"], rows: [
@@ -440,18 +449,26 @@ const specs: Record<string, DocumentSpec> = {
         ["Revision", "finding_id, design version before/after, decision, owner, changed_at", "Designer", "Pending findings"],
         ["Retest", "finding_id, participant/session, result, remaining risk", "Independent observer/Research Lead", "Pending S1/S2 fix"],
         ["UX-03 result", "task success rates, sponsored comprehension, unresolved S1/S2, decision", "Product Owner", "Not evaluated — no real-user evidence yet"]
-      ], note: "Recommended pass gate: T-01/T-02/T-04/T-05 success ≥80%; T-03 Map action ≥90%; Sponsored comprehension ≥80%; unresolved S1 = 0; every S2 is fixed and retested. ຖ້າກຸ່ມໃດມີຜົນຕ່ຳຫຼາຍ ຫ້າມໃຊ້ຄ່າລວມປົກປິດບັນຫາ."}
+      ], note: "Recommended pass gate: T-01/T-02/T-04/T-05 success ≥80%; T-03 Map action ≥90%; Sponsored comprehension ≥80%; unresolved S1 = 0; every S2 is fixed and retested. ຖ້າກຸ່ມໃດມີຜົນຕ່ຳຫຼາຍ ຫ້າມໃຊ້ຄ່າລວມປົກປິດບັນຫາ."},
+      { title: "Formative Round 1 · ແຜນປະຕິບັດ 5 ຄົນ", intro: "ຮອບນີ້ເນັ້ນຫາບັນຫາຫຼັກກ່ອນ validation 20 ຄົນ. ຕ້ອງ recruit ຜູ້ໃຊ້ຈິງ; ການກວດດ້ວຍ Browser ຫຼືທີມພັດທະນາບໍ່ນັບເປັນ participant.", headers: ["ລຳດັບ", "ການດຳເນີນງານ", "ຜູ້ຮັບຜິດຊອບ", "ຫຼັກຖານ/Exit"], rows: [
+        ["F-01 Recruitment", "2 frequent social searchers; 1 search/map-first; 1 low-confidence digital user; 1 place owner. ຫ້າມເອົາທີມສ້າງ Product ມາແທນ.", "Research Lead", "Screener ຄົບ 5 Participant IDs; ບໍ່ເກັບຊື່ໃນ result file"],
+        ["F-02 Dry run", "ລອງ moderator script, task order, timer ແລະການບັນທຶກກັບຄົນທີ່ບໍ່ນັບໃນ sample", "Moderator + Note taker", "ລິ້ງ Prototype ແລະ template ເປີດໄດ້; wording ບໍ່ບອກປຸ່ມ"],
+        ["F-03 Session", "30–40 ນາທີ/ຄົນ: consent, warm-up, T-01—T-05, short debrief. ຊ່ວຍເມື່ອ participant ຕິດ ແລະບັນທຶກ assistance_count.", "Moderator + Note taker", "5 session records + 25 task rows; observation ແຍກຈາກ interpretation"],
+        ["F-04 Synthesis", "ລວມ finding ຕາມ task/screen; ໃຫ້ severity S1—S4 ຈາກ impact + frequency; ຢ່າສະຫຼຸບຈາກຄຳວ່າ ‘ມັກ’.", "Designer + Research Lead", "Finding register, evidence reference, recommended change ແລະ owner"],
+        ["F-05 Decision", "ແກ້ S1/S2 ກ່ອນຮອບຖັດໄປ; S3 ຕັດສິນຕາມ scope; S4 ເຂົ້າ backlog.", "Product Owner", "Revision record; S1/S2 retest plan; go/repeat decision"],
+        ["F-06 Status boundary", "ຊຸດເອກະສານພ້ອມສຳລັບ recruitment ແຕ່ຍັງບໍ່ມີ real-user result.", "Product Owner", "UX-03 ຄົງ 0.9 ຈົນ evidence ແລະ pass gate ຄົບ"]
+      ]}
     ],
     review: ["ອະນຸມັດ participant mix 8/6/4/2 ຫຼືຕ້ອງປັບ?", "Prototype ຈະສ້າງດ້ວຍ Web ຫຼື design tool ໃດ?", "ໃຜເປັນ moderator ແລະ note taker?", "ອະນຸມັດ 5 mandatory tasks ແລະ severity model ຫຼືບໍ່?", "ກຳນົດ task-success threshold ເທົ່າໃດກ່ອນ UX-05 final design?"],
     reviewDecisions: ["ອະນຸມັດ validation mix 8 frequent social searchers, 6 search/map-first, 4 low-confidence digital users ແລະ 2 place owners; ກ່ອນນັ້ນເຮັດ formative round 5 ຄົນ.", "ໃຊ້ Web Prototype ເພື່ອທົດສອບ swipe/navigation, media fallback, trust label ແລະ external action ໃກ້ຄຽງຂອງຈິງ.", "Founder/Product Owner ເປັນ moderator ໃນ Pilot; note taker ຄວນເປັນອີກຄົນ. ຖ້າມີຄົນດຽວ ຕ້ອງຂໍ consent ບັນທຶກ session ແລະຕື່ມ observation ທັນທີຫຼັງ session.", "ອະນຸມັດ T-01—T-05 ແລະ S1—S4; S1/S2 ຕ້ອງແກ້ ແລະ retest.", "ອະນຸມັດ Core task ≥80%, Map action ≥90%, Sponsored comprehension ≥80%, unresolved S1 = 0 ແລະ S2 ທຸກອັນຕ້ອງ retest ກ່ອນ UX-05 final approval."],
-    artifacts: [{ label: "Interactive UX Prototype", path: "/prototype", action: "open", description: "Prototype ເວັບສຳລັບທົດສອບ 5 tasks; ບໍ່ແມ່ນ Production MVP." }, { label: "usability-test-record.template.csv", path: "/templates/usability-test-record.template.csv", description: "Session/task result template ສຳລັບບັນທຶກ completion, time, wrong turns, assistance, finding ແລະ severity." }]
+    artifacts: [{ label: "Interactive UX Prototype", path: "/prototype", action: "open", description: "Prototype ເວັບສຳລັບທົດສອບ 5 tasks; ບໍ່ແມ່ນ Production MVP." }, { label: "formative-usability-test-guide.md", path: "/templates/formative-usability-test-guide.md", description: "Moderator guide ພ້ອມ consent, neutral script, T-01—T-05, observation rule ແລະ session close." }, { label: "formative-participant-screener.csv", path: "/templates/formative-participant-screener.csv", description: "Recruitment/screener template ສຳລັບ 5 cohorts ໂດຍໃຊ້ Participant ID ແທນຊື່." }, { label: "usability-test-record.template.csv", path: "/templates/usability-test-record.template.csv", description: "Session/task result template ສຳລັບບັນທຶກ completion, time, wrong turns, assistance, finding ແລະ severity." }, { label: "formative-test-summary.template.json", path: "/templates/formative-test-summary.template.json", description: "Summary ສຳລັບ task rate, sponsored comprehension, findings, revision, retest ແລະ go/repeat decision." }]
   },
 
   "design-system": {
     code: "UX-04", title: "ລະບົບການອອກແບບ", english: "Design System", owner: "Design System Owner / Frontend Lead",
     version: "0.9", status: "pending", statusLabel: "Token/component baseline ພ້ອມ · ລໍ QA",
     approvalNote: "Noto Sans Lao, semantic token architecture, first-slice components ແລະ WCAG 2.2 AA internal target ຖືກອະນຸມັດ. Hex palette ຍັງເປັນ Candidate ຈົນກວ່າຈະຜ່ານ contrast test ກັບ light surface, dark media overlay, focus, disabled, sponsored ແລະ error states.",
-    sources: ["UX-02 0.9", "UX-03 0.9", "PRO-04 0.9 NFR-01/02/04", "CON-02 1.0", "CON-04 1.0", "CON-05 0.9", "Brand direction"],
+    sources: ["UX-02 1.0", "UX-03 0.9", "PRO-04 0.9 NFR-01/02/04", "CON-02 1.0", "CON-04 1.0", "CON-05 0.9", "Brand direction"],
     purpose: ["ກຳນົດ Design Token, Typography, Color, Spacing, Component, State ແລະ Accessibility Contract ເພື່ອໃຫ້ Designer ແລະ Developer ສ້າງຫນ້າຈໍດ້ວຍພາສາດຽວກັນ.", "Design System ຕ້ອງຮອງຮັບພາສາລາວ, ຕົວເລກກີບ, ຂໍ້ຄວາມຍາວ, full-screen media, low-bandwidth fallback ແລະ keyboard/screen-reader behavior. ສີບໍ່ຄວນເປັນວິທີດຽວໃນການບອກ State."],
     sections: [
       { title: "Foundations ແລະ Tokens", intro: "Token ໃຊ້ semantic name ເພື່ອປ່ຽນ theme ໄດ້ໂດຍບໍ່ແກ້ component ທຸກອັນ.", headers: ["Token group", "Baseline", "Usage", "ກົດ"], rows: [
@@ -504,7 +521,7 @@ const specs: Record<string, DocumentSpec> = {
     code: "UX-05", title: "ການອອກແບບ UX/UI ສົມບູນ", english: "Full UX/UI Design", owner: "Product Designer / Frontend Lead",
     version: "0.5", status: "pending", statusLabel: "Handoff contract ພ້ອມ · Final Design ຍັງບໍ່ສຳເລັດ",
     approvalNote: "ສະບັບ 0.5 ກຳນົດວ່າ Final Design Package ຕ້ອງມີຫຍັງ; ມັນຍັງບໍ່ແມ່ນ Final Screen ທີ່ອະນຸມັດ. Designer ສາມາດເລີ່ມ Happy path ໄດ້ ແຕ່ UX-05 ຫ້າມຂຶ້ນ 1.0 ຈົນ UX test, system states, technical constraints ແລະ sign-off evidence ຄົບ.",
-    sources: ["UX-01 1.0", "UX-02 0.9", "UX-03 0.9", "UX-04 0.9", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-03 0.9", "CON-04 1.0", "CON-05 0.9", "TEC-01/02 pending"],
+    sources: ["UX-01 1.0", "UX-02 1.0", "UX-03 0.9", "UX-04 0.9", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-03 0.9", "CON-04 1.0", "CON-05 0.9", "TEC-01/02 pending"],
     purpose: ["ກຳນົດຂອບເຂດ Final Screen, Responsive Behavior, System State, Prototype Link, Asset ແລະ Developer Handoff ທີ່ຕ້ອງຄົບກ່ອນເລີ່ມ Frontend implementation.", "UX-05 ບໍ່ຄວນຖືກອະນຸມັດຈາກ Happy-path screen ເທົ່ານັ້ນ. Loading, Empty, Error, Stale, Sponsored, Permission, Conflict ແລະ External Fallback ຕ້ອງຖືກອອກແບບ ແລະຜູກກັບ Requirement/Screen ID."],
     sections: [
       { title: "Final Screen Inventory", intro: "Screen ທີ່ລະບຸເປັນ Must ຕ້ອງມີ mobile final design, responsive rule, state set ແລະ annotation.", headers: ["Screen ID", "Screen", "Priority", "Required deliverables"], rows: [
@@ -551,7 +568,7 @@ const specs: Record<string, DocumentSpec> = {
         ["Review record", "open issue, deviation, approval", "Product Owner", "signed version baseline"]
       ]},
       { title: "Approval Gates ແລະ Sign-off", intro: "UX-05 1.0 ແມ່ນຄຳຢືນຢັນວ່າ package ພ້ອມໃຫ້ Developer ສ້າງໂດຍບໍ່ເດົາ. ການມີຮູບ Happy path ສວຍງາມບໍ່ພຽງພໍ.", headers: ["Gate", "ຕ້ອງມີ", "Signer", "ສະຖານະ"], rows: [
-        ["G-UX1 Structure", "UX-01 1.0; UX-02 1.0; screen/route/state traceability", "Product Owner + SA", "UX-01 passed; UX-02 pending visual review"],
+        ["G-UX1 Structure", "UX-01 1.0; UX-02 1.0; screen/route/state traceability", "Product Owner + SA", "Passed · UX-01/02 1.0"],
         ["G-UX2 Evidence", "UX-03 1.0; session/task/finding/retest records; pass thresholds", "Research Lead + Product Owner", "Pending real-user testing"],
         ["G-UX3 System", "UX-04 1.0; tokens/components/accessibility QA", "Design System Owner + Frontend Lead", "Pending palette/component QA"],
         ["G-UX4 Content/Trust", "PRO-04 1.0; CON-02/04 1.0; UI-impact decisions from CON-01/03/05", "Content/Trust Owner", "Partially pending"],

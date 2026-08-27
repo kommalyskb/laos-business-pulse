@@ -1,0 +1,6 @@
+participant_id,target_cohort,uses_social_to_find_places,uses_search_or_map_to_find_places,smartphone_confidence,is_place_owner,eligible,consent_to_contact,scheduled_at,device_note,recruiter_note
+F-01,frequent_social_searcher,,,,,,,,,
+F-02,frequent_social_searcher,,,,,,,,,
+F-03,search_map_first,,,,,,,,,
+F-04,low_confidence_digital_user,,,,,,,,,
+F-05,place_owner,,,,,,,,,
