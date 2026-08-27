@@ -491,19 +491,29 @@ const specs: Record<string, DocumentSpec> = {
 
   "design-system": {
     code: "UX-04", title: "ລະບົບການອອກແບບ", english: "Design System", owner: "Design System Owner / Frontend Lead",
-    version: "0.9", status: "pending", statusLabel: "Token/Prototype QA ຜ່ານ · ລໍ Assistive Tech ແລະ Admin States",
-    approvalNote: "ການກວດຮອບວັນທີ 27 ສິງຫາ 2026 ຢືນຢັນຄູ່ສີ semantic ທີ່ກຳນົດ, touch target, focus-visible, consent dialog/inert background ແລະ reduced-motion rule. ພົບວ່າສີຂາວເທິງ Accent #F27A45 ມີ contrast 2.75:1 ຈຶ່ງຫ້າມໃຊ້ ແລະກຳນົດ on_accent #17221F ທີ່ 5.95:1. UX-04 ຍັງຄົງ 0.9 ຈົນກວ່າ VoiceOver/NVDA, Lao text 200% ແລະ full component/admin states ຈະຜ່ານ.",
-    sources: ["UX-02 1.2", "UX-03 0.9.2", "PRO-04 0.9 NFR-01/02/04", "CON-02 1.0", "CON-04 1.0", "CON-05 0.9", "Brand direction"],
-    purpose: ["ກຳນົດ Design Token, Typography, Color, Spacing, Component, State ແລະ Accessibility Contract ເພື່ອໃຫ້ Designer ແລະ Developer ສ້າງຫນ້າຈໍດ້ວຍພາສາດຽວກັນ.", "Design System ຕ້ອງຮອງຮັບພາສາລາວ, ຕົວເລກກີບ, ຂໍ້ຄວາມຍາວ, full-screen media, low-bandwidth fallback ແລະ keyboard/screen-reader behavior. ສີບໍ່ຄວນເປັນວິທີດຽວໃນການບອກ State."],
+    version: "0.9.2", status: "pending", statusLabel: "ອະນຸມັດຂອບເຂດ Pilot · ລໍ Accessibility QA ກ່ອນ 1.0",
+    approvalNote: "ວັນທີ 28 ສິງຫາ 2026 Product Owner ອະນຸມັດໃຫ້ UX-04 1.0 ຄຸ້ມຄອງ Guest/Pilot UI, ຂະຫຍາຍ Component Catalog ຕາມ Prototype R2.1, ສ້າງ Component Gallery, ຮັກສາ Noto Sans Lao ແລະ Palette ປັດຈຸບັນ. Admin Design System ຖືກແຍກເປັນ UX-04.1 ແລະບໍ່ຂວາງ Pilot. ສະບັບນີ້ຍັງເປັນ 0.9.2 ຈົນກວ່າ VoiceOver, Keyboard, Lao text 200%, Reduced Motion ແລະ State ຂອງ Pilot Component ຈະຜ່ານການທົດສອບຈິງ.",
+    sources: ["UX-02 1.2", "UX-03 0.9.2", "Prototype R2.1", "PRO-04 0.9 NFR-01/02/04", "CON-02 1.0", "CON-04 1.0", "CON-05 0.9", "Brand direction"],
+    purpose: ["ເອກະສານນີ້ເປັນສັນຍາການອອກແບບສຳລັບ Designer, Developer ແລະຜູ້ກວດຮັບມອບ. ມັນລະບຸຄ່າ Token, ໂຄງສ້າງ Component, ຂໍ້ມູນທີ່ຕ້ອງຮັບ, State, ພຶດຕິກຳ, Responsive Rule ແລະເກນ Accessibility ເພື່ອບໍ່ໃຫ້ແຕ່ລະໜ້າຖືກສ້າງຄົນລະແບບ.", "UX-04 1.0 ຈຳກັດສະເພາະ Guest Experience ທີ່ຈຳເປັນຕໍ່ Pilot: Discover, Search ແບບ Video/List/Map, Place Page, Review, Menu, Related Place, Contact, Consent ແລະ Feedback State. Admin Component ຈະຈັດທຳໃນ UX-04.1 ເມື່ອເລີ່ມ Admin UI.", "Design System ຕ້ອງຮອງຮັບພາສາລາວ, ຕົວເລກກີບ, ຂໍ້ຄວາມຍາວ, Full-screen Media, Low-bandwidth Fallback, Keyboard ແລະ Screen Reader. ສີບໍ່ສາມາດເປັນວິທີດຽວໃນການບອກ State."],
     sections: [
-      { title: "Foundations ແລະ Tokens", intro: "Token ໃຊ້ semantic name ເພື່ອປ່ຽນ theme ໄດ້ໂດຍບໍ່ແກ້ component ທຸກອັນ.", headers: ["Token group", "Baseline", "Usage", "ກົດ"], rows: [
+      { title: "ຂອບເຂດ UX-04 1.0 ແລະ UX-04.1", intro: "ການແຍກຂອບເຂດນີ້ເຮັດໃຫ້ທີມປິດ Guest Experience ສຳລັບ Pilot ໄດ້ໂດຍບໍ່ລໍ Admin UI ທີ່ຍັງບໍ່ເລີ່ມພັດທະນາ.", headers: ["ຂອບເຂດ", "ລວມຫຍັງ", "ບໍ່ລວມຫຍັງ", "ເງື່ອນໄຂປິດ"], rows: [
+        ["UX-04 1.0 · Pilot Guest", "Discover; Video/List/Map Search; Place Page; Review Video; Menu; Related Place; Map/Call/Message/Share; Consent; Loading/Empty/Error", "Admin Queue, Data Editor, Moderation Decision, Audit Timeline", "Pilot Component ຄົບ State ແລະຜ່ານ Accessibility Gate"],
+        ["UX-04.1 · Admin", "AdminField, QueueRow, Readiness Checklist, Decision Panel, Conflict Resolution, Audit Timeline", "ບໍ່ປ່ຽນ Guest Token ໂດຍບໍ່ມີ Change Request", "ຈັດທຳເມື່ອ Admin UI ເຂົ້າ Development Plan"],
+        ["Shared contract", "Typography, Semantic Color, Spacing, Focus, Motion, Error Language", "Admin ບໍ່ສາມາດສ້າງ Palette ອີກຊຸດໂດຍບໍ່ມີເຫດຜົນ", "Token Change ຕ້ອງມີຜົນກະທົບ ແລະ Product Owner ອະນຸມັດ"]
+      ], note: "ການເລື່ອນ Admin ໄປ UX-04.1 ບໍ່ໝາຍຄວາມວ່າຕັດ Admin ອອກຈາກ Product; ມັນໝາຍເຖິງ Admin State ບໍ່ແມ່ນເງື່ອນໄຂຂວາງ UX-04 1.0 ສຳລັບ Pilot."},
+      { title: "Foundations ແລະ Design Tokens", intro: "Token ແມ່ນຊື່ກາງຂອງຄ່າອອກແບບ. Developer ຕ້ອງເອີ້ນໃຊ້ Token ແທນການກຳນົດສີ, ຂະໜາດ ຫຼື Animation ໃໝ່ໃນແຕ່ລະໜ້າ.", headers: ["Token group", "Baseline", "Usage", "ກົດ"], rows: [
         ["Typography", "Noto Sans Lao Variable; system sans fallback", "Lao/English UI and documents", "ທົດສອບ ປ/ຜ/ຝ, ວັນນະຍຸດ ແລະ line-height"],
         ["Type scale", "12, 14, 16, 20, 24, 32", "caption → body → heading", "Body mobile ≥16px ສຳລັບຂໍ້ຄວາມອ່ານ"],
         ["Spacing", "4px base: 4/8/12/16/24/32/48", "gap, padding, layout", "ຫ້າມ arbitrary spacing ໂດຍບໍ່ມີ token"],
         ["Radius", "4/8/12/full", "input/card/sheet/chip", "Media edge ແລະ action hierarchy ຕ້ອງຄົງທີ່"],
-        ["Elevation", "0/1/2/overlay", "sticky action, sheet, modal", "ບໍ່ໃຊ້ shadow ເປັນ boundary ດຽວ"]
+        ["Icon", "16/20/24/28px", "inline/status/navigation/action", "Icon-only Action ຕ້ອງມີ Accessible Name ແລະ Target 44px"],
+        ["Media ratio", "9:16 / 4:3 / 1:1", "Full video / card / thumbnail", "ຮັກສາອັດຕາສ່ວນ; ຫ້າມບີບຮູບ"],
+        ["Responsive", "0 / 768 / 1024 / 1440px", "Mobile / Tablet / Desktop / Wide", "ອອກແບບ Mobile ກ່ອນ; Content width ສູງສຸດ 1120px"],
+        ["Layer", "0 / 10 / 20 / 30 / 40", "base/sticky/overlay/modal/toast", "Consent Modal ຕ້ອງຢູ່ເໜືອ Navigation ແລະປິດ Background Interaction"],
+        ["Motion", "120/200/320ms", "feedback/transition/large transition", "Reduce Motion ປິດ non-essential animation, smooth scroll ແລະ auto-advance"],
+        ["Focus/Skeleton", "3px ring + 2px offset; neutral loading pair", "Keyboard focus ແລະ loading placeholder", "Focus ຫ້າມຖືກ clip; Skeleton ຫ້າມສື່ຄວາມໝາຍແທນ label"]
       ]},
-      { title: "Semantic Color", intro: "ຄ່າສີສຸດທ້າຍຕ້ອງຜ່ານ contrast test ກັບ text/icon/state. ຕາຕະລາງນີ້ກຳນົດ role ກ່ອນກຳນົດ hex final.", headers: ["Role", "Draft value", "Usage", "Accessibility rule"], rows: [
+      { title: "Semantic Color", intro: "Palette ປັດຈຸບັນຖືກອະນຸມັດໃຫ້ໃຊ້ຕໍ່ໃນ Pilot. ຊື່ສີບອກໜ້າທີ່ຂອງມັນ; Developer ບໍ່ຄວນອ້າງສີດ້ວຍຊື່ທາງກາຍະພາບເຊັ່ນ orange ຫຼື green ໃນ Component API.", headers: ["Role", "Approved value", "Usage", "Accessibility rule"], rows: [
         ["Surface / inverse", "#FFFDF8 / #101928", "page, media overlay, admin", "text contrast ≥4.5:1"],
         ["Primary", "#17644F", "primary action, active state", "ມີ label/icon; focus visible"],
         ["Accent", "#F27A45 + on-accent #17221F", "highlight, selected marker", "ຫ້າມໃຊ້ສີຂາວເທິງ Accent; ຄູ່ທີ່ອະນຸມັດ = 5.95:1"],
@@ -511,52 +521,78 @@ const specs: Record<string, DocumentSpec> = {
         ["Success/Warning/Error", "surface + text tokens ແຍກຄູ່", "validation, trust, failure", "ທຸກຄູ່ ≥7.74:1; icon + text + color"],
         ["Sponsored", "distinct disclosure token", "commercial label", "ຕ້ອງອ່ານຄຳວ່າ Sponsored/ໂຄສະນາ"]
       ]},
-      { title: "Component Catalog", intro: "Component ແຕ່ລະອັນຕ້ອງມີ variant, state, keyboard behavior, accessible name ແລະ analytics hook ເມື່ອຈຳເປັນ.", headers: ["Component", "Variants", "Required states", "Contract"], rows: [
-        ["Button / Icon button", "primary, secondary, ghost, destructive", "default, hover, focus, pressed, disabled, loading", "min touch target 44×44; accessible name"],
-        ["Search field", "default, with suggestions", "idle, typing, loading, error", "label, clear, submit, keyboard"],
-        ["Filter chip/sheet", "single/multi, removable", "selected, disabled, count", "announce selection; clear all"],
-        ["Place card", "list, feed overlay, related", "organic, sponsored, stale, unavailable", "canonical click area; trust/disclosure"],
-        ["Media frame", "embed, poster, fallback", "loading, playing, muted, error", "no dead end; source action"],
-        ["Trust badge", "checked info, partner, sponsored, stale", "normal/tooltip/detail", "ໃຊ້ຄຳຕາມ CON-02/05; badge text must not overclaim"],
-        ["Toast/alert/empty", "success, info, warning, error", "persistent/dismissible", "critical message not auto-dismiss"],
-        ["Admin data field", "text/select/location/hours/source", "dirty, valid, invalid, conflict", "before/after + reason + audit"]
+      { title: "Pilot Component Catalog", intro: "ລາຍການນີ້ກົງກັບ Prototype R2.1. ແຕ່ລະ Component ຕ້ອງອ້າງ Place ID ຫຼື Search State ດຽວກັນ ເພື່ອບໍ່ໃຫ້ Video, List ແລະ Map ສະແດງຂໍ້ມູນຂັດກັນ.", headers: ["ID / Component", "ໜ້າທີ່", "ຂໍ້ມູນ/ສ່ວນປະກອບ", "ພຶດຕິກຳ ແລະເກນຮັບມອບ"], rows: [
+        ["DS-C01 · SearchField", "ຮັບຄຳຄົ້ນພາສາລາວ/ອັງກິດ ແລະສະເໜີ Intent", "label, value, suggestions, loading, error, clear, submit", "Enter ຄົ້ນຫາ; Escape ປິດ Suggestion; Arrow Key ເລືອກ; Clear ແລ້ວ Focus ກັບຄືນ; ປຸ່ມ ≥44px"],
+        ["DS-C02 · IntentSuggestionChip", "ແປຄວາມຕ້ອງການເຊັ່ນງົບ, ເຂດ ຫຼືໂອກາດເປັນ Search Constraint", "label, constraint_id, selected, disabled", "ເລືອກແລ້ວອັບເດດຜົນ ແລະປະກາດ Result Count; State ບໍ່ອາໄສສີຢ່າງດຽວ"],
+        ["DS-C03 · SearchViewSwitcher", "ປ່ຽນຜົນຊຸດດຽວລະຫວ່າງ Video/List/Map", "active_view, available_views, result_count", "ບໍ່ລຶບ Query/Filter; ບອກ Active View ດ້ວຍ Text/State ແລະ Keyboard ໃຊ້ໄດ້"],
+        ["DS-C04 · VideoResultCard", "ສະແດງ Review-led Result ພ້ອມຂໍ້ມູນພໍໃຫ້ເປີດ Place Page", "poster/video, source, place, district, price, trust, sponsored", "Video ຜິດພາດຕ້ອງມີ Poster, ຄຳອະທິບາຍ ແລະ Recovery Action; Sponsored/Source ເຫັນກ່ອນກົດ"],
+        ["DS-C05 · MapResult", "ເຊື່ອມ Marker ເຂົ້າກັບ Canonical Place", "place_id, coordinates, name, summary, selected", "Marker ເປີດ Summary; Card ເປີດ Place; ຕ້ອງມີ List ທີ່ Keyboard ເຂົ້າເຖິງແທນ Map"],
+        ["DS-C06 · PlaceHero/ActionBar", "ສະແດງຕົວຕົນ Place ແລະ Map/Call/Message/Share", "name, category, hero, address, actions, checked_at", "Action ທີ່ບໍ່ມີຫ້າມປອມເປັນປຸ່ມໃຊ້ໄດ້; Core Fact ຕ້ອງເຫັນໄດ້ໂດຍບໍ່ຫຼິ້ນ Media"],
+        ["DS-C07 · ReviewVideoRail", "ຮວບຮວມລິ້ງ Review ອິດສະຫຼະໂດຍຮັກສາ Attribution", "source_url, poster, creator, platform, published_at, rights_state", "ເປີດ Original Source; Content ຫາຍຕ້ອງມີ Fallback; ຫ້າມເຮັດໃຫ້ເຂົ້າໃຈວ່າ Platform ເປັນເຈົ້າຂອງ Review"],
+        ["DS-C08 · DecisionSummaryCard", "ສະຫຼຸບລາຄາ, ເວລາ, ເຂດ ແລະຄວາມເໝາະສົມ", "price, hours_state, district/distance, suitable_for, checked_at", "Unknown/Stale ຕ້ອງຂຽນຕາມຈິງ; ຫ້າມຕີຄວາມ Unknown ເປັນ Closed ຫຼື Unavailable"],
+        ["DS-C09 · MenuItemCard", "ສະແດງຮູບ, ຊື່, ລາຄາ ແລະວັນກວດຂອງລາຍການ", "item_name, price_kip, image_optional, source, checked_at", "ບໍ່ມີຮູບໃຊ້ Neutral Placeholder; ບໍ່ຮູ້ລາຄາຂຽນວ່າບໍ່ຮູ້ ບໍ່ໃຊ້ 0 ກີບ; ຮູບມີ Alt Text"],
+        ["DS-C10 · RelatedPlaceCard", "ສະເໜີ Place ທີ່ຄ້າຍກັນຈາກ Category/ເຂດ/ລາຄາ", "place_id, name, reason_label, image, price, checked_at", "ຕ້ອງສະແດງເຫດຜົນທີ່ຄ້າຍ; Sponsored ແຍກຈາກ Organic Similarity"],
+        ["DS-C11 · TrustAndDisclosure", "ອະທິບາຍ Source, Checked Date, Partner, Sponsored ແລະ Stale", "trust_type, label, detail, source, checked_at", "Partner ບໍ່ໝາຍເຖິງດີທີ່ສຸດ/Verified; Sponsored ຕ້ອງອ່ານໄດ້ ແລະໃຊ້ຄຳຕາມ CON-02/05"],
+        ["DS-C12 · FeedbackState", "ຈັດການ Loading, Empty, Error ແລະ Recovery ໃນຮູບແບບດຽວກັນ", "state, title, explanation, recovery_action, priority", "Critical Error ບໍ່ Auto-dismiss; Retry ຮັກສາ Context; State Change ປະກາດຜ່ານ Live Region"]
       ]},
-      { title: "Accessibility ແລະ Quality Gate", intro: "Accessibility ເປັນ Acceptance Gate ບໍ່ແມ່ນ polish ພາຍຫຼັງ.", headers: ["Area", "Requirement", "Verification", "Blocker"], rows: [
+      { title: "Component Specification Contract", intro: "ທຸກ Component ໃນ Code ຕ້ອງມີ Specification ກ່ອນຖືວ່າພ້ອມສຳລັບ Development. ຂໍ້ກຳນົດນີ້ປ້ອງກັນການສ້າງ Component ທີ່ເບິ່ງຄ້າຍ Prototype ແຕ່ຂາດ Behavior ຫຼື Error Handling.", headers: ["ຫົວຂໍ້", "ຕ້ອງລະບຸ", "ຕົວຢ່າງ", "Definition of ready"], rows: [
+        ["Purpose/Anatomy", "ໜ້າທີ່ ແລະສ່ວນປະກອບພາຍໃນ", "MenuItemCard = image + name + price + checked date", "ຜູ້ອ່ານຮູ້ວ່າ Component ແກ້ບັນຫາຫຍັງ"],
+        ["Data contract", "Field ບັງຄັບ, Field ບໍ່ບັງຄັບ, format ແລະ source", "price_kip ເປັນຈຳນວນ; image ບໍ່ບັງຄັບ", "Missing Data ມີກົດສະແດງ; Developer ບໍ່ຕ້ອງເດົາ"],
+        ["Variant/State", "default, loading, empty, error, disabled, sponsored, stale ທີ່ກ່ຽວຂ້ອງ", "Video Error ມີ Poster + Open Source", "ທຸກ State ມີຕົວຢ່າງ ແລະ Recovery"],
+        ["Interaction", "Click, keyboard, focus, external destination, announcement", "Escape ປິດ Suggestion; Focus ກັບ SearchField", "Mouse, Touch ແລະ Keyboard ຈົບ Core Task ໄດ້"],
+        ["Responsive", "ການຈັດວາງທີ່ 360/390/768/1024/1440px", "Menu 1 column → 2 columns; ActionBar sticky on mobile", "ບໍ່ clip ແລະບໍ່ມີ Horizontal Scroll ທີ່ບໍ່ຕັ້ງໃຈ"],
+        ["Accessibility", "semantic role, label, alt text, focus, contrast, live region", "Sponsored ມີ Text Label; ບໍ່ອາໄສສີ", "ກວດ Keyboard/VoiceOver/Lao 200% ໄດ້"],
+        ["Analytics hook", "Event ສະເພາະ Action ທີ່ຢູ່ໃນ DEL-04", "map_click, call_click, source_open", "ຫ້າມເກັບຂໍ້ມູນນອກ Consent/Privacy Scope"]
+      ]},
+      { title: "State Coverage Matrix", intro: "State ແມ່ນສະພາບທີ່ຜູ້ໃຊ້ພົບຂະນະໃຊ້ງານ. ຖ້າອອກແບບສະເພາະ Default, Developer ຈະຕ້ອງເດົາໜ້າ Loading ຫຼື Error ເອງ.", headers: ["State", "ຄວາມໝາຍ", "ການສະແດງ", "Recovery/Acceptance"], rows: [
+        ["Default", "ຂໍ້ມູນພ້ອມ ແລະ Action ໃຊ້ໄດ້", "ສະແດງ Core Content ແລະ Primary Action", "ຈົບ Task ໄດ້ໂດຍບໍ່ຕ້ອງອ່ານຄູ່ມື"],
+        ["Loading", "ກຳລັງຮັບຂໍ້ມູນ", "Skeleton ຕາມຮູບຮ່າງ; ບອກວ່າກຳລັງໂຫຼດ", "ບໍ່ຍ້າຍ Focus, ບໍ່ລົບ Query, ບໍ່ກະພິບຮຸນແຮງ"],
+        ["Empty", "ລະບົບທຳງານແຕ່ບໍ່ພົບຂໍ້ມູນ", "ອະທິບາຍວ່າບໍ່ພົບ ແລະສະເໜີປ່ຽນ Query/Filter", "ບໍ່ໃຊ້ຄຳຄື Error; Clear Filter ໄດ້"],
+        ["Error", "Request ຫຼື Media ລົ້ມເຫຼວ", "ບອກສິ່ງທີ່ເກີດໂດຍບໍ່ເປີດເຜີຍ Technical Detail", "ມີ Retry/Fallback; Context ຍັງຢູ່; Critical Error ບໍ່ຫາຍເອງ"],
+        ["Disabled/Unavailable", "Action ບໍ່ສາມາດໃຊ້ໃນສະພາບນັ້ນ", "Disabled ເມື່ອຜູ້ໃຊ້ຕ້ອງຮູ້ວ່າ Action ມີ; ອື່ນໆໃຫ້ຊ່ອນ", "ຖ້າສະແດງຕ້ອງມີເຫດຜົນ; Contrast ຍັງອ່ານໄດ້"],
+        ["Sponsored", "ລາຍການຈ່າຍຄ່າ Placement", "ປ້າຍ ‘Sponsored · ໂຄສະນາ’ ເຫັນກ່ອນ Action", "ບໍ່ປ່ຽນ Rating/Trust; Screen Reader ອ່ານປ້າຍໄດ້"],
+        ["Stale/Unknown", "ຂໍ້ມູນເກີນ Freshness ຫຼືຍັງບໍ່ມີຫຼັກຖານ", "ລະບຸວັນກວດ ແລະຄຳວ່າຂໍ້ມູນອາດປ່ຽນ/ຍັງບໍ່ຮູ້", "ບໍ່ເດົາຄ່າ; ມີ Report/Contact ເມື່ອເໝາະສົມ"]
+      ]},
+      { title: "Accessibility ແລະ Quality Gate", intro: "Accessibility ເປັນເງື່ອນໄຂຮັບມອບ ບໍ່ແມ່ນການຕົບແຕ່ງພາຍຫຼັງ. VoiceOver ເປັນ Screen Reader Baseline ສຳລັບ Pilot; NVDA ຕ້ອງກວດກ່ອນເປີດໃຊ້ວົງກວ້າງ.", headers: ["Area", "Requirement", "Verification", "Blocker"], rows: [
         ["Keyboard", "ທຸກ action ເຂົ້າໄດ້; logical focus order", "manual + automated", "focus trap/lost focus"],
-        ["Screen reader", "landmark, heading, label, state announcement", "NVDA/VoiceOver baseline", "unlabeled critical action"],
+        ["Screen reader", "landmark, heading, label, dialog ແລະ state announcement", "VoiceOver ສຳລັບ Pilot; NVDA ກ່ອນ Wider Launch", "unlabeled critical action ຫຼື state ບໍ່ຖືກປະກາດ"],
         ["Contrast", "normal text ≥4.5:1; large ≥3:1", "token audit + UI test", "core text/action fail"],
         ["Touch", "target ≥44×44; spacing prevents mis-tap", "device test", "Map/Call/Message mis-tap risk"],
         ["Motion/media", "respect reduced motion; captions/source fallback where available", "preference test", "autoplay with sound"],
         ["Lao language", "no clipping/overlap at 200% text", "visual/text resize test", "meaning hidden/truncated"]
       ]},
-      { title: "First Vertical Slice ແລະ Change Contract", intro: "Design System ບໍ່ຈຳເປັນສ້າງ component ທຸກອັນກ່ອນເລີ່ມ. ຕ້ອງປິດ component ທີ່ຮອງຮັບ Feed → Place → Action ແລະ Search ກ່ອນ, ແລ້ວຈຶ່ງຂະຫຍາຍໄປ Admin.", headers: ["Order", "Components", "Definition of ready", "Change control"], rows: [
-        ["DS-01 Media/decision", "MediaFrame, PlaceOverlay, ActionBar, TrustBadge", "default/loading/error/fallback/sponsored/stale; touch/keyboard labels", "Designer + Frontend Lead review"],
-        ["DS-02 Search", "SearchField, FilterChip, FilterSheet, PlaceCard, Pagination/Retry", "typing/loading/empty/error/selected/disabled; result disclosure", "Product Designer owns behavior"],
-        ["DS-03 Feedback", "Alert, Toast, EmptyState, ErrorState, Confirmation", "critical message persistent; recovery action; live-region rule", "Accessibility review required"],
-        ["DS-04 Admin", "AdminField, QueueRow, ReadinessChecklist, DecisionPanel, AuditTimeline", "dirty/invalid/conflict/restricted/approved/rejected", "SA + Trust owner review"],
+      { title: "Development Order ແລະ Change Contract", intro: "Developer ຄວນເລີ່ມຈາກ Primitive ແລະ Search/Place Flow ກ່ອນ. Component Gallery ເປັນບ່ອນກວດຕົວຢ່າງ; ບໍ່ແມ່ນ Production Page ແລະບໍ່ສ້າງ Business Logic ແຍກຈາກ Product.", headers: ["Order", "Components/ວຽກ", "Definition of ready", "Change control"], rows: [
+        ["DS-01 Tokens/Primitives", "Typography, Color, Spacing, Icon, Button, Link, Focus, Skeleton", "Token JSON/CSS ກົງກັນ; contrast ຜ່ານ", "Design System Owner + Frontend Lead"],
+        ["DS-02 Search", "SearchField, IntentChip, ViewSwitcher, VideoResult, MapResult", "typing/loading/empty/error/selected/disabled; query ບໍ່ຫາຍເມື່ອປ່ຽນ View", "Product Designer owns behavior"],
+        ["DS-03 Place decision", "PlaceHero, ActionBar, ReviewRail, DecisionSummary, MenuItem, RelatedPlace, TrustDisclosure", "default/loading/error/fallback/sponsored/stale; data contract ກົງ CON-02/05", "Designer + Content/Trust review"],
+        ["DS-04 Feedback/Consent", "Alert, Toast, Empty, Error, Confirmation, Consent Dialog", "critical message persistent; recovery; live region; focus/inert", "Accessibility review required"],
+        ["DS-05 Gallery/QA", "Component Gallery + State selector + viewport/accessibility checklist", "ຕົວຢ່າງ Pilot Component ຄົບ ແລະກວດໄດ້", "Product Owner accepts UX-04 1.0"],
+        ["DS-06 Admin later", "Admin Component ໃນ UX-04.1", "ເລີ່ມຕາມ Development Plan; ບໍ່ຂວາງ Pilot", "SA + Trust owner review"],
         ["Token/component change", "change_id, old/new, rationale, affected screens, migration", "no orphan component; visual/interaction regression checked", "Product Owner approves breaking token/component change"]
-      ], note: "UX-04 1.0 gate: token files ກົງກັບ document, component states ຄົບ, keyboard/screen-reader/touch checks ຜ່ານ, Lao text ບໍ່ clip ທີ່ 200%, ແລະສີ candidate ທຸກຄູ່ທີ່ໃຊ້ຈິງຜ່ານ contrast target."},
-      { title: "Accessibility QA Evidence · 27 Aug 2026", intro: "ຕາຕະລາງນີ້ແຍກສິ່ງທີ່ກວດຜ່ານແລ້ວອອກຈາກສິ່ງທີ່ຍັງຕ້ອງກວດ. ຫ້າມໃຊ້ Internal Browser QA ແທນຜົນ VoiceOver/NVDA.", headers: ["QA ID", "ການກວດ", "ຜົນ", "ສະຖານະ"], rows: [
+      ], note: "UX-04 1.0 gate: token files ກົງກັບ document, Pilot Guest Component ຄົບ State, Keyboard/VoiceOver/Touch/Reduced Motion ຜ່ານ, Lao text ບໍ່ clip ທີ່ 200%, ແລະຄູ່ສີທີ່ໃຊ້ຈິງຜ່ານ contrast target. Admin State ບໍ່ແມ່ນ Gate ຂອງ UX-04 1.0."},
+      { title: "Accessibility QA Evidence · 28 Aug 2026", intro: "ຕາຕະລາງນີ້ແຍກສິ່ງທີ່ກວດຜ່ານແລ້ວອອກຈາກສິ່ງທີ່ຍັງຕ້ອງກວດ. ຫ້າມນັບ Browser QA ຫຼືການມີ Code ເປັນຫຼັກຖານວ່າ Manual Accessibility Test ຜ່ານ.", headers: ["QA ID", "ການກວດ", "ຜົນ", "ສະຖານະ"], rows: [
         ["A11Y-01", "11 semantic text/background pairs", "ຜ່ານ 4.5:1 ສຳລັບ normal text; focus pair ຜ່ານ 3:1", "Passed"],
         ["A11Y-02", "White on Accent", "2.75:1 ບໍ່ຜ່ານ; ແກ້ໂດຍຫ້າມຄູ່ນີ້ ແລະໃຊ້ dark on-accent", "Resolved by token rule"],
         ["A11Y-03", "Consent keyboard/assistive structure", "role=dialog, aria-modal, labelled title, initial focus ແລະ background inert", "Passed internal browser retest"],
         ["A11Y-04", "Focus-visible ແລະ touch", "focus outline 3px; core Mobile action ≥44px", "Passed for Prototype scope"],
-        ["A11Y-05", "Reduced motion", "CSS preference ປິດ long animation/transition ແລະ smooth scroll", "Implemented; browser retest required"],
-        ["A11Y-06", "Lao text 200%", "ຕ້ອງກວດ Feed/Search/Place/Consent ບໍ່ clip ຫຼືເຊື່ອງຄວາມໝາຍ", "Pending"],
-        ["A11Y-07", "VoiceOver/NVDA", "ຕ້ອງກວດ landmark, heading, label, dialog ແລະ status announcement ດ້ວຍ assistive tech ຈິງ", "Pending"],
-        ["A11Y-08", "Admin/full component states", "default/hover/focus/pressed/disabled/loading/error/conflict ຂອງທຸກ Must component", "Pending"]
+        ["A11Y-05", "Reduced motion", "Token Contract ປິດ non-essential animation, smooth scroll ແລະ auto-advance", "Implemented; manual retest pending"],
+        ["A11Y-06", "Lao text 200%", "ຕ້ອງກວດ Discover/Search/Place/Consent/Gallery ບໍ່ clip ຫຼືເຊື່ອງຄວາມໝາຍ", "Pending · blocks 1.0"],
+        ["A11Y-07", "VoiceOver", "ກວດ landmark, heading, label, dialog ແລະ status announcement ດ້ວຍ VoiceOver ຈິງ", "Pending · blocks 1.0"],
+        ["A11Y-08", "NVDA", "ກວດ Windows Screen Reader ກ່ອນ Public/Wider Launch", "Deferred · does not block Pilot 1.0"],
+        ["A11Y-09", "Pilot Guest Component States", "Default/Loading/Empty/Error/Disabled/Sponsored/Stale ຕ້ອງກວດໃນ Gallery ແລະ Product Flow", "Pending · blocks 1.0"],
+        ["A11Y-10", "Admin Component States", "ຈັດທຳໃນ UX-04.1 ເມື່ອ Admin UI ເຂົ້າ Development", "Deferred · does not block Pilot 1.0"]
       ]}
     ],
-    review: ["ອະນຸມັດ Noto Sans Lao Variable ເປັນ primary font ຫຼືບໍ່?", "ອະນຸມັດ draft palette ຫຼືຕ້ອງມີ brand exploration ກ່ອນ?", "Component ໃດຕ້ອງສ້າງກ່ອນ First Vertical Slice?", "Accessibility baseline ຈະຍຶດ WCAG 2.2 AA ເປັນ internal target ຫຼືບໍ່?", "ໃຜເປັນ Design System Owner ແລະຜູ້ອະນຸມັດ token/component change?"],
-    reviewDecisions: ["ອະນຸມັດ Noto Sans Lao Variable ເປັນ primary font; system sans ເປັນ fallback.", "ຄູ່ສີ semantic ທີ່ລະບຸໃນ token 0.9.1 ຜ່ານ contrast QA. ຫ້າມ white/accent ເພາະ 2.75:1; ຕ້ອງໃຊ້ on_accent #17221F ທີ່ 5.95:1. Palette ຍັງບໍ່ຂຶ້ນ Final ຈົນ full component QA ຄົບ.", "ລຳດັບທຳອິດ: MediaFrame, PlaceOverlay, ActionBar, SearchField, FilterSheet/Chip, PlaceCard, TrustBadge, Feedback states ແລະ AdminField.", "ອະນຸມັດ WCAG 2.2 AA ເປັນ internal target; ຕ້ອງທົດສອບ keyboard, screen reader, contrast, touch target, reduced motion ແລະ Lao 200% text.", "Product Designer/Product Owner ເປັນ Design System Owner ໃນ Pilot; Frontend Lead ກວດ implementation impact; Product Owner ອະນຸມັດ breaking token/component change."],
-    artifacts: [{ label: "ux-design-tokens.json", path: "/templates/ux-design-tokens.json", description: "Token source 0.9.1 ທີ່ເພີ່ມ on-color, success, warning, error, disabled ແລະ usage rule ຫຼັງ contrast QA." }, { label: "ux-design-tokens.css", path: "/templates/ux-design-tokens.css", description: "CSS custom properties ທີ່ກົງກັບ token 0.9.1 ແລະຫ້າມ white-on-accent." }, { label: "ux-accessibility-qa.json", path: "/templates/ux-accessibility-qa.json", description: "ຫຼັກຖານ contrast ratio, resolved failure ແລະ remaining gate ກ່ອນ UX-04 1.0." }]
+    review: ["UX-04 1.0 ຄວນຄຸ້ມຄອງ Guest/Pilot UI ແລະແຍກ Admin UI ໄປ UX-04.1 ຫຼືບໍ່?", "ອະນຸມັດເພີ່ມ Component Catalog ໃຫ້ຄົບຕາມ Prototype R2.1 ຫຼືບໍ່?", "ອະນຸມັດສ້າງ Component Gallery ທີ່ພຣີວິວ ແລະປ່ຽນ State ໄດ້ຫຼືບໍ່?", "ຈະຮັກສາ Noto Sans Lao ແລະ Palette ປັດຈຸບັນໃນ Pilot ຫຼືເລີ່ມ Brand Exploration ໃໝ່?", "ອະນຸມັດ VoiceOver, Keyboard, Lao 200%, Reduced Motion ແລະ Contrast ເປັນ Gate ກ່ອນ UX-04 1.0 ຫຼືບໍ່?"],
+    reviewDecisions: ["ອະນຸມັດ Guest/Pilot UI ເປັນຂອບເຂດ UX-04 1.0; Admin UI ແຍກເປັນ UX-04.1 ແລະບໍ່ຂວາງ Pilot.", "ອະນຸມັດ 12 Pilot Component Specifications ຕາມ Prototype R2.1 ແລະຕ້ອງມີ Data, Behavior, Responsive, State ແລະ Acceptance Contract.", "ອະນຸມັດ Component Gallery ເປັນ Web Documentation ສຳລັບກວດ Token, Component ແລະ State; ບໍ່ແມ່ນໜ້າໂຄສະນາ ຫຼື Production Product.", "ອະນຸມັດ Noto Sans Lao Variable ເປັນ Primary Font ແລະຮັກສາ Semantic Palette ປັດຈຸບັນ. ຫ້າມ White on Accent; ໃຊ້ on_accent #17221F.", "ອະນຸມັດ WCAG 2.2 AA Internal Target; VoiceOver, Keyboard, Lao 200%, Reduced Motion, Touch ແລະ Contrast ຂອງ Pilot Flow ຕ້ອງຜ່ານກ່ອນ 1.0. NVDA ຕ້ອງກວດກ່ອນ Wider Launch."],
+    artifacts: [{ label: "Component Gallery", path: "/design-system", action: "open", description: "ໜ້າ Web Documentation ສຳລັບພຣີວິວ Token ແລະສະຫຼັບ Default/Loading/Empty/Error/Disabled/Sponsored/Stale State." }, { label: "ux-component-specifications.json", path: "/templates/ux-component-specifications.json", description: "Machine-readable Contract ຂອງ 12 Pilot Components: Purpose, Required Data, Behavior ແລະ Acceptance." }, { label: "ux-design-tokens.json", path: "/templates/ux-design-tokens.json", description: "Token source 0.9.2: Typography, Color, Spacing, Icon, Media Ratio, Breakpoint, Layer, Motion, Focus ແລະ Skeleton." }, { label: "ux-design-tokens.css", path: "/templates/ux-design-tokens.css", description: "CSS Custom Properties ທີ່ກົງກັບ Token 0.9.2 ແລະ Reduced-motion Contract." }, { label: "ux-accessibility-qa.json", path: "/templates/ux-accessibility-qa.json", description: "ຫຼັກຖານທີ່ຜ່ານ, ລາຍການທີ່ຍັງ Pending ແລະ Gate ທີ່ຂວາງ UX-04 1.0." }]
   },
 
   "full-ux-ui": {
     code: "UX-05", title: "ການອອກແບບ UX/UI ສົມບູນ", english: "Full UX/UI Design", owner: "Product Designer / Frontend Lead",
     version: "0.5", status: "pending", statusLabel: "Handoff contract ພ້ອມ · Final Design ຍັງບໍ່ສຳເລັດ",
     approvalNote: "ສະບັບ 0.5 ກຳນົດວ່າ Final Design Package ຕ້ອງມີຫຍັງ; ມັນຍັງບໍ່ແມ່ນ Final Screen ທີ່ອະນຸມັດ. Designer ສາມາດເລີ່ມ Happy path ໄດ້ ແຕ່ UX-05 ຫ້າມຂຶ້ນ 1.0 ຈົນ UX test, system states, technical constraints ແລະ sign-off evidence ຄົບ.",
-    sources: ["UX-01 1.0", "UX-02 1.2", "UX-03 0.9.2", "UX-04 0.9", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-03 0.9", "CON-04 1.0", "CON-05 0.9", "TEC-01/02 pending"],
+    sources: ["UX-01 1.0", "UX-02 1.2", "UX-03 0.9.2", "UX-04 0.9.2", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-03 0.9", "CON-04 1.0", "CON-05 0.9", "TEC-01/02 pending"],
     purpose: ["ກຳນົດຂອບເຂດ Final Screen, Responsive Behavior, System State, Prototype Link, Asset ແລະ Developer Handoff ທີ່ຕ້ອງຄົບກ່ອນເລີ່ມ Frontend implementation.", "UX-05 ບໍ່ຄວນຖືກອະນຸມັດຈາກ Happy-path screen ເທົ່ານັ້ນ. Loading, Empty, Error, Stale, Sponsored, Permission, Conflict ແລະ External Fallback ຕ້ອງຖືກອອກແບບ ແລະຜູກກັບ Requirement/Screen ID."],
     sections: [
       { title: "Final Screen Inventory", intro: "Screen ທີ່ລະບຸເປັນ Must ຕ້ອງມີ mobile final design, responsive rule, state set ແລະ annotation.", headers: ["Screen ID", "Screen", "Priority", "Required deliverables"], rows: [
@@ -605,7 +641,7 @@ const specs: Record<string, DocumentSpec> = {
       { title: "Approval Gates ແລະ Sign-off", intro: "UX-05 1.0 ແມ່ນຄຳຢືນຢັນວ່າ package ພ້ອມໃຫ້ Developer ສ້າງໂດຍບໍ່ເດົາ. ການມີຮູບ Happy path ສວຍງາມບໍ່ພຽງພໍ.", headers: ["Gate", "ຕ້ອງມີ", "Signer", "ສະຖານະ"], rows: [
         ["G-UX1 Structure", "UX-01 1.0; UX-02 1.2; screen/route/state traceability", "Product Owner + SA", "Passed · UX-01 1.0 / UX-02 1.2"],
         ["G-UX2 Evidence", "UX-03 1.0; session/task/finding/retest records; pass thresholds", "Research Lead + Product Owner", "Pending real-user testing"],
-        ["G-UX3 System", "UX-04 1.0; tokens/components/accessibility QA", "Design System Owner + Frontend Lead", "Pending palette/component QA"],
+        ["G-UX3 System", "UX-04 1.0; tokens/components/accessibility QA", "Design System Owner + Frontend Lead", "Pending VoiceOver/Lao 200%/Pilot state QA"],
         ["G-UX4 Content/Trust", "PRO-04 1.0; CON-02/04 1.0; UI-impact decisions from CON-01/03/05", "Content/Trust Owner", "Partially pending"],
         ["G-UX5 Technical", "TEC-01/02 route, auth, external action, media/fallback constraints mapped", "Technical Lead", "Pending TEC-01/02"],
         ["G-UX6 Final handoff", "final screens, responsive/state variants, assets, copy, annotations, open deviations", "Product Owner + Frontend Lead", "Pending final design"]
@@ -631,7 +667,7 @@ export default function ContentDesignDocument({ slug, basePath }: { slug: string
   const version = spec.version ?? "0.1";
   const isApproved = spec.status === "approved";
   const statusLabel = spec.statusLabel ?? "ຮ່າງສຳລັບທົບທວນ";
-  const documentDate = slug === "ux-ui-wireframe" || slug === "interactive-prototype" ? "28 ສິງຫາ 2026" : spec.version ? "27 ສິງຫາ 2026" : "26 ສິງຫາ 2026";
+  const documentDate = slug === "ux-ui-wireframe" || slug === "interactive-prototype" || slug === "design-system" ? "28 ສິງຫາ 2026" : spec.version ? "27 ສິງຫາ 2026" : "26 ສິງຫາ 2026";
   const wireframeNumber = spec.sections.length + 3;
   const artifactNumber = wireframeNumber + (spec.wireframes ? 1 : 0);
   const reviewNumber = artifactNumber + (spec.artifacts ? 1 : 0);
@@ -652,7 +688,7 @@ export default function ContentDesignDocument({ slug, basePath }: { slug: string
       <h3>1.1 ປະຫວັດການແກ້ໄຂ</h3>
       <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ສະບັບ</th><th>ວັນທີ</th><th>ລາຍລະອຽດ</th><th>ສະຖານະ</th></tr></thead><tbody>
         <tr><td>0.1</td><td>26 ສິງຫາ 2026</td><td>ຈັດທຳ baseline, policy/matrix ແລະຄຳຖາມສຳລັບການທົບທວນຄັ້ງທຳອິດ</td><td>ຮ່າງ</td></tr>
-        {spec.version ? <tr><td>{version}</td><td>{documentDate}</td><td>{slug === "ux-ui-wireframe" || slug === "interactive-prototype" ? "ບັນທຶກ Founder Review R1/R2, ປັບ Search/Place direction ແລະເພີ່ມຮູບເມນູໃນ Prototype R2.1" : "ບັນທຶກ REV-01 ຫາ REV-05 ແລະປັບ Policy, Threshold ແລະ Ownership ຕາມທີ່ອະນຸມັດ"}</td><td>{statusLabel}</td></tr> : null}
+        {spec.version ? <tr><td>{version}</td><td>{documentDate}</td><td>{slug === "ux-ui-wireframe" || slug === "interactive-prototype" ? "ບັນທຶກ Founder Review R1/R2, ປັບ Search/Place direction ແລະເພີ່ມຮູບເມນູໃນ Prototype R2.1" : slug === "design-system" ? "ອະນຸມັດ Guest/Pilot Scope, ແຍກ Admin UX-04.1, ຂະຫຍາຍ Token/Component Contract ແລະສ້າງ Component Gallery" : "ບັນທຶກ REV-01 ຫາ REV-05 ແລະປັບ Policy, Threshold ແລະ Ownership ຕາມທີ່ອະນຸມັດ"}</td><td>{statusLabel}</td></tr> : null}
       </tbody></table></div>
     </section>
 

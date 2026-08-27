@@ -1,7 +1,7 @@
 {
   "document": "UX-04",
-  "version": "0.9.1",
-  "reviewed_at": "2026-08-27",
+  "version": "0.9.2",
+  "reviewed_at": "2026-08-28",
   "target": "WCAG 2.2 AA internal target",
   "contrast_pairs": [
     { "pair": "text/surface", "ratio": 16.08, "minimum": 4.5, "status": "pass" },
@@ -22,11 +22,12 @@
     "background_inert_while_consent_pending": "passed_browser_retest_390x844",
     "focus_visible": "passed_browser_retest_390x844",
     "core_touch_targets_44px": "passed_390x844",
-    "reduced_motion_css": "implemented_pending_retest",
+    "reduced_motion_css": "implemented_in_token_contract_pending_manual_retest",
     "lao_text_200_percent": "pending_browser_retest",
-    "screen_reader_manual": "pending_voiceover_or_nvda",
-    "full_component_and_admin_states": "pending"
+    "screen_reader_manual": "pending_voiceover_for_pilot; nvda_required_before_wider_launch",
+    "full_pilot_guest_component_states": "pending_component_gallery_qa",
+    "admin_component_states": "deferred_to_ux_04_1_and_not_a_pilot_1_0_blocker"
   },
   "document_status": "in_progress",
-  "remaining_gate": "VoiceOver/NVDA baseline, 200% Lao text verification, and full component/admin state QA are still required before UX-04 1.0."
+  "remaining_gate": "VoiceOver on Pilot journeys, keyboard operation, 200% Lao text verification, reduced-motion retest, and all Pilot guest component states are required before UX-04 1.0. NVDA remains required before wider public launch."
 }

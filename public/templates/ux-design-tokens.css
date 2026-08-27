@@ -17,6 +17,24 @@
   --ux-radius-md: 8px;
   --ux-radius-lg: 12px;
   --ux-radius-pill: 999px;
+  --ux-icon-sm: 16px;
+  --ux-icon-md: 20px;
+  --ux-icon-lg: 24px;
+  --ux-icon-action: 28px;
+  --ux-media-portrait: 9 / 16;
+  --ux-media-landscape: 4 / 3;
+  --ux-media-thumbnail: 1 / 1;
+  --ux-content-width-max: 1120px;
+  --ux-layer-base: 0;
+  --ux-layer-sticky: 10;
+  --ux-layer-overlay: 20;
+  --ux-layer-modal: 30;
+  --ux-layer-toast: 40;
+  --ux-motion-fast: 120ms;
+  --ux-motion-standard: 200ms;
+  --ux-motion-slow: 320ms;
+  --ux-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ux-ease-exit: cubic-bezier(0.4, 0, 1, 1);
   --ux-color-surface: #fffdf8;
   --ux-color-surface-inverse: #101928;
   --ux-color-text: #17221f;
@@ -40,7 +58,20 @@
   --ux-color-muted-text: #61706a;
   --ux-color-border: #cfd8d4;
   --ux-color-focus: #7cc4ff;
+  --ux-color-skeleton: #e6ebe8;
+  --ux-color-skeleton-highlight: #f4f6f5;
+  --ux-media-overlay: linear-gradient(180deg, transparent 35%, rgba(16, 25, 40, 0.88) 100%);
+  --ux-focus-ring-width: 3px;
+  --ux-focus-ring-offset: 2px;
   --ux-touch-target-min: 44px;
 }
 
-/* Contrast QA passed for defined text/background pairs. White on accent is prohibited; use --ux-color-on-accent. */
+/* UX-04 0.9.2. Contrast QA passed for defined text/background pairs. White on accent is prohibited; use --ux-color-on-accent. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

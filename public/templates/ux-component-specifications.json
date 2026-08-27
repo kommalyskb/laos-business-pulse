@@ -1,0 +1,104 @@
+{
+  "document": "UX-04",
+  "version": "0.9.2",
+  "scope": "Pilot guest experience only; Admin components are deferred to UX-04.1.",
+  "required_states": ["default", "loading", "empty", "error", "disabled", "sponsored", "stale"],
+  "components": [
+    {
+      "id": "DS-C01",
+      "name": "SearchField",
+      "purpose": "Capture a Lao or English intent query and let the user submit, clear or choose a suggestion.",
+      "required_data": ["label", "value", "suggestions", "loading", "error_message"],
+      "behavior": "Enter submits; Escape closes suggestions; arrow keys move through suggestions; clear returns focus to the field.",
+      "acceptance": "Has a visible label or accessible name, logical keyboard order, 44px actions and an announced loading/error state."
+    },
+    {
+      "id": "DS-C02",
+      "name": "IntentSuggestionChip",
+      "purpose": "Convert a common decision intent such as budget, district or occasion into a reusable search constraint.",
+      "required_data": ["label", "constraint_id", "selected", "disabled"],
+      "behavior": "Selecting updates the result set and announces the new result count; removal restores the previous constraint.",
+      "acceptance": "Selection is communicated by text/state as well as color and remains understandable at 200% text size."
+    },
+    {
+      "id": "DS-C03",
+      "name": "SearchViewSwitcher",
+      "purpose": "Switch one result set between Video, List and Map without losing the query or filters.",
+      "required_data": ["active_view", "available_views", "result_count"],
+      "behavior": "Keeps search state and scroll context where practical; active view is exposed with aria-pressed or tab semantics.",
+      "acceptance": "The active view is obvious without relying on color and every control is at least 44px."
+    },
+    {
+      "id": "DS-C04",
+      "name": "VideoResultCard",
+      "purpose": "Present a review-led result with enough place facts to decide whether to open the Place Page.",
+      "required_data": ["poster", "source_name", "place_name", "district", "price_band", "trust_state", "sponsored_state"],
+      "behavior": "Opens the canonical Place Page; a failed or missing video shows a poster, explanation and source/place recovery action.",
+      "acceptance": "Never creates a dead end; Sponsored and source attribution are visible before opening the result."
+    },
+    {
+      "id": "DS-C05",
+      "name": "MapResult",
+      "purpose": "Connect a map marker to the same canonical Place record shown in Video and List views.",
+      "required_data": ["place_id", "coordinates", "place_name", "summary", "selected"],
+      "behavior": "Selecting a marker opens its summary card; selecting the card opens the Place Page; keyboard users can reach the equivalent result list.",
+      "acceptance": "Map is not the only route to results and selected state is conveyed by label/shape as well as color."
+    },
+    {
+      "id": "DS-C06",
+      "name": "PlaceHeroAndActionBar",
+      "purpose": "Show the place identity and give immediate Map, Call, Message and Share actions when available.",
+      "required_data": ["place_name", "category", "hero_media", "address", "contact_actions", "checked_at"],
+      "behavior": "Unavailable actions are omitted or explained, never shown as working controls; external actions identify their destination.",
+      "acceptance": "Core facts and checked date remain visible without playing media; action labels are explicit and touch-safe."
+    },
+    {
+      "id": "DS-C07",
+      "name": "ReviewVideoRail",
+      "purpose": "Collect independent review links for one Place while preserving creator attribution and source ownership.",
+      "required_data": ["source_url", "poster", "creator_name", "platform", "published_at", "rights_state"],
+      "behavior": "Opens the original source; unavailable content shows a fallback and does not remove the rest of the Place Page.",
+      "acceptance": "Creator and platform are visible, links are external, and the component does not imply that the Platform owns the review."
+    },
+    {
+      "id": "DS-C08",
+      "name": "DecisionSummaryCard",
+      "purpose": "Summarize the practical facts that influence a go/no-go decision without replacing source evidence.",
+      "required_data": ["price_band", "hours_state", "distance_or_district", "suitable_for", "checked_at"],
+      "behavior": "Unknown and stale values are stated explicitly; it links to the detailed fact or source where available.",
+      "acceptance": "Does not invent a recommendation and never treats Unknown as Closed, Expensive or Unavailable."
+    },
+    {
+      "id": "DS-C09",
+      "name": "MenuItemCard",
+      "purpose": "Help users inspect a real menu item using a photo, name, price and evidence date.",
+      "required_data": ["item_name", "price_kip", "image_optional", "source", "checked_at"],
+      "behavior": "Missing images use a neutral placeholder; unknown prices are written as unknown rather than zero.",
+      "acceptance": "Kip is formatted consistently, the image has useful alt text, and stale price evidence is visibly labelled."
+    },
+    {
+      "id": "DS-C10",
+      "name": "RelatedPlaceCard",
+      "purpose": "Offer a small set of comparable places based on disclosed category, district or price rules.",
+      "required_data": ["place_id", "place_name", "reason_label", "image", "price_band", "checked_at"],
+      "behavior": "Opens the canonical Place Page and keeps Sponsored placement separate from organic similarity.",
+      "acceptance": "The reason for similarity is visible and paid placement is never presented as an organic match."
+    },
+    {
+      "id": "DS-C11",
+      "name": "TrustAndDisclosure",
+      "purpose": "Explain source, checked date, partner status, Sponsored status and stale data without overclaiming verification.",
+      "required_data": ["trust_type", "label", "detail", "source", "checked_at"],
+      "behavior": "A short label opens or reveals a plain-language explanation; the same words follow CON-02 and CON-05.",
+      "acceptance": "Partner does not mean best-rated or verified; Sponsored is always readable and not communicated by color alone."
+    },
+    {
+      "id": "DS-C12",
+      "name": "FeedbackState",
+      "purpose": "Handle loading, empty, error and recovery consistently across Discover, Search and Place.",
+      "required_data": ["state", "title", "explanation", "recovery_action", "status_priority"],
+      "behavior": "Critical errors persist until acknowledged; retry preserves the query or Place context; status changes are announced.",
+      "acceptance": "Every error provides a next action, loading does not trap focus, and empty is not confused with a system failure."
+    }
+  ]
+}
