@@ -1,0 +1,25 @@
+{
+  "document": "UX-04",
+  "version": "0.9",
+  "palette_status": "candidate_pending_contrast_qa",
+  "font": { "primary": "Noto Sans Lao Variable", "fallback": "system-ui, sans-serif", "body_mobile_min_px": 16 },
+  "type_px": { "caption": 12, "small": 14, "body": 16, "title_small": 20, "title": 24, "display": 32 },
+  "space_px": [4, 8, 12, 16, 24, 32, 48],
+  "radius_px": { "small": 4, "medium": 8, "large": 12, "pill": 999 },
+  "color": {
+    "surface": "#FFFDF8",
+    "surface_inverse": "#101928",
+    "text": "#17221F",
+    "text_inverse": "#FFFFFF",
+    "primary": "#17644F",
+    "accent": "#F27A45",
+    "info": "#284B8F",
+    "sponsored_surface": "#FFD09F",
+    "sponsored_text": "#351B06",
+    "border": "#CFD8D4",
+    "focus": "#7CC4FF"
+  },
+  "touch_target_min_px": 44,
+  "viewport_validation_px": [360, 390, 768, 1024, 1440],
+  "accessibility_target": "WCAG 2.2 AA internal target"
+}

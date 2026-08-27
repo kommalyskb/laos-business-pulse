@@ -9,7 +9,7 @@ type MatrixSection = {
 };
 
 type Wireframe = { title: string; screen: string; blocks: string[] };
-type OperationalArtifact = { label: string; path: string; description: string };
+type OperationalArtifact = { label: string; path: string; description: string; action?: "download" | "open" };
 
 type DocumentSpec = {
   code: string;
@@ -308,13 +308,15 @@ const specs: Record<string, DocumentSpec> = {
 
   "information-user-flow": {
     code: "UX-01", title: "ໂຄງສ້າງຂໍ້ມູນ ແລະ User Flow", english: "Information Architecture & User Flow", owner: "Product Designer / System Analyst",
-    sources: ["PRO-01 1.0", "PRO-02 Workflows", "PRO-03 1.0", "CON-01/02 0.1"],
+    version: "1.0", status: "approved", statusLabel: "ອະນຸມັດແລ້ວ",
+    approvalNote: "UX-01 ເປັນ Product-level navigation ແລະ route baseline. TEC-01/02 ຕ້ອງ map architecture/API ໃຫ້ກົງກັບ Screen ID ເຫຼົ່ານີ້; ຖ້າຈະປ່ຽນ route ຫຼື screen boundary ຕ້ອງມີ Change Record ແລະກວດ traceability ຄືນ.",
+    sources: ["PRO-01 1.0", "PRO-02 1.0 Workflows", "PRO-03 1.0", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-04 1.0"],
     purpose: ["ກຳນົດວ່າຜູ້ໃຊ້ພົບຂໍ້ມູນຢູ່ໃສ, ເຄື່ອນຈາກ Discover → Decide → Act ແນວໃດ ແລະລະບົບຕ້ອງຮັກສາ Context ແນວໃດເມື່ອເກີດ Empty, Error ຫຼື External Link fallback.", "MVP ໃຊ້ Guest-first navigation: ຜູ້ໃຊ້ເປີດ Feed, Search ແລະ Place Page ໄດ້ໂດຍບໍ່ສະໝັກ Account. Admin navigation ແຍກຈາກ Public experience ແລະຕ້ອງມີ authentication."],
     sections: [
-      { title: "Navigation Model", intro: "Mobile ໃຊ້ bottom navigation ສຳລັບ 3 destination ຫຼັກ; Desktop ໃຊ້ top/side navigation ແຕ່ຮັກສາຊື່ ແລະລຳດັບດຽວກັນ.", headers: ["Destination", "ຈຸດປະສົງ", "Entry", "ການຮັກສາ Context"], rows: [
+      { title: "Navigation Model", intro: "Pilot ໃຊ້ Discover ແລະ Search ເປັນ Public destination ຫຼັກ. Saved ຖືກອອກແບບໄວ້ເປັນ Should-have ແຕ່ບໍ່ສະແດງໃນ navigation ຈົນກວ່າ local-device save ຈະພ້ອມ. Desktop ແລະ Mobile ຕ້ອງໃຊ້ຊື່ destination ດຽວກັນ.", headers: ["Destination", "ຈຸດປະສົງ", "Entry", "ການຮັກສາ Context"], rows: [
         ["Discover", "Full-screen video-first feed", "Default home/deep link", "ຈື່ feed position ເມື່ອກັບຈາກ Place"],
         ["Search", "ຄົ້ນດ້ວຍ query/filter", "Navigation/search affordance", "ຈື່ query, filter, result position"],
-        ["Saved", "Local-device shortlist", "Bottom nav/place action", "No account; ອະທິບາຍ device-local"],
+        ["Saved", "Local-device shortlist · Should", "ບໍ່ສະແດງໃນ Pilot nav ຈົນ feature ພ້ອມ", "No account; ອະທິບາຍ device-local; ຫ້າມສະແດງ dead navigation"],
         ["Place", "Canonical decision page", "Feed/Search/Saved/deep link", "Back ກັບ entry context"],
         ["Admin", "Manage data/source/case", "Protected URL", "ແຍກ session ແລະ authorization"]
       ]},
@@ -322,7 +324,7 @@ const specs: Record<string, DocumentSpec> = {
         ["J-01 Discover", "Feed → select video/place → Place → Map/Call/Message", "Action ເປີດປາຍທາງຖືກ", "Intent click ບໍ່ເທົ່າ visit/sale"],
         ["J-02 Search", "Search → query/filter → results → Place → action", "ພົບ Place ຫຼືເຫັນ Empty guidance", "Track query category; protect personal text"],
         ["J-03 Source", "Feed/Place → creator/source → external original", "ກັບຫາ original source ໄດ້", "External open only"],
-        ["J-04 Correction", "Place → report correction → external/form → confirmation", "Case/reference received", "No auto-publish"],
+        ["J-04 Correction", "Place → lightweight internal form → confirmation", "Case/reference received", "No auto-publish; ອ້າງ CON-04 intake form"],
         ["J-05 Save/share", "Place → local save/share canonical URL", "ກັບເປີດ Place ໄດ້", "Should scope"]
       ]},
       { title: "Screen Inventory ແລະ Route Contract", intro: "Screen ID ເປັນຕົວອ້າງອີງລະຫວ່າງ UX, Requirement, API ແລະ Test.", headers: ["Screen ID", "Screen", "Route/entry", "ຂໍ້ມູນຫຼັກ"], rows: [
@@ -331,7 +333,7 @@ const specs: Record<string, DocumentSpec> = {
         ["SCR-G03", "Place Detail", "/places/:slug", "canonical place, sources, trust, map/contact"],
         ["SCR-G04", "Saved", "/saved", "device-local saved places"],
         ["SCR-G05", "Consent/Privacy", "entry banner + settings", "essential/analytics choice"],
-        ["SCR-A01", "Admin queue", "/admin", "draft/review/correction/takedown queues"],
+        ["SCR-A01", "Admin home/queue", "/admin", "summary + ແຍກ Place/Data Queue ແລະ Trust/Case Queue"],
         ["SCR-A02", "Place editor", "/admin/places/:id", "fields, sources, readiness, audit"],
         ["SCR-A03", "Case detail", "/admin/cases/:id", "report/evidence/decision/history"]
       ]},
@@ -343,25 +345,29 @@ const specs: Record<string, DocumentSpec> = {
         ["Admin conflict", "ບໍ່ທັບ update; ສະແດງ latest version", "Reload/compare/reapply", "Silent overwrite"]
       ]}
     ],
-    review: ["ອະນຸມັດ bottom navigation: Discover, Search, Saved ຫຼືບໍ່?", "Saved ເປັນ Should ຈະສະແດງໃນ nav ຕັ້ງແຕ່ Pilot ຫຼືລໍ?", "Route naming ແລະ Screen IDs ສອດຄ່ອງກັບ Technical Proposal ຫຼືຕ້ອງປັບ?", "Correction flow ຈະໃຊ້ external channel ຫຼື lightweight form?", "Admin queue ຄວນຮວມຢູ່ໜ້າດຽວ ຫຼືແຍກ Place/Case?"]
+    review: ["ອະນຸມັດ bottom navigation: Discover, Search, Saved ຫຼືບໍ່?", "Saved ເປັນ Should ຈະສະແດງໃນ nav ຕັ້ງແຕ່ Pilot ຫຼືລໍ?", "Route naming ແລະ Screen IDs ສອດຄ່ອງກັບ Technical Proposal ຫຼືຕ້ອງປັບ?", "Correction flow ຈະໃຊ້ external channel ຫຼື lightweight form?", "Admin queue ຄວນຮວມຢູ່ໜ້າດຽວ ຫຼືແຍກ Place/Case?"],
+    reviewDecisions: ["ອະນຸມັດ Discover ແລະ Search ເປັນ Pilot navigation ຫຼັກ; Saved ຈະເພີ່ມເມື່ອ Should scope ພ້ອມ.", "ອອກແບບ Saved ໄວ້ໃນ Screen Inventory ແຕ່ບໍ່ສະແດງ dead entry ໃນ Pilot.", "ອະນຸມັດ Screen IDs ແລະ route names ເປັນ UX contract; TEC-01/02 ຕ້ອງ map ຕາມ ຫຼືສະເໜີ Change Record.", "ໃຊ້ Lightweight Internal Web Form ຕາມ CON-04; ທຸກ submission ສ້າງ Case ID ແລະບໍ່ auto-publish.", "Admin Home ສະແດງສະຫຼຸບລວມ ແຕ່ແຍກ Place/Data Queue ແລະ Trust/Moderation Case Queue."],
+    artifacts: [{ label: "ux-navigation-route-register.json", path: "/templates/ux-navigation-route-register.json", description: "Machine-readable registry ຂອງ Screen ID, route, priority, entry, success outcome ແລະ dependency." }]
   },
 
   "ux-ui-wireframe": {
     code: "UX-02", title: "ໂຄງຮ່າງ UX/UI", english: "UX/UI Wireframe", owner: "Product Designer",
-    sources: ["UX-01 0.1", "PRO-03 1.0", "CON-01/02 0.1", "PRO-04 0.1"],
+    version: "0.9", status: "pending", statusLabel: "Wireframe baseline ພ້ອມ · ລໍ Visual Review",
+    approvalNote: "Information hierarchy ແລະ interaction decisions ຖືກອະນຸມັດແລ້ວ. UX-02 ຈະຂຶ້ນ 1.0 ເມື່ອ Wireframe ຂອງ SCR-G01—G05 ແລະ SCR-A01—A03 ຖືກກວດຄົບທັງ Mobile/Desktop, keyboard/touch flow ແລະ Loading/Empty/Error/Fallback states.",
+    sources: ["UX-01 1.0", "PRO-03 1.0", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-04 1.0", "CON-05 0.9"],
     purpose: ["ກຳນົດ Layout, Information Hierarchy, Interaction ແລະ System State ກ່ອນເລືອກສີ ຫຼືຮູບພາບສຸດທ້າຍ. Wireframe ເນັ້ນວ່າຜູ້ໃຊ້ເຫັນຫຍັງກ່ອນ, ກົດຢູ່ໃສ ແລະກັບຄືນ Context ໄດ້ແນວໃດ.", "Mobile-first width ເປັນ baseline. Discovery Feed ໃຊ້ວິດີໂອເຕັມ viewport; Place identity, trust label ແລະ action ຕ້ອງອ່ານໄດ້ໂດຍບໍ່ບັງເນື້ອຫາຫຼັກ."],
     sections: [
       { title: "Discovery Feed Wireframe Contract", intro: "ໜຶ່ງ viewport ສະແດງໜຶ່ງ content item. Swipe ປ່ຽນ item; tap Place card ເປີດ Place Page; external source ເປັນ action ແຍກ.", headers: ["Zone", "ຕຳແໜ່ງ", "Content/Action", "ກົດ"], rows: [
         ["Media", "Full viewport background", "official embed/poster/fallback", "ບໍ່ auto-open external app"],
         ["Top bar", "Safe-area top", "logo, search, sound/state", "contrast ຜ່ານທຸກ media"],
         ["Place summary", "Bottom-left above nav", "name, category, district, price, trust", "2–3 ແຖວ; tap ເປີດ Place"],
-        ["Actions", "Right rail/bottom action row", "place, source, save/share", "Map/Call ຢູ່ Place Page ເພື່ອຫຼຸດ mis-tap"],
-        ["Navigation", "Safe-area bottom", "Discover/Search/Saved", "ບໍ່ບັງ media control"]
+        ["Actions", "Bottom action row ເໜືອ navigation", "Map, Call, Message ແລະ View Place", "ແຕ່ລະ action ≥44×44; ຂາດຂໍ້ມູນໃຫ້ disabled + reason; ບໍ່ວາງຊິດ swipe edge"],
+        ["Navigation", "Safe-area bottom", "Discover/Search; Saved ເພີ່ມເມື່ອ Should scope ພ້ອມ", "ບໍ່ບັງ media control ແລະບໍ່ສະແດງ dead entry"]
       ]},
       { title: "Search, Filter ແລະ Result", intro: "Search ຕ້ອງເຫັນ query/filter ປັດຈຸບັນ ແລະລຶບໄດ້ໂດຍບໍ່ reset ທັງໝົດ.", headers: ["Element", "Behavior", "State", "Acceptance note"], rows: [
         ["Search input", "Debounced submit/explicit search", "idle, typing, loading, error", "Keyboard submit; clear button"],
         ["Filter chips", "Category, district, price", "selected count + remove", "Only filters with data coverage"],
-        ["Result card", "thumbnail/source + place facts", "organic/sponsored label", "Sponsored never mimics organic"],
+        ["Result card", "Mobile list card: thumbnail/source + place facts", "organic/sponsored label", "ສະແດງ name, district, price, checked state ສຳລັບ scan/compare; Sponsored never mimics organic"],
         ["Empty state", "Explain no match", "query/filter retained", "Clear one/all; suggestion"],
         ["Pagination/load more", "Preserve order and scroll", "loading/retry", "No duplicate result"]
       ]},
@@ -380,17 +386,25 @@ const specs: Record<string, DocumentSpec> = {
       ]}
     ],
     wireframes: [
-      { title: "SCR-G01 · Discovery Feed", screen: "MOBILE · FULL VIEWPORT", blocks: ["TOP: Brand · Search · Media state", "CENTER: Official embed / poster / fallback", "BOTTOM: Place name · category · district · price", "ACTIONS: View place · Source · Save/Share", "NAV: Discover · Search · Saved"] },
-      { title: "SCR-G02 · Search", screen: "MOBILE · SCROLL", blocks: ["HEADER: Back · Search field · Clear", "FILTERS: Category · District · Price", "STATUS: Result count · active filters", "LIST: Place cards + source/trust", "STATE: Loading · Empty · Error · Retry"] },
-      { title: "SCR-G03 · Place", screen: "MOBILE · DECISION PAGE", blocks: ["IDENTITY: Name · trust · checked date", "STICKY ACTIONS: Map · Call · Message", "FACTS: Address · hours · price · category", "SOURCES: Creator · platform · original link", "FOOTER: Correction · related places"] },
-      { title: "SCR-A02 · Place Editor", screen: "DESKTOP · ADMIN", blocks: ["LEFT: Field groups + validation", "RIGHT: Source evidence + preview", "TOP: State · owner · readiness", "BOTTOM: Save draft · submit review", "AUDIT: before/after · actor · reason"] }
+      { title: "SCR-G01 · Discovery Feed", screen: "MOBILE · FULL VIEWPORT", blocks: ["TOP/SAFE AREA: Brand · Search · Mute/Media state", "MEDIA: Official embed / poster / unavailable fallback", "PLACE: Name · category · district · price · checked date", "ACTIONS: Map · Call · Message · View Place (separate ≥44×44 targets)", "SOURCE: Creator · Provider · Original link · Sponsored label", "NAV: Discover · Search"] },
+      { title: "SCR-G02 · Search", screen: "MOBILE · SCROLL", blocks: ["HEADER: Back · Search field · Clear", "FILTER SHEET: Category · District · Price", "STATUS: Result count · active filter chips", "LIST: Place cards + source/trust/disclosure", "STATE: Loading · Empty · Error · Retry · no duplicate load-more"] },
+      { title: "SCR-G03 · Place", screen: "MOBILE · DECISION PAGE", blocks: ["IDENTITY: Name · category · trust · checked date", "STICKY ACTIONS: Map · Call · Message", "FACTS: Address · hours/Unknown · price · district", "SOURCES: Creator · platform · original link · disclosure", "RECOVERY: Report correction · source unavailable", "RELATED: same category/area → discovery"] },
+      { title: "SCR-G04 · Saved", screen: "MOBILE · SHOULD/DEFERRED", blocks: ["NOTICE: Saved on this device; no account sync", "EMPTY: Explain + return to Discover/Search", "LIST: Saved place cards · remove", "STATE: Storage unavailable/cleared", "NAV ENTRY: hidden until feature is released"] },
+      { title: "SCR-G05 · Consent/Privacy", screen: "MOBILE · REQUIRED", blocks: ["INITIAL: Essential-only vs optional analytics choice", "DETAIL: Purpose · categories · settings link", "SETTINGS: Change/withdraw choice", "STATE: Essential-only · analytics allowed · save error", "COPY: pending final CON-05 legal approval"] },
+      { title: "SCR-A01 · Admin Home", screen: "DESKTOP/TABLET · PROTECTED", blocks: ["SUMMARY: assigned · due · P0/P1 · publish readiness", "QUEUE TABS: Place/Data · Trust/Cases", "FILTER: state · priority · owner · age", "ROW: ID · subject · blocker · SLA · assignee", "STATE: Empty · Load error · Unauthorized · Session expired"] },
+      { title: "SCR-A02 · Place Editor", screen: "DESKTOP SPLIT · TABLET STACKED", blocks: ["LEFT/TOP: Field groups + inline validation", "RIGHT/BOTTOM: Source evidence + preview", "HEADER: State · owner · PUB-01—06 readiness", "ACTIONS: Save draft · Submit review · Reject with reason", "CONFLICT: Latest version · compare · reapply", "AUDIT: before/after · actor · reason"] },
+      { title: "SCR-A03 · Moderation Case", screen: "DESKTOP SPLIT · PROTECTED", blocks: ["CASE: Type · P0—P3 · owner · SLA · current state", "CLAIM/EVIDENCE: URLs · reference · restricted access", "DECISION: Reason code · policy · finding · action", "TIMELINE: received · protected · reviewed · notified", "APPEAL: independent reviewer · new evidence", "STATE: Hide/restore · retain/delete pending CON-05"] }
     ],
-    review: ["ອະນຸມັດ full-screen one-item-per-viewport Feed ຫຼືບໍ່?", "Map/Call/Message ຄວນຢູ່ Feed ຫຼືເປີດຫຼັງເຂົ້າ Place Page?", "Saved ເປັນ Should ຈະລວມໃນ Wireframe Pilot ຫຼືບໍ່?", "Search Result ຄວນເປັນ list card ຫຼື video grid ໃນ Mobile?", "Admin Place Editor ຄວນໃຊ້ split view ໃນ desktop ແລະ stacked view ໃນ tablet ຫຼືບໍ່?"]
+    review: ["ອະນຸມັດ full-screen one-item-per-viewport Feed ຫຼືບໍ່?", "Map/Call/Message ຄວນຢູ່ Feed ຫຼືເປີດຫຼັງເຂົ້າ Place Page?", "Saved ເປັນ Should ຈະລວມໃນ Wireframe Pilot ຫຼືບໍ່?", "Search Result ຄວນເປັນ list card ຫຼື video grid ໃນ Mobile?", "Admin Place Editor ຄວນໃຊ້ split view ໃນ desktop ແລະ stacked view ໃນ tablet ຫຼືບໍ່?"],
+    reviewDecisions: ["ອະນຸມັດ Feed ແບບ full-screen, one item per viewport.", "ສະແດງ Map/Call/Message ໃນ Feed ແລະ Place Page; Feed ຕ້ອງແຍກ touch target ຊັດເຈນ, disabled action ມີ reason ແລະບໍ່ຂັດ swipe.", "ອອກແບບ Saved ໄວ້ເປັນ Should/Deferred; ບໍ່ສະແດງໃນ Pilot navigation ຈົນ feature ພ້ອມ.", "Mobile Search Result ໃຊ້ list card ເພື່ອ scan/compare ຂໍ້ມູນໄດ້ໄວ; video ຢູ່ Feed/Place source.", "Admin Place Editor ໃຊ້ split view ໃນ desktop ແລະ stacked view ໃນ tablet/ຈໍແຄບ."],
+    artifacts: [{ label: "Interactive UX Prototype", path: "/prototype", action: "open", description: "Web prototype ສຳລັບ Feed → Place → Action, Search/Filter, Trust label ແລະ video fallback." }, { label: "ux-wireframe-screen-checklist.json", path: "/templates/ux-wireframe-screen-checklist.json", description: "Checklist ກວດ Screen, viewport, state, action, accessibility ແລະ sign-off ກ່ອນ UX-02 1.0." }]
   },
 
   "interactive-prototype": {
     code: "UX-03", title: "ຕົວຢ່າງໂຕ້ຕອບ ແລະການທົດສອບ", english: "Interactive Prototype & Usability Test", owner: "Product Designer / Research Lead",
-    sources: ["UX-01 0.1", "UX-02 0.1", "PRO-03 G3", "PRO-04 UAT"],
+    version: "0.9", status: "pending", statusLabel: "Test plan/prototype ພ້ອມ · ລໍທົດສອບຄົນຈິງ",
+    approvalNote: "Prototype scope, participant mix, tasks, severity ແລະ pass threshold ຖືກອະນຸມັດ. UX-03 ຍັງຫ້າມຂຶ້ນ 1.0 ຈົນກວ່າຈະມີ session records, task-level results, S1/S2 findings, revision links ແລະ retest evidence ຈາກຜູ້ໃຊ້ຈິງ.",
+    sources: ["UX-01 1.0", "UX-02 0.9", "PRO-03 G3", "PRO-04 0.9 UAT", "CON-04 1.0", "CON-05 0.9"],
     purpose: ["ກຳນົດ Prototype Scope, Scenario, Participant, Task, Metric ແລະວິທີປ່ຽນ Finding ເປັນ Design Decision. Prototype ບໍ່ຕ້ອງເຊື່ອມ backend ແຕ່ຕ້ອງຮັກສາ navigation, state ແລະ content ທີ່ໃກ້ຂອງຈິງ.", "ແຜນທົດສອບລວມ 2 ຮອບ: formative 5 ຄົນເພື່ອຫາບັນຫາຫຼັກ ແລະ validation ລວມ 20 ຄົນຕາມ PRO-03. ບໍ່ຄວນສະຫຼຸບຈາກຄຳວ່າ “ມັກ” ໂດຍບໍ່ເບິ່ງ task behavior."],
     sections: [
       { title: "Prototype Scope ແລະ Fidelity", intro: "Prototype ຕ້ອງກວມ Core Journey ແລະ failure state ທີ່ກະທົບການຕັດສິນໃຈ.", headers: ["Scenario", "Screens", "Interaction", "ບໍ່ຈຳເປັນ"], rows: [
@@ -418,14 +432,26 @@ const specs: Record<string, DocumentSpec> = {
         ["S2 High", "ຫຼາຍຄົນຫຼົງ/ຊ້າ/ກົດຜິດ", "Fix in current iteration", "Mandatory"],
         ["S3 Medium", "ຈົບ task ໄດ້ແຕ່ friction ຊັດ", "Prioritize with scope", "Targeted"],
         ["S4 Low", "Cosmetic/preference ບໍ່ກະທົບ outcome", "Backlog", "Optional"]
-      ]}
+      ]},
+      { title: "Test Execution ແລະ Evidence Contract", intro: "Test Plan ບໍ່ແມ່ນ Test Result. ທຸກ Session ຕ້ອງມີ Participant ID ແບບບໍ່ເປີດເຜີຍຊື່, Prototype version, Task result, observation ແລະ consent record. ຫ້າມຂຶ້ນຜົນສຳເລັດກ່ອນທົດສອບຈິງ.", headers: ["Record", "Required fields", "Owner", "ສະຖານະປັດຈຸບັນ"], rows: [
+        ["Session record", "participant_id, cohort, device, date, moderator, note_taker, consent_reference, prototype_version", "Research Lead", "Pending recruitment/testing"],
+        ["Task result", "T-01—T-05, completed, time, wrong_turns, assistance, observation", "Note taker", "Pending testing"],
+        ["Finding", "finding_id, task/screen, evidence, severity, frequency, recommended change", "Designer + Research Lead", "Pending testing"],
+        ["Revision", "finding_id, design version before/after, decision, owner, changed_at", "Designer", "Pending findings"],
+        ["Retest", "finding_id, participant/session, result, remaining risk", "Independent observer/Research Lead", "Pending S1/S2 fix"],
+        ["UX-03 result", "task success rates, sponsored comprehension, unresolved S1/S2, decision", "Product Owner", "Not evaluated — no real-user evidence yet"]
+      ], note: "Recommended pass gate: T-01/T-02/T-04/T-05 success ≥80%; T-03 Map action ≥90%; Sponsored comprehension ≥80%; unresolved S1 = 0; every S2 is fixed and retested. ຖ້າກຸ່ມໃດມີຜົນຕ່ຳຫຼາຍ ຫ້າມໃຊ້ຄ່າລວມປົກປິດບັນຫາ."}
     ],
-    review: ["ອະນຸມັດ participant mix 8/6/4/2 ຫຼືຕ້ອງປັບ?", "Prototype ຈະສ້າງດ້ວຍ Web ຫຼື design tool ໃດ?", "ໃຜເປັນ moderator ແລະ note taker?", "ອະນຸມັດ 5 mandatory tasks ແລະ severity model ຫຼືບໍ່?", "ກຳນົດ task-success threshold ເທົ່າໃດກ່ອນ UX-05 final design?"]
+    review: ["ອະນຸມັດ participant mix 8/6/4/2 ຫຼືຕ້ອງປັບ?", "Prototype ຈະສ້າງດ້ວຍ Web ຫຼື design tool ໃດ?", "ໃຜເປັນ moderator ແລະ note taker?", "ອະນຸມັດ 5 mandatory tasks ແລະ severity model ຫຼືບໍ່?", "ກຳນົດ task-success threshold ເທົ່າໃດກ່ອນ UX-05 final design?"],
+    reviewDecisions: ["ອະນຸມັດ validation mix 8 frequent social searchers, 6 search/map-first, 4 low-confidence digital users ແລະ 2 place owners; ກ່ອນນັ້ນເຮັດ formative round 5 ຄົນ.", "ໃຊ້ Web Prototype ເພື່ອທົດສອບ swipe/navigation, media fallback, trust label ແລະ external action ໃກ້ຄຽງຂອງຈິງ.", "Founder/Product Owner ເປັນ moderator ໃນ Pilot; note taker ຄວນເປັນອີກຄົນ. ຖ້າມີຄົນດຽວ ຕ້ອງຂໍ consent ບັນທຶກ session ແລະຕື່ມ observation ທັນທີຫຼັງ session.", "ອະນຸມັດ T-01—T-05 ແລະ S1—S4; S1/S2 ຕ້ອງແກ້ ແລະ retest.", "ອະນຸມັດ Core task ≥80%, Map action ≥90%, Sponsored comprehension ≥80%, unresolved S1 = 0 ແລະ S2 ທຸກອັນຕ້ອງ retest ກ່ອນ UX-05 final approval."],
+    artifacts: [{ label: "Interactive UX Prototype", path: "/prototype", action: "open", description: "Prototype ເວັບສຳລັບທົດສອບ 5 tasks; ບໍ່ແມ່ນ Production MVP." }, { label: "usability-test-record.template.csv", path: "/templates/usability-test-record.template.csv", description: "Session/task result template ສຳລັບບັນທຶກ completion, time, wrong turns, assistance, finding ແລະ severity." }]
   },
 
   "design-system": {
     code: "UX-04", title: "ລະບົບການອອກແບບ", english: "Design System", owner: "Design System Owner / Frontend Lead",
-    sources: ["UX-02 0.1", "UX-03 0.1", "PRO-04 NFR-01/02/04", "Brand direction"],
+    version: "0.9", status: "pending", statusLabel: "Token/component baseline ພ້ອມ · ລໍ QA",
+    approvalNote: "Noto Sans Lao, semantic token architecture, first-slice components ແລະ WCAG 2.2 AA internal target ຖືກອະນຸມັດ. Hex palette ຍັງເປັນ Candidate ຈົນກວ່າຈະຜ່ານ contrast test ກັບ light surface, dark media overlay, focus, disabled, sponsored ແລະ error states.",
+    sources: ["UX-02 0.9", "UX-03 0.9", "PRO-04 0.9 NFR-01/02/04", "CON-02 1.0", "CON-04 1.0", "CON-05 0.9", "Brand direction"],
     purpose: ["ກຳນົດ Design Token, Typography, Color, Spacing, Component, State ແລະ Accessibility Contract ເພື່ອໃຫ້ Designer ແລະ Developer ສ້າງຫນ້າຈໍດ້ວຍພາສາດຽວກັນ.", "Design System ຕ້ອງຮອງຮັບພາສາລາວ, ຕົວເລກກີບ, ຂໍ້ຄວາມຍາວ, full-screen media, low-bandwidth fallback ແລະ keyboard/screen-reader behavior. ສີບໍ່ຄວນເປັນວິທີດຽວໃນການບອກ State."],
     sections: [
       { title: "Foundations ແລະ Tokens", intro: "Token ໃຊ້ semantic name ເພື່ອປ່ຽນ theme ໄດ້ໂດຍບໍ່ແກ້ component ທຸກອັນ.", headers: ["Token group", "Baseline", "Usage", "ກົດ"], rows: [
@@ -449,7 +475,7 @@ const specs: Record<string, DocumentSpec> = {
         ["Filter chip/sheet", "single/multi, removable", "selected, disabled, count", "announce selection; clear all"],
         ["Place card", "list, feed overlay, related", "organic, sponsored, stale, unavailable", "canonical click area; trust/disclosure"],
         ["Media frame", "embed, poster, fallback", "loading, playing, muted, error", "no dead end; source action"],
-        ["Trust badge", "verified info, partner, sponsored, stale", "normal/tooltip/detail", "badge text must not overclaim"],
+        ["Trust badge", "checked info, partner, sponsored, stale", "normal/tooltip/detail", "ໃຊ້ຄຳຕາມ CON-02/05; badge text must not overclaim"],
         ["Toast/alert/empty", "success, info, warning, error", "persistent/dismissible", "critical message not auto-dismiss"],
         ["Admin data field", "text/select/location/hours/source", "dirty, valid, invalid, conflict", "before/after + reason + audit"]
       ]},
@@ -460,14 +486,25 @@ const specs: Record<string, DocumentSpec> = {
         ["Touch", "target ≥44×44; spacing prevents mis-tap", "device test", "Map/Call/Message mis-tap risk"],
         ["Motion/media", "respect reduced motion; captions/source fallback where available", "preference test", "autoplay with sound"],
         ["Lao language", "no clipping/overlap at 200% text", "visual/text resize test", "meaning hidden/truncated"]
-      ]}
+      ]},
+      { title: "First Vertical Slice ແລະ Change Contract", intro: "Design System ບໍ່ຈຳເປັນສ້າງ component ທຸກອັນກ່ອນເລີ່ມ. ຕ້ອງປິດ component ທີ່ຮອງຮັບ Feed → Place → Action ແລະ Search ກ່ອນ, ແລ້ວຈຶ່ງຂະຫຍາຍໄປ Admin.", headers: ["Order", "Components", "Definition of ready", "Change control"], rows: [
+        ["DS-01 Media/decision", "MediaFrame, PlaceOverlay, ActionBar, TrustBadge", "default/loading/error/fallback/sponsored/stale; touch/keyboard labels", "Designer + Frontend Lead review"],
+        ["DS-02 Search", "SearchField, FilterChip, FilterSheet, PlaceCard, Pagination/Retry", "typing/loading/empty/error/selected/disabled; result disclosure", "Product Designer owns behavior"],
+        ["DS-03 Feedback", "Alert, Toast, EmptyState, ErrorState, Confirmation", "critical message persistent; recovery action; live-region rule", "Accessibility review required"],
+        ["DS-04 Admin", "AdminField, QueueRow, ReadinessChecklist, DecisionPanel, AuditTimeline", "dirty/invalid/conflict/restricted/approved/rejected", "SA + Trust owner review"],
+        ["Token/component change", "change_id, old/new, rationale, affected screens, migration", "no orphan component; visual/interaction regression checked", "Product Owner approves breaking token/component change"]
+      ], note: "UX-04 1.0 gate: token files ກົງກັບ document, component states ຄົບ, keyboard/screen-reader/touch checks ຜ່ານ, Lao text ບໍ່ clip ທີ່ 200%, ແລະສີ candidate ທຸກຄູ່ທີ່ໃຊ້ຈິງຜ່ານ contrast target."}
     ],
-    review: ["ອະນຸມັດ Noto Sans Lao Variable ເປັນ primary font ຫຼືບໍ່?", "ອະນຸມັດ draft palette ຫຼືຕ້ອງມີ brand exploration ກ່ອນ?", "Component ໃດຕ້ອງສ້າງກ່ອນ First Vertical Slice?", "Accessibility baseline ຈະຍຶດ WCAG 2.2 AA ເປັນ internal target ຫຼືບໍ່?", "ໃຜເປັນ Design System Owner ແລະຜູ້ອະນຸມັດ token/component change?"]
+    review: ["ອະນຸມັດ Noto Sans Lao Variable ເປັນ primary font ຫຼືບໍ່?", "ອະນຸມັດ draft palette ຫຼືຕ້ອງມີ brand exploration ກ່ອນ?", "Component ໃດຕ້ອງສ້າງກ່ອນ First Vertical Slice?", "Accessibility baseline ຈະຍຶດ WCAG 2.2 AA ເປັນ internal target ຫຼືບໍ່?", "ໃຜເປັນ Design System Owner ແລະຜູ້ອະນຸມັດ token/component change?"],
+    reviewDecisions: ["ອະນຸມັດ Noto Sans Lao Variable ເປັນ primary font; system sans ເປັນ fallback.", "ຍັງຄ້າງ: Candidate palette ຖືກກຳນົດເປັນ token ແລ້ວ ແຕ່ຕ້ອງທົດສອບ contrast ກັບ light/dark media ແລະ component states ກ່ອນອະນຸມັດ hex final.", "ລຳດັບທຳອິດ: MediaFrame, PlaceOverlay, ActionBar, SearchField, FilterSheet/Chip, PlaceCard, TrustBadge, Feedback states ແລະ AdminField.", "ອະນຸມັດ WCAG 2.2 AA ເປັນ internal target; ຕ້ອງທົດສອບ keyboard, screen reader, contrast, touch target, reduced motion ແລະ Lao 200% text.", "Product Designer/Product Owner ເປັນ Design System Owner ໃນ Pilot; Frontend Lead ກວດ implementation impact; Product Owner ອະນຸມັດ breaking token/component change."],
+    artifacts: [{ label: "ux-design-tokens.json", path: "/templates/ux-design-tokens.json", description: "Token source ສຳລັບ typography, spacing, radius, color candidate, motion ແລະ viewport." }, { label: "ux-design-tokens.css", path: "/templates/ux-design-tokens.css", description: "CSS custom properties ສຳລັບ Frontend prototype; palette ຍັງເປັນ Candidate ຈົນ QA ຜ່ານ." }]
   },
 
   "full-ux-ui": {
     code: "UX-05", title: "ການອອກແບບ UX/UI ສົມບູນ", english: "Full UX/UI Design", owner: "Product Designer / Frontend Lead",
-    sources: ["UX-01—04 0.1", "PRO-04 0.1", "CON-01—05 0.1", "TEC-01/02 pending"],
+    version: "0.5", status: "pending", statusLabel: "Handoff contract ພ້ອມ · Final Design ຍັງບໍ່ສຳເລັດ",
+    approvalNote: "ສະບັບ 0.5 ກຳນົດວ່າ Final Design Package ຕ້ອງມີຫຍັງ; ມັນຍັງບໍ່ແມ່ນ Final Screen ທີ່ອະນຸມັດ. Designer ສາມາດເລີ່ມ Happy path ໄດ້ ແຕ່ UX-05 ຫ້າມຂຶ້ນ 1.0 ຈົນ UX test, system states, technical constraints ແລະ sign-off evidence ຄົບ.",
+    sources: ["UX-01 1.0", "UX-02 0.9", "UX-03 0.9", "UX-04 0.9", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-03 0.9", "CON-04 1.0", "CON-05 0.9", "TEC-01/02 pending"],
     purpose: ["ກຳນົດຂອບເຂດ Final Screen, Responsive Behavior, System State, Prototype Link, Asset ແລະ Developer Handoff ທີ່ຕ້ອງຄົບກ່ອນເລີ່ມ Frontend implementation.", "UX-05 ບໍ່ຄວນຖືກອະນຸມັດຈາກ Happy-path screen ເທົ່ານັ້ນ. Loading, Empty, Error, Stale, Sponsored, Permission, Conflict ແລະ External Fallback ຕ້ອງຖືກອອກແບບ ແລະຜູກກັບ Requirement/Screen ID."],
     sections: [
       { title: "Final Screen Inventory", intro: "Screen ທີ່ລະບຸເປັນ Must ຕ້ອງມີ mobile final design, responsive rule, state set ແລະ annotation.", headers: ["Screen ID", "Screen", "Priority", "Required deliverables"], rows: [
@@ -495,7 +532,13 @@ const specs: Record<string, DocumentSpec> = {
         ["Unknown/Stale", "label + checked date", "contact/report correction", "CON-02"],
         ["Unauthorized/expired", "do not expose data; explain session", "sign in/retry", "ADM-01"],
         ["Conflict", "show latest + unsaved changes", "compare/reapply", "PRO-02 ERR-CONFLICT"],
-        ["Sponsored", "visible label adjacent to placement", "disclosure detail", "CON-05"]
+        ["Sponsored", "visible label adjacent to placement", "disclosure detail", "CON-05"],
+        ["Consent denied/withdrawn", "essential-only mode + settings status", "change choice without dark pattern", "CON-05/TEC-06"],
+        ["Source removed/takedown", "remove media; preserve safe Place facts when allowed", "view place/report issue", "CON-04/05"],
+        ["Map app unavailable", "explain external handoff failure", "copy address/try another map", "ACT-01"],
+        ["Contact unavailable", "disable only missing action + reason", "use remaining action/report correction", "CON-02"],
+        ["Validation failure", "field-level message + summary", "focus first error/preserve input", "ADM-02"],
+        ["Rate limited/temporary external failure", "plain-language wait/retry state", "retry later/use Place fallback", "PRO-02 Error Contract"]
       ]},
       { title: "Developer Handoff Package", intro: "Handoff ຕ້ອງລົບການຄາດເດົາ: ທຸກ screen/component ຕ້ອງອ້າງ Requirement, State, Data ແລະ Interaction.", headers: ["Deliverable", "ລາຍລະອຽດ", "Owner", "Definition of ready"], rows: [
         ["Final screens", "mobile/tablet/desktop + state variants", "Designer", "Screen IDs/version/date"],
@@ -506,9 +549,19 @@ const specs: Record<string, DocumentSpec> = {
         ["Traceability", "screen/action → requirement/AC/event", "SA + QA", "no orphan Must screen/action"],
         ["Asset export", "icons/images/posters with license/source", "Designer/Trust", "format, size, ownership"],
         ["Review record", "open issue, deviation, approval", "Product Owner", "signed version baseline"]
-      ]}
+      ]},
+      { title: "Approval Gates ແລະ Sign-off", intro: "UX-05 1.0 ແມ່ນຄຳຢືນຢັນວ່າ package ພ້ອມໃຫ້ Developer ສ້າງໂດຍບໍ່ເດົາ. ການມີຮູບ Happy path ສວຍງາມບໍ່ພຽງພໍ.", headers: ["Gate", "ຕ້ອງມີ", "Signer", "ສະຖານະ"], rows: [
+        ["G-UX1 Structure", "UX-01 1.0; UX-02 1.0; screen/route/state traceability", "Product Owner + SA", "UX-01 passed; UX-02 pending visual review"],
+        ["G-UX2 Evidence", "UX-03 1.0; session/task/finding/retest records; pass thresholds", "Research Lead + Product Owner", "Pending real-user testing"],
+        ["G-UX3 System", "UX-04 1.0; tokens/components/accessibility QA", "Design System Owner + Frontend Lead", "Pending palette/component QA"],
+        ["G-UX4 Content/Trust", "PRO-04 1.0; CON-02/04 1.0; UI-impact decisions from CON-01/03/05", "Content/Trust Owner", "Partially pending"],
+        ["G-UX5 Technical", "TEC-01/02 route, auth, external action, media/fallback constraints mapped", "Technical Lead", "Pending TEC-01/02"],
+        ["G-UX6 Final handoff", "final screens, responsive/state variants, assets, copy, annotations, open deviations", "Product Owner + Frontend Lead", "Pending final design"]
+      ], note: "Final sign-off roles: Product Owner ຮັບຮອງ scope/design; Frontend Lead ຮັບຮອງ implementation readiness; Content/Trust Owner ຮັບຮອງ copy, source, disclosure ແລະ correction/takedown; Accessibility Reviewer/QA ຮັບຮອງ quality gates. ຄົນດຽວອາດຮັບຫຼາຍບົດບາດໄດ້ ແຕ່ຕ້ອງລົງນາມແຍກບົດບາດ."}
     ],
-    review: ["Screen Inventory ຄົບກັບ MVP Must/Should ຫຼືບໍ່?", "ອະນຸມັດ responsive ranges <768, 768–1199, ≥1200 ຫຼືຕ້ອງອີງ device targets ອື່ນ?", "System State ໃດຍັງຂາດຈາກ Requirement/Error Contract?", "ເອກະສານໃດຕ້ອງອະນຸມັດກ່ອນ UX-05 ຂຶ້ນ 1.0—UX-01—04, CON-01—05, TEC-01/02 ຫຼືທັງໝົດ?", "ໃຜລົງນາມ final design, accessibility, content/trust ແລະ developer readiness?"]
+    review: ["Screen Inventory ຄົບກັບ MVP Must/Should ຫຼືບໍ່?", "ອະນຸມັດ responsive ranges <768, 768–1199, ≥1200 ຫຼືຕ້ອງອີງ device targets ອື່ນ?", "System State ໃດຍັງຂາດຈາກ Requirement/Error Contract?", "ເອກະສານໃດຕ້ອງອະນຸມັດກ່ອນ UX-05 ຂຶ້ນ 1.0—UX-01—04, CON-01—05, TEC-01/02 ຫຼືທັງໝົດ?", "ໃຜລົງນາມ final design, accessibility, content/trust ແລະ developer readiness?"],
+    reviewDecisions: ["ອະນຸມັດ SCR-G01—G05 ແລະ SCR-A01—A03 ເປັນ Must; SCR-G04 Saved ແລະ SCR-A04 Partner/Campaign ເປັນ Should ແລະບໍ່ block Pilot Must.", "ອະນຸມັດ <768, 768–1199, ≥1200; ຕ້ອງກວດຢ່າງໜ້ອຍ 360, 390, 768, 1024 ແລະ 1440px ພ້ອມ short-landscape/safe-area.", "ເພີ່ມ Consent denied/withdrawn, Source removed/takedown, Map app unavailable, Contact unavailable, Validation failure ແລະ Rate-limited/temporary failure ເຂົ້າ State Coverage.", "ສາມາດເລີ່ມ Final Design ໄດ້ຈາກ baseline ປັດຈຸບັນ; ແຕ່ UX-05 1.0 ຕ້ອງຜ່ານ UX-01—04, PRO-04, CON-02/04, UI-impact decisions ຂອງ CON-01/03/05 ແລະ TEC-01/02.", "Sign-off ແຍກ 4 ບົດບາດ: Product Owner, Frontend Lead, Content/Trust Owner ແລະ Accessibility Reviewer/QA; ຖ້າຄົນດຽວຮັບຫຼາຍບົດບາດຕ້ອງລົງນາມແຍກ."],
+    artifacts: [{ label: "ux-final-handoff-checklist.json", path: "/templates/ux-final-handoff-checklist.json", description: "Gate/checklist ສຳລັບ Screen, responsive, state, traceability, asset, accessibility, open deviation ແລະ 4-role sign-off." }]
   }
 };
 
@@ -571,7 +624,7 @@ export default function ContentDesignDocument({ slug, basePath }: { slug: string
 
     {spec.wireframes ? <section className={styles.formalSection} id="wireframes"><h2><span>{wireframeNumber}.</span> Low-fidelity Wireframes</h2><p>ແຜນຜັງຕໍ່ໄປນີ້ສະແດງລຳດັບຂໍ້ມູນ ແລະ interaction zone; ບໍ່ແມ່ນ visual design ສຸດທ້າຍ.</p><div className={styles.formalWireframeGrid}>{spec.wireframes.map((wireframe) => <figure className={styles.formalWireframe} key={wireframe.title}><figcaption><strong>{wireframe.title}</strong><span>{wireframe.screen}</span></figcaption><div>{wireframe.blocks.map((block) => <p key={block}>{block}</p>)}</div></figure>)}</div></section> : null}
 
-    {spec.artifacts ? <section className={styles.formalSection} id="artifacts"><h2><span>{artifactNumber}.</span> ແບບຟອມ ແລະໄຟລ໌ນຳໃຊ້</h2><p>ໄຟລ໌ເຫຼົ່ານີ້ແປງຂໍ້ກຳນົດໃນເອກະສານໃຫ້ເປັນແບບຟອມທີ່ Content Team, Trust &amp; Safety ແລະ Developer ສາມາດນຳໄປໃຊ້ໄດ້. ຄ່າທີ່ຂຽນວ່າ pending ຍັງຫ້າມນຳໄປໃຊ້ເປັນ Production Rule.</p><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ໄຟລ໌</th><th>ຈຸດປະສົງ</th><th>ການນຳໃຊ້</th></tr></thead><tbody>{spec.artifacts.map((artifact) => <tr key={artifact.path}><td><strong>{artifact.label}</strong></td><td>{artifact.description}</td><td><a href={`${basePath}${artifact.path}`} download>ດາວໂຫຼດໄຟລ໌</a></td></tr>)}</tbody></table></div></section> : null}
+    {spec.artifacts ? <section className={styles.formalSection} id="artifacts"><h2><span>{artifactNumber}.</span> ແບບຟອມ ແລະໄຟລ໌ນຳໃຊ້</h2><p>ໄຟລ໌ເຫຼົ່ານີ້ແປງຂໍ້ກຳນົດໃນເອກະສານໃຫ້ເປັນແບບຟອມທີ່ Content Team, Trust &amp; Safety, Designer ແລະ Developer ສາມາດນຳໄປໃຊ້ໄດ້. ຄ່າທີ່ຂຽນວ່າ pending ຍັງຫ້າມນຳໄປໃຊ້ເປັນ Production Rule.</p><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ໄຟລ໌/ຕົວຢ່າງ</th><th>ຈຸດປະສົງ</th><th>ການນຳໃຊ້</th></tr></thead><tbody>{spec.artifacts.map((artifact) => <tr key={artifact.path}><td><strong>{artifact.label}</strong></td><td>{artifact.description}</td><td>{artifact.action === "open" ? <a href={`${basePath}${artifact.path}`}>ເປີດເບິ່ງ</a> : <a href={`${basePath}${artifact.path}`} download>ດາວໂຫຼດໄຟລ໌</a>}</td></tr>)}</tbody></table></div></section> : null}
 
     <section className={styles.formalSection} id="review"><h2><span>{reviewNumber}.</span> {spec.reviewDecisions ? "ບັນທຶກຂໍ້ຕັດສິນ" : "ຂໍ້ຕ້ອງທົບທວນກ່ອນຂຶ້ນສະບັບ 1.0"}</h2>
       <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>ຫົວຂໍ້ທົບທວນ</th>{spec.reviewDecisions ? <th>ຂໍ້ຕັດສິນ</th> : null}<th>ສະຖານະ</th></tr></thead><tbody>{spec.review.map((item, index) => { const decision = spec.reviewDecisions?.[index]; const pending = decision?.includes("ຍັງຄ້າງ"); return <tr key={item}><td>REV-{String(index + 1).padStart(2, "0")}</td><td>{item}</td>{spec.reviewDecisions ? <td>{decision}</td> : null}<td>{decision ? (pending ? "ຍັງຄ້າງ" : "ອະນຸມັດ") : "ລໍທົບທວນ"}</td></tr>; })}</tbody></table></div>

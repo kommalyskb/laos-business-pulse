@@ -1,0 +1,25 @@
+{
+  "document": "UX-02",
+  "version": "0.9",
+  "required_screens": ["SCR-G01", "SCR-G02", "SCR-G03", "SCR-G05", "SCR-A01", "SCR-A02", "SCR-A03"],
+  "should_screens": ["SCR-G04"],
+  "checks_per_screen": [
+    "information_hierarchy_annotated",
+    "primary_and_secondary_actions_defined",
+    "loading_empty_error_and_fallback_states",
+    "keyboard_focus_order",
+    "touch_targets_at_least_44px",
+    "lao_copy_and_long_text",
+    "trust_and_sponsored_labels",
+    "back_navigation_preserves_context",
+    "mobile_or_admin_target_viewports",
+    "requirement_and_screen_id_traceability"
+  ],
+  "review": {
+    "visual_reviewer": null,
+    "accessibility_reviewer": null,
+    "product_owner": null,
+    "reviewed_at": null,
+    "status": "pending"
+  }
+}

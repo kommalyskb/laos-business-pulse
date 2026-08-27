@@ -1,0 +1,20 @@
+{
+  "document": "UX-01",
+  "version": "1.0",
+  "navigation": {
+    "pilot_primary": ["SCR-G01", "SCR-G02"],
+    "should_hidden_until_released": ["SCR-G04"],
+    "guest_first": true,
+    "admin_requires_authentication": true
+  },
+  "screens": [
+    { "id": "SCR-G01", "name": "Discovery Feed", "route": "/discover", "priority": "must", "entry": ["/", "deep_link"], "success": "User opens a Place or a valid Map/Call/Message action.", "depends_on": ["FEED-01", "ACT-01"] },
+    { "id": "SCR-G02", "name": "Search", "route": "/search", "priority": "must", "entry": ["primary_navigation"], "success": "User finds a matching Place or understands how to recover from no results.", "depends_on": ["USR-02", "CON-01"] },
+    { "id": "SCR-G03", "name": "Place Detail", "route": "/places/:slug", "priority": "must", "entry": ["SCR-G01", "SCR-G02", "deep_link"], "success": "User understands Place facts, trust state and available actions.", "depends_on": ["PLC-01", "CON-02", "CON-04", "CON-05"] },
+    { "id": "SCR-G04", "name": "Saved", "route": "/saved", "priority": "should", "entry": ["hidden_until_released"], "success": "User can reopen device-local saved Places.", "depends_on": ["MVP-Should"] },
+    { "id": "SCR-G05", "name": "Consent and Privacy", "route": "banner_and_settings", "priority": "must", "entry": ["first_visit", "settings"], "success": "User understands and can change analytics choice.", "depends_on": ["CON-05", "TEC-06"] },
+    { "id": "SCR-A01", "name": "Admin Home and Queues", "route": "/admin", "priority": "must", "entry": ["authenticated_admin"], "success": "Admin can distinguish Place/Data work from Trust/Case work.", "depends_on": ["ADM-01"] },
+    { "id": "SCR-A02", "name": "Place Editor", "route": "/admin/places/:id", "priority": "must", "entry": ["SCR-A01"], "success": "Admin submits a PUB-01 through PUB-06 compliant Place for review.", "depends_on": ["CON-02", "PRO-02"] },
+    { "id": "SCR-A03", "name": "Moderation Case", "route": "/admin/cases/:id", "priority": "must", "entry": ["SCR-A01", "case_link"], "success": "Authorized reviewer records an auditable decision and appeal path.", "depends_on": ["CON-04", "CON-05"] }
+  ]
+}

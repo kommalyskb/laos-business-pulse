@@ -1,0 +1,87 @@
+.stage { min-height: 100svh; padding: 24px; color: #f7faf8; background: radial-gradient(circle at 20% 5%, #244d43, transparent 34%), #07120f; font-family: "Noto Sans Lao", system-ui, sans-serif; }
+.prototypeHeader { max-width: 1100px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.prototypeHeader div, .prototypeHeader nav { display: flex; align-items: center; gap: 14px; }
+.prototypeHeader span { color: #a5b9b2; font: 700 10px/1.2 system-ui; letter-spacing: .12em; }
+.prototypeHeader button, .prototypeHeader a { border: 1px solid #42675c; border-radius: 999px; padding: 9px 13px; color: inherit; background: transparent; font: inherit; text-decoration: none; cursor: pointer; }
+.tasks { position: fixed; z-index: 20; top: 78px; right: 24px; width: min(340px, calc(100vw - 48px)); padding: 18px; color: #17221f; background: #fffdf8; border-radius: 18px; box-shadow: 0 22px 70px #0008; }
+.tasks ol { margin: 12px 0 0; padding-left: 24px; }
+.tasks li { margin: 8px 0; }
+.device { position: relative; width: min(390px, calc(100vw - 32px)); height: min(780px, calc(100svh - 150px)); min-height: 620px; margin: 0 auto; overflow: hidden; color: #121b18; background: #fffdf8; border: 8px solid #17221f; border-radius: 38px; box-shadow: 0 28px 100px #0009; }
+.statusBar { position: absolute; z-index: 12; top: 0; left: 0; right: 0; height: 30px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; color: white; background: linear-gradient(#0008, transparent); font: 700 11px/1 system-ui; }
+.feed { position: absolute; inset: 0; color: white; background-position: center; background-size: cover; }
+.feedTop { position: absolute; z-index: 2; top: 30px; left: 0; right: 0; display: flex; align-items: center; justify-content: center; padding: 14px 18px; }
+.feedTop button { position: absolute; right: 18px; width: 44px; height: 44px; border: 0; color: white; background: #0005; border-radius: 50%; font-size: 26px; }
+.play { position: absolute; top: 43%; left: 50%; width: 64px; height: 64px; transform: translate(-50%, -50%); border: 1px solid #fff7; border-radius: 50%; color: white; background: #0005; font-size: 24px; cursor: pointer; }
+.fallback { position: absolute; top: 34%; left: 50%; width: 78%; transform: translate(-50%, -50%); padding: 18px; display: grid; gap: 8px; text-align: center; background: #0b1713e8; border: 1px solid #ffffff35; border-radius: 16px; }
+.fallback button { margin-top: 6px; padding: 10px; border: 0; border-radius: 10px; background: #e4a15f; font: inherit; font-weight: 800; }
+.feedContent { position: absolute; z-index: 2; left: 0; right: 0; bottom: 66px; padding: 18px; }
+.source, .sponsored { display: inline-block; margin-bottom: 9px; padding: 5px 8px; border-radius: 6px; background: #0b1713cc; font-size: 11px; font-weight: 800; }
+.sponsored { color: #271508; background: #ffd09f; }
+.placeTitle { width: calc(100% - 48px); display: grid; gap: 3px; padding: 0; color: white; text-align: left; border: 0; background: transparent; font: inherit; cursor: pointer; }
+.placeTitle strong { font-size: 23px; }
+.placeTitle span { font-size: 13px; }
+.placeTitle small { color: #d2dfda; }
+.actionRow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-top: 14px; }
+.actionRow button { min-height: 50px; display: grid; place-content: center; gap: 2px; border: 1px solid #ffffff35; border-radius: 12px; color: white; background: #07120fc4; font: inherit; font-size: 17px; cursor: pointer; }
+.actionRow span { font-size: 10px; }
+.feedPager { position: absolute; right: 14px; bottom: 113px; display: grid; justify-items: center; gap: 3px; }
+.feedPager button { width: 42px; height: 42px; border: 1px solid #ffffff33; border-radius: 50%; color: white; background: #0007; font-size: 20px; }
+.feedPager span { font-size: 10px; }
+.lightScreen { position: absolute; inset: 0 0 60px; overflow-y: auto; padding-top: 30px; background: #fffdf8; }
+.screenHeader { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px 8px; }
+.screenHeader h1 { margin: 0; font-size: 26px; }
+.screenHeader button { border: 0; background: transparent; font: inherit; }
+.searchBox { margin: 10px 18px; padding: 4px 6px 4px 13px; display: flex; border: 1px solid #c9d1ce; border-radius: 12px; background: white; }
+.searchBox input { min-width: 0; flex: 1; padding: 10px 0; border: 0; outline: 0; font: inherit; }
+.searchBox button { width: 40px; border: 0; background: transparent; font-size: 22px; }
+.chips { display: flex; gap: 7px; padding: 4px 18px; overflow-x: auto; }
+.chips button { white-space: nowrap; padding: 8px 11px; border: 1px solid #b6c3be; border-radius: 999px; background: white; font: inherit; }
+.chips .activeChip { color: white; background: #17644f; border-color: #17644f; }
+.resultCount { margin: 13px 18px 7px; color: #62706b; font-size: 12px; }
+.results { padding: 0 18px 22px; display: grid; gap: 10px; }
+.resultCard { width: 100%; min-height: 92px; padding: 8px; display: grid; grid-template-columns: 86px 1fr; gap: 11px; text-align: left; border: 1px solid #dfe4e1; border-radius: 14px; background: white; font: inherit; }
+.resultImage { width: 86px; height: 76px; display: block; background-position: center; background-size: cover; border-radius: 9px; }
+.resultCard span { min-width: 0; display: grid; align-content: center; gap: 3px; }
+.resultCard strong { font-size: 15px; }
+.resultCard small, .resultCard em { color: #61706a; font-size: 11px; font-style: normal; }
+.resultCard b { width: max-content; padding: 2px 5px; color: #6c3609; background: #ffe0bd; border-radius: 4px; font-size: 9px; }
+.empty { padding: 34px 18px; text-align: center; border: 1px dashed #b6c3be; border-radius: 14px; }
+.empty button { padding: 9px 12px; border: 0; border-radius: 9px; color: white; background: #17644f; font: inherit; }
+.placeHero { min-height: 270px; padding: 38px 18px 18px; display: flex; flex-direction: column; justify-content: space-between; color: white; background-position: center; background-size: cover; }
+.placeHero > button { align-self: flex-start; min-height: 44px; padding: 8px 11px; border: 1px solid #ffffff44; border-radius: 999px; color: white; background: #0007; font: inherit; }
+.placeHero > span { position: absolute; right: 18px; top: 43px; padding: 5px 8px; color: #351b06; background: #ffd09f; border-radius: 6px; font-size: 10px; font-weight: 800; }
+.placeHero h1 { margin: 3px 0; font-size: 27px; }
+.placeHero p { margin: 0; }
+.placeActions { position: sticky; z-index: 3; top: 0; padding: 9px 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; background: #fffdf8; box-shadow: 0 5px 16px #17221f12; }
+.placeActions button { min-height: 46px; border: 0; border-radius: 10px; color: white; background: #17644f; font: inherit; font-size: 12px; font-weight: 800; }
+.placeBody { padding: 6px 18px 30px; }
+.placeBody section { padding: 12px 0; border-bottom: 1px solid #e1e6e3; }
+.placeBody h2 { margin: 4px 0 10px; font-size: 16px; }
+.placeBody dl { margin: 0; }
+.placeBody dl div { padding: 7px 0; display: flex; justify-content: space-between; gap: 12px; }
+.placeBody dt { color: #65726d; }
+.placeBody dd { margin: 0; text-align: right; }
+.sourceCard { width: 100%; padding: 12px; display: flex; justify-content: space-between; border: 1px solid #cfd8d4; border-radius: 10px; background: white; font: inherit; }
+.sourceMissing { padding: 12px; display: grid; gap: 4px; color: #67441f; background: #fff0dc; border-radius: 10px; font-size: 12px; }
+.correction { margin-top: 16px; padding: 10px 0; border: 0; color: #17644f; background: transparent; font: inherit; text-decoration: underline; }
+.bottomNav { position: absolute; z-index: 10; left: 0; right: 0; bottom: 0; height: 62px; display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid #dfe4e1; background: #fffdf8f5; }
+.bottomNav button { display: grid; place-content: center; gap: 1px; border: 0; color: #78847f; background: transparent; font: inherit; }
+.bottomNav b { font-size: 19px; }
+.bottomNav span { font-size: 10px; }
+.bottomNav .navActive { color: #17644f; }
+.consent { position: absolute; z-index: 15; left: 12px; right: 12px; bottom: 74px; padding: 14px; background: #fffdf8; border-radius: 14px; box-shadow: 0 12px 40px #0006; }
+.consent p { margin: 5px 0 10px; font-size: 11px; }
+.consent div { display: flex; gap: 6px; }
+.consent button { flex: 1; min-height: 42px; padding: 6px; border: 1px solid #17644f; border-radius: 9px; background: transparent; font: inherit; font-size: 10px; }
+.consent button:last-child { color: white; background: #17644f; }
+.notice { max-width: 680px; margin: 18px auto 0; color: #b8c8c2; text-align: center; font-size: 12px; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+@media (max-width: 620px) {
+  .stage { padding: 0; background: #07120f; }
+  .prototypeHeader { min-height: 60px; margin: 0; padding: 8px 12px; }
+  .prototypeHeader div { display: grid; gap: 2px; }
+  .prototypeHeader nav a { display: none; }
+  .device { width: 100%; height: calc(100svh - 92px); min-height: 560px; border-width: 0; border-radius: 0; }
+  .notice { margin: 7px 12px 0; }
+  .tasks { top: 66px; right: 12px; width: calc(100vw - 24px); }
+}

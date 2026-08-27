@@ -1,0 +1,34 @@
+:root {
+  --ux-font-primary: "Noto Sans Lao Variable", "Noto Sans Lao", system-ui, sans-serif;
+  --ux-font-size-caption: 12px;
+  --ux-font-size-small: 14px;
+  --ux-font-size-body: 16px;
+  --ux-font-size-title-sm: 20px;
+  --ux-font-size-title: 24px;
+  --ux-font-size-display: 32px;
+  --ux-space-1: 4px;
+  --ux-space-2: 8px;
+  --ux-space-3: 12px;
+  --ux-space-4: 16px;
+  --ux-space-6: 24px;
+  --ux-space-8: 32px;
+  --ux-space-12: 48px;
+  --ux-radius-sm: 4px;
+  --ux-radius-md: 8px;
+  --ux-radius-lg: 12px;
+  --ux-radius-pill: 999px;
+  --ux-color-surface: #fffdf8;
+  --ux-color-surface-inverse: #101928;
+  --ux-color-text: #17221f;
+  --ux-color-text-inverse: #fff;
+  --ux-color-primary: #17644f;
+  --ux-color-accent: #f27a45;
+  --ux-color-info: #284b8f;
+  --ux-color-sponsored-surface: #ffd09f;
+  --ux-color-sponsored-text: #351b06;
+  --ux-color-border: #cfd8d4;
+  --ux-color-focus: #7cc4ff;
+  --ux-touch-target-min: 44px;
+}
+
+/* Candidate values: do not mark UX-04 1.0 until contrast and component-state QA pass. */
