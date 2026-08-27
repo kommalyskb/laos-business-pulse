@@ -20,15 +20,15 @@ type Place = {
   distance: string;
   tags: string[];
   reviewCreators: string[];
-  menu: { name: string; price: string }[];
+  menu: { name: string; price: string; image: string }[];
   sponsored?: boolean;
   sourceAvailable?: boolean;
 };
 
 const places: Place[] = [
-  { id: "p01", name: "ເຮືອນຄົວວຽງ", category: "restaurant", categoryLabel: "ຮ້ານອາຫານລາວ", district: "ສີສັດຕະນາກ", price: "₭₭", hours: "ເປີດຮອດ 21:30", checked: "ກວດຫຼ້າສຸດ 20 ສິງຫາ", creator: "@lao.food.story", image: "/platform-food.jpg", rating: "4.6", reviewCount: 128, distance: "2.4 km", tags: ["ອາຫານລາວ", "ຄອບຄົວ", "ມີບ່ອນຈອດລົດ"], reviewCreators: ["@lao.food.story", "@kinyang.vte", "@where2eat.la"], menu: [{ name: "ເອາະຫຼາມ", price: "65,000 ₭" }, { name: "ລາບປານ້ຳຂອງ", price: "75,000 ₭" }, { name: "ຕຳໝາກຫຸ່ງ", price: "35,000 ₭" }], sourceAvailable: true },
-  { id: "p02", name: "ຄາເຟແຄມຂອງ", category: "cafe", categoryLabel: "ຮ້ານກາເຟ", district: "ຈັນທະບູລີ", price: "₭₭", hours: "ເປີດຮອດ 21:00", checked: "ກວດຫຼ້າສຸດ 18 ສິງຫາ", creator: "@slowday.vte", image: "/platform-cafe.jpg", rating: "4.4", reviewCount: 86, distance: "1.1 km", tags: ["ວິວແຄມຂອງ", "ນັ່ງເຮັດວຽກ", "ເປີດເດິກ"], reviewCreators: ["@slowday.vte", "@cafehopping.la", "@vte.weekend"], menu: [{ name: "Lao Cold Brew", price: "38,000 ₭" }, { name: "Coconut Latte", price: "42,000 ₭" }, { name: "Croissant", price: "28,000 ₭" }], sponsored: true, sourceAvailable: true },
-  { id: "p03", name: "ສວນກາເຟເຊົ້າ", category: "cafe", categoryLabel: "ຮ້ານກາເຟ", district: "ໄຊເສດຖາ", price: "ຍັງບໍ່ຮູ້ລາຄາ", hours: "ຂໍ້ມູນເວລາອາດເກົ່າ", checked: "ກວດຫຼ້າສຸດ 2 ເດືອນກ່ອນ", creator: "@morning.lao", image: "/laos-weaver.jpg", rating: "4.1", reviewCount: 34, distance: "4.8 km", tags: ["ສວນ", "ງຽບ", "ກາເຟເຊົ້າ"], reviewCreators: ["@morning.lao"], menu: [{ name: "Americano", price: "ລໍກວດສອບ" }, { name: "ຊາດອກໄມ້", price: "ລໍກວດສອບ" }], sourceAvailable: false },
+  { id: "p01", name: "ເຮືອນຄົວວຽງ", category: "restaurant", categoryLabel: "ຮ້ານອາຫານລາວ", district: "ສີສັດຕະນາກ", price: "₭₭", hours: "ເປີດຮອດ 21:30", checked: "ກວດຫຼ້າສຸດ 20 ສິງຫາ", creator: "@lao.food.story", image: "/platform-food.jpg", rating: "4.6", reviewCount: 128, distance: "2.4 km", tags: ["ອາຫານລາວ", "ຄອບຄົວ", "ມີບ່ອນຈອດລົດ"], reviewCreators: ["@lao.food.story", "@kinyang.vte", "@where2eat.la"], menu: [{ name: "ເອາະຫຼາມ", price: "65,000 ₭", image: "/platform-food.jpg" }, { name: "ລາບປານ້ຳຂອງ", price: "75,000 ₭", image: "/laos-weaver.jpg" }, { name: "ຕຳໝາກຫຸ່ງ", price: "35,000 ₭", image: "/platform-cafe.jpg" }], sourceAvailable: true },
+  { id: "p02", name: "ຄາເຟແຄມຂອງ", category: "cafe", categoryLabel: "ຮ້ານກາເຟ", district: "ຈັນທະບູລີ", price: "₭₭", hours: "ເປີດຮອດ 21:00", checked: "ກວດຫຼ້າສຸດ 18 ສິງຫາ", creator: "@slowday.vte", image: "/platform-cafe.jpg", rating: "4.4", reviewCount: 86, distance: "1.1 km", tags: ["ວິວແຄມຂອງ", "ນັ່ງເຮັດວຽກ", "ເປີດເດິກ"], reviewCreators: ["@slowday.vte", "@cafehopping.la", "@vte.weekend"], menu: [{ name: "Lao Cold Brew", price: "38,000 ₭", image: "/platform-cafe.jpg" }, { name: "Coconut Latte", price: "42,000 ₭", image: "/platform-food.jpg" }, { name: "Croissant", price: "28,000 ₭", image: "/laos-weaver.jpg" }], sponsored: true, sourceAvailable: true },
+  { id: "p03", name: "ສວນກາເຟເຊົ້າ", category: "cafe", categoryLabel: "ຮ້ານກາເຟ", district: "ໄຊເສດຖາ", price: "ຍັງບໍ່ຮູ້ລາຄາ", hours: "ຂໍ້ມູນເວລາອາດເກົ່າ", checked: "ກວດຫຼ້າສຸດ 2 ເດືອນກ່ອນ", creator: "@morning.lao", image: "/laos-weaver.jpg", rating: "4.1", reviewCount: 34, distance: "4.8 km", tags: ["ສວນ", "ງຽບ", "ກາເຟເຊົ້າ"], reviewCreators: ["@morning.lao"], menu: [{ name: "Americano", price: "ລໍກວດສອບ", image: "/platform-cafe.jpg" }, { name: "ຊາດອກໄມ້", price: "ລໍກວດສອບ", image: "/laos-weaver.jpg" }], sourceAvailable: false },
 ];
 
 export default function InteractivePrototype() {
@@ -40,7 +40,7 @@ export default function InteractivePrototype() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<"all" | "restaurant" | "cafe">("all");
   const [resultView, setResultView] = useState<"video" | "list" | "map">("video");
-  const [notice, setNotice] = useState("Prototype R2 ພ້ອມສຳລັບ Founder Review 5 ຂໍ້");
+  const [notice, setNotice] = useState("Founder Review R2 ຜ່ານ · Prototype R2.1 ເພີ່ມຮູບໃນເມນູແລ້ວ");
   const [analytics, setAnalytics] = useState<"pending" | "essential" | "allowed">("pending");
   const [showTasks, setShowTasks] = useState(false);
   const essentialConsentRef = useRef<HTMLButtonElement>(null);
@@ -91,11 +91,11 @@ export default function InteractivePrototype() {
 
   return <main className={styles.stage}>
     <header className={styles.prototypeHeader}>
-      <div><strong>ພ້ອມໄປ · UX-03</strong><span>INTERACTIVE TEST PROTOTYPE · NOT PRODUCTION</span></div>
-      <nav><button onClick={() => setShowTasks((value) => !value)}>{showTasks ? "ປິດຄຳຖາມ" : "Founder Review · 5 ຂໍ້"}</button><a href={`${basePath}/documents/interactive-prototype`}>ກັບເອກະສານ</a></nav>
+      <div><strong>ພ້ອມໄປ · UX-03</strong><span>PROTOTYPE R2.1 · NOT PRODUCTION</span></div>
+      <nav><button onClick={() => setShowTasks((value) => !value)}>{showTasks ? "ປິດຜົນທົບທວນ" : "Founder Review R2 · ຜົນ"}</button><a href={`${basePath}/documents/interactive-prototype`}>ກັບເອກະສານ</a></nav>
     </header>
 
-    {showTasks ? <aside className={styles.tasks} aria-label="Founder review questions"><strong>Founder Review R2 · ຕອບຫຼັງຈາກລອງໃຊ້</strong><ol><li>ຮູ້ທັນທີບໍ່ວ່າ Platform ຕ່າງຈາກ Facebook/TikTok/Google ແນວໃດ?</li><li>Search ຊ່ວຍຄົ້ນຕາມເຈດຕະນາ ແລະປຽບທຽບໄດ້ດີພໍບໍ່?</li><li>Place Page ມີຂໍ້ມູນພໍໃຫ້ຕັດສິນໃຈໄປ/ບໍ່ໄປບໍ່?</li><li>Sponsored, rating/source ແລະ checked date ແຍກກັນຊັດບໍ່?</li><li>ຂໍ້ມູນໃດຂາດ, ເກີນ ຫຼືຄວນເລື່ອນໄປຫຼັງ MVP?</li></ol><p>ຕອບແຕ່ລະຂໍ້: ຜ່ານ / ຕ້ອງປັບ / ຍັງບໍ່ແນ່ໃຈ.</p></aside> : null}
+    {showTasks ? <aside className={styles.tasks} aria-label="Founder review results"><strong>Founder Review R2 · ຜ່ານໂດຍມີ 1 Minor Revision</strong><ol><li><b>ຜ່ານ:</b> Platform ມີຄວາມແຕກຕ່າງຊັດ.</li><li><b>ຜ່ານໃນລະດັບໜຶ່ງ:</b> Search ຊ່ວຍຄົ້ນ ແລະປຽບທຽບໄດ້.</li><li><b>ຜ່ານຫຼັງແກ້:</b> Place Page ຂໍ້ມູນຄົບ; Prototype R2.1 ເພີ່ມຮູບໃນເມນູແລ້ວ.</li><li><b>ຜ່ານ:</b> Sponsored, rating/source ແລະ checked date ແຍກຊັດ.</li><li><b>ຜ່ານ:</b> MVP scope ໂດຍລວມເໝາະສົມ.</li></ol><p>ຜົນນີ້ເປັນ Founder/Product Review; external usability evidence ຍັງບໍ່ທັນເລີ່ມ.</p></aside> : null}
 
     <section className={styles.device} aria-label="Mobile application prototype">
       <div className={styles.prototypeSurface} inert={analytics === "pending"} aria-hidden={analytics === "pending"}>
@@ -127,7 +127,7 @@ export default function InteractivePrototype() {
         <div className={styles.placeBody}>
           <section className={styles.decisionCard}><div><span>ສະຖານະ</span><strong>{selected.hours}</strong></div><div><span>ລາຄາ</span><strong>{selected.price}</strong></div><div><span>ໄລຍະທາງ</span><strong>{selected.distance}</strong></div><small>{selected.checked} · ລາຄາແມ່ນຂໍ້ມູນອ້າງອີງ</small></section>
           <section><div className={styles.sectionTitle}><div><span>VIDEO REVIEWS</span><h2>ຄົນອື່ນເວົ້າແນວໃດ?</h2></div><button onClick={() => setNotice("ສະແດງຣີວິວທັງໝົດ")}>ເບິ່ງທັງໝົດ</button></div><div className={styles.reviewRail}>{selected.reviewCreators.map((creator, index) => <button key={creator} onClick={() => setNotice(`ເປີດ original source ຂອງ ${creator}`)} style={{ backgroundImage: `linear-gradient(180deg, transparent, rgba(5,12,17,.86)), url(${basePath}${index % 2 ? "/platform-cafe.jpg" : selected.image})` }}><i>▶</i><span><strong>{creator}</strong><small>Original review ↗</small></span></button>)}</div></section>
-          <section><div className={styles.sectionTitle}><div><span>DETAILS</span><h2>{selected.category === "restaurant" ? "ເມນູ ແລະລາຄາ" : "ເມນູແນະນຳ"}</h2></div><button onClick={() => setNotice("ສະແດງເມນູທັງໝົດ")}>ເບິ່ງເມນູ</button></div><div className={styles.menuList}>{selected.menu.map((item) => <div key={item.name}><span>{item.name}</span><strong>{item.price}</strong></div>)}</div><p className={styles.freshness}>ລາຄາອາດປ່ຽນແປງ · {selected.checked}</p></section>
+          <section><div className={styles.sectionTitle}><div><span>DETAILS</span><h2>{selected.category === "restaurant" ? "ເມນູ ແລະລາຄາ" : "ເມນູແນະນຳ"}</h2></div><button onClick={() => setNotice("ສະແດງເມນູທັງໝົດ")}>ເບິ່ງເມນູ</button></div><div className={styles.menuList}>{selected.menu.map((item) => <div key={item.name}><i aria-hidden="true" style={{ backgroundImage: `url(${basePath}${item.image})` }}/><span><b>{item.name}</b><small>ຮູບຕົວຢ່າງ · Prototype</small></span><strong>{item.price}</strong></div>)}</div><p className={styles.freshness}>ຮູບ ແລະລາຄາເປັນຂໍ້ມູນຕົວຢ່າງ · {selected.checked}</p></section>
           <section><h2>ເໝາະກັບໃຜ?</h2><div className={styles.tagList}>{selected.tags.map((tag) => <span key={tag}>✓ {tag}</span>)}</div></section>
           <section><h2>ແຫຼ່ງຣີວິວ ແລະຄວາມໂປ່ງໃສ</h2>{selected.sourceAvailable ? <button className={styles.sourceCard} onClick={() => setNotice(`ເປີດ original source ຂອງ ${selected.creator}`)}><span><strong>{selected.creator}</strong><small>ຜູ້ສ້າງຣີວິວຕົ້ນສະບັບ</small></span><b>ເປີດຕົ້ນສະບັບ ↗</b></button> : <div className={styles.sourceMissing}><strong>Source ຖືກລົບ ຫຼືເບິ່ງບໍ່ໄດ້</strong><span>Place facts ຍັງສະແດງຕາມຫຼັກຖານທີ່ກວດໄດ້.</span></div>}</section>
           <section><div className={styles.sectionTitle}><div><span>DISCOVER MORE</span><h2>ຮ້ານທີ່ຄ້າຍຄືກັນ</h2></div></div><div className={styles.relatedGrid}>{relatedPlaces.map((place) => <button key={place.id} onClick={() => openPlace(place)}><i style={{ backgroundImage: `url(${basePath}${place.image})` }}/><span><strong>{place.name}</strong><small>★ {place.rating} · {place.distance}</small></span></button>)}</div></section>

@@ -356,8 +356,8 @@ const specs: Record<string, DocumentSpec> = {
 
   "ux-ui-wireframe": {
     code: "UX-02", title: "ໂຄງຮ່າງ UX/UI", english: "UX/UI Wireframe", owner: "Product Designer",
-    version: "1.1", status: "approved", statusLabel: "ອະນຸມັດ Founder Review Revision",
-    approvalNote: "ວັນທີ 28 ສິງຫາ 2026 ໄດ້ອະນຸມັດໃຫ້ປັບ Search ຈາກ generic list ເປັນ intent-led, video-first discovery ແລະປັບ Place Page ເປັນ decision page ທີ່ມີວິດີໂອຣີວິວ, ຄະແນນຈາກແຫຼ່ງອ້າງອີງ, ເມນູ/ລາຄາ, ຂໍ້ມູນສົດໃໝ່ ແລະສະຖານທີ່ຄ້າຍຄືກັນ. UX-02 1.1 ເປັນ Wireframe Baseline ທີ່ປັບຕາມ Founder Review; ບໍ່ແທນຜົນທົດສອບຜູ້ໃຊ້ພາຍນອກຂອງ UX-03.",
+    version: "1.2", status: "approved", statusLabel: "ອະນຸມັດ Founder Review R2 Revision",
+    approvalNote: "Founder Review R2 ວັນທີ 28 ສິງຫາ 2026 ຢືນຢັນວ່າ Video Search, Place decision page, Sponsored/source/freshness ແລະ MVP scope ຜ່ານ. ມີ Minor Revision 1 ຈຸດ: ເພີ່ມຮູບລາຍການໃນເມນູເພື່ອຊ່ວຍສ້າງຄວາມສົນໃຈ; ຖືກນຳໃຊ້ໃນ Prototype R2.1 ແລ້ວ. UX-02 1.2 ເປັນ Wireframe Baseline ທີ່ອະນຸມັດໂດຍ Founder; ບໍ່ແທນ external usability evidence.",
     sources: ["UX-01 1.0", "PRO-03 1.0", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-04 1.0", "CON-05 0.9"],
     purpose: ["ກຳນົດ Layout, Information Hierarchy, Interaction ແລະ System State ກ່ອນເລືອກສີ ຫຼືຮູບພາບສຸດທ້າຍ. Wireframe ເນັ້ນວ່າຜູ້ໃຊ້ເຫັນຫຍັງກ່ອນ, ກົດຢູ່ໃສ ແລະກັບຄືນ Context ໄດ້ແນວໃດ.", "Mobile-first width ເປັນ baseline. Discovery Feed ໃຊ້ວິດີໂອເຕັມ viewport; Place identity, trust label ແລະ action ຕ້ອງອ່ານໄດ້ໂດຍບໍ່ບັງເນື້ອຫາຫຼັກ."],
     sections: [
@@ -381,7 +381,7 @@ const specs: Record<string, DocumentSpec> = {
         ["2", "Primary action bar", "Map, Call, Message, Save", "disable unavailable action with reason"],
         ["3", "Decision summary", "open status, price band, distance, checked date", "report correction"],
         ["4", "Video review collection", "creator, platform, disclosure, multiple viewpoints", "open each original source"],
-        ["5", "Category-specific details", "restaurant menu/price; hotel room/photo/price band; attraction fee/time/facility", "view all details; show checked date"],
+        ["5", "Category-specific details", "restaurant menu item image/name/price; hotel room photo/type/price band; attraction image/fee/time/facility", "view all details; show checked date; label prototype/demo image"],
         ["6", "Suitability + trust", "tags, data freshness, rating attribution, unavailable source", "understand who it suits and evidence limits"],
         ["7", "Related places", "same category/area/price", "continue discovery without losing context"]
       ]},
@@ -404,7 +404,7 @@ const specs: Record<string, DocumentSpec> = {
     wireframes: [
       { title: "SCR-G01 · Discovery Feed", screen: "MOBILE · FULL VIEWPORT", blocks: ["TOP/SAFE AREA: Brand · Search · Mute/Media state", "MEDIA: Official embed / poster / unavailable fallback", "PLACE: Name · category · district · price · checked date", "ACTIONS: Map · Call · Message · View Place (separate ≥44×44 targets)", "SOURCE: Creator · Provider · Original link · Sponsored label", "NAV: Discover · Search"] },
       { title: "SCR-G02 · Search", screen: "MOBILE · VIDEO-FIRST SCROLL", blocks: ["HEADER: Intent question · Search field · Clear", "SUGGESTIONS: Nearby · Open late · Family · Budget", "FILTER: Category · District · Price · Distance · Open now", "VIEW: Video default · List compare · Map location", "RESULT: Video poster · rating/source count · distance · freshness · Sponsored label", "STATE: Loading · Empty · Error · Retry · preserve query/filter"] },
-      { title: "SCR-G03 · Place", screen: "MOBILE · DECISION PAGE", blocks: ["HERO: Primary review video · identity · rating/source count · disclosure", "STICKY ACTIONS: Map · Call · Message · Save", "DECISION: Open status · price · distance · checked date", "REVIEWS: Multiple creator videos + original-source links", "CATEGORY DETAILS: Menu/room/fee · photos · price · facility", "TRUST: Attribution · freshness · correction · unavailable source", "RELATED: same category/area/price → discovery"] },
+      { title: "SCR-G03 · Place", screen: "MOBILE · DECISION PAGE", blocks: ["HERO: Primary review video · identity · rating/source count · disclosure", "STICKY ACTIONS: Map · Call · Message · Save", "DECISION: Open status · price · distance · checked date", "REVIEWS: Multiple creator videos + original-source links", "CATEGORY DETAILS: Menu item image/name/price · room photo/type/price · attraction image/fee/facility", "TRUST: Attribution · freshness · correction · unavailable source", "RELATED: same category/area/price → discovery"] },
       { title: "SCR-G04 · Saved", screen: "MOBILE · SHOULD/DEFERRED", blocks: ["NOTICE: Saved on this device; no account sync", "EMPTY: Explain + return to Discover/Search", "LIST: Saved place cards · remove", "STATE: Storage unavailable/cleared", "NAV ENTRY: hidden until feature is released"] },
       { title: "SCR-G05 · Consent/Privacy", screen: "MOBILE · REQUIRED", blocks: ["INITIAL: Essential-only vs optional analytics choice", "DETAIL: Purpose · categories · settings link", "SETTINGS: Change/withdraw choice", "STATE: Essential-only · analytics allowed · save error", "COPY: pending final CON-05 legal approval"] },
       { title: "SCR-A01 · Admin Home", screen: "DESKTOP/TABLET · PROTECTED", blocks: ["SUMMARY: assigned · due · P0/P1 · publish readiness", "QUEUE TABS: Place/Data · Trust/Cases", "FILTER: state · priority · owner · age", "ROW: ID · subject · blocker · SLA · assignee", "STATE: Empty · Load error · Unauthorized · Session expired"] },
@@ -418,25 +418,24 @@ const specs: Record<string, DocumentSpec> = {
 
   "interactive-prototype": {
     code: "UX-03", title: "ຕົວຢ່າງໂຕ້ຕອບ ແລະການທົດສອບ", english: "Interactive Prototype & Usability Test", owner: "Product Designer / Research Lead",
-    version: "0.9.1", status: "pending", statusLabel: "Founder Review R1 ສຳເລັດ · Prototype R2 ພ້ອມໃຫ້ທົບທວນ",
-    approvalNote: "Founder/Product Review ວັນທີ 28 ສິງຫາ 2026 ພົບວ່າ Search ຍັງ generic ແລະ Place Page ຂາດຂໍ້ມູນຊ່ວຍຕັດສິນໃຈ. ຈຶ່ງປັບ Prototype R2 ໃຫ້ມີ intent-led Video Search, Video/List/Map view, ວິດີໂອຣີວິວຫຼາຍແຫຼ່ງ, ເມນູ/ລາຄາ, rating attribution, freshness ແລະ related places. UX-03 ຍັງຫ້າມຂຶ້ນ 1.0 ຈົນກວ່າຈະມີຫຼັກຖານການທົດສອບຜູ້ໃຊ້ພາຍນອກ.",
-    sources: ["UX-01 1.0", "UX-02 1.1", "PRO-03 G3", "PRO-04 0.9 UAT", "CON-04 1.0", "CON-05 0.9"],
+    version: "0.9.2", status: "pending", statusLabel: "Founder Review R2 ຜ່ານ · Minor Revision ສຳເລັດ",
+    approvalNote: "Founder Review R2 ວັນທີ 28 ສິງຫາ 2026 ຜ່ານທັງ 5 ຂໍ້: Product differentiation ຊັດ, Search ໃຊ້ໄດ້ດີໃນລະດັບໜຶ່ງ, Place Page ຂໍ້ມູນຄົບ, Trust labels ແຍກຊັດ ແລະ MVP scope ເໝາະສົມ. Minor Revision ຄືເພີ່ມຮູບໃນລາຍການເມນູ; ຖືກນຳໃຊ້ໃນ Prototype R2.1 ແລ້ວ. UX-03 ຍັງຄົງ 0.9.2 ເພາະ external usability evidence ຍັງບໍ່ທັນເລີ່ມ.",
+    sources: ["UX-01 1.0", "UX-02 1.2", "PRO-03 G3", "PRO-04 0.9 UAT", "CON-04 1.0", "CON-05 0.9"],
     purpose: ["UX-03 ມີໜ້າທີ່ກວດວ່າ Prototype ຊ່ວຍໃຫ້ຄົນຊອກຫາສະຖານທີ່ ແລະຕັດສິນໃຈໄປສະຖານທີ່ໄດ້ຈິງຫຼືບໍ່. ຕອນນີ້ທ່ານບໍ່ຈຳເປັນຕ້ອງອ່ານ Metric ຫຼືຕາຕະລາງທັງໝົດກ່ອນ; ໃຫ້ເລີ່ມຈາກຫົວຂໍ້ ‘ສິ່ງທີ່ທ່ານຕ້ອງເຮັດຕໍ່ໄປ’.", "Founder Review ໃຊ້ເພື່ອກວດວ່າ Prototype ສະທ້ອນ Vision ຂອງ Product ຫຼືບໍ່. ມັນຊ່ວຍປັບແນວຄິດໄດ້ ແຕ່ບໍ່ນັບແທນການທົດສອບຜູ້ໃຊ້ພາຍນອກ."],
     sections: [
-      { title: "ເລີ່ມຈາກນີ້ · ສິ່ງທີ່ທ່ານຕ້ອງເຮັດຕໍ່ໄປ", intro: "ຢ່າເລີ່ມຈາກຕາຕະລາງ Metric. ໃຫ້ເຮັດຕາມລຳດັບນີ້ກ່ອນ.", headers: ["ລຳດັບ", "ສິ່ງທີ່ຕ້ອງເຮັດ", "ສິ່ງທີ່ຕ້ອງສັງເກດ", "ຜົນທີ່ຕ້ອງໄດ້"], rows: [
-        ["1", "ເປີດ Interactive UX Prototype R2 ແລະກົດໃຊ້ສະເພາະຂໍ້ມູນທີ່ຈຳເປັນ", "ໜ້າທຳອິດສື່ວ່າເປັນ Video-first discovery ຊັດຫຼືບໍ່", "ບັນທຶກຄວາມເຂົ້າໃຈຄັ້ງທຳອິດ"],
-        ["2", "ເຂົ້າໜ້າຄົ້ນຫາ ແລະລອງ Intent suggestion, Category, Video/List/Map", "ສາມາດຊອກຕາມຄວາມຕ້ອງການໄດ້ງ່າຍກວ່າ Search ທົ່ວໄປຫຼືບໍ່", "ບັນທຶກຈຸດທີ່ຍັງ generic ຫຼືຊ້ຳຊ້ອນ"],
-        ["3", "ເປີດຮ້ານໜຶ່ງແຫ່ງ ແລະເບິ່ງວິດີໂອ, ຂໍ້ມູນ, ເມນູ/ລາຄາ, trust ແລະ related places", "ຂໍ້ມູນພໍໃຫ້ຕັດສິນໃຈໄປ/ບໍ່ໄປຫຼືບໍ່", "ລາຍຊື່ຂໍ້ມູນທີ່ຍັງຂາດ ຫຼືຫຼາຍເກີນໄປ"],
-        ["4", "ກວດປ້າຍ Sponsored, Original source ແລະ checked date", "ແຍກໄດ້ບໍ່ວ່າອັນໃດເປັນໂຄສະນາ, ອັນໃດເປັນຣີວິວ ແລະຂໍ້ມູນເກົ່າຫຼືໃໝ່", "Trust feedback ສຳລັບຮອບປັບຕໍ່ໄປ"],
-        ["5", "ຕອບ 5 ຄຳຖາມ Founder Review ໃນຫົວຂໍ້ຖັດໄປ", "ຕອບຈາກການນຳໃຊ້ຈິງ ບໍ່ແມ່ນຈາກຄວາມງາມຢ່າງດຽວ", "ຂໍ້ຕັດສິນ: ປັບອີກຮອບ ຫຼືພ້ອມທົດສອບພາຍນອກ"]
-      ], note: "ວຽກຕໍ່ໄປຂອງທ່ານແມ່ນກວດ Prototype R2 ແລະຕອບ Founder Review ເທົ່ານັ້ນ. ຍັງບໍ່ຈຳເປັນ recruit 5 ຄົນຈົນກວ່າ Prototype direction ຈະຖືກຢືນຢັນ."},
-      { title: "5 ຄຳຖາມ Founder Review ສຳລັບ Prototype R2", intro: "ຫຼັງຈາກລອງໃຊ້ ໃຫ້ຕອບແຕ່ລະຂໍ້ວ່າ ‘ຜ່ານ’, ‘ຕ້ອງປັບ’ ຫຼື ‘ຍັງບໍ່ແນ່ໃຈ’ ພ້ອມເຫດຜົນສັ້ນໆ.", headers: ["ID", "ຄຳຖາມ", "ເຫດຜົນທີ່ຖາມ", "ສະຖານະ"], rows: [
-        ["FR2-01", "ເມື່ອເປີດແອັບ ຮູ້ທັນທີບໍ່ວ່າແພລັດຟອມນີ້ຕ່າງຈາກ Facebook/TikTok/Google ແນວໃດ?", "ກວດ Product differentiation", "ລໍ Founder Review R2"],
-        ["FR2-02", "ໜ້າຄົ້ນຫາຊ່ວຍຊອກຕາມເຈດຕະນາ ແລະປຽບທຽບສະຖານທີ່ໄດ້ດີພໍຫຼືບໍ່?", "ກວດ Search value", "ລໍ Founder Review R2"],
-        ["FR2-03", "ໜ້າຮ້ານມີຂໍ້ມູນພໍໃຫ້ຕັດສິນໃຈໄປ/ບໍ່ໄປຫຼືບໍ່?", "ກວດ Decision completeness", "ລໍ Founder Review R2"],
-        ["FR2-04", "ວິດີໂອ, Sponsored, rating/source ແລະວັນທີກວດຂໍ້ມູນແຍກກັນຊັດຫຼືບໍ່?", "ກວດ Trust comprehension", "ລໍ Founder Review R2"],
-        ["FR2-05", "ມີຂໍ້ມູນໃດຂາດ, ເກີນ ຫຼືຄວນເລື່ອນໄປຫຼັງ MVP?", "ຄວບຄຸມ MVP scope", "ລໍ Founder Review R2"]
-      ]},
+      { title: "ເລີ່ມຈາກນີ້ · ສະຖານະ ແລະວຽກຕໍ່ໄປ", intro: "Founder Review R2 ສຳເລັດແລ້ວ. ຕາຕະລາງນີ້ບອກວ່າອັນໃດສຳເລັດ ແລະອັນໃດຍັງລໍ.", headers: ["ລຳດັບ", "ວຽກ", "ຜົນ", "ສະຖານະ"], rows: [
+        ["1", "Founder Review R2: ກວດ Product differentiation, Search, Place, Trust ແລະ MVP scope", "ຜ່ານທັງ 5 ຂໍ້", "ສຳເລັດ"],
+        ["2", "Minor Revision: ເພີ່ມຮູບໃນລາຍການເມນູ", "Prototype R2.1 ສະແດງ thumbnail, ຊື່, ລາຄາ ແລະປ້າຍຮູບຕົວຢ່າງ", "ສຳເລັດ"],
+        ["3", "ຢືນຢັນ Prototype R2.1 ຫຼັງກວດຮູບເມນູ", "ຖ້າບໍ່ມີ Feedback ເພີ່ມ ໃຫ້ຖືວ່າ Founder direction ປິດຮອບ", "ລໍການຢືນຢັນສຸດທ້າຍ"],
+        ["4", "Formative test ກັບຜູ້ໃຊ້ພາຍນອກ 5 ຄົນ", "ເລີ່ມຫຼັງ Prototype R2.1 ຖືກຢືນຢັນ", "ຍັງບໍ່ເລີ່ມ"]
+      ], note: "ວຽກດ່ວນທີ່ເຫຼືອມີພຽງກວດຮູບເມນູໃນ Prototype R2.1. ສ່ວນການ recruit 5 ຄົນແມ່ນຂັ້ນຖັດໄປ ແລະຍັງບໍ່ຖືກນັບວ່າສຳເລັດ."},
+      { title: "ຜົນ 5 ຄຳຖາມ Founder Review R2", intro: "ຄຳຕອບຕໍ່ໄປນີ້ຖືກບັນທຶກຕາມ Feedback ຂອງ Founder ແລະໃຊ້ເປັນ Product Direction.", headers: ["ID", "ຫົວຂໍ້", "ຄຳຕອບ/ຫຼັກຖານ", "ຜົນ"], rows: [
+        ["FR2-01", "Product differentiation", "ຮູ້ສຶກໄດ້ວ່າ Platform ແຕກຕ່າງຈາກ Facebook/TikTok/Google", "ຜ່ານ"],
+        ["FR2-02", "Search value", "Search ຊ່ວຍຄົ້ນຕາມເຈດຕະນາ ແລະປຽບທຽບໄດ້ດີໃນລະດັບໜຶ່ງ", "ຜ່ານ · ຕິດຕາມໃນ external test"],
+        ["FR2-03", "Place decision completeness", "ຂໍ້ມູນຄົບຖ້ວນ; ຂໍເພີ່ມຮູບລາຍການໃນເມນູເພື່ອສ້າງຄວາມສົນໃຈ", "ຜ່ານຫຼັງແກ້ · Implemented R2.1"],
+        ["FR2-04", "Trust comprehension", "Sponsored, rating/source ແລະ checked date ແຍກກັນຊັດເຈນ", "ຜ່ານ"],
+        ["FR2-05", "MVP scope", "ຂໍ້ມູນໂດຍລວມຄົບ ແລະຂອບເຂດເໝາະສົມ", "ຜ່ານ"]
+      ], note: "Decision: Founder Review R2 ຜ່ານໂດຍມີ Minor Revision 1 ຈຸດ. ບໍ່ມີຂໍ້ປ່ຽນແປງ MVP scope ຫຼື Trust model."},
       { title: "Founder/Product Review R1 · ຜົນທີ່ບັນທຶກແລ້ວ", intro: "ຜົນນີ້ມາຈາກ Founder walkthrough ແລະໃຊ້ເປັນ Design Direction; ບໍ່ນັບເປັນ external usability evidence.", headers: ["Finding", "ຫຼັກຖານ/Feedback", "ຂໍ້ຕັດສິນ", "ສະຖານະ"], rows: [
         ["FR1-01 Search ທົ່ວໄປເກີນໄປ", "Search UI simple ແລະພົບໄດ້ທົ່ວໄປ; ບໍ່ສະແດງຈຸດເດັ່ນຂອງ platform", "ປັບເປັນ intent-led search ພ້ອມ Video/List/Map results", "Implemented in Prototype R2"],
         ["FR1-02 Place Page ບໍ່ດຶງດູດ", "ຂາດວິດີໂອຣີວິວ, related places, rating/comment ແລະ category-specific details", "ເພີ່ມ review collection, attributed rating, menu/price, freshness, suitability tags ແລະ related places", "Implemented in Prototype R2"],
@@ -482,19 +481,19 @@ const specs: Record<string, DocumentSpec> = {
         ["F-03 Session", "30–40 ນາທີ/ຄົນ: consent, warm-up, T-01—T-05, short debrief. ຊ່ວຍເມື່ອ participant ຕິດ ແລະບັນທຶກ assistance_count.", "Moderator + Note taker", "5 session records + 25 task rows; observation ແຍກຈາກ interpretation"],
         ["F-04 Synthesis", "ລວມ finding ຕາມ task/screen; ໃຫ້ severity S1—S4 ຈາກ impact + frequency; ຢ່າສະຫຼຸບຈາກຄຳວ່າ ‘ມັກ’.", "Designer + Research Lead", "Finding register, evidence reference, recommended change ແລະ owner"],
         ["F-05 Decision", "ແກ້ S1/S2 ກ່ອນຮອບຖັດໄປ; S3 ຕັດສິນຕາມ scope; S4 ເຂົ້າ backlog.", "Product Owner", "Revision record; S1/S2 retest plan; go/repeat decision"],
-        ["F-06 Status boundary", "ຊຸດເອກະສານພ້ອມສຳລັບ recruitment ແຕ່ຍັງບໍ່ມີ real-user result.", "Product Owner", "UX-03 ຄົງ 0.9.1 ຈົນ evidence ແລະ pass gate ຄົບ"]
+        ["F-06 Status boundary", "ຊຸດເອກະສານພ້ອມສຳລັບ recruitment ແຕ່ຍັງບໍ່ມີ real-user result.", "Product Owner", "UX-03 ຄົງ 0.9.2 ຈົນ evidence ແລະ pass gate ຄົບ"]
       ]}
     ],
     review: ["ອະນຸມັດ participant mix 8/6/4/2 ຫຼືຕ້ອງປັບ?", "Prototype ຈະສ້າງດ້ວຍ Web ຫຼື design tool ໃດ?", "ໃຜເປັນ moderator ແລະ note taker?", "ອະນຸມັດ 5 mandatory tasks ແລະ severity model ຫຼືບໍ່?", "ກຳນົດ task-success threshold ເທົ່າໃດກ່ອນ UX-05 final design?"],
     reviewDecisions: ["ອະນຸມັດ validation mix 8 frequent social searchers, 6 search/map-first, 4 low-confidence digital users ແລະ 2 place owners; ກ່ອນນັ້ນເຮັດ formative round 5 ຄົນ.", "ໃຊ້ Web Prototype ເພື່ອທົດສອບ swipe/navigation, media fallback, trust label ແລະ external action ໃກ້ຄຽງຂອງຈິງ.", "Founder/Product Owner ເປັນ moderator ໃນ Pilot; note taker ຄວນເປັນອີກຄົນ. ຖ້າມີຄົນດຽວ ຕ້ອງຂໍ consent ບັນທຶກ session ແລະຕື່ມ observation ທັນທີຫຼັງ session.", "ອະນຸມັດ T-01—T-05 ແລະ S1—S4; S1/S2 ຕ້ອງແກ້ ແລະ retest.", "ອະນຸມັດ Core task ≥80%, Map action ≥90%, Sponsored comprehension ≥80%, unresolved S1 = 0 ແລະ S2 ທຸກອັນຕ້ອງ retest ກ່ອນ UX-05 final approval."],
-    artifacts: [{ label: "Interactive UX Prototype R2", path: "/prototype", action: "open", description: "ເລີ່ມຈາກໄຟລ໌ນີ້: Prototype ເວັບສຳລັບ Founder Review R2 ແລະການທົດສອບ 5 tasks; ບໍ່ແມ່ນ Production MVP." }, { label: "formative-recruitment-message.md", path: "/templates/formative-recruitment-message.md", description: "ໃຊ້ພາຍຫຼັງ Founder Review R2 ຜ່ານ: ຂໍ້ຄວາມເຊີນຜູ້ທົດສອບພາຍນອກ." }, { label: "formative-participant-screener.csv", path: "/templates/formative-participant-screener.csv", description: "ໃຊ້ຄັດກອງ 5 participants ໂດຍໃຊ້ Participant ID ແທນຊື່." }, { label: "formative-session-tracker.csv", path: "/templates/formative-session-tracker.csv", description: "ໃຊ້ຫຼັງນັດໝາຍ: ຕິດຕາມການຕິດຕໍ່, ວັນເວລາ, consent ແລະ session." }, { label: "formative-consent-log.csv", path: "/templates/formative-consent-log.csv", description: "ໃຊ້ກ່ອນແຕ່ລະ session: ບັນທຶກການຍິນຍອມເຂົ້າຮ່ວມ ແລະການບັນທຶກຈໍ/ສຽງ." }, { label: "formative-usability-test-guide.md", path: "/templates/formative-usability-test-guide.md", description: "ໃຊ້ລະຫວ່າງ session: Moderator script, T-01—T-05, observation rule ແລະ session close." }, { label: "usability-test-record.template.csv", path: "/templates/usability-test-record.template.csv", description: "ໃຊ້ລະຫວ່າງ/ຫຼັງ session: ບັນທຶກ completion, time, wrong turns, assistance, finding ແລະ severity." }, { label: "formative-test-summary.template.json", path: "/templates/formative-test-summary.template.json", description: "ໃຊ້ຫຼັງຈົບທຸກ session: ລວມ task rate, findings, revision, retest ແລະ go/repeat decision." }]
+    artifacts: [{ label: "Interactive UX Prototype R2.1", path: "/prototype", action: "open", description: "Prototype ຫຼັງ Founder Review R2: ເພີ່ມຮູບລາຍການໃນເມນູ ແລະພ້ອມໃຫ້ກວດ Minor Revision; ບໍ່ແມ່ນ Production MVP." }, { label: "formative-recruitment-message.md", path: "/templates/formative-recruitment-message.md", description: "ໃຊ້ພາຍຫຼັງ Founder Review R2 ຜ່ານ: ຂໍ້ຄວາມເຊີນຜູ້ທົດສອບພາຍນອກ." }, { label: "formative-participant-screener.csv", path: "/templates/formative-participant-screener.csv", description: "ໃຊ້ຄັດກອງ 5 participants ໂດຍໃຊ້ Participant ID ແທນຊື່." }, { label: "formative-session-tracker.csv", path: "/templates/formative-session-tracker.csv", description: "ໃຊ້ຫຼັງນັດໝາຍ: ຕິດຕາມການຕິດຕໍ່, ວັນເວລາ, consent ແລະ session." }, { label: "formative-consent-log.csv", path: "/templates/formative-consent-log.csv", description: "ໃຊ້ກ່ອນແຕ່ລະ session: ບັນທຶກການຍິນຍອມເຂົ້າຮ່ວມ ແລະການບັນທຶກຈໍ/ສຽງ." }, { label: "formative-usability-test-guide.md", path: "/templates/formative-usability-test-guide.md", description: "ໃຊ້ລະຫວ່າງ session: Moderator script, T-01—T-05, observation rule ແລະ session close." }, { label: "usability-test-record.template.csv", path: "/templates/usability-test-record.template.csv", description: "ໃຊ້ລະຫວ່າງ/ຫຼັງ session: ບັນທຶກ completion, time, wrong turns, assistance, finding ແລະ severity." }, { label: "formative-test-summary.template.json", path: "/templates/formative-test-summary.template.json", description: "ໃຊ້ຫຼັງຈົບທຸກ session: ລວມ task rate, findings, revision, retest ແລະ go/repeat decision." }]
   },
 
   "design-system": {
     code: "UX-04", title: "ລະບົບການອອກແບບ", english: "Design System", owner: "Design System Owner / Frontend Lead",
     version: "0.9", status: "pending", statusLabel: "Token/Prototype QA ຜ່ານ · ລໍ Assistive Tech ແລະ Admin States",
     approvalNote: "ການກວດຮອບວັນທີ 27 ສິງຫາ 2026 ຢືນຢັນຄູ່ສີ semantic ທີ່ກຳນົດ, touch target, focus-visible, consent dialog/inert background ແລະ reduced-motion rule. ພົບວ່າສີຂາວເທິງ Accent #F27A45 ມີ contrast 2.75:1 ຈຶ່ງຫ້າມໃຊ້ ແລະກຳນົດ on_accent #17221F ທີ່ 5.95:1. UX-04 ຍັງຄົງ 0.9 ຈົນກວ່າ VoiceOver/NVDA, Lao text 200% ແລະ full component/admin states ຈະຜ່ານ.",
-    sources: ["UX-02 1.1", "UX-03 0.9.1", "PRO-04 0.9 NFR-01/02/04", "CON-02 1.0", "CON-04 1.0", "CON-05 0.9", "Brand direction"],
+    sources: ["UX-02 1.2", "UX-03 0.9.2", "PRO-04 0.9 NFR-01/02/04", "CON-02 1.0", "CON-04 1.0", "CON-05 0.9", "Brand direction"],
     purpose: ["ກຳນົດ Design Token, Typography, Color, Spacing, Component, State ແລະ Accessibility Contract ເພື່ອໃຫ້ Designer ແລະ Developer ສ້າງຫນ້າຈໍດ້ວຍພາສາດຽວກັນ.", "Design System ຕ້ອງຮອງຮັບພາສາລາວ, ຕົວເລກກີບ, ຂໍ້ຄວາມຍາວ, full-screen media, low-bandwidth fallback ແລະ keyboard/screen-reader behavior. ສີບໍ່ຄວນເປັນວິທີດຽວໃນການບອກ State."],
     sections: [
       { title: "Foundations ແລະ Tokens", intro: "Token ໃຊ້ semantic name ເພື່ອປ່ຽນ theme ໄດ້ໂດຍບໍ່ແກ້ component ທຸກອັນ.", headers: ["Token group", "Baseline", "Usage", "ກົດ"], rows: [
@@ -557,7 +556,7 @@ const specs: Record<string, DocumentSpec> = {
     code: "UX-05", title: "ການອອກແບບ UX/UI ສົມບູນ", english: "Full UX/UI Design", owner: "Product Designer / Frontend Lead",
     version: "0.5", status: "pending", statusLabel: "Handoff contract ພ້ອມ · Final Design ຍັງບໍ່ສຳເລັດ",
     approvalNote: "ສະບັບ 0.5 ກຳນົດວ່າ Final Design Package ຕ້ອງມີຫຍັງ; ມັນຍັງບໍ່ແມ່ນ Final Screen ທີ່ອະນຸມັດ. Designer ສາມາດເລີ່ມ Happy path ໄດ້ ແຕ່ UX-05 ຫ້າມຂຶ້ນ 1.0 ຈົນ UX test, system states, technical constraints ແລະ sign-off evidence ຄົບ.",
-    sources: ["UX-01 1.0", "UX-02 1.1", "UX-03 0.9.1", "UX-04 0.9", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-03 0.9", "CON-04 1.0", "CON-05 0.9", "TEC-01/02 pending"],
+    sources: ["UX-01 1.0", "UX-02 1.2", "UX-03 0.9.2", "UX-04 0.9", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-03 0.9", "CON-04 1.0", "CON-05 0.9", "TEC-01/02 pending"],
     purpose: ["ກຳນົດຂອບເຂດ Final Screen, Responsive Behavior, System State, Prototype Link, Asset ແລະ Developer Handoff ທີ່ຕ້ອງຄົບກ່ອນເລີ່ມ Frontend implementation.", "UX-05 ບໍ່ຄວນຖືກອະນຸມັດຈາກ Happy-path screen ເທົ່ານັ້ນ. Loading, Empty, Error, Stale, Sponsored, Permission, Conflict ແລະ External Fallback ຕ້ອງຖືກອອກແບບ ແລະຜູກກັບ Requirement/Screen ID."],
     sections: [
       { title: "Final Screen Inventory", intro: "Screen ທີ່ລະບຸເປັນ Must ຕ້ອງມີ mobile final design, responsive rule, state set ແລະ annotation.", headers: ["Screen ID", "Screen", "Priority", "Required deliverables"], rows: [
@@ -604,7 +603,7 @@ const specs: Record<string, DocumentSpec> = {
         ["Review record", "open issue, deviation, approval", "Product Owner", "signed version baseline"]
       ]},
       { title: "Approval Gates ແລະ Sign-off", intro: "UX-05 1.0 ແມ່ນຄຳຢືນຢັນວ່າ package ພ້ອມໃຫ້ Developer ສ້າງໂດຍບໍ່ເດົາ. ການມີຮູບ Happy path ສວຍງາມບໍ່ພຽງພໍ.", headers: ["Gate", "ຕ້ອງມີ", "Signer", "ສະຖານະ"], rows: [
-        ["G-UX1 Structure", "UX-01 1.0; UX-02 1.1; screen/route/state traceability", "Product Owner + SA", "Passed · UX-01 1.0 / UX-02 1.1"],
+        ["G-UX1 Structure", "UX-01 1.0; UX-02 1.2; screen/route/state traceability", "Product Owner + SA", "Passed · UX-01 1.0 / UX-02 1.2"],
         ["G-UX2 Evidence", "UX-03 1.0; session/task/finding/retest records; pass thresholds", "Research Lead + Product Owner", "Pending real-user testing"],
         ["G-UX3 System", "UX-04 1.0; tokens/components/accessibility QA", "Design System Owner + Frontend Lead", "Pending palette/component QA"],
         ["G-UX4 Content/Trust", "PRO-04 1.0; CON-02/04 1.0; UI-impact decisions from CON-01/03/05", "Content/Trust Owner", "Partially pending"],
@@ -653,7 +652,7 @@ export default function ContentDesignDocument({ slug, basePath }: { slug: string
       <h3>1.1 ປະຫວັດການແກ້ໄຂ</h3>
       <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ສະບັບ</th><th>ວັນທີ</th><th>ລາຍລະອຽດ</th><th>ສະຖານະ</th></tr></thead><tbody>
         <tr><td>0.1</td><td>26 ສິງຫາ 2026</td><td>ຈັດທຳ baseline, policy/matrix ແລະຄຳຖາມສຳລັບການທົບທວນຄັ້ງທຳອິດ</td><td>ຮ່າງ</td></tr>
-        {spec.version ? <tr><td>{version}</td><td>{documentDate}</td><td>{slug === "ux-ui-wireframe" || slug === "interactive-prototype" ? "ບັນທຶກ Founder Review, ປັບ Search/Place direction ແລະກຳນົດວຽກທົບທວນ Prototype R2" : "ບັນທຶກ REV-01 ຫາ REV-05 ແລະປັບ Policy, Threshold ແລະ Ownership ຕາມທີ່ອະນຸມັດ"}</td><td>{statusLabel}</td></tr> : null}
+        {spec.version ? <tr><td>{version}</td><td>{documentDate}</td><td>{slug === "ux-ui-wireframe" || slug === "interactive-prototype" ? "ບັນທຶກ Founder Review R1/R2, ປັບ Search/Place direction ແລະເພີ່ມຮູບເມນູໃນ Prototype R2.1" : "ບັນທຶກ REV-01 ຫາ REV-05 ແລະປັບ Policy, Threshold ແລະ Ownership ຕາມທີ່ອະນຸມັດ"}</td><td>{statusLabel}</td></tr> : null}
       </tbody></table></div>
     </section>
 
