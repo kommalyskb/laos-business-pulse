@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import styles from "../documents.module.css";
 
 type MatrixSection = {
@@ -10,6 +11,9 @@ type MatrixSection = {
 
 type Wireframe = { title: string; screen: string; blocks: string[] };
 type OperationalArtifact = { label: string; path: string; description: string; action?: "download" | "open" };
+
+const canPreviewArtifact = (path: string) => /\.(md|csv|json|css)$/i.test(path);
+const artifactFileName = (path: string) => path.split("/").pop() ?? path;
 
 type DocumentSpec = {
   code: string;
@@ -651,7 +655,7 @@ export default function ContentDesignDocument({ slug, basePath }: { slug: string
 
     {spec.wireframes ? <section className={styles.formalSection} id="wireframes"><h2><span>{wireframeNumber}.</span> Low-fidelity Wireframes</h2><p>ແຜນຜັງຕໍ່ໄປນີ້ສະແດງລຳດັບຂໍ້ມູນ ແລະ interaction zone; ບໍ່ແມ່ນ visual design ສຸດທ້າຍ.</p><div className={styles.formalWireframeGrid}>{spec.wireframes.map((wireframe) => <figure className={styles.formalWireframe} key={wireframe.title}><figcaption><strong>{wireframe.title}</strong><span>{wireframe.screen}</span></figcaption><div>{wireframe.blocks.map((block) => <p key={block}>{block}</p>)}</div></figure>)}</div></section> : null}
 
-    {spec.artifacts ? <section className={styles.formalSection} id="artifacts"><h2><span>{artifactNumber}.</span> ແບບຟອມ ແລະໄຟລ໌ນຳໃຊ້</h2><p>ໄຟລ໌ເຫຼົ່ານີ້ແປງຂໍ້ກຳນົດໃນເອກະສານໃຫ້ເປັນແບບຟອມທີ່ Content Team, Trust &amp; Safety, Designer ແລະ Developer ສາມາດນຳໄປໃຊ້ໄດ້. ຄ່າທີ່ຂຽນວ່າ pending ຍັງຫ້າມນຳໄປໃຊ້ເປັນ Production Rule.</p><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ໄຟລ໌/ຕົວຢ່າງ</th><th>ຈຸດປະສົງ</th><th>ການນຳໃຊ້</th></tr></thead><tbody>{spec.artifacts.map((artifact) => <tr key={artifact.path}><td><strong>{artifact.label}</strong></td><td>{artifact.description}</td><td>{artifact.action === "open" ? <a href={`${basePath}${artifact.path}`}>ເປີດເບິ່ງ</a> : <a href={`${basePath}${artifact.path}`} download>ດາວໂຫຼດໄຟລ໌</a>}</td></tr>)}</tbody></table></div></section> : null}
+    {spec.artifacts ? <section className={styles.formalSection} id="artifacts"><h2><span>{artifactNumber}.</span> ແບບຟອມ ແລະໄຟລ໌ນຳໃຊ້</h2><p>ໄຟລ໌ເຫຼົ່ານີ້ແປງຂໍ້ກຳນົດໃນເອກະສານໃຫ້ເປັນແບບຟອມທີ່ Content Team, Trust &amp; Safety, Designer ແລະ Developer ສາມາດນຳໄປໃຊ້ໄດ້. ກົດ “ພຣີວິວ” ເພື່ອອ່ານ Markdown, CSV, JSON ຫຼື CSS ໃນໜ້າເວັບກ່ອນດາວໂຫຼດ. ຄ່າທີ່ຂຽນວ່າ pending ຍັງຫ້າມນຳໄປໃຊ້ເປັນ Production Rule.</p><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ໄຟລ໌/ຕົວຢ່າງ</th><th>ຈຸດປະສົງ</th><th>ການນຳໃຊ້</th></tr></thead><tbody>{spec.artifacts.map((artifact) => <tr key={artifact.path}><td><strong>{artifact.label}</strong></td><td>{artifact.description}</td><td><div className={styles.artifactActions}>{artifact.action === "open" ? <a href={`${basePath}${artifact.path}`}>ເປີດເບິ່ງ</a> : <Fragment>{canPreviewArtifact(artifact.path) ? <a href={`${basePath}/artifact-preview?file=${encodeURIComponent(artifactFileName(artifact.path))}&from=${encodeURIComponent(slug)}`}>ພຣີວິວ</a> : null}<a href={`${basePath}${artifact.path}`} download>ດາວໂຫຼດ</a></Fragment>}</div></td></tr>)}</tbody></table></div></section> : null}
 
     <section className={styles.formalSection} id="review"><h2><span>{reviewNumber}.</span> {spec.reviewDecisions ? "ບັນທຶກຂໍ້ຕັດສິນ" : "ຂໍ້ຕ້ອງທົບທວນກ່ອນຂຶ້ນສະບັບ 1.0"}</h2>
       <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>ຫົວຂໍ້ທົບທວນ</th>{spec.reviewDecisions ? <th>ຂໍ້ຕັດສິນ</th> : null}<th>ສະຖານະ</th></tr></thead><tbody>{spec.review.map((item, index) => { const decision = spec.reviewDecisions?.[index]; const pending = decision?.includes("ຍັງຄ້າງ"); return <tr key={item}><td>REV-{String(index + 1).padStart(2, "0")}</td><td>{item}</td>{spec.reviewDecisions ? <td>{decision}</td> : null}<td>{decision ? (pending ? "ຍັງຄ້າງ" : "ອະນຸມັດ") : "ລໍທົບທວນ"}</td></tr>; })}</tbody></table></div>
