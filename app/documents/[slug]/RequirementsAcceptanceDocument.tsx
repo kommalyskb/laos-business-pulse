@@ -50,19 +50,22 @@ export default function RequirementsAcceptanceDocument({ basePath }: { basePath:
         <p>PRO-04 · PRODUCT &amp; ANALYSIS</p>
         <h1>Requirements &amp; Acceptance Criteria</h1>
         <h2>ຂໍ້ກຳນົດຂອງລະບົບ ແລະເງື່ອນໄຂການຮັບມອບ</h2>
-        <div className={`${styles.formalStatus} ${styles.formalDraftStatus}`}>ສະບັບ 0.1 · ຮ່າງສຳລັບທົບທວນ · 26 ສິງຫາ 2026</div>
+        <div className={`${styles.formalStatus} ${styles.formalDraftStatus}`}>ສະບັບ 0.9 · ອະນຸມັດເກນແລ້ວ · ລໍ Consent/Retention Baseline · 27 ສິງຫາ 2026</div>
       </header>
 
       <section className={styles.formalSection} id="rac-control">
         <h2><span>1.</span> ຂໍ້ມູນຄວບຄຸມເອກະສານ</h2>
         <div className={styles.formalTableWrap}><table className={styles.formalTable}><tbody>
-          <tr><th>ລະຫັດເອກະສານ</th><td>PRO-04</td><th>ສະບັບ</th><td>0.1</td></tr>
-          <tr><th>ຊື່ເອກະສານ</th><td>Requirements &amp; Acceptance Criteria</td><th>ສະຖານະ</th><td>ຮ່າງສຳລັບທົບທວນ</td></tr>
+          <tr><th>ລະຫັດເອກະສານ</th><td>PRO-04</td><th>ສະບັບ</th><td>0.9</td></tr>
+          <tr><th>ຊື່ເອກະສານ</th><td>Requirements &amp; Acceptance Criteria</td><th>ສະຖານະ</th><td>ອະນຸມັດເກນແລ້ວ · ລໍ Consent/Retention Baseline</td></tr>
           <tr><th>ເຈົ້າຂອງເອກະສານ</th><td>Product Owner / System Analyst</td><th>ຜູ້ທົບທວນ</th><td>Tech Lead · QA Lead · Operations</td></tr>
           <tr><th>ເອກະສານຕົ້ນທາງ</th><td colSpan={3}>PRO-01 1.0 · PRO-02 1.0 · PRO-03 1.0</td></tr>
         </tbody></table></div>
         <h3>1.1 ປະຫວັດການແກ້ໄຂ</h3>
-        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ສະບັບ</th><th>ວັນທີ</th><th>ລາຍລະອຽດ</th><th>ຜູ້ຈັດທຳ</th></tr></thead><tbody><tr><td>0.1</td><td>26 ສິງຫາ 2026</td><td>ຈັດທຳ 13 Requirements, {acceptanceCount} Acceptance Criteria, Test Policy ແລະ Traceability ສຳລັບທົບທວນ</td><td>System Analyst</td></tr></tbody></table></div>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ສະບັບ</th><th>ວັນທີ</th><th>ລາຍລະອຽດ</th><th>ຜູ້ຈັດທຳ</th></tr></thead><tbody>
+          <tr><td>0.1</td><td>26 ສິງຫາ 2026</td><td>ຈັດທຳ 13 Requirements, {acceptanceCount} Acceptance Criteria, Test Policy ແລະ Traceability ສຳລັບທົບທວນ</td><td>System Analyst</td></tr>
+          <tr><td>0.9</td><td>27 ສິງຫາ 2026</td><td>ອະນຸມັດ Acceptance Authority, Test Environment/Data, Defect Policy, Pilot Performance Target, UAT Journey ແລະ Evidence Contract</td><td>Product Owner / System Analyst</td></tr>
+        </tbody></table></div>
       </section>
 
       <nav className={styles.formalToc} aria-label="ສາລະບານ PRO-04"><h2>ສາລະບານ</h2><ol>
@@ -121,6 +124,14 @@ export default function RequirementsAcceptanceDocument({ basePath }: { basePath:
         <h2><span>6.</span> ວິທີການກວດສອບ</h2>
         <p>Acceptance Criterion ໜຶ່ງຂໍ້ອາດຕ້ອງມີຫຼາຍກວ່າໜຶ່ງ Test Level. ຕົວຢ່າງ: Authorization Rule ອາດຕ້ອງມີ Unit Test, API Contract Test, Integration Test ແລະ End-to-End Test.</p>
         <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Level</th><th>ປະເພດ</th><th>ສິ່ງທີ່ກວດ</th><th>ຜູ້ຮັບຜິດຊອບ</th><th>Evidence</th></tr></thead><tbody>{testLevels.map(([id, type, purpose, owner, evidence]) => <tr key={id}><td>{id}</td><td><strong>{type}</strong></td><td>{purpose}</td><td>{owner}</td><td>{evidence}</td></tr>)}</tbody></table></div>
+        <h3>6.1 ເປົ້າໝາຍ Performance ສຳລັບ Pilot</h3>
+        <p>ຄ່າຕໍ່ໄປນີ້ເປັນ Pilot Baseline ແລະຕ້ອງຖືກກວດໃນ Android ລະດັບກາງ, Mobile Viewport ແລະເຄືອຂ່າຍຈຳລອງ 4G ທົ່ວໄປ. Technical Proposal ສາມາດປັບເກນໃຫ້ເຂັ້ມຂຶ້ນ ແຕ່ຫ້າມຫຼຸດເກນໂດຍບໍ່ມີ Change Decision.</p>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>ສິ່ງທີ່ວັດ</th><th>ເກນ Pilot</th><th>ຜົນເມື່ອບໍ່ຜ່ານ</th></tr></thead><tbody>
+          <tr><td>PERF-01</td><td>First useful content</td><td>ປາກົດພາຍໃນ 3 ວິນາທີ</td><td>Fail NFR-02</td></tr>
+          <tr><td>PERF-02</td><td>Place core data</td><td>ສະແດງພາຍໃນ 2.5 ວິນາທີ</td><td>Fail NFR-02</td></tr>
+          <tr><td>PERF-03</td><td>Interaction feedback</td><td>ໜ້າຈໍຕອບສະໜອງພາຍໃນ 300 ມິນລິວິນາທີ</td><td>ບັນທຶກ Defect ຕາມຜົນກະທົບ</td></tr>
+          <tr><td>PERF-04</td><td>External media timeout</td><td>ສະແດງ Poster/Fallback + Open Original ພາຍໃນ 4 ວິນາທີ</td><td>Fail media recovery</td></tr>
+        </tbody></table></div>
       </section>
 
       <section className={styles.formalSection} id="rac-data">
@@ -144,8 +155,10 @@ export default function RequirementsAcceptanceDocument({ basePath }: { basePath:
 
       <section className={styles.formalSection} id="rac-uat">
         <h2><span>9.</span> UAT ແລະການອະນຸມັດຮັບມອບ</h2>
-        <ol className={styles.formalNumberList}><li><strong>QA:</strong> ກວດ Test Run ແລະຕິດ Evidence ກັບ Requirement, Build Version ແລະ Fixture.</li><li><strong>Tech Lead:</strong> ຢືນຢັນ Technical Result, Regression, Security ແລະຂໍ້ຈຳກັດທີ່ຮູ້ແລ້ວ.</li><li><strong>Product Owner / Business User:</strong> ກວດ UAT Scenario ແລະຢືນຢັນວ່າ User/Business Outcome ກົງກັບຂອບເຂດ.</li><li><strong>Decision Record:</strong> ບັນທຶກຜົນເປັນ Accepted, Rejected ຫຼື Accepted with Approved Deviation.</li></ol>
-        <div className={styles.formalNote}><strong>ຫຼັກຖານຂັ້ນຕ່ຳ:</strong> Requirement ID, Test Case ID, Environment, Build Version, Fixture ID, Expected/Actual Result, Defect Link, ວັນທີ, ຜູ້ທົດສອບ ແລະຜູ້ອະນຸມັດ.</div>
+        <ol className={styles.formalNumberList}><li><strong>QA:</strong> ກວດ Test Run ແລະຕິດ Evidence ກັບ Requirement, Build Version ແລະ Fixture.</li><li><strong>Tech Lead:</strong> ຮັບຮອງ Technical Quality, Regression ແລະ Security.</li><li><strong>Operations Owner:</strong> ຮັບຮອງ Operational Readiness, Monitoring, Backup, Rollback ແລະ Support Path.</li><li><strong>Product Owner:</strong> ຮັບຮອງ Business/UAT ແລະເປັນຜູ້ຕັດສິນ Go/No-go ຂັ້ນສຸດທ້າຍ ຫຼັງບົດບາດທີ່ກ່ຽວຂ້ອງລົງນາມ.</li><li><strong>Decision Record:</strong> ບັນທຶກຜົນເປັນ Accepted, Rejected ຫຼື Accepted with Approved Deviation.</li></ol>
+        <h3>9.1 Journey ທີ່ຕ້ອງຜ່ານ UAT</h3>
+        <ol className={styles.formalNumberList}><li>Feed → Place → Map.</li><li>Search/Filter → Place → Map, Call ຫຼື Message.</li><li>External Media ລົ້ມ → Poster/Fallback → Open Original.</li><li>Correction, Report ແລະ Takedown.</li><li>Admin: Draft → Review → Publish.</li><li>Consent/Analytics: Allow, Essential Only ແລະປ່ຽນການຕັດສິນ.</li><li>Sponsored Placement ສະແດງປ້າຍໂຄສະນາຖືກຕ້ອງ.</li></ol>
+        <div className={styles.formalNote}><strong>ຫຼັກຖານຂັ້ນຕ່ຳ:</strong> ເກັບໃນ Project Evidence Repository ພາຍໃຕ້ <code>UAT/&lt;build-version&gt;/</code> ແລະຕ້ອງມີ Requirement ID, Test Case ID, Environment, Build Version, Fixture ID, Expected/Actual Result, Defect Link, ວັນທີ, ຜູ້ທົດສອບ, ຜູ້ອະນຸມັດ ແລະ Approved Deviation ຖ້າມີ.</div>
       </section>
 
       <section className={styles.formalSection} id="rac-coverage">
@@ -156,15 +169,15 @@ export default function RequirementsAcceptanceDocument({ basePath }: { basePath:
       </section>
 
       <section className={styles.formalSection} id="rac-review">
-        <h2><span>11.</span> ຂໍ້ຕ້ອງຕັດສິນກ່ອນອະນຸມັດສະບັບ 1.0</h2>
-        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>ຫົວຂໍ້</th><th>ຄຳຖາມທີ່ຕ້ອງຕັດສິນ</th><th>ສະຖານະ</th></tr></thead><tbody>
-          <tr><td>REV-01</td><td><strong>Acceptance Authority</strong></td><td>ໃຜມີສິດຮັບມອບສຸດທ້າຍສຳລັບ Business/UAT, Technical Quality ແລະ Operational Readiness?</td><td>ລໍຕັດສິນ</td></tr>
-          <tr><td>REV-02</td><td><strong>Test Environment &amp; Data</strong></td><td>ອະນຸມັດ Test Environment ແຍກ, 8 Controlled Fixtures ແລະກົດຫ້າມໃຊ້ Production Personal Data ໂດຍກົງຫຼືບໍ່?</td><td>ລໍຕັດສິນ</td></tr>
-          <tr><td>REV-03</td><td><strong>Defect Severity</strong></td><td>ອະນຸມັດໃຫ້ Critical/High Block Release; Medium ຮັບໄດ້ສະເພາະມີ workaround, owner, due date ແລະ deviation; Low ເຂົ້າ Backlog ຫຼືບໍ່?</td><td>ລໍຕັດສິນ</td></tr>
-          <tr><td>REV-04</td><td><strong>Performance Target</strong></td><td>ຈະໃຫ້ PRO-04 ອະນຸມັດແບບມີເງື່ອນໄຂ ຫຼືລໍ Mobile baseline, response/render target ແລະ external-media timeout ຈາກ Technical Proposal ກ່ອນ?</td><td>ລໍຕັດສິນ</td></tr>
-          <tr><td>REV-05</td><td><strong>UAT &amp; Sign-off Evidence</strong></td><td>Journey ໃດເປັນ UAT ບັງຄັບ, ໃຜລົງນາມ ແລະເກັບ Evidence/Approved Deviation ໄວ້ບ່ອນໃດ?</td><td>ລໍຕັດສິນ</td></tr>
+        <h2><span>11.</span> ບັນທຶກຂໍ້ຕັດສິນ ແລະເງື່ອນໄຂກ່ອນ 1.0</h2>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>ຫົວຂໍ້</th><th>ຂໍ້ຕັດສິນ</th><th>ສະຖານະ</th></tr></thead><tbody>
+          <tr><td>REV-01</td><td><strong>Acceptance Authority</strong></td><td>Product Owner ຮັບ Business/UAT ແລະ Final Go/No-go; Tech Lead ຮັບ Technical Quality; Operations Owner ຮັບ Operational Readiness.</td><td>ອະນຸມັດ</td></tr>
+          <tr><td>REV-02</td><td><strong>Test Environment &amp; Data</strong></td><td>ແຍກ Test Environment, ໃຊ້ DATA-01 ຫາ DATA-08 ແລະຫ້າມໃຊ້ Production Personal Data ໂດຍກົງ; ໃຊ້ Synthetic/Anonymized Data.</td><td>ອະນຸມັດ</td></tr>
+          <tr><td>REV-03</td><td><strong>Defect Severity</strong></td><td>Critical/High Block Release; Medium ຕ້ອງມີ workaround, owner, due date ແລະ Approved Deviation; Low ເຂົ້າ Backlog.</td><td>ອະນຸມັດ</td></tr>
+          <tr><td>REV-04</td><td><strong>Performance Target</strong></td><td>ອະນຸມັດ PERF-01 ຫາ PERF-04 ເປັນ Pilot Baseline ໃນ Android ລະດັບກາງ ແລະຈຳລອງ 4G.</td><td>ອະນຸມັດ</td></tr>
+          <tr><td>REV-05</td><td><strong>UAT &amp; Sign-off Evidence</strong></td><td>ອະນຸມັດ 7 Journey ບັງຄັບ, Sign-off Roles ແລະ Evidence Contract ຕາມຂໍ້ 9.</td><td>ອະນຸມັດ</td></tr>
         </tbody></table></div>
-        <div className={styles.formalDraftNotice}><strong>ສະຖານະຮ່າງ 0.1</strong><p>PRO-04 ຍັງບໍ່ເປັນ Baseline 1.0 ຈົນກວ່າ REV-01 ຫາ REV-05 ຈະຖືກຕັດສິນ, ບັນທຶກຜູ້ອະນຸມັດ ແລະອັບເດດ Revision History.</p></div>
+        <div className={styles.formalDraftNotice}><strong>PRO-04 · ສະບັບ 0.9</strong><p>REV-01 ຫາ REV-05 ຖືກຕັດສິນຄົບແລ້ວ. ຍັງບໍ່ຂຶ້ນ 1.0 ຈົນກວ່າ TEC-06 ແລະ Legal Review ຈະກຳນົດ Analytics Consent/Data Retention ແລະ CON-05 ຂຶ້ນເປັນ 1.0; ຈາກນັ້ນ PRO-04 ຕ້ອງຜູກ Acceptance Criteria ເຂົ້າກັບ Baseline ດັ່ງກ່າວ.</p></div>
       </section>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">

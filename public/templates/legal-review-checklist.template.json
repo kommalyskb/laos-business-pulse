@@ -1,0 +1,22 @@
+{
+  "document": "CON-05",
+  "version": "0.9",
+  "legal_disclaimer": "This register is a review checklist, not legal advice. A qualified Laos legal reviewer must complete and approve it before Public MVP.",
+  "reviews": [
+    { "id": "LEG-01", "scope": "Terms of Use", "status": "pending", "owner": null, "reviewer": null, "reviewed_at": null, "outcome": null, "evidence_reference": null },
+    { "id": "LEG-02", "scope": "Privacy Notice and data map", "status": "pending", "owner": null, "reviewer": null, "reviewed_at": null, "outcome": null, "evidence_reference": null },
+    { "id": "LEG-03", "scope": "Analytics consent, cookies/local storage and withdrawal", "status": "pending", "owner": null, "reviewer": null, "reviewed_at": null, "outcome": null, "evidence_reference": null },
+    { "id": "LEG-04", "scope": "Social-provider link and embed terms", "status": "pending", "owner": null, "reviewer": null, "reviewed_at": null, "outcome": null, "evidence_reference": null },
+    { "id": "LEG-05", "scope": "Copyright, attribution, takedown and appeal", "status": "pending", "owner": null, "reviewer": null, "reviewed_at": null, "outcome": null, "evidence_reference": null },
+    { "id": "LEG-06", "scope": "Partner and sponsored disclosure", "status": "pending", "owner": null, "reviewer": null, "reviewed_at": null, "outcome": null, "evidence_reference": null },
+    { "id": "LEG-07", "scope": "Cross-border processors, vendors and hosting", "status": "pending", "owner": null, "reviewer": null, "reviewed_at": null, "outcome": null, "evidence_reference": null },
+    { "id": "LEG-08", "scope": "Retention, deletion, security and complaint records", "status": "pending", "owner": null, "reviewer": null, "reviewed_at": null, "outcome": null, "evidence_reference": null }
+  ],
+  "consent_and_retention": [
+    { "data_class": "essential_session_security", "consent_or_notice": null, "retention_days": null, "access_roles": [], "status": "pending" },
+    { "data_class": "non_essential_analytics", "consent_or_notice": null, "retention_days": null, "access_roles": [], "status": "disabled_until_approved" },
+    { "data_class": "correction_takedown_contact", "consent_or_notice": null, "retention_days": null, "access_roles": [], "status": "pending" },
+    { "data_class": "moderation_audit_log", "consent_or_notice": null, "retention_days": null, "access_roles": [], "status": "pending" }
+  ],
+  "approval": { "product_owner": null, "legal_reviewer": null, "technical_owner": null, "approved_at": null }
+}

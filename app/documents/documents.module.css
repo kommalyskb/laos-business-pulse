@@ -77,7 +77,7 @@
 .statusNext { color:#155c49; background:#d4f4e8; }
 .statusPlanned { color:#6c655c; background:#dcd5c8; }
 .detailMeta > p { margin:38px 0 0; color:#68706f; font-size:11px; line-height:1.75; }
-.detailBody { max-width:1050px; padding:70px clamp(25px,7vw,110px) 100px; }
+.detailBody { min-width:0; max-width:1050px; padding:70px clamp(25px,7vw,110px) 100px; }
 .detailBody > section { margin-bottom:82px; }
 .detailBody > section > span { color:var(--orange); font-size:8px; font-weight:900; letter-spacing:.14em; }
 .detailBody h2 { margin:18px 0 25px; font-size:clamp(30px,4vw,52px); letter-spacing:-.04em; }
@@ -1237,7 +1237,7 @@
 @media(max-width:600px){.racPurposeMap,.racDefinitions,.racSummary,.racBoundary,.racAcceptanceRules,.racFilters,.racRequirementBody,.racPassPolicy{grid-template-columns:1fr}.racPurpose{padding:26px 20px}.racPurposeMap article,.racDefinitions article,.racAcceptanceRules li,.racPassPolicy article{min-height:0}.racRequirementList summary{grid-template-columns:1fr;gap:10px}.racRequirementList summary small{grid-column:auto}.racAcceptanceBlock,.racTraceBlock{grid-column:auto}.racAcceptanceBlock li,.racTraceBlock dl>div{grid-template-columns:1fr;gap:7px}.racTestLevels>div,.racTestLevels>div:first-child,.racFixtureTable>div,.racFixtureTable>div:first-child,.racCoverageTable>div,.racCoverageTable>div:first-child{grid-template-columns:1fr;gap:8px}.racTestLevels>div:first-child,.racFixtureTable>div:first-child,.racCoverageTable>div:first-child{display:none}.racTestLevels>div>:nth-child(n),.racFixtureTable>div>:nth-child(n),.racCoverageTable>div>:nth-child(n){grid-column:auto}.racTestLevels>div,.racFixtureTable>div{min-height:0}.racCoverageTable>div{min-height:0;padding:16px}.racSignoffFlow>div{min-height:130px}}
 
 /* Formal web-document system used by PRO-03 and PRO-04. */
-.formalDocument { max-width:1040px; padding:58px clamp(24px,5vw,72px) 96px; color:#202b28; background:#fffdf8; }
+.formalDocument { width:100%; max-width:1040px; box-sizing:border-box; padding:58px clamp(24px,5vw,72px) 96px; color:#202b28; background:#fffdf8; }
 .formalDocument > section { margin:0 0 52px; }
 .formalDocument p,.formalDocument li,.formalDocument td,.formalDocument th { font-size:14px; line-height:1.8; }
 .formalDocument p { max-width:850px; margin:0 0 16px; }

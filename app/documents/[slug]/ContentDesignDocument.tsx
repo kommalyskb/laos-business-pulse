@@ -9,6 +9,7 @@ type MatrixSection = {
 };
 
 type Wireframe = { title: string; screen: string; blocks: string[] };
+type OperationalArtifact = { label: string; path: string; description: string };
 
 type DocumentSpec = {
   code: string;
@@ -19,13 +20,21 @@ type DocumentSpec = {
   purpose: string[];
   sections: MatrixSection[];
   review: string[];
+  reviewDecisions?: string[];
+  version?: string;
+  status?: "approved" | "pending";
+  statusLabel?: string;
+  approvalNote?: string;
   wireframes?: Wireframe[];
+  artifacts?: OperationalArtifact[];
 };
 
 const specs: Record<string, DocumentSpec> = {
   "content-taxonomy": {
     code: "CON-01", title: "ມາດຕະຖານການຈັດໝວດ", english: "Content Taxonomy", owner: "Content Lead / System Analyst",
-    sources: ["PRO-01 1.0", "PRO-02 1.0", "PRO-03 1.0", "PRO-04 0.1"],
+    version: "0.9", status: "pending", statusLabel: "ອະນຸມັດໂຄງສ້າງ · ລໍ District/Price Registry",
+    approvalNote: "ໂຄງສ້າງ Category, Cuisine, Governance ແລະ Coverage Gate ຖືກອະນຸມັດແລ້ວ. ແຕ່ CON-01 ຍັງບໍ່ຂຶ້ນ 1.0 ຈົນກວ່າຈະລະບຸ Canonical District IDs ຂອງ 2–3 ເຂດ Pilot ແລະຈຳນວນເງິນຂັ້ນຕ່ຳ/ສູງຂອງ Price Band ₭, ₭₭, ₭₭₭. ຫ້າມ Developer ເດົາຄ່າສອງສ່ວນນີ້ເອງ.",
+    sources: ["PRO-01 1.0", "PRO-02 1.0", "PRO-03 1.0", "PRO-04 0.9"],
     purpose: [
       "ເອກະສານນີ້ກຳນົດພາສາກາງສຳລັບຈັດໝວດ Place, Content Source ແລະ Search Filter. ຈຸດປະສົງແມ່ນໃຫ້ Content Team, Developer, Designer ແລະຜູ້ໃຊ້ເຂົ້າໃຈຄຳດຽວກັນ ແລະບໍ່ສ້າງ Tag ຊ້ຳຊ້ອນ.",
       "Pilot ຈຳກັດ Primary Category ເປັນ Restaurant ແລະ Café. Attraction, Accommodation ແລະ Service ຖືກກຳນົດໄວ້ໃນ Model ເພື່ອບໍ່ຕ້ອງຮື້ໂຄງສ້າງພາຍຫຼັງ ແຕ່ຍັງບໍ່ເປີດໃຊ້ໃນ Pilot."
@@ -38,7 +47,7 @@ const specs: Record<string, DocumentSpec> = {
         ["Editorial Tag", "ບໍລິບົດຊ່ວຍຄົ້ນພົບ", "Good for groups, Riverside, Late night", "ຕ້ອງມີ Evidence; ບໍ່ນຳໃຊ້ແທນຂໍ້ເທັດຈິງ"]
       ]},
       { title: "Attribute ແລະ Filter ສຳລັບ Pilot", intro: "Filter ຕ້ອງອີງຂໍ້ມູນທີ່ທີມຮັກສາໄດ້. ຖ້າ Field ບໍ່ຄົບພໍ ຫ້າມເປີດ Filter ໃຫ້ຜູ້ໃຊ້.", headers: ["Attribute", "ຄ່າທີ່ອະນຸຍາດ", "MVP UI", "ຄຸນນະພາບຂັ້ນຕ່ຳ"], rows: [
-        ["District", "Canonical district IDs ຂອງວຽງຈັນ", "Filter ແບບເລືອກໜຶ່ງ/ຫຼາຍ", "≥90% ຂອງ Published Places ມີຄ່າ"],
+        ["District", "Canonical district IDs ສະເພາະເຂດ Pilot ທີ່ອະນຸມັດ", "Filter ແບບເລືອກໜຶ່ງ/ຫຼາຍ", "100% ຂອງ Published Places ມີຄ່າ"],
         ["Price band", "₭ · ₭₭ · ₭₭₭ · Unknown", "Filter + label", "ຫ້າມຄາດເດົາ; Unknown ຕ້ອງສະແດງ"],
         ["Cuisine / Product", "Lao, Thai, Vietnamese, Chinese, Western, Bakery, Coffee, Other", "Multi-select", "ອີງເມນູ ຫຼື Source ທີ່ກວດໄດ້"],
         ["Setting", "Indoor, Outdoor, Riverside, Garden, Takeaway", "Tag/Filter ພາຍຫຼັງ", "ໃຊ້ສະເພາະຄ່າທີ່ຢືນຢັນ"],
@@ -55,14 +64,33 @@ const specs: Record<string, DocumentSpec> = {
         ["ກວດຊ້ຳ/ຜົນກະທົບ", "Content Lead + SA", "Existing term, data migration, UI/API impact", "Approve / merge / reject"],
         ["ປ່ອຍ Version", "Product Owner", "Updated dictionary + migration rule", "Taxonomy version"],
         ["ທົບທວນ", "Content Lead", "Zero-result, unused term, low coverage", "Monthly during Pilot"]
-      ]}
+      ]},
+      { title: "Canonical Term Registry", intro: "Registry ແມ່ນລາຍຊື່ຄຳທີ່ລະບົບອະນຸຍາດໃຫ້ເກັບ. ID ຄົງທີ່ແມ່ນຄ່າທີ່ Database/API ໃຊ້; ປ້າຍລາວ ແລະອັງກິດສາມາດແກ້ຄຳໄດ້ໂດຍບໍ່ປ່ຽນ ID.", headers: ["Canonical ID", "ປະເພດ", "ປ້າຍທີ່ສະແດງ", "ສະຖານະ/ກົດ"], rows: [
+        ["CAT-RESTAURANT", "Primary category", "ຮ້ານອາຫານ / Restaurant", "Active ສຳລັບ Pilot"],
+        ["CAT-CAFE", "Primary category", "ຮ້ານກາເຟ / Café", "Active ສຳລັບ Pilot"],
+        ["CUI-LAO · CUI-THAI · CUI-VIETNAMESE · CUI-CHINESE", "Cuisine", "ອາຫານລາວ · ໄທ · ຫວຽດນາມ · ຈີນ", "Active; ຕ້ອງມີຫຼັກຖານຈາກເມນູ/Source"],
+        ["CUI-WESTERN · CUI-BAKERY · CUI-COFFEE · CUI-OTHER", "Cuisine/Product", "Western · Bakery · Coffee · ອື່ນໆ", "Active; Other ຕ້ອງມີ note ອະທິບາຍ"],
+        ["PRICE-LOW · PRICE-MID · PRICE-HIGH", "Price band", "₭ · ₭₭ · ₭₭₭", "ID ອະນຸມັດ; min/max amount ຍັງ Pending"],
+        ["PRICE-UNKNOWN", "Price band", "ຍັງບໍ່ຮູ້ລາຄາ", "ໃຊ້ເມື່ອຫຼັກຖານລາຄາບໍ່ພໍ; ຫ້າມເດົາ"],
+        ["DISTRICT-PENDING-01…03", "District", "ລໍລະບຸ 2–3 ເຂດ Pilot", "Placeholder ເທົ່ານັ້ນ; ຫ້າມ Publish/Filter"]
+      ]},
+      { title: "ຫຼັກການກຳນົດ Price Band", intro: "Price Band ຕ້ອງສະທ້ອນຄ່າໃຊ້ຈ່າຍປົກກະຕິຕໍ່ຄົນ ແລະຕ້ອງຄຳນວນດ້ວຍວິທີດຽວກັນ. ສະບັບນີ້ຍັງບໍ່ກຳນົດຈຳນວນກີບ ເພາະຕ້ອງເກັບຕົວຢ່າງລາຄາຈິງກ່ອນ.", headers: ["ຫົວຂໍ້", "ກົດວັດແທກ", "ຫຼັກຖານ", "ຈຸດທີ່ຍັງຄ້າງ"], rows: [
+        ["Unit of measure", "ຄ່າໃຊ້ຈ່າຍທົ່ວໄປຂອງ 1 ຄົນສຳລັບ 1 ຄາບອາຫານ ຫຼື 1 ຄັ້ງເຂົ້າຮ້ານກາເຟ", "ລາຍການເມນູ 3–5 ລາຍການທີ່ເປັນຕົວແທນ", "ຈຳນວນກີບຂອງແຕ່ລະ Band"],
+        ["Exclusion", "ບໍ່ນັບເຫຼົ້າ, ຄ່າສົ່ງ, ສ່ວນຫຼຸດຊົ່ວຄາວ ຫຼືງານພິເສດ", "Source URL/ຮູບເມນູ + checked_at", "ກົດສຳລັບ Set menu ແລະ Buffet"],
+        ["Assignment", "ຈັດ Band ຈາກ median ຂອງຕົວຢ່າງ; ຖ້າ evidence ບໍ່ພໍໃຫ້ Unknown", "sample_items, calculated_amount, reviewer", "ຕ້ອງອະນຸມັດ Threshold ກ່ອນເປີດ Filter"],
+        ["Review cadence", "ທົບທວນຫຼັງ Pilot 6 ອາທິດ ຫຼືເມື່ອລາຄາຕົວຢ່າງປ່ຽນຫຼາຍ", "ປະຫວັດ Price Registry", "ກຳນົດ trigger ຕົວເລກຫຼັງມີ baseline"]
+      ], note: "ກ່ອນອະນຸມັດ Price Threshold ຕ້ອງເກັບລາຄາຈາກ Restaurant ແລະ Café ໃນເຂດ Pilot ຢ່າງໜ້ອຍກຸ່ມລະ 10 Places. ນີ້ເປັນເກນເກັບຫຼັກຖານ ບໍ່ແມ່ນການອະນຸມັດຊ່ວງລາຄາ."}
     ],
-    review: ["ອະນຸມັດ Primary Category ຂອງ Pilot ເປັນ Restaurant ແລະ Café ຫຼືບໍ່?", "ອະນຸມັດ Price Band 3 ລະດັບ + Unknown ຫຼືຕ້ອງການຈຳນວນເງິນ?", "District ແລະ Cuisine ໃດຕ້ອງມີກ່ອນ 30 Places ທຳອິດ?", "ໃຜເປັນ Taxonomy Owner ແລະຜູ້ອະນຸມັດ Term?", "ຈະໃຊ້ coverage threshold 90% ກ່ອນເປີດ Public Filter ຫຼືປັບເປັນເທົ່າໃດ?"]
+    review: ["ອະນຸມັດ Primary Category ຂອງ Pilot ເປັນ Restaurant ແລະ Café ຫຼືບໍ່?", "ອະນຸມັດ Price Band 3 ລະດັບ + Unknown ຫຼືຕ້ອງການຈຳນວນເງິນ?", "District ແລະ Cuisine ໃດຕ້ອງມີກ່ອນ 30 Places ທຳອິດ?", "ໃຜເປັນ Taxonomy Owner ແລະຜູ້ອະນຸມັດ Term?", "ຈະໃຊ້ coverage threshold 90% ກ່ອນເປີດ Public Filter ຫຼືປັບເປັນເທົ່າໃດ?"],
+    reviewDecisions: ["ອະນຸມັດ Restaurant ແລະ Café ເປັນສອງ Primary Category ສຳລັບ Pilot.", "ຍັງຄ້າງ: ອະນຸມັດຮູບແບບ ₭, ₭₭, ₭₭₭ ແລະ Unknown ແລ້ວ ແຕ່ຍັງຕ້ອງກຳນົດຈຳນວນກີບຂັ້ນຕ່ຳ/ສູງຈາກຕົວຢ່າງລາຄາຈິງ.", "ຍັງຄ້າງ: District ໃຊ້ສະເພາະເຂດ Pilot ແຕ່ຍັງບໍ່ລະບຸຊື່; Cuisine ອະນຸມັດ Lao, Thai, Vietnamese, Chinese, Western, Bakery, Coffee ແລະ Other.", "Content Lead ເປັນ Taxonomy Owner; SA ກວດຜົນກະທົບ; Product Owner ອະນຸມັດ Primary Category ແລະ Schema Change.", "ກ່ອນເປີດ Filter: Category ແລະ District ຕ້ອງຄົບ 100%; Price Band ແລະ Cuisine ຕ້ອງຄົບຢ່າງໜ້ອຍ 90%."],
+    artifacts: [{ label: "content-taxonomy.seed.json", path: "/templates/content-taxonomy.seed.json", description: "Seed Registry ສຳລັບ Category, Cuisine, Price Band ແລະ District placeholder; ຄ່າ Pending ຖືກໝາຍໄວ້ຊັດເຈນ." }]
   },
 
   "place-data-standard": {
     code: "CON-02", title: "ມາດຕະຖານຂໍ້ມູນສະຖານທີ່", english: "Place Data Standard", owner: "Data Steward / Content Lead",
-    sources: ["CON-01 0.1", "PRO-02 Entity Model", "PRO-03 MVP-001/004/008", "PRO-04 0.1"],
+    version: "1.0", status: "approved", statusLabel: "ອະນຸມັດແລ້ວ",
+    approvalNote: "Baseline ນີ້ບັງຄັບກັບ Place ທຸກອັນກ່ອນ Publish. ຕ້ອງທົບທວນ Freshness Cadence ຫຼັງນຳໃຊ້ Pilot ຄົບ 6 ອາທິດ.",
+    sources: ["CON-01 0.9 approved structure", "PRO-02 Entity Model", "PRO-03 MVP-001/004/008", "PRO-04 0.9"],
     purpose: ["ກຳນົດ Field Dictionary, Source Evidence, Verification State, Freshness ແລະ Correction Rule ສຳລັບ Place Record. ເປົ້າໝາຍແມ່ນໃຫ້ Public Place Page ບອກຂໍ້ມູນທີ່ຮູ້, ສິ່ງທີ່ຍັງບໍ່ຮູ້ ແລະວັນທີກວດຄັ້ງລ່າສຸດຢ່າງຊັດເຈນ.", "ມາດຕະຖານນີ້ບັງຄັບກັບ Place ທຸກອັນກ່ອນ Publish. ການຈ່າຍຄ່າ Founding Partner ບໍ່ຫຼຸດຂໍ້ກຳນົດ Data Quality ແລະບໍ່ຊື້ປ້າຍ Verified."],
     sections: [
       { title: "Field Dictionary ແລະ Publish Readiness", intro: "Required Field ຕ້ອງຄົບກ່ອນ Publish; Conditional Field ຕ້ອງຄົບເມື່ອມີສະພາບທີ່ກຳນົດ.", headers: ["Field", "ລະດັບ", "ກົດຂໍ້ມູນ", "Public behavior"], rows: [
@@ -89,24 +117,45 @@ const specs: Record<string, DocumentSpec> = {
         ["Stale", "Field ເກີນ cadence ຫຼື source conflict", "ສະແດງຄຳເຕືອນ/Unknown", "Re-verify"],
         ["Suspended", "ສົງໄສຂໍ້ມູນ/rights/safety", "ຖອນອອກຊົ່ວຄາວ", "Resolve + review"],
         ["Archived", "ປິດຖາວອນ/merged", "Redirect ຫຼື unavailable", "ບໍ່ restore ໂດຍບໍ່ມີ decision"]
-      ], note: "ຄ່າ Freshness cadence ເລີ່ມຕົ້ນສຳລັບ Pilot: Contact/Hours 30 ວັນ; Address/Map 90 ວັນ; Category 180 ວັນ. ຕົວເລກນີ້ເປັນ Operational Hypothesis ແລະຕ້ອງທົບທວນຈາກຂໍ້ມູນຈິງ."},
+      ], note: "ຄ່າ Freshness cadence ສຳລັບ Pilot: Contact/Hours 30 ວັນ; Address/Map 90 ວັນ; Category 180 ວັນ. ລະບົບຕ້ອງປ່ຽນເປັນ Stale ອັດຕະໂນມັດເມື່ອກາຍກຳນົດ ແລະທີມຕ້ອງທົບທວນ cadence ຫຼັງ Pilot 6 ອາທິດ."},
       { title: "Correction, Duplicate ແລະ Audit", intro: "ການແກ້ຂໍ້ມູນຕ້ອງຮັກສາຄ່າເກົ່າ, ຫຼັກຖານ, actor ແລະ reason.", headers: ["Process", "ຂັ້ນຕອນ", "ກົດຄວາມປອດໄພ", "Evidence"], rows: [
         ["Correction", "Receive → triage → verify item → approve/reject → publish", "ອະນຸມັດແຍກແຕ່ລະ Field; ຫ້າມທັບ Record ທັງໝົດ", "Request, source, before/after, actor"],
         ["Duplicate", "Detect → compare → confirm same place/branch → merge", "ຫ້າມ merge ພຽງເພາະຊື່ຄ້າຍ", "Match signals + decision"],
         ["Conflict", "Keep current → mark disputed → collect evidence → review", "ຫ້າມເລືອກ source ເພາະຜູ້ຈ່າຍ", "Conflict record"],
         ["Rollback", "Restore previous accepted version", "ຕ້ອງບັນທຶກ reason ແລະ actor", "Audit log + version ID"]
-      ]}
+      ]},
+      { title: "Place Data Entry Template", intro: "Template ນີ້ກຳນົດຮູບແບບຄ່າທີ່ Content Operator ຕ້ອງປ້ອນ ແລະ Developer ຕ້ອງ validate. ການມີ Field ໃນ Database ຢ່າງດຽວບໍ່ໝາຍຄວາມວ່າ Record ພ້ອມ Publish.", headers: ["ກຸ່ມ", "Field/format", "Validation", "ຜູ້ກວດ"], rows: [
+        ["Identity", "place_id: UUID/server-generated; slug: lowercase unique; name_lao: 1–120 chars; name_en: optional", "place_id/slug ຫ້າມຊ້ຳ; ຊື່ຫ້າມມີແຕ່ whitespace", "Content Operator + system validation"],
+        ["Classification", "primary_category_id; subcategory_ids 1–3; cuisine_ids[]", "ໃຊ້ສະເພາະ Active Canonical IDs; Other ຕ້ອງມີ note", "Content Lead"],
+        ["Location", "address_lao; district_id; latitude/longitude", "District ຕ້ອງເປັນ Pilot ID; coordinate ຢູ່ໃນຂອບເຂດທີ່ກວດໄດ້", "Reviewer ເປີດ Map ກວດ"],
+        ["Contact", "phone_raw + phone_normalized; message_url", "ຕ້ອງມີ phone ຫຼື message_url ຢ່າງໜ້ອຍໜຶ່ງ; URL/protocol ຖືກຕ້ອງ", "Reviewer ທົດສອບ action"],
+        ["Hours/Price", "opening_hours structured ຫຼື unknown_reason; price_band_id ຫຼື PRICE-UNKNOWN", "ຫ້າມ null ແບບບໍ່ອະທິບາຍ; Price Threshold ອ້າງ CON-01 ເມື່ອອະນຸມັດ", "Data Steward"],
+        ["Evidence", "source_ids[]; checked_at ISO date; confidence; curator_id; reviewer_id", "ມີ active source ຢ່າງໜ້ອຍ 1; curator ແລະ reviewer ຕ້ອງແຍກບົດບາດ", "Reviewer"],
+        ["Lifecycle", "state; created_at/by; updated_at/by; published_at", "State transition ຕາມ PRO-02; ຫ້າມປ່ຽນເປັນ Published ໂດຍຂ້າມ Ready for review", "System + authorized admin"]
+      ]},
+      { title: "Publish Readiness Checklist", intro: "Checklist ຕ້ອງຖືກຕິກຄົບຕໍ່ Record ແລະເກັບກັບ Audit Log. ຖ້າຂໍ້ໃດບໍ່ຜ່ານ ຜົນລວມແມ່ນ Not Ready.", headers: ["Check ID", "ສິ່ງທີ່ກວດ", "Pass ເມື່ອ", "ຖ້າບໍ່ຜ່ານ"], rows: [
+        ["PUB-01", "Identity", "ID/slug unique ແລະຊື່ສະແດງຖືກຕ້ອງ", "ກັບໄປ Draft"],
+        ["PUB-02", "Category/District", "Canonical ID active; District ຢູ່ໃນ Pilot Registry", "ກັບໄປ Classification Queue"],
+        ["PUB-03", "Map/Contact", "ພິກັດກົງ Place; ມີ action ທີ່ທົດສອບແລ້ວຢ່າງໜ້ອຍ 1", "ຫ້າມ Publish"],
+        ["PUB-04", "Hours/Price", "ມີຄ່າທີ່ຢືນຢັນ ຫຼື Unknown + reason; ບໍ່ມີການເດົາ", "ແກ້ Field/Evidence"],
+        ["PUB-05", "Source/Rights", "Original URL, attribution, availability ແລະ rights method ຖືກບັນທຶກ", "ຖອນ Source ຫຼືສົ່ງ Rights Review"],
+        ["PUB-06", "Independent review", "Reviewer ກວດ before/after, checklist ແລະລົງ timestamp", "ຄ້າງ Ready for review"]
+      ], note: "Publish gate = PUB-01 AND PUB-02 AND PUB-03 AND PUB-04 AND PUB-05 AND PUB-06. ບໍ່ໃຊ້ຄະແນນສະເລ່ຍເພື່ອກົບ Field ສຳຄັນທີ່ຂາດ."}
     ],
-    review: ["Required Field ທີ່ລະບຸຄົບພໍສຳລັບ Pilot ຫຼືບໍ່?", "ອະນຸມັດ Source Confidence 4 ລະດັບ ຫຼືຕ້ອງການ Score?", "ອະນຸມັດ Freshness cadence 30/90/180 ວັນເປັນຄ່າທົດສອບຫຼືບໍ່?", "ໃຜເປັນ Data Steward ແລະ Reviewer ສຸດທ້າຍ?", "Public UI ຈະສະແດງ Unknown/Stale/Verified label ດ້ວຍຄຳໃດ?"]
+    review: ["Required Field ທີ່ລະບຸຄົບພໍສຳລັບ Pilot ຫຼືບໍ່?", "ອະນຸມັດ Source Confidence 4 ລະດັບ ຫຼືຕ້ອງການ Score?", "ອະນຸມັດ Freshness cadence 30/90/180 ວັນເປັນຄ່າທົດສອບຫຼືບໍ່?", "ໃຜເປັນ Data Steward ແລະ Reviewer ສຸດທ້າຍ?", "Public UI ຈະສະແດງ Unknown/Stale/Verified label ດ້ວຍຄຳໃດ?"],
+    reviewDecisions: ["ອະນຸມັດ Required Fields; latitude/longitude ບັງຄັບ ແລະ phone ຫຼື message_url ຕ້ອງມີຢ່າງໜ້ອຍໜຶ່ງ. Hours/Price ເປັນ Unknown ໄດ້ແຕ່ຫ້າມປ່ອຍຫວ່າງ.", "ອະນຸມັດ Confidence 4 ລະດັບ; ບໍ່ໃຊ້ຄະແນນຕົວເລກໃນ Pilot.", "ອະນຸມັດ 30/90/180 ວັນເປັນ Pilot Baseline ແລະທົບທວນຫຼັງ 6 ອາທິດ.", "Content Lead ເຮັດໜ້າທີ່ Data Steward; Reviewer ຕ້ອງເປັນຄົນລະບົດບາດ. ຖ້າມີຄົນດຽວ ຕ້ອງແຍກຮອບຈັດຂໍ້ມູນ ແລະຮອບກວດພ້ອມ Checklist/Audit.", "ອະນຸມັດ “ກວດຂໍ້ມູນແລ້ວ”, “ກວດຫຼ້າສຸດ: [ວັນທີ]”, “ຂໍ້ມູນອາດເກົ່າ” ແລະ “ຍັງບໍ່ຢືນຢັນ”; ບໍ່ໃຊ້ Verified Place."],
+    artifacts: [{ label: "place-data-entry.template.json", path: "/templates/place-data-entry.template.json", description: "ແບບຟອມ Place Record ທີ່ມີ Field, Evidence, State ແລະ Publish Checklist ຄົບ." }]
   },
 
   "content-acquisition": {
     code: "CON-03", title: "ແຜນຫາ Content ໄລຍະທຳອິດ", english: "Content Acquisition Plan", owner: "Content Lead / Founder",
-    sources: ["BUS-04 Pilot Plan", "PRO-03 DEC-01/02/04", "CON-01 0.1", "CON-02 0.1"],
+    version: "0.9", status: "pending", statusLabel: "ອະນຸມັດເນື້ອຫາ · ລໍລະບຸເຂດ Pilot",
+    approvalNote: "ຂໍ້ຕັດສິນ 4 ໃນ 5 ຂໍ້ຖືກອະນຸມັດແລ້ວ. ເອກະສານຈະຂຶ້ນ 1.0 ໄດ້ເມື່ອລະບຸຊື່ 2–3 ເຂດສຳລັບ 30 Places ທຳອິດ ໂດຍໃຊ້ເກນຄວາມໜາແໜ້ນຂອງຮ້ານ, Source ທີ່ມີ, ເວລາເດີນທາງ ແລະ Category Mix.",
+    sources: ["BUS-04 Pilot Plan", "PRO-03 DEC-01/02/04", "CON-01 0.9", "CON-02 1.0"],
     purpose: ["ກຳນົດວິທີສ້າງ Supply ຈາກ 0 ໄປ 100 Places ໂດຍບໍ່ Copy ຫຼື Re-host ວິດີໂອ. ແຜນລວມ Place Inventory, Review Link, Creator Attribution, Owner Confirmation ແລະຕົ້ນທຶນການດຳເນີນງານ.", "Cold start ຕ້ອງພິສູດວ່າທີມສາມາດສ້າງ ແລະຮັກສາ Content ໄດ້ດ້ວຍກຳລັງຄົນຈິງ. ຫ້າມໃຊ້ຈຳນວນ Link ເປັນຄຸນນະພາບໂດຍບໍ່ກວດ Place Data ແລະ Rights."],
     sections: [
       { title: "Cold-start Inventory 30 → 60 → 100", intro: "ແຕ່ລະຂັ້ນມີຈຸດປະສົງຮຽນຮູ້ຕ່າງກັນ. ຫ້າມຂ້າມ Gate ເພາະຕ້ອງການຕົວເລກ 100 ໄວ.", headers: ["Stage", "ເປົ້າໝາຍ", "ສິ່ງທີ່ຕ້ອງພິສູດ", "Gate"], rows: [
-        ["30 Places", "Restaurant/Café ໃນ 2–3 ເຂດ", "Field workflow, source linking, publish review, time-per-place", "≥90% required field; no unresolved rights issue"],
+        ["30 Places", "Restaurant/Café ໃນ 2–3 ເຂດທີ່ຈະລະບຸກ່ອນ 1.0; ສັດສ່ວນ 60:40 ±10%", "Field workflow, source linking, publish review, time-per-place", "≥90% required field; critical fields 100%; no unresolved rights issue"],
         ["60 Places", "ເພີ່ມຄວາມຫຼາກຫຼາຍ price/cuisine", "Search/filter usefulness, duplicate handling, correction volume", "Core search + place journey tested"],
         ["100 Places", "Inventory ພໍສຳລັບ Validation Pilot", "Freshness workload, owner response, creator/source coverage", "Release Gate G2/G3 evidence"]
       ]},
@@ -116,7 +165,7 @@ const specs: Record<string, DocumentSpec> = {
         ["Rights/availability", "public URL, official embed, creator attribution", "ມີ link/fallback ແລະ takedown path", "ຕ້ອງ download/copy ຈຶ່ງໃຊ້ໄດ້"],
         ["Quality", "ເນື້ອຫາກ່ຽວ, ບໍ່ຫຼອກ, ບໍ່ຂັດ policy", "ຊ່ວຍຕັດສິນໃຈ", "ມີອັນຕະລາຍ/ຄວາມຜິດຊັດ"]
       ]},
-      { title: "Creator ແລະ Place-owner Outreach", intro: "Pilot ບໍ່ບັງຄັບໃຫ້ Creator ຫຼືຮ້ານສ້າງ Account. Outreach ມຸ່ງຢືນຢັນ attribution, data ແລະ willingness to participate.", headers: ["Audience", "Offer", "Call to action", "ສິ່ງທີ່ຫ້າມສັນຍາ"], rows: [
+      { title: "Creator ແລະ Place-owner Outreach", intro: "Pilot ບໍ່ບັງຄັບໃຫ້ Creator ຫຼືຮ້ານສ້າງ Account. Outreach ເລີ່ມເມື່ອມີປະມານ 20 Place Records ເພື່ອໃຫ້ Attribution/Opt-out Feedback ຖືກນຳໄປປັບກ່ອນຄົບ 30 Places.", headers: ["Audience", "Offer", "Call to action", "ສິ່ງທີ່ຫ້າມສັນຍາ"], rows: [
         ["Creator", "Attribution + link back + correction/takedown channel", "ຢືນຢັນ creator identity/source link; opt out ຫຼືຮ່ວມ", "ບໍ່ສັນຍາ reach/revenue"],
         ["Place owner", "Free listing verification; Founding Partner ເປັນທາງເລືອກ", "ຢືນຢັນ data; ທົດສອບ 200,000 ກີບ/ເດືອນ", "ການຈ່າຍບໍ່ຊື້ review score/verification"],
         ["Reviewer/user", "ຊ່ອງທາງແຈ້ງຂໍ້ມູນຜິດ", "ສົ່ງ evidence", "ບໍ່ publish ອັດຕະໂນມັດ"]
@@ -127,14 +176,30 @@ const specs: Record<string, DocumentSpec> = {
         ["Source coverage", "Places ມີ active review source ÷ Published Places", "≥80%", "Feed usefulness"],
         ["Time per place", "total curation/review minutes ÷ accepted places", "ບັນທຶກ baseline; ບໍ່ຟັນທົງກ່ອນ 30", "Staffing/automation"],
         ["Manual workload", "hours ທັງໝົດຕໍ່ອາທິດ", "ທົບທວນເມື່ອ >20h/week 2 ອາທິດ", "ຢຸດຂະຫຍາຍ/automate"]
+      ]},
+      { title: "Pilot Area Selection Register", intro: "ບໍ່ຄວນເລືອກເຂດຈາກຄວາມຄຸ້ນເຄີຍພຽງຢ່າງດຽວ. ຜູ້ກໍ່ຕັ້ງຕ້ອງປຽບທຽບ Candidate ດ້ວຍຫຼັກຖານຊຸດດຽວກັນ ແລະບັນທຶກເຫດຜົນກ່ອນອະນຸມັດ.", headers: ["Register item", "ຫຼັກຖານທີ່ຕ້ອງເກັບ", "ເກນຜ່ານ", "ສະຖານະ"], rows: [
+        ["AREA-01", "ຊື່ເຂດ/ຂອບເຂດ, ຈຳນວນ Candidate Places, active review sources, ເວລາເດີນທາງ, category mix", "ມີ Inventory ພໍສຳລັບແບ່ງ 30 Places; ສາມາດກວດພື້ນທີ່ໄດ້; ບໍ່ມີ rights blocker", "Pending — ລໍຊື່ເຂດ"],
+        ["AREA-02", "ໃຊ້ Field ແລະເກນດຽວກັບ AREA-01", "ບໍ່ຊ້ຳ coverage ທັງໝົດ; ຊ່ວຍທົດສອບ district filter", "Pending — ລໍຊື່ເຂດ"],
+        ["AREA-03", "Optional; ໃຊ້ເມື່ອ 2 ເຂດທຳອິດບໍ່ຄົບ category/source mix", "ຜ່ານເກນດຽວກັນ ແລະບໍ່ເພີ່ມ travel workload ເກີນກຳລັງ", "Pending/Optional"]
+      ], note: "ການໃສ່ຊື່ເຂດໃນ Register ຈະແກ້ CON-03 REV-01 ແລະເປີດໃຫ້ CON-01 ສ້າງ Canonical District IDs. ຫ້າມໃຊ້ຄຳວ່າ ‘ເຂດກາງເມືອງ’ ໂດຍບໍ່ລະບຸຂອບເຂດ."},
+      { title: "Content Source Ledger", intro: "Ledger ແມ່ນທະບຽນຂອງ Link/Embed ທຸກອັນ. ມັນໃຊ້ຕອບວ່າ Content ມາຈາກໃສ, ຜູກກັບ Place ໃດ, ໃຜກວດ, ມີສິດນຳໃຊ້ດ້ວຍວິທີໃດ ແລະຖືກຖອນເມື່ອໃດ.", headers: ["Field group", "Fields", "ກົດ", "ຜົນຕໍ່ workflow"], rows: [
+        ["Identity/Match", "source_id, place_id, original_url, provider, media_type", "original_url unique ຕໍ່ source; Place/branch ຕ້ອງຖືກ match", "Match ບໍ່ຊັດ → rejected ຫຼື review queue"],
+        ["Creator/Attribution", "creator_display_name, creator_profile_url, attribution_copy", "ອ້າງ original public source; ຫ້າມໃຫ້ຄວາມໝາຍວ່າ creator endorse platform", "ຂາດ attribution → ຫ້າມ publish source"],
+        ["Rights/Method", "public_available, use_method, rights_basis, checked_at", "use_method = redirect ຫຼື official_embed; re-host ຫ້າມໃນ MVP", "rights uncertain → redirect only/rights review"],
+        ["Commercial", "source_disclosure, platform_campaign_id", "ຮັກສາ Paid Partnership ຂອງ source; ແຍກຈາກ campaign ຂອງ platform", "ຂາດ label → suspend"],
+        ["Control", "status, curator_id, reviewer_id, moderation_case_id, removed_at/reason", "State = discovered → matched → rights_checked → approved; ຫຼື unavailable/takedown/rejected", "ທຸກ state change ມີ actor/timestamp"]
       ]}
     ],
-    review: ["ເລືອກ 2–3 ເຂດໃດສຳລັບ 30 Places ທຳອິດ?", "ສັດສ່ວນ Restaurant:Café ຈະເປັນ 60:40 ຫຼືແບບໃດ?", "ໃຜຮັບຜິດຊອບ curation, review ແລະ owner outreach?", "Creator outreach ຈະເລີ່ມກ່ອນ ຫຼືຫຼັງ 30 Places?", "ອະນຸມັດ Supply target ແລະ workload threshold ທີ່ລະບຸຫຼືບໍ່?"]
+    review: ["ເລືອກ 2–3 ເຂດໃດສຳລັບ 30 Places ທຳອິດ?", "ສັດສ່ວນ Restaurant:Café ຈະເປັນ 60:40 ຫຼືແບບໃດ?", "ໃຜຮັບຜິດຊອບ curation, review ແລະ owner outreach?", "Creator outreach ຈະເລີ່ມກ່ອນ ຫຼືຫຼັງ 30 Places?", "ອະນຸມັດ Supply target ແລະ workload threshold ທີ່ລະບຸຫຼືບໍ່?"],
+    reviewDecisions: ["ຍັງຄ້າງ: ຕ້ອງລະບຸຊື່ ແລະຂອບເຂດ 2–3 ເຂດໃນ Pilot Area Selection Register ກ່ອນຂຶ້ນ 1.0.", "ອະນຸມັດ Restaurant:Café 60:40 ໂດຍຍອມໃຫ້ຄາດເຄື່ອນ ±10% ເພື່ອບໍ່ຫຼຸດຄຸນນະພາບ Source.", "Founder/Product Owner ຮັບຜິດຊອບລວມ; Content Operator ຈັດຂໍ້ມູນ; Reviewer ອະນຸມັດ; Founder ຕິດຕໍ່ຮ້ານ. ຖ້າມີຄົນດຽວຕ້ອງແຍກ Work Queue ແລະເວລາກວດ.", "ເລີ່ມ Creator Outreach ເມື່ອມີປະມານ 20 Records.", "ອະນຸມັດ ≥90% completeness, critical fields 100%, active source coverage ≥80% ແລະທົບທວນ Automation ເມື່ອ Manual Workload >20 ຊົ່ວໂມງ/ອາທິດຕິດກັນ 2 ອາທິດ; unresolved rights issue ເປັນ Stop Condition."],
+    artifacts: [{ label: "content-source-ledger.template.csv", path: "/templates/content-source-ledger.template.csv", description: "CSV ສຳລັບບັນທຶກ Original URL, Place match, attribution, rights method, disclosure, reviewer ແລະ source state." }]
   },
 
   "creator-moderation": {
     code: "CON-04", title: "Creator ແລະ Content Moderation", english: "Creator & Moderation Guideline", owner: "Trust & Safety Owner",
-    sources: ["CON-03 0.1", "PRO-02 Trust Workflows", "PRO-03 MVP-011/013", "PRO-04 TRU-01"],
+    version: "1.0", status: "approved", statusLabel: "ອະນຸມັດແລ້ວ",
+    approvalNote: "Founder/Product Owner ເປັນ Trust & Safety Owner ໃນ Pilot. P0–P3 ເປັນເປົ້າໝາຍດຳເນີນງານພາຍໃນ ບໍ່ແມ່ນຄຳຮັບປະກັນທາງກົດໝາຍ.",
+    sources: ["CON-03 0.9", "PRO-02 Trust Workflows", "PRO-03 MVP-011/013", "PRO-04 TRU-01"],
     purpose: ["ກຳນົດມາດຕະຖານ Creator Attribution, Content Eligibility, Report, Takedown ແລະ Appeal. Platform ເປັນຜູ້ຈັດລະບຽບ link ແລະຂໍ້ມູນ Place; ບໍ່ໄດ້ເປັນເຈົ້າຂອງວິດີໂອຈາກ Social Platform.", "Moderation ຕ້ອງແຍກລະຫວ່າງ Content ບໍ່ເໝາະສົມ, Source unavailable, Rights complaint, Place data conflict ແລະ Sponsored disclosure. ແຕ່ລະປະເພດມີ workflow ຕ່າງກັນ."],
     sections: [
       { title: "Creator Identity ແລະ Attribution", intro: "Attribution ຕ້ອງຊີ້ໄປຫາ Original Source ແລະບໍ່ສ້າງຄວາມເຂົ້າໃຈວ່າ Creator ຮັບຮອງ Platform.", headers: ["Field/Element", "Required", "ກົດ", "Fallback"], rows: [
@@ -149,9 +214,12 @@ const specs: Record<string, DocumentSpec> = {
         ["MOD-DECEPTIVE", "ຫຼອກລວງ/ປອມແປງຊັດເຈນ", "Remove + audit", "ບໍ່ສະແດງ"],
         ["MOD-RIGHTS", "Rights holder ແຈ້ງຖອນ", "Immediate public removal + case review", "ບໍ່ສະແດງລະຫວ່າງກວດ"],
         ["MOD-UNAVAILABLE", "Source ລົ້ມ/ລົບ/ຈຳກັດ", "Fallback + retry; confirm before permanent unlink", "Place ຍັງຢູ່"],
-        ["MOD-UNSAFE", "ເນື້ອຫາສ່ຽງອັນຕະລາຍ/ລະເມີດຮ້າຍແຮງ", "Remove + escalate", "ບໍ່ສະແດງ"]
+        ["MOD-UNSAFE", "ເນື້ອຫາສ່ຽງອັນຕະລາຍ/ລະເມີດຮ້າຍແຮງ", "Remove + escalate", "ບໍ່ສະແດງ"],
+        ["MOD-PRIVACY", "ເປີດເຜີຍຂໍ້ມູນສ່ວນບຸກຄົນ", "Immediate removal + P0 review", "ບໍ່ສະແດງລະຫວ່າງກວດ"],
+        ["MOD-SPAM", "Content ຊ້ຳ, ບໍ່ກ່ຽວ ຫຼືໂຄສະນາລົບກວນ", "Reject/Unlink", "ບໍ່ສະແດງ"],
+        ["MOD-HARASSMENT", "ຂົ່ມຂູ່, ລົບກວນ ຫຼືໂຈມຕີບຸກຄົນ", "Remove + escalate", "ບໍ່ສະແດງ"]
       ]},
-      { title: "Report, Review ແລະ Takedown", intro: "Report ຕ້ອງເຂົ້າ Case Queue ດຽວ, ມີ owner, priority, evidence ແລະ audit trail.", headers: ["Priority", "ຕົວຢ່າງ", "Initial action", "Pilot target"], rows: [
+      { title: "Report, Review ແລະ Takedown", intro: "Report ຮັບຜ່ານ Web Form ແລະ Email ສະເພາະເປັນຊ່ອງທາງຫຼັກ; Messaging ເປັນພຽງຊ່ອງທາງສຳຮອງ. ທຸກ Report ຕ້ອງເຂົ້າ Case Queue ດຽວ, ມີ owner, priority, evidence ແລະ audit trail.", headers: ["Priority", "ຕົວຢ່າງ", "Initial action", "Pilot target"], rows: [
         ["P0", "Rights takedown, serious safety/privacy", "ຖອນ public source ທັນທີ + notify owner", "ຮັບຮູ້ພາຍໃນ 4 ຊົ່ວໂມງທຳການ"],
         ["P1", "Wrong place, deceptive content, active conflict", "Suspend + investigate", "1 ວັນທຳການ"],
         ["P2", "Attribution/name correction", "Queue by age", "3 ວັນທຳການ"],
@@ -162,43 +230,80 @@ const specs: Record<string, DocumentSpec> = {
         ["Eligibility check", "ບໍ່ຮັບ duplicate ທີ່ບໍ່ມີຂໍ້ມູນໃໝ່", "Trust operator", "Accept/reject reason"],
         ["Independent review", "Reviewer ບໍ່ແມ່ນຜູ້ຕັດສິນຄັ້ງທຳອິດ", "Trust owner/Product Owner", "Decision + policy reference"],
         ["Restore/confirm removal", "ປ່ຽນ state ແບບ auditable", "Authorized admin", "Before/after + actor"]
-      ]}
+      ]},
+      { title: "Public Intake Forms", intro: "ຊ່ອງທາງ Web Form ຕ້ອງແຍກປະເພດຄຳຮ້ອງເພື່ອໃຫ້ລະບົບຈັດ Priority ແລະເກັບຫຼັກຖານຖືກ. ທຸກ Form ຕ້ອງສ້າງ Case ID ແລະສົ່ງຄຳຢືນຢັນໃຫ້ຜູ້ສົ່ງ.", headers: ["Form", "Required fields", "Optional/conditional", "Routing"], rows: [
+        ["General content report", "place/source URL, reason code, description", "reporter contact, screenshot/evidence", "MOD-* → P1/P2/P3 ຕາມ reason"],
+        ["Place data correction", "place_id/URL, field ທີ່ຜິດ, current value, proposed value, evidence", "requester relation to place, contact", "Data correction queue; ຫ້າມ auto-publish"],
+        ["Rights/Privacy takedown", "claimant name/contact, authority, exact URL, claim, evidence, good-faith declaration, submitted_at", "authorized representative document", "P0; hide affected public source while reviewed"],
+        ["Appeal", "case_id, disputed decision, new evidence, requested outcome", "representative/contact", "Independent reviewer; duplicate without new evidence may be closed"],
+        ["Form notice", "purpose, who receives data, response channel, policy links", "consent choice ເມື່ອກົດໝາຍກຳນົດ", "Retention/access ອ້າງ CON-05 ແລະ TEC-06"]
+      ]},
+      { title: "Internal Moderation Decision Record", intro: "Case ທີ່ມີແຕ່ຜົນວ່າ ‘ລົບ’ ຫຼື ‘ບໍ່ລົບ’ ຍັງກວດສອບບໍ່ໄດ້. Internal Record ຕ້ອງບັນທຶກວ່າໃຜຕັດສິນ, ໃຊ້ Policy ໃດ, ເຫັນຫຼັກຖານຫຍັງ ແລະປ່ຽນ State ແນວໃດ.", headers: ["ກຸ່ມຂໍ້ມູນ", "Required fields", "ກົດ", "Audit result"], rows: [
+        ["Case control", "case_id, case_type, priority, status, received_at, owner", "case_id immutable; priority change ຕ້ອງມີ reason", "ຕາມ SLA/age ໄດ້"],
+        ["Evidence", "reported URLs, attachments/references, claimant statement, source snapshot metadata", "ຫ້າມເກັບສຳເນົາ media ເກີນ policy; access restricted", "ຮູ້ຫຼັກຖານທີ່ໃຊ້"],
+        ["Decision", "reason_code, policy_reference, finding, action, before_state, after_state", "finding ຕ້ອງອະທິບາຍ; ຫ້າມໃຊ້ຄຳວ່າ ‘ຕາມເໝາະສົມ’ ຢ່າງດຽວ", "ທົບທວນຄືນໄດ້"],
+        ["People/time", "decided_by/at, notified_at, appeal_reviewer, appeal_decided_at", "ຜູ້ຕັດສິນເດີມຫ້າມອະນຸມັດ appeal", "ກວດ conflict of interest ໄດ້"],
+        ["Closure", "final_status, retention_class, deletion_due_at", "Retention class ຕ້ອງອ້າງ CON-05/TEC-06 ເມື່ອອະນຸມັດ", "ປິດ Case ໂດຍບໍ່ເສຍ audit"]
+      ], note: "ກ່ອນ Public Pilot ຕ້ອງ configure URL ຂອງ Web Form, dedicated Trust & Safety email, mailbox owner ແລະ fallback contact ໃນ Deployment Configuration. ຄ່າຕິດຕໍ່ຈິງບໍ່ຄວນຖືກສົມມຸດໃນເອກະສານນີ້."}
     ],
-    review: ["ໃຜເປັນ Trust & Safety Owner ໃນ Pilot?", "Reason Codes ຄົບກັບຄວາມສ່ຽງຫຼັກຫຼືບໍ່?", "ອະນຸມັດ P0–P3 operating target ຫຼືຕ້ອງປັບຕາມກຳລັງຄົນ?", "ຊ່ອງທາງ report/takedown ທຳອິດຈະໃຊ້ Email, Form ຫຼື Messaging?", "ໃຜເປັນ independent appeal reviewer ເມື່ອທີມຍັງນ້ອຍ?"]
+    review: ["ໃຜເປັນ Trust & Safety Owner ໃນ Pilot?", "Reason Codes ຄົບກັບຄວາມສ່ຽງຫຼັກຫຼືບໍ່?", "ອະນຸມັດ P0–P3 operating target ຫຼືຕ້ອງປັບຕາມກຳລັງຄົນ?", "ຊ່ອງທາງ report/takedown ທຳອິດຈະໃຊ້ Email, Form ຫຼື Messaging?", "ໃຜເປັນ independent appeal reviewer ເມື່ອທີມຍັງນ້ອຍ?"],
+    reviewDecisions: ["Founder/Product Owner ເປັນ Trust & Safety Owner ໃນ Pilot.", "ອະນຸມັດ Reason Codes ເດີມ ແລະເພີ່ມ MOD-PRIVACY, MOD-SPAM ແລະ MOD-HARASSMENT.", "ອະນຸມັດ P0–P3 ເປັນ Internal Operating Target; P0 ທີ່ນ່າເຊື່ອຖື/ສ່ຽງສູງຕ້ອງຖອນຈາກ Public ທັນທີ.", "ໃຊ້ Web Form + Dedicated Email ເປັນຊ່ອງທາງຫຼັກ; Messaging ເປັນ Fallback. URL/email ຕົວຈິງເປັນ Deployment Configuration ທີ່ຕ້ອງຕັ້ງກ່ອນ Public Pilot.", "ຜູ້ຕັດສິນເດີມຫ້າມອະນຸມັດ Appeal ຂອງຕົນ. ກໍລະນີ Rights/Privacy ສົ່ງ Legal Reviewer; ຖ້າມີຄົນດຽວຕ້ອງເຮັດ Second Review ແບບມີບັນທຶກ."],
+    artifacts: [{ label: "moderation-case.template.json", path: "/templates/moderation-case.template.json", description: "ແບບຟອມກາງສຳລັບ Report, Correction, Rights/Privacy Takedown, Appeal ແລະ Internal Decision Record." }]
   },
 
   "legal-disclosure": {
     code: "CON-05", title: "ລິຂະສິດ ແລະການເປີດເຜີຍ", english: "Copyright & Sponsored Disclosure", owner: "Product Owner / Legal Reviewer",
-    sources: ["PRO-03 DEC-02/03", "CON-03 0.1", "CON-04 0.1", "BUS-06 Revenue Model"],
+    version: "0.9", status: "pending", statusLabel: "ອະນຸມັດດ້ານ Product · ລໍ Legal Review",
+    approvalNote: "ນີ້ແມ່ນ Product Policy ບໍ່ແມ່ນຄຳແນະນຳທາງກົດໝາຍ. ກ່ອນຂຶ້ນ 1.0 ແລະກ່ອນ Public MVP ຕ້ອງຜ່ານການກວດຈາກນັກກົດໝາຍທີ່ມີອຳນາດໃນລາວ ພ້ອມກຳນົດ Analytics Consent ແລະ Data Retention ໃຫ້ສຳເລັດ.",
+    sources: ["PRO-03 DEC-02/03", "CON-03 0.9", "CON-04 1.0", "BUS-06 Revenue Model"],
     purpose: ["ກຳນົດ Product Policy ສຳລັບ Linking, Official Embed, Attribution, Takedown, Sponsored Placement ແລະ User Consent. ເອກະສານນີ້ກຳນົດພຶດຕິກຳຂອງ Platform ແຕ່ບໍ່ແທນຄຳແນະນຳທາງກົດໝາຍ.", "ກ່ອນ Public MVP ຕ້ອງໃຫ້ທີ່ປຶກສາກົດໝາຍທີ່ມີອຳນາດໃນລາວກວດ Terms, Privacy Notice, consent, takedown ແລະ commercial disclosure ສະບັບສຸດທ້າຍ."],
     sections: [
       { title: "Linking, Embedding ແລະ Attribution Policy", intro: "Platform ຕ້ອງຊີ້ກັບຫາ Original Source ແລະຫ້າມເກັບສຳເນົາວິດີໂອໂດຍບໍ່ມີສິດ.", headers: ["ການກະທຳ", "ສະຖານະ", "ເງື່ອນໄຂ", "Fallback"], rows: [
         ["Redirect to original URL", "Allowed by product policy", "Public URL + attribution + source platform", "ສະແດງ Place ໂດຍບໍ່ມີ source ເມື່ອ link unavailable"],
-        ["Official embed", "Allowed conditionally", "ໃຊ້ກົນໄກ official provider; ບໍ່ຂ້າມ access control", "Preview + open original"],
+        ["Official embed", "Allowed conditionally", "TikTok, Facebook ແລະ YouTube: ໃຊ້ສະເພາະ Public Content ແລະ Official Provider Mechanism; ບໍ່ຂ້າມ access control", "Preview + open original; ຖ້າບໍ່ແນ່ໃຈໃຫ້ Redirect ເທົ່ານັ້ນ"],
         ["Store permitted metadata", "Limited", "ເກັບສະເພາະ metadata ທີ່ຈຳເປັນ ແລະອະນຸຍາດ", "Manual title/attribution ຈາກ approved source"],
         ["Download/re-host/transcode", "Prohibited by MVP policy", "ຍົກເວັ້ນມີ written license ແລະ approval ໃໝ່", "Link/embed only"],
         ["Scraping beyond permission", "Prohibited", "ຫ້າມ bypass restriction/rate limit", "Manual curation"]
       ]},
-      { title: "Takedown ແລະ Rights Complaint", intro: "Rights complaint ຕ້ອງມີຊ່ອງທາງຊັດເຈນ, ຖອນ public exposure ໄດ້ໄວ ແລະຮັກສາ case evidence.", headers: ["ຂັ້ນ", "ຂໍ້ມູນທີ່ຕ້ອງຮັບ", "Platform action", "ຜົນ"], rows: [
+      { title: "Takedown ແລະ Rights Complaint", intro: "Rights complaint ຮັບຜ່ານ Dedicated Web Form ແລະ Email ໂດຍ Trust & Safety Owner ເປັນເຈົ້າຂອງ Case. ລະບົບຕ້ອງຖອນ Public Exposure ໄດ້ໄວ ແລະຮັກສາ Evidence/Audit.", headers: ["ຂັ້ນ", "ຂໍ້ມູນທີ່ຕ້ອງຮັບ", "Platform action", "ຜົນ"], rows: [
         ["Receive", "Contact, URL, rights claim, evidence, declaration", "Create case + acknowledge", "Case ID"],
         ["Protect", "ກວດວ່າ source ໃດຖືກແຈ້ງ", "Remove/suspend public source ທັນທີເມື່ອຄວາມສ່ຽງສູງ", "Place record ບໍ່ຖືກລົບອັດຕະໂນມັດ"],
         ["Review", "Identity/authority, URL match, counter evidence", "Approve removal / request more / restore", "Reasoned decision"],
         ["Close", "Final decision + notification", "Update state/audit", "Retention per approved policy"]
       ]},
       { title: "Sponsored ແລະ Commercial Disclosure", intro: "ຜູ້ໃຊ້ຕ້ອງແຍກ Organic Source, Founding Partner ແລະ Sponsored Placement ອອກຈາກກັນໄດ້ໃນທັນທີ.", headers: ["Label", "ໝາຍເຖິງ", "ບໍ່ໝາຍເຖິງ", "UI rule"], rows: [
-        ["Source linked", "ມີ review source ຕົ້ນສະບັບ", "Platform ບໍ່ຮັບຮອງຄວາມເຫັນ", "ສະແດງ creator + platform + link"],
-        ["Place information verified", "Field ສຳຄັນຖືກກວດຕາມ CON-02", "ບໍ່ແມ່ນຄະແນນ/ຄຳຮັບປະກັນ", "ສະແດງ Checked Date"],
-        ["Founding Partner", "ຮ້ານຮ່ວມ Pilot ແລະຈ່າຍ package", "ບໍ່ຊື້ ranking, review score ຫຼື verification", "ປ້າຍ Partner ແຍກຈາກ Sponsored"],
-        ["Sponsored", "ຮ້ານຈ່າຍເພື່ອ placement ໃນຊ່ວງກຳນົດ", "ບໍ່ແມ່ນ organic ranking", "ປ້າຍ “Sponsored/ໂຄສະນາ” ຢູ່ໃກ້ title/action; ຫ້າມເຊື່ອງ"]
+        ["ແຫຼ່ງຣີວິວ", "ມີ Review Source ຕົ້ນສະບັບ", "Platform ບໍ່ຮັບຮອງຄວາມເຫັນ", "ສະແດງ Creator + Platform + Link"],
+        ["ກວດຂໍ້ມູນແລ້ວ", "Field ສຳຄັນຖືກກວດຕາມ CON-02", "ບໍ່ແມ່ນຄະແນນ/ຄຳຮັບປະກັນ", "ສະແດງ Checked Date"],
+        ["ຮ້ານຮ່ວມທົດລອງ", "ຮ້ານຮ່ວມ Pilot ແລະຈ່າຍ Package", "ບໍ່ຊື້ Ranking, Review Score ຫຼື Verification", "ປ້າຍ Partner ແຍກຈາກ Sponsored"],
+        ["ໂຄສະນາ", "ຮ້ານຈ່າຍເພື່ອ Placement ໃນຊ່ວງກຳນົດ", "ບໍ່ແມ່ນ Organic Ranking", "ສະແດງ “ໂຄສະນາ — ຮ້ານຈ່າຍເພື່ອສະແດງ” ໃກ້ Title/Action; ຫ້າມເຊື່ອງ"]
       ]},
       { title: "Consent, Analytics ແລະ Data Boundary", intro: "MVP ໃຊ້ Guest-first ແລະ Anonymous Session. ຕ້ອງເກັບຂໍ້ມູນເທົ່າທີ່ຈຳເປັນຕໍ່ essential operation ແລະ approved analytics.", headers: ["Data/Action", "Purpose", "Consent/notice", "ຂໍ້ຈຳກັດ"], rows: [
         ["Essential session", "Security, state, rate limiting", "Privacy notice", "ບໍ່ໃຊ້ marketing profile"],
         ["Analytics event", "Feed → Place → Intent funnel", "Consent choice ຕາມ approved policy", "Pseudonymous ID; dedupe; limited retention"],
         ["Map/Call/Message click", "Decision Intent", "ອະທິບາຍວ່າ click ບໍ່ເທົ່າ visit/sale", "ຫ້າມລາຍງານເກີນຫຼັກຖານ"],
         ["Correction/takedown contact", "Resolve request", "Form notice", "Access limited; retention decision required"]
-      ]}
+      ]},
+      { title: "Legal Review Checklist", intro: "Checklist ນີ້ບໍ່ແມ່ນຄຳຕອບທາງກົດໝາຍ. ມັນແມ່ນບັນຊີຄຳຖາມ ແລະຫຼັກຖານທີ່ Product Owner ຕ້ອງສົ່ງໃຫ້ນັກກົດໝາຍທີ່ມີອຳນາດໃນລາວກວດກ່ອນ Public MVP.", headers: ["Review ID", "ຂອບເຂດກວດ", "ຜົນສົ່ງມອບ", "ສະຖານະ"], rows: [
+        ["LEG-01", "Terms of Use: ບົດບາດ platform, external content, user action, liability, complaint", "ຂໍ້ຄວາມທີ່ legal reviewer ອະນຸມັດ + version/effective date", "Pending legal review"],
+        ["LEG-02", "Privacy Notice: data categories, purpose, access, provider, user rights, contact", "Approved notice + data map", "Pending legal review/TEC-06"],
+        ["LEG-03", "Analytics consent, cookies/local storage, withdrawal", "Consent rule + UI copy + proof record", "Pending legal review/TEC-06"],
+        ["LEG-04", "TikTok/Facebook/YouTube linking/embed/provider terms", "Provider-by-provider allowed method + fallback + review date", "Pending legal review and current provider verification"],
+        ["LEG-05", "Copyright, attribution, takedown, counter-evidence/appeal", "Approved forms, response procedure, notice wording", "Pending legal review"],
+        ["LEG-06", "Partner/Sponsored disclosure ແລະ commercial claims", "Approved Lao labels + placement rule", "Product labels approved; legal confirmation pending"],
+        ["LEG-07", "Cross-border processor/vendor, hosting, access control", "Vendor register + contract/transfer requirements", "Pending TEC-06/legal review"],
+        ["LEG-08", "Retention, deletion, security/audit logs, complaint records", "Approved retention schedule + deletion/hold rule", "Pending TEC-06/legal review"]
+      ]},
+      { title: "Consent & Retention Decision Register", intro: "ຫ້າມ Developer ເລືອກ consent default ຫຼືຈຳນວນວັນເກັບຂໍ້ມູນເອງ. Register ນີ້ແຍກສິ່ງທີ່ Product ສະເໜີອອກຈາກສິ່ງທີ່ Legal/TEC-06 ຕ້ອງອະນຸມັດ.", headers: ["Data class", "Product baseline", "ຈຸດທີ່ຕ້ອງຕັດສິນ", "Release behavior ລະຫວ່າງຄ້າງ"], rows: [
+        ["Essential session/security", "ໃຊ້ສະເພາະ session state, abuse/rate-limit ແລະ security", "legal basis/notice; identifier; retention days", "ເກັບຂັ້ນຕ່ຳ; ບໍ່ສ້າງ marketing profile"],
+        ["Non-essential analytics", "Feed → Place → Intent events ແບບ pseudonymous", "consent trigger, default, withdrawal, retention, vendor", "ປິດການເກັບທີ່ບໍ່ຈຳເປັນຈົນກວ່າຈະອະນຸມັດ"],
+        ["Correction/takedown contact", "ໃຊ້ຕິດຕໍ່ ແລະແກ້ Case ເທົ່ານັ້ນ", "required/optional fields, restricted roles, retention/deletion, legal hold", "ຮັບສະເພາະ Field ຈຳເປັນ; access ຈຳກັດ"],
+        ["Moderation/audit log", "ຮັກສາ state change, actor, reason ແລະ evidence reference", "retention class, security access, deletion/hold exception", "ບັນທຶກ metadata ຂັ້ນຕ່ຳ; ຫ້າມເກັບ media copy ໂດຍບໍ່ມີ rule"],
+        ["Consent withdrawal/deletion request", "ຕ້ອງມີວິທີປ່ຽນ choice ແລະສົ່ງຄຳຮ້ອງ", "identity check, response time, deletion vs legal hold, proof of completion", "ບໍ່ Launch analytics ທີ່ຕ້ອງ consent ຖ້າ flow ນີ້ບໍ່ພ້ອມ"]
+      ], note: "Gate ສຳລັບ CON-05 1.0: LEG-01 ຫາ LEG-08 ມີ reviewer/date/outcome ຄົບ, Consent & Retention Register ບໍ່ມີຄ່າ Pending, ແລະ Requirement/UX/TEC-06 ຖືກປັບໃຫ້ກົງກັນ. ຖ້າຍັງຄ້າງ ໃຫ້ປິດ non-essential analytics ແທນການເດົາ."}
     ],
-    review: ["ຕົກລົງວ່າ CON-05 ເປັນ Product Policy ທີ່ຕ້ອງຜ່ານ Legal Review ກ່ອນ Public MVP ຫຼືບໍ່?", "Official Embed ຂອງ provider ໃດຈະອະນຸຍາດໃນ Pilot?", "Rights complaint ຈະຮັບຜ່ານຊ່ອງທາງໃດ ແລະໃຜເປັນ owner?", "ອະນຸມັດຄຳລາວສຳລັບ Partner, Sponsored ແລະ Verified label ຫຼືບໍ່?", "ຈະກຳນົດ analytics consent ແລະ data retention ໃນ TEC-06/Legal Review ກ່ອນ PRO-04 1.0 ຫຼືບໍ່?"]
+    review: ["ຕົກລົງວ່າ CON-05 ເປັນ Product Policy ທີ່ຕ້ອງຜ່ານ Legal Review ກ່ອນ Public MVP ຫຼືບໍ່?", "Official Embed ຂອງ provider ໃດຈະອະນຸຍາດໃນ Pilot?", "Rights complaint ຈະຮັບຜ່ານຊ່ອງທາງໃດ ແລະໃຜເປັນ owner?", "ອະນຸມັດຄຳລາວສຳລັບ Partner, Sponsored ແລະ Verified label ຫຼືບໍ່?", "ຈະກຳນົດ analytics consent ແລະ data retention ໃນ TEC-06/Legal Review ກ່ອນ PRO-04 1.0 ຫຼືບໍ່?"],
+    reviewDecisions: ["ອະນຸມັດເປັນ Product Policy; ຍັງຄ້າງ Legal Review Checklist LEG-01 ຫາ LEG-08 ກ່ອນ Public MVP ແລະກ່ອນຂຶ້ນ 1.0.", "ອະນຸຍາດ Official Embed ຂອງ TikTok, Facebook ແລະ YouTube ສະເພາະ Public Content ທີ່ Provider ຮອງຮັບ; ຖ້າບໍ່ແນ່ໃຈໃຫ້ Redirect ເທົ່ານັ້ນ. ຍັງຕ້ອງກວດ Provider terms ປັດຈຸບັນກ່ອນ Launch.", "ໃຊ້ Dedicated Form + Email; Trust & Safety Owner ເປັນ Owner ແລະໃຊ້ P0 Process ສຳລັບ Rights/Privacy.", "ອະນຸມັດ “ແຫຼ່ງຣີວິວ”, “ກວດຂໍ້ມູນແລ້ວ”, “ຮ້ານຮ່ວມທົດລອງ” ແລະ “ໂຄສະນາ — ຮ້ານຈ່າຍເພື່ອສະແດງ”; Legal Reviewer ຍັງຕ້ອງຢືນຢັນກ່ອນ Launch.", "ຍັງຄ້າງ: TEC-06 ແລະ Legal Review ຕ້ອງຕື່ມ Consent & Retention Decision Register ໃຫ້ບໍ່ມີ Pending ກ່ອນ CON-05 ແລະ PRO-04 ຂຶ້ນ 1.0."],
+    artifacts: [{ label: "legal-review-checklist.template.json", path: "/templates/legal-review-checklist.template.json", description: "Decision Register ສຳລັບ Legal Reviewer, Product Owner ແລະ TEC-06 ບັນທຶກ outcome, owner, date, evidence ແລະ pending item." }]
   },
 
   "information-user-flow": {
@@ -418,32 +523,44 @@ export default function ContentDesignDocument({ slug, basePath }: { slug: string
   const previousSpec = specs[previous];
   const nextSpec = specs[next];
   const category = spec.code.startsWith("CON-") ? "CONTENT & TRUST" : "UX/UI DESIGN";
+  const version = spec.version ?? "0.1";
+  const isApproved = spec.status === "approved";
+  const statusLabel = spec.statusLabel ?? "ຮ່າງສຳລັບທົບທວນ";
+  const documentDate = spec.version ? "27 ສິງຫາ 2026" : "26 ສິງຫາ 2026";
+  const wireframeNumber = spec.sections.length + 3;
+  const artifactNumber = wireframeNumber + (spec.wireframes ? 1 : 0);
+  const reviewNumber = artifactNumber + (spec.artifacts ? 1 : 0);
 
   return <article className={`${styles.detailBody} ${styles.formalDocument}`}>
     <header className={styles.formalDocumentHeader}>
       <p>{spec.code} · {category}</p><h1>{spec.english}</h1><h2>{spec.title}</h2>
-      <div className={`${styles.formalStatus} ${styles.formalDraftStatus}`}>ສະບັບ 0.1 · ຮ່າງສຳລັບທົບທວນ · 26 ສິງຫາ 2026</div>
+      <div className={`${styles.formalStatus} ${isApproved ? "" : styles.formalDraftStatus}`}>ສະບັບ {version} · {statusLabel} · {documentDate}</div>
     </header>
 
     <section className={styles.formalSection} id="document-control"><h2><span>1.</span> ຂໍ້ມູນຄວບຄຸມເອກະສານ</h2>
       <div className={styles.formalTableWrap}><table className={styles.formalTable}><tbody>
-        <tr><th>ລະຫັດ</th><td>{spec.code}</td><th>ສະບັບ</th><td>0.1</td></tr>
-        <tr><th>ຊື່</th><td>{spec.english}</td><th>ສະຖານະ</th><td>ຮ່າງສຳລັບທົບທວນ</td></tr>
-        <tr><th>Owner</th><td>{spec.owner}</td><th>ວັນທີ</th><td>26 ສິງຫາ 2026</td></tr>
+        <tr><th>ລະຫັດ</th><td>{spec.code}</td><th>ສະບັບ</th><td>{version}</td></tr>
+        <tr><th>ຊື່</th><td>{spec.english}</td><th>ສະຖານະ</th><td>{statusLabel}</td></tr>
+        <tr><th>Owner</th><td>{spec.owner}</td><th>ວັນທີ</th><td>{documentDate}</td></tr>
         <tr><th>Source documents</th><td colSpan={3}>{spec.sources.join(" · ")}</td></tr>
       </tbody></table></div>
       <h3>1.1 ປະຫວັດການແກ້ໄຂ</h3>
-      <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ສະບັບ</th><th>ວັນທີ</th><th>ລາຍລະອຽດ</th><th>ສະຖານະ</th></tr></thead><tbody><tr><td>0.1</td><td>26 ສິງຫາ 2026</td><td>ຈັດທຳ baseline, policy/matrix ແລະຄຳຖາມສຳລັບການທົບທວນຄັ້ງທຳອິດ</td><td>ຮ່າງ</td></tr></tbody></table></div>
+      <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ສະບັບ</th><th>ວັນທີ</th><th>ລາຍລະອຽດ</th><th>ສະຖານະ</th></tr></thead><tbody>
+        <tr><td>0.1</td><td>26 ສິງຫາ 2026</td><td>ຈັດທຳ baseline, policy/matrix ແລະຄຳຖາມສຳລັບການທົບທວນຄັ້ງທຳອິດ</td><td>ຮ່າງ</td></tr>
+        {spec.version ? <tr><td>{version}</td><td>27 ສິງຫາ 2026</td><td>ບັນທຶກ REV-01 ຫາ REV-05 ແລະປັບ Policy, Threshold ແລະ Ownership ຕາມທີ່ອະນຸມັດ</td><td>{statusLabel}</td></tr> : null}
+      </tbody></table></div>
     </section>
 
     <nav className={styles.formalToc} aria-label={`ສາລະບານ ${spec.code}`}><h2>ສາລະບານ</h2><ol>
       <li><a href="#document-control">ຂໍ້ມູນຄວບຄຸມ</a></li><li><a href="#purpose">ຈຸດປະສົງ ແລະຂອບເຂດ</a></li>
       {spec.sections.map((section, index) => <li key={section.title}><a href={`#section-${index + 3}`}>{section.title}</a></li>)}
-      {spec.wireframes ? <li><a href="#wireframes">Low-fidelity Wireframes</a></li> : null}<li><a href="#review">ຂໍ້ຕ້ອງທົບທວນ</a></li>
+      {spec.wireframes ? <li><a href="#wireframes">Low-fidelity Wireframes</a></li> : null}
+      {spec.artifacts ? <li><a href="#artifacts">ແບບຟອມ ແລະໄຟລ໌ນຳໃຊ້</a></li> : null}
+      <li><a href="#review">ຂໍ້ຕ້ອງທົບທວນ</a></li>
     </ol></nav>
 
     <section className={styles.formalSection} id="purpose"><h2><span>2.</span> ຈຸດປະສົງ ແລະຂອບເຂດ</h2>{spec.purpose.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-      <div className={styles.formalNote}><strong>ສະຖານະຂອງເນື້ອຫາ</strong>ຂໍ້ກຳນົດ, target ແລະ threshold ໃນສະບັບ 0.1 ແມ່ນ baseline ສຳລັບການທົບທວນ. ຍັງບໍ່ມີຜົນບັງຄັບເປັນ 1.0 ຈົນກວ່າຂໍ້ຕ້ອງຕັດສິນຈະຖືກອະນຸມັດ.</div>
+      <div className={styles.formalNote}><strong>ສະຖານະຂອງເນື້ອຫາ</strong>{spec.approvalNote ?? "ຂໍ້ກຳນົດ, target ແລະ threshold ໃນສະບັບ 0.1 ແມ່ນ baseline ສຳລັບການທົບທວນ. ຍັງບໍ່ມີຜົນບັງຄັບເປັນ 1.0 ຈົນກວ່າຂໍ້ຕ້ອງຕັດສິນຈະຖືກອະນຸມັດ."}</div>
     </section>
 
     {spec.sections.map((section, index) => <section className={styles.formalSection} id={`section-${index + 3}`} key={section.title}>
@@ -452,11 +569,13 @@ export default function ContentDesignDocument({ slug, basePath }: { slug: string
       {section.note ? <div className={styles.formalDecision}><strong>ຂໍ້ສັງເກດ</strong><p>{section.note}</p></div> : null}
     </section>)}
 
-    {spec.wireframes ? <section className={styles.formalSection} id="wireframes"><h2><span>{spec.sections.length + 3}.</span> Low-fidelity Wireframes</h2><p>ແຜນຜັງຕໍ່ໄປນີ້ສະແດງລຳດັບຂໍ້ມູນ ແລະ interaction zone; ບໍ່ແມ່ນ visual design ສຸດທ້າຍ.</p><div className={styles.formalWireframeGrid}>{spec.wireframes.map((wireframe) => <figure className={styles.formalWireframe} key={wireframe.title}><figcaption><strong>{wireframe.title}</strong><span>{wireframe.screen}</span></figcaption><div>{wireframe.blocks.map((block) => <p key={block}>{block}</p>)}</div></figure>)}</div></section> : null}
+    {spec.wireframes ? <section className={styles.formalSection} id="wireframes"><h2><span>{wireframeNumber}.</span> Low-fidelity Wireframes</h2><p>ແຜນຜັງຕໍ່ໄປນີ້ສະແດງລຳດັບຂໍ້ມູນ ແລະ interaction zone; ບໍ່ແມ່ນ visual design ສຸດທ້າຍ.</p><div className={styles.formalWireframeGrid}>{spec.wireframes.map((wireframe) => <figure className={styles.formalWireframe} key={wireframe.title}><figcaption><strong>{wireframe.title}</strong><span>{wireframe.screen}</span></figcaption><div>{wireframe.blocks.map((block) => <p key={block}>{block}</p>)}</div></figure>)}</div></section> : null}
 
-    <section className={styles.formalSection} id="review"><h2><span>{spec.sections.length + (spec.wireframes ? 4 : 3)}.</span> ຂໍ້ຕ້ອງທົບທວນກ່ອນຂຶ້ນສະບັບ 1.0</h2>
-      <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>ຄຳຖາມຕ້ອງຕັດສິນ</th><th>ສະຖານະ</th></tr></thead><tbody>{spec.review.map((item, index) => <tr key={item}><td>REV-{String(index + 1).padStart(2, "0")}</td><td>{item}</td><td>ລໍທົບທວນ</td></tr>)}</tbody></table></div>
-      <div className={styles.formalDraftNotice}><strong>{spec.code} · Draft 0.1</strong><p>ເອກະສານມີ baseline ສຳລັບຣີວິວແລ້ວ ແຕ່ຍັງບໍ່ອະນຸມັດ. ການຕັດສິນ REV-01 ຫາ REV-05 ຈະຖືກບັນທຶກໃນ Revision ຖັດໄປ.</p></div>
+    {spec.artifacts ? <section className={styles.formalSection} id="artifacts"><h2><span>{artifactNumber}.</span> ແບບຟອມ ແລະໄຟລ໌ນຳໃຊ້</h2><p>ໄຟລ໌ເຫຼົ່ານີ້ແປງຂໍ້ກຳນົດໃນເອກະສານໃຫ້ເປັນແບບຟອມທີ່ Content Team, Trust &amp; Safety ແລະ Developer ສາມາດນຳໄປໃຊ້ໄດ້. ຄ່າທີ່ຂຽນວ່າ pending ຍັງຫ້າມນຳໄປໃຊ້ເປັນ Production Rule.</p><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ໄຟລ໌</th><th>ຈຸດປະສົງ</th><th>ການນຳໃຊ້</th></tr></thead><tbody>{spec.artifacts.map((artifact) => <tr key={artifact.path}><td><strong>{artifact.label}</strong></td><td>{artifact.description}</td><td><a href={`${basePath}${artifact.path}`} download>ດາວໂຫຼດໄຟລ໌</a></td></tr>)}</tbody></table></div></section> : null}
+
+    <section className={styles.formalSection} id="review"><h2><span>{reviewNumber}.</span> {spec.reviewDecisions ? "ບັນທຶກຂໍ້ຕັດສິນ" : "ຂໍ້ຕ້ອງທົບທວນກ່ອນຂຶ້ນສະບັບ 1.0"}</h2>
+      <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>ຫົວຂໍ້ທົບທວນ</th>{spec.reviewDecisions ? <th>ຂໍ້ຕັດສິນ</th> : null}<th>ສະຖານະ</th></tr></thead><tbody>{spec.review.map((item, index) => { const decision = spec.reviewDecisions?.[index]; const pending = decision?.includes("ຍັງຄ້າງ"); return <tr key={item}><td>REV-{String(index + 1).padStart(2, "0")}</td><td>{item}</td>{spec.reviewDecisions ? <td>{decision}</td> : null}<td>{decision ? (pending ? "ຍັງຄ້າງ" : "ອະນຸມັດ") : "ລໍທົບທວນ"}</td></tr>; })}</tbody></table></div>
+      <div className={isApproved ? styles.formalDecision : styles.formalDraftNotice}><strong>{spec.code} · {version}</strong><p>{isApproved ? "REV-01 ຫາ REV-05 ຖືກຕັດສິນຄົບ ແລະເອກະສານນີ້ເປັນ Baseline 1.0 ທີ່ອະນຸມັດແລ້ວ." : spec.approvalNote ?? "ເອກະສານມີ baseline ສຳລັບຣີວິວແລ້ວ ແຕ່ຍັງບໍ່ອະນຸມັດ."}</p></div>
     </section>
 
     <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">

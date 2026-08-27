@@ -1,0 +1,42 @@
+{
+  "document": "CON-04",
+  "case_control": {
+    "case_id": null,
+    "case_type": "general_report|place_correction|rights_privacy_takedown|appeal",
+    "priority": "P0|P1|P2|P3",
+    "status": "received",
+    "received_at": null,
+    "owner_id": null
+  },
+  "public_intake": {
+    "reporter_name": null,
+    "reporter_contact": null,
+    "claimant_authority": null,
+    "place_id": null,
+    "place_url": null,
+    "source_urls": [],
+    "reason_code": null,
+    "description_or_claim": "",
+    "current_value": null,
+    "proposed_value": null,
+    "evidence_references": [],
+    "good_faith_declaration": null,
+    "related_case_id": null,
+    "requested_outcome": null
+  },
+  "internal_decision": {
+    "policy_reference": null,
+    "finding": null,
+    "action": null,
+    "before_state": null,
+    "after_state": null,
+    "decided_by": null,
+    "decided_at": null,
+    "notified_at": null,
+    "appeal_reviewer": null,
+    "appeal_decided_at": null,
+    "final_status": null,
+    "retention_class": "PENDING_CON-05_TEC-06",
+    "deletion_due_at": null
+  }
+}
