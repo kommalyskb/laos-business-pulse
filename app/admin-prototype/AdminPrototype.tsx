@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import styles from "./admin-prototype.module.css";
 
 type ModuleId = "overview" | "queue" | "places" | "content" | "trust" | "partners" | "campaigns" | "analytics" | "finance" | "system";
@@ -46,6 +46,19 @@ const copy: Record<ModuleId,{eyebrow:string;title:string;description:string;prim
   analytics:{eyebrow:"ANALYTICS",title:"Discovery → Decision",description:"ວັດພຶດຕິກຳທີ່ຊ່ວຍຕັດສິນໃຈ ບໍ່ແມ່ນພຽງ View ຫຼື Like"},
   finance:{eyebrow:"REVENUE & FINANCE",title:"ຫຼັກຖານລາຍຮັບແລະ Runway",description:"ນັບສະເພາະເງິນທີ່ມີຫຼັກຖານ, ຕິດຕາມລາຍຈ່າຍ ແລະເພດານງົບ",primary:"＋ ບັນທຶກທຸລະກຳ"},
   system:{eyebrow:"SYSTEM & ACCESS",title:"Users, roles and platform controls",description:"ຄວບຄຸມສິດ, Integration, Feature Flag ແລະ privileged audit",primary:"＋ Invite user"},
+};
+
+const primaryGuides: Record<ModuleId,{purpose:string;start:string;done:string}> = {
+  overview:{purpose:"ກວດສຸຂະພາບທຸລະກິດທັງ audience, operations, trust, partner ແລະ cash.",start:"ເລີ່ມຈາກກ່ອງ ‘ຕ້ອງຈັດການຕອນນີ້’ ແລ້ວເປີດ Module ທີ່ມີຄວາມສ່ຽງ.",done:"ຜູ້ບໍລິຫານຮູ້ບັນຫາ, ເຈົ້າຂອງວຽກ ແລະການຕັດສິນຖັດໄປ."},
+  queue:{purpose:"ຮວບຮວມວຽກຈາກທຸກ Module ເພື່ອຈັດ priority, owner ແລະ SLA.",start:"ເລືອກວຽກ P0/P1 ຫຼື overdue ກ່ອນ ແລ້ວ Assign to me.",done:"ວຽກມີ owner, ຫຼັກຖານຄົບ, ປິດເປັນ Resolved ແລະມີ Audit."},
+  places:{purpose:"ສ້າງແລະຮັກສາ Place profile ທີ່ຜູ້ໃຊ້ນຳໄປຕັດສິນໃຈໄດ້.",start:"ເລືອກ Place ທີ່ Draft/Review ແລະກວດ fields ກັບ source evidence.",done:"Required fields ແລະ source ຄົບ, reviewer ອະນຸມັດ ແລະ status = Published."},
+  content:{purpose:"ນຳ review source ຈາກ social media ຜ່ານ rights, Place matching ແລະ publishing.",start:"ເລືອກ Source ທີ່ຄ້າງຢູ່ Rights review ຫຼືຍັງບໍ່ມີ Place match.",done:"ສິດນຳໃຊ້ຊັດ, ຈັບຄູ່ Place ຖືກ ແລະ source ຖືກ Published ພ້ອມ attribution."},
+  trust:{purpose:"ຈັດການ report, evidence, policy decision ແລະ appeal ໂດຍກວດຍ້ອນຫຼັງໄດ້.",start:"ເລືອກ P0/P1 case, ກວດ protected evidence ແລະ policy version.",done:"ມີ decision note, reason code, separation of duties ແລະ immutable audit."},
+  partners:{purpose:"ບໍລິຫານຮ້ານຄູ່ຮ່ວມຈາກ Lead ຫາ paid pilot, active ແລະ renewal.",start:"ເບິ່ງ opportunity ທີ່ມີ next action ຮອດກຳນົດ ຫຼືຄ້າງ payment evidence.",done:"ແຕ່ລະ account ມີ stage, owner, next activity ແລະຫຼັກຖານລາຍຮັບ."},
+  campaigns:{purpose:"ຄວບຄຸມ Sponsored Campaign ຈາກ draft ຫາ delivery ແລະ attribution.",start:"ກວດ creative, Sponsored label, landing Place ແລະ payment evidence.",done:"Campaign ຖືກອະນຸມັດ, delivery ວັດໄດ້ ແລະບໍ່ກະທົບ organic rating/trust."},
+  analytics:{purpose:"ປ່ຽນ event ການຄົ້ນຫາແລະ Decision Intent ເປັນຂໍ້ມູນຕັດສິນໃຈ.",start:"ເລືອກ period/province ແລ້ວເບິ່ງ funnel ຈາກ Discovery ຫາ Map/Contact.",done:"Metric definition, filter ແລະ attribution ຊັດ ແລະມີ action ທີ່ຮັບຜິດຊອບ."},
+  finance:{purpose:"ແຍກ invoice ຫຼືຄວາມສົນໃຈອອກຈາກລາຍຮັບທີ່ມີຫຼັກຖານ.",start:"ກວດ Pending evidence, ຈັບຄູ່ receipt/bank reference ແລະ budget category.",done:"ທຸລະກຳຖືກ Verified, runway ຄຳນວນຈາກຕົວເລກຈິງ ແລະງົບບໍ່ເກີນ Gate."},
+  system:{purpose:"ຄວບຄຸມ user, role, record rule, integration, feature flag ແລະ deployment.",start:"ກວດ privileged access, degraded integration ແລະການປ່ຽນແປງລ່າສຸດ.",done:"ສິດຖືກຈຳກັດຕາມ role, service ມີ owner ແລະທຸກ privileged action ມີ Audit."},
 };
 
 const seedWork: WorkItem[] = [
@@ -166,21 +179,144 @@ const detailCatalog: Record<string,DetailBlueprint> = {
   "system:deployments": detailView("Deployments","ຕິດຕາມ environment, version, migration, health check, rollback ແລະ release owner.","Production healthy",["Web application","Admin portal","Search index","Database migration"],"Deploy ຕ້ອງຢຸດຖ້າ health check ຫຼື migration validation ບໍ່ຜ່ານ.","Commit/version, approver, health result ແລະ rollback reference"),
 };
 
+type WorkspaceRecord = {id:string;title:string;detail:string;status:string;owner:string;due:string;priority:"High"|"Medium"|"Low";value:number;checks:boolean[];history:string[]};
+type WorkspaceMode = "register"|"board"|"calendar"|"analytics"|"matrix"|"finance"|"import";
+
+const workflowFor=(key:string):string[]=>{
+  if(key==="overview:reports")return["Draft","Scheduled","Generated"];
+  if(key==="overview:alerts")return["Open","Acknowledged","Resolved"];
+  if(key==="overview:system-health")return["Operational","Degraded","Resolved"];
+  if(key==="queue:all-work")return["New","In review","Resolved"];
+  if(key==="queue:sla-monitor")return["At risk","Escalated","Resolved"];
+  if(key==="queue:automation")return["Draft","Active","Paused"];
+  if(key==="places:needs-review")return["Pending","In review","Approved"];
+  if(key==="places:categories")return["Draft","Active","Deprecated"];
+  if(key==="places:source-coverage")return["Gap","In review","Verified"];
+  if(key==="places:import-export")return["Uploaded","Validated","Imported"];
+  if(key==="content:rights-review")return["Pending","In review","Approved"];
+  if(key==="content:place-matching")return["Unmatched","In review","Matched"];
+  if(key==="content:publishing")return["Ready","Scheduled","Published"];
+  if(key==="content:creators")return["Prospect","Permission pending","Active"];
+  if(key==="trust:reports")return["Open","In review","Resolved"];
+  if(key==="trust:appeals")return["Submitted","Independent review","Resolved"];
+  if(key==="trust:policies")return["Draft","Review","Effective"];
+  if(key==="trust:reason-codes")return["Draft","Active","Retired"];
+  if(key==="partners:accounts")return["Lead","Verified","Active"];
+  if(key==="partners:pilot")return["Onboarding","Payment pending","Active"];
+  if(key==="partners:renewals")return["Due","In review","Renewed"];
+  if(key==="partners:activities")return["Planned","In progress","Completed"];
+  if(key==="partners:performance")return["Monitoring","Reviewed","Shared"];
+  if(key==="campaigns:calendar")return["Planned","Approved","Live"];
+  if(key==="campaigns:creative-review")return["Draft","Review","Approved"];
+  if(key==="campaigns:sponsored-compliance")return["Check due","Review","Compliant"];
+  if(key==="campaigns:billing")return["Draft","Payment pending","Reconciled"];
+  if(key.startsWith("analytics:")&&key!=="analytics:exports")return["Monitoring","Analyzed","Actioned"];
+  if(key==="analytics:exports")return["Draft","Scheduled","Generated"];
+  if(key==="finance:payments")return["Pending","Matched","Verified"];
+  if(key==="finance:invoices")return["Draft","Issued","Paid"];
+  if(key==="finance:expenses")return["Submitted","Review","Approved"];
+  if(key==="finance:budget-gates")return["Locked","Evidence review","Released"];
+  if(key==="finance:runway")return["Draft","Reviewed","Approved"];
+  if(key==="system:roles")return["Draft","Review","Active"];
+  if(key==="system:record-rules")return["Draft","Test","Enforced"];
+  if(key==="system:integrations")return["Operational","Degraded","Resolved"];
+  if(key==="system:feature-flags")return["Off","Pilot","On"];
+  if(key==="system:audit")return["Recorded","Reviewed","Archived"];
+  if(key==="system:deployments")return["Planned","Deploying","Succeeded"];
+  return["Open","In review","Completed"];
+};
+
+const modeFor=(key:string):WorkspaceMode=>{
+  if(["places:import-export","analytics:exports"].includes(key))return"import";
+  if(["partners:activities","campaigns:calendar","system:deployments"].includes(key))return"calendar";
+  if(["places:categories","trust:policies","trust:reason-codes","system:roles","system:record-rules","system:feature-flags"].includes(key))return"matrix";
+  if(key.startsWith("finance:")||key==="campaigns:billing")return"finance";
+  if(key.startsWith("analytics:")||["overview:reports","overview:system-health","places:source-coverage","partners:performance","system:integrations","system:audit"].includes(key))return"analytics";
+  if(["queue:all-work","queue:sla-monitor","queue:automation","content:publishing","trust:appeals","partners:renewals","campaigns:creative-review"].includes(key))return"board";
+  return"register";
+};
+
+const seedWorkspace=(spec:DetailBlueprint,key:string):WorkspaceRecord[]=>{
+  const workflow=workflowFor(key);const prefix=key.split(":").map(part=>part.slice(0,3).toUpperCase()).join("-");
+  return spec.records.map((title,index)=>({id:`${prefix}-${String(index+1).padStart(3,"0")}`,title,detail:spec.purpose,status:workflow[index%workflow.length],owner:["Unassigned","Kommaly S.","Mali L.","Noy P."][index%4],due:["Today · 14:30","Tomorrow","30 Aug","Next week"][index%4],priority:index===0?"High":index===1?"Medium":"Low",value:42+index*17,checks:[true,index>0,index>1],history:["Record created from operating rule","Scope and dependency checked"]}));
+};
+
+const toneFor=(status:string)=>["Resolved","Approved","Verified","Generated","Effective","Active","Renewed","Completed","Shared","Published","Matched","Paid","Released","On","Enforced","Succeeded","Compliant","Reconciled","Actioned","Imported"].includes(status)?"success":["Escalated","At risk","Gap","Degraded","Payment pending"].includes(status)?"danger":"warning";
+
+const entityLabelFor=(key:string)=>{
+  const view=key.split(":")[1];
+  if(view.includes("report"))return"report";if(view.includes("alert"))return"alert";if(view.includes("automation"))return"automation rule";
+  if(view.includes("categories"))return"category";if(view.includes("source"))return"source check";if(view.includes("correction"))return"correction";
+  if(view.includes("rights"))return"rights review";if(view.includes("matching"))return"matching task";if(view.includes("publishing"))return"publishing item";if(view.includes("creator"))return"creator";
+  if(view.includes("appeal"))return"appeal";if(view.includes("polic"))return"policy";if(view.includes("reason"))return"reason code";
+  if(view.includes("account"))return"partner account";if(view.includes("pilot"))return"pilot";if(view.includes("renewal"))return"renewal";if(view.includes("activities"))return"activity";
+  if(view.includes("calendar"))return"schedule";if(view.includes("creative"))return"creative";if(view.includes("compliance"))return"compliance check";if(view.includes("billing"))return"billing record";
+  if(view.includes("export"))return"export job";if(view.includes("payment"))return"payment";if(view.includes("invoice"))return"invoice";if(view.includes("expense"))return"expense";if(view.includes("budget"))return"budget gate";if(view.includes("runway"))return"scenario";
+  if(view.includes("role"))return"role";if(view.includes("rule"))return"record rule";if(view.includes("integration"))return"integration";if(view.includes("flag"))return"feature flag";if(view.includes("audit"))return"audit review";if(view.includes("deployment"))return"deployment";
+  return"operating record";
+};
+
 function DetailWorkspace({moduleId,viewId,query,onAction}:{moduleId:ModuleId;viewId:string;query:string;onAction:(message:string)=>void}) {
-  const spec = detailCatalog[`${moduleId}:${viewId}`];
-  const [selected,setSelected] = useState(0);
-  useEffect(()=>setSelected(0),[moduleId,viewId]);
-  if(!spec) return null;
-  const filtered = spec.records.map((name,index)=>({name,index})).filter(item=>item.name.toLowerCase().includes(query.toLowerCase()));
-  const current = spec.records[selected] ?? spec.records[0];
-  const statuses = ["Action required","In review","On track","Scheduled"];
-  const owners = ["Kommaly S.","Mali L.","Noy P.","System rule"];
+  const key=`${moduleId}:${viewId}`;const spec=detailCatalog[key];const fallback=detailView("Operating workspace","Manage records.","0 records",["New record"],"Review required.","Evidence required.");
+  const activeSpec=spec??fallback;const workflow=workflowFor(key);const mode=modeFor(key);const storageKey=`admin-r4:${key}`;const entityLabel=entityLabelFor(key);
+  const [records,setRecords]=useState<WorkspaceRecord[]>(()=>seedWorkspace(activeSpec,key));
+  const [selectedId,setSelectedId]=useState(records[0]?.id??"");
+  const [filter,setFilter]=useState<"Active"|"Needs attention"|"Completed">("Active");
+  const [showEvidence,setShowEvidence]=useState(false);const [createOpen,setCreateOpen]=useState(false);const [newName,setNewName]=useState("");
+  const [cash,setCash]=useState(62400000);const [burn,setBurn]=useState(10700000);const [monthlyRevenue,setMonthlyRevenue]=useState(1200000);
+  const skipSave=useRef(true);
+  useEffect(()=>{skipSave.current=true;const saved=sessionStorage.getItem(storageKey);let next=seedWorkspace(activeSpec,key);if(saved){try{const parsed=JSON.parse(saved) as WorkspaceRecord[];if(Array.isArray(parsed)&&parsed.length)next=parsed}catch{sessionStorage.removeItem(storageKey)}}setRecords(next);setSelectedId(next[0]?.id??"");setFilter("Active");setShowEvidence(false)},[storageKey]);
+  useEffect(()=>{if(skipSave.current){skipSave.current=false;return}sessionStorage.setItem(storageKey,JSON.stringify(records))},[records,storageKey]);
+  if(!spec)return null;
+  const finalStatus=workflow[workflow.length-1];const selected=records.find(record=>record.id===selectedId)??records[0];
+  const visible=records.filter(record=>{const matches=`${record.id} ${record.title} ${record.detail} ${record.owner}`.toLowerCase().includes(query.toLowerCase());if(!matches)return false;if(filter==="Completed")return record.status===finalStatus;if(filter==="Needs attention")return record.priority==="High"||record.owner==="Unassigned"||record.status===workflow[0];return record.status!==finalStatus});
+  const patchRecord=(id:string,patch:Partial<WorkspaceRecord>,message:string)=>{setRecords(list=>list.map(record=>record.id===id?{...record,...patch,history:[message,...record.history]}:record));onAction(message)};
+  const toggleCheck=(index:number)=>{if(!selected)return;const checks=selected.checks.map((value,i)=>i===index?!value:value);patchRecord(selected.id,{checks},`${selected.id} checklist updated`)};
+  const assign=()=>selected&&patchRecord(selected.id,{owner:"Kommaly S.",status:selected.status===workflow[0]?workflow[Math.min(1,workflow.length-1)]:selected.status},`${selected.id} assigned to Kommaly S.`);
+  const advance=()=>{if(!selected)return;const index=workflow.indexOf(selected.status);const status=workflow[Math.min(index+1,workflow.length-1)];patchRecord(selected.id,{status},`${selected.id} advanced to ${status} · audit recorded`)};
+  const createRecord=()=>{if(!newName.trim())return;const id=`${moduleId.slice(0,3).toUpperCase()}-${viewId.slice(0,3).toUpperCase()}-${String(records.length+1).padStart(3,"0")}`;const next:WorkspaceRecord={id,title:newName.trim(),detail:spec.purpose,status:workflow[0],owner:"Unassigned",due:"Tomorrow",priority:"Medium",value:35,checks:[false,false,false],history:["Record created manually"]};setRecords(list=>[next,...list]);setSelectedId(id);setNewName("");setCreateOpen(false);setFilter("Active");onAction(`${id} created in ${spec.title}`)};
+  const exportCsv=()=>{const rows=[["ID","Title","Status","Owner","Due"],...records.map(record=>[record.id,record.title,record.status,record.owner,record.due])];const csv=rows.map(row=>row.map(value=>`"${String(value).replaceAll('"','""')}"`).join(",")).join("\n");const url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));const anchor=document.createElement("a");anchor.href=url;anchor.download=`${moduleId}-${viewId}.csv`;anchor.click();URL.revokeObjectURL(url);onAction(`${spec.title} CSV exported · ${records.length} records`)};
+  const importFile=async(event:ChangeEvent<HTMLInputElement>)=>{const file=event.target.files?.[0];if(!file)return;const lines=(await file.text()).split(/\r?\n/).filter(Boolean).slice(1,6);const additions=lines.map((line,index):WorkspaceRecord=>({id:`IMP-${Date.now().toString().slice(-5)}-${index+1}`,title:line.split(",")[0]||`Imported row ${index+1}`,detail:`Imported from ${file.name}`,status:workflow[0],owner:"Unassigned",due:"Today",priority:"Medium",value:20+index*8,checks:[true,false,false],history:[`Imported from ${file.name}`]}));setRecords(list=>[...additions,...list]);onAction(`${file.name} previewed · ${additions.length} rows added to validation queue`);event.target.value=""};
+  const saveView=()=>{sessionStorage.setItem(`admin-r4:view:${key}`,JSON.stringify({filter,query}));onAction(`${spec.title} view saved · ${filter} filter`)};
+  const matrixLabels=moduleId==="system"?["View","Edit","Approve"]:["Required","Visible","Enforced"];
+  const runway=burn-monthlyRevenue>0?(cash/(burn-monthlyRevenue)).toFixed(1):"∞";
   return <>
-    <div className={styles.summary}><Metric label="Current scope" value={spec.headline} detail="Live operating view"/><Metric label="Open / active" value={spec.records.length*3+2} detail="Filterable records"/><Metric label="Needs attention" value={Math.max(1,spec.records.length-2)} detail="Owner action required" tone="danger"/><Metric label="Data freshness" value="96%" detail="Checked today" tone="success"/></div>
-    <div className={styles.detailWorkspace}>
-      <section className={styles.detailRegister}><header><div><small>{moduleId.toUpperCase()} / {viewId.replaceAll("-"," ").toUpperCase()}</small><h2>{spec.title}</h2><p>{spec.purpose}</p></div><button onClick={()=>onAction(`${spec.title} filter saved`)}>Save view</button></header><div className={styles.detailToolbar}><button aria-pressed="true">Active</button><button>Needs attention</button><button>Completed</button><span>{filtered.length} groups · updated just now</span></div><div className={styles.detailHead}><span>Record / scope</span><span>Status</span><span>Owner</span><span>Updated</span></div>{filtered.map(item=><button key={item.name} className={styles.detailRow} aria-pressed={item.index===selected} onClick={()=>setSelected(item.index)}><span><code>{moduleId.slice(0,3).toUpperCase()}-{String(item.index+1).padStart(3,"0")}</code><b>{item.name}</b><small>{spec.purpose}</small></span><mark data-status={statuses[item.index%statuses.length]}>{statuses[item.index%statuses.length]}</mark><span>{owners[item.index%owners.length]}</span><time>{item.index===0?"12 min ago":`${item.index+1}h ago`}</time></button>)}</section>
-      <aside className={styles.contextPanel}><header><div><small>SELECTED OPERATING RECORD</small><h2>{current}</h2><code>{moduleId.toUpperCase()} / {viewId}</code></div><mark data-status={statuses[selected%statuses.length]}>{statuses[selected%statuses.length]}</mark></header><div className={styles.contextFacts}><article><small>OWNER</small><b>{owners[selected%owners.length]}</b></article><article><small>NEXT REVIEW</small><b>{selected===0?"Today · 14:30":"Within 48 hours"}</b></article><article><small>IMPACT</small><b>{selected===0?"High · user-facing":"Standard operations"}</b></article><article><small>DEPENDENCY</small><b>{moduleId==="system"?"Technical owner":"Source + policy check"}</b></article></div><section><small>CONTROL / BUSINESS RULE</small><p>{spec.control}</p></section><section><small>REQUIRED EVIDENCE</small><p>{spec.evidence}</p></section><section className={styles.checklist}><small>COMPLETION CHECKLIST</small><label><input type="checkbox" defaultChecked/> Record scope confirmed</label><label><input type="checkbox"/> Evidence reviewed</label><label><input type="checkbox"/> Decision note completed</label></section><section className={styles.activity}><small>ACTIVITY & AUDIT</small><ol><li><i>10:42</i><span><b>Record opened for review</b><small>{owners[selected%owners.length]}</small></span></li><li><i>09:18</i><span><b>Data refreshed</b><small>System automation</small></span></li></ol></section><footer><button onClick={()=>onAction(`${current} assigned to Kommaly S.`)}>Assign to me</button><button onClick={()=>onAction(`${current} evidence opened`)}>Open evidence</button><button className={styles.primary} onClick={()=>onAction(`${current} action completed · audit recorded`)}>Complete action</button></footer></aside>
-    </div>
+    <section className={styles.guideStrip}><div><small>ໜ້ານີ້ໃຊ້ເຮັດຫຍັງ</small><b>{spec.purpose}</b></div><div><small>ເລີ່ມຈາກໃສ</small><b>ເລືອກ {workflow[0]} → ມອບໝາຍ Owner → ເປີດ Evidence</b></div><div><small>ສຳເລັດເມື່ອໃດ</small><b>Checklist ຄົບ, ຜ່ານ “{spec.control}” ແລະ State = {finalStatus}</b></div></section>
+    <div className={styles.summary}><Metric label="Current scope" value={spec.headline} detail={`${records.length} operating records`}/><Metric label="Active" value={records.filter(x=>x.status!==finalStatus).length} detail="In workflow"/><Metric label="Needs attention" value={records.filter(x=>x.priority==="High"||x.owner==="Unassigned").length} detail="Owner action required" tone="danger"/><Metric label={finalStatus} value={records.filter(x=>x.status===finalStatus).length} detail="Evidence complete" tone="success"/></div>
+    {mode==="board"?<section className={styles.modePanel}><header><div><small>WORKFLOW BOARD</small><b>{workflow.join(" → ")}</b></div></header><div className={styles.workflowBoard}>{workflow.map(status=><section key={status}><header><b>{status}</b><span>{records.filter(x=>x.status===status).length}</span></header>{records.filter(x=>x.status===status).map(record=><button key={record.id} onClick={()=>setSelectedId(record.id)}><small>{record.id} · {record.owner}</small><b>{record.title}</b><span>{record.due}</span></button>)}</section>)}</div></section>:null}
+    {mode==="calendar"?<section className={styles.modePanel}><header><div><small>OPERATING CALENDAR</small><b>Schedule, owner and readiness</b></div></header><div className={styles.calendarGrid}>{records.map((record,index)=><button key={record.id} onClick={()=>setSelectedId(record.id)}><time>{28+index} AUG</time><span><b>{record.title}</b><small>{record.status} · {record.owner}</small></span></button>)}</div></section>:null}
+    {mode==="analytics"?<section className={styles.modePanel}><header><div><small>MEASURE → EXPLAIN → ACT</small><b>{spec.title} operating analysis</b></div><button onClick={exportCsv}>Export CSV</button></header><div className={styles.insightGrid}>{records.map(record=><button key={record.id} onClick={()=>setSelectedId(record.id)}><span><b>{record.title}</b><small>{record.status}</small></span><strong>{record.value}%</strong><i><em style={{width:`${Math.min(record.value,100)}%`}}/></i></button>)}</div><p className={styles.definition}><b>Metric control:</b> {spec.control} · <b>Evidence:</b> {spec.evidence}</p></section>:null}
+    {mode==="matrix"?<section className={styles.modePanel}><header><div><small>CONTROL MATRIX</small><b>{spec.title}</b></div><button onClick={()=>onAction(`${spec.title} matrix draft saved`)}>Save matrix</button></header><div className={styles.matrixHead}><span>Record / rule</span>{matrixLabels.map(label=><span key={label}>{label}</span>)}</div>{records.map(record=><div className={styles.matrixRow} key={record.id}><button onClick={()=>setSelectedId(record.id)}><b>{record.title}</b><small>{record.status}</small></button>{record.checks.map((checked,index)=><input key={index} aria-label={`${record.title} ${matrixLabels[index]}`} type="checkbox" checked={checked} onChange={()=>{const checks=record.checks.map((value,i)=>i===index?!value:value);patchRecord(record.id,{checks},`${record.id} ${matrixLabels[index]} changed`)}}/>)}</div>)}</section>:null}
+    {mode==="finance"?<section className={styles.modePanel}><header><div><small>FINANCIAL CONTROL & SCENARIO</small><b>{spec.title}</b></div><button onClick={exportCsv}>Export evidence</button></header><div className={styles.scenarioGrid}><label>Available cash (₭)<input type="number" value={cash} onChange={event=>setCash(Number(event.target.value))}/></label><label>Monthly cost (₭)<input type="number" value={burn} onChange={event=>setBurn(Number(event.target.value))}/></label><label>Verified monthly revenue (₭)<input type="number" value={monthlyRevenue} onChange={event=>setMonthlyRevenue(Number(event.target.value))}/></label><article><small>CALCULATED RUNWAY</small><b>{runway} months</b><span>Cash ÷ (Cost − verified revenue)</span></article></div><p className={styles.definition}>{spec.control} Required: {spec.evidence}.</p></section>:null}
+    {mode==="import"?<section className={styles.modePanel}><header><div><small>FILE OPERATION</small><b>Validate before changing live records</b></div><button onClick={exportCsv}>Export current CSV</button></header><div className={styles.uploadZone}><label><b>Choose CSV for validation preview</b><span>Reads up to 5 rows in this prototype; imported rows start at {workflow[0]}.</span><input type="file" accept=".csv,text/csv" onChange={importFile}/></label><div><small>ROLLBACK BOUNDARY</small><b>Published data is never overwritten automatically</b><span>{records.length} records in current validation register</span></div></div></section>:null}
+    <div className={styles.detailWorkspace}><section className={styles.detailRegister}><header><div><small>{moduleId.toUpperCase()} / {viewId.replaceAll("-"," ").toUpperCase()} · {mode.toUpperCase()}</small><h2>{spec.title}</h2><p>{spec.purpose}</p></div><div className={styles.headerActions}><button onClick={saveView}>☆ Save view</button><button onClick={exportCsv}>⇩ Export</button><button className={styles.primary} onClick={()=>setCreateOpen(true)}>＋ New {entityLabel}</button></div></header>{createOpen?<div className={styles.quickInline}><label>{entityLabel} title<input autoFocus value={newName} onChange={event=>setNewName(event.target.value)} placeholder={`Enter ${entityLabel} name or title`}/></label><button onClick={()=>setCreateOpen(false)}>Cancel</button><button className={styles.primary} disabled={!newName.trim()} onClick={createRecord}>Create {entityLabel}</button></div>:null}<div className={styles.detailToolbar}>{(["Active","Needs attention","Completed"] as const).map(status=><button key={status} aria-pressed={filter===status} onClick={()=>setFilter(status)}>{status}</button>)}<span>{visible.length} of {records.length} records</span></div><div className={styles.detailHead}><span>Record / scope</span><span>Status</span><span>Owner</span><span>Due</span></div>{visible.map(record=><button key={record.id} className={styles.detailRow} aria-pressed={record.id===selected?.id} onClick={()=>{setSelectedId(record.id);setShowEvidence(false)}}><span><code>{record.id}</code><b>{record.title}</b><small>{record.detail}</small></span><mark data-tone={toneFor(record.status)}>{record.status}</mark><span>{record.owner}</span><time>{record.due}</time></button>)}{!visible.length?<div className={styles.empty}><b>No records in this view</b><span>Change filter, search text or create a new {entityLabel}.</span></div>:null}</section>{selected?<aside className={styles.contextPanel}><header><div><small>SELECTED {entityLabel.toUpperCase()}</small><h2>{selected.title}</h2><code>{selected.id} · {selected.priority} priority</code></div><mark data-tone={toneFor(selected.status)}>{selected.status}</mark></header><div className={styles.contextFacts}><article><small>OWNER</small><b>{selected.owner}</b></article><article><small>DUE / REVIEW</small><b>{selected.due}</b></article><article><small>WORKFLOW</small><b>{workflow.join(" → ")}</b></article><article><small>SESSION STATE</small><b>Saved in this browser tab</b></article></div><section><small>CONTROL / BUSINESS RULE</small><p>{spec.control}</p></section><section><small>REQUIRED EVIDENCE</small><p>{spec.evidence}</p></section><section className={styles.checklist}><small>COMPLETION CHECKLIST</small>{["Record scope and owner confirmed","Required evidence reviewed","Decision note and downstream impact recorded"].map((label,index)=><label key={label}><input type="checkbox" checked={selected.checks[index]} onChange={()=>toggleCheck(index)}/>{label}</label>)}</section>{showEvidence?<section className={styles.evidenceDrawer}><small>EVIDENCE PREVIEW</small><b>{spec.evidence}</b><p>Reference: {selected.id}-E01 · checked 28 Aug 2026 · retained with audit history.</p></section>:null}<section className={styles.activity}><small>ACTIVITY & AUDIT</small><ol>{selected.history.slice(0,4).map((event,index)=><li key={`${event}-${index}`}><i>{index===0?"Now":`${index+1}h`}</i><span><b>{event}</b><small>{selected.owner}</small></span></li>)}</ol></section><footer><button onClick={assign}>Assign to me</button><button onClick={()=>setShowEvidence(value=>!value)}>{showEvidence?"Close evidence":"Open evidence"}</button><button className={styles.primary} disabled={!selected.checks.every(Boolean)||selected.status===finalStatus} onClick={advance}>{selected.status===finalStatus?finalStatus:`Advance to ${workflow[Math.min(workflow.indexOf(selected.status)+1,workflow.length-1)]}`}</button></footer></aside>:null}</div>
+  </>;
+}
+
+type CorrectionItem = {id:string;title:string;field:string;before:string;after:string;submitter:string;status:"Pending"|"In review"|"Approved"|"Rejected";owner:string;checks:boolean[]};
+const correctionSeed:CorrectionItem[] = [
+  {id:"REQ-028",title:"Business hours correction",field:"Opening hours",before:"08:00–20:00",after:"07:00–21:30",submitter:"Place owner",status:"Pending",owner:"Unassigned",checks:[true,false,false]},
+  {id:"REQ-031",title:"Phone number changed",field:"Phone",before:"+856 20 5555 0141",after:"+856 20 2244 7788",submitter:"User report",status:"In review",owner:"Noy P.",checks:[true,true,false]},
+  {id:"REQ-034",title:"Menu price update",field:"Menu price",before:"₭55,000",after:"₭62,000",submitter:"Internal data check",status:"Approved",owner:"Kommaly S.",checks:[true,true,true]},
+];
+
+function CorrectionWorkspace({query,onAction}:{query:string;onAction:(message:string)=>void}) {
+  const [items,setItems]=useState(correctionSeed);
+  const [selectedId,setSelectedId]=useState(correctionSeed[0].id);
+  const [filter,setFilter]=useState<"All"|CorrectionItem["status"]>("All");
+  const [showEvidence,setShowEvidence]=useState(false);
+  const skipSave=useRef(true);
+  useEffect(()=>{const saved=sessionStorage.getItem("admin-r4:places:corrections");if(saved){try{const parsed=JSON.parse(saved) as CorrectionItem[];if(Array.isArray(parsed)&&parsed.length){setItems(parsed);setSelectedId(parsed[0].id)}}catch{sessionStorage.removeItem("admin-r4:places:corrections")}}},[]);
+  useEffect(()=>{if(skipSave.current){skipSave.current=false;return}sessionStorage.setItem("admin-r4:places:corrections",JSON.stringify(items))},[items]);
+  const selected=items.find(item=>item.id===selectedId)??items[0];
+  const visible=items.filter(item=>(filter==="All"||item.status===filter)&&`${item.id} ${item.title} ${item.field} ${item.submitter}`.toLowerCase().includes(query.toLowerCase()));
+  const update=(patch:Partial<CorrectionItem>,message:string)=>{setItems(list=>list.map(item=>item.id===selected.id?{...item,...patch}:item));onAction(message)};
+  const toggleCheck=(index:number)=>{const checks=selected.checks.map((value,i)=>i===index?!value:value);update({checks},`${selected.id} checklist updated`)};
+  const create=()=>{const id=`REQ-${40+items.length}`;const next:CorrectionItem={id,title:"New Place correction",field:"Contact information",before:"Current published value",after:"Proposed corrected value",submitter:"Admin manual entry",status:"Pending",owner:"Unassigned",checks:[false,false,false]};setItems(list=>[next,...list]);setSelectedId(id);setFilter("All");onAction(`${id} correction request created`)};
+  return <>
+    <section className={styles.guideStrip}><div><small>ໜ້ານີ້ໃຊ້ເຮັດຫຍັງ</small><b>ກວດຄຳຂໍແກ້ Place ໂດຍປຽບທຽບຄ່າເກົ່າ/ໃໝ່ກັບຫຼັກຖານ</b></div><div><small>ເລີ່ມຈາກໃສ</small><b>ເລືອກ Pending → Assign owner → ກວດ checklist</b></div><div><small>ສຳເລັດເມື່ອໃດ</small><b>ມີຫຼັກຖານຄົບ, reviewer ບໍ່ແມ່ນ submitter ແລະບັນທຶກ decision</b></div></section>
+    <div className={styles.summary}><Metric label="Pending" value={items.filter(x=>x.status==="Pending").length} detail="Awaiting owner"/><Metric label="In review" value={items.filter(x=>x.status==="In review").length} detail="Evidence check"/><Metric label="Approved" value={items.filter(x=>x.status==="Approved").length} detail="Ready to publish" tone="success"/><Metric label="Separation risk" value={items.filter(x=>x.submitter.includes(x.owner)).length} detail="Must be zero" tone="danger"/></div>
+    <div className={styles.detailWorkspace}><section className={styles.detailRegister}><header><div><small>PLACES / CORRECTIONS</small><h2>Place correction register</h2><p>ທຸກຄຳຂໍເກັບ field diff, submitter, evidence, reviewer ແລະ decision.</p></div><button className={styles.primary} onClick={create}>＋ New correction</button></header><div className={styles.detailToolbar}>{(["All","Pending","In review","Approved"] as const).map(status=><button key={status} aria-pressed={filter===status} onClick={()=>setFilter(status)}>{status}</button>)}<span>{visible.length} records</span></div><div className={styles.detailHead}><span>Request / field</span><span>Status</span><span>Owner</span><span>Updated</span></div>{visible.map((item,index)=><button key={item.id} className={styles.detailRow} aria-pressed={item.id===selected.id} onClick={()=>{setSelectedId(item.id);setShowEvidence(false)}}><span><code>{item.id}</code><b>{item.title}</b><small>{item.field}: {item.before} → {item.after}</small></span><mark data-status={item.status}>{item.status}</mark><span>{item.owner}</span><time>{index+1}h ago</time></button>)}</section><aside className={styles.contextPanel}><header><div><small>CORRECTION DECISION</small><h2>{selected.title}</h2><code>{selected.id} · {selected.submitter}</code></div><mark data-status={selected.status}>{selected.status}</mark></header><div className={styles.diffGrid}><article><small>PUBLISHED VALUE</small><b>{selected.before}</b></article><article><small>PROPOSED VALUE</small><b>{selected.after}</b></article></div><section><small>BUSINESS CONTROL</small><p>ຜູ້ສົ່ງຄຳຂໍບໍ່ສາມາດ Approve ຄຳຂໍຂອງຕົນເອງ; ຕ້ອງຮັກສາ Before/After ໃນ Audit.</p></section><section className={styles.checklist}><small>REQUIRED CHECKLIST</small>{["ຢືນຢັນ Place ແລະ field ທີ່ຖືກແກ້","ກວດຫຼັກຖານທຽບກັບຄ່າໃໝ່","ກວດ separation of duties ແລະຂຽນ decision note"].map((label,index)=><label key={label}><input type="checkbox" checked={selected.checks[index]} onChange={()=>toggleCheck(index)}/>{label}</label>)}</section>{showEvidence?<section className={styles.evidenceDrawer}><small>EVIDENCE PREVIEW</small><b>Owner message · storefront photo · checked 28 Aug 2026</b><p>Evidence ອ້າງວ່າ {selected.field} ປ່ຽນຈາກ “{selected.before}” ເປັນ “{selected.after}”.</p></section>:null}<footer><button onClick={()=>update({owner:"Kommaly S.",status:"In review"},`${selected.id} assigned to Kommaly S.`)}>Assign to me</button><button onClick={()=>setShowEvidence(value=>!value)}>{showEvidence?"Close evidence":"Open evidence"}</button><button onClick={()=>update({status:"Rejected"},`${selected.id} rejected · audit recorded`)}>Reject</button><button className={styles.primary} disabled={!selected.checks.every(Boolean)||selected.status==="Approved"} onClick={()=>update({status:"Approved"},`${selected.id} approved · Place publish task created`)}>Approve correction</button></footer></aside></div>
   </>;
 }
 
@@ -253,7 +389,7 @@ export default function AdminPrototype() {
   };
 
   const moduleContent = useMemo(():ReactNode => {
-    if(activeSub!==subMenus[active][0].id) return <DetailWorkspace moduleId={active} viewId={activeSub} query={query} onAction={announce}/>;
+    if(activeSub!==subMenus[active][0].id) return active==="places"&&activeSub==="corrections"?<CorrectionWorkspace query={query} onAction={announce}/>:<DetailWorkspace moduleId={active} viewId={activeSub} query={query} onAction={announce}/>;
     if(active==="overview") return <>
       <div className={styles.summary}><Metric label="Monthly active users" value="18,420" detail="+14.8% vs prior" tone="success"/><Metric label="Decision Intent" value="31.6%" detail="+3.2 points" tone="success"/><Metric label="Verified Places" value={places.filter(x=>x.status==="Published").length} detail={`${places.filter(x=>x.freshness>=90).length} fresh`}/><Metric label="Verified revenue" value={money(verifiedRevenue)} detail="Paid evidence only"/></div>
       <div className={styles.dashboardGrid}>
@@ -313,9 +449,11 @@ export default function AdminPrototype() {
 
   const current=copy[active];
   const currentSub=subMenus[active].find(item=>item.id===activeSub) ?? subMenus[active][0];
+  const isPrimaryView=currentSub.id===subMenus[active][0].id;
+  const primaryGuide=primaryGuides[active];
   return <main className={styles.app}>
     <header className={styles.appBar}><button className={styles.launchButton} onClick={()=>setLauncherOpen(true)} aria-label="Open application launcher">▦</button><a href="../final-design" className={styles.brand}><b>ພ້ອມໄປ</b><span>{modules.find(item=>item.id===active)?.label} · ADMIN</span></a><nav aria-label={`${modules.find(item=>item.id===active)?.label} sub-navigation`}>{subMenus[active].map(item=><button key={item.id} aria-current={item.id===currentSub.id?"page":undefined} onClick={()=>openSub(item.id)}><span>{item.label}</span></button>)}</nav><div className={styles.utilities}><button aria-label="Activities" onClick={()=>setToast(`${audit.length} audit/activity records in this session`)}>◷<em>{audit.length}</em></button><button aria-label="Help" onClick={()=>setToast("ເລືອກ Module ຈາກ Application Launcher ແລະເລືອກ Sub-Menu ເທິງ Header")}>?</button><span>KS</span></div></header>
-    <section className={styles.workspace}><header className={styles.controlBar}><div><small>{current.eyebrow} / {currentSub.label.toUpperCase()}</small><h1>{current.title}</h1><p>{current.description}</p></div><label><span>⌕</span><input value={query} onChange={event=>setQuery(event.target.value)} placeholder={`ຄົ້ນຫາໃນ ${currentSub.label}…`} aria-label={`Search ${active} ${currentSub.label}`}/></label>{current.primary?<button className={styles.primary} onClick={()=>setCreateOpen(true)}>{current.primary}</button>:<button onClick={()=>setLauncherOpen(true)}>All modules ▦</button>}</header>{moduleContent}</section>
+    <section className={styles.workspace}><header className={styles.controlBar}><div><small>{current.eyebrow} / {currentSub.label.toUpperCase()}</small><h1>{current.title}</h1><p>{current.description}</p></div><label><span>⌕</span><input value={query} onChange={event=>setQuery(event.target.value)} placeholder={`ຄົ້ນຫາໃນ ${currentSub.label}…`} aria-label={`Search ${active} ${currentSub.label}`}/></label>{isPrimaryView&&current.primary?<button className={styles.primary} onClick={()=>setCreateOpen(true)}>{current.primary}</button>:<button onClick={()=>setToast(isPrimaryView?"ເປີດ Application Launcher ເພື່ອປ່ຽນ Module":"ໃຊ້ Page actions ໃນ workspace ດ້ານລຸ່ມ")}>{isPrimaryView?"All modules ▦":"Page actions ↓"}</button>}</header>{isPrimaryView?<section className={styles.guideStrip}><div><small>ໜ້ານີ້ໃຊ້ເຮັດຫຍັງ</small><b>{primaryGuide.purpose}</b></div><div><small>ເລີ່ມຈາກໃສ</small><b>{primaryGuide.start}</b></div><div><small>ສຳເລັດເມື່ອໃດ</small><b>{primaryGuide.done}</b></div></section>:null}{moduleContent}</section>
     {launcherOpen?<div className={styles.launcher} role="dialog" aria-modal="true" aria-label="Application launcher"><header><div><small>ພ້ອມໄປ · APPLICATIONS</small><b>ເລືອກ Module ທີ່ຕ້ອງການເຮັດວຽກ</b></div><button onClick={()=>setLauncherOpen(false)} aria-label="Close">×</button></header><div>{modules.map(item=><button key={item.id} onClick={()=>nav(item.id)}><i>{item.icon}</i><b>{item.label}</b><small>{item.section}</small></button>)}</div></div>:null}
     {createOpen?<QuickCreate kind={current.primary??"Create record"} onClose={()=>setCreateOpen(false)} onCreate={createRecord}/>:null}
     <div className={styles.toast} role="status">{toast}</div>

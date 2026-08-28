@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import AdminPrototype from "./AdminPrototype";
 
 export const metadata: Metadata = {
-  title: "Admin Workflow Prototype R3.2 | ພ້ອມໄປ",
-  description: "Admin Portal R3.2 ເລືອກ Main Module ຈາກ Application Launcher ແລະໃຊ້ Header ສະເພາະ Sub-Menu ຂອງ Module ປັດຈຸບັນ.",
-  openGraph: { title: "Admin Workflow Prototype R3.2", description: "Application-based modules and one-level contextual header navigation.", images: [] },
-  twitter: { title: "Admin Workflow Prototype R3.2", description: "Application-based modules and one-level contextual header navigation.", images: [] },
+  title: "Admin Workflow Prototype R4.0 | ພ້ອມໄປ",
+  description: "Admin Portal R4.0 ມີ 10 Modules, 55 functional views, contextual guidance, workflow, evidence, audit ແລະ session persistence.",
+  openGraph: { title: "Admin Workflow Prototype R4.0", description: "Fifty-five functional Admin views with contextual workflows and evidence controls.", images: [] },
+  twitter: { title: "Admin Workflow Prototype R4.0", description: "Fifty-five functional Admin views with contextual workflows and evidence controls.", images: [] },
 };
 
 export default function AdminPrototypePage() {

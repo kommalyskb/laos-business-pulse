@@ -1,0 +1,88 @@
+{
+  "document": "UX-05",
+  "version": "0.10.0",
+  "prototype": "Admin Workflow Prototype R4.0",
+  "date": "2026-08-28",
+  "route": "/admin-prototype",
+  "purpose": "Functional design evidence for a 360-degree Admin Portal. It clarifies what each view is for, where work starts, what evidence is required and when work is complete.",
+  "navigation_contract": {
+    "main_modules": "Selected only through the Application Launcher",
+    "header": "Shows only the submenus of the active module",
+    "second_navigation_row": false,
+    "url_state": "module and view query parameters"
+  },
+  "coverage": {
+    "modules": 10,
+    "views": 55,
+    "module_views": {
+      "overview": 5,
+      "operations": 4,
+      "places": 6,
+      "content": 5,
+      "trust": 5,
+      "partners": 6,
+      "campaigns": 5,
+      "analytics": 6,
+      "finance": 6,
+      "system": 7
+    }
+  },
+  "guidance_contract": [
+    "what this page is used for",
+    "where the operator should start",
+    "when the task is complete"
+  ],
+  "workspace_modes": [
+    {
+      "id": "register",
+      "use": "case, source, account, compliance and record review",
+      "interactions": ["search", "filter", "select", "create view-specific record", "assign", "checklist", "evidence preview", "workflow transition", "CSV export", "audit history"]
+    },
+    {
+      "id": "board",
+      "use": "all work, SLA, automation, publishing, appeal, renewal and creative review",
+      "interactions": ["workflow columns", "record selection", "owner", "due date", "state transition"]
+    },
+    {
+      "id": "calendar",
+      "use": "partner activity, campaign calendar and deployment",
+      "interactions": ["dated schedule cards", "readiness", "owner", "record context"]
+    },
+    {
+      "id": "analytics",
+      "use": "management report, system health, source coverage, partner performance, analytics, integration and audit",
+      "interactions": ["metric drill-down", "metric definition", "business control", "CSV export"]
+    },
+    {
+      "id": "matrix",
+      "use": "category, policy, reason code, role, record rule and feature flag",
+      "interactions": ["required/visible/enforced toggles", "draft save", "audit event"]
+    },
+    {
+      "id": "finance",
+      "use": "campaign billing, payments, invoices, expenses, budget gates and runway",
+      "interactions": ["available cash input", "monthly cost input", "verified revenue input", "live runway calculation", "evidence export"]
+    },
+    {
+      "id": "import",
+      "use": "Place import/export and analytics export",
+      "interactions": ["CSV selection", "five-row validation preview", "validation queue", "current-data export", "rollback boundary"]
+    }
+  ],
+  "prototype_state": {
+    "persistence": "Browser sessionStorage per view",
+    "survives_refresh_in_same_tab": true,
+    "durable_or_multi_user": false,
+    "audit": "Session simulation only"
+  },
+  "production_gaps": [
+    "backend APIs and database persistence",
+    "authentication and server-enforced role/record rules",
+    "real media, map, payment, notification and analytics integrations",
+    "concurrency and conflict resolution",
+    "exhaustive loading, error, offline, unauthorized and rate-limit states",
+    "manual accessibility evidence",
+    "four-role final sign-off"
+  ],
+  "approval_boundary": "R4.0 is an interactive UX and workflow prototype. It is not a production application and does not replace PRO-02 System Analysis, TEC-01 architecture or TEC-02 API contracts."
+}

@@ -1,13 +1,13 @@
 {
   "document": "UX-05",
-  "version": "0.9.2",
-  "baseline": "Final Design Gallery 0.9.2 · Admin Workflow Prototype R3.2",
+  "version": "0.10.0",
+  "baseline": "Final Design Gallery 0.10.0 · Admin Workflow Prototype R4.0",
   "status": "baseline_ready_final_gates_pending",
   "source_of_truth": {
     "guest_pilot": "Prototype R2.3 at /prototype",
     "guest_rendering": "live_prototype_embed",
     "duplicate_guest_markup": false,
-    "admin": "Standalone Admin Workflow Prototype R3.2 with ten modules selected through the Application Launcher, one contextual submenu header, detailed record workspaces, session record transitions, Odoo-inspired interaction structure and UX-04 visual tokens",
+    "admin": "Standalone Admin Workflow Prototype R4.0 with ten modules and fifty-five functional views selected through the Application Launcher and contextual submenu header; seven view-specific workspace modes, purpose/start/done guidance, session persistence, evidence, workflow, export and audit simulation use UX-04 visual tokens",
     "admin_prototype_route": "/admin-prototype"
   },
   "shared_contract": {
