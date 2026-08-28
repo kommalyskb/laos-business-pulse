@@ -13,6 +13,7 @@ import ProductVisionDocument from "./ProductVisionDocument";
 import RevenueKpiDocument from "./RevenueKpiDocument";
 import RequirementsAcceptanceDocument from "./RequirementsAcceptanceDocument";
 import SystemAnalysisDocument from "./SystemAnalysisDocument";
+import SystemArchitectureDocument from "./SystemArchitectureDocument";
 
 export function generateStaticParams() {
   return documents.map((document) => ({ slug: document.slug }));
@@ -99,6 +100,8 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
                         ? <MvpScopeDocument basePath={basePath} />
                       : document.slug === "requirements-acceptance"
                           ? <RequirementsAcceptanceDocument basePath={basePath} />
+                          : document.slug === "system-architecture"
+                            ? <SystemArchitectureDocument basePath={basePath} />
                           : document.category === "content" || document.category === "design"
                             ? <ContentDesignDocument slug={document.slug} basePath={basePath} />
                 : <article className={styles.detailBody}>

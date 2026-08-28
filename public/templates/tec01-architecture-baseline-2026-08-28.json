@@ -1,0 +1,108 @@
+{
+  "document": {
+    "id": "TEC-01",
+    "title": "System Architecture",
+    "version": "0.1",
+    "status": "draft_for_review",
+    "date": "2026-08-28",
+    "architecture_style": "modular_monolith_first",
+    "next_document": "TEC-02"
+  },
+  "sources": [
+    "PRO-02 1.0",
+    "PRO-03 1.0",
+    "PRO-04 0.9",
+    "UX-05 0.11.0",
+    "CON-02 1.0",
+    "CON-04 1.0",
+    "BUS-05 1.0",
+    "BUS-06 1.0"
+  ],
+  "principles": [
+    { "id": "ARC-P01", "name": "Modular Monolith-first", "rule": "Keep one operationally simple backend deployment with explicit domain module boundaries for the Pilot." },
+    { "id": "ARC-P02", "name": "Relational source of truth", "rule": "Transactional business records live in a relational database; search and analytics are rebuildable projections." },
+    { "id": "ARC-P03", "name": "Public read separate from Admin command", "rule": "Public APIs return Published data only; every privileged write is authenticated, authorized, validated and audited." },
+    { "id": "ARC-P04", "name": "External failure isolation", "rule": "Social, map, message and analytics failure cannot remove available core Place information or actions." },
+    { "id": "ARC-P05", "name": "Link-only media", "rule": "Store canonical URL, permitted metadata and attribution; do not download or re-host social video." },
+    { "id": "ARC-P06", "name": "Consent-aware measurement", "rule": "Separate essential and optional analytics; optional events require consent and do not block user actions." },
+    { "id": "ARC-P07", "name": "Server-enforced trust", "rule": "Authorization, record rules, publish gates, sponsored disclosure and audit are enforced on the server." },
+    { "id": "ARC-P08", "name": "Evidence before scale", "rule": "Add or split infrastructure only when measured performance, reliability or ownership evidence supports it." }
+  ],
+  "components": [
+    { "id": "ARC-C01", "name": "Edge & Delivery", "boundary": "public_admin", "responsibility": "TLS, routing, static assets, caching, basic rate limiting and request IDs" },
+    { "id": "ARC-C02", "name": "Guest Web", "boundary": "public", "responsibility": "Feed, Search, Place, Consent and Map/Call/Message handoff" },
+    { "id": "ARC-C03", "name": "Admin Web", "boundary": "private", "responsibility": "Ten modules, 55 views, operational workflow, evidence and role-aware controls" },
+    { "id": "ARC-C04", "name": "Public API", "boundary": "public", "responsibility": "Published-only Feed, Search and Place queries" },
+    { "id": "ARC-C05", "name": "Admin API", "boundary": "private", "responsibility": "Commands and controlled queries for all Admin domains" },
+    { "id": "ARC-C06", "name": "Domain Modules", "boundary": "internal", "responsibility": "Business rules, state transitions, publish gates, eligibility, deduplication and calculations" },
+    { "id": "ARC-C07", "name": "Primary Database", "boundary": "private", "responsibility": "System of record, constraints, transactions, version fields and outbox" },
+    { "id": "ARC-C08", "name": "Search Projection", "boundary": "private_read", "responsibility": "Rebuildable Published Place search and filter index" },
+    { "id": "ARC-C09", "name": "Job Queue & Worker", "boundary": "private", "responsibility": "Source checks, freshness, scheduled campaigns, projections, notification and aggregates" },
+    { "id": "ARC-C10", "name": "Analytics Ingest & Aggregate", "boundary": "controlled", "responsibility": "Consent validation, event deduplication, Decision Intent and privacy-safe aggregates" },
+    { "id": "ARC-C11", "name": "Integration Adapters", "boundary": "external_boundary", "responsibility": "Social metadata/embed, map, deep links, notification and future payment adapters" },
+    { "id": "ARC-C12", "name": "Object & Evidence Storage", "boundary": "private", "responsibility": "Approved Place images, posters, evidence and generated exports" },
+    { "id": "ARC-C13", "name": "Identity & Session", "boundary": "private", "responsibility": "Admin sign-in, sessions, roles and privileged-step verification" },
+    { "id": "ARC-C14", "name": "Observability & Recovery", "boundary": "operations", "responsibility": "Logs, metrics, traces, alerts, backup verification and restore evidence" }
+  ],
+  "flows": [
+    { "id": "FLOW-01", "name": "Place and Source to Publish", "path": ["Admin Web", "Admin API", "Domain", "Primary DB and Audit Outbox", "Worker", "Search and Cache"] },
+    { "id": "FLOW-02", "name": "Guest Discover to Decide", "path": ["Guest Web", "Edge", "Public API", "Cache or Search", "Published read model"] },
+    { "id": "FLOW-03", "name": "Map Call Message", "path": ["Guest Web", "Availability check", "External adapter or deep link", "Optional analytics"] },
+    { "id": "FLOW-04", "name": "Correction and Takedown", "path": ["Intake", "Request workflow", "Evidence", "Decision", "Place or Source command", "Audit"] },
+    { "id": "FLOW-05", "name": "Source Availability", "path": ["Scheduler", "Queue", "Worker", "Social adapter", "Classified result", "Retry or state command"] },
+    { "id": "FLOW-06", "name": "Sponsored Campaign", "path": ["Campaign command", "Eligibility", "Scheduler", "Labeled placement", "Aggregate", "Report"] },
+    { "id": "FLOW-07", "name": "Payment and Expense Evidence", "path": ["Finance command", "Evidence storage", "Database record", "Verification", "Audit and report"] }
+  ],
+  "data_contract": {
+    "source_of_truth": "relational_database",
+    "projection_policy": "Search and analytics projections must be rebuildable from canonical records.",
+    "command_transaction": [
+      "authenticate_actor",
+      "authorize_action_and_record_scope",
+      "validate_input_state_version_and_business_rules",
+      "write_business_change_audit_and_outbox_atomically",
+      "commit_then_respond",
+      "process_outbox_idempotently"
+    ],
+    "media_policy": "link_metadata_and_attribution_only",
+    "public_visibility": "published_only"
+  },
+  "environments": [
+    { "name": "local", "purpose": "developer feedback", "data": "synthetic fixtures", "production_secrets_allowed": false },
+    { "name": "test_ci", "purpose": "contract integration and end-to-end automation", "data": "resettable DATA-01 to DATA-08", "production_secrets_allowed": false },
+    { "name": "pilot_staging", "purpose": "UAT performance accessibility and operational rehearsal", "data": "anonymized or approved pilot data", "public_traffic": false },
+    { "name": "production", "purpose": "public pilot and Admin operations", "data": "authoritative", "controls": ["backup", "alert", "audit", "rollback"] }
+  ],
+  "security_recovery": {
+    "authorization": "server_enforced_role_action_and_record_rules",
+    "audit": "atomic_with_privileged_business_write",
+    "secrets": "runtime_secret_store_only",
+    "external_input": ["URL allowlist", "size and type validation", "timeout", "sanitization", "no arbitrary server fetch"],
+    "analytics": "asynchronous_consent_aware_and_non_blocking",
+    "pilot_recovery_provisional": { "rpo_hours": 24, "rto_hours": 8, "final_owner": "TEC-06" }
+  },
+  "architecture_decisions": [
+    { "id": "ADR-001", "decision": "Modular Monolith for Pilot", "status": "proposed" },
+    { "id": "ADR-002", "decision": "Relational database as source of truth", "status": "proposed" },
+    { "id": "ADR-003", "decision": "Search starts as a rebuildable projection", "status": "proposed" },
+    { "id": "ADR-004", "decision": "Transactional outbox for asynchronous effects", "status": "proposed" },
+    { "id": "ADR-005", "decision": "External social media remains link-only", "status": "fixed_by_scope" },
+    { "id": "ADR-006", "decision": "Admin authorization is server-enforced", "status": "fixed_by_security" },
+    { "id": "ADR-007", "decision": "Analytics is asynchronous and consent-aware", "status": "proposed" },
+    { "id": "ADR-008", "decision": "No platform booking or payment transaction in MVP", "status": "fixed_by_PRO_03" }
+  ],
+  "review_decisions": [
+    { "id": "REV-01", "topic": "Architecture style", "recommendation": "approve_modular_monolith_first", "status": "pending" },
+    { "id": "REV-02", "topic": "Data and search", "recommendation": "approve_relational_source_and_rebuildable_projections", "status": "pending" },
+    { "id": "REV-03", "topic": "Asynchronous and external boundary", "recommendation": "approve_outbox_queue_bounded_retry_and_link_only_media", "status": "pending" },
+    { "id": "REV-04", "topic": "Security and Admin", "recommendation": "approve_as_mandatory_control", "status": "pending" },
+    { "id": "REV-05", "topic": "Environment and recovery", "recommendation": "approve_provisional_rpo_24h_rto_8h_pending_TEC_06", "status": "pending" }
+  ],
+  "next_documents": [
+    { "id": "TEC-02", "receives": "solution alternatives, delivery and cost comparison" },
+    { "id": "TEC-03", "receives": "technology and vendor decisions" },
+    { "id": "TEC-04", "receives": "physical database and API contracts" },
+    { "id": "TEC-05", "receives": "search relevance and recommendation design" },
+    { "id": "TEC-06", "receives": "threat, privacy, infrastructure and recovery controls" }
+  ]
+}
