@@ -1,13 +1,13 @@
 {
   "document": "UX-05",
-  "version": "0.10.1",
-  "baseline": "Final Design Gallery 0.10.1 · Admin Workflow Prototype R4.1",
+  "version": "0.11.0",
+  "baseline": "Final Design Gallery 0.11.0 · Admin Workflow Prototype R5.0",
   "status": "baseline_ready_final_gates_pending",
   "source_of_truth": {
     "guest_pilot": "Prototype R2.3 at /prototype",
     "guest_rendering": "live_prototype_embed",
     "duplicate_guest_markup": false,
-    "admin": "Standalone Admin Workflow Prototype R4.1 with task-first Place and Review Source intake, ten modules and fifty-five functional views; seven view-specific workspace modes, purpose/start/done guidance, session persistence, evidence, workflow, export and audit simulation use UX-04 visual tokens",
+    "admin": "Standalone Admin Workflow Prototype R5.0 with task-first Place and Review Source intake, ten modules and fifty-five functional views; seven view-specific workspace modes, purpose/start/done guidance, typed session persistence, accessible custom dropdowns, readable Lao typography, evidence, workflow, export and audit simulation use UX-04 visual tokens",
     "admin_prototype_route": "/admin-prototype"
   },
   "shared_contract": {
@@ -17,7 +17,10 @@
     "states": ["default", "loading", "empty", "error", "stale", "sponsored", "unauthorized", "conflict"],
     "unknown_data_rule": "Show unknown or unavailable explicitly; never convert missing data to zero, closed or verified.",
     "sponsored_rule": "Show Sponsored and Lao advertising text before the decision action; payment does not alter rating or trust.",
-    "external_action_rule": "Map, Call, Message and Original Source are external handoffs with unavailable/failure fallback."
+    "external_action_rule": "Map, Call, Message and Original Source are external handoffs with unavailable/failure fallback.",
+    "admin_navigation_rule": "Select a main module through the Application Launcher; show only the active module's submenus in the header.",
+    "admin_dropdown_rule": "Expose label, optional metadata, selected and expanded states; support keyboard, pointer and mobile bottom-sheet interaction.",
+    "admin_typography_rule": "Use Noto Sans Lao; captions are at least 12px, working text is 13–14px and section headings are at least 16px."
   },
   "screens": [
     {

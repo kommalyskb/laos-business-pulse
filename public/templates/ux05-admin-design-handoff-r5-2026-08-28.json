@@ -1,0 +1,91 @@
+{
+  "document": "UX-05",
+  "version": "0.11.0",
+  "prototype": "Admin Workflow Prototype R5.0",
+  "date": "2026-08-28",
+  "route": "/admin-prototype",
+  "status": "design_handoff_ready_technical_implementation_pending",
+  "authority": {
+    "visual": "UX-04 design tokens, Noto Sans Lao typography and semantic state colors",
+    "interaction": "Admin Workflow Prototype R5.0",
+    "business_logic": "PRO-02 System Analysis 1.0 and PRO-04 acceptance baseline",
+    "next_documents": ["TEC-01 System Architecture", "TEC-02 Technical Proposal"]
+  },
+  "coverage": {
+    "modules": 10,
+    "views": 55,
+    "workspace_modes": 7,
+    "guest_source": "Prototype R2.3",
+    "admin_source": "Admin Workflow Prototype R5.0"
+  },
+  "navigation_contract": {
+    "module_selection": "Main modules are selected through the Application Launcher.",
+    "header": "The header shows only the submenus of the active module.",
+    "url_state": "The selected module and view are represented by module and view query parameters.",
+    "prohibited_pattern": "Do not add a second persistent module-navigation row above the active module submenus."
+  },
+  "workflow_contract": {
+    "guidance": ["what the page is for", "where the operator starts", "when the task is complete"],
+    "content_intake": ["create or select Place", "add original review link", "review rights", "publish"],
+    "place_dependency": "A review source must be linked to a Place; when no Place exists, the operator creates a Draft Place first.",
+    "evidence_rule": "A workflow transition that changes public, trust, finance or access state must retain evidence and an audit reference."
+  },
+  "control_contract": {
+    "dropdown": {
+      "presentation": ["selected label", "optional explanatory metadata", "expanded state", "selected check"],
+      "keyboard": ["ArrowDown", "ArrowUp", "Home", "End", "Enter", "Space", "Escape"],
+      "pointer": ["open", "select", "outside-click close"],
+      "mobile": "The option list uses a bottom-sheet presentation with touch-friendly rows.",
+      "accessibility": ["aria-haspopup=listbox", "aria-expanded", "aria-controls", "role=listbox", "role=option", "aria-selected"]
+    },
+    "forms": "Labels, required fields, validation messages and the primary action remain visible in reading order.",
+    "destructive_actions": "Production implementation must add confirmation, authorization and server-side audit controls where required by PRO-02."
+  },
+  "typography_contract": {
+    "font_family": "Noto Sans Lao Variable, Noto Sans Lao, system-ui",
+    "caption_min_px": 12,
+    "working_text_px": [13, 14],
+    "section_heading_min_px": 16,
+    "lao_line_height": [1.5, 1.65],
+    "applies_to": ["navigation", "table", "form", "modal", "dashboard", "dropdown", "status", "mobile"]
+  },
+  "responsive_contract": {
+    "validation_viewports_px": [360, 390, 768, 1024, 1440],
+    "mobile": "Single-column priority, scrollable module submenus and bottom-sheet dropdown options.",
+    "tablet": "Adaptive one- or two-column workspaces without hiding required context.",
+    "desktop": "Persistent working context with register/detail or dashboard panels where the task benefits from it."
+  },
+  "prototype_state": {
+    "storage": "Browser sessionStorage",
+    "typed_records": true,
+    "survives_refresh_in_same_tab": true,
+    "durable": false,
+    "multi_user": false,
+    "server_authoritative": false,
+    "audit": "Session simulation only"
+  },
+  "technical_handoff": {
+    "tec_01_must_define": [
+      "frontend, admin, API, database, search, analytics and integration boundaries",
+      "authentication, authorization and server-enforced role and record rules",
+      "deployment topology, observability, scaling and failure isolation",
+      "authoritative persistence and concurrency model"
+    ],
+    "tec_02_must_define": [
+      "API and event contracts for each core workflow",
+      "error, retry, idempotency and conflict behavior",
+      "external media, map, payment, notification and analytics integration contracts",
+      "implementation alternatives, effort, cost and trade-offs"
+    ]
+  },
+  "production_gaps": [
+    "backend APIs and database persistence",
+    "authentication and production permission enforcement",
+    "real external integrations",
+    "multi-user concurrency and conflict resolution",
+    "exhaustive loading, empty, error, offline, unauthorized and rate-limit states",
+    "external usability evidence and manual accessibility gates",
+    "four-role final sign-off"
+  ],
+  "approval_boundary": "R5.0 is the approved design-handoff baseline for architecture and estimation. It is not UX-05 1.0 and is not a production application."
+}
