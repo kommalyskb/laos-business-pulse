@@ -1,6 +1,6 @@
 {
   "document": "UX-04",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "reviewed_at": "2026-08-28",
   "target": "WCAG 2.2 AA internal target",
   "contrast_pairs": [
@@ -21,16 +21,21 @@
     "consent_dialog_initial_focus": "passed_browser_retest_390x844",
     "background_inert_while_consent_pending": "passed_browser_retest_390x844",
     "focus_visible": "passed_browser_retest_390x844",
-    "core_touch_targets_44px": "passed_390x844",
-    "qa_test_mode": "prototype_r2_2_has_deterministic_screen_and_state_selectors_plus_session_only_pass_fail_checklist",
+    "core_touch_targets_44px": "passed_internal_browser_retest_r2_3_at_390x844",
+    "qa_test_mode": "prototype_r2_3_has_deterministic_screen_and_state_selectors_plus_session_only_pass_fail_checklist",
     "qa_evidence_template": "ux04-qa-test-record.template.json",
-    "keyboard_manual": "test_instructions_and_focus_visible_surface_ready_pending_manual_evidence",
-    "reduced_motion_css": "implemented_and_test_instructions_available_in_prototype_r2_2_pending_manual_retest",
-    "lao_text_200_percent": "long_text_scenario_ready_pending_manual_200_percent_retest",
-    "screen_reader_manual": "voiceover_core_journey_instructions_ready_pending_manual_evidence; nvda_required_before_wider_launch",
-    "full_pilot_guest_component_states": "default_loading_empty_error_disabled_sponsored_stale_are_deterministically_accessible_pending_manual_results",
+    "keyboard_structure_and_focus": "semantic_controls_focus_visible_qa_dialog_initial_focus_escape_close_and_focus_return_passed_internal_browser_retest_r2_3",
+    "keyboard_physical_operation": "pending_manual_physical_keyboard_evidence",
+    "reduced_motion_css": "prefers_reduced_motion_contract_verified_in_css_r2_3_pending_actual_os_preference_retest",
+    "lao_long_text_responsive": "passed_internal_browser_retest_at_360_390_768_1024_1440_and_240px_stress_viewports_without_horizontal_overflow",
+    "lao_text_actual_200_percent": "pending_manual_browser_zoom_evidence",
+    "screen_reader_semantics": "no_visible_unnamed_buttons_links_inputs_duplicate_ids_or_images_without_alt_in_internal_browser_audit_r2_3",
+    "screen_reader_manual": "voiceover_core_journey_pending_manual_evidence; nvda_required_before_wider_launch",
+    "full_pilot_guest_component_states": "default_loading_empty_error_disabled_sponsored_stale_and_long_text_passed_internal_browser_retest_r2_3",
+    "console_errors_and_warnings": "none_during_internal_browser_retest_r2_3",
+    "evidence_record": "ux04-internal-qa-2026-08-28.json",
     "admin_component_states": "deferred_to_ux_04_1_and_not_a_pilot_1_0_blocker"
   },
   "document_status": "in_progress",
-  "remaining_gate": "The R2.2 test surfaces make the required checks executable but do not count as passing evidence. VoiceOver on Pilot journeys, keyboard operation, 200% Lao text verification, reduced-motion retest, and all Pilot guest component states still require recorded manual results before UX-04 1.0. NVDA remains required before wider public launch."
+  "remaining_gate": "Internal browser QA for Prototype R2.3 passed deterministic component states, semantic structure, focus restoration, touch targets, responsive layouts, Lao long-text stress, media fallback, and console checks. UX-04 remains 0.9.4 until physical-keyboard operation, VoiceOver on Pilot journeys, actual browser zoom at 200%, and actual OS reduced-motion preference are manually tested and recorded. NVDA remains required before wider public launch."
 }

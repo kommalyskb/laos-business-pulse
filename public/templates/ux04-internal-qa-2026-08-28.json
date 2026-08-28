@@ -1,0 +1,70 @@
+{
+  "document": "UX-04",
+  "document_version": "0.9.4",
+  "prototype_version": "R2.3",
+  "run_id": "QA-20260828-INT-01",
+  "tested_at": "2026-08-28",
+  "tester": "Codex automated browser QA",
+  "scope": "Internal functional, responsive, semantic accessibility, focus, state, fallback and console regression testing",
+  "evidence_boundary": {
+    "is_external_user_research": false,
+    "is_voiceover_test": false,
+    "is_physical_keyboard_test": false,
+    "is_actual_browser_zoom_200_percent_test": false,
+    "is_actual_os_reduced_motion_test": false,
+    "note": "This record documents only checks actually performed in the Codex in-app browser. It must not be used as evidence for UX-03 external usability testing or for the four pending manual accessibility gates."
+  },
+  "environment": {
+    "browser": "Codex in-app browser",
+    "baseline": "Public Prototype R2.2",
+    "retest": "Local Prototype R2.3",
+    "viewports": ["360px", "390px", "768px", "1024px", "1440px"],
+    "stress_viewport": "240px"
+  },
+  "findings_and_retests": [
+    {
+      "issue_id": "QA-F01",
+      "finding": "The search input accessible name included the Clear button text because the label wrapped both controls.",
+      "resolution": "Added a direct Lao aria-label to the search input.",
+      "retest": "pass"
+    },
+    {
+      "issue_id": "QA-F02",
+      "finding": "View switchers and active filters did not expose their selected state.",
+      "resolution": "Added clear Lao aria-label values and aria-pressed to intent, category, view and bottom-navigation controls.",
+      "retest": "pass"
+    },
+    {
+      "issue_id": "QA-F03",
+      "finding": "Several visible controls were between 32px and 42px and did not meet the 44px touch-target contract.",
+      "resolution": "Raised minimum dimensions for intent chips, view switchers, map markers, section actions, prototype links and QA controls to at least 44px.",
+      "retest": "pass"
+    },
+    {
+      "issue_id": "QA-F04",
+      "finding": "Closing the QA panel did not have a reliable focus-return contract.",
+      "resolution": "Initial focus now moves to the close button; Close and Escape return focus to the QA trigger with a visible 3px outline.",
+      "retest": "pass"
+    }
+  ],
+  "test_results": [
+    {"area": "deterministic_states", "coverage": "default, loading, empty, error, disabled with reason, sponsored, stale/unknown and Lao long text", "result": "pass"},
+    {"area": "core_flow", "coverage": "search, video/list/map switch, place open/back and query preservation", "result": "pass"},
+    {"area": "media_fallback", "coverage": "unavailable video explanation, recovery CTA, Place continuation and missing source disclosure", "result": "pass"},
+    {"area": "responsive_layout", "coverage": "360, 390, 768, 1024 and 1440px plus 240px stress viewport", "result": "pass"},
+    {"area": "lao_long_text_stress", "coverage": "wrapping and no unintended horizontal overflow", "result": "pass"},
+    {"area": "semantic_audit", "coverage": "visible button/link/input names, duplicate IDs, image alt text and heading order", "result": "pass"},
+    {"area": "qa_panel_focus", "coverage": "initial focus, visible focus, Close/Escape and trigger focus restoration", "result": "pass"},
+    {"area": "console", "coverage": "errors and warnings during retest", "result": "pass"},
+    {"area": "physical_keyboard_operation", "coverage": "Tab/Shift+Tab/Enter/Space across the full journey", "result": "pending_manual"},
+    {"area": "voiceover", "coverage": "Discover to Search to Place with announcements", "result": "pending_manual"},
+    {"area": "browser_zoom_200_percent", "coverage": "actual browser zoom across Discover, Search, Place and Consent", "result": "pending_manual"},
+    {"area": "os_reduced_motion", "coverage": "actual system preference and visual retest", "result": "pending_manual", "css_contract": "verified"}
+  ],
+  "decision": {
+    "prototype_r2_3_internal_qa": "pass",
+    "ux_04_status": "0.9.4 in progress",
+    "ux_04_ready_for_1_0": false,
+    "remaining_manual_gates": ["physical keyboard", "VoiceOver", "actual 200% browser zoom", "actual OS reduced-motion preference"]
+  }
+}

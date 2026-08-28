@@ -62,13 +62,15 @@ export default function InteractivePrototype() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<"all" | "restaurant" | "cafe">("all");
   const [resultView, setResultView] = useState<"video" | "list" | "map">("video");
-  const [notice, setNotice] = useState("Prototype R2.2 · ເປີດ UX-04 QA Test Mode ໄດ້ແລ້ວ");
+  const [notice, setNotice] = useState("Prototype R2.3 · QA findings ຖືກແກ້ ແລະທົດສອບຊ້ຳແລ້ວ");
   const [analytics, setAnalytics] = useState<"pending" | "essential" | "allowed">("pending");
   const [showTasks, setShowTasks] = useState(false);
   const [showQa, setShowQa] = useState(false);
   const [qaScenario, setQaScenario] = useState<QaScenario>("default");
   const [qaResults, setQaResults] = useState<Record<QaItemId, QaResult>>({ keyboard: "pending", lao_200: "pending", reduced_motion: "pending", voiceover: "pending", component_states: "pending" });
   const essentialConsentRef = useRef<HTMLButtonElement>(null);
+  const qaTriggerRef = useRef<HTMLButtonElement>(null);
+  const qaCloseRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (analytics === "pending") essentialConsentRef.current?.focus();
@@ -76,12 +78,24 @@ export default function InteractivePrototype() {
 
   useEffect(() => {
     if (!showQa) return;
+    const frame = requestAnimationFrame(() => qaCloseRef.current?.focus());
     const closeQa = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setShowQa(false);
+      if (event.key === "Escape") {
+        setShowQa(false);
+        requestAnimationFrame(() => qaTriggerRef.current?.focus());
+      }
     };
     window.addEventListener("keydown", closeQa);
-    return () => window.removeEventListener("keydown", closeQa);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("keydown", closeQa);
+    };
   }, [showQa]);
+
+  const closeQaPanel = () => {
+    setShowQa(false);
+    requestAnimationFrame(() => qaTriggerRef.current?.focus());
+  };
 
   const selected = places.find((place) => place.id === selectedId) ?? places[0];
   const displaySelected: Place = qaScenario === "long_text" ? {
@@ -145,14 +159,14 @@ export default function InteractivePrototype() {
 
   return <main className={styles.stage}>
     <header className={styles.prototypeHeader}>
-      <div><strong>ພ້ອມໄປ · UX-03</strong><span>PROTOTYPE R2.2 · QA TEST MODE</span></div>
-      <nav><button aria-expanded={showQa} aria-controls="ux04-qa-panel" onClick={() => setShowQa((value) => !value)}>{showQa ? "ປິດ QA" : "UX-04 · ທົດສອບ"}</button><button onClick={() => setShowTasks((value) => !value)}>{showTasks ? "ປິດຜົນທົບທວນ" : "Founder Review R2 · ຜົນ"}</button><a href={`${basePath}/documents/interactive-prototype`}>ກັບເອກະສານ</a></nav>
+      <div><strong>ພ້ອມໄປ · UX-03</strong><span>PROTOTYPE R2.3 · QA RETEST</span></div>
+      <nav><button ref={qaTriggerRef} aria-expanded={showQa} aria-controls={showQa ? "ux04-qa-panel" : undefined} onClick={() => showQa ? closeQaPanel() : setShowQa(true)}>{showQa ? "ປິດ QA" : "UX-04 · ທົດສອບ"}</button><button onClick={() => setShowTasks((value) => !value)}>{showTasks ? "ປິດຜົນທົບທວນ" : "Founder Review R2 · ຜົນ"}</button><a href={`${basePath}/documents/interactive-prototype`}>ກັບເອກະສານ</a></nav>
     </header>
 
     {showTasks ? <aside className={styles.tasks} aria-label="Founder review results"><strong>Founder Review R2 · ຜ່ານໂດຍມີ 1 Minor Revision</strong><ol><li><b>ຜ່ານ:</b> Platform ມີຄວາມແຕກຕ່າງຊັດ.</li><li><b>ຜ່ານໃນລະດັບໜຶ່ງ:</b> Search ຊ່ວຍຄົ້ນ ແລະປຽບທຽບໄດ້.</li><li><b>ຜ່ານຫຼັງແກ້:</b> Place Page ຂໍ້ມູນຄົບ; Prototype R2.1 ເພີ່ມຮູບໃນເມນູແລ້ວ.</li><li><b>ຜ່ານ:</b> Sponsored, rating/source ແລະ checked date ແຍກຊັດ.</li><li><b>ຜ່ານ:</b> MVP scope ໂດຍລວມເໝາະສົມ.</li></ol><p>ຜົນນີ້ເປັນ Founder/Product Review; external usability evidence ຍັງບໍ່ທັນເລີ່ມ.</p></aside> : null}
 
-    {showQa ? <aside id="ux04-qa-panel" className={styles.qaPanel} aria-label="UX-04 QA test mode">
-      <header><div><span>UX-04 · QA TEST MODE</span><h2>ເປີດສະຖານະທົດສອບໄດ້ທັນທີ</h2></div><button aria-label="ປິດ QA panel" onClick={() => setShowQa(false)}>×</button></header>
+    {showQa ? <aside id="ux04-qa-panel" role="dialog" aria-modal="false" className={styles.qaPanel} aria-label="UX-04 QA test mode">
+      <header><div><span>UX-04 · QA TEST MODE</span><h2>ເປີດສະຖານະທົດສອບໄດ້ທັນທີ</h2></div><button ref={qaCloseRef} aria-label="ປິດ QA panel" onClick={closeQaPanel}>×</button></header>
       <p className={styles.qaWarning}>ປຸ່ມ Pass/Fail ເປັນບັນທຶກຊົ່ວຄາວໃນໜ້ານີ້. ການມີ Test Mode ບໍ່ໝາຍຄວາມວ່າຜ່ານ QA ແລ້ວ.</p>
       <section><h3>1. ເລືອກໜ້າ</h3><div className={styles.qaScreens}>{(["discover", "search", "place"] as Screen[]).map((item) => <button key={item} aria-pressed={screen === item} onClick={() => { setQaScenario("default"); setScreen(item); if (item === "place") setSelectedId("p01"); }}>{item === "discover" ? "Discover" : item === "search" ? "Search" : "Place"}</button>)}</div></section>
       <section><h3>2. ເລືອກ State</h3><div className={styles.qaScenarios}>{qaScenarios.map((item) => <button key={item.id} aria-pressed={qaScenario === item.id} onClick={() => activateQaScenario(item.id)}><strong>{item.label}</strong><span>{item.description}</span></button>)}</div></section>
@@ -168,7 +182,7 @@ export default function InteractivePrototype() {
         <div className={styles.feedTop}><strong>ສຳຫຼວດ</strong><button aria-label="ເປີດຄົ້ນຫາ" onClick={() => setScreen("search")}>⌕</button></div>
         {!feedPlace.sourceAvailable ? <div className={styles.fallback}><b>ວິດີໂອເບິ່ງບໍ່ໄດ້</b><span>ຂໍ້ມູນ Place ຍັງເບິ່ງໄດ້</span><button onClick={() => openPlace(feedPlace)}>ເບິ່ງຂໍ້ມູນຮ້ານ</button></div> : <button className={styles.play} aria-label="ຈຳລອງຫຼິ້ນວິດີໂອ" onClick={() => setNotice("ຈຳລອງການຫຼິ້ນວິດີໂອ")}>▶</button>}
         <div className={styles.feedContent}>
-          {feedPlace.sponsored ? <span className={styles.sponsored}>ໂຄສະນາ — ຮ້ານຈ່າຍເພື່ອສະແດງ</span> : <span className={styles.source}>ແຫຼ່ງຣີວິວ · {feedPlace.creator}</span>}
+          {feedPlace.sponsored ? <span className={styles.sponsored}>Sponsored · ໂຄສະນາ — ຮ້ານຈ່າຍເພື່ອສະແດງ</span> : <span className={styles.source}>ແຫຼ່ງຣີວິວ · {feedPlace.creator}</span>}
           <button className={styles.placeTitle} onClick={() => openPlace(feedPlace)}><strong>{feedPlace.name}</strong><span>{feedPlace.categoryLabel} · {feedPlace.district} · {feedPlace.price}</span><small>{feedPlace.checked}</small></button>
           <div className={styles.actionRow}><button onClick={() => act("ແຜນທີ່", feedPlace)}>⌖<span>ແຜນທີ່</span></button><button onClick={() => act("ໂທ", feedPlace)}>☎<span>ໂທ</span></button><button onClick={() => act("ຂໍ້ຄວາມ", feedPlace)}>◫<span>ຂໍ້ຄວາມ</span></button><button onClick={() => openPlace(feedPlace)}>ⓘ<span>ຂໍ້ມູນ</span></button></div>
           <div className={styles.feedPager}><button aria-label="ລາຍການກ່ອນ" onClick={() => moveFeed(-1)}>↑</button><span>{feedIndex + 1}/{places.length}</span><button aria-label="ລາຍການຖັດໄປ" onClick={() => moveFeed(1)}>↓</button></div>
@@ -177,15 +191,15 @@ export default function InteractivePrototype() {
 
       {screen === "search" ? <section className={styles.lightScreen}>
         <header className={styles.screenHeader}><div><span>ຄົ້ນຫາຈາກຣີວິວຈິງ</span><h1>ມື້ນີ້ຢາກໄປໃສ?</h1></div><button onClick={() => setScreen("discover")}>ປິດ</button></header>
-        <label className={styles.searchBox}><span className={styles.srOnly}>ຄົ້ນຫາຊື່ຮ້ານ ເຂດ ຫຼືຄວາມຕ້ອງການ</span><b aria-hidden="true">⌕</b><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="ເຊັ່ນ: ຮ້ານຄອບຄົວ ເປີດເດິກ..."/><button onClick={() => setQuery("")} aria-label="ລຶບຄຳຄົ້ນ">×</button></label>
-        <div className={styles.intentRail} aria-label="ຄຳຄົ້ນແນະນຳ"><button onClick={() => setQuery("ໃກ້ຂ້ອຍ")}>⌖ ໃກ້ຂ້ອຍ</button><button onClick={() => setQuery("ເປີດເດິກ")}>☾ ເປີດເດິກ</button><button onClick={() => setQuery("ຄອບຄົວ")}>♙ ສຳລັບຄອບຄົວ</button><button onClick={() => setQuery("ງົບ ₭₭")}>₭ ງົບ ₭₭</button></div>
-        <div className={styles.chips} aria-label="ກອງປະເພດ">{(["all", "restaurant", "cafe"] as const).map((value) => <button key={value} className={filter === value ? styles.activeChip : ""} onClick={() => setFilter(value)}>{value === "all" ? "ທັງໝົດ" : value === "restaurant" ? "ຮ້ານອາຫານ" : "ຮ້ານກາເຟ"}</button>)}</div>
-        <div className={styles.resultTools}><p><strong>ແນະນຳສຳລັບທ່ານ</strong><span>{results.length} ສະຖານທີ່</span></p><div aria-label="ຮູບແບບຜົນຄົ້ນຫາ">{(["video", "list", "map"] as const).map((view) => <button key={view} className={resultView === view ? styles.activeView : ""} onClick={() => setResultView(view)}>{view === "video" ? "▶" : view === "list" ? "☷" : "⌖"}<span className={styles.srOnly}>{view}</span></button>)}</div></div>
+        <label className={styles.searchBox}><span className={styles.srOnly}>ຄົ້ນຫາຊື່ຮ້ານ ເຂດ ຫຼືຄວາມຕ້ອງການ</span><b aria-hidden="true">⌕</b><input aria-label="ຄົ້ນຫາຊື່ຮ້ານ ເຂດ ຫຼືຄວາມຕ້ອງການ" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="ເຊັ່ນ: ຮ້ານຄອບຄົວ ເປີດເດິກ..."/><button onClick={() => setQuery("")} aria-label="ລຶບຄຳຄົ້ນ">×</button></label>
+        <div className={styles.intentRail} aria-label="ຄຳຄົ້ນແນະນຳ"><button aria-pressed={query === "ໃກ້ຂ້ອຍ"} onClick={() => setQuery("ໃກ້ຂ້ອຍ")}>⌖ ໃກ້ຂ້ອຍ</button><button aria-pressed={query === "ເປີດເດິກ"} onClick={() => setQuery("ເປີດເດິກ")}>☾ ເປີດເດິກ</button><button aria-pressed={query === "ຄອບຄົວ"} onClick={() => setQuery("ຄອບຄົວ")}>♙ ສຳລັບຄອບຄົວ</button><button aria-pressed={query === "ງົບ ₭₭"} onClick={() => setQuery("ງົບ ₭₭")}>₭ ງົບ ₭₭</button></div>
+        <div className={styles.chips} aria-label="ກອງປະເພດ">{(["all", "restaurant", "cafe"] as const).map((value) => <button key={value} aria-pressed={filter === value} className={filter === value ? styles.activeChip : ""} onClick={() => setFilter(value)}>{value === "all" ? "ທັງໝົດ" : value === "restaurant" ? "ຮ້ານອາຫານ" : "ຮ້ານກາເຟ"}</button>)}</div>
+        <div className={styles.resultTools}><p><strong>ແນະນຳສຳລັບທ່ານ</strong><span>{results.length} ສະຖານທີ່</span></p><div aria-label="ຮູບແບບຜົນຄົ້ນຫາ">{(["video", "list", "map"] as const).map((view) => <button key={view} aria-label={view === "video" ? "ສະແດງຜົນແບບວິດີໂອ" : view === "list" ? "ສະແດງຜົນແບບລາຍການ" : "ສະແດງຜົນແບບແຜນທີ່"} aria-pressed={resultView === view} className={resultView === view ? styles.activeView : ""} onClick={() => setResultView(view)}>{view === "video" ? "▶" : view === "list" ? "☷" : "⌖"}</button>)}</div></div>
         {qaScenario === "loading" ? <div className={styles.loadingState} role="status" aria-live="polite"><strong>ກຳລັງໂຫຼດສະຖານທີ່…</strong><span>ລໍຖ້າຂໍ້ມູນຈາກລະບົບ</span><i/><i/><i/></div> : qaScenario === "error" ? <div className={styles.errorState} role="alert"><strong>ດຶງຂໍ້ມູນບໍ່ສຳເລັດ</strong><p>ກວດກາ Internet ແລ້ວລອງໃໝ່. ຄຳຄົ້ນຂອງທ່ານຍັງຖືກຮັກສາໄວ້.</p><button onClick={() => setQaScenario("default")}>ລອງໃໝ່</button></div> : qaScenario === "empty" ? <div className={styles.stateWrap}><div className={styles.empty}><strong>ບໍ່ພົບຮ້ານທີ່ກົງ</strong><p>ລອງລຶບຄຳຄົ້ນ ຫຼືປ່ຽນປະເພດ.</p><button onClick={() => { setQaScenario("default"); setQuery(""); setFilter("all"); }}>ລ້າງຕົວກອງ</button></div></div> : resultView === "map" ? <div className={styles.mapPreview}><span>ແຜນທີ່ຈຳລອງ</span>{results.map((place, index) => <button key={place.id} style={{ left: `${20 + index * 28}%`, top: `${25 + (index % 2) * 35}%` }} onClick={() => openPlace(place)}>⌖<small>{place.name}</small></button>)}</div> : <div className={resultView === "video" ? styles.videoResults : styles.results}>{results.length ? results.map((place) => <button className={resultView === "video" ? styles.videoResultCard : styles.resultCard} key={place.id} onClick={() => openPlace(place)}><i className={styles.resultImage} aria-hidden="true" style={{ backgroundImage: `linear-gradient(180deg, transparent, rgba(5,12,17,.82)), url(${basePath}${place.image})` }}>{resultView === "video" ? <em>▶</em> : null}</i><span><strong>{place.name}</strong><small>{place.categoryLabel} · {place.district}</small><em>★ {place.rating} · {place.reviewCount} ຄຳເຫັນ · {place.distance}</em><small>{place.price} · {place.checked}</small>{place.sponsored ? <b>ໂຄສະນາ</b> : <i>{place.tags.slice(0, 2).join(" · ")}</i>}</span></button>) : <div className={styles.empty}><strong>ບໍ່ພົບຮ້ານທີ່ກົງ</strong><p>ລອງລຶບຄຳຄົ້ນ ຫຼືປ່ຽນປະເພດ.</p><button onClick={() => { setQuery(""); setFilter("all"); }}>ລ້າງຕົວກອງ</button></div>}</div>}
       </section> : null}
 
       {screen === "place" ? <section className={`${styles.lightScreen} ${qaScenario === "long_text" ? styles.longTextMode : ""}`}>
-        <header className={styles.placeHero} style={{ backgroundImage: `linear-gradient(180deg, rgba(5,12,17,.08), rgba(5,12,17,.9)), url(${basePath}${displaySelected.image})` }}><button onClick={returnFromPlace}>← ກັບ</button>{displaySelected.sponsored ? <span>ໂຄສະນາ — ຮ້ານຈ່າຍ</span> : null}<button className={styles.heroPlay} onClick={() => setNotice(`ຫຼິ້ນຣີວິວຫຼັກຈາກ ${displaySelected.creator}`)} aria-label="ຫຼິ້ນວິດີໂອຣີວິວ">▶</button><div><small>{displaySelected.categoryLabel}</small><h1>{displaySelected.name}</h1><p>{displaySelected.district} · {displaySelected.price} · {displaySelected.distance}</p><b>★ {displaySelected.rating} <span>({displaySelected.reviewCount} ຄຳເຫັນຈາກແຫຼ່ງອ້າງອີງ)</span></b></div></header>
+        <header className={styles.placeHero} style={{ backgroundImage: `linear-gradient(180deg, rgba(5,12,17,.08), rgba(5,12,17,.9)), url(${basePath}${displaySelected.image})` }}><button onClick={returnFromPlace}>← ກັບ</button>{displaySelected.sponsored ? <span>Sponsored · ໂຄສະນາ — ຮ້ານຈ່າຍ</span> : null}<button className={styles.heroPlay} onClick={() => setNotice(`ຫຼິ້ນຣີວິວຫຼັກຈາກ ${displaySelected.creator}`)} aria-label="ຫຼິ້ນວິດີໂອຣີວິວ">▶</button><div><small>{displaySelected.categoryLabel}</small><h1>{displaySelected.name}</h1><p>{displaySelected.district} · {displaySelected.price} · {displaySelected.distance}</p><b>★ {displaySelected.rating} <span>({displaySelected.reviewCount} ຄຳເຫັນຈາກແຫຼ່ງອ້າງອີງ)</span></b></div></header>
         <div className={styles.placeActions}><button onClick={() => act("ແຜນທີ່", displaySelected)}>⌖<span>ແຜນທີ່</span></button><button disabled={qaScenario === "disabled"} aria-describedby={qaScenario === "disabled" ? "disabled-call-reason" : undefined} onClick={() => act("ໂທ", displaySelected)}>☎<span>ໂທ</span></button><button onClick={() => act("ຂໍ້ຄວາມ", displaySelected)}>◫<span>ຂໍ້ຄວາມ</span></button><button onClick={() => act("ບັນທຶກ", displaySelected)}>♡<span>ບັນທຶກ</span></button></div>
         {qaScenario === "disabled" ? <p id="disabled-call-reason" className={styles.disabledReason} role="status">ປຸ່ມ “ໂທ” ຖືກປິດ ເພາະຮ້ານຍັງບໍ່ມີເບີໂທທີ່ກວດສອບແລ້ວ.</p> : null}
         <div className={styles.placeBody}>
@@ -199,7 +213,7 @@ export default function InteractivePrototype() {
         </div>
       </section> : null}
 
-      {screen !== "place" ? <nav className={styles.bottomNav} aria-label="Prototype navigation"><button className={screen === "discover" ? styles.navActive : ""} onClick={() => setScreen("discover")}><b>⌂</b><span>ສຳຫຼວດ</span></button><button className={screen === "search" ? styles.navActive : ""} onClick={() => setScreen("search")}><b>⌕</b><span>ຄົ້ນຫາ</span></button></nav> : null}
+      {screen !== "place" ? <nav className={styles.bottomNav} aria-label="Prototype navigation"><button aria-pressed={screen === "discover"} className={screen === "discover" ? styles.navActive : ""} onClick={() => setScreen("discover")}><b>⌂</b><span>ສຳຫຼວດ</span></button><button aria-pressed={screen === "search"} className={screen === "search" ? styles.navActive : ""} onClick={() => setScreen("search")}><b>⌕</b><span>ຄົ້ນຫາ</span></button></nav> : null}
       </div>
       {analytics === "pending" ? <div className={styles.consent} role="dialog" aria-modal="true" aria-labelledby="analytics-consent-title"><strong id="analytics-consent-title">ການວັດການນຳໃຊ້</strong><p>Prototype ຈະຈຳລອງ analytics choice; ບໍ່ໄດ້ບັນທຶກ task ຂອງທ່ານ.</p><div><button ref={essentialConsentRef} onClick={() => chooseAnalytics("essential")}>ໃຊ້ສະເພາະທີ່ຈຳເປັນ</button><button onClick={() => chooseAnalytics("allowed")}>ອະນຸຍາດ Analytics</button></div></div> : null}
     </section>
