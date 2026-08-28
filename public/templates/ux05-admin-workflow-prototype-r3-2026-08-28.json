@@ -1,0 +1,41 @@
+{
+  "document": "UX-05",
+  "version": "0.9.0",
+  "prototype": "Admin Workflow Prototype R3.0",
+  "route": "/admin-prototype",
+  "date": "2026-08-28",
+  "purpose": "Replace the static Admin gallery with a standalone high-fidelity workflow prototype that demonstrates record selection, state transition, cross-module navigation and auditable operating decisions.",
+  "visual_authority": {
+    "tokens": "UX-04",
+    "font": "Noto Sans Lao Variable",
+    "structure_reference": "Odoo-inspired information architecture and interaction anatomy only"
+  },
+  "modules": [
+    {"id":"overview","screen":"SCR-A00","interactions":["KPI drill-down","attention-to-module navigation","partner pipeline","finance summary"]},
+    {"id":"queue","screen":"SCR-A01","interactions":["search","select record","assign owner","start review","resolve","open source record","audit update"]},
+    {"id":"places","screen":"SCR-A02","interactions":["quick create","select record","edit fields","save draft","submit review","approve and publish","open correction","open linked sources"]},
+    {"id":"trust","screen":"SCR-A03","interactions":["select case","review evidence context","choose policy decision","write decision note","apply decision","resolve linked queue item","record audit"]},
+    {"id":"content","screen":"SCR-A04","interactions":["quick create","search","select source","match Place","advance Captured-to-Published workflow"]},
+    {"id":"partners","screen":"SCR-A05","interactions":["quick create","search","Kanban pipeline","advance Lead-to-Renewal stage"]},
+    {"id":"campaigns","screen":"SCR-A06","interactions":["quick create","search","advance Draft-to-Completed stage","Sponsored integrity disclosure"]},
+    {"id":"analytics","screen":"SCR-A07","interactions":["province filter","KPI recalculation","trend and decision funnel"]},
+    {"id":"finance","screen":"SCR-A08","interactions":["quick create","search","verify payment evidence","verified-revenue recalculation","budget and runway context"]},
+    {"id":"system","screen":"SCR-A09","interactions":["invite user","search","change role","toggle feature flag","session audit feed"]}
+  ],
+  "cross_module_flows": [
+    "Operations Queue to Place, Content or Trust source record",
+    "Executive attention item to responsible module",
+    "Place record to linked Content sources",
+    "Trust resolution to linked Operations item and shared audit feed",
+    "Finance evidence verification to Executive verified-revenue KPI"
+  ],
+  "state_model": "In-memory session fixtures. Changes survive module navigation in the current tab but do not survive refresh.",
+  "not_production": [
+    "No backend or durable database",
+    "No authentication or production RBAC enforcement",
+    "No real external integrations",
+    "No exhaustive loading, offline, conflict, unauthorized or retry behavior",
+    "No signed accessibility or multi-role acceptance evidence"
+  ],
+  "remaining_before_1_0": ["TEC-01 and TEC-02","production route and API contracts","auth and record rules","exhaustive failure states","manual accessibility gates","four-role final sign-off"]
+}

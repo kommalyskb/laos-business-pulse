@@ -37,6 +37,11 @@ const guestPrototypeScreens: Record<GuestScreenId, "discover" | "search" | "plac
   "SCR-G05": "discover",
 };
 
+const adminPrototypeModules: Record<AdminScreenId, string> = {
+  "SCR-A00":"overview", "SCR-A01":"queue", "SCR-A02":"places", "SCR-A03":"trust", "SCR-A04":"content",
+  "SCR-A05":"partners", "SCR-A06":"campaigns", "SCR-A07":"analytics", "SCR-A08":"finance", "SCR-A09":"system",
+};
+
 function StateNotice({ state }: { state: UiState }) {
   if (state === "default") return null;
   const copy: Record<Exclude<UiState, "default">, [string, string]> = {
@@ -249,6 +254,7 @@ export default function FinalDesignGallery({ basePath }: { basePath: string }) {
   const guestScreenId = isGuest ? screenId as GuestScreenId : "SCR-G01";
   const guestConsent = guestScreenId === "SCR-G05" ? "pending" : "essential";
   const guestPrototypeUrl = `${basePath}/prototype?embed=1&screen=${guestPrototypeScreens[guestScreenId]}&state=${uiState}&consent=${guestConsent}`;
+  const adminPrototypeUrl = isGuest ? "" : `${basePath}/admin-prototype?module=${adminPrototypeModules[screenId as AdminScreenId]}`;
 
   const chooseScreen = (id: ScreenId) => {
     const next = screens.find(item => item.id === id)!;
@@ -256,14 +262,14 @@ export default function FinalDesignGallery({ basePath }: { basePath: string }) {
   };
 
   return <main className={styles.site}>
-    <header className={styles.topbar}><a href={`${basePath}/documents/full-ux-ui`}><b>UX-05</b><span>FINAL DESIGN GALLERY</span></a><nav><a href={`${basePath}/prototype`}>Prototype R2.3</a><a href={`${basePath}/design-system`}>UX-04 Gallery</a><a href={`${basePath}/documents`}>Documents</a></nav></header>
-    <section className={styles.hero}><div><small>FULL UX/UI DESIGN · BASELINE 0.8.2</small><h1>ໜ້າຈໍສຳລັບຕັດສິນໃຈ<br/><em>ແລະພ້ອມສົ່ງຕໍ່ Developer</em></h1></div><p>Guest/Pilot ໃຊ້ Prototype R2.3 ເປັນແຫຼ່ງອອກແບບດຽວ. Admin Portal R2.2 ໃຊ້ໂຄງສ້າງແບບ Odoo ສຳລັບ navigation ແລະ record workspace; ສ່ວນສີ, font, semantic state ແລະ focus style ໃຊ້ Design Tokens ຂອງ UX-04.</p></section>
+    <header className={styles.topbar}><a href={`${basePath}/documents/full-ux-ui`}><b>UX-05</b><span>FINAL DESIGN GALLERY</span></a><nav><a href={`${basePath}/prototype`}>Guest Prototype R2.3</a><a href={`${basePath}/admin-prototype`}>Admin Prototype R3.0</a><a href={`${basePath}/design-system`}>UX-04 Gallery</a><a href={`${basePath}/documents`}>Documents</a></nav></header>
+    <section className={styles.hero}><div><small>FULL UX/UI DESIGN · BASELINE 0.9.0</small><h1>ໜ້າຈໍສຳລັບຕັດສິນໃຈ<br/><em>ແລະພ້ອມທົດລອງ Workflow</em></h1></div><p>Guest/Pilot ໃຊ້ Prototype R2.3 ເປັນແຫຼ່ງອອກແບບດຽວ. Admin R3.0 ເປັນ standalone interactive prototype: 10 Modules, record drill-down, create/edit/advance/approve/audit ແລະ cross-module navigation; visual identity ໃຊ້ UX-04 Design Tokens.</p></section>
     <section className={styles.workspace}>
       <aside className={styles.registry}><div><small>SCREEN REGISTRY</small><b>14 Screen / Module Views</b></div>{["Guest/Pilot", "Admin"].map(group => <section key={group}><h2>{group}</h2>{screens.filter(item => item.group === group).map(item => <button key={item.id} aria-pressed={screenId === item.id} onClick={() => chooseScreen(item.id)}><code>{item.id}</code><span><b>{item.name}</b><small>{item.route}</small></span></button>)}</section>)}</aside>
       <div className={styles.board}>
-        <header className={styles.boardTools}><div><code>{screen.id}</code><span><b>{screen.name}</b><small>{screen.purpose}</small></span></div><div className={styles.switches}>{isGuest ? <span className={styles.sourceBadge}>LIVE · PROTOTYPE R2.3</span> : <span aria-label="Viewport selector">{(["mobile", "tablet", "desktop"] as Viewport[]).map(item => <button key={item} aria-pressed={viewport === item} onClick={() => setViewport(item)}>{item}</button>)}</span>}<span aria-label="State selector">{screen.states.map(item => <button key={item} aria-pressed={uiState === item} onClick={() => setUiState(item)}>{stateLabels[item]}</button>)}</span></div></header>
-        <div className={`${styles.canvas} ${styles[isGuest ? "mobile" : viewport]}`}><div className={styles.viewportLabel}><b>{isGuest ? "390 × 844 · Prototype source" : viewport === "mobile" ? "390 × 844" : viewport === "tablet" ? "768 × 1024" : "1440 × 900"}</b><span>{uiState}</span></div><div className={`${styles.preview} ${isGuest ? styles.prototypePreview : ""}`}>{isGuest ? <iframe key={guestPrototypeUrl} src={guestPrototypeUrl} title={`Prototype R2.3 · ${screen.name} · ${stateLabels[uiState]}`} /> : <AdminPreview screen={screenId as AdminScreenId} state={uiState} onNavigate={id => chooseScreen(id)} />}</div></div>
-        <footer className={styles.specBar}><div><small>PRIMARY OUTCOME</small><b>{screen.purpose}</b></div><div><small>DATA CONTRACT</small><b>{screen.group === "Admin" ? "Protected API · role, record rule, activity + audit required" : "Place ID · source · freshness · action availability"}</b></div><div><small>HANDOFF STATUS</small><b>{isGuest ? "Prototype parity · single source of truth" : "Admin Portal R2.2 · Odoo structure + UX-04 visual tokens"}</b></div></footer>
+        <header className={styles.boardTools}><div><code>{screen.id}</code><span><b>{screen.name}</b><small>{screen.purpose}</small></span></div><div className={styles.switches}><span className={styles.sourceBadge}>{isGuest ? "LIVE · GUEST PROTOTYPE R2.3" : "LIVE · ADMIN WORKFLOW R3.0"}</span>{!isGuest ? <span aria-label="Viewport selector">{(["mobile", "tablet", "desktop"] as Viewport[]).map(item => <button key={item} aria-pressed={viewport === item} onClick={() => setViewport(item)}>{item}</button>)}</span> : <span aria-label="State selector">{screen.states.map(item => <button key={item} aria-pressed={uiState === item} onClick={() => setUiState(item)}>{stateLabels[item]}</button>)}</span>}</div></header>
+        <div className={`${styles.canvas} ${styles[isGuest ? "mobile" : viewport]}`}><div className={styles.viewportLabel}><b>{isGuest ? "390 × 844 · Guest prototype" : viewport === "mobile" ? "390 × 844" : viewport === "tablet" ? "768 × 1024" : "1440 × 900"}</b><span>{isGuest ? uiState : "interactive"}</span></div><div className={`${styles.preview} ${styles.prototypePreview}`}>{isGuest ? <iframe key={guestPrototypeUrl} src={guestPrototypeUrl} title={`Prototype R2.3 · ${screen.name} · ${stateLabels[uiState]}`} /> : <iframe key={adminPrototypeUrl} src={adminPrototypeUrl} title={`Admin Workflow Prototype R3.0 · ${screen.name}`} />}</div></div>
+        <footer className={styles.specBar}><div><small>PRIMARY OUTCOME</small><b>{screen.purpose}</b></div><div><small>DATA CONTRACT</small><b>{screen.group === "Admin" ? "Session fixtures · workflow transitions · activity + audit simulation" : "Place ID · source · freshness · action availability"}</b></div><div><small>HANDOFF STATUS</small><b>{isGuest ? "Prototype parity · single source of truth" : "Admin Workflow R3.0 · interactive prototype · backend/auth not connected"}</b></div></footer>
       </div>
     </section>
   </main>;
