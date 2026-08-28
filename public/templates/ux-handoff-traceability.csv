@@ -1,0 +1,8 @@
+screen_id,route,requirement_ids,function_ids,entities,events,content_policy,design_source,acceptance_owner,status
+SCR-G01,/discover,USR-01|ACT-01,F01-F06|F45-F47,Place|ContentItem|SourceRef|ActionAvailability,feed_view|place_open|map_click|call_click|message_click,CON-02|CON-04|CON-05,UX-02 1.2|UX-03 0.9.4|UX-04 0.9.4,Product Owner|Frontend Lead,baseline_ready
+SCR-G02,/search,USR-02,F07-F14,SearchQuery|Filter|Place|SourceRef,search_submit|filter_apply|view_switch|result_open,CON-01|CON-02|CON-05,UX-02 1.2|UX-03 0.9.4|UX-04 0.9.4,Product Owner|Frontend Lead,baseline_ready
+SCR-G03,/places/:placeId,USR-03|ACT-01,F15-F25|F45-F48,Place|PlaceFact|CategoryDetail|ContentItem|SourceRef|ActionAvailability,place_view|source_open|map_click|call_click|message_click|correction_open,CON-02|CON-04|CON-05,UX-02 1.2|UX-03 0.9.4|UX-04 0.9.4,Product Owner|Content Trust Owner,baseline_ready
+SCR-G05,/privacy/settings,NFR-04,F60-F64,ConsentRecord|PrivacyNotice,consent_view|consent_save|consent_withdraw,CON-05|TEC-06 pending,UX-04 0.9.4,Product Owner|Accessibility QA,baseline_pending_technical
+SCR-A01,/admin/queue,ADM-01,F26-F31,WorkItem|Assignment|UserRole|AuditEvent,queue_view|filter_apply|work_open,CON-02|CON-04,UX-02 1.2|PRO-02 1.0,Frontend Lead|Operations Owner,baseline_ready
+SCR-A02,/admin/places/:placeId,ADM-02,F32-F39,Place|PlaceVersion|SourceRef|PublishCheck|AuditEvent,place_edit|draft_save|review_submit|conflict_compare,CON-01|CON-02|CON-03,UX-02 1.2|PRO-02 1.0,Frontend Lead|Data Steward,baseline_ready
+SCR-A03,/admin/cases/:caseId,ADM-03,F40-F44,ModerationCase|Evidence|Decision|Appeal|AuditEvent,case_view|decision_save|decision_apply|appeal_open,CON-04|CON-05,UX-02 1.2|PRO-02 1.0,Content Trust Owner|Accessibility QA,baseline_ready

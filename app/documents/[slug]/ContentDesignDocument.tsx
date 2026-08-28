@@ -597,11 +597,18 @@ const specs: Record<string, DocumentSpec> = {
 
   "full-ux-ui": {
     code: "UX-05", title: "ການອອກແບບ UX/UI ສົມບູນ", english: "Full UX/UI Design", owner: "Product Designer / Frontend Lead",
-    version: "0.5", status: "pending", statusLabel: "Handoff contract ພ້ອມ · Final Design ຍັງບໍ່ສຳເລັດ",
-    approvalNote: "ສະບັບ 0.5 ກຳນົດວ່າ Final Design Package ຕ້ອງມີຫຍັງ; ມັນຍັງບໍ່ແມ່ນ Final Screen ທີ່ອະນຸມັດ. Designer ສາມາດເລີ່ມ Happy path ໄດ້ ແຕ່ UX-05 ຫ້າມຂຶ້ນ 1.0 ຈົນ UX test, system states, technical constraints ແລະ sign-off evidence ຄົບ.",
+    version: "0.7", status: "pending", statusLabel: "Final Design Baseline ພ້ອມ · ລໍ Technical/Manual Gates ກ່ອນ 1.0",
+    approvalNote: "ຫຼັງຈາກ Product Owner ອະນຸມັດໃຫ້ໄປຂັ້ນ UX-05 ໃນວັນທີ 28 ສິງຫາ 2026, ສະບັບ 0.7 ສ້າງ Final Design Gallery R1 ສຳລັບ 7 Must Screens: Guest/Pilot 4 ໜ້າ ແລະ Admin 3 ໜ້າ. Gallery ເລືອກ Screen, Viewport ແລະ State ໄດ້ ພ້ອມ screen specification, state matrix ແລະ handoff traceability. ນີ້ເປັນ Developer-ready baseline ແຕ່ຍັງບໍ່ແມ່ນ 1.0: TEC-01/02, UI-impact legal/privacy decisions, Physical Keyboard, VoiceOver, actual Zoom 200%, OS Reduced Motion ແລະ final four-role sign-off ຍັງຕ້ອງສຳເລັດ.",
     sources: ["UX-01 1.0", "UX-02 1.2", "UX-03 0.9.4", "UX-04 0.9.4", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-03 0.9", "CON-04 1.0", "CON-05 0.9", "TEC-01/02 pending"],
     purpose: ["ກຳນົດຂອບເຂດ Final Screen, Responsive Behavior, System State, Prototype Link, Asset ແລະ Developer Handoff ທີ່ຕ້ອງຄົບກ່ອນເລີ່ມ Frontend implementation.", "UX-05 ບໍ່ຄວນຖືກອະນຸມັດຈາກ Happy-path screen ເທົ່ານັ້ນ. Loading, Empty, Error, Stale, Sponsored, Permission, Conflict ແລະ External Fallback ຕ້ອງຖືກອອກແບບ ແລະຜູກກັບ Requirement/Screen ID."],
     sections: [
+      { title: "Final Design Baseline R1 · ສິ່ງທີ່ສຳເລັດແລ້ວ", intro: "Final Design Gallery ແມ່ນ Web Documentation ສຳລັບກວດໜ້າຕາ, hierarchy, responsive direction ແລະ failure state. ມັນບໍ່ແມ່ນ Production application ແລະບໍ່ສ້າງ business logic ແຍກຈາກ PRO-02/04.", headers: ["Deliverable", "ຂອບເຂດ", "ວິທີກວດ", "ສະຖານະ"], rows: [
+        ["Final Design Gallery R1", "SCR-G01/G02/G03/G05 ແລະ SCR-A01/A02/A03", "ເລືອກ Screen, Mobile/Tablet/Desktop ແລະ State ໃນ Web Gallery", "Baseline ready"],
+        ["Screen Specification", "Purpose, route, data, state, interaction ແລະ acceptance ຂອງ 7 Must Screens", "ພຣີວິວ JSON ຈາກໜ້າເອກະສານ", "Baseline ready"],
+        ["State Coverage Matrix", "Default/Loading/Empty/Error/Stale/Sponsored/Unauthorized/Conflict ແລະ state ສະເພາະ", "ພຣີວິວ CSV ແລະທຽບກັບ Gallery", "Baseline ready"],
+        ["Handoff Traceability", "Screen → Route → Requirement → Function → Entity → Event → Policy", "ກວດ CSV ວ່າ 7 Must Screens ບໍ່ orphan", "Baseline ready"],
+        ["Should/Deferred Screens", "SCR-G04 Saved ແລະ SCR-A04 Partner/Campaign", "ມີ state contract ໃນ matrix; ຍັງບໍ່ສ້າງ visual final", "Does not block Pilot Must"]
+      ], note: "Decision boundary: Frontend ສາມາດໃຊ້ Baseline R1 ເພື່ອ estimate, ສ້າງ primitive ແລະເລີ່ມ Must Screen ໄດ້. ຫ້າມຖືວ່າ UX-05 1.0 ຫຼື Production sign-off ຈົນ gate ດ້ານ Technical, Privacy/Legal, Manual Accessibility ແລະ 4-role sign-off ຄົບ."},
       { title: "Final Screen Inventory", intro: "Screen ທີ່ລະບຸເປັນ Must ຕ້ອງມີ mobile final design, responsive rule, state set ແລະ annotation.", headers: ["Screen ID", "Screen", "Priority", "Required deliverables"], rows: [
         ["SCR-G01", "Discovery Feed", "Must", "mobile portrait final; fallback; sponsored/source/trust; gesture annotation"],
         ["SCR-G02", "Search & Filters", "Must", "query, filter sheet, result list, loading/empty/error"],
@@ -648,15 +655,15 @@ const specs: Record<string, DocumentSpec> = {
       { title: "Approval Gates ແລະ Sign-off", intro: "UX-05 1.0 ແມ່ນຄຳຢືນຢັນວ່າ package ພ້ອມໃຫ້ Developer ສ້າງໂດຍບໍ່ເດົາ. ການມີຮູບ Happy path ສວຍງາມບໍ່ພຽງພໍ.", headers: ["Gate", "ຕ້ອງມີ", "Signer", "ສະຖານະ"], rows: [
         ["G-UX1 Structure", "UX-01 1.0; UX-02 1.2; screen/route/state traceability", "Product Owner + SA", "Passed · UX-01 1.0 / UX-02 1.2"],
         ["G-UX2 Evidence", "UX-03 1.0; session/task/finding/retest records; pass thresholds", "Research Lead + Product Owner", "Pending real-user testing"],
-        ["G-UX3 System", "UX-04 1.0; tokens/components/accessibility QA", "Design System Owner + Frontend Lead", "Pending VoiceOver/Lao 200%/Pilot state QA"],
+        ["G-UX3 System", "UX-04 1.0; tokens/components/accessibility QA", "Design System Owner + Frontend Lead", "Internal QA passed; Physical Keyboard/VoiceOver/actual Zoom 200%/OS Reduced Motion pending"],
         ["G-UX4 Content/Trust", "PRO-04 1.0; CON-02/04 1.0; UI-impact decisions from CON-01/03/05", "Content/Trust Owner", "Partially pending"],
         ["G-UX5 Technical", "TEC-01/02 route, auth, external action, media/fallback constraints mapped", "Technical Lead", "Pending TEC-01/02"],
-        ["G-UX6 Final handoff", "final screens, responsive/state variants, assets, copy, annotations, open deviations", "Product Owner + Frontend Lead", "Pending final design"]
+        ["G-UX6 Final handoff", "final screens, responsive/state variants, assets, copy, annotations, open deviations", "Product Owner + Frontend Lead", "Baseline R1 ready; final four-role sign-off pending"]
       ], note: "Final sign-off roles: Product Owner ຮັບຮອງ scope/design; Frontend Lead ຮັບຮອງ implementation readiness; Content/Trust Owner ຮັບຮອງ copy, source, disclosure ແລະ correction/takedown; Accessibility Reviewer/QA ຮັບຮອງ quality gates. ຄົນດຽວອາດຮັບຫຼາຍບົດບາດໄດ້ ແຕ່ຕ້ອງລົງນາມແຍກບົດບາດ."}
     ],
     review: ["Screen Inventory ຄົບກັບ MVP Must/Should ຫຼືບໍ່?", "ອະນຸມັດ responsive ranges <768, 768–1199, ≥1200 ຫຼືຕ້ອງອີງ device targets ອື່ນ?", "System State ໃດຍັງຂາດຈາກ Requirement/Error Contract?", "ເອກະສານໃດຕ້ອງອະນຸມັດກ່ອນ UX-05 ຂຶ້ນ 1.0—UX-01—04, CON-01—05, TEC-01/02 ຫຼືທັງໝົດ?", "ໃຜລົງນາມ final design, accessibility, content/trust ແລະ developer readiness?"],
     reviewDecisions: ["ອະນຸມັດ SCR-G01—G05 ແລະ SCR-A01—A03 ເປັນ Must; SCR-G04 Saved ແລະ SCR-A04 Partner/Campaign ເປັນ Should ແລະບໍ່ block Pilot Must.", "ອະນຸມັດ <768, 768–1199, ≥1200; ຕ້ອງກວດຢ່າງໜ້ອຍ 360, 390, 768, 1024 ແລະ 1440px ພ້ອມ short-landscape/safe-area.", "ເພີ່ມ Consent denied/withdrawn, Source removed/takedown, Map app unavailable, Contact unavailable, Validation failure ແລະ Rate-limited/temporary failure ເຂົ້າ State Coverage.", "ສາມາດເລີ່ມ Final Design ໄດ້ຈາກ baseline ປັດຈຸບັນ; ແຕ່ UX-05 1.0 ຕ້ອງຜ່ານ UX-01—04, PRO-04, CON-02/04, UI-impact decisions ຂອງ CON-01/03/05 ແລະ TEC-01/02.", "Sign-off ແຍກ 4 ບົດບາດ: Product Owner, Frontend Lead, Content/Trust Owner ແລະ Accessibility Reviewer/QA; ຖ້າຄົນດຽວຮັບຫຼາຍບົດບາດຕ້ອງລົງນາມແຍກ."],
-    artifacts: [{ label: "ux-final-handoff-checklist.json", path: "/templates/ux-final-handoff-checklist.json", description: "Gate/checklist ສຳລັບ Screen, responsive, state, traceability, asset, accessibility, open deviation ແລະ 4-role sign-off." }]
+    artifacts: [{ label: "Final Design Gallery R1", path: "/final-design", action: "open", description: "Web Gallery ສຳລັບເລືອກ 7 Must Screens, Mobile/Tablet/Desktop ແລະ system states ເພື່ອກວດ visual hierarchy ແລະ handoff direction." }, { label: "ux-final-screen-specifications.json", path: "/templates/ux-final-screen-specifications.json", description: "Machine-readable purpose, route, required data, states, interactions ແລະ acceptance ຂອງ 7 Must Screens." }, { label: "ux-screen-state-matrix.csv", path: "/templates/ux-screen-state-matrix.csv", description: "Matrix ກວດ state coverage ຂອງ Must ແລະ Should Screens ລວມ Default, Loading, Empty, Error, Stale, Sponsored, Unauthorized ແລະ Conflict." }, { label: "ux-handoff-traceability.csv", path: "/templates/ux-handoff-traceability.csv", description: "Screen-to-development mapping: Route, Requirement, Function, Entity, Analytics Event, Content Policy, Design Source ແລະ Acceptance Owner." }, { label: "ux-final-handoff-checklist.json", path: "/templates/ux-final-handoff-checklist.json", description: "Gate/checklist ສຳລັບ Screen, responsive, state, traceability, asset, accessibility, open deviation ແລະ 4-role sign-off." }]
   }
 };
 
@@ -674,7 +681,7 @@ export default function ContentDesignDocument({ slug, basePath }: { slug: string
   const version = spec.version ?? "0.1";
   const isApproved = spec.status === "approved";
   const statusLabel = spec.statusLabel ?? "ຮ່າງສຳລັບທົບທວນ";
-  const documentDate = slug === "ux-ui-wireframe" || slug === "interactive-prototype" || slug === "design-system" ? "28 ສິງຫາ 2026" : spec.version ? "27 ສິງຫາ 2026" : "26 ສິງຫາ 2026";
+  const documentDate = slug === "ux-ui-wireframe" || slug === "interactive-prototype" || slug === "design-system" || slug === "full-ux-ui" ? "28 ສິງຫາ 2026" : spec.version ? "27 ສິງຫາ 2026" : "26 ສິງຫາ 2026";
   const wireframeNumber = spec.sections.length + 3;
   const artifactNumber = wireframeNumber + (spec.wireframes ? 1 : 0);
   const reviewNumber = artifactNumber + (spec.artifacts ? 1 : 0);
@@ -695,7 +702,7 @@ export default function ContentDesignDocument({ slug, basePath }: { slug: string
       <h3>1.1 ປະຫວັດການແກ້ໄຂ</h3>
       <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ສະບັບ</th><th>ວັນທີ</th><th>ລາຍລະອຽດ</th><th>ສະຖານະ</th></tr></thead><tbody>
         <tr><td>0.1</td><td>26 ສິງຫາ 2026</td><td>ຈັດທຳ baseline, policy/matrix ແລະຄຳຖາມສຳລັບການທົບທວນຄັ້ງທຳອິດ</td><td>ຮ່າງ</td></tr>
-        {spec.version ? <tr><td>{version}</td><td>{documentDate}</td><td>{slug === "ux-ui-wireframe" ? "ບັນທຶກ Founder Review R1/R2, ປັບ Search/Place direction ແລະເພີ່ມຮູບເມນູໃນ Prototype R2.1" : slug === "interactive-prototype" ? "ອັບເດດ Prototype R2.3 ຫຼັງ Internal Browser QA, ແກ້ 4 findings ແລະບັນທຶກ evidence boundary ກ່ອນ external test" : slug === "design-system" ? "ບັນທຶກ Internal Browser QA R2.3, finding/fix/retest ແລະແຍກ 4 Manual Accessibility Gate ກ່ອນ 1.0" : "ບັນທຶກ REV-01 ຫາ REV-05 ແລະປັບ Policy, Threshold ແລະ Ownership ຕາມທີ່ອະນຸມັດ"}</td><td>{statusLabel}</td></tr> : null}
+        {spec.version ? <tr><td>{version}</td><td>{documentDate}</td><td>{slug === "ux-ui-wireframe" ? "ບັນທຶກ Founder Review R1/R2, ປັບ Search/Place direction ແລະເພີ່ມຮູບເມນູໃນ Prototype R2.1" : slug === "interactive-prototype" ? "ອັບເດດ Prototype R2.3 ຫຼັງ Internal Browser QA, ແກ້ 4 findings ແລະບັນທຶກ evidence boundary ກ່ອນ external test" : slug === "design-system" ? "ບັນທຶກ Internal Browser QA R2.3, finding/fix/retest ແລະແຍກ 4 Manual Accessibility Gate ກ່ອນ 1.0" : slug === "full-ux-ui" ? "ສ້າງ Final Design Gallery R1, 7 Must Screen specifications, state matrix ແລະ developer handoff traceability" : "ບັນທຶກ REV-01 ຫາ REV-05 ແລະປັບ Policy, Threshold ແລະ Ownership ຕາມທີ່ອະນຸມັດ"}</td><td>{statusLabel}</td></tr> : null}
       </tbody></table></div>
     </section>
 
