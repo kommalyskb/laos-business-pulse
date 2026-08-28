@@ -1,6 +1,6 @@
 {
   "document": "UX-04",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "reviewed_at": "2026-08-28",
   "target": "WCAG 2.2 AA internal target",
   "contrast_pairs": [
@@ -22,12 +22,15 @@
     "background_inert_while_consent_pending": "passed_browser_retest_390x844",
     "focus_visible": "passed_browser_retest_390x844",
     "core_touch_targets_44px": "passed_390x844",
-    "reduced_motion_css": "implemented_in_token_contract_pending_manual_retest",
-    "lao_text_200_percent": "pending_browser_retest",
-    "screen_reader_manual": "pending_voiceover_for_pilot; nvda_required_before_wider_launch",
-    "full_pilot_guest_component_states": "pending_component_gallery_qa",
+    "qa_test_mode": "prototype_r2_2_has_deterministic_screen_and_state_selectors_plus_session_only_pass_fail_checklist",
+    "qa_evidence_template": "ux04-qa-test-record.template.json",
+    "keyboard_manual": "test_instructions_and_focus_visible_surface_ready_pending_manual_evidence",
+    "reduced_motion_css": "implemented_and_test_instructions_available_in_prototype_r2_2_pending_manual_retest",
+    "lao_text_200_percent": "long_text_scenario_ready_pending_manual_200_percent_retest",
+    "screen_reader_manual": "voiceover_core_journey_instructions_ready_pending_manual_evidence; nvda_required_before_wider_launch",
+    "full_pilot_guest_component_states": "default_loading_empty_error_disabled_sponsored_stale_are_deterministically_accessible_pending_manual_results",
     "admin_component_states": "deferred_to_ux_04_1_and_not_a_pilot_1_0_blocker"
   },
   "document_status": "in_progress",
-  "remaining_gate": "VoiceOver on Pilot journeys, keyboard operation, 200% Lao text verification, reduced-motion retest, and all Pilot guest component states are required before UX-04 1.0. NVDA remains required before wider public launch."
+  "remaining_gate": "The R2.2 test surfaces make the required checks executable but do not count as passing evidence. VoiceOver on Pilot journeys, keyboard operation, 200% Lao text verification, reduced-motion retest, and all Pilot guest component states still require recorded manual results before UX-04 1.0. NVDA remains required before wider public launch."
 }

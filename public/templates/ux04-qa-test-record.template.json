@@ -1,0 +1,51 @@
+{
+  "document": "UX-04",
+  "template": "QA and accessibility test evidence record",
+  "version": "0.9.3",
+  "instructions": "Create one record per test area and environment. Do not mark pass only because a test state is visible; record the actual steps, observed result, and tester.",
+  "record": {
+    "qa_id": "QA-YYYYMMDD-001",
+    "test_area": "keyboard | lao_text_200_percent | reduced_motion | voiceover | component_states",
+    "tested_at": "YYYY-MM-DDTHH:mm:ss+07:00",
+    "tester": "",
+    "environment": {
+      "device": "",
+      "operating_system": "",
+      "browser_and_version": "",
+      "viewport": "",
+      "assistive_technology": "none | VoiceOver + version"
+    },
+    "prototype": {
+      "version": "R2.2",
+      "url": "/prototype",
+      "screen": "discover | search | place",
+      "scenario": "default | loading | empty | error | disabled | sponsored | stale | long_text"
+    },
+    "test_case": {
+      "precondition": "",
+      "steps": [""],
+      "expected_result": "",
+      "actual_result": "",
+      "result": "pass | fail | blocked"
+    },
+    "issue": {
+      "issue_id": "",
+      "severity": "S1 | S2 | S3 | S4 | none",
+      "evidence_link": "",
+      "owner": "",
+      "target_fix_date": "YYYY-MM-DD"
+    },
+    "retest": {
+      "required": false,
+      "tested_at": "",
+      "tester": "",
+      "result": "not_required | pending | pass | fail",
+      "evidence_link": ""
+    },
+    "approval": {
+      "reviewed_by": "",
+      "reviewed_at": "",
+      "decision": "pending | accepted | rejected"
+    }
+  }
+}

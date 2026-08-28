@@ -48,12 +48,12 @@ export default function DesignSystemGallery({ basePath }: { basePath: string }) 
       <a className={styles.brand} href={`${basePath}/platform`}>ພ້ອມ<span>ໄປ</span><small>UX-04</small></a>
       <nav aria-label="ນຳທາງ Design System">
         <a href={`${basePath}/documents/design-system`}>← ກັບເອກະສານ UX-04</a>
-        <a href={`${basePath}/prototype`}>ເປີດ Prototype R2.1</a>
+        <a href={`${basePath}/prototype`}>ເປີດ Prototype R2.2 QA</a>
       </nav>
     </header>
 
     <section className={styles.hero}>
-      <div><p>UX-04 · COMPONENT GALLERY · 0.9.2</p><h1>ມາດຕະຖານ UI<br/>ສຳລັບ Pilot</h1></div>
+      <div><p>UX-04 · COMPONENT GALLERY · 0.9.3</p><h1>ມາດຕະຖານ UI<br/>ສຳລັບ Pilot</h1></div>
       <div className={styles.heroNote}><strong>ຈຸດປະສົງຂອງໜ້ານີ້</strong><p>ໃຊ້ກວດ Design Token, Component ແລະ State ກ່ອນ Developer ນຳໄປສ້າງລະບົບຈິງ. ນີ້ແມ່ນເອກະສານແບບ Interactive—ບໍ່ແມ່ນໜ້າໂຄສະນາ ຫຼື Production Product.</p></div>
     </section>
 

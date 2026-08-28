@@ -4,6 +4,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./prototype.module.css";
 
 type Screen = "discover" | "search" | "place";
+type QaScenario = "default" | "loading" | "empty" | "error" | "disabled" | "sponsored" | "stale" | "long_text";
+type QaResult = "pending" | "pass" | "fail";
+type QaItemId = "keyboard" | "lao_200" | "reduced_motion" | "voiceover" | "component_states";
 type Place = {
   id: string;
   name: string;
@@ -31,6 +34,25 @@ const places: Place[] = [
   { id: "p03", name: "ສວນກາເຟເຊົ້າ", category: "cafe", categoryLabel: "ຮ້ານກາເຟ", district: "ໄຊເສດຖາ", price: "ຍັງບໍ່ຮູ້ລາຄາ", hours: "ຂໍ້ມູນເວລາອາດເກົ່າ", checked: "ກວດຫຼ້າສຸດ 2 ເດືອນກ່ອນ", creator: "@morning.lao", image: "/laos-weaver.jpg", rating: "4.1", reviewCount: 34, distance: "4.8 km", tags: ["ສວນ", "ງຽບ", "ກາເຟເຊົ້າ"], reviewCreators: ["@morning.lao"], menu: [{ name: "Americano", price: "ລໍກວດສອບ", image: "/platform-cafe.jpg" }, { name: "ຊາດອກໄມ້", price: "ລໍກວດສອບ", image: "/laos-weaver.jpg" }], sourceAvailable: false },
 ];
 
+const qaScenarios: { id: QaScenario; label: string; description: string }[] = [
+  { id: "default", label: "Default", description: "ການນຳໃຊ້ປົກກະຕິ" },
+  { id: "loading", label: "Loading", description: "ກຳລັງໂຫຼດຜົນຄົ້ນຫາ" },
+  { id: "empty", label: "Empty", description: "ບໍ່ພົບຜົນຄົ້ນຫາ" },
+  { id: "error", label: "Error", description: "ລະບົບດຶງຂໍ້ມູນບໍ່ສຳເລັດ" },
+  { id: "disabled", label: "Disabled", description: "ປິດປຸ່ມໂທເມື່ອບໍ່ມີເບີ" },
+  { id: "sponsored", label: "Sponsored", description: "ຮ້ານຈ່າຍຄ່າສະແດງຜົນ" },
+  { id: "stale", label: "Stale", description: "ຂໍ້ມູນເກົ່າ ແລະ Source ຂາດ" },
+  { id: "long_text", label: "Lao long text", description: "ກວດຂໍ້ຄວາມລາວຍາວ" },
+];
+
+const qaItems: { id: QaItemId; title: string; instruction: string }[] = [
+  { id: "keyboard", title: "Keyboard", instruction: "ໃຊ້ Tab/Shift+Tab ໄປທຸກປຸ່ມ, Enter/Space ເພື່ອກົດ ແລະ Escape ເພື່ອປິດ QA panel." },
+  { id: "lao_200", title: "Lao text 200%", instruction: "ຕັ້ງ Browser Zoom ເປັນ 200%, ເລືອກ Lao long text ແລະກວດວ່າຂໍ້ຄວາມບໍ່ຖືກຕັດ/ທັບກັນ." },
+  { id: "reduced_motion", title: "Reduced Motion", instruction: "ເປີດ Reduce Motion ໃນລະບົບປະຕິບັດການ, reload ໜ້າ ແລະກວດວ່າບໍ່ມີ animation ທີ່ລົບກວນ." },
+  { id: "voiceover", title: "VoiceOver", instruction: "ເປີດ VoiceOver, ຟັງຊື່/ສະຖານະຂອງ control ແລະເດີນ Discover → Search → Place." },
+  { id: "component_states", title: "Component states", instruction: "ເປີດ Default, Loading, Empty, Error, Disabled, Sponsored ແລະ Stale ແລ້ວປຽບທຽບກັບຂໍ້ຄວາມກຳກັບ." },
+];
+
 export default function InteractivePrototype() {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   const [screen, setScreen] = useState<Screen>("discover");
@@ -40,16 +62,34 @@ export default function InteractivePrototype() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<"all" | "restaurant" | "cafe">("all");
   const [resultView, setResultView] = useState<"video" | "list" | "map">("video");
-  const [notice, setNotice] = useState("Founder Review R2 ຜ່ານ · Prototype R2.1 ເພີ່ມຮູບໃນເມນູແລ້ວ");
+  const [notice, setNotice] = useState("Prototype R2.2 · ເປີດ UX-04 QA Test Mode ໄດ້ແລ້ວ");
   const [analytics, setAnalytics] = useState<"pending" | "essential" | "allowed">("pending");
   const [showTasks, setShowTasks] = useState(false);
+  const [showQa, setShowQa] = useState(false);
+  const [qaScenario, setQaScenario] = useState<QaScenario>("default");
+  const [qaResults, setQaResults] = useState<Record<QaItemId, QaResult>>({ keyboard: "pending", lao_200: "pending", reduced_motion: "pending", voiceover: "pending", component_states: "pending" });
   const essentialConsentRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (analytics === "pending") essentialConsentRef.current?.focus();
   }, [analytics]);
 
+  useEffect(() => {
+    if (!showQa) return;
+    const closeQa = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setShowQa(false);
+    };
+    window.addEventListener("keydown", closeQa);
+    return () => window.removeEventListener("keydown", closeQa);
+  }, [showQa]);
+
   const selected = places.find((place) => place.id === selectedId) ?? places[0];
+  const displaySelected: Place = qaScenario === "long_text" ? {
+    ...selected,
+    name: "ເຮືອນຄົວວຽງສຳລັບຄອບຄົວໃຫຍ່ ແລະກຸ່ມໝູ່ທີ່ຢາກຊິມອາຫານລາວຫຼາຍປະເພດ",
+    categoryLabel: "ຮ້ານອາຫານລາວພື້ນບ້ານທີ່ເນັ້ນວັດຖຸດິບຕາມລະດູການ",
+    menu: selected.menu.map((item, index) => index === 0 ? { ...item, name: "ເອາະຫຼາມສູດພື້ນບ້ານໃສ່ຜັກຫຼາຍຊະນິດ ແລະຊີ້ນທີ່ເລືອກໄດ້" } : item),
+  } : selected;
   const relatedPlaces = places.filter((place) => place.id !== selected.id).slice(0, 2);
   const feedPlace = places[feedIndex];
   const results = useMemo(() => places.filter((place) => {
@@ -89,13 +129,36 @@ export default function InteractivePrototype() {
     setNotice(choice === "essential" ? "ເລືອກໃຊ້ສະເພາະຂໍ້ມູນທີ່ຈຳເປັນ" : "ອະນຸຍາດ Analytics ສຳລັບ Prototype");
   };
 
+  const activateQaScenario = (scenario: QaScenario) => {
+    setQaScenario(scenario);
+    setAnalytics((current) => current === "pending" ? "essential" : current);
+    if (scenario === "loading" || scenario === "empty" || scenario === "error") setScreen("search");
+    else if (scenario === "disabled" || scenario === "sponsored" || scenario === "stale" || scenario === "long_text") {
+      setReturnScreen("search");
+      setSelectedId(scenario === "sponsored" ? "p02" : scenario === "stale" ? "p03" : "p01");
+      setScreen("place");
+    } else setScreen("discover");
+    setNotice(`UX-04 QA · ກຳລັງຈຳລອງ ${qaScenarios.find((item) => item.id === scenario)?.label ?? scenario}`);
+  };
+
+  const qaSummary = Object.values(qaResults).reduce((summary, result) => ({ ...summary, [result]: summary[result] + 1 }), { pending: 0, pass: 0, fail: 0 });
+
   return <main className={styles.stage}>
     <header className={styles.prototypeHeader}>
-      <div><strong>ພ້ອມໄປ · UX-03</strong><span>PROTOTYPE R2.1 · NOT PRODUCTION</span></div>
-      <nav><button onClick={() => setShowTasks((value) => !value)}>{showTasks ? "ປິດຜົນທົບທວນ" : "Founder Review R2 · ຜົນ"}</button><a href={`${basePath}/documents/interactive-prototype`}>ກັບເອກະສານ</a></nav>
+      <div><strong>ພ້ອມໄປ · UX-03</strong><span>PROTOTYPE R2.2 · QA TEST MODE</span></div>
+      <nav><button aria-expanded={showQa} aria-controls="ux04-qa-panel" onClick={() => setShowQa((value) => !value)}>{showQa ? "ປິດ QA" : "UX-04 · ທົດສອບ"}</button><button onClick={() => setShowTasks((value) => !value)}>{showTasks ? "ປິດຜົນທົບທວນ" : "Founder Review R2 · ຜົນ"}</button><a href={`${basePath}/documents/interactive-prototype`}>ກັບເອກະສານ</a></nav>
     </header>
 
     {showTasks ? <aside className={styles.tasks} aria-label="Founder review results"><strong>Founder Review R2 · ຜ່ານໂດຍມີ 1 Minor Revision</strong><ol><li><b>ຜ່ານ:</b> Platform ມີຄວາມແຕກຕ່າງຊັດ.</li><li><b>ຜ່ານໃນລະດັບໜຶ່ງ:</b> Search ຊ່ວຍຄົ້ນ ແລະປຽບທຽບໄດ້.</li><li><b>ຜ່ານຫຼັງແກ້:</b> Place Page ຂໍ້ມູນຄົບ; Prototype R2.1 ເພີ່ມຮູບໃນເມນູແລ້ວ.</li><li><b>ຜ່ານ:</b> Sponsored, rating/source ແລະ checked date ແຍກຊັດ.</li><li><b>ຜ່ານ:</b> MVP scope ໂດຍລວມເໝາະສົມ.</li></ol><p>ຜົນນີ້ເປັນ Founder/Product Review; external usability evidence ຍັງບໍ່ທັນເລີ່ມ.</p></aside> : null}
+
+    {showQa ? <aside id="ux04-qa-panel" className={styles.qaPanel} aria-label="UX-04 QA test mode">
+      <header><div><span>UX-04 · QA TEST MODE</span><h2>ເປີດສະຖານະທົດສອບໄດ້ທັນທີ</h2></div><button aria-label="ປິດ QA panel" onClick={() => setShowQa(false)}>×</button></header>
+      <p className={styles.qaWarning}>ປຸ່ມ Pass/Fail ເປັນບັນທຶກຊົ່ວຄາວໃນໜ້ານີ້. ການມີ Test Mode ບໍ່ໝາຍຄວາມວ່າຜ່ານ QA ແລ້ວ.</p>
+      <section><h3>1. ເລືອກໜ້າ</h3><div className={styles.qaScreens}>{(["discover", "search", "place"] as Screen[]).map((item) => <button key={item} aria-pressed={screen === item} onClick={() => { setQaScenario("default"); setScreen(item); if (item === "place") setSelectedId("p01"); }}>{item === "discover" ? "Discover" : item === "search" ? "Search" : "Place"}</button>)}</div></section>
+      <section><h3>2. ເລືອກ State</h3><div className={styles.qaScenarios}>{qaScenarios.map((item) => <button key={item.id} aria-pressed={qaScenario === item.id} onClick={() => activateQaScenario(item.id)}><strong>{item.label}</strong><span>{item.description}</span></button>)}</div></section>
+      <section><div className={styles.qaChecklistTitle}><h3>3. ບັນທຶກຜົນ</h3><span>Pass {qaSummary.pass} · Fail {qaSummary.fail} · ລໍ {qaSummary.pending}</span></div><div className={styles.qaChecklist}>{qaItems.map((item) => <article key={item.id}><div><strong>{item.title}</strong><p>{item.instruction}</p></div><div aria-label={`ຜົນທົດສອບ ${item.title}`}>{(["pass", "fail", "pending"] as QaResult[]).map((result) => <button key={result} aria-pressed={qaResults[item.id] === result} onClick={() => setQaResults((current) => ({ ...current, [item.id]: result }))}>{result === "pass" ? "ຜ່ານ" : result === "fail" ? "ບໍ່ຜ່ານ" : "ລ້າງ"}</button>)}</div></article>)}</div></section>
+      <footer><a href={`${basePath}/templates/ux04-qa-test-record.template.json`}>ເປີດແບບຟອມບັນທຶກຫຼັກຖານ ↗</a><small>ບັນທຶກ Device, Browser, ຂັ້ນຕອນ, Expected, Actual ແລະ Issue ID.</small></footer>
+    </aside> : null}
 
     <section className={styles.device} aria-label="Mobile application prototype">
       <div className={styles.prototypeSurface} inert={analytics === "pending"} aria-hidden={analytics === "pending"}>
@@ -118,18 +181,19 @@ export default function InteractivePrototype() {
         <div className={styles.intentRail} aria-label="ຄຳຄົ້ນແນະນຳ"><button onClick={() => setQuery("ໃກ້ຂ້ອຍ")}>⌖ ໃກ້ຂ້ອຍ</button><button onClick={() => setQuery("ເປີດເດິກ")}>☾ ເປີດເດິກ</button><button onClick={() => setQuery("ຄອບຄົວ")}>♙ ສຳລັບຄອບຄົວ</button><button onClick={() => setQuery("ງົບ ₭₭")}>₭ ງົບ ₭₭</button></div>
         <div className={styles.chips} aria-label="ກອງປະເພດ">{(["all", "restaurant", "cafe"] as const).map((value) => <button key={value} className={filter === value ? styles.activeChip : ""} onClick={() => setFilter(value)}>{value === "all" ? "ທັງໝົດ" : value === "restaurant" ? "ຮ້ານອາຫານ" : "ຮ້ານກາເຟ"}</button>)}</div>
         <div className={styles.resultTools}><p><strong>ແນະນຳສຳລັບທ່ານ</strong><span>{results.length} ສະຖານທີ່</span></p><div aria-label="ຮູບແບບຜົນຄົ້ນຫາ">{(["video", "list", "map"] as const).map((view) => <button key={view} className={resultView === view ? styles.activeView : ""} onClick={() => setResultView(view)}>{view === "video" ? "▶" : view === "list" ? "☷" : "⌖"}<span className={styles.srOnly}>{view}</span></button>)}</div></div>
-        {resultView === "map" ? <div className={styles.mapPreview}><span>ແຜນທີ່ຈຳລອງ</span>{results.map((place, index) => <button key={place.id} style={{ left: `${20 + index * 28}%`, top: `${25 + (index % 2) * 35}%` }} onClick={() => openPlace(place)}>⌖<small>{place.name}</small></button>)}</div> : <div className={resultView === "video" ? styles.videoResults : styles.results}>{results.length ? results.map((place) => <button className={resultView === "video" ? styles.videoResultCard : styles.resultCard} key={place.id} onClick={() => openPlace(place)}><i className={styles.resultImage} aria-hidden="true" style={{ backgroundImage: `linear-gradient(180deg, transparent, rgba(5,12,17,.82)), url(${basePath}${place.image})` }}>{resultView === "video" ? <em>▶</em> : null}</i><span><strong>{place.name}</strong><small>{place.categoryLabel} · {place.district}</small><em>★ {place.rating} · {place.reviewCount} ຄຳເຫັນ · {place.distance}</em><small>{place.price} · {place.checked}</small>{place.sponsored ? <b>ໂຄສະນາ</b> : <i>{place.tags.slice(0, 2).join(" · ")}</i>}</span></button>) : <div className={styles.empty}><strong>ບໍ່ພົບຮ້ານທີ່ກົງ</strong><p>ລອງລຶບຄຳຄົ້ນ ຫຼືປ່ຽນປະເພດ.</p><button onClick={() => { setQuery(""); setFilter("all"); }}>ລ້າງຕົວກອງ</button></div>}</div>}
+        {qaScenario === "loading" ? <div className={styles.loadingState} role="status" aria-live="polite"><strong>ກຳລັງໂຫຼດສະຖານທີ່…</strong><span>ລໍຖ້າຂໍ້ມູນຈາກລະບົບ</span><i/><i/><i/></div> : qaScenario === "error" ? <div className={styles.errorState} role="alert"><strong>ດຶງຂໍ້ມູນບໍ່ສຳເລັດ</strong><p>ກວດກາ Internet ແລ້ວລອງໃໝ່. ຄຳຄົ້ນຂອງທ່ານຍັງຖືກຮັກສາໄວ້.</p><button onClick={() => setQaScenario("default")}>ລອງໃໝ່</button></div> : qaScenario === "empty" ? <div className={styles.stateWrap}><div className={styles.empty}><strong>ບໍ່ພົບຮ້ານທີ່ກົງ</strong><p>ລອງລຶບຄຳຄົ້ນ ຫຼືປ່ຽນປະເພດ.</p><button onClick={() => { setQaScenario("default"); setQuery(""); setFilter("all"); }}>ລ້າງຕົວກອງ</button></div></div> : resultView === "map" ? <div className={styles.mapPreview}><span>ແຜນທີ່ຈຳລອງ</span>{results.map((place, index) => <button key={place.id} style={{ left: `${20 + index * 28}%`, top: `${25 + (index % 2) * 35}%` }} onClick={() => openPlace(place)}>⌖<small>{place.name}</small></button>)}</div> : <div className={resultView === "video" ? styles.videoResults : styles.results}>{results.length ? results.map((place) => <button className={resultView === "video" ? styles.videoResultCard : styles.resultCard} key={place.id} onClick={() => openPlace(place)}><i className={styles.resultImage} aria-hidden="true" style={{ backgroundImage: `linear-gradient(180deg, transparent, rgba(5,12,17,.82)), url(${basePath}${place.image})` }}>{resultView === "video" ? <em>▶</em> : null}</i><span><strong>{place.name}</strong><small>{place.categoryLabel} · {place.district}</small><em>★ {place.rating} · {place.reviewCount} ຄຳເຫັນ · {place.distance}</em><small>{place.price} · {place.checked}</small>{place.sponsored ? <b>ໂຄສະນາ</b> : <i>{place.tags.slice(0, 2).join(" · ")}</i>}</span></button>) : <div className={styles.empty}><strong>ບໍ່ພົບຮ້ານທີ່ກົງ</strong><p>ລອງລຶບຄຳຄົ້ນ ຫຼືປ່ຽນປະເພດ.</p><button onClick={() => { setQuery(""); setFilter("all"); }}>ລ້າງຕົວກອງ</button></div>}</div>}
       </section> : null}
 
-      {screen === "place" ? <section className={styles.lightScreen}>
-        <header className={styles.placeHero} style={{ backgroundImage: `linear-gradient(180deg, rgba(5,12,17,.08), rgba(5,12,17,.9)), url(${basePath}${selected.image})` }}><button onClick={returnFromPlace}>← ກັບ</button>{selected.sponsored ? <span>ໂຄສະນາ — ຮ້ານຈ່າຍ</span> : null}<button className={styles.heroPlay} onClick={() => setNotice(`ຫຼິ້ນຣີວິວຫຼັກຈາກ ${selected.creator}`)} aria-label="ຫຼິ້ນວິດີໂອຣີວິວ">▶</button><div><small>{selected.categoryLabel}</small><h1>{selected.name}</h1><p>{selected.district} · {selected.price} · {selected.distance}</p><b>★ {selected.rating} <span>({selected.reviewCount} ຄຳເຫັນຈາກແຫຼ່ງອ້າງອີງ)</span></b></div></header>
-        <div className={styles.placeActions}><button onClick={() => act("ແຜນທີ່", selected)}>⌖<span>ແຜນທີ່</span></button><button onClick={() => act("ໂທ", selected)}>☎<span>ໂທ</span></button><button onClick={() => act("ຂໍ້ຄວາມ", selected)}>◫<span>ຂໍ້ຄວາມ</span></button><button onClick={() => act("ບັນທຶກ", selected)}>♡<span>ບັນທຶກ</span></button></div>
+      {screen === "place" ? <section className={`${styles.lightScreen} ${qaScenario === "long_text" ? styles.longTextMode : ""}`}>
+        <header className={styles.placeHero} style={{ backgroundImage: `linear-gradient(180deg, rgba(5,12,17,.08), rgba(5,12,17,.9)), url(${basePath}${displaySelected.image})` }}><button onClick={returnFromPlace}>← ກັບ</button>{displaySelected.sponsored ? <span>ໂຄສະນາ — ຮ້ານຈ່າຍ</span> : null}<button className={styles.heroPlay} onClick={() => setNotice(`ຫຼິ້ນຣີວິວຫຼັກຈາກ ${displaySelected.creator}`)} aria-label="ຫຼິ້ນວິດີໂອຣີວິວ">▶</button><div><small>{displaySelected.categoryLabel}</small><h1>{displaySelected.name}</h1><p>{displaySelected.district} · {displaySelected.price} · {displaySelected.distance}</p><b>★ {displaySelected.rating} <span>({displaySelected.reviewCount} ຄຳເຫັນຈາກແຫຼ່ງອ້າງອີງ)</span></b></div></header>
+        <div className={styles.placeActions}><button onClick={() => act("ແຜນທີ່", displaySelected)}>⌖<span>ແຜນທີ່</span></button><button disabled={qaScenario === "disabled"} aria-describedby={qaScenario === "disabled" ? "disabled-call-reason" : undefined} onClick={() => act("ໂທ", displaySelected)}>☎<span>ໂທ</span></button><button onClick={() => act("ຂໍ້ຄວາມ", displaySelected)}>◫<span>ຂໍ້ຄວາມ</span></button><button onClick={() => act("ບັນທຶກ", displaySelected)}>♡<span>ບັນທຶກ</span></button></div>
+        {qaScenario === "disabled" ? <p id="disabled-call-reason" className={styles.disabledReason} role="status">ປຸ່ມ “ໂທ” ຖືກປິດ ເພາະຮ້ານຍັງບໍ່ມີເບີໂທທີ່ກວດສອບແລ້ວ.</p> : null}
         <div className={styles.placeBody}>
-          <section className={styles.decisionCard}><div><span>ສະຖານະ</span><strong>{selected.hours}</strong></div><div><span>ລາຄາ</span><strong>{selected.price}</strong></div><div><span>ໄລຍະທາງ</span><strong>{selected.distance}</strong></div><small>{selected.checked} · ລາຄາແມ່ນຂໍ້ມູນອ້າງອີງ</small></section>
-          <section><div className={styles.sectionTitle}><div><span>VIDEO REVIEWS</span><h2>ຄົນອື່ນເວົ້າແນວໃດ?</h2></div><button onClick={() => setNotice("ສະແດງຣີວິວທັງໝົດ")}>ເບິ່ງທັງໝົດ</button></div><div className={styles.reviewRail}>{selected.reviewCreators.map((creator, index) => <button key={creator} onClick={() => setNotice(`ເປີດ original source ຂອງ ${creator}`)} style={{ backgroundImage: `linear-gradient(180deg, transparent, rgba(5,12,17,.86)), url(${basePath}${index % 2 ? "/platform-cafe.jpg" : selected.image})` }}><i>▶</i><span><strong>{creator}</strong><small>Original review ↗</small></span></button>)}</div></section>
-          <section><div className={styles.sectionTitle}><div><span>DETAILS</span><h2>{selected.category === "restaurant" ? "ເມນູ ແລະລາຄາ" : "ເມນູແນະນຳ"}</h2></div><button onClick={() => setNotice("ສະແດງເມນູທັງໝົດ")}>ເບິ່ງເມນູ</button></div><div className={styles.menuList}>{selected.menu.map((item) => <div key={item.name}><i aria-hidden="true" style={{ backgroundImage: `url(${basePath}${item.image})` }}/><span><b>{item.name}</b><small>ຮູບຕົວຢ່າງ · Prototype</small></span><strong>{item.price}</strong></div>)}</div><p className={styles.freshness}>ຮູບ ແລະລາຄາເປັນຂໍ້ມູນຕົວຢ່າງ · {selected.checked}</p></section>
-          <section><h2>ເໝາະກັບໃຜ?</h2><div className={styles.tagList}>{selected.tags.map((tag) => <span key={tag}>✓ {tag}</span>)}</div></section>
-          <section><h2>ແຫຼ່ງຣີວິວ ແລະຄວາມໂປ່ງໃສ</h2>{selected.sourceAvailable ? <button className={styles.sourceCard} onClick={() => setNotice(`ເປີດ original source ຂອງ ${selected.creator}`)}><span><strong>{selected.creator}</strong><small>ຜູ້ສ້າງຣີວິວຕົ້ນສະບັບ</small></span><b>ເປີດຕົ້ນສະບັບ ↗</b></button> : <div className={styles.sourceMissing}><strong>Source ຖືກລົບ ຫຼືເບິ່ງບໍ່ໄດ້</strong><span>Place facts ຍັງສະແດງຕາມຫຼັກຖານທີ່ກວດໄດ້.</span></div>}</section>
+          <section className={styles.decisionCard}><div><span>ສະຖານະ</span><strong>{displaySelected.hours}</strong></div><div><span>ລາຄາ</span><strong>{displaySelected.price}</strong></div><div><span>ໄລຍະທາງ</span><strong>{displaySelected.distance}</strong></div><small>{displaySelected.checked} · ລາຄາແມ່ນຂໍ້ມູນອ້າງອີງ</small></section>
+          <section><div className={styles.sectionTitle}><div><span>VIDEO REVIEWS</span><h2>ຄົນອື່ນເວົ້າແນວໃດ?</h2></div><button onClick={() => setNotice("ສະແດງຣີວິວທັງໝົດ")}>ເບິ່ງທັງໝົດ</button></div><div className={styles.reviewRail}>{displaySelected.reviewCreators.map((creator, index) => <button key={creator} onClick={() => setNotice(`ເປີດ original source ຂອງ ${creator}`)} style={{ backgroundImage: `linear-gradient(180deg, transparent, rgba(5,12,17,.86)), url(${basePath}${index % 2 ? "/platform-cafe.jpg" : displaySelected.image})` }}><i>▶</i><span><strong>{creator}</strong><small>Original review ↗</small></span></button>)}</div></section>
+          <section><div className={styles.sectionTitle}><div><span>DETAILS</span><h2>{displaySelected.category === "restaurant" ? "ເມນູ ແລະລາຄາ" : "ເມນູແນະນຳ"}</h2></div><button onClick={() => setNotice("ສະແດງເມນູທັງໝົດ")}>ເບິ່ງເມນູ</button></div><div className={styles.menuList}>{displaySelected.menu.map((item) => <div key={item.name}><i aria-hidden="true" style={{ backgroundImage: `url(${basePath}${item.image})` }}/><span><b>{item.name}</b><small>ຮູບຕົວຢ່າງ · Prototype</small></span><strong>{item.price}</strong></div>)}</div><p className={styles.freshness}>ຮູບ ແລະລາຄາເປັນຂໍ້ມູນຕົວຢ່າງ · {displaySelected.checked}</p></section>
+          <section><h2>ເໝາະກັບໃຜ?</h2><div className={styles.tagList}>{displaySelected.tags.map((tag) => <span key={tag}>✓ {tag}</span>)}</div></section>
+          <section><h2>ແຫຼ່ງຣີວິວ ແລະຄວາມໂປ່ງໃສ</h2>{displaySelected.sourceAvailable ? <button className={styles.sourceCard} onClick={() => setNotice(`ເປີດ original source ຂອງ ${displaySelected.creator}`)}><span><strong>{displaySelected.creator}</strong><small>ຜູ້ສ້າງຣີວິວຕົ້ນສະບັບ</small></span><b>ເປີດຕົ້ນສະບັບ ↗</b></button> : <div className={styles.sourceMissing}><strong>Source ຖືກລົບ ຫຼືເບິ່ງບໍ່ໄດ້</strong><span>Place facts ຍັງສະແດງຕາມຫຼັກຖານທີ່ກວດໄດ້.</span></div>}</section>
           <section><div className={styles.sectionTitle}><div><span>DISCOVER MORE</span><h2>ຮ້ານທີ່ຄ້າຍຄືກັນ</h2></div></div><div className={styles.relatedGrid}>{relatedPlaces.map((place) => <button key={place.id} onClick={() => openPlace(place)}><i style={{ backgroundImage: `url(${basePath}${place.image})` }}/><span><strong>{place.name}</strong><small>★ {place.rating} · {place.distance}</small></span></button>)}</div></section>
           <button className={styles.correction} onClick={() => setNotice("Correction form → ຈະສ້າງ Case ID; ບໍ່ auto-publish")}>ຂໍ້ມູນບໍ່ຖືກຕ້ອງ? ແຈ້ງໃຫ້ພວກເຮົາ</button>
         </div>
