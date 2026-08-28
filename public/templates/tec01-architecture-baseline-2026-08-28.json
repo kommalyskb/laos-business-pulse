@@ -2,9 +2,11 @@
   "document": {
     "id": "TEC-01",
     "title": "System Architecture",
-    "version": "0.1",
-    "status": "draft_for_review",
+    "version": "1.0",
+    "status": "approved",
     "date": "2026-08-28",
+    "approved_at": "2026-08-28",
+    "approved_by_role": "Product Owner",
     "architecture_style": "modular_monolith_first",
     "next_document": "TEC-02"
   },
@@ -82,21 +84,21 @@
     "pilot_recovery_provisional": { "rpo_hours": 24, "rto_hours": 8, "final_owner": "TEC-06" }
   },
   "architecture_decisions": [
-    { "id": "ADR-001", "decision": "Modular Monolith for Pilot", "status": "proposed" },
-    { "id": "ADR-002", "decision": "Relational database as source of truth", "status": "proposed" },
-    { "id": "ADR-003", "decision": "Search starts as a rebuildable projection", "status": "proposed" },
-    { "id": "ADR-004", "decision": "Transactional outbox for asynchronous effects", "status": "proposed" },
+    { "id": "ADR-001", "decision": "Modular Monolith for Pilot", "status": "accepted" },
+    { "id": "ADR-002", "decision": "Relational database as source of truth", "status": "accepted" },
+    { "id": "ADR-003", "decision": "Search starts as a rebuildable projection", "status": "accepted" },
+    { "id": "ADR-004", "decision": "Transactional outbox for asynchronous effects", "status": "accepted" },
     { "id": "ADR-005", "decision": "External social media remains link-only", "status": "fixed_by_scope" },
     { "id": "ADR-006", "decision": "Admin authorization is server-enforced", "status": "fixed_by_security" },
-    { "id": "ADR-007", "decision": "Analytics is asynchronous and consent-aware", "status": "proposed" },
+    { "id": "ADR-007", "decision": "Analytics is asynchronous and consent-aware", "status": "accepted" },
     { "id": "ADR-008", "decision": "No platform booking or payment transaction in MVP", "status": "fixed_by_PRO_03" }
   ],
   "review_decisions": [
-    { "id": "REV-01", "topic": "Architecture style", "recommendation": "approve_modular_monolith_first", "status": "pending" },
-    { "id": "REV-02", "topic": "Data and search", "recommendation": "approve_relational_source_and_rebuildable_projections", "status": "pending" },
-    { "id": "REV-03", "topic": "Asynchronous and external boundary", "recommendation": "approve_outbox_queue_bounded_retry_and_link_only_media", "status": "pending" },
-    { "id": "REV-04", "topic": "Security and Admin", "recommendation": "approve_as_mandatory_control", "status": "pending" },
-    { "id": "REV-05", "topic": "Environment and recovery", "recommendation": "approve_provisional_rpo_24h_rto_8h_pending_TEC_06", "status": "pending" }
+    { "id": "REV-01", "topic": "Architecture style", "decision": "approve_modular_monolith_first", "status": "approved" },
+    { "id": "REV-02", "topic": "Data and search", "decision": "approve_relational_source_and_rebuildable_projections", "status": "approved" },
+    { "id": "REV-03", "topic": "Asynchronous and external boundary", "decision": "approve_outbox_queue_bounded_retry_and_link_only_media", "status": "approved" },
+    { "id": "REV-04", "topic": "Security and Admin", "decision": "approve_as_mandatory_control", "status": "approved" },
+    { "id": "REV-05", "topic": "Environment and recovery", "decision": "approve_provisional_rpo_24h_rto_8h_pending_TEC_06", "status": "approved" }
   ],
   "next_documents": [
     { "id": "TEC-02", "receives": "solution alternatives, delivery and cost comparison" },

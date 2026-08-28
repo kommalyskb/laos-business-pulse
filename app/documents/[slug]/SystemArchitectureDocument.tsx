@@ -63,17 +63,17 @@ const safeguards = [
   ["Secrets", "Runtime secret store; never source code, browser bundle, logs or exported fixtures", "Deployment boundary"],
   ["External input", "URL allowlist, size/type validation, timeout, response sanitization and no arbitrary server fetch", "ARC-C11"],
   ["Observability", "Request/job ID, actor, module, outcome, duration and safe error code; redact secrets/PII", "ARC-C14"],
-  ["Recovery", "Automated backup + restore rehearsal; provisional Pilot RPO 24h and RTO 8h pending REV-05", "ARC-C07/C12/C14"],
+  ["Recovery", "Automated backup + restore rehearsal; Pilot RPO 24h and RTO 8h are approved as a provisional baseline and must be confirmed in TEC-06", "ARC-C07/C12/C14"],
 ] as const;
 
 const decisions = [
-  ["ADR-001", "Modular Monolith for Pilot", "Proposed", "Lowest operational complexity while preserving domain boundaries; split only with measured evidence."],
-  ["ADR-002", "Relational DB as source of truth", "Proposed", "Transactions, relations, audit and constraints dominate MVP requirements."],
-  ["ADR-003", "Search starts as rebuildable projection", "Proposed", "Avoid dedicated search operations until Lao relevance/volume evidence requires it."],
-  ["ADR-004", "Transactional outbox for async effects", "Proposed", "Prevents business commit succeeding while search/event/job notification is silently lost."],
+  ["ADR-001", "Modular Monolith for Pilot", "Accepted", "Lowest operational complexity while preserving domain boundaries; split only with measured evidence."],
+  ["ADR-002", "Relational DB as source of truth", "Accepted", "Transactions, relations, audit and constraints dominate MVP requirements."],
+  ["ADR-003", "Search starts as rebuildable projection", "Accepted", "Avoid dedicated search operations until Lao relevance/volume evidence requires it."],
+  ["ADR-004", "Transactional outbox for async effects", "Accepted", "Prevents business commit succeeding while search/event/job notification is silently lost."],
   ["ADR-005", "External social media remains link-only", "Fixed by scope", "Protect attribution and copyright boundary; use permitted embed/metadata and fallback."],
   ["ADR-006", "Admin authorization is server-enforced", "Fixed by security", "Prototype visibility rules are not sufficient for production access control."],
-  ["ADR-007", "Analytics is asynchronous and consent-aware", "Proposed", "Measurement failure cannot block discovery or decision actions."],
+  ["ADR-007", "Analytics is asynchronous and consent-aware", "Accepted", "Measurement failure cannot block discovery or decision actions."],
   ["ADR-008", "No platform booking/payment transaction in MVP", "Fixed by PRO-03", "Users contact Place directly; Finance records verified evidence, not payment processing."],
 ] as const;
 
@@ -85,11 +85,11 @@ const scaling = [
 ] as const;
 
 const reviews = [
-  ["REV-01", "Architecture Style", "ອະນຸມັດ Modular Monolith-first ສຳລັບ Pilot ຫຼືຕ້ອງແຍກ Service ຕັ້ງແຕ່ຕົ້ນ?", "ແນະນຳ: ອະນຸມັດ Modular Monolith-first"],
-  ["REV-02", "Data & Search", "ອະນຸມັດ Relational DB ເປັນ source of truth ແລະ Search/Analytics ເປັນ rebuildable projection ຫຼືບໍ່?", "ແນະນຳ: ອະນຸມັດ"],
-  ["REV-03", "Async & External Boundary", "ອະນຸມັດ queue/outbox, bounded retry ແລະ link-only media adapter ເພື່ອແຍກ external failure ອອກຈາກ Core Journey ຫຼືບໍ່?", "ແນະນຳ: ອະນຸມັດ"],
-  ["REV-04", "Security & Admin", "ອະນຸມັດ server-enforced role/record rule, atomic audit ແລະ restricted evidence boundary ຫຼືບໍ່?", "ແນະນຳ: ອະນຸມັດເປັນ mandatory control"],
-  ["REV-05", "Environment & Recovery", "ອະນຸມັດ Local → Test/CI → Pilot/Staging → Production ແລະ Pilot recovery baseline RPO 24h / RTO 8h ຫຼືຕ້ອງປັບ?", "ແນະນຳ: ອະນຸມັດເປັນ provisional baseline ແລ້ວຢືນຢັນໃນ TEC-06"],
+  ["REV-01", "Architecture Style", "ອະນຸມັດ Modular Monolith-first ສຳລັບ Pilot ຫຼືຕ້ອງແຍກ Service ຕັ້ງແຕ່ຕົ້ນ?", "ອະນຸມັດ Modular Monolith-first; ແຍກ Service ເມື່ອມີຫຼັກຖານຈາກ scale, reliability ຫຼື team ownership."],
+  ["REV-02", "Data & Search", "ອະນຸມັດ Relational DB ເປັນ source of truth ແລະ Search/Analytics ເປັນ rebuildable projection ຫຼືບໍ່?", "ອະນຸມັດ Relational DB ເປັນຂໍ້ມູນທາງການ; Search/Analytics ຕ້ອງສ້າງຄືນໄດ້."],
+  ["REV-03", "Async & External Boundary", "ອະນຸມັດ queue/outbox, bounded retry ແລະ link-only media adapter ເພື່ອແຍກ external failure ອອກຈາກ Core Journey ຫຼືບໍ່?", "ອະນຸມັດ Queue, Transactional Outbox, ການລອງໃໝ່ແບບຈຳກັດ ແລະ Link-only media."],
+  ["REV-04", "Security & Admin", "ອະນຸມັດ server-enforced role/record rule, atomic audit ແລະ restricted evidence boundary ຫຼືບໍ່?", "ອະນຸມັດເປັນຂໍ້ບັງຄັບ; UI ບໍ່ສາມາດໃຊ້ແທນ server security control."],
+  ["REV-05", "Environment & Recovery", "ອະນຸມັດ Local → Test/CI → Pilot/Staging → Production ແລະ Pilot recovery baseline RPO 24h / RTO 8h ຫຼືຕ້ອງປັບ?", "ອະນຸມັດ 4 Environment; RPO 24h / RTO 8h ເປັນຄ່າຊົ່ວຄາວ ແລະທົບທວນຄືນໃນ TEC-06."],
 ] as const;
 
 export default function SystemArchitectureDocument({ basePath }: { basePath: string }) {
@@ -98,17 +98,17 @@ export default function SystemArchitectureDocument({ basePath }: { basePath: str
       <p>TEC-01 · ARCHITECTURE &amp; ENGINEERING</p>
       <h1>System Architecture</h1>
       <h2>ໂຄງສ້າງລະບົບສຳລັບ Guest, Admin, Data, Search, Background Work ແລະ External Integration</h2>
-      <div className={`${styles.formalStatus} ${styles.formalDraftStatus}`}>ສະບັບ 0.1 · ຮ່າງສຳລັບທົບທວນ · 28 ສິງຫາ 2026</div>
+      <div className={styles.formalStatus}>ສະບັບ 1.0 · ອະນຸມັດແລ້ວ · 28 ສິງຫາ 2026</div>
     </header>
 
     <section className={styles.formalSection} id="arc-control"><h2><span>1.</span> ຂໍ້ມູນຄວບຄຸມເອກະສານ</h2>
       <div className={styles.formalTableWrap}><table className={styles.formalTable}><tbody>
-        <tr><th>ລະຫັດ</th><td>TEC-01</td><th>ສະບັບ</th><td>0.1</td></tr>
-        <tr><th>ສະຖານະ</th><td>ຮ່າງສຳລັບທົບທວນ</td><th>ເຈົ້າຂອງ</th><td>Solution Architect / Tech Lead</td></tr>
+        <tr><th>ລະຫັດ</th><td>TEC-01</td><th>ສະບັບ</th><td>1.0</td></tr>
+        <tr><th>ສະຖານະ</th><td>ອະນຸມັດແລ້ວ</td><th>ເຈົ້າຂອງ</th><td>Solution Architect / Tech Lead</td></tr>
         <tr><th>ຜູ້ທົບທວນ</th><td>Product Owner · System Analyst · Security/Operations · Frontend/Backend Lead</td><th>ເອກະສານຖັດໄປ</th><td>TEC-02 Technical Proposal</td></tr>
         <tr><th>Baseline ຕົ້ນທາງ</th><td colSpan={3}>PRO-02 1.0 · PRO-03 1.0 · PRO-04 0.9 · UX-05 0.11.0 · CON-02/04 1.0 · BUS-05/06 1.0</td></tr>
       </tbody></table></div>
-      <h3>1.1 ປະຫວັດການແກ້ໄຂ</h3><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ສະບັບ</th><th>ວັນທີ</th><th>ລາຍລະອຽດ</th><th>ຜູ້ຈັດທຳ</th></tr></thead><tbody><tr><td>0.1</td><td>28 ສິງຫາ 2026</td><td>ກຳນົດ logical architecture, 14 components, 7 core flows, data ownership, deployment, security, recovery, scaling ແລະ 8 Architecture Decisions.</td><td>Solution Architecture</td></tr></tbody></table></div>
+      <h3>1.1 ປະຫວັດການແກ້ໄຂ</h3><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ສະບັບ</th><th>ວັນທີ</th><th>ລາຍລະອຽດ</th><th>ຜູ້ຈັດທຳ</th></tr></thead><tbody><tr><td>0.1</td><td>28 ສິງຫາ 2026</td><td>ກຳນົດ logical architecture, 14 components, 7 core flows, data ownership, deployment, security, recovery, scaling ແລະ 8 Architecture Decisions.</td><td>Solution Architecture</td></tr><tr><td>1.0</td><td>28 ສິງຫາ 2026</td><td>ອະນຸມັດ REV-01—05, ປ່ຽນ ADR-001—004/007 ເປັນ Accepted ແລະກຳນົດ RPO 24h / RTO 8h ເປັນ Pilot provisional baseline.</td><td>Product Owner / Solution Architecture</td></tr></tbody></table></div>
     </section>
 
     <nav className={styles.formalToc} aria-label="ສາລະບານ TEC-01"><h2>ສາລະບານ</h2><ol>
@@ -176,7 +176,7 @@ export default function SystemArchitectureDocument({ basePath }: { basePath: str
     </section>
 
     <section className={styles.formalSection} id="arc-decisions"><h2><span>11.</span> Architecture Decision Register</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Decision</th><th>Status</th><th>Rationale</th></tr></thead><tbody>{decisions.map(([id,decision,status,rationale])=><tr key={id}><td><code>{id}</code></td><td><strong>{decision}</strong></td><td>{status}</td><td>{rationale}</td></tr>)}</tbody></table></div>
-      <p>“Proposed” ຈະປ່ຽນເປັນ Accepted/Rejected ຫຼັງ REV-01—05. “Fixed by scope/security” ປ່ຽນໄດ້ສະເພາະມີ upstream Change Decision.</p>
+      <p>ADR-001—004 ແລະ ADR-007 ຖືກອະນຸມັດເປັນ Accepted. “Fixed by scope/security” ປ່ຽນໄດ້ສະເພາະມີ upstream Change Decision ທີ່ຖືກອະນຸມັດ.</p>
     </section>
 
     <section className={styles.formalSection} id="arc-handoff"><h2><span>12.</span> Technical Handoff ແລະ Traceability</h2>
@@ -184,12 +184,12 @@ export default function SystemArchitectureDocument({ basePath }: { basePath: str
         <tr><td>PRO-02</td><td>64 Functions, 27 Entities, 16 Workflows, State/Error/Audit rules</td><td>Component/data/flow boundaries</td></tr><tr><td>PRO-03/04</td><td>MVP priority, manual boundary, acceptance/performance</td><td>Release architecture and NFR constraints</td></tr><tr><td>UX-05 0.11.0</td><td>Guest/Admin screens, control, responsive, session prototype boundary</td><td>Client/API/auth/persistence responsibility</td></tr><tr><td>CON/BUS</td><td>Source, disclosure, evidence, revenue and cost rules</td><td>Storage/integration/security/commercial boundaries</td></tr><tr><td>TEC-01</td><td>14 Components, 7 Flows, trust/data zones, ADRs</td><td>TEC-02 alternatives/cost · TEC-03 stack · TEC-04 schema/API · TEC-06 security/infra</td></tr>
       </tbody></table></div>
       <h3>12.1 ໄຟລ໌ນຳໃຊ້</h3><div className={styles.architectureArtifacts}><a href={`${basePath}/artifact-preview?file=tec01-architecture-baseline-2026-08-28.json&from=system-architecture`}><b>ພຣີວິວ Architecture Baseline JSON</b><span>Component, flow, decision, security ແລະ review contract</span></a><a href={`${basePath}/templates/tec01-architecture-baseline-2026-08-28.json`} download><b>ດາວໂຫຼດ JSON</b><span>Machine-readable handoff ສຳລັບ TEC-02—06</span></a></div>
-      <div className={styles.formalDraftNotice}><strong>Definition of ready for TEC-02</strong><p>REV-01—05 ຖືກຕັດສິນ; Component/Flow/Trust Boundary ບໍ່ຂັດ PRO-02/UX-05; open issue ມີ owner; ແລະທາງເລືອກທີ່ TEC-02 ຕ້ອງປຽບທຽບຖືກລະບຸ.</p></div>
+      <div className={styles.formalApproval}><strong>TEC-02 ພ້ອມເລີ່ມ</strong><p>REV-01—05 ຖືກອະນຸມັດ; Component/Flow/Trust Boundary ບໍ່ຂັດ PRO-02/UX-05; RPO/RTO ມີ owner ທົບທວນໃນ TEC-06; ແລະ TEC-02 ສາມາດນຳ baseline ນີ້ໄປປຽບທຽບທາງເລືອກ, cost ແລະ delivery approach.</p></div>
     </section>
 
-    <section className={styles.formalSection} id="arc-review"><h2><span>13.</span> 5 ຂໍ້ທີ່ຕ້ອງທົບທວນກ່ອນ TEC-01 ຂຶ້ນ 1.0</h2><p>ຄຳຖາມເຫຼົ່ານີ້ປ່ຽນໂຄງສ້າງ, cost ຫຼື security ໂດຍກົງ ຈຶ່ງຫ້າມໃຫ້ Developer ຄາດເດົາເອງ.</p>
-      <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>ຫົວຂໍ້</th><th>ຄຳຖາມ</th><th>ຄຳແນະນຳ</th><th>ສະຖານະ</th></tr></thead><tbody>{reviews.map(([id,title,question,recommendation])=><tr key={id}><td><code>{id}</code></td><td><strong>{title}</strong></td><td>{question}</td><td>{recommendation}</td><td>ລໍທົບທວນ</td></tr>)}</tbody></table></div>
-      <div className={styles.formalDraftNotice}><strong>TEC-01 · ສະບັບ 0.1</strong><p>ເນື້ອຫາທາງສະຖາປັດຕະຍະກຳຄົບສຳລັບ review ແລ້ວ ແຕ່ຍັງບໍ່ແມ່ນ approved architecture baseline. ຫຼັງອະນຸມັດ REV-01—05 ຈຶ່ງອັບເດດ ADR status, recovery target ແລະຂຶ້ນ 1.0.</p></div>
+    <section className={styles.formalSection} id="arc-review"><h2><span>13.</span> ບັນທຶກການອະນຸມັດ 5 ຂໍ້</h2><p>ການຕັດສິນ REV-01—05 ເປັນ Architecture Baseline ສຳລັບ TEC-02—06. Developer ບໍ່ຄວນປ່ຽນແປງໂດຍບໍ່ມີ Change Decision ແລະການປະເມີນຜົນກະທົບ.</p>
+      <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>ຫົວຂໍ້</th><th>ຄຳຖາມ</th><th>ຜົນຕັດສິນ</th><th>ສະຖານະ</th></tr></thead><tbody>{reviews.map(([id,title,question,recommendation])=><tr key={id}><td><code>{id}</code></td><td><strong>{title}</strong></td><td>{question}</td><td>{recommendation}</td><td><strong>ອະນຸມັດ</strong></td></tr>)}</tbody></table></div>
+      <div className={styles.formalApproval}><strong>TEC-01 · ສະບັບ 1.0</strong><p>Architecture Baseline ຖືກອະນຸມັດຄົບແລ້ວ. RPO 24h / RTO 8h ຍັງເປັນຄ່າຊົ່ວຄາວສຳລັບ Pilot ແລະຕ້ອງຢືນຢັນຄືນໃນ TEC-06 ຫຼັງຈາກຮູ້ infrastructure cost ແລະ data criticality.</p></div>
     </section>
 
     <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ"><a href={`${basePath}/documents/full-ux-ui`}><small>← DESIGN HANDOFF</small><strong>UX-05 0.11.0</strong></a><a href={`${basePath}/documents/technical-proposal`}><small>ເອກະສານຖັດໄປ →</small><strong>TEC-02 Technical Proposal</strong></a></nav>
