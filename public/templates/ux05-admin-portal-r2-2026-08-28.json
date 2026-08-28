@@ -1,18 +1,19 @@
 {
   "document": "UX-05",
-  "version": "0.8.0",
-  "baseline": "Admin Business Operations Portal R2",
+  "version": "0.8.1",
+  "baseline": "Odoo-inspired Admin Business Operations Portal R2.1",
   "date": "2026-08-28",
   "objective": "Provide a professional 360-degree operating portal that connects audience, catalog, content, trust, commercial, finance and system control without losing record-level accountability.",
   "design_inspiration": {
     "source": "Odoo 19 information architecture and interaction patterns",
     "adapted_patterns": [
-      "application launcher and module workspaces",
+      "full workspace application launcher and horizontal module workspaces",
       "search, filter, group by and favorites",
       "list, kanban and analytical views",
       "dashboard drill-down to underlying records",
       "record activities and audit timeline",
-      "role-aware module and record access"
+      "role-aware module and record access",
+      "mauve top application bar and module-level menu anatomy"
     ],
     "not_copied": ["Odoo branding", "Odoo logo", "Odoo color palette", "Odoo proprietary application screens"],
     "project_identity": ["Noto Sans Lao", "Phom Pai brand", "decision-first business language", "green neutral operational palette"]

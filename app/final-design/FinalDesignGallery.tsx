@@ -82,23 +82,32 @@ const adminModules: Array<{ id: AdminScreenId; label: string; icon: string; grou
 function AdminShell({ screen, state, children, onNavigate }: { screen: AdminScreenId; state: UiState; children: ReactNode; onNavigate: (screen: AdminScreenId) => void }) {
   const meta = adminMeta[screen];
   const [launcherOpen, setLauncherOpen] = useState(false);
+  const moduleMenus: Record<AdminScreenId, string[]> = {
+    "SCR-A00": ["Dashboards", "My Dashboard", "Reporting"],
+    "SCR-A01": ["My Work", "All Work", "Activities", "Reporting"],
+    "SCR-A02": ["Places", "Categories", "Sources", "Configuration"],
+    "SCR-A03": ["Cases", "Appeals", "Policies", "Reporting"],
+    "SCR-A04": ["Content", "Sources", "Publishing", "Configuration"],
+    "SCR-A05": ["Pipeline", "Partners", "Activities", "Reporting"],
+    "SCR-A06": ["Campaigns", "Creative", "Delivery", "Reporting"],
+    "SCR-A07": ["Dashboards", "Audience", "Places", "Attribution"],
+    "SCR-A08": ["Overview", "Payments", "Expenses", "Reporting"],
+    "SCR-A09": ["Users", "Access Rights", "Integrations", "Technical"],
+  };
   return <div className={styles.adminApp}>
     <aside className={styles.adminSidebar}>
-      <div className={styles.adminBrand}><button aria-label="Open application launcher" aria-expanded={launcherOpen} onClick={() => setLauncherOpen(value => !value)}>▦</button><div><strong>ພ້ອມໄປ</strong><small>BUSINESS OPERATIONS</small></div></div>
-      <div className={styles.workspaceSelect}><small>WORKSPACE</small><b>Laos Pilot Operations</b><span>⌄</span></div>
-      <nav aria-label="Admin navigation">
-        {(["Operate", "Grow", "Control"] as const).map(group => <div className={styles.adminNavGroup} key={group}><small>{group}</small>{adminModules.filter(item => item.group === group).map(item => <button key={item.id} aria-current={screen === item.id ? "page" : undefined} onClick={() => onNavigate(item.id)}><i>{item.icon}</i><span>{item.label}</span>{item.count ? <em>{item.count}</em> : null}</button>)}</div>)}
-      </nav>
-      <div className={styles.systemHealth}><span /><div><b>All systems operational</b><small>Last checked 1 min ago</small></div></div>
-      <div className={styles.adminUser}><b>KS</b><div><strong>Kommaly S.</strong><small>Operations administrator</small></div><span>⋮</span></div>
+      <div className={styles.adminBrand}><button aria-label="Open application launcher" aria-expanded={launcherOpen} onClick={() => setLauncherOpen(value => !value)}>▦</button><div><strong>{meta.title}</strong><small>ພ້ອມໄປ</small></div></div>
+      <nav aria-label={`${meta.title} menus`}>{moduleMenus[screen].map((label, index) => <button key={label} aria-current={index === 0 ? "page" : undefined}><span>{label}</span>{index === 0 ? <i>⌄</i> : null}</button>)}</nav>
+      <div className={styles.adminTopUtilities}><button aria-label="Messages">✉<em>2</em></button><button aria-label="Activities">◷<em>5</em></button><button aria-label="Help">?</button><button className={styles.companyMenu}>Laos Pilot Operations　⌄</button></div>
+      <div className={styles.adminUser}><b>KS</b><div><strong>Kommaly S.</strong><small>Administrator</small></div><span>⌄</span></div>
     </aside>
     <main className={styles.adminMain}>
       <header className={styles.adminTopbar}>
-        <div><small>{meta.section}　/　{screen}</small><h2>{meta.title}</h2><p>{meta.description}</p></div>
-        <div className={styles.adminTopActions}><button className={styles.adminSearch}>⌕ <span>Search any record…</span><kbd>⌘ K</kbd></button><button aria-label="Activities">◷<em>5</em></button><button aria-label="Notifications">♢<em>3</em></button><button aria-label="Help">?</button></div>
+        <div><small>ພ້ອມໄປ　/　{meta.section}　/　{screen}</small><h2>{meta.title}</h2><p>{meta.description}</p></div>
+        <div className={styles.adminTopActions}><button className={styles.adminSearch}>⌕ <span>Search in {meta.title}…</span><kbd>⌘ K</kbd></button><button aria-label="Favorite">☆</button><button aria-label="Actions">⚙</button></div>
       </header>
       <div className={styles.adminContent}><StateNotice state={state} />{children}</div>
-      {launcherOpen ? <div className={styles.appLauncher}><header><div><small>APP LAUNCHER</small><b>Choose a workspace</b></div><button onClick={() => setLauncherOpen(false)}>×</button></header><div>{adminModules.map(item => <button key={item.id} onClick={() => { onNavigate(item.id); setLauncherOpen(false); }}><i>{item.icon}</i><span><b>{item.label}</b><small>{adminMeta[item.id].description}</small></span>{item.count ? <em>{item.count}</em> : null}</button>)}</div></div> : null}
+      {launcherOpen ? <div className={styles.appLauncher}><header><div><small>ພ້ອມໄປ · APPLICATIONS</small><b>ເລືອກ Module ທີ່ຕ້ອງການເຮັດວຽກ</b></div><button onClick={() => setLauncherOpen(false)}>×</button></header><label><span>⌕</span><input aria-label="Search applications" placeholder="ຄົ້ນຫາ Module…" /></label><div>{adminModules.map(item => <button key={item.id} onClick={() => { onNavigate(item.id); setLauncherOpen(false); }}><i>{item.icon}</i><span><b>{item.label}</b><small>{adminMeta[item.id].section}</small></span>{item.count ? <em>{item.count}</em> : null}</button>)}</div></div> : null}
     </main>
   </div>;
 }
@@ -232,8 +241,8 @@ function AdminPreview({ screen, state, onNavigate }: { screen: AdminScreenId; st
 }
 
 export default function FinalDesignGallery({ basePath }: { basePath: string }) {
-  const [screenId, setScreenId] = useState<ScreenId>("SCR-G01");
-  const [viewport, setViewport] = useState<Viewport>("mobile");
+  const [screenId, setScreenId] = useState<ScreenId>("SCR-A00");
+  const [viewport, setViewport] = useState<Viewport>("desktop");
   const [uiState, setUiState] = useState<UiState>("default");
   const screen = screens.find(item => item.id === screenId)!;
   const isGuest = screen.group === "Guest/Pilot";
@@ -248,13 +257,13 @@ export default function FinalDesignGallery({ basePath }: { basePath: string }) {
 
   return <main className={styles.site}>
     <header className={styles.topbar}><a href={`${basePath}/documents/full-ux-ui`}><b>UX-05</b><span>FINAL DESIGN GALLERY</span></a><nav><a href={`${basePath}/prototype`}>Prototype R2.3</a><a href={`${basePath}/design-system`}>UX-04 Gallery</a><a href={`${basePath}/documents`}>Documents</a></nav></header>
-    <section className={styles.hero}><div><small>FULL UX/UI DESIGN · BASELINE 0.8.0</small><h1>ໜ້າຈໍສຳລັບຕັດສິນໃຈ<br/><em>ແລະພ້ອມສົ່ງຕໍ່ Developer</em></h1></div><p>Guest/Pilot ໃຊ້ Prototype R2.3 ເປັນແຫຼ່ງອອກແບບດຽວ. Admin Portal R2 ເພີ່ມມຸມມອງທຸລະກິດ 360° ຜ່ານ 10 Modules ພ້ອມ workflow, analytics, finance ແລະ system control.</p></section>
+    <section className={styles.hero}><div><small>FULL UX/UI DESIGN · BASELINE 0.8.1</small><h1>ໜ້າຈໍສຳລັບຕັດສິນໃຈ<br/><em>ແລະພ້ອມສົ່ງຕໍ່ Developer</em></h1></div><p>Guest/Pilot ໃຊ້ Prototype R2.3 ເປັນແຫຼ່ງອອກແບບດຽວ. Admin Portal R2.1 ຮື້ visual shell ໃໝ່ໃຫ້ໃກ້ Odoo 19: horizontal app bar, module menu, control panel, record views ແລະ full workspace launcher.</p></section>
     <section className={styles.workspace}>
       <aside className={styles.registry}><div><small>SCREEN REGISTRY</small><b>14 Screen / Module Views</b></div>{["Guest/Pilot", "Admin"].map(group => <section key={group}><h2>{group}</h2>{screens.filter(item => item.group === group).map(item => <button key={item.id} aria-pressed={screenId === item.id} onClick={() => chooseScreen(item.id)}><code>{item.id}</code><span><b>{item.name}</b><small>{item.route}</small></span></button>)}</section>)}</aside>
       <div className={styles.board}>
         <header className={styles.boardTools}><div><code>{screen.id}</code><span><b>{screen.name}</b><small>{screen.purpose}</small></span></div><div className={styles.switches}>{isGuest ? <span className={styles.sourceBadge}>LIVE · PROTOTYPE R2.3</span> : <span aria-label="Viewport selector">{(["mobile", "tablet", "desktop"] as Viewport[]).map(item => <button key={item} aria-pressed={viewport === item} onClick={() => setViewport(item)}>{item}</button>)}</span>}<span aria-label="State selector">{screen.states.map(item => <button key={item} aria-pressed={uiState === item} onClick={() => setUiState(item)}>{stateLabels[item]}</button>)}</span></div></header>
         <div className={`${styles.canvas} ${styles[isGuest ? "mobile" : viewport]}`}><div className={styles.viewportLabel}><b>{isGuest ? "390 × 844 · Prototype source" : viewport === "mobile" ? "390 × 844" : viewport === "tablet" ? "768 × 1024" : "1440 × 900"}</b><span>{uiState}</span></div><div className={`${styles.preview} ${isGuest ? styles.prototypePreview : ""}`}>{isGuest ? <iframe key={guestPrototypeUrl} src={guestPrototypeUrl} title={`Prototype R2.3 · ${screen.name} · ${stateLabels[uiState]}`} /> : <AdminPreview screen={screenId as AdminScreenId} state={uiState} onNavigate={id => chooseScreen(id)} />}</div></div>
-        <footer className={styles.specBar}><div><small>PRIMARY OUTCOME</small><b>{screen.purpose}</b></div><div><small>DATA CONTRACT</small><b>{screen.group === "Admin" ? "Protected API · role, record rule, activity + audit required" : "Place ID · source · freshness · action availability"}</b></div><div><small>HANDOFF STATUS</small><b>{isGuest ? "Prototype parity · single source of truth" : "Admin Portal R2 · detailed module baseline"}</b></div></footer>
+        <footer className={styles.specBar}><div><small>PRIMARY OUTCOME</small><b>{screen.purpose}</b></div><div><small>DATA CONTRACT</small><b>{screen.group === "Admin" ? "Protected API · role, record rule, activity + audit required" : "Place ID · source · freshness · action availability"}</b></div><div><small>HANDOFF STATUS</small><b>{isGuest ? "Prototype parity · single source of truth" : "Odoo-inspired Admin Portal R2.1 · detailed module baseline"}</b></div></footer>
       </div>
     </section>
   </main>;

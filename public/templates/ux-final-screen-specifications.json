@@ -1,13 +1,13 @@
 {
   "document": "UX-05",
-  "version": "0.8.0",
-  "baseline": "Final Design Gallery · Admin Portal R2",
+  "version": "0.8.1",
+  "baseline": "Final Design Gallery · Odoo-inspired Admin Portal R2.1",
   "status": "baseline_ready_final_gates_pending",
   "source_of_truth": {
     "guest_pilot": "Prototype R2.3 at /prototype",
     "guest_rendering": "live_prototype_embed",
     "duplicate_guest_markup": false,
-    "admin": "360-degree Business Operations Portal R2 with ten interconnected modules"
+    "admin": "Odoo-inspired 360-degree Business Operations Portal R2.1 with ten interconnected modules"
   },
   "shared_contract": {
     "font": "Noto Sans Lao Variable",
