@@ -1,8 +1,14 @@
 {
   "document": "UX-05",
-  "version": "0.7",
-  "baseline": "Final Design Gallery R1",
+  "version": "0.7.1",
+  "baseline": "Final Design Gallery R1.1",
   "status": "baseline_ready_final_gates_pending",
+  "source_of_truth": {
+    "guest_pilot": "Prototype R2.3 at /prototype",
+    "guest_rendering": "live_prototype_embed",
+    "duplicate_guest_markup": false,
+    "admin": "UX-05-owned final design"
+  },
   "shared_contract": {
     "font": "Noto Sans Lao Variable",
     "breakpoints": [360, 390, 768, 1024, 1440],
@@ -16,44 +22,44 @@
     {
       "screen_id": "SCR-G01",
       "name": "Discovery Feed",
-      "route": "/discover",
+      "route": "/prototype?screen=discover",
       "priority": "must",
       "primary_outcome": "Open a decision-ready Place or an external action from a video-led discovery item.",
       "required_data": ["place_id", "name", "category", "district", "price_band", "source", "checked_at", "media_state", "action_availability"],
-      "states": ["default", "loading", "error", "sponsored", "source_unavailable"],
+      "states": ["default", "sponsored", "stale"],
       "interactions": ["previous_item", "next_item", "play_pause", "open_search", "open_place", "map", "call", "message"],
       "acceptance": ["One primary item per mobile viewport", "Trust/source is readable without opening Place", "Unavailable media is not a dead end", "Each action has a separate 44px target"]
     },
     {
       "screen_id": "SCR-G02",
       "name": "Search & Filters",
-      "route": "/search",
+      "route": "/prototype?screen=search",
       "priority": "must",
       "primary_outcome": "Find and compare a Place by intent, category, location, price and availability.",
       "required_data": ["query", "intent", "filters", "result_count", "place_summary", "view_mode"],
-      "states": ["default", "loading", "empty", "error", "stale", "sponsored"],
+      "states": ["default", "loading", "empty", "error"],
       "interactions": ["type_query", "clear_query", "select_intent", "apply_filter", "switch_video_list_map", "open_place"],
       "acceptance": ["Query and filters survive view changes and retry", "Selected state is programmatically exposed", "Empty differs from Error", "Sponsored is separated from organic similarity"]
     },
     {
       "screen_id": "SCR-G03",
       "name": "Place Decision",
-      "route": "/places/:placeId",
+      "route": "/prototype?screen=place",
       "priority": "must",
       "primary_outcome": "Decide whether to visit using facts, reviews, category details, freshness and contact actions.",
       "required_data": ["place_identity", "hours_state", "price", "location", "source_rating", "review_sources", "category_details", "checked_at"],
-      "states": ["default", "loading", "error", "stale", "sponsored", "contact_unavailable", "source_removed"],
+      "states": ["default", "disabled", "stale", "sponsored", "long_text"],
       "interactions": ["back_with_context", "map", "call", "message", "save_local", "open_source", "report_correction", "open_related"],
       "acceptance": ["Decision facts precede promotional detail", "Menu/room/category items include image, name, price and checked date when available", "Unavailable action includes a reason", "Back returns to prior Search/Feed context"]
     },
     {
       "screen_id": "SCR-G05",
       "name": "Consent & Privacy",
-      "route": "/privacy/settings",
+      "route": "/prototype?consent=pending",
       "priority": "must",
       "primary_outcome": "Choose essential-only or optional analytics and change the choice later.",
       "required_data": ["consent_status", "purposes", "effective_date", "privacy_notice_url"],
-      "states": ["default", "save_error", "essential_only", "analytics_allowed", "withdrawn"],
+      "states": ["default"],
       "interactions": ["choose_essential", "choose_analytics", "save", "withdraw", "open_notice"],
       "acceptance": ["Essential-only and analytics choices have equal prominence", "Declining analytics does not block core use", "Initial focus and dialog structure are accessible", "Save failure preserves the choice"]
     },

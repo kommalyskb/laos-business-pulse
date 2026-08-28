@@ -1,0 +1,25 @@
+{
+  "document": "UX-05",
+  "version": "0.7.1",
+  "date": "2026-08-28",
+  "finding": "Guest/Pilot screens in Final Design Gallery drifted from Prototype R2.3 because they used duplicated JSX and CSS.",
+  "resolution": {
+    "prototype_source": "/prototype",
+    "gallery_source": "/final-design",
+    "rendering": "Guest/Pilot screens are rendered from the live Prototype route in an embedded 390x844 viewport.",
+    "duplicate_guest_markup_removed": true,
+    "admin_design_unchanged": true
+  },
+  "mapping": [
+    { "screen_id": "SCR-G01", "prototype_screen": "discover", "states": ["default", "sponsored", "stale"] },
+    { "screen_id": "SCR-G02", "prototype_screen": "search", "states": ["default", "loading", "empty", "error"] },
+    { "screen_id": "SCR-G03", "prototype_screen": "place", "states": ["default", "disabled", "stale", "sponsored", "long_text"] },
+    { "screen_id": "SCR-G05", "prototype_screen": "discover", "consent": "pending", "states": ["default"] }
+  ],
+  "verification": {
+    "lint": "passed_with_two_preexisting_img_warnings_outside_changed_files",
+    "production_build": "passed",
+    "browser_parity_check": "passed_local_for_G01_G02_G03_G05_and_state_mapping",
+    "browser_console_errors": 0
+  }
+}

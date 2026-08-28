@@ -55,6 +55,7 @@ const qaItems: { id: QaItemId; title: string; instruction: string }[] = [
 
 export default function InteractivePrototype() {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  const [embedMode, setEmbedMode] = useState(false);
   const [screen, setScreen] = useState<Screen>("discover");
   const [returnScreen, setReturnScreen] = useState<Exclude<Screen, "place">>("discover");
   const [selectedId, setSelectedId] = useState("p01");
@@ -71,6 +72,31 @@ export default function InteractivePrototype() {
   const essentialConsentRef = useRef<HTMLButtonElement>(null);
   const qaTriggerRef = useRef<HTMLButtonElement>(null);
   const qaCloseRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("embed") !== "1") return;
+
+    const requestedScreen = params.get("screen");
+    const requestedScenario = params.get("state");
+    const validScreen: Screen = requestedScreen === "search" || requestedScreen === "place" ? requestedScreen : "discover";
+    const validScenario: QaScenario = qaScenarios.some((item) => item.id === requestedScenario) ? requestedScenario as QaScenario : "default";
+    const selectedPlaceId = validScenario === "sponsored" ? "p02" : validScenario === "stale" ? "p03" : "p01";
+
+    const frame = requestAnimationFrame(() => {
+      setEmbedMode(true);
+      setScreen(validScreen);
+      setReturnScreen(validScreen === "discover" ? "discover" : "search");
+      setQaScenario(validScenario);
+      setSelectedId(selectedPlaceId);
+      setFeedIndex(validScenario === "sponsored" ? 1 : validScenario === "stale" ? 2 : 0);
+      setAnalytics(params.get("consent") === "pending" ? "pending" : "essential");
+      setShowQa(false);
+      setShowTasks(false);
+      setNotice(`UX-05 embed · ${validScreen} · ${validScenario}`);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   useEffect(() => {
     if (analytics === "pending") essentialConsentRef.current?.focus();
@@ -157,7 +183,7 @@ export default function InteractivePrototype() {
 
   const qaSummary = Object.values(qaResults).reduce((summary, result) => ({ ...summary, [result]: summary[result] + 1 }), { pending: 0, pass: 0, fail: 0 });
 
-  return <main className={styles.stage}>
+  return <main className={`${styles.stage} ${embedMode ? styles.embedStage : ""}`} data-prototype-version="R2.3" data-embedded={embedMode ? "true" : "false"}>
     <header className={styles.prototypeHeader}>
       <div><strong>ພ້ອມໄປ · UX-03</strong><span>PROTOTYPE R2.3 · QA RETEST</span></div>
       <nav><button ref={qaTriggerRef} aria-expanded={showQa} aria-controls={showQa ? "ux04-qa-panel" : undefined} onClick={() => showQa ? closeQaPanel() : setShowQa(true)}>{showQa ? "ປິດ QA" : "UX-04 · ທົດສອບ"}</button><button onClick={() => setShowTasks((value) => !value)}>{showTasks ? "ປິດຜົນທົບທວນ" : "Founder Review R2 · ຜົນ"}</button><a href={`${basePath}/documents/interactive-prototype`}>ກັບເອກະສານ</a></nav>
