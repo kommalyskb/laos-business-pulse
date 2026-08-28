@@ -1,0 +1,38 @@
+{
+  "document": "UX-05",
+  "version": "0.7.2",
+  "baseline": "Professional Operations Console R1.2",
+  "date": "2026-08-28",
+  "objective": "Replace generic dashboard mockups with an operations-grade Admin experience whose hierarchy, workflow context, status and decision controls are explicit.",
+  "shared_shell": {
+    "elements": ["brand", "workspace context", "role-aware navigation", "system health", "signed-in operator", "record search", "notifications", "screen breadcrumb"],
+    "visual_principles": ["neutral data-first canvas", "one restrained green accent", "consistent borders and spacing", "status never communicated by color alone", "dense but scannable operations typography"]
+  },
+  "screens": [
+    {
+      "screen_id": "SCR-A01",
+      "name": "Operations Queue",
+      "professional_surfaces": ["daily operational summary", "assigned/due/SLA/completion KPIs", "queue tabs and filters", "work-item table", "priority", "owner", "SLA", "status", "pagination"]
+    },
+    {
+      "screen_id": "SCR-A02",
+      "name": "Place Editor",
+      "professional_surfaces": ["record version and save state", "sectioned place form", "required-field guidance", "source evidence", "publish readiness", "audit context", "draft and review actions"]
+    },
+    {
+      "screen_id": "SCR-A03",
+      "name": "Moderation Case",
+      "professional_surfaces": ["case priority and SLA", "reported issue summary", "protected evidence", "policy-guided decision", "reason code", "decision note", "immutable audit notice", "case timeline", "separation-of-duties guidance"]
+    }
+  ],
+  "responsive": {
+    "desktop": "Persistent navigation with full operations context and split work surfaces.",
+    "tablet": "Reduced navigation width with stacked evidence or case side panels.",
+    "mobile": "Icon navigation, prioritized controls, compact queue columns and single-column forms."
+  },
+  "verification": {
+    "lint": "passed_with_two_preexisting_img_warnings_outside_changed_files",
+    "production_build": "passed",
+    "github_pages_build": "passed"
+  }
+}
