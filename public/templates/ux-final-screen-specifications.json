@@ -1,13 +1,13 @@
 {
   "document": "UX-05",
-  "version": "0.10.0",
-  "baseline": "Final Design Gallery 0.10.0 · Admin Workflow Prototype R4.0",
+  "version": "0.10.1",
+  "baseline": "Final Design Gallery 0.10.1 · Admin Workflow Prototype R4.1",
   "status": "baseline_ready_final_gates_pending",
   "source_of_truth": {
     "guest_pilot": "Prototype R2.3 at /prototype",
     "guest_rendering": "live_prototype_embed",
     "duplicate_guest_markup": false,
-    "admin": "Standalone Admin Workflow Prototype R4.0 with ten modules and fifty-five functional views selected through the Application Launcher and contextual submenu header; seven view-specific workspace modes, purpose/start/done guidance, session persistence, evidence, workflow, export and audit simulation use UX-04 visual tokens",
+    "admin": "Standalone Admin Workflow Prototype R4.1 with task-first Place and Review Source intake, ten modules and fifty-five functional views; seven view-specific workspace modes, purpose/start/done guidance, session persistence, evidence, workflow, export and audit simulation use UX-04 visual tokens",
     "admin_prototype_route": "/admin-prototype"
   },
   "shared_contract": {
@@ -111,13 +111,13 @@
     {
       "screen_id": "SCR-A04",
       "name": "Content & Sources",
-      "route": "/admin/content",
+      "route": "/admin-prototype?module=content&view=source-inbox",
       "priority": "admin_portal_core",
-      "primary_outcome": "Move review content from intake through classification, rights review, Place matching and publication with full source traceability.",
-      "required_data": ["source_id", "origin", "creator", "content_type", "rights_state", "freshness", "place_match", "publish_state"],
+      "primary_outcome": "Let an operator choose a real-world task—add a Place or add a review-video link—then move the source through rights review, Place matching and publication.",
+      "required_data": ["place_id", "place_name", "place_category", "source_id", "original_url", "detected_platform", "creator", "rights_state", "place_match", "publish_state"],
       "states": ["default", "loading", "empty", "error", "unauthorized"],
-      "interactions": ["add_source", "classify", "review_rights", "match_place", "schedule_publish", "open_original"],
-      "acceptance": ["Every item retains an original source reference", "Rights state is distinct from content quality", "Removed sources follow CON-04 policy", "Publication is blocked when mandatory evidence is missing"]
+      "interactions": ["choose_add_place_or_review_source", "create_draft_place", "paste_original_url", "detect_platform", "select_place", "review_rights", "advance_workflow", "open_original"],
+      "acceptance": ["The first viewport clearly offers Add Place and Add Review Video", "The dependency Place then Source then Rights then Publish is visible", "A source cannot be created without a linked Place", "Every item retains an original URL", "Creating a Place opens the Place Draft", "Publication is blocked when mandatory evidence is missing"]
     },
     {
       "screen_id": "SCR-A05",

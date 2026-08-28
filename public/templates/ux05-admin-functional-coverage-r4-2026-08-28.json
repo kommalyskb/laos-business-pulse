@@ -1,7 +1,7 @@
 {
   "document": "UX-05",
-  "version": "0.10.0",
-  "prototype": "Admin Workflow Prototype R4.0",
+  "version": "0.10.1",
+  "prototype": "Admin Workflow Prototype R4.1",
   "date": "2026-08-28",
   "route": "/admin-prototype",
   "purpose": "Functional design evidence for a 360-degree Admin Portal. It clarifies what each view is for, where work starts, what evidence is required and when work is complete.",
@@ -32,6 +32,18 @@
     "where the operator should start",
     "when the task is complete"
   ],
+  "task_first_content_intake": {
+    "problem": "Operators could not tell whether a shop, attraction or review video should be created in Places or Content.",
+    "entry_choices": ["Add a shop or Place", "Add a review-video source"],
+    "place_examples": ["restaurant", "cafe", "hotel or stay", "tourist attraction", "activity or tour", "local service"],
+    "source_platforms": ["TikTok", "Facebook", "YouTube"],
+    "dependency": "A review source must select the Place it reviews; when the Place does not exist, the operator can create the Place first.",
+    "visible_sequence": ["create or select Place", "add original link", "review rights", "publish"],
+    "outcomes": {
+      "place": "Creates a Draft Place and opens the Places editor.",
+      "source": "Creates a Captured Source in Source Inbox with its original URL, creator, detected platform and linked Place."
+    }
+  },
   "workspace_modes": [
     {
       "id": "register",
@@ -84,5 +96,5 @@
     "manual accessibility evidence",
     "four-role final sign-off"
   ],
-  "approval_boundary": "R4.0 is an interactive UX and workflow prototype. It is not a production application and does not replace PRO-02 System Analysis, TEC-01 architecture or TEC-02 API contracts."
+  "approval_boundary": "R4.1 is an interactive UX and workflow prototype. It is not a production application and does not replace PRO-02 System Analysis, TEC-01 architecture or TEC-02 API contracts."
 }
