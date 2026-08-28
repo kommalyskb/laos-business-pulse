@@ -1,5 +1,5 @@
 {
-  "document": { "id": "TEC-02", "version": "0.1", "status": "draft_for_review", "date": "2026-08-28", "next_document": "TEC-03" },
+  "document": { "id": "TEC-02", "version": "1.0", "status": "approved", "date": "2026-08-28", "approved_at": "2026-08-28", "approved_by_role": "Product Owner", "next_document": "TEC-03" },
   "recommendation": {
     "delivery_model": "two_track",
     "track_a": "Six-week validation using existing prototypes, curated data and manual operations within the approved validation budget.",
@@ -51,10 +51,10 @@
     "cost_per_unique_intent": "allocated_platform_operation_cost / valid_unique_decision_actions"
   },
   "review_decisions": [
-    { "id": "REV-01", "topic": "Two-track delivery model", "status": "pending" },
-    { "id": "REV-02", "topic": "Founder-led hybrid resourcing", "status": "pending" },
-    { "id": "REV-03", "topic": "Must-only production scope", "status": "pending" },
-    { "id": "REV-04", "topic": "Validation versus Production budget authority", "status": "pending" },
-    { "id": "REV-05", "topic": "75-110 person-day ROM and P0-P4 release gates", "status": "pending" }
+    { "id": "REV-01", "topic": "Two-track delivery model", "decision": "approved", "status": "approved" },
+    { "id": "REV-02", "topic": "Founder-led hybrid resourcing", "decision": "approved_with_specialist_checkpoints_and_founder_shadow_cost", "status": "approved" },
+    { "id": "REV-03", "topic": "Must-only production scope", "decision": "approved_with_change_control_for_should_scope", "status": "approved" },
+    { "id": "REV-04", "topic": "Validation versus Production budget authority", "decision": "approved_separate_production_budget_required", "status": "approved" },
+    { "id": "REV-05", "topic": "75-110 person-day ROM and P0-P4 release gates", "decision": "approved_as_planning_range_recalculate_in_DEL_01", "status": "approved" }
   ]
 }

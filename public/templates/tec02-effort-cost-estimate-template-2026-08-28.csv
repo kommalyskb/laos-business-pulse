@@ -5,4 +5,4 @@ TP-WP03,Guest decision journey,16,24,,,,,,,,pending,Feed Search Place Map Call M
 TP-WP04,Trust analytics and partner operations,18,26,,,,,,,,pending,Correction takedown consent events Founding Partner and summary
 TP-WP05,Hardening and release readiness,14,20,,,,,,,,pending,Security performance accessibility backup restore rollback and UAT
 TP-WP06,Pilot support and handoff,5,8,,,,,,,,pending,Runbook training launch support and evidence pack
-TOTAL,Production MVP ROM,75,110,,,,,,,,draft,Planning range only; not an approved budget or delivery date
+TOTAL,Production MVP ROM,75,110,,,,,,,,approved_rom,Approved planning range only; not an approved budget or delivery date and must be recalculated in DEL-01
