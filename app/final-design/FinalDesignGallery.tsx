@@ -3,9 +3,9 @@
 import { useState, type ReactNode } from "react";
 import styles from "./final-design.module.css";
 
-type ScreenId = "SCR-G01" | "SCR-G02" | "SCR-G03" | "SCR-G05" | "SCR-A01" | "SCR-A02" | "SCR-A03";
+type ScreenId = "SCR-G01" | "SCR-G02" | "SCR-G03" | "SCR-G05" | "SCR-A00" | "SCR-A01" | "SCR-A02" | "SCR-A03" | "SCR-A04" | "SCR-A05" | "SCR-A06" | "SCR-A07" | "SCR-A08" | "SCR-A09";
 type GuestScreenId = Extract<ScreenId, "SCR-G01" | "SCR-G02" | "SCR-G03" | "SCR-G05">;
-type AdminScreenId = Extract<ScreenId, "SCR-A01" | "SCR-A02" | "SCR-A03">;
+type AdminScreenId = Exclude<ScreenId, GuestScreenId>;
 type Viewport = "mobile" | "tablet" | "desktop";
 type UiState = "default" | "loading" | "empty" | "error" | "disabled" | "stale" | "sponsored" | "long_text" | "unauthorized" | "conflict";
 
@@ -14,9 +14,16 @@ const screens: Array<{ id: ScreenId; group: "Guest/Pilot" | "Admin"; name: strin
   { id: "SCR-G02", group: "Guest/Pilot", name: "Search & Filters", purpose: "ຄົ້ນຕາມເຈດຕະນາ ແລະປຽບທຽບ Video/List/Map", route: "/prototype?screen=search", states: ["default", "loading", "empty", "error"] },
   { id: "SCR-G03", group: "Guest/Pilot", name: "Place Decision", purpose: "ລວມຂໍ້ມູນຈຳເປັນໃຫ້ຕັດສິນໃຈໄປ ຫຼືບໍ່ໄປ", route: "/prototype?screen=place", states: ["default", "disabled", "stale", "sponsored", "long_text"] },
   { id: "SCR-G05", group: "Guest/Pilot", name: "Consent & Privacy", purpose: "ໃຫ້ທາງເລືອກ analytics ທີ່ຊັດ ແລະປ່ຽນໃຈໄດ້", route: "/prototype?consent=pending", states: ["default"] },
+  { id: "SCR-A00", group: "Admin", name: "Executive Overview", purpose: "ເຫັນສຸຂະພາບ Platform 360° ຈາກ content ຫາ revenue", route: "/admin", states: ["default", "loading", "error", "unauthorized"] },
   { id: "SCR-A01", group: "Admin", name: "Operations Queue", purpose: "ຈັດລຳດັບ Place/Trust work ຕາມ priority, SLA ແລະ owner", route: "/admin/queue", states: ["default", "loading", "empty", "error", "unauthorized"] },
-  { id: "SCR-A02", group: "Admin", name: "Place Editor", purpose: "ແກ້ຂໍ້ມູນ Place ຄູ່ກັບ source evidence ແລະ publish readiness", route: "/admin/places/:placeId", states: ["default", "error", "conflict", "unauthorized"] },
-  { id: "SCR-A03", group: "Admin", name: "Moderation Case", purpose: "ຕັດສິນ report/takedown/correction ດ້ວຍ policy, evidence ແລະ audit trail", route: "/admin/cases/:caseId", states: ["default", "loading", "error", "unauthorized"] },
+  { id: "SCR-A02", group: "Admin", name: "Place 360 & Editor", purpose: "ເຫັນ ແລະແກ້ Place record ຄູ່ກັບ evidence, performance ແລະ readiness", route: "/admin/places/:placeId", states: ["default", "error", "conflict", "unauthorized"] },
+  { id: "SCR-A03", group: "Admin", name: "Trust & Safety", purpose: "ຕັດສິນ report/takedown/correction ດ້ວຍ policy, evidence ແລະ audit trail", route: "/admin/trust/:caseId", states: ["default", "loading", "error", "unauthorized"] },
+  { id: "SCR-A04", group: "Admin", name: "Content & Sources", purpose: "ຄວບຄຸມ content intake, source rights, freshness ແລະ publishing pipeline", route: "/admin/content", states: ["default", "loading", "empty", "error", "unauthorized"] },
+  { id: "SCR-A05", group: "Admin", name: "Partners", purpose: "ບໍລິຫານຮ້ານຈາກ lead ຫາ pilot, active partner ແລະ renewal", route: "/admin/partners", states: ["default", "loading", "empty", "error", "unauthorized"] },
+  { id: "SCR-A06", group: "Admin", name: "Campaigns", purpose: "ຈັດການ Sponsored Campaign ໂດຍແຍກໂຄສະນາອອກຈາກ review score", route: "/admin/campaigns", states: ["default", "loading", "empty", "error", "unauthorized"] },
+  { id: "SCR-A07", group: "Admin", name: "Analytics", purpose: "ວັດ discovery, Decision Intent, contact action ແລະ Place performance", route: "/admin/analytics", states: ["default", "loading", "error", "unauthorized"] },
+  { id: "SCR-A08", group: "Admin", name: "Revenue & Finance", purpose: "ເຫັນ revenue stream, invoice, expense, cash runway ແລະ budget gate", route: "/admin/finance", states: ["default", "loading", "empty", "error", "unauthorized"] },
+  { id: "SCR-A09", group: "Admin", name: "System & Access", purpose: "ຄວບຄຸມ role, permission, integration, feature flag ແລະ system health", route: "/admin/settings", states: ["default", "loading", "error", "unauthorized"] },
 ];
 
 const stateLabels: Record<UiState, string> = {
@@ -47,30 +54,40 @@ function StateNotice({ state }: { state: UiState }) {
 }
 
 const adminMeta: Record<AdminScreenId, { section: string; title: string; description: string }> = {
+  "SCR-A00": { section: "Command center", title: "Executive Overview", description: "Monitor the full operating model from content supply to cash runway." },
   "SCR-A01": { section: "Operations", title: "Operations Queue", description: "Prioritize, assign and resolve Place and Trust work." },
-  "SCR-A02": { section: "Place catalog", title: "Place Editor", description: "Maintain verified place data against source evidence." },
+  "SCR-A02": { section: "Place catalog", title: "Place 360 & Editor", description: "Maintain verified place data and see its complete operating context." },
   "SCR-A03": { section: "Trust & Safety", title: "Moderation Case", description: "Review evidence and record an auditable policy decision." },
+  "SCR-A04": { section: "Content operations", title: "Content & Sources", description: "Control intake, rights, freshness, quality and publishing flow." },
+  "SCR-A05": { section: "Commercial", title: "Partner Management", description: "Manage every business relationship from lead through renewal." },
+  "SCR-A06": { section: "Commercial", title: "Sponsored Campaigns", description: "Plan, approve and measure transparent sponsored placement." },
+  "SCR-A07": { section: "Insights", title: "Platform Analytics", description: "Turn discovery and decision behavior into operating insight." },
+  "SCR-A08": { section: "Finance", title: "Revenue & Finance", description: "Track verified revenue, expenses, budget gates and cash runway." },
+  "SCR-A09": { section: "Administration", title: "System & Access", description: "Manage people, permissions, integrations and platform controls." },
 };
 
-function AdminShell({ screen, state, children }: { screen: AdminScreenId; state: UiState; children: ReactNode }) {
+const adminModules: Array<{ id: AdminScreenId; label: string; icon: string; group: "Operate" | "Grow" | "Control"; count?: string }> = [
+  { id: "SCR-A00", label: "Overview", icon: "⌂", group: "Operate" },
+  { id: "SCR-A01", label: "Work queue", icon: "☷", group: "Operate", count: "17" },
+  { id: "SCR-A02", label: "Places", icon: "⌖", group: "Operate" },
+  { id: "SCR-A03", label: "Trust & Safety", icon: "⚑", group: "Operate", count: "3" },
+  { id: "SCR-A04", label: "Content", icon: "▶", group: "Operate", count: "12" },
+  { id: "SCR-A05", label: "Partners", icon: "◇", group: "Grow" },
+  { id: "SCR-A06", label: "Campaigns", icon: "◉", group: "Grow", count: "4" },
+  { id: "SCR-A07", label: "Analytics", icon: "▥", group: "Grow" },
+  { id: "SCR-A08", label: "Finance", icon: "₭", group: "Control" },
+  { id: "SCR-A09", label: "System", icon: "⚙", group: "Control" },
+];
+
+function AdminShell({ screen, state, children, onNavigate }: { screen: AdminScreenId; state: UiState; children: ReactNode; onNavigate: (screen: AdminScreenId) => void }) {
   const meta = adminMeta[screen];
-  const navigation = [
-    { label: "Work queue", icon: "▦", active: screen === "SCR-A01", count: "17" },
-    { label: "Places", icon: "⌂", active: screen === "SCR-A02" },
-    { label: "Trust cases", icon: "⚑", active: screen === "SCR-A03", count: "3" },
-    { label: "Partners", icon: "◇", active: false },
-  ];
+  const [launcherOpen, setLauncherOpen] = useState(false);
   return <div className={styles.adminApp}>
     <aside className={styles.adminSidebar}>
-      <div className={styles.adminBrand}><span>ພ</span><div><strong>ພ້ອມໄປ</strong><small>OPERATIONS CONSOLE</small></div></div>
+      <div className={styles.adminBrand}><button aria-label="Open application launcher" aria-expanded={launcherOpen} onClick={() => setLauncherOpen(value => !value)}>▦</button><div><strong>ພ້ອມໄປ</strong><small>BUSINESS OPERATIONS</small></div></div>
       <div className={styles.workspaceSelect}><small>WORKSPACE</small><b>Laos Pilot Operations</b><span>⌄</span></div>
       <nav aria-label="Admin navigation">
-        <small>OPERATIONS</small>
-        {navigation.map(item => <button key={item.label} aria-current={item.active ? "page" : undefined}><i>{item.icon}</i><span>{item.label}</span>{item.count ? <em>{item.count}</em> : null}</button>)}
-        <small>INSIGHTS & CONTROL</small>
-        <button><i>◫</i><span>Performance</span></button>
-        <button><i>◎</i><span>Audit log</span></button>
-        <button><i>⚙</i><span>Settings</span></button>
+        {(["Operate", "Grow", "Control"] as const).map(group => <div className={styles.adminNavGroup} key={group}><small>{group}</small>{adminModules.filter(item => item.group === group).map(item => <button key={item.id} aria-current={screen === item.id ? "page" : undefined} onClick={() => onNavigate(item.id)}><i>{item.icon}</i><span>{item.label}</span>{item.count ? <em>{item.count}</em> : null}</button>)}</div>)}
       </nav>
       <div className={styles.systemHealth}><span /><div><b>All systems operational</b><small>Last checked 1 min ago</small></div></div>
       <div className={styles.adminUser}><b>KS</b><div><strong>Kommaly S.</strong><small>Operations administrator</small></div><span>⋮</span></div>
@@ -78,9 +95,10 @@ function AdminShell({ screen, state, children }: { screen: AdminScreenId; state:
     <main className={styles.adminMain}>
       <header className={styles.adminTopbar}>
         <div><small>{meta.section}　/　{screen}</small><h2>{meta.title}</h2><p>{meta.description}</p></div>
-        <div className={styles.adminTopActions}><button className={styles.adminSearch}>⌕ <span>Search records…</span><kbd>⌘ K</kbd></button><button aria-label="Notifications">♢<em>3</em></button><button aria-label="Help">?</button></div>
+        <div className={styles.adminTopActions}><button className={styles.adminSearch}>⌕ <span>Search any record…</span><kbd>⌘ K</kbd></button><button aria-label="Activities">◷<em>5</em></button><button aria-label="Notifications">♢<em>3</em></button><button aria-label="Help">?</button></div>
       </header>
       <div className={styles.adminContent}><StateNotice state={state} />{children}</div>
+      {launcherOpen ? <div className={styles.appLauncher}><header><div><small>APP LAUNCHER</small><b>Choose a workspace</b></div><button onClick={() => setLauncherOpen(false)}>×</button></header><div>{adminModules.map(item => <button key={item.id} onClick={() => { onNavigate(item.id); setLauncherOpen(false); }}><i>{item.icon}</i><span><b>{item.label}</b><small>{adminMeta[item.id].description}</small></span>{item.count ? <em>{item.count}</em> : null}</button>)}</div></div> : null}
     </main>
   </div>;
 }
@@ -150,8 +168,67 @@ function ModerationCase() {
   </>;
 }
 
-function AdminPreview({ screen, state }: { screen: AdminScreenId; state: UiState }) {
-  return <AdminShell screen={screen} state={state}>{screen === "SCR-A01" ? <OperationsQueue state={state} /> : screen === "SCR-A02" ? <PlaceEditor /> : <ModerationCase />}</AdminShell>;
+function ModuleToolbar({ primary = "＋ Create", views = ["☷", "▦", "▥"] }: { primary?: string; views?: string[] }) {
+  return <section className={styles.moduleToolbar}><button className={styles.primaryAction}>{primary}</button><div className={styles.omniFilter}><span>⌕</span><b>Search</b><i>▾</i><button>Filters</button><button>Group By</button><button>Favorites</button></div><div className={styles.viewSwitcher}>{views.map((view, index) => <button key={view} aria-pressed={index === 0}>{view}</button>)}</div><span className={styles.recordPager}>1–20 / 148　‹　›</span></section>;
+}
+
+function MetricStrip({ items }: { items: Array<[string, string, string, string]> }) {
+  return <section className={styles.portalMetrics}>{items.map(item => <article key={item[0]}><span>{item[3]}</span><div><small>{item[0]}</small><b>{item[1]}</b><em>{item[2]}</em></div></article>)}</section>;
+}
+
+function ExecutiveOverview() {
+  const bars = [42, 55, 49, 67, 61, 78, 72, 86, 81, 94, 89, 100];
+  return <>
+    <section className={styles.portalLead}><div><small>FRIDAY · 28 AUGUST 2026</small><h3>Platform command center</h3><p>One operating view across audience, catalog, trust, partners and money.</p></div><div><button>Share snapshot</button><button>＋ Add dashboard</button></div></section>
+    <section className={styles.globalFilters}><button>Period: Last 30 days　⌄</button><button>Province: All　⌄</button><button>Category: All　⌄</button><button>Partner type: All　⌄</button><span>Data refreshed 10:58</span></section>
+    <MetricStrip items={[["Monthly active users","18,420","+14.8% vs prior","↗"],["Decision Intent rate","31.6%","+3.2 points","◎"],["Verified Places","486","91% fresh","⌖"],["Verified revenue","₭12.8M","74% of target","₭"]]} />
+    <div className={styles.overviewGrid}>
+      <section className={styles.portalCard}><header><div><small>GROWTH & DECISION</small><b>Discovery → decision trend</b></div><button>Monthly　⌄</button></header><div className={styles.trendChart}><div className={styles.chartScale}><span>24k</span><span>16k</span><span>8k</span><span>0</span></div><div className={styles.bars}>{bars.map((height, index) => <i key={index} style={{ height: `${height}%` }}><em>{index === 11 ? "18.4k" : ""}</em></i>)}</div></div><footer><span><i /> Discovery sessions</span><span><i /> Decision actions</span><b>Conversion 31.6%</b></footer></section>
+      <section className={styles.portalCard}><header><div><small>BUSINESS FUNNEL</small><b>Partner pipeline</b></div><a>Open CRM →</a></header><div className={styles.funnelList}>{[["Qualified leads",36,"₭31.2M"],["Pilot invited",18,"₭10.8M"],["Pilot paid",9,"₭1.8M"],["Active partner",7,"₭1.4M MRR"]].map((item,index) => <article key={item[0]}><span>{index+1}</span><div><b>{item[0]}</b><i style={{width:`${100-index*19}%`}} /></div><strong>{item[1]}</strong><small>{item[2]}</small></article>)}</div></section>
+      <section className={styles.portalCard}><header><div><small>OPERATIONAL HEALTH</small><b>What needs attention</b></div><a>View all 17 →</a></header><div className={styles.attentionList}><article data-tone="danger"><i>!</i><div><b>2 trust cases approaching SLA</b><small>Oldest case due in 22 minutes</small></div><button>Review</button></article><article data-tone="warning"><i>◷</i><div><b>43 Places need freshness check</b><small>Price or hours older than policy allows</small></div><button>Assign</button></article><article data-tone="info"><i>▶</i><div><b>12 sources awaiting rights review</b><small>3 may block scheduled publication</small></div><button>Inspect</button></article></div></section>
+      <section className={styles.portalCard}><header><div><small>CASH CONTROL</small><b>Runway and budget gates</b></div><a>Open Finance →</a></header><div className={styles.runway}><div><span>Available cash</span><b>₭62.4M</b><small>Founder living cost included</small></div><div><span>Monthly burn</span><b>₭10.7M</b><small>Runway 5.8 months</small></div></div><div className={styles.budgetGate}><span><i style={{width:"30%"}} /></span><div><b>Gate 1 · Validation</b><small>₭7.5M of ₭25M experiment ceiling</small><strong>ON TRACK</strong></div></div></section>
+    </div>
+  </>;
+}
+
+function ContentSources() {
+  const rows = [["SRC-284","TikTok · @kinlao","Restaurant review","Rights review","Today"],["SRC-281","Facebook · Lao Travel","Waterfall guide","Ready","29 Aug"],["SRC-276","YouTube · Stay Local","Hotel room tour","Needs transcript","30 Aug"],["SRC-269","TikTok · eat.with.me","Menu update","Source removed","Overdue"]];
+  return <><ModuleToolbar primary="＋ Add source" /><MetricStrip items={[["New intake","48","Last 7 days","＋"],["Rights cleared","86%","41 of 48","✓"],["Publishing ready","29","8 scheduled","▶"],["Freshness risk","43","Needs recheck","◷"]]} /><section className={styles.pipelineStrip}>{[["Captured",48],["Classified",44],["Rights checked",41],["Place matched",37],["Ready to publish",29]].map((item,index)=><article key={item[0]}><span>{index+1}</span><div><b>{item[0]}</b><small>{item[1]} records</small></div>{index<4?<i>→</i>:null}</article>)}</section><section className={styles.dataPanel}><header><div><b>Content source register</b><small>Every public media reference keeps source, rights status, freshness and linked Place.</small></div><div><button>Owner: Any　⌄</button><button>Status: Open　⌄</button></div></header><table><thead><tr><th>Source ID</th><th>Origin / Creator</th><th>Content type</th><th>Compliance state</th><th>Next action</th><th /></tr></thead><tbody>{rows.map((row,index)=><tr key={row[0]}><td><code>{row[0]}</code></td><td><b>{row[1]}</b><small>{index===0?"Matched to PLC-041":"Linked Place available"}</small></td><td>{row[2]}</td><td><span data-tone={index===3?"danger":index===0||index===2?"warning":"success"}>{row[3]}</span></td><td>{row[4]}</td><td><button>•••</button></td></tr>)}</tbody></table></section></>;
+}
+
+function PartnerManagement() {
+  const columns = [
+    {title:"Qualified",value:"₭31.2M",cards:[["ຮ້ານຄົວລາວ","Restaurant · Vientiane","Next: Call today"],["Mekong View Hotel","Hotel · Pakse","Next: Verify owner"]]},
+    {title:"Pilot invited",value:"₭10.8M",cards:[["ກາເຟພູດອຍ","Café · Luang Prabang","Proposal sent"],["River Garden","Restaurant · Vang Vieng","Meeting 30 Aug"]]},
+    {title:"Paid pilot",value:"₭1.8M",cards:[["ເຮືອນຄົວວຽງ","Restaurant · Vientiane","₭200k · Month 2"],["Sabaidee Stay","Hotel · Thakhek","₭200k · Month 1"]]},
+    {title:"Active partner",value:"₭1.4M MRR",cards:[["Green Discovery","Tour · Multi-province","Renewal in 28d"],["Lao Table","Restaurant · Vientiane","Healthy account"]]},
+  ];
+  return <><ModuleToolbar primary="＋ New partner" views={["▦","☷","▥"]} /><MetricStrip items={[["Pipeline value","₭45.2M","Weighted ₭13.4M","₭"],["Paid pilots","9","50% conversion","◇"],["Monthly recurring","₭1.4M","7 active partners","↗"],["Renewal risk","2","Action this week","!"]]} /><section className={styles.kanbanBoard}>{columns.map(column=><section key={column.title}><header><div><b>{column.title}</b><span>{column.cards.length}</span></div><small>{column.value}</small></header>{column.cards.map(card=><article key={card[0]}><div><span>{card[0].slice(0,1)}</span><div><b>{card[0]}</b><small>{card[1]}</small></div></div><p>{card[2]}</p><footer><span className={styles.ownerAvatar}>KS</span><div><i /><i /><i /></div><button>•••</button></footer></article>)}<button className={styles.addCard}>＋ Add</button></section>)}</section></>;
+}
+
+function CampaignManagement() {
+  const campaigns=[["CAM-026","Weekend Food Discovery","Live","24–31 Aug","128k","8.4%","₭1,000,000"],["CAM-024","Stay Local Luang Prabang","Review","1–14 Sep","—","—","₭1,000,000"],["CAM-021","Green Season Escape","Completed","1–15 Aug","286k","11.2%","₭1,000,000"]];
+  return <><ModuleToolbar primary="＋ New campaign" /><MetricStrip items={[["Active campaigns","4","2 end this week","◉"],["Sponsored reach","412k","+18% vs plan","↗"],["Decision Intent","9.7%","Organic baseline 7.1%","◎"],["Booked revenue","₭4.0M","100% verified","₭"]]} /><section className={styles.complianceBanner}><i>✓</i><div><b>Sponsored integrity is enforced</b><small>Placement is visibly labeled “Sponsored”; campaign payment cannot change rating, review order or trust score.</small></div><button>View policy</button></section><section className={styles.dataPanel}><header><div><b>Campaign register</b><small>Plan, creative approval, delivery, decision outcome and billing in one record.</small></div><div><button>Timeline</button><button>All campaigns　⌄</button></div></header><table><thead><tr><th>Campaign</th><th>Status</th><th>Flight</th><th>Reach</th><th>Decision rate</th><th>Revenue</th><th /></tr></thead><tbody>{campaigns.map((row,index)=><tr key={row[0]}><td><code>{row[0]}</code><b>{row[1]}</b></td><td><span data-tone={index===0?"success":index===1?"warning":"neutral"}>{row[2]}</span></td><td>{row[3]}</td><td>{row[4]}</td><td>{row[5]}</td><td><b>{row[6]}</b></td><td><button>•••</button></td></tr>)}</tbody></table></section></>;
+}
+
+function AnalyticsDashboard() {
+  const points=[35,48,44,58,52,69,73,68,82,77,91,96];
+  return <><section className={styles.globalFilters}><button>Period: 1–28 Aug 2026　⌄</button><button>Audience: All　⌄</button><button>Province: All　⌄</button><button>Attribution: First touch　⌄</button><span>Privacy-safe aggregate</span></section><MetricStrip items={[["Discovery sessions","58,214","+16.2%","◉"],["Search success","72.8%","+4.1 points","⌕"],["Decision Intent","18,420","31.6% of sessions","◎"],["Contact / Map action","7,286","39.6% of intent","↗"]]} /><div className={styles.analyticsGrid}><section className={`${styles.portalCard} ${styles.wideCard}`}><header><div><small>BEHAVIOR TREND</small><b>Discovery and Decision Intent</b></div><div><button>Sessions</button><button>Decision Intent</button></div></header><div className={styles.lineChart}><div>{points.map((point,index)=><i key={index} style={{height:`${point}%`}}><span /></i>)}</div><footer>{["1 Aug","7 Aug","14 Aug","21 Aug","28 Aug"].map(label=><span key={label}>{label}</span>)}</footer></div></section><section className={styles.portalCard}><header><div><small>DECISION FUNNEL</small><b>Where users move forward</b></div></header><div className={styles.decisionFunnel}>{[["Viewed Place",32180,"100%"],["Opened details",24604,"76%"],["Decision Intent",18420,"57%"],["Map / Contact",7286,"23%"]].map(item=><div key={item[0]}><span style={{width:item[2]}}><b>{item[0]}</b></span><strong>{item[1].toLocaleString()}</strong></div>)}</div></section><section className={styles.portalCard}><header><div><small>TOP PLACES</small><b>Decision contribution</b></div><a>Full report →</a></header><ol className={styles.ranking}>{[["ເຮືອນຄົວວຽງ","1,284","42%"],["ຕາດກວາງຊີ","1,102","38%"],["Mekong View","946","35%"],["ກາເຟພູດອຍ","804","33%"]].map((item,index)=><li key={item[0]}><span>{index+1}</span><b>{item[0]}</b><small>{item[1]} intent</small><strong>{item[2]}</strong></li>)}</ol></section></div></>;
+}
+
+function FinanceDashboard() {
+  return <><ModuleToolbar primary="＋ Record payment" views={["☷","▥"]} /><MetricStrip items={[["Verified revenue","₭12.8M","Aug month-to-date","₭"],["Recurring revenue","₭1.4M","7 partner accounts","↗"],["Operating expense","₭10.7M","Within monthly plan","−"],["Cash runway","5.8 mo","₭62.4M available","◷"]]} /><div className={styles.financeGrid}><section className={styles.portalCard}><header><div><small>REVENUE MIX</small><b>Only paid evidence is counted</b></div><button>August　⌄</button></header><div className={styles.revenueDonut}><div><b>₭12.8M</b><small>Total</small></div><ul><li><i data-tone="one" />Sponsored Campaign <b>₭8.0M</b></li><li><i data-tone="two" />Founding Partner Pilot <b>₭1.8M</b></li><li><i data-tone="three" />Pro Business <b>₭1.4M</b></li><li><i data-tone="four" />Affiliate / other <b>₭1.6M</b></li></ul></div></section><section className={styles.portalCard}><header><div><small>BUDGET CONTROL</small><b>Experiment ceiling · ₭25M</b></div><span>Gate 1</span></header><div className={styles.budgetSummary}><div><span><i style={{width:"30%"}} /></span><b>₭7.5M released</b><small>Release next 35% only after Gate 1 evidence passes.</small></div><dl><div><dt>Spent</dt><dd>₭5.9M</dd></div><div><dt>Committed</dt><dd>₭1.1M</dd></div><div><dt>Available</dt><dd>₭0.5M</dd></div></dl></div></section><section className={`${styles.dataPanel} ${styles.financeTable}`}><header><div><b>Recent financial evidence</b><small>Interest or verbal promise is never recorded as revenue.</small></div><button>Reconcile　3</button></header><table><thead><tr><th>Evidence</th><th>Counterparty</th><th>Type</th><th>Date</th><th>Amount</th><th>Status</th></tr></thead><tbody>{[["PAY-082","Lao Table","Campaign","28 Aug","₭1,000,000","Verified"],["INV-041","Sabaidee Stay","Pilot","27 Aug","₭200,000","Paid"],["EXP-119","Cloud provider","Server","26 Aug","−₭820,000","Matched"]].map((row,index)=><tr key={row[0]}><td><code>{row[0]}</code></td><td><b>{row[1]}</b></td><td>{row[2]}</td><td>{row[3]}</td><td><b>{row[4]}</b></td><td><span data-tone={index===2?"neutral":"success"}>{row[5]}</span></td></tr>)}</tbody></table></section></div></>;
+}
+
+function SystemAccess() {
+  return <><ModuleToolbar primary="＋ Invite user" views={["☷","▦"]} /><MetricStrip items={[["Active users","8","4 roles","♙"],["Pending access","2","Owner approval","◷"],["Integrations","6 / 7","1 degraded","⌁"],["Audit events","1,842","Last 30 days","◎"]]} /><div className={styles.systemGrid}><section className={styles.portalCard}><header><div><small>ROLE-BASED ACCESS</small><b>Users and responsibility</b></div><a>Manage roles →</a></header><div className={styles.userList}>{[["KS","Kommaly S.","Platform Administrator","All modules"],["ML","Mali L.","Trust Reviewer","Trust · Content"],["NP","Noy P.","Data Steward","Places · Content"],["VK","Vanh K.","Commercial Manager","Partners · Campaigns"]].map(user=><article key={user[0]}><span>{user[0]}</span><div><b>{user[1]}</b><small>{user[2]}</small></div><em>{user[3]}</em><button>•••</button></article>)}</div></section><section className={styles.portalCard}><header><div><small>INTEGRATIONS</small><b>Connected services</b></div><a>Configure →</a></header><div className={styles.integrationList}>{[["API","Core application API","Operational"],["MAP","Map link provider","Operational"],["OBJ","Object media storage","Operational"],["MAIL","Transactional email","Degraded"]].map((item,index)=><article key={item[0]}><span>{item[0]}</span><div><b>{item[1]}</b><small>{index===3?"Latency above target":"Checked less than 2m ago"}</small></div><i data-tone={index===3?"warning":"success"}>{item[2]}</i></article>)}</div></section><section className={styles.portalCard}><header><div><small>FEATURE CONTROL</small><b>Pilot release flags</b></div><a>Open deployment →</a></header><div className={styles.flagList}>{[["Guest video feed",true,"100%"],["AI recommendations",false,"Internal only"],["Partner self-service",false,"5 pilot accounts"],["Booking transaction",false,"Deferred"]].map(item=><label key={item[0]}><span><b>{item[0]}</b><small>{item[2]}</small></span><input type="checkbox" defaultChecked={Boolean(item[1])} /></label>)}</div></section><section className={styles.portalCard}><header><div><small>SECURITY & AUDIT</small><b>Latest privileged activity</b></div><a>Full audit log →</a></header><div className={styles.auditFeed}><article><i>10:42</i><div><b>Place version published</b><small>KS · PLC-041 · before/after retained</small></div></article><article><i>10:18</i><div><b>Trust case evidence protected</b><small>ML · CAS-019 · CON-04</small></div></article><article><i>09:51</i><div><b>Role permission changed</b><small>KS · USER-007 · owner approval</small></div></article></div></section></div></>;
+}
+
+function AdminPreview({ screen, state, onNavigate }: { screen: AdminScreenId; state: UiState; onNavigate: (screen: AdminScreenId) => void }) {
+  const content: Record<AdminScreenId, ReactNode> = {
+    "SCR-A00": <ExecutiveOverview />, "SCR-A01": <OperationsQueue state={state} />, "SCR-A02": <PlaceEditor />, "SCR-A03": <ModerationCase />, "SCR-A04": <ContentSources />, "SCR-A05": <PartnerManagement />, "SCR-A06": <CampaignManagement />, "SCR-A07": <AnalyticsDashboard />, "SCR-A08": <FinanceDashboard />, "SCR-A09": <SystemAccess />,
+  };
+  return <AdminShell screen={screen} state={state} onNavigate={onNavigate}>{content[screen]}</AdminShell>;
 }
 
 export default function FinalDesignGallery({ basePath }: { basePath: string }) {
@@ -171,13 +248,13 @@ export default function FinalDesignGallery({ basePath }: { basePath: string }) {
 
   return <main className={styles.site}>
     <header className={styles.topbar}><a href={`${basePath}/documents/full-ux-ui`}><b>UX-05</b><span>FINAL DESIGN GALLERY</span></a><nav><a href={`${basePath}/prototype`}>Prototype R2.3</a><a href={`${basePath}/design-system`}>UX-04 Gallery</a><a href={`${basePath}/documents`}>Documents</a></nav></header>
-    <section className={styles.hero}><div><small>FULL UX/UI DESIGN · BASELINE 0.7.2</small><h1>ໜ້າຈໍສຳລັບຕັດສິນໃຈ<br/><em>ແລະພ້ອມສົ່ງຕໍ່ Developer</em></h1></div><p>Guest/Pilot ໃຊ້ Prototype R2.3 ເປັນແຫຼ່ງອອກແບບດຽວ. Admin R1.2 ຖືກຍົກລະດັບເປັນ Professional Operations Console ສຳລັບ Queue, Place Data ແລະ Trust Case.</p></section>
+    <section className={styles.hero}><div><small>FULL UX/UI DESIGN · BASELINE 0.8.0</small><h1>ໜ້າຈໍສຳລັບຕັດສິນໃຈ<br/><em>ແລະພ້ອມສົ່ງຕໍ່ Developer</em></h1></div><p>Guest/Pilot ໃຊ້ Prototype R2.3 ເປັນແຫຼ່ງອອກແບບດຽວ. Admin Portal R2 ເພີ່ມມຸມມອງທຸລະກິດ 360° ຜ່ານ 10 Modules ພ້ອມ workflow, analytics, finance ແລະ system control.</p></section>
     <section className={styles.workspace}>
-      <aside className={styles.registry}><div><small>SCREEN REGISTRY</small><b>7 Must Screens</b></div>{["Guest/Pilot", "Admin"].map(group => <section key={group}><h2>{group}</h2>{screens.filter(item => item.group === group).map(item => <button key={item.id} aria-pressed={screenId === item.id} onClick={() => chooseScreen(item.id)}><code>{item.id}</code><span><b>{item.name}</b><small>{item.route}</small></span></button>)}</section>)}</aside>
+      <aside className={styles.registry}><div><small>SCREEN REGISTRY</small><b>14 Screen / Module Views</b></div>{["Guest/Pilot", "Admin"].map(group => <section key={group}><h2>{group}</h2>{screens.filter(item => item.group === group).map(item => <button key={item.id} aria-pressed={screenId === item.id} onClick={() => chooseScreen(item.id)}><code>{item.id}</code><span><b>{item.name}</b><small>{item.route}</small></span></button>)}</section>)}</aside>
       <div className={styles.board}>
         <header className={styles.boardTools}><div><code>{screen.id}</code><span><b>{screen.name}</b><small>{screen.purpose}</small></span></div><div className={styles.switches}>{isGuest ? <span className={styles.sourceBadge}>LIVE · PROTOTYPE R2.3</span> : <span aria-label="Viewport selector">{(["mobile", "tablet", "desktop"] as Viewport[]).map(item => <button key={item} aria-pressed={viewport === item} onClick={() => setViewport(item)}>{item}</button>)}</span>}<span aria-label="State selector">{screen.states.map(item => <button key={item} aria-pressed={uiState === item} onClick={() => setUiState(item)}>{stateLabels[item]}</button>)}</span></div></header>
-        <div className={`${styles.canvas} ${styles[isGuest ? "mobile" : viewport]}`}><div className={styles.viewportLabel}><b>{isGuest ? "390 × 844 · Prototype source" : viewport === "mobile" ? "390 × 844" : viewport === "tablet" ? "768 × 1024" : "1440 × 900"}</b><span>{uiState}</span></div><div className={`${styles.preview} ${isGuest ? styles.prototypePreview : ""}`}>{isGuest ? <iframe key={guestPrototypeUrl} src={guestPrototypeUrl} title={`Prototype R2.3 · ${screen.name} · ${stateLabels[uiState]}`} /> : <AdminPreview screen={screenId as AdminScreenId} state={uiState} />}</div></div>
-        <footer className={styles.specBar}><div><small>PRIMARY OUTCOME</small><b>{screen.purpose}</b></div><div><small>DATA CONTRACT</small><b>{screen.group === "Admin" ? "Protected API · role + audit required" : "Place ID · source · freshness · action availability"}</b></div><div><small>HANDOFF STATUS</small><b>{isGuest ? "Prototype parity · single source of truth" : "Baseline ready · final gates pending"}</b></div></footer>
+        <div className={`${styles.canvas} ${styles[isGuest ? "mobile" : viewport]}`}><div className={styles.viewportLabel}><b>{isGuest ? "390 × 844 · Prototype source" : viewport === "mobile" ? "390 × 844" : viewport === "tablet" ? "768 × 1024" : "1440 × 900"}</b><span>{uiState}</span></div><div className={`${styles.preview} ${isGuest ? styles.prototypePreview : ""}`}>{isGuest ? <iframe key={guestPrototypeUrl} src={guestPrototypeUrl} title={`Prototype R2.3 · ${screen.name} · ${stateLabels[uiState]}`} /> : <AdminPreview screen={screenId as AdminScreenId} state={uiState} onNavigate={id => chooseScreen(id)} />}</div></div>
+        <footer className={styles.specBar}><div><small>PRIMARY OUTCOME</small><b>{screen.purpose}</b></div><div><small>DATA CONTRACT</small><b>{screen.group === "Admin" ? "Protected API · role, record rule, activity + audit required" : "Place ID · source · freshness · action availability"}</b></div><div><small>HANDOFF STATUS</small><b>{isGuest ? "Prototype parity · single source of truth" : "Admin Portal R2 · detailed module baseline"}</b></div></footer>
       </div>
     </section>
   </main>;

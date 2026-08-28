@@ -1,13 +1,13 @@
 {
   "document": "UX-05",
-  "version": "0.7.2",
-  "baseline": "Final Design Gallery R1.2",
+  "version": "0.8.0",
+  "baseline": "Final Design Gallery · Admin Portal R2",
   "status": "baseline_ready_final_gates_pending",
   "source_of_truth": {
     "guest_pilot": "Prototype R2.3 at /prototype",
     "guest_rendering": "live_prototype_embed",
     "duplicate_guest_markup": false,
-    "admin": "Professional Operations Console R1.2"
+    "admin": "360-degree Business Operations Portal R2 with ten interconnected modules"
   },
   "shared_contract": {
     "font": "Noto Sans Lao Variable",
@@ -64,6 +64,17 @@
       "acceptance": ["Essential-only and analytics choices have equal prominence", "Declining analytics does not block core use", "Initial focus and dialog structure are accessible", "Save failure preserves the choice"]
     },
     {
+      "screen_id": "SCR-A00",
+      "name": "Executive Overview",
+      "route": "/admin",
+      "priority": "admin_portal_core",
+      "primary_outcome": "See the operating health of the whole platform from content supply and user decision behavior through partner pipeline, revenue and cash runway.",
+      "required_data": ["audience_kpis", "decision_funnel", "catalog_health", "sla_risk", "partner_pipeline", "revenue", "expense", "cash_runway", "data_refreshed_at"],
+      "states": ["default", "loading", "error", "unauthorized"],
+      "interactions": ["apply_global_filter", "open_underlying_record", "share_snapshot", "open_module", "add_dashboard"],
+      "acceptance": ["Every KPI shows period and source context", "Summary values drill down to underlying records", "Revenue excludes interest and unpaid promises", "Unauthorized roles only see permitted metrics"]
+    },
+    {
       "screen_id": "SCR-A01",
       "name": "Operations Queue",
       "route": "/admin/queue",
@@ -76,7 +87,7 @@
     },
     {
       "screen_id": "SCR-A02",
-      "name": "Place Editor",
+      "name": "Place 360 & Editor",
       "route": "/admin/places/:placeId",
       "priority": "must",
       "primary_outcome": "Edit Place data against source evidence and submit a publish-ready version.",
@@ -87,14 +98,80 @@
     },
     {
       "screen_id": "SCR-A03",
-      "name": "Moderation Case",
-      "route": "/admin/cases/:caseId",
+      "name": "Trust & Safety Case",
+      "route": "/admin/trust/:caseId",
       "priority": "must",
       "primary_outcome": "Apply a policy-based decision with evidence, reason code and auditable timeline.",
       "required_data": ["case_id", "priority", "sla", "claim", "evidence", "policy", "reason_code", "decision", "timeline", "appeal_state"],
       "states": ["default", "loading", "error", "unauthorized", "evidence_restricted", "appeal_pending"],
       "interactions": ["protect_content", "open_evidence", "select_reason", "save_draft", "apply_decision", "notify", "open_appeal"],
       "acceptance": ["Decision requires policy and reason code", "Restricted evidence is never exposed to unauthorized roles", "Every state change creates an audit event", "Appeal reviewer differs from the original decision maker"]
+    },
+    {
+      "screen_id": "SCR-A04",
+      "name": "Content & Sources",
+      "route": "/admin/content",
+      "priority": "admin_portal_core",
+      "primary_outcome": "Move review content from intake through classification, rights review, Place matching and publication with full source traceability.",
+      "required_data": ["source_id", "origin", "creator", "content_type", "rights_state", "freshness", "place_match", "publish_state"],
+      "states": ["default", "loading", "empty", "error", "unauthorized"],
+      "interactions": ["add_source", "classify", "review_rights", "match_place", "schedule_publish", "open_original"],
+      "acceptance": ["Every item retains an original source reference", "Rights state is distinct from content quality", "Removed sources follow CON-04 policy", "Publication is blocked when mandatory evidence is missing"]
+    },
+    {
+      "screen_id": "SCR-A05",
+      "name": "Partner Management",
+      "route": "/admin/partners",
+      "priority": "admin_portal_expansion",
+      "primary_outcome": "Manage a business from qualified lead through paid pilot, active partnership, performance review and renewal.",
+      "required_data": ["partner_id", "stage", "contact", "place_ids", "next_activity", "pilot_payment", "performance_summary", "renewal_date"],
+      "states": ["default", "loading", "empty", "error", "unauthorized"],
+      "interactions": ["create_partner", "move_stage", "schedule_activity", "record_payment", "open_place", "export_summary"],
+      "acceptance": ["Pipeline value distinguishes forecast from paid revenue", "Paid pilot status requires payment evidence", "Partner benefits cannot alter review score", "Every relationship has an owner and next activity"]
+    },
+    {
+      "screen_id": "SCR-A06",
+      "name": "Sponsored Campaigns",
+      "route": "/admin/campaigns",
+      "priority": "admin_portal_expansion",
+      "primary_outcome": "Plan, approve, deliver and measure Sponsored Campaigns while preserving editorial and review integrity.",
+      "required_data": ["campaign_id", "partner", "flight_dates", "creative", "sponsored_label", "targeting", "delivery", "decision_rate", "payment_evidence"],
+      "states": ["default", "loading", "empty", "error", "unauthorized"],
+      "interactions": ["create_campaign", "approve_creative", "schedule", "pause", "view_delivery", "reconcile_payment"],
+      "acceptance": ["Sponsored label is mandatory and adjacent to placement", "Payment cannot change rating, ranking evidence or trust score", "Campaign outcome is reported separately from organic performance", "Campaign revenue requires verified payment"]
+    },
+    {
+      "screen_id": "SCR-A07",
+      "name": "Platform Analytics",
+      "route": "/admin/analytics",
+      "priority": "admin_portal_core",
+      "primary_outcome": "Measure discovery, search success, Decision Intent, map/contact actions and Place contribution using privacy-safe aggregates.",
+      "required_data": ["date_range", "audience_segment", "discovery_sessions", "search_success", "decision_intent", "external_actions", "place_performance", "attribution_model"],
+      "states": ["default", "loading", "error", "unauthorized"],
+      "interactions": ["filter", "change_measure", "change_view", "drill_down", "export", "save_favorite"],
+      "acceptance": ["Metric definitions are visible", "Filters apply consistently to all widgets", "Charts link to permitted underlying records", "Small segments are protected from re-identification"]
+    },
+    {
+      "screen_id": "SCR-A08",
+      "name": "Revenue & Finance",
+      "route": "/admin/finance",
+      "priority": "admin_portal_core",
+      "primary_outcome": "Control verified revenue, recurring income, expense, founder living cost, budget gates and cash runway.",
+      "required_data": ["payment_evidence", "invoice", "revenue_stream", "expense", "founder_living_cost", "experiment_ceiling", "budget_gate", "cash_balance", "runway"],
+      "states": ["default", "loading", "empty", "error", "unauthorized"],
+      "interactions": ["record_payment", "attach_evidence", "reconcile", "approve_expense", "review_gate", "export"],
+      "acceptance": ["Interest and verbal intent are never counted as revenue", "Every actual amount links to evidence", "Experiment ceiling and founder living cost are separate", "Next budget tranche is not released before its gate passes"]
+    },
+    {
+      "screen_id": "SCR-A09",
+      "name": "System & Access",
+      "route": "/admin/settings",
+      "priority": "admin_portal_core",
+      "primary_outcome": "Control user roles, record access, integrations, feature releases, system health and privileged audit events.",
+      "required_data": ["user", "role", "permission", "record_rule", "integration_status", "feature_flag", "deployment", "audit_event"],
+      "states": ["default", "loading", "error", "unauthorized"],
+      "interactions": ["invite_user", "assign_role", "review_access", "configure_integration", "change_feature_flag", "open_audit"],
+      "acceptance": ["Least-privilege access is the default", "Permission changes require owner approval and audit", "Feature flags expose rollout scope", "System health distinguishes degraded from unavailable"]
     }
   ]
 }

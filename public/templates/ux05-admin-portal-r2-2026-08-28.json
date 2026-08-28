@@ -1,0 +1,43 @@
+{
+  "document": "UX-05",
+  "version": "0.8.0",
+  "baseline": "Admin Business Operations Portal R2",
+  "date": "2026-08-28",
+  "objective": "Provide a professional 360-degree operating portal that connects audience, catalog, content, trust, commercial, finance and system control without losing record-level accountability.",
+  "design_inspiration": {
+    "source": "Odoo 19 information architecture and interaction patterns",
+    "adapted_patterns": [
+      "application launcher and module workspaces",
+      "search, filter, group by and favorites",
+      "list, kanban and analytical views",
+      "dashboard drill-down to underlying records",
+      "record activities and audit timeline",
+      "role-aware module and record access"
+    ],
+    "not_copied": ["Odoo branding", "Odoo logo", "Odoo color palette", "Odoo proprietary application screens"],
+    "project_identity": ["Noto Sans Lao", "Phom Pai brand", "decision-first business language", "green neutral operational palette"]
+  },
+  "shared_shell": {
+    "elements": ["app launcher", "workspace context", "grouped module navigation", "global record search", "activities", "notifications", "help", "system health", "signed-in role"],
+    "record_tools": ["breadcrumb", "primary action", "search", "filters", "group by", "favorites", "view switcher", "pagination", "activity and audit"],
+    "professional_criteria": ["dense but scannable", "clear operating hierarchy", "record-level traceability", "one primary action per context", "status never relies on color alone", "numbers show period and evidence boundary"]
+  },
+  "modules": [
+    { "screen_id": "SCR-A00", "module": "Executive Overview", "business_question": "Is the entire platform healthy and what needs attention now?", "drill_down": ["audience", "decision funnel", "catalog freshness", "SLA risk", "partner pipeline", "revenue", "runway"] },
+    { "screen_id": "SCR-A01", "module": "Operations Queue", "business_question": "What work should each operator do next?", "drill_down": ["priority", "SLA", "owner", "work type", "blocker"] },
+    { "screen_id": "SCR-A02", "module": "Place 360 & Editor", "business_question": "Is this Place complete, current, trusted and effective?", "drill_down": ["public facts", "source evidence", "publish readiness", "performance", "partner", "audit"] },
+    { "screen_id": "SCR-A03", "module": "Trust & Safety", "business_question": "What policy decision should be made and can it be audited?", "drill_down": ["claim", "evidence", "policy", "decision", "appeal", "timeline"] },
+    { "screen_id": "SCR-A04", "module": "Content & Sources", "business_question": "Where is content in the intake-to-publication pipeline?", "drill_down": ["origin", "creator", "rights", "classification", "Place match", "freshness", "publish state"] },
+    { "screen_id": "SCR-A05", "module": "Partners", "business_question": "How does a business move from lead to paid and retained partner?", "drill_down": ["stage", "next activity", "pilot payment", "benefit", "performance", "renewal"] },
+    { "screen_id": "SCR-A06", "module": "Campaigns", "business_question": "Is sponsored delivery transparent, effective and paid?", "drill_down": ["creative", "label", "flight", "reach", "Decision Intent", "payment"] },
+    { "screen_id": "SCR-A07", "module": "Analytics", "business_question": "How do people discover, decide and take external action?", "drill_down": ["search success", "Decision Intent", "map", "contact", "Place contribution", "attribution"] },
+    { "screen_id": "SCR-A08", "module": "Revenue & Finance", "business_question": "What money is verified, what is spent and how long can the project operate?", "drill_down": ["revenue evidence", "invoice", "expense", "founder living cost", "budget gate", "cash runway"] },
+    { "screen_id": "SCR-A09", "module": "System & Access", "business_question": "Who can do what and are systems safe and available?", "drill_down": ["user", "role", "record rule", "integration", "feature flag", "deployment", "audit"] }
+  ],
+  "scope_boundary": {
+    "design_baseline": "All ten modules have a representative final-design surface and navigation path.",
+    "not_production_logic": "Metrics and records in the gallery are illustrative data contracts, not a live backend.",
+    "mvp_note": "The portal information architecture is complete; implementation may phase modules according to PRO-03 and technical dependency order.",
+    "one_source_rule": "Guest and Pilot remain sourced from Prototype R2.3; this baseline only expands Admin."
+  }
+}

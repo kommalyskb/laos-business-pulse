@@ -3,8 +3,14 @@ SCR-G01,Discovery Feed,required,required,n_a,required,n_a,required,n_a,n_a,sourc
 SCR-G02,Search & Filters,required,required,required,required,required,required,n_a,n_a,no_results_with_filters,baseline_ready
 SCR-G03,Place Decision,required,required,n_a,required,required,required,n_a,n_a,contact_unavailable|source_removed,baseline_ready
 SCR-G05,Consent & Privacy,required,n_a,n_a,required,n_a,n_a,n_a,n_a,essential_only|analytics_allowed|withdrawn,baseline_ready
+SCR-A00,Executive Overview,required,required,n_a,required,n_a,n_a,required,n_a,partial_data|metric_restricted,portal_r2_baseline
 SCR-A01,Operations Queue,required,required,required,required,n_a,n_a,required,n_a,session_expired,baseline_ready
-SCR-A02,Place Editor,required,n_a,n_a,required,n_a,n_a,required,required,validation_error|session_expired,baseline_ready
-SCR-A03,Moderation Case,required,required,n_a,required,n_a,n_a,required,n_a,evidence_restricted|appeal_pending,baseline_ready
+SCR-A02,Place 360 & Editor,required,n_a,n_a,required,n_a,n_a,required,required,validation_error|session_expired,baseline_ready
+SCR-A03,Trust & Safety,required,required,n_a,required,n_a,n_a,required,n_a,evidence_restricted|appeal_pending,baseline_ready
+SCR-A04,Content & Sources,required,required,required,required,required,n_a,required,required,source_removed|rights_restricted,portal_r2_baseline
+SCR-A05,Partners,required,required,required,required,n_a,n_a,required,required,payment_unverified|renewal_due,portal_r2_expansion
+SCR-A06,Campaigns,required,required,required,required,n_a,required,required,required,campaign_expired|label_missing|payment_unverified,portal_r2_expansion
+SCR-A07,Analytics,required,required,n_a,required,required,required,required,n_a,small_segment_restricted|partial_data,portal_r2_baseline
+SCR-A08,Revenue & Finance,required,required,required,required,n_a,n_a,required,required,evidence_missing|gate_blocked|reconciliation_pending,portal_r2_baseline
+SCR-A09,System & Access,required,required,n_a,required,required,n_a,required,required,integration_degraded|approval_pending,portal_r2_baseline
 SCR-G04,Saved,required,n_a,required,error,n_a,n_a,n_a,n_a,storage_unavailable,should_deferred
-SCR-A04,Partner Campaign Admin,required,required,empty,error,n_a,required,required,conflict,campaign_expired,should_deferred

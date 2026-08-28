@@ -1,6 +1,6 @@
 {
   "document": "UX-05",
-  "version": "0.7.2",
+  "version": "0.8.0",
   "final_design_complete": false,
   "gates": [
     { "id": "G-UX1", "name": "Structure", "requires": ["UX-01 1.0", "UX-02 1.2", "screen_route_state_traceability"], "status": "passed_structure_baseline" },
@@ -8,7 +8,7 @@
     { "id": "G-UX3", "name": "Design system", "requires": ["UX-04 1.0", "token_files", "component_states", "accessibility_qa"], "status": "internal_qa_passed_manual_accessibility_pending" },
     { "id": "G-UX4", "name": "Content and trust", "requires": ["PRO-04 1.0", "CON-02 1.0", "CON-04 1.0", "CON-01_03_05_ui_decisions"], "status": "partially_pending" },
     { "id": "G-UX5", "name": "Technical", "requires": ["TEC-01", "TEC-02", "route_auth_media_external_action_mapping"], "status": "pending" },
-    { "id": "G-UX6", "name": "Final handoff", "requires": ["responsive_final_screens", "all_system_states", "assets_and_licenses", "copy", "annotations", "open_deviations"], "status": "guest_parity_and_professional_admin_r1_2_ready_final_sign_off_pending" }
+    { "id": "G-UX6", "name": "Final handoff", "requires": ["responsive_final_screens", "all_system_states", "assets_and_licenses", "copy", "annotations", "open_deviations"], "status": "guest_parity_and_admin_portal_r2_baseline_ready_final_sign_off_pending" }
   ],
   "required_states": ["loading", "empty", "error", "offline_slow", "unknown_stale", "unauthorized_expired", "conflict", "sponsored", "consent_denied_withdrawn", "source_removed_takedown", "map_unavailable", "contact_unavailable", "validation_failure", "rate_limited_temporary_failure"],
   "viewport_validation_px": [360, 390, 768, 1024, 1440],
