@@ -15,6 +15,7 @@ import RequirementsAcceptanceDocument from "./RequirementsAcceptanceDocument";
 import SystemAnalysisDocument from "./SystemAnalysisDocument";
 import SystemArchitectureDocument from "./SystemArchitectureDocument";
 import TechnicalProposalDocument from "./TechnicalProposalDocument";
+import TechStackDocument from "./TechStackDocument";
 
 export function generateStaticParams() {
   return documents.map((document) => ({ slug: document.slug }));
@@ -105,6 +106,8 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
                             ? <SystemArchitectureDocument basePath={basePath} />
                             : document.slug === "technical-proposal"
                               ? <TechnicalProposalDocument basePath={basePath} />
+                              : document.slug === "tech-stack"
+                                ? <TechStackDocument basePath={basePath} />
                           : document.category === "content" || document.category === "design"
                             ? <ContentDesignDocument slug={document.slug} basePath={basePath} />
                 : <article className={styles.detailBody}>

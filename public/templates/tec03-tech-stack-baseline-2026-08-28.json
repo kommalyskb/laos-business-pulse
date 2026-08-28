@@ -1,0 +1,86 @@
+{
+  "document": {
+    "id": "TEC-03",
+    "version": "0.1",
+    "status": "draft_for_review",
+    "asOf": "2026-08-28",
+    "owner": "Solution Architect / Tech Lead",
+    "approver": "Product Owner"
+  },
+  "architecture": {
+    "style": "modular_monolith_first",
+    "repository": "pnpm_workspace_single_repository",
+    "deployables": ["web_and_api", "background_worker"],
+    "sourceOfTruth": "postgresql",
+    "externalMedia": "link_only",
+    "aiInMvp": false
+  },
+  "stack": [
+    { "id": "TS-01", "layer": "language", "choice": "TypeScript", "baseline": "5.x", "pin": "exact_minor_patch_in_lockfile" },
+    { "id": "TS-02", "layer": "web_application", "choice": "Next.js and React", "baseline": "Next.js 16.x Active LTS; React 19", "pin": "exact_patch" },
+    { "id": "TS-03", "layer": "runtime", "choice": "Node.js", "baseline": "24 LTS", "pin": "major_24_and_exact_container_digest" },
+    { "id": "TS-04", "layer": "primary_database", "choice": "PostgreSQL", "baseline": "18", "pin": "managed_supported_minor" },
+    { "id": "TS-05", "layer": "data_access", "choice": "Drizzle ORM and reviewed SQL migrations", "baseline": "latest_tested_supported", "productionGuardrail": "no_schema_push" },
+    { "id": "TS-06", "layer": "search", "choice": "PostgreSQL normalized fields, pg_trgm and indexes", "baseline": "pilot", "escalation": "TEC-05_evidence" },
+    { "id": "TS-07", "layer": "background_jobs", "choice": "Graphile Worker and transactional outbox", "delivery": "at_least_once", "guardrail": "idempotent_tasks_bounded_retry_dead_job_alert" },
+    { "id": "TS-08", "layer": "object_storage", "choice": "Cloudflare R2 through S3-compatible adapter", "guardrail": "private_by_default_social_video_link_only" },
+    { "id": "TS-09", "layer": "identity", "choice": "Managed OIDC provider and server session", "status": "provider_pending_TEC-06" },
+    { "id": "TS-10", "layer": "testing", "choice": "Vitest and Playwright", "coverage": ["unit", "integration", "contract", "e2e", "accessibility_journeys"] },
+    { "id": "TS-11", "layer": "observability", "choice": "structured_json_logs_and_OpenTelemetry", "signals": ["request_id", "job_id", "error", "latency", "queue_age"] },
+    { "id": "TS-12", "layer": "delivery", "choice": "GitHub Actions, Docker OCI image and Render Blueprint", "guardrail": "approved_production_deploy_and_separate_migration_gate" }
+  ],
+  "hosting": {
+    "recommended": {
+      "provider": "Render",
+      "region": "Singapore",
+      "services": ["paid_web_service", "paid_background_worker", "paid_managed_postgresql_18"],
+      "reason": "managed_service_flow_same_region_private_network_and_lower_founder_operations_burden"
+    },
+    "fallback": { "provider": "Fly.io", "region": "Singapore", "condition": "render_constraint_or_verified_cost_advantage" },
+    "rejectedForPilot": { "option": "self_managed_vps", "reason": "patch_backup_monitoring_and_incident_burden" }
+  },
+  "search": {
+    "steps": ["unicode_normalize_and_alias", "published_filters", "exact_and_prefix", "trigram_candidates", "rule_based_rank", "measure_with_lao_query_set"],
+    "warning": "pg_trgm_is_candidate_retrieval_not_proof_of_Lao_relevance",
+    "dedicatedEngine": "not_in_pilot_without_TEC-05_trigger"
+  },
+  "jobs": {
+    "pattern": "business_write_audit_outbox_in_one_transaction_then_worker",
+    "delivery": "at_least_once",
+    "requiredControls": ["idempotency_key", "bounded_retry", "dead_job_alert", "manual_replay", "correlation_id"]
+  },
+  "qualityGates": ["lint_and_typecheck", "domain_unit_tests", "migration_and_transaction_tests", "playwright_must_journeys", "performance_security_restore_and_manual_accessibility", "dependency_image_and_secret_scan"],
+  "cost": {
+    "formula": "application + worker + database + object_storage + observability + external_api + backup_and_support_reserve",
+    "showCashAndShadowCost": true,
+    "freeTierAllowedForProductionDatabase": false,
+    "currencyRule": "record_source_date_and_exchange_rate_at_approval",
+    "authority": "no_purchase_authority_until_quote_and_budget_approval"
+  },
+  "reviewDecisions": [
+    { "id": "REV-01", "topic": "application_baseline", "status": "pending" },
+    { "id": "REV-02", "topic": "data_baseline", "status": "pending" },
+    { "id": "REV-03", "topic": "search_and_jobs", "status": "pending" },
+    { "id": "REV-04", "topic": "hosting", "status": "pending" },
+    { "id": "REV-05", "topic": "quality_identity_observability_and_no_AI_in_MVP", "status": "pending" }
+  ],
+  "handoff": ["TEC-04", "TEC-05", "TEC-06", "DEL-01"],
+  "officialSources": [
+    "https://nextjs.org/support-policy",
+    "https://nodejs.org/en/about/previous-releases",
+    "https://www.postgresql.org/support/versioning/",
+    "https://www.postgresql.org/docs/current/pgtrgm.html",
+    "https://orm.drizzle.team/docs/migrations",
+    "https://worker.graphile.org/docs",
+    "https://render.com/docs/regions",
+    "https://render.com/docs/background-workers",
+    "https://render.com/docs/postgresql-upgrading",
+    "https://render.com/docs/free",
+    "https://fly.io/docs/reference/regions/",
+    "https://developers.cloudflare.com/r2/get-started/s3/",
+    "https://developers.cloudflare.com/r2/pricing/",
+    "https://playwright.dev/docs/languages",
+    "https://vitest.dev/guide/",
+    "https://opentelemetry.io/docs/languages/js/"
+  ]
+}
