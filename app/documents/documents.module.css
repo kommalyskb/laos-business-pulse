@@ -1341,6 +1341,21 @@
 .architectureArtifacts span { margin-top:5px; color:#5b6863; font-size:11px; line-height:1.65; }
 .architectureArtifacts a:hover { border-color:#9d4c28; }
 .architectureArtifacts a:focus-visible { outline:3px solid #7cc4ff; outline-offset:2px; }
+.proposalExecutive { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin:20px 0 24px; }
+.proposalExecutive article { min-height:210px; padding:24px; border:1px solid #82978e; border-top:6px solid #397865; background:#edf5f1; }
+.proposalExecutive article:last-child { border-color:#9aaeca; border-top-color:#284b8f; background:#edf1f8; }
+.proposalExecutive b { color:#7f4225; font:900 10px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.08em; }
+.proposalExecutive h3 { margin:34px 0 10px; font-size:19px; }
+.proposalExecutive p { margin:0; color:#4f5d57; }
+.proposalRoadmap { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:1px; margin:22px 0 25px; background:#aeb7b2; border:1px solid #aeb7b2; }
+.proposalRoadmap article { min-height:210px; padding:18px 15px; background:#fbf9f3; }
+.proposalRoadmap b { color:#9d4c28; font:900 19px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace; }
+.proposalRoadmap h3 { margin:25px 0 9px; font-size:14px; }
+.proposalRoadmap p { margin:0; color:#59655f; font-size:11px; line-height:1.7; }
+.proposalFormula { margin:22px 0; padding:22px; border:1px solid #9aaeca; border-left:6px solid #284b8f; background:#edf1f8; }
+.proposalFormula b { color:#284b8f; font:900 10px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.08em; }
+.proposalFormula p { margin:13px 0 8px; color:#263a34; font-weight:800; }
+.proposalFormula span { display:block; color:#59655f; font-size:12px; line-height:1.75; }
 
 @media(max-width:760px){
   .formalDocument { padding:38px 18px 70px; }
@@ -1354,6 +1369,8 @@
   .architectureActors,.architectureClients,.architectureStores,.architectureExternal,.architectureArtifacts { grid-template-columns:1fr; }
   .architectureTopology { grid-template-columns:1fr; }
   .architectureTopology i { padding:7px 0; justify-self:center; transform:rotate(90deg); }
+  .proposalExecutive,.proposalRoadmap { grid-template-columns:1fr; }
+  .proposalExecutive article,.proposalRoadmap article { min-height:0; }
 }
 
 @media print {
@@ -1374,4 +1391,5 @@
   .formalRequirement > header h3,.formalRequirement > header code { color:black!important; }
   .formalDocument a { color:black!important; }
   .architectureDiagram,.architectureTopology,.architectureArtifacts { break-inside:avoid-page; }
+  .proposalExecutive,.proposalRoadmap,.proposalFormula { break-inside:avoid-page; }
 }

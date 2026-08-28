@@ -1,0 +1,60 @@
+{
+  "document": { "id": "TEC-02", "version": "0.1", "status": "draft_for_review", "date": "2026-08-28", "next_document": "TEC-03" },
+  "recommendation": {
+    "delivery_model": "two_track",
+    "track_a": "Six-week validation using existing prototypes, curated data and manual operations within the approved validation budget.",
+    "track_b": "Founder-led hybrid Production MVP only after scope, capacity, stack, funding and release gates are approved.",
+    "production_architecture": "TEC-01 modular_monolith_first",
+    "hosting_direction_for_TEC_03": "compare managed application and managed relational database as the primary option"
+  },
+  "budget_boundary": {
+    "approved_validation_budget_lak": 25000000,
+    "founder_living_cost_lak": 15000000,
+    "validation_operating_budget_lak": 10000000,
+    "production_build_budget_status": "not_approved",
+    "rule": "The approved validation budget must not be represented as a full outsourced Production MVP budget."
+  },
+  "delivery_options": [
+    { "id": "OPT-A", "name": "Prototype and concierge only", "decision": "conditional_for_validation" },
+    { "id": "OPT-B", "name": "Founder-led hybrid build", "decision": "recommended_for_production_mvp" },
+    { "id": "OPT-C", "name": "Agency or outsourced full build", "decision": "not_now" },
+    { "id": "OPT-D", "name": "Microservices or self-managed infrastructure", "decision": "rejected_for_pilot" }
+  ],
+  "work_packages": [
+    { "id": "TP-WP01", "name": "Foundation and delivery controls", "min_person_days": 8, "max_person_days": 12 },
+    { "id": "TP-WP02", "name": "Admin Place and Source vertical slice", "min_person_days": 14, "max_person_days": 20 },
+    { "id": "TP-WP03", "name": "Guest decision journey", "min_person_days": 16, "max_person_days": 24 },
+    { "id": "TP-WP04", "name": "Trust analytics and partner operations", "min_person_days": 18, "max_person_days": 26 },
+    { "id": "TP-WP05", "name": "Hardening and release readiness", "min_person_days": 14, "max_person_days": 20 },
+    { "id": "TP-WP06", "name": "Pilot support and handoff", "min_person_days": 5, "max_person_days": 8 }
+  ],
+  "effort_rom": {
+    "min_person_days": 75,
+    "max_person_days": 110,
+    "status": "planning_range_not_delivery_commitment",
+    "single_full_time_developer_with_part_time_qa_ux_weeks": "16-24",
+    "two_experienced_developers_with_part_time_qa_ux_weeks": "9-14",
+    "recalculate_in": "DEL-01"
+  },
+  "release_order": [
+    { "id": "P0", "name": "Foundation" },
+    { "id": "P1", "name": "First vertical slice" },
+    { "id": "P2", "name": "Discover and decide" },
+    { "id": "P3", "name": "Trust and revenue evidence" },
+    { "id": "P4", "name": "Hardening and Pilot" }
+  ],
+  "cost_formulas": {
+    "cash_development_cost": "external_specialist_days * approved_day_rate + build_tools_services + test_devices_data + contingency",
+    "economic_development_cost": "cash_development_cost + founder_person_days * reference_day_rate",
+    "monthly_run_cost": "application + database + storage_egress + queue_search + observability + backup + external_api + support_reserve",
+    "cost_per_published_place": "content_data_labor + allocated_system_cost / published_places",
+    "cost_per_unique_intent": "allocated_platform_operation_cost / valid_unique_decision_actions"
+  },
+  "review_decisions": [
+    { "id": "REV-01", "topic": "Two-track delivery model", "status": "pending" },
+    { "id": "REV-02", "topic": "Founder-led hybrid resourcing", "status": "pending" },
+    { "id": "REV-03", "topic": "Must-only production scope", "status": "pending" },
+    { "id": "REV-04", "topic": "Validation versus Production budget authority", "status": "pending" },
+    { "id": "REV-05", "topic": "75-110 person-day ROM and P0-P4 release gates", "status": "pending" }
+  ]
+}

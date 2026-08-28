@@ -1,0 +1,8 @@
+work_package_id,work_package,min_person_days,max_person_days,assigned_person_days,owner,external_days,day_rate_lak,external_cost_lak,service_tool_cost_lak,evidence_or_quote,status,notes
+TP-WP01,Foundation and delivery controls,8,12,,,,,,,,pending,Do not approve privileged mutation before identity audit and migration controls
+TP-WP02,Admin Place and Source vertical slice,14,20,,,,,,,,pending,First testable Admin to Published Place path
+TP-WP03,Guest decision journey,16,24,,,,,,,,pending,Feed Search Place Map Call Message and media fallback
+TP-WP04,Trust analytics and partner operations,18,26,,,,,,,,pending,Correction takedown consent events Founding Partner and summary
+TP-WP05,Hardening and release readiness,14,20,,,,,,,,pending,Security performance accessibility backup restore rollback and UAT
+TP-WP06,Pilot support and handoff,5,8,,,,,,,,pending,Runbook training launch support and evidence pack
+TOTAL,Production MVP ROM,75,110,,,,,,,,draft,Planning range only; not an approved budget or delivery date
