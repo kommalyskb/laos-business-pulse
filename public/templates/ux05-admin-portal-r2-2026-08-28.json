@@ -1,7 +1,7 @@
 {
   "document": "UX-05",
-  "version": "0.8.1",
-  "baseline": "Odoo-inspired Admin Business Operations Portal R2.1",
+  "version": "0.8.2",
+  "baseline": "Admin Business Operations Portal R2.2 · Odoo structure with UX-04 visual tokens",
   "date": "2026-08-28",
   "objective": "Provide a professional 360-degree operating portal that connects audience, catalog, content, trust, commercial, finance and system control without losing record-level accountability.",
   "design_inspiration": {
@@ -13,10 +13,11 @@
       "dashboard drill-down to underlying records",
       "record activities and audit timeline",
       "role-aware module and record access",
-      "mauve top application bar and module-level menu anatomy"
+      "horizontal application bar and module-level menu anatomy"
     ],
     "not_copied": ["Odoo branding", "Odoo logo", "Odoo color palette", "Odoo proprietary application screens"],
-    "project_identity": ["Noto Sans Lao", "Phom Pai brand", "decision-first business language", "green neutral operational palette"]
+    "project_identity": ["Noto Sans Lao Variable", "Phom Pai brand", "decision-first business language", "UX-04 semantic color palette", "UX-04 focus and accessibility tokens"],
+    "visual_authority": "UX-04 Design Tokens are authoritative for color, typography, semantic states, borders and focus. Odoo is used only for information architecture, navigation and interaction anatomy."
   },
   "shared_shell": {
     "elements": ["app launcher", "workspace context", "grouped module navigation", "global record search", "activities", "notifications", "help", "system health", "signed-in role"],

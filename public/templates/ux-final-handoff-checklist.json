@@ -1,6 +1,6 @@
 {
   "document": "UX-05",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "final_design_complete": false,
   "gates": [
     { "id": "G-UX1", "name": "Structure", "requires": ["UX-01 1.0", "UX-02 1.2", "screen_route_state_traceability"], "status": "passed_structure_baseline" },
