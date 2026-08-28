@@ -1,13 +1,13 @@
 {
   "document": "UX-05",
-  "version": "0.9.1",
-  "baseline": "Final Design Gallery 0.9.1 · Admin Workflow Prototype R3.1",
+  "version": "0.9.2",
+  "baseline": "Final Design Gallery 0.9.2 · Admin Workflow Prototype R3.2",
   "status": "baseline_ready_final_gates_pending",
   "source_of_truth": {
     "guest_pilot": "Prototype R2.3 at /prototype",
     "guest_rendering": "live_prototype_embed",
     "duplicate_guest_markup": false,
-    "admin": "Standalone Admin Workflow Prototype R3.1 with ten interconnected modules, contextual header sub-navigation, detailed record workspaces, session record transitions, Odoo-inspired interaction structure and UX-04 visual tokens",
+    "admin": "Standalone Admin Workflow Prototype R3.2 with ten modules selected through the Application Launcher, one contextual submenu header, detailed record workspaces, session record transitions, Odoo-inspired interaction structure and UX-04 visual tokens",
     "admin_prototype_route": "/admin-prototype"
   },
   "shared_contract": {
