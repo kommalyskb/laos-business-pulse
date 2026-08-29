@@ -14,6 +14,7 @@ import ProductVisionDocument from "./ProductVisionDocument";
 import RevenueKpiDocument from "./RevenueKpiDocument";
 import RequirementsAcceptanceDocument from "./RequirementsAcceptanceDocument";
 import SearchRecommendationDocument from "./SearchRecommendationDocument";
+import SecurityInfrastructureDocument from "./SecurityInfrastructureDocument";
 import SystemAnalysisDocument from "./SystemAnalysisDocument";
 import SystemArchitectureDocument from "./SystemArchitectureDocument";
 import TechnicalProposalDocument from "./TechnicalProposalDocument";
@@ -114,6 +115,8 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
                                   ? <DataApiDocument basePath={basePath} />
                                   : document.slug === "ai-recommendation"
                                     ? <SearchRecommendationDocument basePath={basePath} />
+                                    : document.slug === "security-infrastructure"
+                                      ? <SecurityInfrastructureDocument basePath={basePath} />
                           : document.category === "content" || document.category === "design"
                             ? <ContentDesignDocument slug={document.slug} basePath={basePath} />
                 : <article className={styles.detailBody}>

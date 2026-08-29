@@ -1,0 +1,283 @@
+{
+  "documentId": "TEC-06",
+  "title": "Security, Privacy & Infrastructure — Production Pilot Control Baseline",
+  "version": "0.1",
+  "status": "review_required",
+  "updatedAt": "2026-08-30",
+  "owners": {
+    "accountable": "Founder / Product Owner",
+    "technical": "Platform / Security Owner",
+    "consulted": [
+      "Content & Trust Owner",
+      "Operations Owner",
+      "Legal Counsel"
+    ],
+    "approvalRequired": [
+      "REV-01",
+      "REV-02",
+      "REV-03",
+      "REV-04",
+      "REV-05"
+    ]
+  },
+  "purpose": "Turn prior architecture, stack, data, search, privacy and operational decisions into implementable controls, evidence and public-pilot release gates.",
+  "scope": {
+    "in": [
+      "data classification and threat model",
+      "identity, access and session",
+      "privacy, consent and retention",
+      "application and SDLC security",
+      "OVH/Debian/Docker/Caddy/PostgreSQL boundary",
+      "secrets and patching",
+      "backup, restore and disaster recovery",
+      "observability, security detection and incident response",
+      "release evidence"
+    ],
+    "out": [
+      "legal opinion",
+      "24x7 managed SOC claim",
+      "high availability claim",
+      "payment or booking controls",
+      "implementation-complete claim"
+    ]
+  },
+  "decisions": [
+    {
+      "id": "SEC-D01",
+      "decision": "Single-host OVH Pilot is conditionally allowed; no high-availability claim.",
+      "condition": "OVH-G01—06 and CNT-01—11 pass with evidence."
+    },
+    {
+      "id": "SEC-D02",
+      "decision": "Production Admin identity and authorization are server-enforced.",
+      "condition": "Managed OIDC, MFA, session, role/action/resource policy and append-only audit."
+    },
+    {
+      "id": "SEC-D03",
+      "decision": "Guest-first data minimization is mandatory.",
+      "condition": "Optional analytics remains off until consent, retention and legal gates pass."
+    },
+    {
+      "id": "SEC-D04",
+      "decision": "Recovery and monitoring are release gates.",
+      "condition": "Off-host backup, continuous WAL, restore drill, detection and incident runbook pass."
+    },
+    {
+      "id": "SEC-D05",
+      "decision": "Evidence precedes any passed claim.",
+      "condition": "A configured control is not passed without test/config/report/restore evidence."
+    }
+  ],
+  "hosting": {
+    "provider": "OVHcloud",
+    "region": "Asia Pacific — Singapore",
+    "server": {
+      "cpu": "AMD EPYC 7313 16c/32t 3.0/3.7GHz",
+      "memory": "128GB ECC 3200MHz",
+      "disks": "2×960GB SSD NVMe",
+      "operatingSystem": "Debian 13 Trixie"
+    },
+    "topology": "Single dedicated host, Docker Compose; Caddy is the only public ingress on TCP 80/443.",
+    "notPublic": [
+      "PostgreSQL",
+      "background worker",
+      "Grafana Alloy",
+      "restricted object/evidence access"
+    ],
+    "availabilityClaim": "No high-availability claim. RAID1 is not backup.",
+    "fallback": "Evaluate fallback when a release gate fails, repeated restore fails, capacity reserve is lost or outage risk exceeds approved Pilot tolerance."
+  },
+  "securityModel": {
+    "dataClasses": [
+      "DATA-C1 Public",
+      "DATA-C2 Internal",
+      "DATA-C3 Restricted",
+      "DATA-C4 Secret"
+    ],
+    "threats": [
+      "THR-01",
+      "THR-02",
+      "THR-03",
+      "THR-04",
+      "THR-05",
+      "THR-06",
+      "THR-07",
+      "THR-08",
+      "THR-09",
+      "THR-10",
+      "THR-11",
+      "THR-12"
+    ],
+    "roles": [
+      "content_editor",
+      "publisher",
+      "support",
+      "trust",
+      "commercial",
+      "finance",
+      "auditor",
+      "platform_admin"
+    ],
+    "identityControls": [
+      "IAM-01",
+      "IAM-02",
+      "IAM-03",
+      "IAM-04",
+      "IAM-05",
+      "IAM-06",
+      "IAM-07",
+      "IAM-08"
+    ],
+    "sessionProposal": {
+      "idleMinutes": 30,
+      "absoluteHours": 12,
+      "privilegedStepUpMinutes": 15,
+      "disableRevocationMinutes": 15
+    },
+    "applicationControls": [
+      "APP-01",
+      "APP-02",
+      "APP-03",
+      "APP-04",
+      "APP-05",
+      "APP-06",
+      "APP-07",
+      "APP-08",
+      "APP-09",
+      "APP-10"
+    ],
+    "containerControls": [
+      "CNT-01",
+      "CNT-02",
+      "CNT-03",
+      "CNT-04",
+      "CNT-05",
+      "CNT-06",
+      "CNT-07",
+      "CNT-08",
+      "CNT-09",
+      "CNT-10",
+      "CNT-11"
+    ],
+    "ovhGates": [
+      "OVH-G01",
+      "OVH-G02",
+      "OVH-G03",
+      "OVH-G04",
+      "OVH-G05",
+      "OVH-G06"
+    ]
+  },
+  "privacy": {
+    "mode": "Guest-first; essential processing only by default.",
+    "optionalAnalytics": "OFF until explicit consent, withdrawal, retention, vendor and legal review pass.",
+    "rawSearchQueryPersistence": "Not persisted in MVP.",
+    "retentionRegister": "tec06-retention-register-2026-08-30.csv",
+    "legalState": "Technical/Product proposal only; Lao-law and vendor review remain required."
+  },
+  "recovery": {
+    "proposedObjectives": {
+      "postgresqlRpo": "≤1 hour",
+      "postgresqlRto": "≤8 hours",
+      "status": "Not an SLO until timed restore passes."
+    },
+    "method": [
+      "Daily encrypted PostgreSQL base backup",
+      "Continuous off-host WAL archive",
+      "35-day rolling recovery points",
+      "12 monthly retained points",
+      "Monthly isolated PITR drill"
+    ],
+    "steps": [
+      "DR-01",
+      "DR-02",
+      "DR-03",
+      "DR-04",
+      "DR-05",
+      "DR-06"
+    ],
+    "releaseBlockers": [
+      "no valid off-host restore point",
+      "two consecutive backup or restore failures",
+      "timed restore exceeds approved objective",
+      "restore evidence is incomplete"
+    ]
+  },
+  "observability": {
+    "pipeline": "Pino/OpenTelemetry → Grafana Alloy → Grafana Cloud Loki/Mimir/Tempo/Alerting",
+    "securityMode": "SIEM-ready Pilot; not a full managed SIEM or 24×7 human SOC.",
+    "detections": [
+      "SEC-DET-01",
+      "SEC-DET-02",
+      "SEC-DET-03",
+      "SEC-DET-04",
+      "SEC-DET-05",
+      "SEC-DET-06",
+      "SEC-DET-07",
+      "SEC-DET-08"
+    ],
+    "proposedCoverage": "Human 08:00–22:00 ICT daily; external alerts and safe automated actions 24×7.",
+    "severityLevels": [
+      "S1 Critical",
+      "S2 High",
+      "S3 Medium",
+      "S4 Low"
+    ]
+  },
+  "release": {
+    "gates": [
+      "G-SEC-01",
+      "G-SEC-02",
+      "G-SEC-03",
+      "G-SEC-04",
+      "G-SEC-05",
+      "G-SEC-06",
+      "G-SEC-07",
+      "G-SEC-08"
+    ],
+    "noGo": [
+      "open S1/Critical",
+      "High issue without approved expiry",
+      "invalid backup/restore",
+      "Admin without MFA",
+      "public database or restricted evidence",
+      "missing audit",
+      "unknown consent/legal behavior"
+    ],
+    "currentResult": "NOT_EVALUATED",
+    "publicPilotApproved": false
+  },
+  "artifacts": {
+    "controlMatrix": "tec06-security-control-matrix-2026-08-30.csv",
+    "retentionRegister": "tec06-retention-register-2026-08-30.csv",
+    "restoreRunbook": "tec06-backup-restore-runbook-template-2026-08-30.json"
+  },
+  "review": [
+    {
+      "id": "REV-01",
+      "topic": "single-host risk",
+      "recommendation": "Conditionally approve with no HA claim and all host/container gates."
+    },
+    {
+      "id": "REV-02",
+      "topic": "identity and access",
+      "recommendation": "Approve control set; choose provider after quote, audit, region and exit review."
+    },
+    {
+      "id": "REV-03",
+      "topic": "consent and retention",
+      "recommendation": "Approve as technical baseline; keep optional analytics off pending legal review."
+    },
+    {
+      "id": "REV-04",
+      "topic": "recovery",
+      "recommendation": "Replace provisional 24h RPO with proposed ≤1h RPO; retain ≤8h RTO; prove through timed restore."
+    },
+    {
+      "id": "REV-05",
+      "topic": "monitoring and incident",
+      "recommendation": "Approve honest SIEM-ready coverage; add managed SIEM/24×7 human coverage only at defined trigger."
+    }
+  ],
+  "disclaimer": "Draft technical/product baseline; not legal advice and not proof that any control has passed."
+}

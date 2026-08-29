@@ -1,0 +1,177 @@
+{
+  "documentId": "TEC-06-DR-RUNBOOK",
+  "version": "0.1-template",
+  "status": "not_executed",
+  "warning": "A completed file is evidence only when authorized, timestamped, linked to backup/config/test output and independently reviewed.",
+  "objective": {
+    "postgresqlRpo": "≤1 hour proposed",
+    "postgresqlRto": "≤8 hours proposed",
+    "evidenceRequiredBeforeSloClaim": true
+  },
+  "exercise": {
+    "id": "",
+    "mode": "isolated_restore",
+    "declaredAt": "",
+    "incidentOrDrill": "drill",
+    "commander": "",
+    "recoveryOperator": "",
+    "observer": "",
+    "approver": "",
+    "authorizationReference": "",
+    "targetRecoveryTimestamp": "",
+    "targetEnvironment": "",
+    "productionTrafficAllowed": false
+  },
+  "prerequisites": [
+    {
+      "check": "Current encrypted off-host base backup is selectable",
+      "result": "not_checked",
+      "evidence": ""
+    },
+    {
+      "check": "Continuous WAL range covers target timestamp",
+      "result": "not_checked",
+      "evidence": ""
+    },
+    {
+      "check": "Restore credential is separate from application credential",
+      "result": "not_checked",
+      "evidence": ""
+    },
+    {
+      "check": "Isolated host/network and storage capacity are available",
+      "result": "not_checked",
+      "evidence": ""
+    },
+    {
+      "check": "Approved schema/config version and secret recovery process are available",
+      "result": "not_checked",
+      "evidence": ""
+    }
+  ],
+  "backupSelection": {
+    "baseBackupId": "",
+    "createdAt": "",
+    "checksum": "",
+    "encryptionKeyId": "",
+    "walStart": "",
+    "walEnd": "",
+    "objectInventoryReference": ""
+  },
+  "steps": [
+    {
+      "id": "DR-01",
+      "action": "Declare incident or drill; freeze destructive automation; name commander and target timestamp.",
+      "startedAt": "",
+      "completedAt": "",
+      "operator": "",
+      "result": "not_run",
+      "evidence": ""
+    },
+    {
+      "id": "DR-02",
+      "action": "Preserve failed host, volume, WAL, log and checksum evidence; never overwrite the only copy.",
+      "startedAt": "",
+      "completedAt": "",
+      "operator": "",
+      "result": "not_run",
+      "evidence": ""
+    },
+    {
+      "id": "DR-03",
+      "action": "Provision isolated host and network; retrieve secrets through approved break-glass.",
+      "startedAt": "",
+      "completedAt": "",
+      "operator": "",
+      "result": "not_run",
+      "evidence": ""
+    },
+    {
+      "id": "DR-04",
+      "action": "Restore base backup, replay WAL to target and verify PostgreSQL consistency and migration version.",
+      "startedAt": "",
+      "completedAt": "",
+      "operator": "",
+      "result": "not_run",
+      "evidence": ""
+    },
+    {
+      "id": "DR-05",
+      "action": "Start maintenance or read-only mode; validate authentication, Published boundary, audit, outbox, search and evidence references.",
+      "startedAt": "",
+      "completedAt": "",
+      "operator": "",
+      "result": "not_run",
+      "evidence": ""
+    },
+    {
+      "id": "DR-06",
+      "action": "Resume worker and writes only after approval; cut traffic, monitor, communicate, rotate exposed material and review.",
+      "startedAt": "",
+      "completedAt": "",
+      "operator": "",
+      "result": "not_run",
+      "evidence": ""
+    }
+  ],
+  "validation": [
+    {
+      "check": "Admin OIDC/MFA/session and negative authorization tests pass",
+      "result": "not_checked",
+      "evidence": ""
+    },
+    {
+      "check": "Only Published and Public DTO data reaches Guest responses",
+      "result": "not_checked",
+      "evidence": ""
+    },
+    {
+      "check": "Schema version and database consistency checks pass",
+      "result": "not_checked",
+      "evidence": ""
+    },
+    {
+      "check": "Audit append and privileged rollback behavior pass",
+      "result": "not_checked",
+      "evidence": ""
+    },
+    {
+      "check": "Outbox backlog reconciles and worker idempotency passes",
+      "result": "not_checked",
+      "evidence": ""
+    },
+    {
+      "check": "Search projection rebuild and representative Lao queries pass",
+      "result": "not_checked",
+      "evidence": ""
+    },
+    {
+      "check": "Restricted evidence references and access remain correct",
+      "result": "not_checked",
+      "evidence": ""
+    },
+    {
+      "check": "External HTTPS, monitoring and missing-telemetry alerts pass",
+      "result": "not_checked",
+      "evidence": ""
+    }
+  ],
+  "measurement": {
+    "lastRecoverableTimestamp": "",
+    "serviceRecoveryTimestamp": "",
+    "measuredRpoMinutes": null,
+    "measuredRtoMinutes": null,
+    "dataLossDescription": "",
+    "targetMet": null
+  },
+  "outcome": {
+    "result": "not_executed",
+    "reviewer": "",
+    "reviewedAt": "",
+    "releaseGate": "G-SEC-06",
+    "releaseBlocked": true,
+    "followUpOwner": "",
+    "followUpDue": "",
+    "notes": ""
+  }
+}
