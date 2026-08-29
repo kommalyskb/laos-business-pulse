@@ -1,0 +1,129 @@
+{
+  "artifact": {
+    "id": "TEC-03-OBS-SEC",
+    "document": "TEC-03",
+    "documentVersion": "0.2",
+    "asOf": "2026-08-29",
+    "status": "draft_for_TEC-06_detailing",
+    "owner": "Tech Lead and Security Owner"
+  },
+  "decision": {
+    "observabilityBeforePublicPilot": "must",
+    "securityEventLoggingBeforePublicPilot": "must",
+    "pilotSecurityMonitoring": "SIEM-ready",
+    "fullManagedSiemDuringPilot": false,
+    "reason": "The Pilot needs reliable detection and investigation without taking on enterprise SIEM cost and operating burden before risk, compliance, scale and ownership justify it."
+  },
+  "stack": {
+    "applicationLogger": "Pino structured JSON",
+    "instrumentation": "OpenTelemetry JavaScript SDK",
+    "pilotTransport": "Direct OTLP export",
+    "collectorOnTrigger": "Grafana Alloy or OpenTelemetry Collector",
+    "backend": {
+      "provider": "Grafana Cloud",
+      "logs": "Loki",
+      "metrics": "Mimir",
+      "traces": "Tempo",
+      "visualizationAndAlerts": "Grafana"
+    },
+    "providerSignals": ["Render service and deployment health", "PostgreSQL health and backup evidence", "Cloudflare R2 access and quota", "OIDC authentication events"]
+  },
+  "telemetryFlow": [
+    "Browser, Web/API, Worker, Database and provider produce approved signals",
+    "Pino and OpenTelemetry attach service, environment and correlation identifiers",
+    "Redaction and an allowlist prevent secrets and unnecessary personal data from leaving the source",
+    "OTLP sends logs, metrics and traces to Grafana Cloud without blocking the core request",
+    "Dashboards correlate operational, product and security health",
+    "Alert rules notify an accountable owner and link to a tested runbook",
+    "Incident handling preserves evidence and records resolution"
+  ],
+  "requiredEventFields": [
+    "event_id",
+    "timestamp_utc",
+    "severity",
+    "service",
+    "environment",
+    "request_id_when_available",
+    "trace_id_when_available",
+    "job_id_when_applicable",
+    "module",
+    "action",
+    "outcome",
+    "safe_error_code_when_failed",
+    "duration_ms_when_timed",
+    "security_event_type_when_security_related"
+  ],
+  "neverLog": [
+    "password",
+    "session_access_or_refresh_token",
+    "API_key_or_authorization_header",
+    "database_connection_string",
+    "raw_request_or_form_body",
+    "full_payment_or_evidence_file",
+    "unnecessary_full_phone_email_or_personal_data"
+  ],
+  "logClasses": [
+    {
+      "name": "application_log",
+      "purpose": "Debug operation and performance",
+      "sampling": "allowed_when_documented",
+      "access": "engineering_and_operations",
+      "integrity": "best_effort_delivery_with_missing_data_alert"
+    },
+    {
+      "name": "audit_log",
+      "purpose": "Prove who changed business state, what changed and when",
+      "sampling": "forbidden",
+      "access": "restricted_business_and_security_roles",
+      "integrity": "atomic_with_privileged_business_write_and_append_only_behavior"
+    },
+    {
+      "name": "security_event",
+      "purpose": "Detect and investigate suspicious behavior",
+      "sampling": "forbidden_for_required_detection_events",
+      "access": "restricted_security_owner",
+      "integrity": "normalized_schema_detection_alert_and_evidence_preservation"
+    }
+  ],
+  "dashboards": [
+    { "id": "DASH-01", "name": "Guest and API Health", "owner": "Tech Lead" },
+    { "id": "DASH-02", "name": "Admin Operations", "owner": "Operations Lead" },
+    { "id": "DASH-03", "name": "Worker and Outbox", "owner": "Backend Lead" },
+    { "id": "DASH-04", "name": "Database and Infrastructure", "owner": "Tech Lead" },
+    { "id": "DASH-05", "name": "External Dependencies", "owner": "Integration Owner" },
+    { "id": "DASH-06", "name": "Business Operations", "owner": "Product and Operations" },
+    { "id": "DASH-07", "name": "Security Monitoring", "owner": "Security Owner", "access": "restricted" }
+  ],
+  "alertContract": ["condition", "threshold", "window", "deduplication", "severity", "owner", "evidence_link", "runbook", "acknowledgement", "escalation"],
+  "securityDetections": [
+    "SEC-DET-01 authentication attack",
+    "SEC-DET-02 privilege change",
+    "SEC-DET-03 authorization abuse",
+    "SEC-DET-04 sensitive evidence access",
+    "SEC-DET-05 bulk data movement",
+    "SEC-DET-06 audit or monitoring tamper",
+    "SEC-DET-07 configuration or secret change",
+    "SEC-DET-08 data integrity anomaly"
+  ],
+  "provisionalRetention": [
+    { "data": "application_logs", "online": "14_to_30_days", "archive": "incident_selected_only" },
+    { "data": "metrics", "online": "30_to_90_days", "archive": "aggregates_up_to_12_months" },
+    { "data": "traces", "online": "7_to_14_days", "archive": "incident_selected_only" },
+    { "data": "security_events", "online": "90_days", "archive": "up_to_12_months_if_approved" },
+    { "data": "audit_records", "online": "12_months", "archive": "according_to_TEC-06_business_legal_and_privacy_decision" }
+  ],
+  "siemEvolution": [
+    { "phase": "Pilot", "capability": "normalized security events, restricted dashboards, detection alerts and incident runbooks", "claim": "SIEM-ready only" },
+    { "phase": "Growth", "capability": "collector, centralized redaction, archive and cross-source correlation", "gate": "volume, provider count or investigation complexity" },
+    { "phase": "Managed SIEM", "capability": "detection engineering, case management and compliance reporting", "gate": "payment or booking, compliance obligation, dedicated owner or material incident" }
+  ],
+  "pendingForTEC06": [
+    "exact provider plan and quote",
+    "sampling and cardinality limits",
+    "approved retention and deletion schedule",
+    "role based access and break glass procedure",
+    "alert delivery channel and escalation times",
+    "incident severity, communication and evidence preservation runbooks",
+    "managed SIEM evaluation criteria and approved trigger"
+  ]
+}

@@ -1,9 +1,11 @@
 {
   "document": {
     "id": "TEC-03",
-    "version": "0.1",
+    "version": "0.2",
     "status": "draft_for_review",
-    "asOf": "2026-08-28",
+    "createdAt": "2026-08-28",
+    "updatedAt": "2026-08-29",
+    "asOf": "2026-08-29",
     "owner": "Solution Architect / Tech Lead",
     "approver": "Product Owner"
   },
@@ -26,8 +28,12 @@
     { "id": "TS-08", "layer": "object_storage", "choice": "Cloudflare R2 through S3-compatible adapter", "guardrail": "private_by_default_social_video_link_only" },
     { "id": "TS-09", "layer": "identity", "choice": "Managed OIDC provider and server session", "status": "provider_pending_TEC-06" },
     { "id": "TS-10", "layer": "testing", "choice": "Vitest and Playwright", "coverage": ["unit", "integration", "contract", "e2e", "accessibility_journeys"] },
-    { "id": "TS-11", "layer": "observability", "choice": "structured_json_logs_and_OpenTelemetry", "signals": ["request_id", "job_id", "error", "latency", "queue_age"] },
-    { "id": "TS-12", "layer": "delivery", "choice": "GitHub Actions, Docker OCI image and Render Blueprint", "guardrail": "approved_production_deploy_and_separate_migration_gate" }
+    { "id": "TS-11", "layer": "application_telemetry", "choice": "Pino structured JSON logger and OpenTelemetry SDK", "signals": ["logs", "metrics", "traces"], "guardrail": "allowlist_redaction_no_secret_token_or_full_PII" },
+    { "id": "TS-12", "layer": "telemetry_pipeline", "choice": "direct OTLP to Grafana Cloud for Pilot; Grafana Alloy or OTel Collector on trigger", "guardrail": "asynchronous_fail_open_for_core_journey" },
+    { "id": "TS-13", "layer": "observability_backend", "choice": "Grafana Cloud Loki, Mimir, Tempo and Grafana Alerting", "guardrail": "quote_retention_ingest_limit_and_cost_alert_required" },
+    { "id": "TS-14", "layer": "security_event_monitoring", "choice": "normalized security events and restricted Grafana dashboards and alerts", "guardrail": "separate_from_application_and_audit_logs" },
+    { "id": "TS-15", "layer": "siem_evolution", "choice": "managed SIEM pending risk, compliance or scale trigger", "guardrail": "do_not_claim_full_SIEM_during_Pilot" },
+    { "id": "TS-16", "layer": "delivery", "choice": "GitHub Actions, Docker OCI image and Render Blueprint", "guardrail": "approved_production_deploy_and_separate_migration_gate" }
   ],
   "hosting": {
     "recommended": {
@@ -49,6 +55,27 @@
     "delivery": "at_least_once",
     "requiredControls": ["idempotency_key", "bounded_retry", "dead_job_alert", "manual_replay", "correlation_id"]
   },
+  "observability": {
+    "pilotBackend": "Grafana Cloud",
+    "signals": ["structured_logs", "metrics", "distributed_traces", "synthetic_checks"],
+    "flow": "browser_web_api_worker_database_and_provider_to_Pino_and_OpenTelemetry_to_OTLP_to_Grafana_Cloud_to_dashboard_alert_and_runbook",
+    "collectorTrigger": ["centralized_redaction", "buffering_or_retry", "multi_destination", "central_credential_management"],
+    "requiredCorrelation": ["event_id", "timestamp", "environment", "service", "request_id", "trace_id", "job_id_when_applicable", "outcome", "safe_error_code", "duration_ms_when_applicable"],
+    "neverLog": ["password", "session_access_or_refresh_token", "API_key", "authorization_header", "database_connection_string", "full_payment_or_evidence_file", "raw_form_body", "unnecessary_full_phone_or_email"],
+    "dashboards": ["guest_API_health", "admin_operations", "worker_and_outbox", "database_and_infrastructure", "external_dependencies", "business_operations", "security_monitoring"],
+    "alertRequirements": ["condition_and_window", "deduplication", "severity", "owner", "dashboard_trace_or_log_link", "runbook", "acknowledgement", "escalation"]
+  },
+  "securityMonitoring": {
+    "pilotDecision": "SIEM_ready_security_event_monitoring_not_full_SIEM",
+    "logClasses": {
+      "application": "debug_and_performance_may_be_sampled_short_retention",
+      "audit": "business_change_evidence_atomic_append_only_no_sampling",
+      "security": "normalized_restricted_detection_and_longer_retention"
+    },
+    "detections": ["authentication_attack", "privilege_change", "authorization_abuse", "sensitive_evidence_access", "bulk_data_movement", "audit_or_monitoring_tamper", "configuration_or_secret_change", "data_integrity_anomaly"],
+    "managedSiemTriggers": ["payment_or_booking_scope", "regulatory_or_contractual_requirement", "dedicated_security_operations_owner", "cross_source_volume_or_correlation_need", "material_security_incident"],
+    "finalConfigurationOwner": "TEC-06"
+  },
   "qualityGates": ["lint_and_typecheck", "domain_unit_tests", "migration_and_transaction_tests", "playwright_must_journeys", "performance_security_restore_and_manual_accessibility", "dependency_image_and_secret_scan"],
   "cost": {
     "formula": "application + worker + database + object_storage + observability + external_api + backup_and_support_reserve",
@@ -62,7 +89,7 @@
     { "id": "REV-02", "topic": "data_baseline", "status": "pending" },
     { "id": "REV-03", "topic": "search_and_jobs", "status": "pending" },
     { "id": "REV-04", "topic": "hosting", "status": "pending" },
-    { "id": "REV-05", "topic": "quality_identity_observability_and_no_AI_in_MVP", "status": "pending" }
+    { "id": "REV-05", "topic": "quality_observability_security_monitoring_identity_storage_and_no_AI_in_MVP", "status": "pending" }
   ],
   "handoff": ["TEC-04", "TEC-05", "TEC-06", "DEL-01"],
   "officialSources": [
@@ -81,6 +108,12 @@
     "https://developers.cloudflare.com/r2/pricing/",
     "https://playwright.dev/docs/languages",
     "https://vitest.dev/guide/",
-    "https://opentelemetry.io/docs/languages/js/"
+    "https://opentelemetry.io/docs/languages/js/",
+    "https://grafana.com/docs/opentelemetry/ingest/",
+    "https://grafana.com/docs/grafana-cloud/observe-and-act/send-data/",
+    "https://grafana.com/docs/grafana-cloud/observe-and-act/send-data/logs/collect-logs-with-otel/",
+    "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html",
+    "https://csrc.nist.gov/Projects/log-management",
+    "https://www.nist.gov/publications/guide-computer-security-log-management"
   ]
 }
