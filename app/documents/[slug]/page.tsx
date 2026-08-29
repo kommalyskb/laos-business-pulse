@@ -4,6 +4,7 @@ import { categories, documents, getDocument } from "../documentData";
 import styles from "../documents.module.css";
 import BusinessCanvasDocument from "./BusinessCanvasDocument";
 import ContentDesignDocument from "./ContentDesignDocument";
+import DataApiDocument from "./DataApiDocument";
 import FeasibilityStudyDocument from "./FeasibilityStudyDocument";
 import FinancialStructureDocument from "./FinancialStructureDocument";
 import MarketCompetitorDocument from "./MarketCompetitorDocument";
@@ -108,6 +109,8 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
                               ? <TechnicalProposalDocument basePath={basePath} />
                               : document.slug === "tech-stack"
                                 ? <TechStackDocument basePath={basePath} />
+                                : document.slug === "data-api"
+                                  ? <DataApiDocument basePath={basePath} />
                           : document.category === "content" || document.category === "design"
                             ? <ContentDesignDocument slug={document.slug} basePath={basePath} />
                 : <article className={styles.detailBody}>

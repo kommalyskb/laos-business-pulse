@@ -1,0 +1,31 @@
+table_id,logical_trace,table_name,category,primary_key,important_foreign_keys,integrity_baseline,index_path,deletion_policy,source_of_truth
+DB-001,ENT-001,places,place,uuidv7,area_id,"unique slug; status/type checks; version positive","status+published_at; area_id+status; lower name",soft lifecycle,yes
+DB-002,ENT-002,place_aliases,place,uuidv7,place_id,"unique place+normalized alias","trigram normalized_alias",audited delete,yes
+DB-003,ENT-003,categories,taxonomy,uuidv7,parent_id,"unique code; no self parent; service cycle check","parent_id+sort_order; status",archive/restrict,yes
+DB-004,ENT-004,place_categories,taxonomy,"place_id+category_id","place_id; category_id","one primary category per place","category_id+place_id",explicit junction delete,yes
+DB-005,ENT-005,areas,taxonomy,uuidv7,parent_id,"unique code; no self parent; type/state checks","parent_id; status+name",archive/restrict,yes
+DB-006,ENT-006,place_contacts,place,uuidv7,place_id,"unique normalized contact; one primary per type","place_id+type",soft remove,yes
+DB-007,ENT-007,business_hours,place,uuidv7,place_id,"weekday 0-6; closed/open field consistency","place_id+weekday",replace schedule,yes
+DB-008,ENT-008,price_profiles,place,uuidv7,place_id,"one per place; nonnegative; min<=max; level 1-4","level; min/max",replace current+audit,yes
+DB-009,ENT-009,place_redirects,place,uuidv7,"source_place_id; target_place_id","unique source and old slug; source!=target",target_place_id,immutable,yes
+DB-010,ENT-010,creators,content,uuidv7,none,"unique platform+external key; status check","platform+status; lower display name",deactivate,yes
+DB-011,ENT-011,content_sources,content,uuidv7,"place_id; creator_id","unique canonical URL; external key; state check","place+status+published; next_check_at",soft lifecycle/takedown,yes
+DB-012,ENT-012,source_availability_checks,trust,uuidv7,content_source_id,"outcome/status/latency checks","source+checked desc; outcome+checked",append-only,yes
+DB-013,ENT-013,takedown_requests,trust,uuidv7,"polymorphic target","target/state checks; protected requester","state+created; target",retain/protected,yes
+DB-014,ENT-014,verification_checks,trust,uuidv7,"place_id; checked_by; evidence_id","type/result/evidence rules","place+checked desc; result",append-only,yes
+DB-015,ENT-015,correction_requests,trust,uuidv7,place_id,"state/closed_at consistency; protected requester","state+submitted; place+submitted",retain/protected,yes
+DB-016,ENT-016,correction_items,trust,uuidv7,correction_request_id,"unique request+field; decision check; value schema","request+decision",immutable after close,yes
+DB-017,ENT-017,request_evidence,trust,uuidv7,"polymorphic request","unique object key; request catalog","request type+id; status",restricted retention,yes
+DB-018,ENT-018,request_communications,trust,uuidv7,"polymorphic request","channel/direction/outcome; optional unique idempotency","request type+id+sent",append-only/protected,yes
+DB-019,ENT-019,duplicate_candidates,trust,uuidv7,"place_a_id; place_b_id","ordered unique pair; score 0-1","status+score desc; each place",retain decision,yes
+DB-020,ENT-020,work_items,operations,uuidv7,"assignee_id; polymorphic resource","state/type/priority; outcome before done","state+priority+due; assignee+state",retain outcome,yes
+DB-021,ENT-021,partner_memberships,revenue,uuidv7,place_id,"one active per place; amount>=0; valid window","place+state; ends_at",end/cancel,yes
+DB-022,ENT-022,sponsored_campaigns,revenue,uuidv7,place_id,"valid state/window/amount; service eligibility","state+start+end; place",end/cancel,yes
+DB-023,ENT-023,admin_users,access,uuidv7,none,"unique OIDC subject; role/state checks","role+state",deactivate,yes
+DB-024,ENT-024,audit_logs,audit,uuidv7,"actor_id; polymorphic resource","append-only; redacted snapshots","resource+time; actor+time; request",no update/delete,yes
+DB-025,ENT-025,anonymous_sessions,analytics,uuidv7,none,"unique hash; consent/expiry checks","expires; last_seen",TTL purge,yes
+DB-026,ENT-026,analytics_events,analytics,uuidv7,"session_id; place_id; source_id","unique event key; schema allowlist; no PII","name+time; place+time; session+time",append-only/TTL,yes
+DB-027,ENT-027,decision_intents,analytics,uuidv7,"analytics_event_id; place_id","one intent per event; type check","place+type+time",append-only,yes
+DB-S01,Derived,place_search_documents,search,place_id,place_id,"one projection per place; source version","GIN tsvector; GIN trigram; benchmark facets",rebuildable,no
+DB-S02,Platform,outbox_events,platform,uuidv7,aggregate reference,"event schema/version; attempt nonnegative","unpublished partial; aggregate+time",retention pending,platform
+DB-S03,Platform,idempotency_records,platform,"scope+key",none,"same key and request hash","expires_at",TTL purge,platform

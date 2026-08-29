@@ -1,0 +1,32 @@
+api_id,audience,method,path,access,purpose,idempotency,concurrency,primary_errors
+API-P01,Public,GET,/api/v1/feed,anonymous,published video-first feed,no,no,"ERR-VALIDATION; ERR-RATE-LIMITED"
+API-P02,Public,GET,/api/v1/search,anonymous,search and facets,no,no,"ERR-VALIDATION; ERR-RATE-LIMITED"
+API-P03,Public,GET,/api/v1/places/{slug},anonymous,public Place detail,no,no,"ERR-NOT-FOUND; ERR-PLACE-NOT-PUBLIC"
+API-P04,Public,GET,/api/v1/places/{placeId}/sources,anonymous,published review links,no,no,"ERR-NOT-FOUND; ERR-PLACE-NOT-PUBLIC"
+API-P05,Public,POST,/api/v1/events,anonymous session,analytics allowlist,required,event key,"ERR-EVENT-SCHEMA; ERR-IDEMPOTENCY-CONFLICT"
+API-P06,Public,POST,/api/v1/correction-requests,rate-limited anonymous,submit correction,required,no,"ERR-VALIDATION; ERR-EVIDENCE-REQUIRED"
+API-P07,Public,POST,/api/v1/takedown-requests,rate-limited anonymous,submit takedown,required,no,"ERR-VALIDATION; ERR-EVIDENCE-REQUIRED"
+API-A01,Admin,GET,/api/v1/admin/work-items,operations role,work queue,no,no,ERR-FORBIDDEN
+API-A02,Admin,POST,/api/v1/admin/work-items/{id}/claim,operations role,claim work,required,expectedVersion,"ERR-CONCURRENCY-CONFLICT; ERR-INVALID-STATE"
+API-A03,Admin,POST,/api/v1/admin/work-items/{id}/complete,operations role,complete work with outcome,required,expectedVersion,"ERR-WORK-OUTCOME-MISSING; ERR-CONCURRENCY-CONFLICT"
+API-A04,Admin,GET/POST,/api/v1/admin/places,content role,list or create Place,POST required,create duplicate check,"ERR-VALIDATION; ERR-DUPLICATE-REVIEW-REQUIRED"
+API-A05,Admin,GET/PATCH,/api/v1/admin/places/{id},content role,read or edit Place,no,expectedVersion,"ERR-NOT-FOUND; ERR-CONCURRENCY-CONFLICT"
+API-A06,Admin,POST,/api/v1/admin/places/{id}/submit-review,content role,submit Place review,required,expectedVersion,"ERR-INVALID-STATE; ERR-PLACE-PUBLISH-BLOCKED"
+API-A07,Admin,POST,/api/v1/admin/places/{id}/publish,publisher role,publish Place,required,expectedVersion,"ERR-PLACE-PUBLISH-BLOCKED; ERR-VERIFICATION-INCOMPLETE"
+API-A08,Admin,POST,/api/v1/admin/places/{id}/suspend,publisher role,suspend Place,required,expectedVersion,ERR-INVALID-STATE
+API-A09,Admin,POST,/api/v1/admin/places/{id}/archive,publisher role,archive Place,required,expectedVersion,ERR-INVALID-STATE
+API-A10,Admin,POST,/api/v1/admin/places/{id}/merge,senior reviewer,atomic Place merge,required,both versions,"ERR-MERGE-CONFLICT; ERR-CONCURRENCY-CONFLICT"
+API-A11,Admin,GET/POST,/api/v1/admin/sources,content role,list or create source,POST required,create duplicate check,"ERR-SOURCE-URL-DUPLICATE; ERR-SOURCE-VALIDATION"
+API-A12,Admin,GET/PATCH,/api/v1/admin/sources/{id},content role,read or edit source,no,expectedVersion,"ERR-NOT-FOUND; ERR-CONCURRENCY-CONFLICT"
+API-A13,Admin,POST,/api/v1/admin/sources/{id}/check,content role,queue source check,required,no,"ERR-DEPENDENCY-TIMEOUT; ERR-IDEMPOTENCY-CONFLICT"
+API-A14,Admin,POST,/api/v1/admin/sources/{id}/publish,publisher role,publish source,required,expectedVersion,"ERR-SOURCE-PUBLISH-BLOCKED; ERR-SOURCE-TAKEDOWN-HOLD"
+API-A15,Admin,POST,/api/v1/admin/sources/{id}/mark-unavailable,content role,mark broken link,required,expectedVersion,ERR-INVALID-STATE
+API-A16,Admin,GET/PATCH,/api/v1/admin/correction-requests/{id},support role,review correction,no,expectedVersion,"ERR-CONCURRENCY-CONFLICT; ERR-REQUEST-VALUE-CONFLICT"
+API-A17,Admin,POST,/api/v1/admin/correction-requests/{id}/apply,reviewer role,atomic correction apply,required,request and Place versions,"ERR-REQUEST-NOT-READY-TO-CLOSE; ERR-CONCURRENCY-CONFLICT"
+API-A18,Admin,GET/PATCH,/api/v1/admin/takedown-requests/{id},trust role,review takedown,no,expectedVersion,"ERR-EVIDENCE-REQUIRED; ERR-INVALID-STATE"
+API-A19,Admin,POST,/api/v1/admin/verification-checks,reviewer role,record verification,required,no,"ERR-VERIFICATION-INCOMPLETE; ERR-EVIDENCE-REQUIRED"
+API-A20,Admin,GET/POST,/api/v1/admin/campaigns,commercial role,list or create campaign,POST required,create eligibility,"ERR-CAMPAIGN-INELIGIBLE; ERR-CAMPAIGN-WINDOW"
+API-A21,Admin,PATCH,/api/v1/admin/campaigns/{id},commercial role,edit draft campaign,no,expectedVersion,"ERR-CONCURRENCY-CONFLICT; ERR-INVALID-STATE"
+API-A22,Admin,POST,/api/v1/admin/campaigns/{id}/{action},commercial approver,activate pause or end,required,expectedVersion,"ERR-CAMPAIGN-INELIGIBLE; ERR-CAMPAIGN-WINDOW"
+API-A23,Admin,GET,/api/v1/admin/audit-logs,auditor role,query redacted audit,no,no,"ERR-FORBIDDEN; ERR-VALIDATION"
+API-A24,Admin,GET,/api/v1/admin/reports/operations,manager role,operations report,no,no,ERR-REPORT-DEFINITION-CONFLICT

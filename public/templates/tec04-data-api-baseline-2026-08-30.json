@@ -1,0 +1,82 @@
+{
+  "document": {
+    "id": "TEC-04",
+    "title": "Database Design & API Specification",
+    "version": "0.1",
+    "status": "review_required",
+    "date": "2026-08-30",
+    "owner": "Technical Lead",
+    "approver": "Founder"
+  },
+  "inputs": ["PRO-02@1.0", "PRO-03@1.0", "PRO-04@1.0", "TEC-01@1.0", "TEC-03@1.0"],
+  "stack": {
+    "database": "PostgreSQL 18",
+    "schema": "Drizzle ORM",
+    "migration": "reviewed SQL migration",
+    "search": ["PostgreSQL full text search", "pg_trgm", "GIN"],
+    "jobs": "Graphile Worker",
+    "event_delivery": "transactional outbox"
+  },
+  "physical_decisions": {
+    "identifier": "uuid type with database default uuidv7()",
+    "database_naming": "snake_case",
+    "api_naming": "camelCase",
+    "event_time": "timestamptz stored in UTC",
+    "business_hours": "weekday plus local time",
+    "money": "bigint minor unit plus ISO 4217 currency_code",
+    "state": "text plus CHECK constraint",
+    "optimistic_concurrency": "version integer plus expectedVersion",
+    "jsonb": "validated flexible metadata/snapshot only",
+    "deletion": "soft lifecycle by default; no hard delete for Place, Source or Admin",
+    "polymorphic_reference": "resource_type plus resource_id enforced by service catalog",
+    "public_api": "published records only"
+  },
+  "table_scope": {
+    "business_table_count": 27,
+    "support_table_count": 3,
+    "business_tables": [
+      "places", "place_aliases", "categories", "place_categories", "areas", "place_contacts", "business_hours", "price_profiles", "place_redirects",
+      "creators", "content_sources", "source_availability_checks", "takedown_requests", "verification_checks", "correction_requests", "correction_items", "request_evidence", "request_communications", "duplicate_candidates",
+      "work_items", "partner_memberships", "sponsored_campaigns", "admin_users", "audit_logs", "anonymous_sessions", "analytics_events", "decision_intents"
+    ],
+    "support_tables": ["place_search_documents", "outbox_events", "idempotency_records"],
+    "platform_owned_schema": ["Graphile Worker internal schema", "migration journal"],
+    "source_of_truth": "business tables",
+    "rebuildable": ["place_search_documents", "report aggregates"]
+  },
+  "api": {
+    "base_path": "/api/v1",
+    "content_type": "application/json; charset=utf-8",
+    "public_endpoint_entries": 7,
+    "admin_endpoint_entries": 24,
+    "pagination": {"type": "opaque_cursor", "default_limit": 20, "maximum_limit": 30},
+    "idempotency_header": "Idempotency-Key",
+    "correlation_field": "traceId",
+    "concurrency_field": "expectedVersion",
+    "success_envelope": {"data": "resource_or_collection", "meta": {"traceId": "string"}},
+    "error_envelope": {"error": {"code": "stable_code", "message": "localized_message", "details": "safe_object", "traceId": "string"}}
+  },
+  "transaction_contracts": [
+    "TX-01 state transition plus audit plus outbox atomic",
+    "TX-02 Place merge fully atomic",
+    "TX-03 correction apply fully atomic",
+    "TX-04 campaign eligibility rechecked in transaction",
+    "TX-05 analytics event plus decision intent atomic and idempotent",
+    "TX-06 idempotency key and request hash reserved atomically",
+    "TX-07 worker lease uses short transaction and version recheck",
+    "TX-08 communication occurs after business outcome commit"
+  ],
+  "migration_order": ["bootstrap", "reference_core", "place_core", "content_trust", "operations_revenue", "analytics", "async_search_support", "release_gate"],
+  "excluded_from_mvp": ["booking", "order", "payment", "invoice", "refund", "creator_login", "creator_marketplace", "comment", "like", "follow", "direct_message", "AI_model_training"],
+  "artifacts": [
+    "tec04-table-index-register-2026-08-30.csv",
+    "tec04-api-catalog-2026-08-30.csv"
+  ],
+  "review_decisions": [
+    {"id": "REV-01", "subject": "UUIDv7 identifier", "recommendation": "approve", "status": "pending"},
+    {"id": "REV-02", "subject": "money time and state representation", "recommendation": "approve", "status": "pending"},
+    {"id": "REV-03", "subject": "polymorphic reference boundary", "recommendation": "approve_with_integration_tests", "status": "pending"},
+    {"id": "REV-04", "subject": "API version naming cursor concurrency and idempotency", "recommendation": "approve", "status": "pending"},
+    {"id": "REV-05", "subject": "MVP table and endpoint scope", "recommendation": "approve", "status": "pending"}
+  ]
+}
