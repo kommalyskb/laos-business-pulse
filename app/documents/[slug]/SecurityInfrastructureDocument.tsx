@@ -147,7 +147,7 @@ const detections = [
 ] as const;
 
 const incidents = [
-  ["S1 Critical", "PII/secret leak, admin takeover, audit tamper, restricted leak, unrecoverable loss", "Auto-safe now; ack ≤30 min in coverage, ≤8 h outside"],
+  ["S1 Critical", "PII/secret leak, admin takeover, audit tamper, restricted leak, unrecoverable loss", "Auto-safe + On-call alert immediately; acknowledge ≤60 min at all times"],
   ["S2 High", "Material auth bypass, sustained outage, backup degradation, active abuse", "Ack ≤2 h in coverage; contain same coverage period"],
   ["S3 Medium", "Limited weakness, recurring error, suspicious event without confirmed impact", "Next business day; fix or expiring risk acceptance"],
   ["S4 Low", "Hardening improvement without current impact", "Backlog + monthly review"],
@@ -165,11 +165,11 @@ const releaseGates = [
 ] as const;
 
 const reviews = [
-  ["REV-01", "Risk/single host", "ອະນຸມັດ OVH Single-host Pilot ແບບບໍ່ອ້າງ HA, ຜ່ານ OVH-G01—06/CNT-01—11 ແລະໃຊ້ fallback ເມື່ອ gate ບໍ່ຜ່ານ ຫຼືບໍ່?", "ແນະນຳ: ອະນຸມັດແບບມີເງື່ອນໄຂ."],
-  ["REV-02", "Identity/access", "ອະນຸມັດ Managed OIDC + MFA ທຸກ Admin, IAM-01—08 ແລະ 30-min idle/12-h absolute/15-min step-up ຫຼືບໍ່?", "ແນະນຳ: ອະນຸມັດ control; provider ລັອກຫຼັງ quote/audit/region/exit test."],
-  ["REV-03", "Consent/retention", "ອະນຸມັດ RET-01—10 ເປັນ Technical/Product baseline ແລະປິດ optional analytics ຈົນ Legal Review ຫຼືບໍ່?", "ແນະນຳ: ອະນຸມັດແບບລໍ Legal; Developer ຫ້າມເພີ່ມວັນ/ເປີດເອງ."],
-  ["REV-04", "Recovery", "ປັບ TEC-01 RPO 24h ເປັນ RPO ≤1h ແລະຮັກສາ RTO ≤8h ດ້ວຍ daily base + continuous WAL + monthly restore ຫຼືບໍ່?", "ແນະນຳ: ອະນຸມັດ target; ຫ້າມອ້າງ SLO ຖ້າ timed restore ບໍ່ຜ່ານ."],
-  ["REV-05", "Monitoring/incident", "ອະນຸມັດ SIEM-ready, SEC-DET-01—08, S1—S4 ແລະ human coverage 08:00–22:00 ICT; ນອກ coverage auto-safe + S1 ack ≤8h ຫຼືບໍ່?", "ແນະນຳ: ອະນຸມັດ honest Pilot baseline; Managed SIEM/24×7 ຕາມ trigger."],
+  ["REV-01", "Risk/single host", "ອະນຸມັດ OVH Single-host Pilot ແບບບໍ່ອ້າງ HA, ຜ່ານ OVH-G01—06/CNT-01—11 ແລະໃຊ້ fallback ເມື່ອ gate ບໍ່ຜ່ານ.", "ອະນຸມັດແບບມີເງື່ອນໄຂ", "Approved"],
+  ["REV-02", "Identity/access", "ອະນຸມັດ Managed OIDC + MFA ທຸກ Admin, IAM-01—08 ແລະ 30-min idle/12-h absolute/15-min step-up; provider ລັອກຫຼັງ quote/audit/region/exit test.", "ອະນຸມັດ Control; ຍັງບໍ່ລັອກ Provider", "Approved"],
+  ["REV-03", "Consent/retention", "ອະນຸມັດ RET-01—10 ເປັນ Technical/Product baseline; optional analytics ປິດຈົນ Consent, Vendor ແລະ Legal Review ຜ່ານ.", "ອະນຸມັດ Technical/Product; Legal ຍັງຄົງຄ້າງ", "Approved"],
+  ["REV-04", "Recovery", "ອະນຸມັດ RPO ≤1h ແລະ RTO ≤8h ເປັນ Target ດ້ວຍ daily base + continuous WAL + monthly restore; ຫ້າມອ້າງ SLO ຈົນ timed restore ຜ່ານ.", "ອະນຸມັດ Target; Evidence ກ່ອນ SLO", "Approved"],
+  ["REV-05", "Monitoring/incident", "ອະນຸມັດ SIEM-ready, SEC-DET-01—08, S1—S4, human coverage 08:00–22:00 ICT ແລະ 24×7 automated safe action. S1 ຕ້ອງແຈ້ງ On-call ທັນທີ ແລະຮັບຮູ້ພາຍໃນ 60 ນາທີ.", "ອະນຸມັດພ້ອມປັບ S1; Managed SIEM/24×7 SOC ຕາມ Trigger", "Approved"],
 ] as const;
 
 export default function SecurityInfrastructureDocument({ basePath }: Props) {
@@ -177,7 +177,7 @@ export default function SecurityInfrastructureDocument({ basePath }: Props) {
     <header className={styles.formalDocumentHeader}>
       <p>TEC-06 · SECURITY / PRIVACY / INFRASTRUCTURE · 30 AUGUST 2026</p>
       <h1>Security, Privacy ແລະ Infrastructure</h1><h2>Production Pilot Control Baseline</h2>
-      <span className={`${styles.formalStatus} ${styles.formalDraftStatus}`}>0.1 · ຮ່າງສຳລັບທົບທວນ</span>
+      <span className={styles.formalStatus}>1.0 · ອະນຸມັດແລ້ວ</span>
     </header>
     <aside className={styles.formalDraftNotice}><strong>ຈຸດປະສົງ</strong><p>ປ່ຽນ Security, Privacy, OVH, Container, Backup, Monitoring ແລະ Incident decisions ຈາກ TEC-01/03/04/05 ໃຫ້ເປັນ Control, Owner, Evidence ແລະ Release Gate. ນີ້ແມ່ນ Technical/Product Baseline ບໍ່ແທນຄຳປຶກສາກົດໝາຍລາວ.</p></aside>
     <nav className={styles.formalToc} aria-label="ສາລະບານ TEC-06"><h2>ສາລະບານ</h2><ol>
@@ -192,7 +192,7 @@ export default function SecurityInfrastructureDocument({ basePath }: Props) {
 
     <section id="tec06-control" className={styles.formalSection}><h2><span>01</span> ການຄວບຄຸມເອກະສານ</h2>
       <div className={styles.formalTableWrap}><table className={styles.formalTable}><tbody>
-        <tr><th>ID / status</th><td><code>TEC-06</code> · 0.1 — Founder/Technical/Security/Legal review</td></tr>
+        <tr><th>ID / status</th><td><code>TEC-06</code> · 1.0 — Design/Operations Baseline approved 30 August 2026</td></tr>
         <tr><th>Owner / approver</th><td>Technical/Security Owner / Founder; Legal Reviewer ອະນຸມັດ privacy/legal</td></tr>
         <tr><th>Inputs</th><td>CON-04/05, PRO-03/04, TEC-01/03/04/05 ແລະ OVH server specification</td></tr>
         <tr><th>Outputs</th><td>Threat/control, access/session, retention, hardening, RPO/RTO, restore, monitoring/incident and evidence gates</td></tr>
@@ -256,7 +256,7 @@ export default function SecurityInfrastructureDocument({ basePath }: Props) {
     <section id="tec06-monitor" className={styles.formalSection}><h2><span>10</span> Observability, SIEM-ready ແລະ Incident</h2>
       <p>Pino/OpenTelemetry → local Grafana Alloy → Grafana Cloud Loki/Mimir/Tempo/Alerting. App logs may sample; Audit/required Security Events do not. Telemetry failure never blocks Guest request but missing-data alert must be external.</p>
       <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Detection</th><th>Signal</th><th>Response</th></tr></thead><tbody>{detections.map(([id,d,s,r])=><tr key={id}><td><code>{id}</code></td><td><strong>{d}</strong></td><td>{s}</td><td>{r}</td></tr>)}</tbody></table></div>
-      <h3>10.1 Severity and coverage</h3><p>Recommendation: human coverage <strong>08:00–22:00 ICT daily</strong>; alert/automated safe action 24×7. No claim of 24×7 human SOC.</p>
+      <h3>10.1 Severity and coverage</h3><p>Approved baseline: human coverage <strong>08:00–22:00 ICT daily</strong>; alert/automated safe action 24×7. S1 alerts On-call immediately and must be acknowledged within <strong>60 minutes at all times</strong>. This is not a claim of 24×7 human SOC.</p>
       <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Severity</th><th>Examples</th><th>Target</th></tr></thead><tbody>{incidents.map(([s,e,t])=><tr key={s}><th>{s}</th><td>{e}</td><td>{t}</td></tr>)}</tbody></table></div>
       <p><strong>Lifecycle:</strong> Prepare → Detect/Triage → Contain → Eradicate/Recover → fact-based communication → post-incident review within 5 business days. Managed SIEM evaluation trigger: payment/booking, compliance, dedicated owner, cross-source complexity or material incident.</p>
     </section>
@@ -289,10 +289,10 @@ export default function SecurityInfrastructureDocument({ basePath }: Props) {
       </ul>
     </section>
 
-    <section id="tec06-review" className={styles.formalSection}><h2><span>13</span> 5 ຂໍ້ທົບທວນກ່ອນ 1.0</h2>
-      <p>TEC-06 remains 0.1 until REV-01—05 are decided. Version 1.0 locks Design/Operations Baseline; G-SEC-01—08 still require evidence before Public Pilot.</p>
-      <div className={styles.formalTableWrap}><table className={`${styles.formalTable} ${styles.formalCatalogTable}`}><thead><tr><th>ID</th><th>Topic</th><th>Decision question</th><th>Recommendation</th></tr></thead><tbody>{reviews.map(([id,t,q,r])=><tr key={id}><td><code>{id}</code></td><td><strong>{t}</strong></td><td>{q}</td><td>{r}</td></tr>)}</tbody></table></div>
-      <aside className={styles.formalDraftNotice}><strong>Definition of done for 1.0</strong><p>REV-01—05 decided; Technical vs Legal approval explicitly separated; Threat/Role/Control/Recovery/Incident/Release contracts align with TEC-01—05/CON-05; JSON/CSV/runbook align with Web Document. Pending evidence must never be marked Passed without proof.</p></aside>
+    <section id="tec06-review" className={styles.formalSection}><h2><span>13</span> ບັນທຶກການອະນຸມັດ 5 ຂໍ້</h2>
+      <p>Founder/Product Owner ອະນຸມັດ REV-01—05 ວັນທີ 30 ສິງຫາ 2026. Version 1.0 ລັອກ Design/Operations Baseline; G-SEC-01—08 ຍັງຕ້ອງມີຫຼັກຖານກ່ອນ Public Pilot.</p>
+      <div className={styles.formalTableWrap}><table className={`${styles.formalTable} ${styles.formalCatalogTable}`}><thead><tr><th>ID</th><th>Topic</th><th>Approved decision</th><th>Meaning</th><th>Status</th></tr></thead><tbody>{reviews.map(([id,t,q,r,s])=><tr key={id}><td><code>{id}</code></td><td><strong>{t}</strong></td><td>{q}</td><td>{r}</td><td><strong>{s}</strong></td></tr>)}</tbody></table></div>
+      <aside className={styles.formalApproval}><strong>TEC-06 · ສະບັບ 1.0</strong><p>Threat, Role, Access, Privacy, Infrastructure, Recovery, Monitoring, Incident ແລະ Release contracts ຖືກອະນຸມັດເປັນ Developer/Operations Handoff Baseline. Legal Review, provider selection ແລະ G-SEC-01—08 ຍັງເປັນ Pre-launch Evidence; ຫ້າມໝາຍ Control ວ່າ Passed ໂດຍບໍ່ມີຫຼັກຖານ.</p></aside>
     </section>
 
     <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">

@@ -1,8 +1,8 @@
 {
   "documentId": "TEC-06",
   "title": "Security, Privacy & Infrastructure — Production Pilot Control Baseline",
-  "version": "0.1",
-  "status": "review_required",
+  "version": "1.0",
+  "status": "approved_design_operations_baseline",
   "updatedAt": "2026-08-30",
   "owners": {
     "accountable": "Founder / Product Owner",
@@ -12,12 +12,33 @@
       "Operations Owner",
       "Legal Counsel"
     ],
-    "approvalRequired": [
-      "REV-01",
-      "REV-02",
-      "REV-03",
-      "REV-04",
-      "REV-05"
+    "approvalRequired": [],
+    "approvedReviews": [
+      {
+        "id": "REV-01",
+        "approvedAt": "2026-08-30",
+        "status": "approved_conditionally"
+      },
+      {
+        "id": "REV-02",
+        "approvedAt": "2026-08-30",
+        "status": "approved_provider_pending"
+      },
+      {
+        "id": "REV-03",
+        "approvedAt": "2026-08-30",
+        "status": "approved_technical_legal_pending"
+      },
+      {
+        "id": "REV-04",
+        "approvedAt": "2026-08-30",
+        "status": "approved_target_evidence_pending"
+      },
+      {
+        "id": "REV-05",
+        "approvedAt": "2026-08-30",
+        "status": "approved_with_s1_revision"
+      }
     ]
   },
   "purpose": "Turn prior architecture, stack, data, search, privacy and operational decisions into implementable controls, evidence and public-pilot release gates.",
@@ -132,7 +153,8 @@
       "idleMinutes": 30,
       "absoluteHours": 12,
       "privilegedStepUpMinutes": 15,
-      "disableRevocationMinutes": 15
+      "disableRevocationMinutes": 15,
+      "status": "approved_baseline"
     },
     "applicationControls": [
       "APP-01",
@@ -177,9 +199,9 @@
   },
   "recovery": {
     "proposedObjectives": {
-      "postgresqlRpo": "≤1 hour",
-      "postgresqlRto": "≤8 hours",
-      "status": "Not an SLO until timed restore passes."
+      "postgresqlRpo": "≤1 hour approved target",
+      "postgresqlRto": "≤8 hours approved target",
+      "status": "Not an SLO until a timed isolated restore passes."
     },
     "method": [
       "Daily encrypted PostgreSQL base backup",
@@ -216,13 +238,14 @@
       "SEC-DET-07",
       "SEC-DET-08"
     ],
-    "proposedCoverage": "Human 08:00–22:00 ICT daily; external alerts and safe automated actions 24×7.",
     "severityLevels": [
       "S1 Critical",
       "S2 High",
       "S3 Medium",
       "S4 Low"
-    ]
+    ],
+    "approvedCoverage": "Human 08:00–22:00 ICT daily; external alerts and safe automated actions 24×7.",
+    "s1Response": "Alert On-call immediately and acknowledge within 60 minutes at all times."
   },
   "release": {
     "gates": [
@@ -244,7 +267,7 @@
       "missing audit",
       "unknown consent/legal behavior"
     ],
-    "currentResult": "NOT_EVALUATED",
+    "currentResult": "BASELINE_APPROVED_GATES_PENDING",
     "publicPilotApproved": false
   },
   "artifacts": {
@@ -256,28 +279,38 @@
     {
       "id": "REV-01",
       "topic": "single-host risk",
-      "recommendation": "Conditionally approve with no HA claim and all host/container gates."
+      "decision": "Conditionally approved: single-host OVH Pilot, no HA claim, all OVH-G01—06 and CNT-01—11 evidence required.",
+      "status": "APPROVED",
+      "approvedAt": "2026-08-30"
     },
     {
       "id": "REV-02",
       "topic": "identity and access",
-      "recommendation": "Approve control set; choose provider after quote, audit, region and exit review."
+      "decision": "Approved controls: managed OIDC, MFA, IAM-01—08 and 30m/12h/15m session baseline; provider remains pending.",
+      "status": "APPROVED",
+      "approvedAt": "2026-08-30"
     },
     {
       "id": "REV-03",
       "topic": "consent and retention",
-      "recommendation": "Approve as technical baseline; keep optional analytics off pending legal review."
+      "decision": "Approved Technical/Product baseline; optional analytics remains off pending consent, vendor and legal review.",
+      "status": "APPROVED",
+      "approvedAt": "2026-08-30"
     },
     {
       "id": "REV-04",
       "topic": "recovery",
-      "recommendation": "Replace provisional 24h RPO with proposed ≤1h RPO; retain ≤8h RTO; prove through timed restore."
+      "decision": "Approved target RPO ≤1h and RTO ≤8h; no SLO claim until timed restore passes.",
+      "status": "APPROVED",
+      "approvedAt": "2026-08-30"
     },
     {
       "id": "REV-05",
       "topic": "monitoring and incident",
-      "recommendation": "Approve honest SIEM-ready coverage; add managed SIEM/24×7 human coverage only at defined trigger."
+      "decision": "Approved SIEM-ready Pilot with 08:00–22:00 ICT human coverage, 24×7 safe automation and S1 On-call acknowledgement ≤60 minutes.",
+      "status": "APPROVED",
+      "approvedAt": "2026-08-30"
     }
   ],
-  "disclaimer": "Draft technical/product baseline; not legal advice and not proof that any control has passed."
+  "disclaimer": "Approved Design/Operations baseline; not legal advice, not Public Pilot approval and not proof that any implementation control has passed."
 }

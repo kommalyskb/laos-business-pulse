@@ -1,11 +1,11 @@
 {
   "documentId": "TEC-06-DR-RUNBOOK",
-  "version": "0.1-template",
+  "version": "1.0-template",
   "status": "not_executed",
   "warning": "A completed file is evidence only when authorized, timestamped, linked to backup/config/test output and independently reviewed.",
   "objective": {
-    "postgresqlRpo": "≤1 hour proposed",
-    "postgresqlRto": "≤8 hours proposed",
+    "postgresqlRpo": "≤1 hour approved target",
+    "postgresqlRto": "≤8 hours approved target",
     "evidenceRequiredBeforeSloClaim": true
   },
   "exercise": {
