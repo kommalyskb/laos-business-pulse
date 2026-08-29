@@ -1,0 +1,68 @@
+{
+  "documentId": "DEL-01",
+  "version": "0.1",
+  "status": "review_required",
+  "updatedAt": "2026-08-30",
+  "title": "Development Plan",
+  "owner": "Delivery / Tech Lead",
+  "approver": "Product Owner",
+  "inputs": [
+    "PRO-02",
+    "PRO-03",
+    "PRO-04",
+    "TEC-01",
+    "TEC-02",
+    "TEC-03",
+    "TEC-04",
+    "TEC-05",
+    "TEC-06"
+  ],
+  "rom": {
+    "minPersonDays": 75,
+    "maxPersonDays": 110,
+    "calendarCommitment": false,
+    "budgetApproved": false,
+    "formula": "calendar weeks = total person-days / approved productive person-days per week + dependency/vendor/leave buffer"
+  },
+  "scopeRule": "Must-only committed baseline; Should/Later requires approved change control.",
+  "phases": [
+    "P0 Foundation",
+    "P1 First vertical slice",
+    "P2 Discover & decide",
+    "P3 Trust & evidence",
+    "P4 Hardening & Pilot"
+  ],
+  "dependencyOrder": [
+    "WP-01",
+    "WP-02A",
+    "WP-03",
+    "WP-02B",
+    "WP-04",
+    "WP-05/WP-06",
+    "WP-07/WP-08",
+    "WP-09"
+  ],
+  "requiredRoles": [
+    "Product Owner / Founder",
+    "Tech Lead / Developer",
+    "QA Lead / Specialist",
+    "Operations Owner",
+    "Security / Infrastructure Specialist",
+    "Content / Trust Operator"
+  ],
+  "done": [
+    "acceptance and negative/security paths pass",
+    "code review and migration compatibility complete",
+    "observability/audit/error/runbook updated",
+    "no release-blocking defect",
+    "versioned evidence attached"
+  ],
+  "reviews": [
+    "REV-01 Calendar model",
+    "REV-02 Team",
+    "REV-03 Scope",
+    "REV-04 Release gates",
+    "REV-05 Budget authority"
+  ],
+  "disclaimer": "Draft plan. No launch date, named staffing commitment, purchase or production budget is approved."
+}

@@ -1,0 +1,13 @@
+event_id,event_name,consent_class,surface,trigger,allowed_properties,dedupe_rule,retention,owner,status
+"AN-E01","feed_impression","optional","Feed","eligible item becomes visible","session_id;event_id;place_id;position;source_kind","event_id","RET-03","Product Analytics","disabled_pending_legal"
+"AN-E02","feed_item_engaged","optional","Feed","approved dwell threshold reached","session_id;event_id;place_id;dwell_bucket","event_id","RET-03","Product Analytics","disabled_pending_legal"
+"AN-E03","search_submitted","optional","Search","normalized search submitted","normalized_intent_id;category_id;area_id;price_id;result_count_bucket","event_id","RET-03","Search Owner","disabled_pending_legal"
+"AN-E04","search_result_opened","optional","Search","eligible result opened","session_id;event_id;place_id;position;normalized_filter_ids","event_id","RET-03","Search Owner","disabled_pending_legal"
+"AN-E05","place_opened","optional","Place","canonical Place view rendered","session_id;event_id;place_id;entry_surface;campaign_id","event_id","RET-03","Product Analytics","disabled_pending_legal"
+"AN-E06","source_opened","optional","Place","Open Original activated","session_id;event_id;place_id;source_id;provider","event_id","RET-03","Content Analytics","disabled_pending_legal"
+"AN-E07","map_clicked","optional","Decision Intent","valid map action activated","session_id;event_id;place_id;action_target_kind","session+place+action_family+7d","RET-03","Product Analytics","disabled_pending_legal"
+"AN-E08","call_clicked","optional","Decision Intent","valid call action activated","session_id;event_id;place_id;action_target_kind","session+place+action_family+7d","RET-03","Product Analytics","disabled_pending_legal"
+"AN-E09","message_clicked","optional","Decision Intent","valid message action activated","session_id;event_id;place_id;channel","session+place+action_family+7d","RET-03","Product Analytics","disabled_pending_legal"
+"AN-E10","share_clicked","optional","Place","share action activated","session_id;event_id;place_id;share_channel","event_id","RET-03","Product Analytics","disabled_pending_legal"
+"AN-E11","consent_changed","essential","Privacy","consent mode changes","session_id;previous_mode;new_mode;policy_version","event_id","RET-09 or approved privacy record","Privacy Owner","planned"
+"AN-E12","client_error","essential_operational","Reliability","allowlisted client error occurs","error_code;route;build;trace_id","event_id","RET-08","Operations","planned"

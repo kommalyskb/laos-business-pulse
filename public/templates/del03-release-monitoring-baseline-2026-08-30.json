@@ -1,0 +1,57 @@
+{
+  "documentId": "DEL-03",
+  "version": "0.1",
+  "status": "review_required",
+  "updatedAt": "2026-08-30",
+  "title": "Deployment, Release & Monitoring",
+  "topology": "OVH Singapore single-host Docker Compose; Caddy public 80/443 only; no HA or zero-downtime claim.",
+  "environments": [
+    "Local",
+    "Test/CI",
+    "Pilot/Staging",
+    "Production"
+  ],
+  "promotion": "One scanned OCI digest promoted across environments; configuration and secrets external.",
+  "pipeline": [
+    "CI-01 Change validation",
+    "CI-02 Security/supply chain",
+    "CI-03 Immutable build",
+    "CI-04 Test deployment",
+    "CI-05 Pilot gate",
+    "CI-06 Production release"
+  ],
+  "alerts": [
+    "ALT-01",
+    "ALT-02",
+    "ALT-03",
+    "ALT-04",
+    "ALT-05",
+    "ALT-06",
+    "ALT-07",
+    "ALT-08"
+  ],
+  "incident": {
+    "normalHumanCoverage": "08:00–22:00 ICT daily",
+    "automation": "24x7",
+    "s1": "Alert On-call immediately; acknowledge ≤60 minutes at all times."
+  },
+  "migration": "Expand/deploy/backfill/contract; backup before destructive change.",
+  "rollback": "Previous approved digest/config only when schema compatible; data restore requires incident/recovery authority.",
+  "noGo": [
+    "open S1/Critical",
+    "open High without valid exceptional approval",
+    "invalid backup/restore",
+    "failed migration/rollback",
+    "missing audit",
+    "public restricted data/database",
+    "unknown consent behavior"
+  ],
+  "reviews": [
+    "REV-01 Promotion",
+    "REV-02 Release authority",
+    "REV-03 Migration/rollback",
+    "REV-04 Observability/on-call",
+    "REV-05 Single-host disclosure"
+  ],
+  "disclaimer": "Draft runbook baseline; no release is authorized by this artifact."
+}

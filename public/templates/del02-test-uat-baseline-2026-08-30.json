@@ -1,0 +1,62 @@
+{
+  "documentId": "DEL-02",
+  "version": "0.1",
+  "status": "review_required",
+  "updatedAt": "2026-08-30",
+  "title": "Test & UAT Plan",
+  "owners": {
+    "qa": "QA Lead",
+    "technical": "Tech Lead",
+    "operations": "Operations Owner",
+    "finalAcceptance": "Product Owner"
+  },
+  "testLevels": [
+    "T1 Unit/rule",
+    "T2 Contract/API",
+    "T3 Integration",
+    "T4 End-to-end",
+    "T5 Non-functional",
+    "T6 UAT/Operational Acceptance"
+  ],
+  "fixtures": [
+    "DATA-01",
+    "DATA-02",
+    "DATA-03",
+    "DATA-04",
+    "DATA-05",
+    "DATA-06",
+    "DATA-07",
+    "DATA-08"
+  ],
+  "requiredUat": [
+    "UAT-01",
+    "UAT-02",
+    "UAT-03",
+    "UAT-04",
+    "UAT-05",
+    "UAT-06",
+    "UAT-07"
+  ],
+  "performance": {
+    "PERF_01": "First useful content ≤3s",
+    "PERF_02": "Place core data ≤2.5s",
+    "PERF_03": "Interaction feedback ≤300ms",
+    "PERF_04": "Media fallback ≤4s"
+  },
+  "releasePolicy": {
+    "criticalOpen": 0,
+    "highOpen": 0,
+    "mustCriteria": "all pass",
+    "securityGates": "G-SEC-01—08 evidence required",
+    "deviation": "named owner, reason, impact, compensating control, expiry and approvers"
+  },
+  "dataPolicy": "Versioned synthetic/sanitized fixtures; no direct Production PII copy.",
+  "reviews": [
+    "REV-01 Automation boundary",
+    "REV-02 Environment/data",
+    "REV-03 Defect policy",
+    "REV-04 Performance/security/recovery",
+    "REV-05 Acceptance authority"
+  ],
+  "disclaimer": "Draft test design; no test or UAT result is passed until evidence fields are completed and signed."
+}

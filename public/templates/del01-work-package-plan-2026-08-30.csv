@@ -1,0 +1,7 @@
+work_package_id,outcome,min_person_days,max_person_days,gate,depends_on,owner,includes,status,approval_state
+"TP-WP01","Foundation & delivery controls","8","12","P0","—","Founder/Tech Lead","Identity; audit; CI/CD; schema; secret; observability","not_started","review_required"
+"TP-WP02","Admin Place/Source vertical slice","14","20","P1","TP-WP01","Founder + QA checkpoint","Draft; source; validation; publish; projection","not_started","review_required"
+"TP-WP03","Guest decision journey","16","24","P2","TP-WP02","Founder + UX/QA","Feed; Search; Place; action; media fallback","not_started","review_required"
+"TP-WP04","Trust analytics partner operations","18","26","P3","TP-WP02;TP-WP03","Founder + Operations","Correction; consent; quality; campaign; reporting","not_started","review_required"
+"TP-WP05","Hardening & release readiness","14","20","P4","TP-WP01—04","QA/Security/Infrastructure","Regression; security; performance; recovery; UAT","not_started","review_required"
+"TP-WP06","Pilot support & handoff","5","8","P4","TP-WP05","Founder + Operations","Seed; runbook; training; launch; evidence pack","not_started","review_required"

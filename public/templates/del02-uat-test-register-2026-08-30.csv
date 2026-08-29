@@ -1,0 +1,8 @@
+uat_id,journey,requirement_ids,fixture_ids,expected_outcome,result,actual_result,build_version,environment,defect_ids,tester,approver
+"UAT-01","Admin creates and publishes Place + Source","ADM-01;TRU-01","DATA-01;DATA-04","Place/Source/readiness/audit/public result","not_run","","","","","",""
+"UAT-02","Guest discovers and decides","USR-01;USR-02;USR-04","DATA-01;DATA-03","Feed→Place→Map/Call/Message with fallback","not_run","","","","","",""
+"UAT-03","Guest searches in Lao","USR-03","DATA-01;DATA-02","Normalization/filter/empty/Sponsored separation","not_run","","","","","",""
+"UAT-04","Correction and takedown","TRU-01","DATA-03;DATA-05","Evidence/partial decision/urgent hide/audit","not_run","","","","","",""
+"UAT-05","Source and data quality recovery","TRU-01;ADM-01","DATA-02;DATA-03","Retry/unavailable/stale/manual queue","not_run","","","","","",""
+"UAT-06","Partner and Sponsored reporting","BUS-06;ANA-01","DATA-06;DATA-07","Window/disclosure/eligibility/intent disclaimer","not_run","","","","","",""
+"UAT-07","Operational recovery","NFR-01;NFR-04","DATA-08","Deploy/migration/monitoring/rollback/restore/support","not_run","","","","","",""

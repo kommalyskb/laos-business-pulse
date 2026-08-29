@@ -1,0 +1,66 @@
+{
+  "documentId": "DEL-04",
+  "version": "0.1",
+  "status": "review_required",
+  "updatedAt": "2026-08-30",
+  "title": "Analytics Tracking Plan",
+  "defaultMode": "EssentialOnly; optional analytics OFF pending consent, withdrawal, vendor, retention and legal gates.",
+  "prohibited": [
+    "raw search query",
+    "PII beyond essential purpose",
+    "secret/token",
+    "restricted evidence body",
+    "cross-device fingerprint",
+    "message body"
+  ],
+  "events": [
+    "AN-E01",
+    "AN-E02",
+    "AN-E03",
+    "AN-E04",
+    "AN-E05",
+    "AN-E06",
+    "AN-E07",
+    "AN-E08",
+    "AN-E09",
+    "AN-E10",
+    "AN-E11",
+    "AN-E12"
+  ],
+  "funnels": [
+    "FNL-01 Discovery reach",
+    "FNL-02 Place consideration",
+    "FNL-03 Decision Intent",
+    "FNL-04 Source exploration",
+    "FNL-05 Partner result"
+  ],
+  "retention": {
+    "optionalRaw": "90 days only after gate",
+    "aggregate": "12 months non-identifying",
+    "applicationLogs": "30 days",
+    "traces": "14 days",
+    "rawQuery": "not persisted"
+  },
+  "dataQuality": [
+    "DQ-A01",
+    "DQ-A02",
+    "DQ-A03",
+    "DQ-A04",
+    "DQ-A05",
+    "DQ-A06"
+  ],
+  "reportingRules": [
+    "Decision Intent is not visit/booking/sale",
+    "Sponsored and organic separate",
+    "manual verification separate",
+    "show time zone, window, consent, freshness and quality flags"
+  ],
+  "reviews": [
+    "REV-01 Consent gate",
+    "REV-02 Event catalog",
+    "REV-03 Decision Intent",
+    "REV-04 Retention/access",
+    "REV-05 Reporting"
+  ],
+  "disclaimer": "Draft analytics design. Optional collection remains disabled."
+}

@@ -5,6 +5,7 @@ import styles from "../documents.module.css";
 import BusinessCanvasDocument from "./BusinessCanvasDocument";
 import ContentDesignDocument from "./ContentDesignDocument";
 import DataApiDocument from "./DataApiDocument";
+import DeliveryOperationsDocument from "./DeliveryOperationsDocument";
 import FeasibilityStudyDocument from "./FeasibilityStudyDocument";
 import FinancialStructureDocument from "./FinancialStructureDocument";
 import MarketCompetitorDocument from "./MarketCompetitorDocument";
@@ -117,6 +118,8 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
                                     ? <SearchRecommendationDocument basePath={basePath} />
                                     : document.slug === "security-infrastructure"
                                       ? <SecurityInfrastructureDocument basePath={basePath} />
+                                      : document.category === "delivery"
+                                        ? <DeliveryOperationsDocument slug={document.slug} basePath={basePath} />
                           : document.category === "content" || document.category === "design"
                             ? <ContentDesignDocument slug={document.slug} basePath={basePath} />
                 : <article className={styles.detailBody}>

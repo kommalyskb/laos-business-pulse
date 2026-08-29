@@ -1,0 +1,336 @@
+import styles from "../documents.module.css";
+
+type Props = { slug: string; basePath: string };
+
+const phasePlan = [
+  ["P0", "Foundation", "TP-WP01 · WP-01", "Identity/OIDC, role/action authorization, audit atomicity, schema/migration, CI/CD, secret, log and environment", "Admin mutation ບໍ່ເລີ່ມຈົນ negative authorization ແລະ audit rollback ຜ່ານ"],
+  ["P1", "First vertical slice", "TP-WP02 · WP-02A/03/02B/04", "Admin ສ້າງ Place + Source → readiness → publish → Guest ເປີດ canonical Place → Map Intent", "E2E, Published-only boundary, attribution, audit/outbox ແລະ rollback ຜ່ານ"],
+  ["P2", "Discover & decide", "TP-WP03 · WP-05/06", "Full-screen Feed, Lao Search/filter, Place detail, menu/room/media fallback, Map/Call/Message", "Core Guest journey, PERF-01—04, responsive and accessibility baseline ຜ່ານ"],
+  ["P3", "Trust & evidence", "TP-WP04 · WP-07/08/09", "Correction/takedown, freshness/retry, consent event, Founding Partner, Sponsored and performance summary", "Trust queue, event reconciliation, disclosure and manual operations rehearsal ຜ່ານ"],
+  ["P4", "Hardening & Pilot", "TP-WP05/06", "Regression, security, recovery, load, UAT, rollback, seed/import, operator training and launch support", "QA/UAT/G-SEC/Operations gates ຜ່ານ; Product Owner signs Go/No-Go"],
+] as const;
+
+const effort = [
+  ["TP-WP01", "Foundation & delivery controls", 8, 12, "P0", "Founder/Tech Lead", "Identity, audit, CI/CD, schema, secret, observability"],
+  ["TP-WP02", "Admin Place/Source vertical slice", 14, 20, "P1", "Founder + QA checkpoint", "Draft, source, validation, publish and projection"],
+  ["TP-WP03", "Guest decision journey", 16, 24, "P2", "Founder + UX/QA", "Feed, Search, Place, actions and media fallback"],
+  ["TP-WP04", "Trust, analytics & partner operations", 18, 26, "P3", "Founder + Operations", "Correction, consent, quality, campaign and reporting"],
+  ["TP-WP05", "Hardening & release readiness", 14, 20, "P4", "QA/Security/Infrastructure specialist", "Regression, security, performance, recovery and UAT defect"],
+  ["TP-WP06", "Pilot support & handoff", 5, 8, "P4", "Founder + Operations", "Seed, runbook, training, launch and evidence pack"],
+] as const;
+
+const teamModel = [
+  ["Product Owner / Founder", "Scope, priority, business decision, acceptance and Go/No-Go", "Cannot self-mark technical/security evidence as passed"],
+  ["Tech Lead / Developer", "Architecture, implementation, review, migration, automation and technical evidence", "Cannot approve own unresolved Critical/High exception"],
+  ["QA Lead / Specialist", "Risk-based test plan, independent verification, defect and UAT evidence", "Independence checkpoint required at P1 and P4"],
+  ["Operations Owner", "Environment, release, monitoring, backup, incident, queue and SOP readiness", "Accepts operational handoff before Pilot"],
+  ["Security / Infrastructure Specialist", "Threat/control, host/container, recovery and security-gate review", "Checkpoint-based; findings have owner and expiry"],
+  ["Content / Trust Operator", "Fixture, Place/Source, correction/takedown and quality rehearsal", "Uses least-privilege role and documented queue"],
+] as const;
+
+const deliveryCadence = [
+  ["Backlog refinement", "Weekly", "Ready items have Requirement, dependency, acceptance, estimate, owner and evidence type", "Product + Tech + QA"],
+  ["Iteration planning", "Every 2 weeks or capacity window", "Commit by available person-days, not optimistic calendar", "Product + Delivery"],
+  ["Daily control", "Working days", "Blocker, risk, queue and evidence gap updated; no status theatre", "Active team"],
+  ["Demo/acceptance", "End of iteration", "Working outcome against controlled fixture and criteria", "Product + QA + Operations"],
+  ["Retrospective", "End of iteration", "Cycle time, escaped defect, rework and process action", "Active team"],
+  ["Gate review", "P0—P4 exit", "Evidence pack, residual risk, budget and next-stage authority", "Named approvers"],
+] as const;
+
+const deliveryRisks = [
+  ["DEL-R01", "Founder capacity becomes bottleneck", "High", "Reserve realistic capacity; WIP limit; specialist checkpoint; do not convert ROM directly to date", "Founder"],
+  ["DEL-R02", "Should/Later scope enters silently", "High", "Must-only backlog; change record with person-day/budget/gate impact", "Product Owner"],
+  ["DEL-R03", "External source behavior changes", "High", "Early adapter spike, redirect fallback, contract fixture and owner", "Tech Lead"],
+  ["DEL-R04", "Late security/recovery failure", "High", "P0 controls, monthly restore, security test throughout—not only P4", "Security/Operations"],
+  ["DEL-R05", "Insufficient Lao content/test data", "Medium", "Controlled fixtures plus Pilot inventory gate 30→60→100", "Content Owner"],
+  ["DEL-R06", "Evidence is missing despite feature completion", "Medium", "Evidence path is part of Definition of Done and gate checklist", "QA Lead"],
+] as const;
+
+const backlogItems = [
+  ["DEL-B001", "Lock domain/API/state/error contracts and reference seed", "P0", "—", "Reviewed examples, migration/seed from empty DB"],
+  ["DEL-B002", "Managed OIDC, MFA, session and server authorization", "P0", "DEL-B001", "Allowed/expired/forbidden/step-up tests"],
+  ["DEL-B003", "Audit writer, outbox and business-write atomicity", "P0", "DEL-B001/B002", "Commit together or rollback together"],
+  ["DEL-B004", "Place Draft, required field and duplicate candidate", "P1", "DEL-B001—003", "Draft/audit/validation/duplicate fixtures"],
+  ["DEL-B005", "Source URL, attribution, metadata, link and fallback", "P1", "DEL-B003/B004", "Provider contract and lifecycle tests"],
+  ["DEL-B006", "Readiness, publish, public DTO and canonical Place", "P1", "DEL-B004/B005", "Published-only E2E and no-leak test"],
+  ["DEL-B007", "Feed, Lao Search, filters and media fallback", "P2", "DEL-B006", "Eligibility, pagination, 60-query and mobile E2E"],
+  ["DEL-B008", "Map/Call/Message, save/share and consent-safe event skeleton", "P2", "DEL-B006", "Deep-link/fallback/consent/dedupe tests"],
+  ["DEL-B009", "Correction, takedown, suspend/archive and appeal", "P3", "DEL-B003/B006", "SLA/partial decision/urgent hide/audit"],
+  ["DEL-B010", "Freshness, source retry, dead-letter and maintenance queue", "P3", "DEL-B005/B006/B009", "Clock/idempotency/recovery evidence"],
+  ["DEL-B011", "Partner, Sponsored and performance summary", "P3", "DEL-B007/B008", "Time/eligibility/disclosure/reconciliation"],
+  ["DEL-B012", "Regression, accessibility, performance and security", "P4", "DEL-B001—011", "DEL-02 + G-SEC evidence"],
+  ["DEL-B013", "Backup restore, rollback and incident rehearsal", "P4", "DEL-B012", "Timed restore and release tabletop"],
+  ["DEL-B014", "Seed/import, operator training, UAT and known limits", "P4", "DEL-B012/B013", "Signed UAT/operations handoff"],
+  ["DEL-B015", "Public Pilot Go/No-Go and launch observation", "P4", "DEL-B014", "Four-role sign-off and evidence pack"],
+] as const;
+
+const del01Reviews = [
+  ["REV-01", "Calendar model", "Use 75–110 person-days as ROM and calculate dates only after weekly capacity, holidays and support load are known.", "Approve capacity-first; no launch date commitment yet."],
+  ["REV-02", "Team", "Use Founder-led Hybrid with independent QA and Security/Infrastructure checkpoints.", "Approve; named people and rates remain planning inputs."],
+  ["REV-03", "Scope", "Only Must scope enters committed baseline; Should/Later requires change control.", "Approve to protect runway and Pilot learning."],
+  ["REV-04", "Release gates", "P0→P4 are evidence gates; an iteration date cannot waive a failed gate.", "Approve; failed gate returns work to owner."],
+  ["REV-05", "Budget authority", "Separate cash cost, Founder shadow cost, vendor quote, contingency and approved purchase.", "Approve structure; actual production budget remains pending inputs."],
+] as const;
+
+const testLevels = [
+  ["T1", "Unit / rule", "Validation, state, eligibility, score, dedupe, calculation", "Developer", "Every PR"],
+  ["T2", "Contract / API", "Schema, stable error, authorization, pagination, idempotency, compatibility", "Developer + QA", "PR and release"],
+  ["T3", "Integration", "PostgreSQL transaction, audit/outbox, worker, search projection, provider adapter", "Developer + QA", "PR/nightly"],
+  ["T4", "End-to-end", "Guest/Admin critical journeys and failure recovery through UI", "QA", "P1 onward + release"],
+  ["T5", "Non-functional", "Performance, accessibility, security, recovery, capacity and resilience", "Specialist owners", "P2/P4 gates"],
+  ["T6", "UAT / operational acceptance", "Business outcome, operator queue, release, backup, incident and support", "Product + Operations", "P4"],
+] as const;
+
+const fixtures = [
+  ["DATA-01", "Complete Published Place", "Eligible Feed/Search/Place/Action"],
+  ["DATA-02", "Unknown and stale fields", "Trust/freshness labels and safe fallback"],
+  ["DATA-03", "Temporary, unavailable and takedown Source", "Retry, redirect fallback and public removal"],
+  ["DATA-04", "Duplicate Place and separate branch", "Candidate, review, merge and redirect"],
+  ["DATA-05", "Partial correction request", "Approve/reject/needs-evidence and SLA clock"],
+  ["DATA-06", "Campaign state/time boundaries", "Sponsored eligibility, label, schedule and expiry"],
+  ["DATA-07", "Consent and duplicate events", "Essential-only, opt-in, dedupe and reconciliation"],
+  ["DATA-08", "Admin security failures", "Expired/forbidden/concurrent/audit-failure rollback"],
+] as const;
+
+const uatJourneys = [
+  ["UAT-01", "Admin creates and publishes Place + Source", "Place/Source fields, duplicate warning, attribution, readiness, audit and public visibility"],
+  ["UAT-02", "Guest discovers and decides", "Feed → Place → Map/Call/Message with media failure fallback"],
+  ["UAT-03", "Guest searches in Lao", "Normalization, filters, empty result and Sponsored separation"],
+  ["UAT-04", "Correction and takedown", "Intake, evidence, queue, partial decision, urgent hide and audit"],
+  ["UAT-05", "Source/data quality recovery", "Temporary retry, confirmed unavailable, stale Place and manual queue"],
+  ["UAT-06", "Partner and Sponsored reporting", "Time window, disclosure, eligible placement and Decision Intent disclaimer"],
+  ["UAT-07", "Operational recovery", "Deploy, migration, monitoring, rollback/restore, support and handover"],
+] as const;
+
+const defects = [
+  ["Critical", "Security/rights breach, restricted leak, data corruption/loss, core unavailable without recovery", "Release blocked; S1 process; no waiver by feature owner"],
+  ["High", "Must journey, authorization, audit, Published boundary, backup/rollback or material incorrect result", "Release blocked unless Product + Tech + Operations approve time-bound exceptional risk; Security High normally no waiver"],
+  ["Medium", "Workaround exists; limited audience/non-core behavior; no security/data-integrity impact", "Owner, target date and regression scope required"],
+  ["Low", "Cosmetic/copy/minor efficiency with no outcome loss", "Backlog; may release with documented acceptance"],
+] as const;
+
+const del02Reviews = [
+  ["REV-01", "Automation boundary", "Automate deterministic unit/contract/integration/critical E2E; keep exploratory, usability and business judgment human.", "Recommended"],
+  ["REV-02", "Environment/data", "Use isolated Test/UAT with versioned synthetic fixtures; never copy Production PII directly.", "Recommended"],
+  ["REV-03", "Defect policy", "Critical/High block release according to the matrix; deviation must name owner, expiry and compensating control.", "Recommended"],
+  ["REV-04", "Performance/security/recovery", "Treat PERF-01—04 and G-SEC-01—08 as exit gates with reproducible evidence.", "Recommended"],
+  ["REV-05", "Acceptance authority", "QA verifies, Tech accepts technical quality, Operations accepts readiness, Product gives final UAT/Go-No-Go.", "Recommended"],
+] as const;
+
+const environments = [
+  ["Local", "Developer feedback", "Synthetic local seed; fake provider", "No production secret/data", "Developer"],
+  ["Test / CI", "Automated repeatable verification", "Ephemeral DB/fixture per run", "No manual sign-off", "Tech/QA"],
+  ["Pilot / Staging", "UAT, load, security, migration, restore and operator rehearsal", "Production-like sanitized dataset/config", "Restricted access; outbound integration controlled", "QA/Operations"],
+  ["Production", "Public Pilot", "Approved seed and business data", "Change/release/audit/backup controls", "Operations"],
+] as const;
+
+const pipeline = [
+  ["CI-01", "Change validation", "Format/type/lint/unit/contract/migration check", "No failed required job"],
+  ["CI-02", "Security/supply chain", "Secret, dependency, SAST, container scan and SBOM", "Critical/High = 0 or approved non-release exception"],
+  ["CI-03", "Build", "Immutable OCI image pinned by digest", "Same digest promoted; never rebuild per environment"],
+  ["CI-04", "Test deployment", "Migration from clean and previous schema; integration/E2E/smoke", "Required suites pass"],
+  ["CI-05", "Pilot gate", "Performance, accessibility, DAST, restore, rollback and UAT evidence", "Named approvers sign"],
+  ["CI-06", "Production release", "Backup, migration, digest deploy, health/smoke and observation", "Release commander records result"],
+] as const;
+
+const alerts = [
+  ["ALT-01", "External availability/HTTPS", "2 consecutive failures or cert threshold", "S1/S2 runbook"],
+  ["ALT-02", "Host/RAID/disk", "RAID degraded; disk 70/80/90%; SMART/NVMe failure", "Protect capacity; stop unsafe release"],
+  ["ALT-03", "Application/API", "Error rate/latency above baseline", "Inspect trace; rollback when release-correlated"],
+  ["ALT-04", "PostgreSQL", "Connection, lock, replication/WAL archive, storage anomaly", "Protect writes and recovery chain"],
+  ["ALT-05", "Worker/outbox", "Queue age/depth/dead-letter or projection lag", "Pause/retry/reconcile"],
+  ["ALT-06", "Backup/restore", "Job/checksum/WAL gap or missed drill", "Block release; recovery owner"],
+  ["ALT-07", "Security", "SEC-DET-01—08", "Auto-safe; On-call; evidence preservation"],
+  ["ALT-08", "Missing telemetry", "Expected heartbeat absent", "Treat monitoring silence as incident"],
+] as const;
+
+const del03Reviews = [
+  ["REV-01", "Promotion", "Promote one immutable image digest from Test to Pilot to Production.", "Recommended"],
+  ["REV-02", "Release authority", "Product, Tech, QA and Operations sign their own gates; Release Commander executes.", "Recommended"],
+  ["REV-03", "Migration/rollback", "Backup before migration; forward-fix by default, restore only by incident authority when integrity requires it.", "Recommended"],
+  ["REV-04", "Observability/on-call", "Approve ALT-01—08 and TEC-06 S1 acknowledgement within 60 minutes at all times.", "Recommended"],
+  ["REV-05", "Single-host disclosure", "Allow planned maintenance and no zero-downtime/HA claim; release only with recovery evidence.", "Recommended"],
+] as const;
+
+const analyticsEvents = [
+  ["AN-E01", "feed_impression", "Optional", "Feed", "session_id,event_id,place_id,position,source_kind", "Exposure only; not a view/sale"],
+  ["AN-E02", "feed_item_engaged", "Optional", "Feed", "session_id,event_id,place_id,dwell_bucket", "Threshold/version required"],
+  ["AN-E03", "search_submitted", "Optional", "Search", "normalized_intent/category/area/price IDs,result_count_bucket", "No raw query"],
+  ["AN-E04", "search_result_opened", "Optional", "Search", "place_id,position,normalized filters", "Search success signal"],
+  ["AN-E05", "place_opened", "Optional", "Place", "place_id,entry_surface,campaign_id?", "Interest only"],
+  ["AN-E06", "source_opened", "Optional", "Place", "place_id,source_id,provider", "Redirect to original"],
+  ["AN-E07", "map_clicked", "Optional", "Decision Intent", "place_id,action_target_kind", "Intent—not verified visit"],
+  ["AN-E08", "call_clicked", "Optional", "Decision Intent", "place_id,action_target_kind", "Intent—not completed call/sale"],
+  ["AN-E09", "message_clicked", "Optional", "Decision Intent", "place_id,channel", "Intent—not completed conversation"],
+  ["AN-E10", "share_clicked", "Optional", "Place", "place_id,share_channel", "No recipient data"],
+  ["AN-E11", "consent_changed", "Essential", "Privacy", "session_id,previous_mode,new_mode,policy_version", "No optional event before opt-in"],
+  ["AN-E12", "client_error", "Essential operational", "Reliability", "error_code,route,build,trace_id", "No content/PII payload"],
+] as const;
+
+const funnel = [
+  ["FNL-01", "Discovery reach", "Unique consented sessions with eligible feed/search exposure", "Deduplicate session + event; bot/test excluded"],
+  ["FNL-02", "Place consideration", "Unique sessions with place_opened ÷ Discovery reach", "Same window and eligibility"],
+  ["FNL-03", "Decision Intent", "Unique sessions with map/call/message ÷ Place consideration", "One Place/action family within 7 days; not sale"],
+  ["FNL-04", "Source exploration", "Unique source_opened ÷ Place consideration", "Attribution source must remain valid"],
+  ["FNL-05", "Partner result", "Eligible Place exposure/open/intent by approved campaign/partner window", "Sponsored and organic reported separately"],
+] as const;
+
+const dataQuality = [
+  ["DQ-A01", "Schema validity", "≥99.5% accepted optional events; invalid separated", "Daily"],
+  ["DQ-A02", "Duplicate rate", "≤1% after event_id/dedupe policy", "Daily"],
+  ["DQ-A03", "Processing delay", "p95 ≤15 min for dashboard; documented outage otherwise", "Hourly"],
+  ["DQ-A04", "Consent violation", "0 optional events from EssentialOnly", "Release + daily"],
+  ["DQ-A05", "Identity/privacy", "0 raw query/PII/secret in payload", "CI + daily sample"],
+  ["DQ-A06", "Reconciliation", "Client test log, ingest and aggregate agree within approved tolerance", "Release + weekly"],
+] as const;
+
+const del04Reviews = [
+  ["REV-01", "Consent gate", "Keep optional analytics OFF until consent UI, withdrawal, retention, vendor and Legal gates pass.", "Recommended"],
+  ["REV-02", "Event catalog", "Approve AN-E01—12 and prohibit ad-hoc production events without schema/version/owner.", "Recommended"],
+  ["REV-03", "Decision Intent", "Use Map/Call/Message as intent only; never present it as visit, booking or sale.", "Recommended"],
+  ["REV-04", "Retention/access", "Apply TEC-06 RET-03/08/09 and restricted role-based access; no raw search query.", "Recommended"],
+  ["REV-05", "Reporting", "Organic/Sponsored and observed/manual evidence stay separate; dashboard shows quality/consent state.", "Recommended"],
+] as const;
+
+const operationsQueues = [
+  ["OPS-Q01", "Content intake", "New Place/Source and duplicate candidates", "Content Editor", "Oldest/risk/launch-area"],
+  ["OPS-Q02", "Publish review", "Readiness, attribution, trust/freshness and public preview", "Publisher", "No self-approval where conflict exists"],
+  ["OPS-Q03", "Correction/support", "Owner/user request and evidence", "Support", "SLA clock; Needs Evidence pauses"],
+  ["OPS-Q04", "Takedown/trust", "Rights, harmful/removed source, appeal", "Trust", "P0/P1 first; urgent safe-hide"],
+  ["OPS-Q05", "Data quality", "Stale, failed source, retry/dead-letter and duplicate", "Content/Operations", "Risk then age"],
+  ["OPS-Q06", "Campaign/partner", "Schedule, label, eligibility, performance summary", "Commercial", "Cannot alter verification/rating"],
+  ["OPS-Q07", "Incident/technical", "Alert, outage, security and recovery task", "Operations/Platform", "S1—S4 severity"],
+] as const;
+
+const opsRoles = [
+  ["content_editor", "Create/edit Place and Source Draft; submit review", "Cannot publish, decide trust case or manage access"],
+  ["publisher", "Review readiness and publish/suspend/archive eligible content", "Cannot self-approve conflicted draft or manage secret/access"],
+  ["support", "Handle assigned correction/support case and communication", "Cannot publish, make trust ruling or bulk export evidence"],
+  ["trust", "Handle takedown/privacy/rights evidence, urgent hide and appeal workflow", "Cannot approve own appeal or commercial/finance/access"],
+  ["commercial", "Manage Partner/Campaign Draft, schedule and approved report", "Cannot change organic rank, verification, review or trust decision"],
+  ["finance", "Maintain revenue/expense/invoice evidence and verification", "Cannot mutate content, trust, access or audit"],
+  ["auditor", "Read redacted audit/security/compliance evidence by purpose", "Cannot mutate business state or browse raw secret/evidence by default"],
+  ["platform_admin", "Identity, role, deploy, backup and recovery", "Cannot self-approve routine content/commercial/trust decision"],
+] as const;
+
+const dailySop = [
+  ["START", "Open shift", "Review handover, active incident, dashboard/alert, backup/WAL status and overdue queues", "Shift log opened"],
+  ["TRUST", "Urgent safety/rights", "Process P0/P1 takedown, restricted leak, false disclosure and appeal", "Decision/evidence/audit linked"],
+  ["CONTENT", "Inventory and publish", "Intake → duplicate → source → readiness → independent publish preview", "Place/Source audit and checked date"],
+  ["QUALITY", "Freshness and failure", "Retry temporary source; classify unavailable; update stale field or queue", "No silent delete; task outcome"],
+  ["SUPPORT", "Correction", "Acknowledge, validate evidence, partial decision, apply approved fields and reply", "Case state, SLA and audit"],
+  ["COMMERCIAL", "Partner/campaign", "Verify window/label/eligibility; reconcile report; explain Decision Intent", "Commercial evidence separate from trust"],
+  ["END", "Handover", "Summarize open S1/S2, overdue, blocked, change/release and next owner", "Named receiver and timestamp"],
+] as const;
+
+const operatingCadence = [
+  ["Daily", "Queues, alert, backup/WAL, failed jobs, data freshness, consent/data-quality and handover"],
+  ["Weekly", "Publish sample, correction/takedown SLA, event reconciliation, capacity, defect and partner summary"],
+  ["Monthly", "Isolated PostgreSQL restore, access/secret/patch review, cost/capacity, incident trend and SOP drill"],
+  ["Quarterly", "Access review, break-glass, evidence restore sample, clean-host reconstruction and vendor/risk review"],
+] as const;
+
+const del05Reviews = [
+  ["REV-01", "Operating hours", "Approve normal queue coverage 08:00–22:00 ICT daily plus S1 On-call at all times.", "Recommended"],
+  ["REV-02", "Segregation of duties", "Content drafts; Publisher publishes; Trust decides rights; Commercial cannot change trust/rating; Platform cannot self-approve routine business data.", "Recommended"],
+  ["REV-03", "Queue/SLA", "Approve OPS-Q01—07, severity/risk-first priority and documented pause/escalation.", "Recommended"],
+  ["REV-04", "Maintenance cadence", "Approve daily/weekly/monthly/quarterly controls including monthly timed restore.", "Recommended"],
+  ["REV-05", "Evidence/handover", "Every material action has case/task, reason, actor, timestamp, result and next owner; chat alone is not record.", "Recommended"],
+] as const;
+
+function Header({ code, title, lao }: { code: string; title: string; lao: string }) {
+  return <header className={styles.formalDocumentHeader}><p>{code} · DELIVERY &amp; OPERATIONS · 30 AUGUST 2026</p><h1>{title}</h1><h2>{lao}</h2><span className={`${styles.formalStatus} ${styles.formalDraftStatus}`}>0.1 · ຮ່າງສຳລັບທົບທວນພາຍຫຼັງ</span></header>;
+}
+
+function Artifacts({ basePath, items }: { basePath: string; items: readonly (readonly [string,string,string])[] }) {
+  return <div className={styles.architectureArtifacts}>{items.flatMap(([file,title,description])=>[
+    <a key={`p-${file}`} href={`${basePath}/artifact-preview?file=${file}`}><b>ພຣີວິວ {title}</b><span>{description}</span></a>,
+    <a key={`d-${file}`} href={`${basePath}/templates/${file}`} download><b>ດາວໂຫຼດ {title}</b><span>Working artifact · ລໍຣີວິວ</span></a>,
+  ])}</div>;
+}
+
+function Reviews({ rows }: { rows: readonly (readonly [string,string,string,string])[] }) {
+  return <div className={styles.formalTableWrap}><table className={`${styles.formalTable} ${styles.formalCatalogTable}`}><thead><tr><th>ID</th><th>Topic</th><th>Decision needed</th><th>Recommendation</th></tr></thead><tbody>{rows.map(([id,t,d,r])=><tr key={id}><td><code>{id}</code></td><td><strong>{t}</strong></td><td>{d}</td><td>{r}</td></tr>)}</tbody></table></div>;
+}
+
+function DevelopmentPlan({ basePath }: { basePath: string }) {
+  const totalMin=effort.reduce((s,r)=>s+r[2],0), totalMax=effort.reduce((s,r)=>s+r[3],0);
+  return <article className={styles.formalDocument}><Header code="DEL-01" title="Development Plan" lao="ແຜນພັດທະນາຈາກ Approved Baseline ຫາ Public Pilot" />
+    <aside className={styles.formalDraftNotice}><strong>ຈຸດປະສົງ</strong><p>ປ່ຽນ 64 Functions, 9 Work Packages, Must Scope, Technical Stack ແລະ Security Gates ໃຫ້ເປັນລຳດັບສ້າງ, Capacity, Owner, Evidence ແລະ Go/No-Go. ບໍ່ສ້າງວັນ Launch ຈາກ ROM ໂດຍບໍ່ຮູ້ຄວາມສາມາດທີມ.</p></aside>
+    <nav className={styles.formalToc}><h2>ສາລະບານ</h2><ol><li><a href="#del01-control">Control</a></li><li><a href="#del01-effort">Effort/Capacity</a></li><li><a href="#del01-phase">P0—P4</a></li><li><a href="#del01-team">Team/Cadence</a></li><li><a href="#del01-quality">Ready/Done/Change</a></li><li><a href="#del01-risk">Risk/Artifacts</a></li><li><a href="#del01-review">Review</a></li></ol></nav>
+    <section id="del01-control" className={styles.formalSection}><h2><span>01</span> Document Control ແລະ Baseline</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><tbody><tr><th>ID / status</th><td>DEL-01 · 0.1 · Review required</td></tr><tr><th>Owner / approver</th><td>Delivery/Tech Lead · Product Owner approves scope/budget/date</td></tr><tr><th>Inputs</th><td>PRO-02/03/04 · TEC-01—06 · CON/UX handoff</td></tr><tr><th>Output</th><td>Capacity plan, ordered backlog, gates, team/RACI, delivery evidence and change control</td></tr></tbody></table></div><p>Approved planning range is <strong>{totalMin}–{totalMax} person-days</strong>. It includes work, review and evidence stated below; it excludes unknown vendor procurement, post-Pilot product expansion and calendar delay from unavailable capacity.</p></section>
+    <section id="del01-effort" className={styles.formalSection}><h2><span>02</span> Effort, Capacity ແລະ Calendar Formula</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>WP</th><th>Outcome</th><th>Min</th><th>Max</th><th>Gate</th><th>Owner</th><th>Includes</th></tr></thead><tbody>{effort.map(([id,o,min,max,g,owner,scope])=><tr key={id}><td><code>{id}</code></td><td><strong>{o}</strong></td><td>{min}</td><td>{max}</td><td>{g}</td><td>{owner}</td><td>{scope}</td></tr>)}</tbody><tfoot><tr><th colSpan={2}>Total ROM</th><th>{totalMin}</th><th>{totalMax}</th><td colSpan={3}>person-days · not commitment</td></tr></tfoot></table></div><p><strong>Calendar weeks = total person-days ÷ approved productive person-days per week + dependency/vendor/leave buffer.</strong> Productive capacity excludes meetings, support, procurement, leave and unrelated work. Reforecast at each gate using completed evidence and remaining backlog.</p></section>
+    <section id="del01-phase" className={styles.formalSection}><h2><span>03</span> Delivery Gates P0—P4 ແລະ Ordered Backlog</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Gate</th><th>Outcome</th><th>Work</th><th>Scope</th><th>Exit evidence</th></tr></thead><tbody>{phasePlan.map(([id,o,w,s,e])=><tr key={id}><td><code>{id}</code></td><td><strong>{o}</strong></td><td>{w}</td><td>{s}</td><td>{e}</td></tr>)}</tbody></table></div><aside className={styles.formalDecision}><strong>Dependency order</strong><p>WP-01 → WP-02A → WP-03 → WP-02B → WP-04 → WP-05/06 → WP-07/08 → WP-09. Duplicate Merge/Redirect follows first publish; analytics capture may use no-op sink until consent gate, but failure must never block Guest action.</p></aside><h3>3.1 Development starting backlog</h3><div className={styles.formalTableWrap}><table className={`${styles.formalTable} ${styles.formalCatalogTable}`}><thead><tr><th>ID</th><th>Outcome</th><th>Gate</th><th>Depends on</th><th>Exit evidence</th></tr></thead><tbody>{backlogItems.map(row=><tr key={row[0]}>{row.map((c,i)=><td key={`${row[0]}-${i}`}>{i===0?<code>{c}</code>:i===1?<strong>{c}</strong>:c}</td>)}</tr>)}</tbody></table></div></section>
+    <section id="del01-team" className={styles.formalSection}><h2><span>04</span> Team, Ownership ແລະ Cadence</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Role</th><th>Accountability</th><th>Separation/control</th></tr></thead><tbody>{teamModel.map(([r,a,c])=><tr key={r}><td><strong>{r}</strong></td><td>{a}</td><td>{c}</td></tr>)}</tbody></table></div><h3>4.1 Cadence</h3><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Control</th><th>When</th><th>Required output</th><th>Owner</th></tr></thead><tbody>{deliveryCadence.map(row=><tr key={row[0]}>{row.map((c,i)=><td key={`${row[0]}-${i}`}>{i===0?<strong>{c}</strong>:c}</td>)}</tr>)}</tbody></table></div></section>
+    <section id="del01-quality" className={styles.formalSection}><h2><span>05</span> Definition of Ready, Done ແລະ Change</h2><h3>Ready</h3><ul className={styles.formalPlainList}><li>Requirement/Function/Workflow ID, outcome, dependency and owner are known.</li><li>Acceptance and controlled fixture exist; UX/API/data contract is stable enough to implement.</li><li>Estimate includes code, review, test, evidence, documentation and migration/operations work.</li><li>Secret/vendor/legal decision is either resolved or explicitly blocks start.</li></ul><h3>Done</h3><ul className={styles.formalPlainList}><li>Acceptance and negative/security paths pass; code review and migration compatibility complete.</li><li>Observability, audit, error/fallback, runbook and evidence are updated where affected.</li><li>No open blocking defect; change is demonstrable from approved environment/build/fixture.</li></ul><h3>Change control</h3><p>Every scope/stack/gate/date/budget change records request, reason, alternatives, person-day/cash/runway/risk impact, affected documents, decision owner and effective baseline. Emergency change is retrospectively documented within one business day.</p></section>
+    <section id="del01-risk" className={styles.formalSection}><h2><span>06</span> Risk, Budget Evidence ແລະ Artifacts</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Risk</th><th>Level</th><th>Control</th><th>Owner</th></tr></thead><tbody>{deliveryRisks.map(row=><tr key={row[0]}>{row.map((c,i)=><td key={`${row[0]}-${i}`}>{i===0?<code>{c}</code>:i===1?<strong>{c}</strong>:c}</td>)}</tr>)}</tbody></table></div><p>Budget view must show cash development cost, Founder person-days × reference rate, specialist/vendor quote, infrastructure allocation, contingency, spent/committed/forecast and remaining authority separately.</p><Artifacts basePath={basePath} items={[["del01-development-plan-baseline-2026-08-30.json","Delivery Baseline JSON","Gate, effort, capacity, RACI, change and decision"],["del01-work-package-plan-2026-08-30.csv","Work Package CSV","Estimate, dependency, owner, gate, evidence and status"]]} /></section>
+    <section id="del01-review" className={styles.formalSection}><h2><span>07</span> 5 ຂໍ້ທົບທວນກ່ອນ 1.0</h2><Reviews rows={del01Reviews} /><aside className={styles.formalDraftNotice}><strong>1.0 gate</strong><p>Approve REV-01—05; name actual capacity/roles; approve budget authority and first P0 backlog. No date or budget is approved by this 0.1 draft.</p></aside></section>
+    <nav className={styles.docPagination}><a href={`${basePath}/documents/security-infrastructure`}><small>← PREVIOUS</small><strong>TEC-06 · Security/Infrastructure</strong></a><a href={`${basePath}/documents/test-uat`}><small>NEXT →</small><strong>DEL-02 · Test &amp; UAT</strong></a></nav>
+  </article>;
+}
+
+function TestUat({ basePath }: { basePath: string }) {
+  return <article className={styles.formalDocument}><Header code="DEL-02" title="Test & UAT Plan" lao="ແຜນທົດສອບ, ຫຼັກຖານ ແລະການຮັບມອບ" />
+    <aside className={styles.formalDraftNotice}><strong>ຈຸດປະສົງ</strong><p>ກຳນົດວ່າຈະພິສູດ Requirement, Security, Performance, Recovery ແລະວຽກ Admin/Guest ແນວໃດ. “ເປີດໄດ້” ຫຼື “ທົດສອບແລ້ວ” ບໍ່ພຽງພໍຖ້າບໍ່ມີ Build, Fixture, Result ແລະ Approver.</p></aside>
+    <section className={styles.formalSection}><h2><span>01</span> Control ແລະ Strategy</h2><p>DEL-02 operationalizes PRO-04’s 13 Requirements/46 Criteria, PRO-02 traceability, PERF-01—04, TEC-05 QG-S01—08 and TEC-06 G-SEC-01—08. Risk-based depth increases for authorization, public/restricted data boundary, rights, audit/outbox, analytics consent and recovery.</p><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Level</th><th>Type</th><th>Coverage</th><th>Owner</th><th>When</th></tr></thead><tbody>{testLevels.map(row=><tr key={row[0]}>{row.map((c,i)=><td key={`${row[0]}-${i}`}>{i===0?<code>{c}</code>:i===1?<strong>{c}</strong>:c}</td>)}</tr>)}</tbody></table></div></section>
+    <section className={styles.formalSection}><h2><span>02</span> Environment, Fixture ແລະ Test Data</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Fixture</th><th>Coverage</th></tr></thead><tbody>{fixtures.map(([id,n,c])=><tr key={id}><td><code>{id}</code></td><td><strong>{n}</strong></td><td>{c}</td></tr>)}</tbody></table></div><ul className={styles.formalPlainList}><li>Fixtures are versioned, resettable and synthetic/sanitized; Production PII is never copied directly.</li><li>External provider tests use recorded approved fixtures plus limited controlled live checks; flaky live behavior cannot silently pass.</li><li>Every test result records Test Case, Requirement, environment, build digest, fixture version, expected/actual, defect and tester.</li></ul></section>
+    <section className={styles.formalSection}><h2><span>03</span> Required Suites ແລະ Non-functional Gates</h2><p>Every PR runs T1/T2 and affected T3. Nightly runs full integration and selected E2E. Release candidate runs regression, UAT seed, performance, accessibility, security, migration/rollback and recovery suites.</p><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Measure</th><th>Pilot threshold</th><th>Fail result</th></tr></thead><tbody><tr><td>PERF-01</td><td>First useful content</td><td>≤3 seconds</td><td>Block NFR-02</td></tr><tr><td>PERF-02</td><td>Place core data</td><td>≤2.5 seconds</td><td>Block NFR-02</td></tr><tr><td>PERF-03</td><td>Interaction feedback</td><td>≤300 ms</td><td>Defect by impact</td></tr><tr><td>PERF-04</td><td>Media timeout fallback</td><td>≤4 seconds</td><td>Block media recovery</td></tr></tbody></table></div><p>Performance runs on a defined mid-range Android/mobile viewport and simulated normal 4G from Lao/SEA path. Security/recovery result cannot be replaced by screenshots; use scan/test/config/restore evidence.</p></section>
+    <section className={styles.formalSection}><h2><span>04</span> Defect, Regression ແລະ Deviation</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Severity</th><th>Meaning</th><th>Release rule</th></tr></thead><tbody>{defects.map(([s,m,r])=><tr key={s}><th>{s}</th><td>{m}</td><td>{r}</td></tr>)}</tbody></table></div><p>Every fix has cause, affected Requirement/Function, regression cases and retest evidence. A deviation includes owner, reason, user/risk impact, compensating control, expiry and explicit approvers; expired deviation automatically blocks the next release.</p></section>
+    <section className={styles.formalSection}><h2><span>05</span> UAT Journeys and Sign-off</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Journey</th><th>Must demonstrate</th></tr></thead><tbody>{uatJourneys.map(([id,j,m])=><tr key={id}><td><code>{id}</code></td><td><strong>{j}</strong></td><td>{m}</td></tr>)}</tbody></table></div><ol className={styles.formalNumberList}><li>QA prepares build/fixture/case and confirms no blocking regression.</li><li>Business/Operations user executes without developer steering; actual result and defect are recorded.</li><li>Tech Lead signs technical quality; Operations signs readiness; Product Owner accepts/rejects or approves a time-bound deviation.</li><li>Evidence lives under versioned UAT path and is immutable after sign-off; correction creates a new revision.</li></ol></section>
+    <section className={styles.formalSection}><h2><span>06</span> Exit Criteria and Artifacts</h2><ul className={styles.formalPlainList}><li>All Must criteria and seven UAT journeys pass; Critical/High open count = 0.</li><li>Performance, accessibility, security, backup/restore, rollback and monitoring evidence pass.</li><li>Test coverage maps every Must Requirement to case/result/evidence; known limitations and Medium/Low defects are signed.</li><li>Operations accepts runbook, access, queues, alerts, handover and support path.</li></ul><Artifacts basePath={basePath} items={[["del02-test-uat-baseline-2026-08-30.json","Test Baseline JSON","Levels, fixture, gate, defect and authority"],["del02-uat-test-register-2026-08-30.csv","UAT Register CSV","Journey, case, fixture, expected/actual, defect, result and sign-off"]]} /></section>
+    <section className={styles.formalSection}><h2><span>07</span> 5 ຂໍ້ທົບທວນກ່ອນ 1.0</h2><Reviews rows={del02Reviews} /></section>
+    <nav className={styles.docPagination}><a href={`${basePath}/documents/development-plan`}><small>← PREVIOUS</small><strong>DEL-01 · Development Plan</strong></a><a href={`${basePath}/documents/release-monitoring`}><small>NEXT →</small><strong>DEL-03 · Release &amp; Monitoring</strong></a></nav>
+  </article>;
+}
+
+function ReleaseMonitoring({ basePath }: { basePath: string }) {
+  return <article className={styles.formalDocument}><Header code="DEL-03" title="Deployment, Release & Monitoring" lao="ວິທີນຳສົ່ງ, ກວດສອບ, ຍ້ອນກັບ ແລະຮັບມືເຫດການ" />
+    <aside className={styles.formalDraftNotice}><strong>ຈຸດປະສົງ</strong><p>ໃຫ້ທຸກ Release ຮູ້ Source, Image Digest, Migration, Approver, Backup, Smoke, Observation, Rollback ແລະ Incident path. OVH Single-host Pilot ບໍ່ອ້າງ Zero-downtime ຫຼື High Availability.</p></aside>
+    <section className={styles.formalSection}><h2><span>01</span> Environment and Promotion</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Environment</th><th>Purpose</th><th>Data</th><th>Boundary</th><th>Owner</th></tr></thead><tbody>{environments.map(row=><tr key={row[0]}>{row.map((c,i)=><td key={`${row[0]}-${i}`}>{i===0?<strong>{c}</strong>:c}</td>)}</tr>)}</tbody></table></div><p>Source commit produces one scanned OCI image and SBOM. The same digest is promoted Test → Pilot → Production with environment configuration outside the image. Production deploy requires protected authority and cannot use a developer-local build.</p></section>
+    <section className={styles.formalSection}><h2><span>02</span> CI/CD Gates</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Stage</th><th>Checks</th><th>Pass</th></tr></thead><tbody>{pipeline.map(row=><tr key={row[0]}>{row.map((c,i)=><td key={`${row[0]}-${i}`}>{i===0?<code>{c}</code>:i===1?<strong>{c}</strong>:c}</td>)}</tr>)}</tbody></table></div><p>Required CI cannot be bypassed by changing a workflow in the same unreviewed change. Emergency release still records authorizer, reason, minimal tests, observation and retrospective within one business day.</p></section>
+    <section className={styles.formalSection}><h2><span>03</span> Release Runbook</h2><ol className={styles.formalNumberList}><li><strong>Plan:</strong> name release commander, change set, risk, affected contracts, maintenance/communication and rollback trigger.</li><li><strong>Prepare:</strong> verify gate/sign-off, current backup/WAL, disk reserve, secret/config, image digest and migration plan.</li><li><strong>Protect:</strong> announce maintenance if needed; pause worker/write where migration requires; record start timestamp.</li><li><strong>Migrate/deploy:</strong> run one-shot migration with lock/time; deploy pinned digest through Compose; Caddy remains only public ingress.</li><li><strong>Verify:</strong> health, OIDC, Admin negative auth, audit/outbox, Published boundary, Feed/Search/Place/Intent and external HTTPS.</li><li><strong>Observe:</strong> watch ALT-01—08, error/latency/queue/data-quality for approved window; record decision.</li><li><strong>Close or recover:</strong> resume work, communicate and close evidence, or rollback/forward-fix under incident authority.</li></ol></section>
+    <section className={styles.formalSection}><h2><span>04</span> Migration, Rollback and Recovery</h2><p>Database change is forward-compatible across one release where possible: expand → deploy → backfill → contract later. Backup precedes destructive migration. Application rollback uses previous approved image/config only if schema remains compatible; data restore is not a routine undo and requires incident/recovery authority.</p><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Trigger</th><th>Action</th><th>Authority</th></tr></thead><tbody><tr><td>Smoke/health fails before traffic</td><td>Stop release; restore previous image/config; verify</td><td>Release Commander</td></tr><tr><td>Error/latency or Must journey regression</td><td>Pause writes/worker if needed; rollback or forward-fix by safest path</td><td>Tech + Operations</td></tr><tr><td>Data integrity/restricted leak</td><td>S1, safe-hide/revoke, preserve evidence; restore only by DR runbook</td><td>Incident Commander</td></tr><tr><td>Migration irreversible/unknown</td><td>No-Go until backup, restore and forward repair are proven</td><td>Tech + Product + Operations</td></tr></tbody></table></div></section>
+    <section className={styles.formalSection}><h2><span>05</span> Monitoring, Alert and Incident</h2><p>Pino/OpenTelemetry → Grafana Alloy → Grafana Cloud. Application log, append-only Audit and required Security Event remain separate. Normal human coverage is 08:00–22:00 ICT daily; automated safe action/alert is 24×7; S1 alerts On-call immediately and acknowledgement is ≤60 minutes at all times.</p><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Signal</th><th>Condition</th><th>Response</th></tr></thead><tbody>{alerts.map(row=><tr key={row[0]}>{row.map((c,i)=><td key={`${row[0]}-${i}`}>{i===0?<code>{c}</code>:i===1?<strong>{c}</strong>:c}</td>)}</tr>)}</tbody></table></div><p>Incident lifecycle: detect/triage → contain → preserve evidence → eradicate/recover → fact-based communication → review within five business days. Monitoring silence itself generates ALT-08.</p></section>
+    <section className={styles.formalSection}><h2><span>06</span> Release Evidence and Artifacts</h2><ul className={styles.formalPlainList}><li>Commit, digest, SBOM/scans, environment, migration, backup ID, test/UAT, approvers and release timestamps.</li><li>Smoke/monitoring screenshots alone are supporting evidence; retain machine results, log/trace/query references and decision.</li><li>No-Go: open S1/Critical, unauthorized Admin, public DB/evidence, invalid restore point, failed migration/rollback, missing audit or unresolved consent behavior.</li></ul><Artifacts basePath={basePath} items={[["del03-release-monitoring-baseline-2026-08-30.json","Release Baseline JSON","Environment, CI/CD, monitoring, incident and authority"],["del03-release-checklist-2026-08-30.csv","Release Checklist CSV","Preflight, deploy, verify, observe, rollback and evidence"]]} /></section>
+    <section className={styles.formalSection}><h2><span>07</span> 5 ຂໍ້ທົບທວນກ່ອນ 1.0</h2><Reviews rows={del03Reviews} /></section>
+    <nav className={styles.docPagination}><a href={`${basePath}/documents/test-uat`}><small>← PREVIOUS</small><strong>DEL-02 · Test &amp; UAT</strong></a><a href={`${basePath}/documents/analytics-plan`}><small>NEXT →</small><strong>DEL-04 · Analytics Plan</strong></a></nav>
+  </article>;
+}
+
+function AnalyticsPlan({ basePath }: { basePath: string }) {
+  return <article className={styles.formalDocument}><Header code="DEL-04" title="Analytics Tracking Plan" lao="ແຜນ Event, Funnel, Data Quality ແລະ Privacy-safe Reporting" />
+    <aside className={styles.formalDraftNotice}><strong>Fail-safe baseline</strong><p>Optional Analytics ຍັງປິດຈົນ Consent, Withdrawal, Vendor, Retention ແລະ Legal gate ຜ່ານ. Core Guest journey ຕ້ອງໃຊ້ໄດ້ໃນ EssentialOnly; raw search query, PII, secret ແລະ evidence body ຫ້າມເຂົ້າ Event.</p></aside>
+    <section className={styles.formalSection}><h2><span>01</span> Measurement Contract</h2><p>DEL-04 measures Discover → Consider → Decision Intent and operational quality. It does not claim a verified visit, reservation or sale. Every event has ID/name, version, purpose, consent class, trigger, allowlisted fields, dedupe rule, owner, retention and validation.</p><div className={styles.formalTableWrap}><table className={`${styles.formalTable} ${styles.formalCatalogTable}`}><thead><tr><th>ID</th><th>Event</th><th>Consent</th><th>Surface</th><th>Allowed properties</th><th>Guardrail</th></tr></thead><tbody>{analyticsEvents.map(row=><tr key={row[0]}>{row.map((c,i)=><td key={`${row[0]}-${i}`}>{i===0?<code>{c}</code>:i===1?<strong>{c}</strong>:c}</td>)}</tr>)}</tbody></table></div></section>
+    <section className={styles.formalSection}><h2><span>02</span> Trigger, Session and Deduplication</h2><ul className={styles.formalPlainList}><li>Event emits only after the user-visible action/outcome occurs; pre-render does not count as impression.</li><li>Anonymous session is rotated/expired under TEC-06; no cross-device identity or fingerprinting.</li><li><code>event_id</code> is unique; Decision Intent deduplicates by anonymous session + Place + action family within seven days.</li><li>Test/bot/internal traffic has explicit marker and is excluded from business dashboard but retained in QA evidence.</li><li>Client retry is idempotent; analytics failure never blocks navigation, Map, Call or Message.</li></ul><p>Context uses approved IDs and bounded enums. Raw URL may be normalized to provider/source ID; free text, phone content, message body, precise device fingerprint and raw IP are not analytic properties.</p></section>
+    <section className={styles.formalSection}><h2><span>03</span> Funnel and Attribution</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Metric</th><th>Formula</th><th>Rule</th></tr></thead><tbody>{funnel.map(row=><tr key={row[0]}>{row.map((c,i)=><td key={`${row[0]}-${i}`}>{i===0?<code>{c}</code>:i===1?<strong>{c}</strong>:c}</td>)}</tr>)}</tbody></table></div><p>Attribution window and campaign eligibility are evaluated at event time. Sponsored and organic exposure/results are separate dimensions. Manual shop follow-up is reported as supplementary observed evidence, never merged silently into platform Decision Intent.</p></section>
+    <section className={styles.formalSection}><h2><span>04</span> Privacy, Retention and Access</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><tbody><tr><th>Optional raw event</th><td>RET-03 · 90 days only after legal/consent gate</td></tr><tr><th>Aggregate</th><td>12 months, non-identifying and purpose-bound</td></tr><tr><th>Application log/trace</th><td>RET-08 · 30-day log / 14-day trace; not analytics source by default</td></tr><tr><th>Security event</th><td>RET-09; restricted and not mixed with marketing/product analytics</td></tr><tr><th>Access</th><td>Role/purpose-based aggregate; event-level export disabled by default and audited</td></tr><tr><th>Withdrawal</th><td>Stops future optional events; deletion follows policy and feasible identifier boundary</td></tr></tbody></table></div></section>
+    <section className={styles.formalSection}><h2><span>05</span> Data Quality and Dashboard</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Control</th><th>Threshold</th><th>Review</th></tr></thead><tbody>{dataQuality.map(row=><tr key={row[0]}>{row.map((c,i)=><td key={`${row[0]}-${i}`}>{i===0?<code>{c}</code>:i===1?<strong>{c}</strong>:c}</td>)}</tr>)}</tbody></table></div><p>Every dashboard shows time window, timezone Asia/Vientiane, consent mode, data freshness, excluded test/bot count and quality flags. Minimum views: Product Funnel, Search Quality, Place/Source, Partner/Sponsored, Operations/Data Quality and Consent/Privacy.</p></section>
+    <section className={styles.formalSection}><h2><span>06</span> Release Gate and Artifacts</h2><ul className={styles.formalPlainList}><li>Schema/catalog, client trigger and server validator match same version.</li><li>EssentialOnly emits no optional event; consent change and withdrawal tests pass.</li><li>QA action log reconciles with accepted, rejected, duplicate and aggregate counts.</li><li>Retention/purge and restricted access evidence pass before optional production collection.</li></ul><Artifacts basePath={basePath} items={[["del04-analytics-baseline-2026-08-30.json","Analytics Baseline JSON","Consent, session, funnel, retention, dashboard and gate"],["del04-analytics-event-catalog-2026-08-30.csv","Event Catalog CSV","Trigger, properties, consent, dedupe, retention, owner and status"]]} /></section>
+    <section className={styles.formalSection}><h2><span>07</span> 5 ຂໍ້ທົບທວນກ່ອນ 1.0</h2><Reviews rows={del04Reviews} /></section>
+    <nav className={styles.docPagination}><a href={`${basePath}/documents/release-monitoring`}><small>← PREVIOUS</small><strong>DEL-03 · Release &amp; Monitoring</strong></a><a href={`${basePath}/documents/admin-operations`}><small>NEXT →</small><strong>DEL-05 · Admin &amp; Operations SOP</strong></a></nav>
+  </article>;
+}
+
+function AdminOperations({ basePath }: { basePath: string }) {
+  return <article className={styles.formalDocument}><Header code="DEL-05" title="Admin & Operations SOP" lao="ຄູ່ມືວຽກປະຈຳວັນ, Queue, Escalation ແລະ Handover" />
+    <aside className={styles.formalDraftNotice}><strong>ຈຸດປະສົງ</strong><p>ໃຫ້ Admin ຮູ້ວ່າຈະເລີ່ມວຽກຈາກ Queue ໃດ, ກວດຫຍັງ, ໃຜອະນຸມັດ, ເມື່ອໃດຕ້ອງຢຸດ/ຍົກລະດັບ ແລະຫຼັກຖານຫຍັງຕ້ອງສົ່ງຕໍ່.</p></aside>
+    <section className={styles.formalSection}><h2><span>01</span> Roles and Operating Boundary</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Role</th><th>Routine authority</th><th>Must not do</th></tr></thead><tbody>{opsRoles.map(([r,a,c])=><tr key={r}><td><code>{r}</code></td><td>{a}</td><td>{c}</td></tr>)}</tbody></table></div><p>Every Admin uses a named OIDC/MFA account. Shared account, copied secret, direct database change and untracked evidence export are prohibited. Privileged action uses step-up and append-only audit.</p></section>
+    <section className={styles.formalSection}><h2><span>02</span> Work Queues</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Queue</th><th>Contains</th><th>Owner</th><th>Priority</th></tr></thead><tbody>{operationsQueues.map(row=><tr key={row[0]}>{row.map((c,i)=><td key={`${row[0]}-${i}`}>{i===0?<code>{c}</code>:i===1?<strong>{c}</strong>:c}</td>)}</tr>)}</tbody></table></div><p>Queue item contains case/task ID, entity, source, severity/SLA, owner, state, blockers, last action, next action and audit/evidence reference. Personal chat or memory is not the queue of record.</p></section>
+    <section className={styles.formalSection}><h2><span>03</span> Daily Workflow</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Stage</th><th>Work</th><th>Procedure</th><th>Evidence</th></tr></thead><tbody>{dailySop.map(row=><tr key={row[0]}>{row.map((c,i)=><td key={`${row[0]}-${i}`}>{i===0?<code>{c}</code>:i===1?<strong>{c}</strong>:c}</td>)}</tr>)}</tbody></table></div></section>
+    <section className={styles.formalSection}><h2><span>04</span> Place/Source Publish SOP</h2><ol className={styles.formalNumberList}><li>Search canonical records and evaluate duplicate candidate before creating a Place.</li><li>Create Draft with required source, category, area, contact/map, freshness and Unknown label where evidence is absent.</li><li>Register canonical social URL, validate provider/availability, attribute creator and keep Open Original fallback; never re-host video.</li><li>Resolve duplicate/readiness errors; preview public DTO and confirm no restricted field/evidence appears.</li><li>Publisher independently checks PUB-01—06, trust/freshness/partner/Sponsored separation and publishes with reason/audit.</li><li>Verify Feed/Search/Place, link/action targets and monitoring; failed verification suspends or returns to Draft according to state rule.</li></ol></section>
+    <section className={styles.formalSection}><h2><span>05</span> Correction, Takedown and Escalation</h2><p>Correction acknowledges request, validates requester/evidence, allows approve/reject/needs-evidence per item, applies approved fields through normal validation and communicates a reasoned outcome. Takedown/rights/safety uses CON-04 P0—P3; P0 safe-hides immediately without deleting audit/evidence.</p><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Severity</th><th>Example</th><th>Operations response</th></tr></thead><tbody>{defects.map(([s,m,r])=><tr key={s}><th>{s}</th><td>{m}</td><td>{r}</td></tr>)}</tbody></table></div><p>S1 alerts On-call immediately and acknowledgement is ≤60 minutes at all times. Preserve evidence before destructive recovery; communicate confirmed facts only.</p></section>
+    <section className={styles.formalSection}><h2><span>06</span> Commercial and Reporting Boundary</h2><ul className={styles.formalPlainList}><li>Commercial creates Partner/Campaign Draft; authorized activation requires dates, eligible Place, approved placement and visible Sponsored label.</li><li>Payment/partner status never changes organic rank, verification, review score or trust decision.</li><li>Performance Summary identifies window, definitions, consent/data-quality state and states Decision Intent is not a verified visit/sale.</li><li>Invoice/payment evidence is separate from content/trust record and available only to appropriate Finance/Commercial role.</li></ul></section>
+    <section className={styles.formalSection}><h2><span>07</span> Maintenance, Handover and Evidence</h2><div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Cadence</th><th>Controls</th></tr></thead><tbody>{operatingCadence.map(([c,w])=><tr key={c}><th>{c}</th><td>{w}</td></tr>)}</tbody></table></div><p>Handover names open incident, overdue queue, release/change, temporary access/exception, blocked item, next action, owner and due time. Material decisions remain in system record, not only chat. SOP revision is versioned and operators acknowledge training.</p><Artifacts basePath={basePath} items={[["del05-admin-operations-baseline-2026-08-30.json","Operations Baseline JSON","Role, queue, daily SOP, escalation, cadence and handover"],["del05-operations-checklist-2026-08-30.csv","Operations Checklist CSV","Daily/weekly/monthly/quarterly control and evidence"]]} /></section>
+    <section className={styles.formalSection}><h2><span>08</span> 5 ຂໍ້ທົບທວນກ່ອນ 1.0</h2><Reviews rows={del05Reviews} /></section>
+    <nav className={styles.docPagination}><a href={`${basePath}/documents/analytics-plan`}><small>← PREVIOUS</small><strong>DEL-04 · Analytics Plan</strong></a><a href={`${basePath}/documents`}><small>DIRECTORY →</small><strong>Document Directory</strong></a></nav>
+  </article>;
+}
+
+export default function DeliveryOperationsDocument({ slug, basePath }: Props) {
+  if (slug === "development-plan") return <DevelopmentPlan basePath={basePath} />;
+  if (slug === "test-uat") return <TestUat basePath={basePath} />;
+  if (slug === "release-monitoring") return <ReleaseMonitoring basePath={basePath} />;
+  if (slug === "analytics-plan") return <AnalyticsPlan basePath={basePath} />;
+  if (slug === "admin-operations") return <AdminOperations basePath={basePath} />;
+  return null;
+}
