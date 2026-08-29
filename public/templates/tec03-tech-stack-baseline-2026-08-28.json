@@ -1,8 +1,8 @@
 {
   "document": {
     "id": "TEC-03",
-    "version": "0.4",
-    "status": "draft_for_review",
+    "version": "1.0",
+    "status": "approved",
     "createdAt": "2026-08-28",
     "updatedAt": "2026-08-30",
     "asOf": "2026-08-30",
@@ -182,12 +182,20 @@
     "authority": "no_purchase_authority_until_quote_and_budget_approval"
   },
   "reviewDecisions": [
-    { "id": "REV-01", "topic": "application_baseline", "status": "pending" },
-    { "id": "REV-02", "topic": "data_baseline", "status": "pending" },
-    { "id": "REV-03", "topic": "search_and_jobs", "status": "pending" },
-    { "id": "REV-04", "topic": "hosting", "status": "pending" },
-    { "id": "REV-05", "topic": "quality_observability_security_monitoring_identity_storage_and_no_AI_in_MVP", "status": "pending" }
+    { "id": "REV-01", "topic": "application_baseline", "status": "approved" },
+    { "id": "REV-02", "topic": "data_baseline", "status": "approved" },
+    { "id": "REV-03", "topic": "search_and_jobs", "status": "approved_conditional", "conditionOwner": "TEC-05", "condition": "Lao relevance query latency and queue age evidence before Public Pilot" },
+    { "id": "REV-04", "topic": "hosting_and_container", "status": "approved_conditional", "conditionOwner": "TEC-06", "condition": "OVH-G01 to G06 and CNT-01 to CNT-11 evidence before Public Pilot" },
+    { "id": "REV-05", "topic": "quality_observability_security_monitoring_identity_storage_and_no_AI_in_MVP", "status": "approved" }
   ],
+  "approval": {
+    "approvedAt": "2026-08-30",
+    "approvedBy": "Product Owner",
+    "baselineLocked": true,
+    "purchaseAuthorityGranted": false,
+    "publicLaunchAuthorityGranted": false,
+    "preLaunchGatesRemainMandatory": true
+  },
   "handoff": ["TEC-04", "TEC-05", "TEC-06", "DEL-01"],
   "officialSources": [
     "https://nextjs.org/support-policy",

@@ -2,7 +2,7 @@
   "artifact": {
     "id": "TEC-03-OBS-SEC",
     "document": "TEC-03",
-    "documentVersion": "0.4",
+    "documentVersion": "1.0",
     "asOf": "2026-08-30",
     "status": "draft_for_TEC-06_detailing",
     "owner": "Tech Lead and Security Owner"
