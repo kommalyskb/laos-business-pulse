@@ -1,0 +1,104 @@
+{
+  "documentId": "TEC-05",
+  "title": "Search & AI Recommendation",
+  "version": "0.1",
+  "status": "review_required",
+  "date": "2026-08-30",
+  "decisionOwner": "Founder",
+  "scope": {
+    "mvp": [
+      "Lao and English search by canonical name, approved alias and keyword",
+      "Hard filters for category, area and price",
+      "PostgreSQL-first retrieval and deterministic organic ranking",
+      "Rule-based Discover Feed and Related Places",
+      "Sponsored placement separated from organic relevance",
+      "Explicit zero-result recovery"
+    ],
+    "deferred": [
+      "Open-now and near-me filters",
+      "Persistent user profiles and cross-device personalization",
+      "AI or embedding retrieval",
+      "Learning-to-rank",
+      "Dedicated search or vector cluster"
+    ]
+  },
+  "phases": [
+    {"id": 0, "name": "Internal", "capability": "Deterministic browse and feed"},
+    {"id": 1, "name": "MVP Pilot", "capability": "Rule-based Search and Related Places"},
+    {"id": 2, "name": "Evidence-led", "capability": "Anonymous session-context recommendation"},
+    {"id": 3, "name": "Later", "capability": "AI, embeddings or learning-to-rank"}
+  ],
+  "normalization": {
+    "unicodeForm": "NFC",
+    "rawQueryPersistence": false,
+    "maxCodePoints": 100,
+    "steps": ["validate", "preserve-in-request", "trim-and-collapse-space", "unicode-nfc", "canonical-digits-and-punctuation", "approved-alias-expansion", "token-views", "intent-parse"],
+    "rule": "Do not remove Lao tone marks or broadly rewrite characters without benchmark evidence and approved taxonomy terms."
+  },
+  "retrieval": {
+    "projection": "place_search_documents",
+    "channels": ["exact-canonical-name", "exact-approved-alias", "name-or-alias-prefix", "postgresql-full-text", "pg_trgm"],
+    "candidateLimit": 200,
+    "finalEligibility": ["place-status-published", "active-taxonomy", "source-and-rights-policy"]
+  },
+  "organicRankingV1": {
+    "formula": "0.50*lexical + 0.20*intent + 0.15*category + 0.10*area + 0.05*price",
+    "features": [
+      {"id": "RF-01", "name": "lexical", "weight": 0.50},
+      {"id": "RF-02", "name": "intent", "weight": 0.20},
+      {"id": "RF-03", "name": "category", "weight": 0.15},
+      {"id": "RF-04", "name": "area", "weight": 0.10},
+      {"id": "RF-05", "name": "price", "weight": 0.05}
+    ],
+    "tieBreak": ["organic_score_desc", "lexical_score_desc", "canonical_name_asc", "place_id_asc"],
+    "paidFeatureAllowed": false
+  },
+  "filters": {
+    "betweenGroups": "AND",
+    "withinCategoryGroup": "OR",
+    "withinAreaGroup": "OR",
+    "priceUnknownWhenActive": "exclude",
+    "openNow": "reserved_deferred",
+    "nearMe": "deferred"
+  },
+  "recommendation": {
+    "mvpSurfaces": ["discover-feed", "related-places", "search-suggestions"],
+    "laterSurfaces": ["session-context-feed", "ai-candidate-experiment"],
+    "persistentProfile": false,
+    "reasonCodeRequired": true,
+    "commercialSignalInOrganicRank": false
+  },
+  "privacy": {
+    "rawQueryAnalytics": false,
+    "allowedAggregates": ["normalized-intent-id", "category-id", "area-id", "price-id", "query-length-bucket", "result-count-bucket"],
+    "sensitiveTraitInference": false,
+    "crossDeviceIdentity": false
+  },
+  "qualityGates": [
+    {"id": "QG-S01", "metric": "exact-top1", "threshold": "100-percent-of-12-approved-cases"},
+    {"id": "QG-S02", "metric": "recall-at-20", "threshold": ">=0.90"},
+    {"id": "QG-S03", "metric": "ndcg-at-10", "threshold": ">=0.80-overall-and-each-family>=0.70"},
+    {"id": "QG-S04", "metric": "known-match-zero-result", "threshold": "0"},
+    {"id": "QG-S05", "metric": "public-and-commercial-integrity", "threshold": "zero-leak-100-percent-label-zero-paid-organic-feature"},
+    {"id": "QG-S06", "metric": "search-api-load", "threshold": "10000-projections-20-concurrent-p95<=500ms-p99<=1000ms-error<1-percent"},
+    {"id": "QG-S07", "metric": "projection-lag-p95", "threshold": "<=60-seconds"},
+    {"id": "QG-S08", "metric": "product-evidence", "threshold": "report-place-open-and-decision-intent-without-visit-or-sale-claim"}
+  ],
+  "aiEscalationGates": [
+    "baseline-error-analysis-demonstrates-unresolved-gap",
+    "semantic-minimum-300-published-places-and-200-judged-pairs",
+    "personalization-minimum-10000-consented-sessions-and-1000-deduplicated-intents-in-90-days",
+    "offline-ndcg-at-10-relative-uplift-at-least-5-percent-without-regression",
+    "latency-cost-privacy-and-security-approved",
+    "feature-flag-control-group-and-rule-based-fallback"
+  ],
+  "artifacts": [
+    "tec05-lao-search-benchmark-template-2026-08-30.csv",
+    "tec05-ranking-signal-register-2026-08-30.csv"
+  ],
+  "review": {
+    "requiredDecisions": ["REV-01", "REV-02", "REV-03", "REV-04", "REV-05"],
+    "approved": false,
+    "note": "Version 1.0 is a design baseline. Pilot quality gates still require measured evidence."
+  }
+}
