@@ -147,7 +147,7 @@ const detections = [
 ] as const;
 
 const incidents = [
-  ["S1 Critical", "PII/secret leak, admin takeover, audit tamper, restricted leak, unrecoverable loss", "Auto-safe + On-call alert immediately; acknowledge ≤60 min at all times"],
+  ["S1 Critical", "PII/secret leak, admin takeover, audit tamper, restricted leak, unrecoverable loss", "Auto-safe + immediate alert 24×7; acknowledge ≤60 min during 08:00–22:00 ICT; outside hours best effort until backup On-call exists"],
   ["S2 High", "Material auth bypass, sustained outage, backup degradation, active abuse", "Ack ≤2 h in coverage; contain same coverage period"],
   ["S3 Medium", "Limited weakness, recurring error, suspicious event without confirmed impact", "Next business day; fix or expiring risk acceptance"],
   ["S4 Low", "Hardening improvement without current impact", "Backlog + monthly review"],
@@ -169,7 +169,7 @@ const reviews = [
   ["REV-02", "Identity/access", "ອະນຸມັດ Managed OIDC + MFA ທຸກ Admin, IAM-01—08 ແລະ 30-min idle/12-h absolute/15-min step-up; provider ລັອກຫຼັງ quote/audit/region/exit test.", "ອະນຸມັດ Control; ຍັງບໍ່ລັອກ Provider", "Approved"],
   ["REV-03", "Consent/retention", "ອະນຸມັດ RET-01—10 ເປັນ Technical/Product baseline; optional analytics ປິດຈົນ Consent, Vendor ແລະ Legal Review ຜ່ານ.", "ອະນຸມັດ Technical/Product; Legal ຍັງຄົງຄ້າງ", "Approved"],
   ["REV-04", "Recovery", "ອະນຸມັດ RPO ≤1h ແລະ RTO ≤8h ເປັນ Target ດ້ວຍ daily base + continuous WAL + monthly restore; ຫ້າມອ້າງ SLO ຈົນ timed restore ຜ່ານ.", "ອະນຸມັດ Target; Evidence ກ່ອນ SLO", "Approved"],
-  ["REV-05", "Monitoring/incident", "ອະນຸມັດ SIEM-ready, SEC-DET-01—08, S1—S4, human coverage 08:00–22:00 ICT ແລະ 24×7 automated safe action. S1 ຕ້ອງແຈ້ງ On-call ທັນທີ ແລະຮັບຮູ້ພາຍໃນ 60 ນາທີ.", "ອະນຸມັດພ້ອມປັບ S1; Managed SIEM/24×7 SOC ຕາມ Trigger", "Approved"],
+  ["REV-05", "Monitoring/incident", "ອະນຸມັດ SIEM-ready, SEC-DET-01—08, S1—S4, human coverage 08:00–22:00 ICT ແລະ 24×7 alert/automated safe action. S1 ≤60 ນາທີຮັບປະກັນສະເພາະໃນ coverage; ນອກເວລາ best effort ຈົນມີ backup On-call/managed service.", "ອະນຸມັດ 1.1; ບໍ່ອ້າງ 24×7 human SLA", "Approved"],
 ] as const;
 
 export default function SecurityInfrastructureDocument({ basePath }: Props) {
@@ -177,7 +177,7 @@ export default function SecurityInfrastructureDocument({ basePath }: Props) {
     <header className={styles.formalDocumentHeader}>
       <p>TEC-06 · SECURITY / PRIVACY / INFRASTRUCTURE · 30 AUGUST 2026</p>
       <h1>Security, Privacy ແລະ Infrastructure</h1><h2>Production Pilot Control Baseline</h2>
-      <span className={styles.formalStatus}>1.0 · ອະນຸມັດແລ້ວ</span>
+      <span className={styles.formalStatus}>1.1 · ອະນຸມັດແລ້ວ · ປັບ On-call ໃຫ້ປະຕິບັດໄດ້ຈິງ</span>
     </header>
     <aside className={styles.formalDraftNotice}><strong>ຈຸດປະສົງ</strong><p>ປ່ຽນ Security, Privacy, OVH, Container, Backup, Monitoring ແລະ Incident decisions ຈາກ TEC-01/03/04/05 ໃຫ້ເປັນ Control, Owner, Evidence ແລະ Release Gate. ນີ້ແມ່ນ Technical/Product Baseline ບໍ່ແທນຄຳປຶກສາກົດໝາຍລາວ.</p></aside>
     <nav className={styles.formalToc} aria-label="ສາລະບານ TEC-06"><h2>ສາລະບານ</h2><ol>
@@ -256,7 +256,7 @@ export default function SecurityInfrastructureDocument({ basePath }: Props) {
     <section id="tec06-monitor" className={styles.formalSection}><h2><span>10</span> Observability, SIEM-ready ແລະ Incident</h2>
       <p>Pino/OpenTelemetry → local Grafana Alloy → Grafana Cloud Loki/Mimir/Tempo/Alerting. App logs may sample; Audit/required Security Events do not. Telemetry failure never blocks Guest request but missing-data alert must be external.</p>
       <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Detection</th><th>Signal</th><th>Response</th></tr></thead><tbody>{detections.map(([id,d,s,r])=><tr key={id}><td><code>{id}</code></td><td><strong>{d}</strong></td><td>{s}</td><td>{r}</td></tr>)}</tbody></table></div>
-      <h3>10.1 Severity and coverage</h3><p>Approved baseline: human coverage <strong>08:00–22:00 ICT daily</strong>; alert/automated safe action 24×7. S1 alerts On-call immediately and must be acknowledged within <strong>60 minutes at all times</strong>. This is not a claim of 24×7 human SOC.</p>
+      <h3>10.1 Severity and coverage</h3><p>Approved baseline: human coverage <strong>08:00–22:00 ICT daily</strong>; alert delivery and automated safe action 24×7. S1 acknowledgement within <strong>60 minutes</strong> is committed only during human coverage. Outside that window response is best effort until a second On-call person or managed service is approved. The Platform does not claim a 24×7 human SLA or SOC.</p>
       <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>Severity</th><th>Examples</th><th>Target</th></tr></thead><tbody>{incidents.map(([s,e,t])=><tr key={s}><th>{s}</th><td>{e}</td><td>{t}</td></tr>)}</tbody></table></div>
       <p><strong>Lifecycle:</strong> Prepare → Detect/Triage → Contain → Eradicate/Recover → fact-based communication → post-incident review within 5 business days. Managed SIEM evaluation trigger: payment/booking, compliance, dedicated owner, cross-source complexity or material incident.</p>
     </section>

@@ -1,7 +1,7 @@
 {
   "documentId": "TEC-06",
   "title": "Security, Privacy & Infrastructure — Production Pilot Control Baseline",
-  "version": "1.0",
+  "version": "1.1",
   "status": "approved_design_operations_baseline",
   "updatedAt": "2026-08-30",
   "owners": {
@@ -245,7 +245,8 @@
       "S4 Low"
     ],
     "approvedCoverage": "Human 08:00–22:00 ICT daily; external alerts and safe automated actions 24×7.",
-    "s1Response": "Alert On-call immediately and acknowledge within 60 minutes at all times."
+    "s1Response": "Alert delivery and approved safe automation are 24x7. Human acknowledgement within 60 minutes is committed only during 08:00–22:00 ICT; outside coverage is best effort until backup On-call or managed service exists.",
+    "human24x7SlaClaim": false
   },
   "release": {
     "gates": [
@@ -307,7 +308,7 @@
     {
       "id": "REV-05",
       "topic": "monitoring and incident",
-      "decision": "Approved SIEM-ready Pilot with 08:00–22:00 ICT human coverage, 24×7 safe automation and S1 On-call acknowledgement ≤60 minutes.",
+      "decision": "Approved SIEM-ready Pilot with 08:00–22:00 ICT human coverage and 24×7 alert/safe automation. S1 acknowledgement ≤60 minutes is committed only during coverage; outside coverage is best effort until backup On-call or managed service exists.",
       "status": "APPROVED",
       "approvedAt": "2026-08-30"
     }

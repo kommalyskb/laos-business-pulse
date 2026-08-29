@@ -17,3 +17,4 @@ check_id,stage,check,owner,evidence,result,release_rule
 "REL-16","observe","Observe ALT-01—08 for approved window","Operations","","not_checked","blocking"
 "REL-17","close","Record Go/Rollback decision, timings and evidence","Release Commander","","not_checked","required"
 "REL-18","handover","Communicate result, limitation, support and next owner","Operations","","not_checked","required"
+"REL-19","handover","Confirm 24x7 alert/safe automation and disclose that human S1 SLA applies only during 08:00–22:00 ICT until backup On-call exists","Operations/Product","coverage record and public/internal wording","not_checked","required"

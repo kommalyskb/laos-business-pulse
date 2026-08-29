@@ -15,3 +15,6 @@ control_id,cadence,control,owner,required_evidence,completed_at,result
 "OPS-C14","quarterly","Review access and break-glass","Identity/Security","signed access review","","not_run"
 "OPS-C15","quarterly","Reconstruct clean host and sample evidence restore","Platform/Recovery","exercise record","","not_run"
 "OPS-C16","quarterly","Review vendor, risk and SOP training acknowledgement","Product/Operations","review record","","not_run"
+"OPS-C17","daily","Review solo-Founder self-review flags and keep high-risk irreversible actions in safe state pending independent checkpoint","Product/Trust","flagged-action register","","not_run"
+"OPS-C18","weekly","Measure OPS-Q01—07 Pilot SLA attainment and record pause/escalation causes","Operations","SLA report","","not_run"
+"OPS-C19","monthly","Verify public/internal support wording does not claim 24x7 human response before backup On-call exists","Product/Operations","coverage claim review","","not_run"

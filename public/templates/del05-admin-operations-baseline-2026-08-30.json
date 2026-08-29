@@ -1,12 +1,15 @@
 {
   "documentId": "DEL-05",
-  "version": "0.1",
-  "status": "review_required",
+  "version": "0.2",
+  "status": "review_decisions_approved_pilot_rehearsal_pending",
   "updatedAt": "2026-08-30",
   "title": "Admin & Operations SOP",
   "coverage": {
     "normalQueue": "08:00–22:00 ICT daily",
-    "s1OnCall": "24x7 immediate alert; acknowledgement ≤60 minutes"
+    "automation": "24x7 alert delivery and approved safe action",
+    "s1DuringCoverage": "Human acknowledgement ≤60 minutes during 08:00–22:00 ICT",
+    "s1OutsideCoverage": "Best effort until backup On-call or managed service is approved",
+    "human24x7SlaClaim": false
   },
   "identity": "Named OIDC/MFA account; least privilege; step-up and audit for privileged action.",
   "queues": [
@@ -34,6 +37,26 @@
     "Platform Admin does not self-approve routine business data",
     "Finance evidence separate"
   ],
+  "soloFounderPilot": {
+    "multipleRolesAllowed": true,
+    "controls": [
+      "one named OIDC/MFA account",
+      "active action role recorded",
+      "Draft and Review/Decision remain separate states",
+      "routine low-risk self-review explicitly flagged and sampled",
+      "P0 safe-hide allowed immediately",
+      "irreversible deletion, appeal, security exception and material finance/access decision require independent checkpoint"
+    ]
+  },
+  "pilotSla": {
+    "OPS_Q01": "acknowledge within 1 operating day; target first review within 2 operating days",
+    "OPS_Q02": "target review within 2 operating days after readiness passes",
+    "OPS_Q03": "acknowledge within 2 operating days; target initial decision within 5 operating days",
+    "OPS_Q04": "P0 immediate safe-hide; P1 within 4 coverage hours; P2 within 1 operating day; P3 within 3 operating days",
+    "OPS_Q05": "unsafe public data safe-hide in current coverage; High within 1 operating day; normal weekly",
+    "OPS_Q06": "validate before scheduled start; pause immediately when Sponsored disclosure fails",
+    "OPS_Q07": "S1 automation 24x7; human ≤60 minutes in coverage; outside hours best effort"
+  },
   "cadence": {
     "daily": "queue/alert/backup/failure/handover",
     "weekly": "sample/SLA/reconciliation/capacity/defect/report",
@@ -41,12 +64,11 @@
     "quarterly": "access/break-glass/evidence restore/clean-host/vendor/risk"
   },
   "evidence": "Every material action records case/task, actor, reason, time, result, audit/evidence and next owner.",
-  "reviews": [
-    "REV-01 Operating hours",
-    "REV-02 Segregation of duties",
-    "REV-03 Queue/SLA",
-    "REV-04 Maintenance cadence",
-    "REV-05 Evidence/handover"
-  ],
-  "disclaimer": "Draft SOP. Named staffing, SLA and production authority require review."
+  "reviewDecision": {
+    "status": "APPROVED",
+    "approvedAt": "2026-08-30",
+    "items": ["REV-01 Operating hours", "REV-02 Segregation of duties", "REV-03 Queue/SLA", "REV-04 Maintenance cadence", "REV-05 Evidence/handover"]
+  },
+  "openInputsBefore1_0": ["named role holders and backup checkpoint", "queue/SLA fixture rehearsal", "monthly timed restore", "handover and incident rehearsal"],
+  "disclaimer": "The Pilot operating decisions are approved. SLA figures are internal targets, not an unconditional customer promise; implementation evidence remains pending."
 }

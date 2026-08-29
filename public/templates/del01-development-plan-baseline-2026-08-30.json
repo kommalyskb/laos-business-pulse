@@ -1,7 +1,7 @@
 {
   "documentId": "DEL-01",
-  "version": "0.1",
-  "status": "review_required",
+  "version": "0.2",
+  "status": "review_decisions_approved_inputs_pending",
   "updatedAt": "2026-08-30",
   "title": "Development Plan",
   "owner": "Delivery / Tech Lead",
@@ -57,12 +57,16 @@
     "no release-blocking defect",
     "versioned evidence attached"
   ],
-  "reviews": [
-    "REV-01 Calendar model",
-    "REV-02 Team",
-    "REV-03 Scope",
-    "REV-04 Release gates",
-    "REV-05 Budget authority"
+  "reviewDecision": {
+    "status": "APPROVED",
+    "approvedAt": "2026-08-30",
+    "items": ["REV-01 Calendar model", "REV-02 Team", "REV-03 Scope", "REV-04 Release gates", "REV-05 Budget authority"]
+  },
+  "openInputsBefore1_0": [
+    "approved productive person-days per week",
+    "named QA and Security/Infrastructure checkpoint availability",
+    "production spend ceiling and purchase authority",
+    "first P0 backlog commitment"
   ],
-  "disclaimer": "Draft plan. No launch date, named staffing commitment, purchase or production budget is approved."
+  "disclaimer": "Review decisions are approved. No launch date, named staffing commitment, purchase or production budget is created by this baseline."
 }

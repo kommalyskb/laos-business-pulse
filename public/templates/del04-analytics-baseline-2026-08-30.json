@@ -1,7 +1,7 @@
 {
   "documentId": "DEL-04",
-  "version": "0.1",
-  "status": "review_required",
+  "version": "0.2",
+  "status": "review_decisions_approved_optional_collection_disabled",
   "updatedAt": "2026-08-30",
   "title": "Analytics Tracking Plan",
   "defaultMode": "EssentialOnly; optional analytics OFF pending consent, withdrawal, vendor, retention and legal gates.",
@@ -55,12 +55,10 @@
     "manual verification separate",
     "show time zone, window, consent, freshness and quality flags"
   ],
-  "reviews": [
-    "REV-01 Consent gate",
-    "REV-02 Event catalog",
-    "REV-03 Decision Intent",
-    "REV-04 Retention/access",
-    "REV-05 Reporting"
-  ],
-  "disclaimer": "Draft analytics design. Optional collection remains disabled."
+  "reviewDecision": {
+    "status": "APPROVED",
+    "approvedAt": "2026-08-30",
+    "items": ["REV-01 Consent gate", "REV-02 Event catalog", "REV-03 Decision Intent", "REV-04 Retention/access", "REV-05 Reporting"]
+  },
+  "disclaimer": "The analytics design is approved for implementation. Optional collection remains disabled until every stated gate passes."
 }

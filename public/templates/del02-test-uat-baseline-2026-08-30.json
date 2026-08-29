@@ -1,7 +1,7 @@
 {
   "documentId": "DEL-02",
-  "version": "0.1",
-  "status": "review_required",
+  "version": "0.2",
+  "status": "review_decisions_approved_execution_pending",
   "updatedAt": "2026-08-30",
   "title": "Test & UAT Plan",
   "owners": {
@@ -41,7 +41,8 @@
     "PERF_01": "First useful content ≤3s",
     "PERF_02": "Place core data ≤2.5s",
     "PERF_03": "Interaction feedback ≤300ms",
-    "PERF_04": "Media fallback ≤4s"
+    "PERF_04": "Media fallback ≤4s",
+    "classification": "Pilot targets; test on defined mid-range mobile and normal 4G Lao/SEA path before release"
   },
   "releasePolicy": {
     "criticalOpen": 0,
@@ -51,12 +52,10 @@
     "deviation": "named owner, reason, impact, compensating control, expiry and approvers"
   },
   "dataPolicy": "Versioned synthetic/sanitized fixtures; no direct Production PII copy.",
-  "reviews": [
-    "REV-01 Automation boundary",
-    "REV-02 Environment/data",
-    "REV-03 Defect policy",
-    "REV-04 Performance/security/recovery",
-    "REV-05 Acceptance authority"
-  ],
-  "disclaimer": "Draft test design; no test or UAT result is passed until evidence fields are completed and signed."
+  "reviewDecision": {
+    "status": "APPROVED",
+    "approvedAt": "2026-08-30",
+    "items": ["REV-01 Automation boundary", "REV-02 Environment/data", "REV-03 Defect policy", "REV-04 Performance/security/recovery", "REV-05 Acceptance authority"]
+  },
+  "disclaimer": "The test design is approved for implementation. No test or UAT result is passed until evidence fields are completed and signed."
 }

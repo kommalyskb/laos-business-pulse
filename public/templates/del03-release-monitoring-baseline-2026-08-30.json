@@ -1,7 +1,7 @@
 {
   "documentId": "DEL-03",
-  "version": "0.1",
-  "status": "review_required",
+  "version": "0.2",
+  "status": "review_decisions_approved_execution_pending",
   "updatedAt": "2026-08-30",
   "title": "Deployment, Release & Monitoring",
   "topology": "OVH Singapore single-host Docker Compose; Caddy public 80/443 only; no HA or zero-downtime claim.",
@@ -32,8 +32,10 @@
   ],
   "incident": {
     "normalHumanCoverage": "08:00–22:00 ICT daily",
-    "automation": "24x7",
-    "s1": "Alert On-call immediately; acknowledge ≤60 minutes at all times."
+    "automation": "24x7 alert delivery and approved safe action",
+    "s1DuringCoverage": "Human acknowledgement ≤60 minutes during 08:00–22:00 ICT.",
+    "s1OutsideCoverage": "Best effort until backup On-call or managed service is approved.",
+    "human24x7SlaClaim": false
   },
   "migration": "Expand/deploy/backfill/contract; backup before destructive change.",
   "rollback": "Previous approved digest/config only when schema compatible; data restore requires incident/recovery authority.",
@@ -46,12 +48,10 @@
     "public restricted data/database",
     "unknown consent behavior"
   ],
-  "reviews": [
-    "REV-01 Promotion",
-    "REV-02 Release authority",
-    "REV-03 Migration/rollback",
-    "REV-04 Observability/on-call",
-    "REV-05 Single-host disclosure"
-  ],
-  "disclaimer": "Draft runbook baseline; no release is authorized by this artifact."
+  "reviewDecision": {
+    "status": "APPROVED",
+    "approvedAt": "2026-08-30",
+    "items": ["REV-01 Promotion", "REV-02 Release authority", "REV-03 Migration/rollback", "REV-04 Observability/on-call", "REV-05 Single-host disclosure"]
+  },
+  "disclaimer": "The release design is approved for implementation. No release is authorized until build-specific gates and evidence pass."
 }
