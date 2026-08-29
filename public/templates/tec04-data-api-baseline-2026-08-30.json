@@ -2,8 +2,8 @@
   "document": {
     "id": "TEC-04",
     "title": "Database Design & API Specification",
-    "version": "0.1",
-    "status": "review_required",
+    "version": "1.0",
+    "status": "approved",
     "date": "2026-08-30",
     "owner": "Technical Lead",
     "approver": "Founder"
@@ -22,13 +22,13 @@
     "database_naming": "snake_case",
     "api_naming": "camelCase",
     "event_time": "timestamptz stored in UTC",
-    "business_hours": "weekday plus local time",
-    "money": "bigint minor unit plus ISO 4217 currency_code",
+    "business_hours": "weekday plus Place local time; Asia/Vientiane default for MVP",
+    "money": "bigint minor unit plus ISO 4217 currency_code; LAK 1 equals 1 kip; LAK is default",
     "state": "text plus CHECK constraint",
     "optimistic_concurrency": "version integer plus expectedVersion",
     "jsonb": "validated flexible metadata/snapshot only",
     "deletion": "soft lifecycle by default; no hard delete for Place, Source or Admin",
-    "polymorphic_reference": "resource_type plus resource_id enforced by service catalog",
+    "polymorphic_reference": "resource_type plus resource_id enforced by service allowlist and existence checks; integration tests and reconciliation report required",
     "public_api": "published records only"
   },
   "table_scope": {
@@ -73,10 +73,10 @@
     "tec04-api-catalog-2026-08-30.csv"
   ],
   "review_decisions": [
-    {"id": "REV-01", "subject": "UUIDv7 identifier", "recommendation": "approve", "status": "pending"},
-    {"id": "REV-02", "subject": "money time and state representation", "recommendation": "approve", "status": "pending"},
-    {"id": "REV-03", "subject": "polymorphic reference boundary", "recommendation": "approve_with_integration_tests", "status": "pending"},
-    {"id": "REV-04", "subject": "API version naming cursor concurrency and idempotency", "recommendation": "approve", "status": "pending"},
-    {"id": "REV-05", "subject": "MVP table and endpoint scope", "recommendation": "approve", "status": "pending"}
+    {"id": "REV-01", "subject": "UUIDv7 identifier", "decision": "approved", "status": "approved"},
+    {"id": "REV-02", "subject": "money time and state representation", "decision": "approved_with_LAK_and_timezone_clarification", "status": "approved"},
+    {"id": "REV-03", "subject": "polymorphic reference boundary", "decision": "approved_with_integration_tests_and_reconciliation", "status": "approved_with_conditions"},
+    {"id": "REV-04", "subject": "API version naming cursor concurrency and idempotency", "decision": "approved", "status": "approved"},
+    {"id": "REV-05", "subject": "MVP table and endpoint scope", "decision": "approved_and_frozen", "status": "approved"}
   ]
 }

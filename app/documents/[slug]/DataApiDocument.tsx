@@ -4,8 +4,8 @@ type DataApiDocumentProps = { basePath: string };
 
 const decisions = [
   ["Identifier", "ໃຊ້ PostgreSQL UUIDv7 ຊະນິດ uuid ເປັນ Primary Key; ຖານຂໍ້ມູນສ້າງຄ່າດ້ວຍ uuidv7() ເພື່ອໃຫ້ index ແລະການຮຽງຕາມເວລາມີປະສິດທິພາບ."],
-  ["Time", "ບັນທຶກເວລາເຫດການເປັນ timestamptz ໃນ UTC; ຊົ່ວໂມງເປີດຮ້ານເກັບເປັນວັນຂອງອາທິດ ແລະ local time ໂດຍບໍ່ປ່ຽນເປັນ UTC."],
-  ["Money", "ເກັບຈຳນວນເງິນເປັນ bigint ຕາມໜ່ວຍຍ່ອຍສຸດຂອງສະກຸນເງິນ ແລະເກັບ currency_code ແບບ ISO 4217; ບໍ່ໃຊ້ float ຄຳນວນເງິນ."],
+  ["Time", "ບັນທຶກເວລາເຫດການເປັນ timestamptz ໃນ UTC; ຊົ່ວໂມງເປີດຮ້ານເກັບເປັນວັນຂອງອາທິດ ແລະ local time ຕາມ timezone ຂອງ Place ໂດຍບໍ່ປ່ຽນເປັນ UTC. MVP ໃຊ້ Asia/Vientiane ເປັນຄ່າເລີ່ມຕົ້ນ."],
+  ["Money", "ເກັບຈຳນວນເງິນເປັນ bigint ຕາມໜ່ວຍຍ່ອຍສຸດ ແລະ currency_code ແບບ ISO 4217. ສຳລັບ LAK, ຄ່າ 1 ໃນຖານຂໍ້ມູນໝາຍເຖິງ 1 ກີບ ແລະ LAK ເປັນຄ່າເລີ່ມຕົ້ນ; ຫ້າມໃຊ້ float ຄຳນວນເງິນ."],
   ["State", "ໃຊ້ text ຮ່ວມກັບ CHECK constraint ແທນ PostgreSQL native enum ເພື່ອໃຫ້ migration ຂອງສະຖານະປ່ຽນໄດ້ປອດໄພກວ່າ."],
   ["Concurrency", "ຕາຕະລາງທີ່ຖືກແກ້ໄຂຈາກ Admin ມີ version integer; API ຮັບ expectedVersion ແລະປະຕິເສດການຂຽນທັບຂໍ້ມູນໃໝ່."],
   ["JSONB", "ໃຊ້ສະເພາະ metadata ຫຼື snapshot ທີ່ໂຄງສ້າງຍືດຫຍຸ່ນ; relationship, state ແລະ field ທີ່ຄົ້ນຫາປະຈຳຕ້ອງເປັນ column ປົກກະຕິ."],
@@ -141,11 +141,11 @@ const migrationPlan = [
 ] as const;
 
 const reviewDecisions = [
-  ["REV-01", "Identifier", "ອະນຸມັດ UUIDv7 ຈາກ PostgreSQL 18 ເປັນ PK ຂອງຕາຕະລາງໃໝ່.", "ແນະນຳ: ອະນຸມັດ; ບໍ່ພຶ່ງ serial sequence ແລະຮັກສາ index locality."],
-  ["REV-02", "Money/time/state", "ອະນຸມັດ bigint minor unit + ISO currency, UTC timestamptz ແລະ text + CHECK state.", "ແນະນຳ: ອະນຸມັດ; ຫຼີກ float/timezone/native-enum migration problem."],
-  ["REV-03", "Polymorphic references", "ອະນຸມັດ resource_type/resource_id ສຳລັບ Work/Audit/Request Evidence ໂດຍ service ບັງຄັບ catalog; domain relation ອື່ນໃຊ້ real FK.", "ແນະນຳ: ອະນຸມັດພ້ອມ integration tests ແລະ repair report."],
-  ["REV-04", "API contract", "ອະນຸມັດ /api/v1, camelCase JSON, opaque cursor, expectedVersion ແລະ Idempotency-Key ສຳລັບ side-effect POST.", "ແນະນຳ: ອະນຸມັດ; ໃຫ້ Client/Server ມີ contract ດຽວ."],
-  ["REV-05", "MVP scope", "ຢືນຢັນ 27 business tables + 3 support tables + 31 API operations ຄົບ PRO-02/03 ແລະບໍ່ມີ Booking/Payment/Social interaction.", "ແນະນຳ: ອະນຸມັດຂອບເຂດນີ້; ການເພີ່ມ table/endpoint ຕ້ອງ trace ກັບ requirement."],
+  ["REV-01", "Identifier", "UUIDv7 ຈາກ PostgreSQL 18 ເປັນ PK ຂອງຕາຕະລາງໃໝ່; ຫ້າມໃຊ້ລຳດັບ ID ເປັນຫຼັກກວດສິດ.", "ອະນຸມັດ"],
+  ["REV-02", "Money/time/state", "bigint minor unit + ISO currency; LAK 1 = 1 ກີບ; UTC timestamptz; local business hours; text + CHECK state.", "ອະນຸມັດພ້ອມ LAK/timezone clarification"],
+  ["REV-03", "Polymorphic references", "resource_type/resource_id ສຳລັບ Work/Audit/Request Evidence/Communication ໂດຍ service allowlist ແລະກວດ record; domain relation ອື່ນໃຊ້ real FK.", "ອະນຸມັດແບບມີເງື່ອນໄຂ: integration tests + reconciliation report"],
+  ["REV-04", "API contract", "/api/v1, camelCase JSON, opaque cursor, expectedVersion, stable error code ແລະ Idempotency-Key ສຳລັບ side-effect POST.", "ອະນຸມັດ"],
+  ["REV-05", "MVP scope", "Freeze 27 business tables + 3 support tables + 31 API catalog entries; ບໍ່ມີ Booking/Payment/Social interaction. ການເພີ່ມໃໝ່ຕ້ອງ trace ກັບ requirement.", "ອະນຸມັດ ແລະ freeze MVP scope"],
 ] as const;
 
 export default function DataApiDocument({ basePath }: DataApiDocumentProps) {
@@ -155,12 +155,12 @@ export default function DataApiDocument({ basePath }: DataApiDocumentProps) {
         <p>TEC-04 · TECHNICAL BASELINE · 30 AUGUST 2026</p>
         <h1>ຖານຂໍ້ມູນ ແລະ API</h1>
         <h2>Database Design &amp; API Specification</h2>
-        <span className={`${styles.formalStatus} ${styles.formalDraftStatus}`}>0.1 · ຮ່າງສຳລັບທົບທວນ</span>
+        <span className={styles.formalStatus}>1.0 · ອະນຸມັດແລ້ວ</span>
       </header>
 
-      <aside className={styles.formalDraftNotice}>
-        <strong>ຈຸດປະສົງຂອງສະບັບ 0.1</strong>
-        <p>ປ່ຽນ Logical Data Model ແລະ Function Specification ຈາກ PRO-02 ໃຫ້ເປັນ physical schema, index, API contract, transaction ແລະ migration order ທີ່ Developer ສາມາດນຳໄປສ້າງລະບົບໄດ້. ສະບັບນີ້ຍັງບໍ່ແມ່ນການອະນຸມັດ 1.0.</p>
+      <aside className={styles.formalApproval}>
+        <strong>ສະບັບ 1.0 — Developer Handoff Baseline</strong>
+        <p>REV-01—05 ຖືກອະນຸມັດແລ້ວ. Logical Data Model ແລະ Function Specification ຈາກ PRO-02 ຖືກປ່ຽນເປັນ physical schema, index, API contract, transaction ແລະ migration order ທີ່ Developer ນຳໄປສ້າງລະບົບໄດ້. ສະຖານະ 1.0 ແມ່ນການອະນຸມັດແບບອອກແບບ; migration, restore, security ແລະ load-test evidence ຍັງຕ້ອງຜ່ານກ່ອນ Public Pilot.</p>
       </aside>
 
       <nav className={styles.formalToc} aria-label="ສາລະບານ TEC-04">
@@ -179,7 +179,7 @@ export default function DataApiDocument({ basePath }: DataApiDocumentProps) {
           <li><a href="#tec04-security">Security ແລະ Data Boundary</a></li>
           <li><a href="#tec04-handoff">Traceability ແລະໄຟລ໌ນຳໃຊ້</a></li>
           <li><a href="#tec04-sources">Official Sources</a></li>
-          <li><a href="#tec04-review">5 ຂໍ້ທົບທວນກ່ອນ 1.0</a></li>
+          <li><a href="#tec04-review">ບັນທຶກອະນຸມັດ REV-01—05</a></li>
         </ol>
       </nav>
 
@@ -189,7 +189,7 @@ export default function DataApiDocument({ basePath }: DataApiDocumentProps) {
           <table className={styles.formalTable}>
             <tbody>
               <tr><th>Document ID</th><td><code>TEC-04</code></td></tr>
-              <tr><th>Version / status</th><td>0.1 — ຮ່າງສຳລັບທົບທວນ</td></tr>
+              <tr><th>Version / status</th><td>1.0 — ອະນຸມັດແລ້ວ</td></tr>
               <tr><th>Owner / approver</th><td>Technical Lead / Founder</td></tr>
               <tr><th>Input</th><td>PRO-02 System Analysis 1.0, PRO-03 MVP Scope 1.0, TEC-01 Architecture 1.0 ແລະ TEC-03 Tech Stack 1.0</td></tr>
               <tr><th>Output</th><td>Physical schema baseline, table/index register, API catalog, error contract ແລະ migration sequence</td></tr>
@@ -265,7 +265,7 @@ export default function DataApiDocument({ basePath }: DataApiDocumentProps) {
         <h3>6.1 Integrity boundary</h3>
         <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ຊັ້ນ</th><th>ຕ້ອງບັງຄັບ</th><th>ຕົວຢ່າງ</th></tr></thead><tbody>
           <tr><th>Database</th><td>Type, NOT NULL, FK, unique, range, pair ordering, partial unique ແລະ append-only privilege.</td><td>ໜຶ່ງ primary category ຕໍ່ Place; duplicate source URL ບໍ່ຜ່ານ; campaign end ຕ້ອງຫຼັງ start.</td></tr>
-          <tr><th>Domain service</th><td>State transition, permission, cross-aggregate eligibility, polymorphic target catalog ແລະ evidence completeness.</td><td>Place ຈະ publish ໄດ້ຕ້ອງຜ່ານ required verification; Sponsored ບໍ່ສາມາດຊື້ review score.</td></tr>
+          <tr><th>Domain service</th><td>State transition, permission, cross-aggregate eligibility, polymorphic target allowlist/existence ແລະ evidence completeness. Integration tests ຄຸ້ມທຸກ resource type ແລະ reconciliation job ລາຍງານ broken reference.</td><td>Place ຈະ publish ໄດ້ຕ້ອງຜ່ານ required verification; Sponsored ບໍ່ສາມາດຊື້ review score.</td></tr>
           <tr><th>API contract</th><td>Shape, field allowlist, max length/count, URL scheme, cursor ແລະ event property schema.</td><td>Analytics properties ທີ່ບໍ່ຢູ່ allowlist ຖືກປະຕິເສດ.</td></tr>
           <tr><th>Worker/reconciliation</th><td>Eventual consistency, broken reference report, search projection version ແລະ retry/dead job.</td><td>Projection source_version ບໍ່ກົງ Place version ຈະຖືກ rebuild.</td></tr>
         </tbody></table></div>
@@ -373,10 +373,10 @@ export default function DataApiDocument({ basePath }: DataApiDocumentProps) {
       </section>
 
       <section id="tec04-review" className={styles.formalSection}>
-        <h2><span>14</span> 5 ຂໍ້ທົບທວນກ່ອນ 1.0</h2>
-        <p>TEC-04 ຍັງເປັນ 0.1 ຈົນກວ່າ Founder/Technical Lead ຈະຕັດສິນ 5 ຂໍ້ນີ້. ແຕ່ລະຂໍ້ມີຄຳແນະນຳເພື່ອບອກ impact ຂອງການອະນຸມັດ.</p>
-        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Decision</th><th>ຄຳແນະນຳ</th></tr></thead><tbody>{reviewDecisions.map(([id, title, decision, recommendation]) => <tr key={id}><td><code>{id}</code></td><td><strong>{title}</strong><br />{decision}</td><td>{recommendation}</td></tr>)}</tbody></table></div>
-        <aside className={styles.formalDraftNotice}><strong>Definition of done for TEC-04 1.0</strong><p>REV-01—05 ຖືກຕັດສິນ, 27 logical entities trace ໄປ physical table ຄົບ, API ມີ request/response/error/access/transaction contract, critical query ມີ index path, migration/restore test ຜ່ານ ແລະ artifacts ກົງກັບໜ້າເອກະສານ.</p></aside>
+        <h2><span>14</span> ບັນທຶກອະນຸມັດ REV-01—05</h2>
+        <p>Founder ອະນຸມັດທັງ 5 ຂໍ້ຕາມຄຳແນະນຳ. ຕາຕະລາງນີ້ແມ່ນ decision record ທີ່ Developer, Reviewer ແລະ Tester ຕ້ອງໃຊ້ກວດ implementation.</p>
+        <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>Decision</th><th>ສະຖານະ/ເງື່ອນໄຂ</th></tr></thead><tbody>{reviewDecisions.map(([id, title, decision, approval]) => <tr key={id}><td><code>{id}</code></td><td><strong>{title}</strong><br />{decision}</td><td>{approval}</td></tr>)}</tbody></table></div>
+        <aside className={styles.formalApproval}><strong>TEC-04 · ສະບັບ 1.0</strong><p>27 logical entities trace ໄປ physical tables ຄົບ, 3 support tables ຖືກແຍກຈາກ Source of Truth, API ມີ request/response/error/access/transaction contract, critical query ມີ index path ແລະ artifacts ກົງກັບໜ້າເອກະສານ. Implementation ຕ້ອງສ້າງ migration/restore, contract/integration, reconciliation, security ແລະ load-test evidence ຕາມ gates ກ່ອນ Public Pilot.</p></aside>
       </section>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
