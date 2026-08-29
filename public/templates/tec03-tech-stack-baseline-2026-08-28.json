@@ -1,7 +1,7 @@
 {
   "document": {
     "id": "TEC-03",
-    "version": "0.2",
+    "version": "0.3",
     "status": "draft_for_review",
     "createdAt": "2026-08-28",
     "updatedAt": "2026-08-29",
@@ -29,21 +29,46 @@
     { "id": "TS-09", "layer": "identity", "choice": "Managed OIDC provider and server session", "status": "provider_pending_TEC-06" },
     { "id": "TS-10", "layer": "testing", "choice": "Vitest and Playwright", "coverage": ["unit", "integration", "contract", "e2e", "accessibility_journeys"] },
     { "id": "TS-11", "layer": "application_telemetry", "choice": "Pino structured JSON logger and OpenTelemetry SDK", "signals": ["logs", "metrics", "traces"], "guardrail": "allowlist_redaction_no_secret_token_or_full_PII" },
-    { "id": "TS-12", "layer": "telemetry_pipeline", "choice": "direct OTLP to Grafana Cloud for Pilot; Grafana Alloy or OTel Collector on trigger", "guardrail": "asynchronous_fail_open_for_core_journey" },
+    { "id": "TS-12", "layer": "telemetry_pipeline", "choice": "Grafana Alloy on OVH to OTLP to Grafana Cloud", "guardrail": "bounded_buffer_asynchronous_fail_open_and_external_missing_data_alert" },
     { "id": "TS-13", "layer": "observability_backend", "choice": "Grafana Cloud Loki, Mimir, Tempo and Grafana Alerting", "guardrail": "quote_retention_ingest_limit_and_cost_alert_required" },
     { "id": "TS-14", "layer": "security_event_monitoring", "choice": "normalized security events and restricted Grafana dashboards and alerts", "guardrail": "separate_from_application_and_audit_logs" },
     { "id": "TS-15", "layer": "siem_evolution", "choice": "managed SIEM pending risk, compliance or scale trigger", "guardrail": "do_not_claim_full_SIEM_during_Pilot" },
-    { "id": "TS-16", "layer": "delivery", "choice": "GitHub Actions, Docker OCI image and Render Blueprint", "guardrail": "approved_production_deploy_and_separate_migration_gate" }
+    { "id": "TS-16", "layer": "delivery", "choice": "GitHub Actions, Docker OCI image, Docker Compose and Caddy on OVH", "guardrail": "digest_pinning_separate_migration_approved_deploy_and_rollback_manifest" }
   ],
   "hosting": {
     "recommended": {
-      "provider": "Render",
-      "region": "Singapore",
-      "services": ["paid_web_service", "paid_background_worker", "paid_managed_postgresql_18"],
-      "reason": "managed_service_flow_same_region_private_network_and_lower_founder_operations_burden"
+      "provider": "OVHcloud",
+      "region": "Asia Pacific Singapore ap-southeast-sgp",
+      "assetStatus": "existing_dedicated_server",
+      "operatingSystem": "Debian 13 Trixie",
+      "topology": ["Caddy", "Docker Compose web API", "Docker Compose worker", "PostgreSQL 18", "Grafana Alloy"],
+      "reason": "sufficient_existing_capacity_near_Lao_users_and_lower_incremental_cash_cost",
+      "approvalCondition": "OVH_G01_to_G06_pass_before_public_Pilot"
     },
-    "fallback": { "provider": "Fly.io", "region": "Singapore", "condition": "render_constraint_or_verified_cost_advantage" },
-    "rejectedForPilot": { "option": "self_managed_vps", "reason": "patch_backup_monitoring_and_incident_burden" }
+    "hardware": {
+      "cpu": "AMD EPYC 7313 16 cores 32 threads 3.0 to 3.7 GHz",
+      "memory": "128 GB ECC DDR4 3200 MHz",
+      "dataDisks": "2 x 960 GB NVMe SSD",
+      "requiredDiskMode": "RAID1",
+      "estimatedUsableBeforeFilesystemOverhead": "approximately 960 GB"
+    },
+    "initialResourceControls": {
+      "hostReserve": "at least 25 percent CPU and 16 GB RAM",
+      "postgresql": "start 4 to 8 vCPU and 32 to 48 GB RAM limit",
+      "webApi": "start 2 replicas each 2 vCPU and 4 GB RAM",
+      "worker": "start 1 to 2 replicas total 2 to 4 vCPU and 4 to 8 GB RAM",
+      "disk": "keep at least 20 percent free with 70 80 90 percent alerts and log image temp quotas"
+    },
+    "launchGates": [
+      "OVH-G01 RAID1 NVMe health filesystem and disk-full evidence",
+      "OVH-G02 encrypted off-host base backup continuous WAL and monthly restore drill",
+      "OVH-G03 default-deny firewall HTTPS-only public service and key-only restricted SSH",
+      "OVH-G04 pinned image separate migration health check rollback and external secret",
+      "OVH-G05 external uptime host RAID disk backup database queue and missing-telemetry alerts",
+      "OVH-G06 PRO-04 load and latency test from Lao or Southeast Asia network"
+    ],
+    "primaryFallback": { "provider": "Render", "region": "Singapore", "condition": "recovery_SLO_capacity_security_or_founder_operations_gate_fails" },
+    "secondaryAlternative": { "provider": "Fly.io", "region": "Singapore" }
   },
   "search": {
     "steps": ["unicode_normalize_and_alias", "published_filters", "exact_and_prefix", "trigram_candidates", "rule_based_rank", "measure_with_lao_query_set"],
@@ -58,8 +83,9 @@
   "observability": {
     "pilotBackend": "Grafana Cloud",
     "signals": ["structured_logs", "metrics", "distributed_traces", "synthetic_checks"],
-    "flow": "browser_web_api_worker_database_and_provider_to_Pino_and_OpenTelemetry_to_OTLP_to_Grafana_Cloud_to_dashboard_alert_and_runbook",
-    "collectorTrigger": ["centralized_redaction", "buffering_or_retry", "multi_destination", "central_credential_management"],
+    "flow": "browser_web_api_worker_postgresql_debian_docker_and_NVMe_to_Pino_OpenTelemetry_and_host_integrations_to_local_Grafana_Alloy_to_OTLP_to_Grafana_Cloud_to_dashboard_alert_and_runbook",
+    "collector": "Grafana_Alloy_required_on_OVH_Pilot",
+    "externalMissingDataDetection": true,
     "requiredCorrelation": ["event_id", "timestamp", "environment", "service", "request_id", "trace_id", "job_id_when_applicable", "outcome", "safe_error_code", "duration_ms_when_applicable"],
     "neverLog": ["password", "session_access_or_refresh_token", "API_key", "authorization_header", "database_connection_string", "full_payment_or_evidence_file", "raw_form_body", "unnecessary_full_phone_or_email"],
     "dashboards": ["guest_API_health", "admin_operations", "worker_and_outbox", "database_and_infrastructure", "external_dependencies", "business_operations", "security_monitoring"],
@@ -78,7 +104,8 @@
   },
   "qualityGates": ["lint_and_typecheck", "domain_unit_tests", "migration_and_transaction_tests", "playwright_must_journeys", "performance_security_restore_and_manual_accessibility", "dependency_image_and_secret_scan"],
   "cost": {
-    "formula": "application + worker + database + object_storage + observability + external_api + backup_and_support_reserve",
+    "formula": "OVH_allocated_cost + off_host_recovery + object_storage + observability + external_API + support_incident_reserve + founder_operational_labor",
+    "separateCostClasses": ["incremental_cash_cost", "shared_or_sunk_OVH_cost", "founder_shadow_labor"],
     "showCashAndShadowCost": true,
     "freeTierAllowedForProductionDatabase": false,
     "currencyRule": "record_source_date_and_exchange_rate_at_approval",

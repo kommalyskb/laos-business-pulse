@@ -2,7 +2,7 @@
   "artifact": {
     "id": "TEC-03-OBS-SEC",
     "document": "TEC-03",
-    "documentVersion": "0.2",
+    "documentVersion": "0.3",
     "asOf": "2026-08-29",
     "status": "draft_for_TEC-06_detailing",
     "owner": "Tech Lead and Security Owner"
@@ -17,8 +17,8 @@
   "stack": {
     "applicationLogger": "Pino structured JSON",
     "instrumentation": "OpenTelemetry JavaScript SDK",
-    "pilotTransport": "Direct OTLP export",
-    "collectorOnTrigger": "Grafana Alloy or OpenTelemetry Collector",
+    "pilotTransport": "Local Grafana Alloy to OTLP export",
+    "collector": "Grafana Alloy required on OVH Dedicated Server",
     "backend": {
       "provider": "Grafana Cloud",
       "logs": "Loki",
@@ -26,13 +26,13 @@
       "traces": "Tempo",
       "visualizationAndAlerts": "Grafana"
     },
-    "providerSignals": ["Render service and deployment health", "PostgreSQL health and backup evidence", "Cloudflare R2 access and quota", "OIDC authentication events"]
+    "providerSignals": ["OVH control-plane availability", "Debian journald and security events", "Docker and Caddy health", "NVMe and RAID health", "PostgreSQL health and off-host backup evidence", "Cloudflare R2 access and quota", "OIDC authentication events"]
   },
   "telemetryFlow": [
     "Browser, Web/API, Worker, Database and provider produce approved signals",
-    "Pino and OpenTelemetry attach service, environment and correlation identifiers",
+    "Pino and OpenTelemetry attach service, environment and correlation identifiers while host integrations collect Debian, Docker, NVMe RAID and PostgreSQL signals",
     "Redaction and an allowlist prevent secrets and unnecessary personal data from leaving the source",
-    "OTLP sends logs, metrics and traces to Grafana Cloud without blocking the core request",
+    "Local Grafana Alloy applies approved redaction, bounded buffering and credential isolation before OTLP sends telemetry to Grafana Cloud without blocking the core request",
     "Dashboards correlate operational, product and security health",
     "Alert rules notify an accountable owner and link to a tested runbook",
     "Incident handling preserves evidence and records resolution"
@@ -117,6 +117,15 @@
     { "phase": "Growth", "capability": "collector, centralized redaction, archive and cross-source correlation", "gate": "volume, provider count or investigation complexity" },
     { "phase": "Managed SIEM", "capability": "detection engineering, case management and compliance reporting", "gate": "payment or booking, compliance obligation, dedicated owner or material incident" }
   ],
+  "ovhControls": {
+    "publicPorts": [80, 443],
+    "ssh": "key_only_through_IP_allowlist_or_VPN",
+    "databasePublicPort": false,
+    "requiredStorageMode": "RAID1",
+    "offHostRecovery": "encrypted_base_backup_plus_continuous_WAL_archive",
+    "restoreExercise": "monthly",
+    "externalUptimeAndMissingTelemetryCheck": true
+  },
   "pendingForTEC06": [
     "exact provider plan and quote",
     "sampling and cardinality limits",
