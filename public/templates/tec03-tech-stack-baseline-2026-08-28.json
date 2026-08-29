@@ -1,11 +1,11 @@
 {
   "document": {
     "id": "TEC-03",
-    "version": "0.3",
+    "version": "0.4",
     "status": "draft_for_review",
     "createdAt": "2026-08-28",
-    "updatedAt": "2026-08-29",
-    "asOf": "2026-08-29",
+    "updatedAt": "2026-08-30",
+    "asOf": "2026-08-30",
     "owner": "Solution Architect / Tech Lead",
     "approver": "Product Owner"
   },
@@ -35,6 +35,76 @@
     { "id": "TS-15", "layer": "siem_evolution", "choice": "managed SIEM pending risk, compliance or scale trigger", "guardrail": "do_not_claim_full_SIEM_during_Pilot" },
     { "id": "TS-16", "layer": "delivery", "choice": "GitHub Actions, Docker OCI image, Docker Compose and Caddy on OVH", "guardrail": "digest_pinning_separate_migration_approved_deploy_and_rollback_manifest" }
   ],
+  "containers": {
+    "pilotDecision": "single_host_Docker_Compose_without_Kubernetes_or_Swarm",
+    "runtime": {
+      "engine": "Docker Engine CE stable from the official Docker Debian repository",
+      "components": ["docker-ce", "docker-ce-cli", "containerd.io", "runc"],
+      "hostOperatingSystem": "Debian 13 Trixie",
+      "versionPolicy": "pin the tested package versions and upgrade through CI and staging"
+    },
+    "orchestration": {
+      "tool": "Docker Compose v2 plugin",
+      "manifests": ["compose.yaml", "compose.production.yaml"],
+      "excluded": ["Docker Desktop", "Compose standalone v1", "Kubernetes", "Docker Swarm"]
+    },
+    "buildAndRegistry": {
+      "build": "multi-stage Dockerfile with BuildKit and buildx",
+      "runtimeUser": "non-root",
+      "registry": "GitHub Container Registry",
+      "imageIdentity": "immutable commit SHA tag and OCI digest",
+      "productionPull": "digest_only_never_latest",
+      "evidence": ["image_scan", "SBOM", "provenance", "commit_digest_mapping"]
+    },
+    "services": [
+      { "name": "caddy", "role": "HTTPS edge and reverse proxy", "publicPorts": [80, 443] },
+      { "name": "web-a", "role": "Next.js Web and API replica", "publicPorts": [] },
+      { "name": "web-b", "role": "Next.js Web and API replica", "publicPorts": [] },
+      { "name": "worker", "role": "Graphile Worker", "publicPorts": [] },
+      { "name": "postgres", "role": "PostgreSQL 18 source of truth", "publicPorts": [] },
+      { "name": "alloy", "role": "host container application and database telemetry collector", "publicPorts": [] },
+      { "name": "migration", "role": "one-shot reviewed schema migration", "publicPorts": [] },
+      { "name": "backup_restore", "role": "one-shot backup restore and recovery verification", "publicPorts": [] }
+    ],
+    "networks": [
+      { "name": "edge", "members": ["caddy"], "rule": "only public container boundary" },
+      { "name": "app", "members": ["caddy", "web-a", "web-b"], "rule": "internal HTTP and health checks" },
+      { "name": "backend", "members": ["web-a", "web-b", "worker", "postgres"], "rule": "private application and database traffic" },
+      { "name": "observability", "members": ["alloy", "approved telemetry endpoints"], "rule": "telemetry only with bounded credentials" }
+    ],
+    "storage": {
+      "postgres_data": "named local volume on verified RAID1; never removed by routine deploy",
+      "caddy_data_and_config": "named volumes; configuration backed up and TLS state rebuildable",
+      "alloy_buffer": "bounded quota and rotation; not authoritative",
+      "application_media": "Cloudflare R2; no durable media in web or worker containers",
+      "postgresql_recovery": "encrypted off-host base backup and continuous WAL archive with restore drill"
+    },
+    "secretsAndPrivileges": {
+      "source": "root-owned files outside repository and image",
+      "mount": "read-only under /run/secrets only for the required service",
+      "forbidden": ["privileged container", "host network or PID namespace", "writable Docker socket", "application process running as root"],
+      "required": ["no-new-privileges", "read-only filesystem where possible", "minimum telemetry permissions"]
+    },
+    "firewall": {
+      "implementation": "iptables-nft and DOCKER-USER chain",
+      "policy": "default-deny forwarded traffic and publish only Caddy 80 and 443",
+      "verification": "external port scan before public launch",
+      "warning": "do not rely on UFW alone for Docker-published ports"
+    },
+    "deploymentSequence": [
+      "CI lint typecheck tests migration dependency secret and image scans",
+      "BuildKit builds image and GHCR records SHA tag digest SBOM and provenance",
+      "restricted deploy user pulls the approved digest and validates Compose Caddy disk backup and health",
+      "one-shot migration runs after backup and records evidence",
+      "web replicas roll one at a time followed by the worker",
+      "smoke and synthetic checks pass or the previous digest and Compose manifest are restored"
+    ],
+    "rollback": {
+      "application": "previous OCI digest and versioned Compose manifest",
+      "database": "migration-specific rollback or restore plan; never assume image rollback reverses schema",
+      "evidence": "release record links commit digest migration version checks and outcome"
+    }
+  },
   "hosting": {
     "recommended": {
       "provider": "OVHcloud",
@@ -137,8 +207,14 @@
     "https://vitest.dev/guide/",
     "https://opentelemetry.io/docs/languages/js/",
     "https://grafana.com/docs/opentelemetry/ingest/",
-    "https://grafana.com/docs/grafana-cloud/observe-and-act/send-data/",
     "https://grafana.com/docs/grafana-cloud/observe-and-act/send-data/logs/collect-logs-with-otel/",
+    "https://docs.docker.com/engine/install/debian/",
+    "https://docs.docker.com/compose/how-tos/production/",
+    "https://docs.docker.com/reference/compose-file/services/",
+    "https://docs.github.com/en/actions/tutorials/publish-packages/publish-docker-images",
+    "https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry",
+    "https://caddyserver.com/docs/running",
+    "https://caddyserver.com/docs/caddyfile/directives/reverse_proxy",
     "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html",
     "https://csrc.nist.gov/Projects/log-management",
     "https://www.nist.gov/publications/guide-computer-security-log-management"
