@@ -1,8 +1,8 @@
 {
   "documentId": "TEC-05",
   "title": "Search & AI Recommendation",
-  "version": "0.1",
-  "status": "review_required",
+  "version": "1.0",
+  "status": "approved_design_baseline",
   "date": "2026-08-30",
   "decisionOwner": "Founder",
   "scope": {
@@ -98,7 +98,16 @@
   ],
   "review": {
     "requiredDecisions": ["REV-01", "REV-02", "REV-03", "REV-04", "REV-05"],
-    "approved": false,
-    "note": "Version 1.0 is a design baseline. Pilot quality gates still require measured evidence."
+    "approved": true,
+    "approvedDate": "2026-08-30",
+    "approvedBy": "Founder",
+    "decisions": {
+      "REV-01": "approved-mvp-postgresql-rule-based-ai-later",
+      "REV-02": "approved-organic-v1-as-versioned-benchmark-baseline",
+      "REV-03": "approved-commercial-integrity-without-exception",
+      "REV-04": "approved-pilot-quality-and-privacy-baseline-evidence-still-required",
+      "REV-05": "approved-ai-escalation-gates-and-rule-based-fallback"
+    },
+    "note": "Version 1.0 is an approved design and developer baseline. Pilot quality gates still require measured evidence before public release."
   }
 }

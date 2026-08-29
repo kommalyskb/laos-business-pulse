@@ -120,11 +120,11 @@ const failureMatrix = [
 ] as const;
 
 const reviewDecisions = [
-  ["REV-01", "MVP boundary", "ອະນຸມັດ Phase 1 PostgreSQL rule-based Search/Related Places ແລະໃຫ້ Phase 2/3 AI/personalization ເປັນ Later ຫຼືບໍ່?", "ແນະນຳ: ອະນຸມັດ; ກົງ PRO-03 ແລະຫຼຸດ cost/unknown."],
-  ["REV-02", "Ranking contract", "ອະນຸມັດ candidate union, provisional 50/20/15/10/5 weights, deterministic tie-break ແລະ hard eligibility/filter ຫຼືບໍ່?", "ແນະນຳ: ອະນຸມັດເປັນ benchmark baseline; weight ປ່ຽນໄດ້ດ້ວຍ recorded experiment."],
-  ["REV-03", "Commercial integrity", "ອະນຸມັດວ່າ Partner/Sponsored/payment ບໍ່ເປັນ organic feature ແລະ Sponsored ໃຊ້ labeled slot ແຍກຫຼືບໍ່?", "ແນະນຳ: ອະນຸມັດແບບບໍ່ມີຂໍ້ຍົກເວັ້ນ."],
-  ["REV-04", "Quality/privacy gates", "ອະນຸມັດ 60-query benchmark, QG-S01—08, raw-query non-persistence ແລະ session-only recommendation ຫຼືບໍ່?", "ແນະນຳ: ອະນຸມັດ; threshold ເປັນ Pilot baseline ແລະຕ້ອງມີ evidence ກ່ອນ launch."],
-  ["REV-05", "Escalation", "ອະນຸມັດ AI-G01—06 ແລະ rule ວ່າຫ້າມເພີ່ມ AI/dedicated engine ເພາະຄວາມຮູ້ສຶກໂດຍບໍ່ມີ baseline/uplift/cost/privacy/fallback evidence ຫຼືບໍ່?", "ແນະນຳ: ອະນຸມັດ; ຮັກສາ architecture ໃຫ້ງ່າຍຈົນມີຄວາມຈຳເປັນຈິງ."],
+  ["REV-01", "MVP boundary", "ອະນຸມັດ", "Phase 1 PostgreSQL rule-based Search/Related Places ເປັນ Production MVP; Phase 2/3 AI/personalization, Near Me ແລະ Open Now ເປັນ Later."],
+  ["REV-02", "Ranking contract", "ອະນຸມັດເປັນ benchmark baseline", "Candidate union, 50/20/15/10/5 weights, deterministic tie-break ແລະ hard eligibility/filter ຖືກລັອກເປັນ V1; weight ປ່ຽນໄດ້ສະເພາະຈາກ recorded experiment."],
+  ["REV-03", "Commercial integrity", "ອະນຸມັດໂດຍບໍ່ມີຂໍ້ຍົກເວັ້ນ", "Partner, Sponsored ແລະ payment ບໍ່ເປັນ organic feature; paid placement ຢູ່ໃນ labeled slot ແຍກ ແລະຊື້ rating/verification ບໍ່ໄດ້."],
+  ["REV-04", "Quality/privacy gates", "ອະນຸມັດສຳລັບ Pilot", "60-query benchmark, QG-S01—08, raw-query non-persistence ແລະ session-only recommendation ເປັນ baseline; Quality Gate ຍັງຕ້ອງພິສູດດ້ວຍ inventory ແລະຜົນທົດສອບຈິງ."],
+  ["REV-05", "AI escalation", "ອະນຸມັດ AI-G01—06", "ຫ້າມເພີ່ມ AI/dedicated engine ໂດຍບໍ່ມີ baseline gap, data sufficiency, quality uplift, cost/latency/privacy evidence, feature flag ແລະ rule-based fallback."],
 ] as const;
 
 export default function SearchRecommendationDocument({ basePath }: SearchRecommendationDocumentProps) {
@@ -134,12 +134,13 @@ export default function SearchRecommendationDocument({ basePath }: SearchRecomme
         <p>TEC-05 · SEARCH QUALITY BASELINE · 30 AUGUST 2026</p>
         <h1>ການຄົ້ນຫາ ແລະລະບົບແນະນຳ</h1>
         <h2>Search &amp; AI Recommendation</h2>
-        <span className={`${styles.formalStatus} ${styles.formalDraftStatus}`}>0.1 · ຮ່າງສຳລັບທົບທວນ</span>
+        <span className={styles.formalStatus}>1.0 · ອະນຸມັດແລ້ວ · 30 ສິງຫາ 2026</span>
       </header>
 
-      <aside className={styles.formalDraftNotice}>
-        <strong>ຈຸດປະສົງຂອງ TEC-05</strong>
+      <aside className={styles.formalDecision}>
+        <strong>ຈຸດປະສົງ ແລະສະຖານະຂອງ TEC-05</strong>
         <p>ກຳນົດວ່າ Platform ຈະແປຄຳຄົ້ນພາສາລາວ, filter, Place data ແລະ anonymous behavior ເປັນຜົນຄົ້ນຫາ/ຄຳແນະນຳທີ່ກົງ, ໄວ, ອະທິບາຍໄດ້ ແລະບໍ່ໃຫ້ການຈ່າຍເງິນປ່ຽນ organic relevance. ເອກະສານນີ້ບໍ່ຖືວ່າ “ໃຊ້ AI” ເປັນຄຸນຄ່າໃນຕົວມັນເອງ; AI ຕ້ອງພິສູດວ່າດີກວ່າ rule-based baseline.</p>
+        <p>Founder ອະນຸມັດ REV-01—05 ແລ້ວ. ສະບັບ 1.0 ນີ້ເປັນ Design/Developer Baseline; ບໍ່ໄດ້ໝາຍຄວາມວ່າ QG-S01—08 ຜ່ານແລ້ວ—ຜົນທົດສອບຈິງຍັງເປັນ Release Gate.</p>
       </aside>
 
       <nav className={styles.formalToc} aria-label="ສາລະບານ TEC-05">
@@ -156,7 +157,7 @@ export default function SearchRecommendationDocument({ basePath }: SearchRecomme
           <li><a href="#tec05-ai">AI Escalation ແລະ Safeguards</a></li>
           <li><a href="#tec05-operations">Failure, Monitoring ແລະ Handoff</a></li>
           <li><a href="#tec05-sources">Official Sources</a></li>
-          <li><a href="#tec05-review">5 ຂໍ້ທົບທວນກ່ອນ 1.0</a></li>
+          <li><a href="#tec05-review">ບັນທຶກ 5 ການຕັດສິນທີ່ອະນຸມັດ</a></li>
         </ol>
       </nav>
 
@@ -164,7 +165,7 @@ export default function SearchRecommendationDocument({ basePath }: SearchRecomme
         <h2><span>01</span> ການຄວບຄຸມເອກະສານ</h2>
         <div className={styles.formalTableWrap}><table className={styles.formalTable}><tbody>
           <tr><th>Document ID</th><td><code>TEC-05</code></td></tr>
-          <tr><th>Version / status</th><td>0.1 — ຮ່າງສຳລັບທົບທວນ</td></tr>
+          <tr><th>Version / status</th><td>1.0 — ອະນຸມັດແລ້ວ</td></tr>
           <tr><th>Owner / approver</th><td>Technical Lead + Product Owner / Founder</td></tr>
           <tr><th>Input</th><td>PRO-02 System Analysis, PRO-03 MVP Scope, PRO-04 Acceptance, CON-01 Taxonomy, TEC-03 Tech Stack ແລະ TEC-04 Data/API</td></tr>
           <tr><th>Output</th><td>Lao normalization, retrieval/ranking contract, recommendation phases, quality benchmark, safeguards ແລະ AI escalation gate</td></tr>
@@ -309,10 +310,10 @@ export default function SearchRecommendationDocument({ basePath }: SearchRecomme
       </section>
 
       <section id="tec05-review" className={styles.formalSection}>
-        <h2><span>12</span> 5 ຂໍ້ທົບທວນກ່ອນ 1.0</h2>
-        <p>ຂໍ້ຕໍ່ໄປນີ້ລັອກຂອບເຂດ, formula, commercial integrity, quality/privacy ແລະເງື່ອນໄຂການເພີ່ມ AI. TEC-05 ຍັງເປັນ 0.1 ຈົນກວ່າ REV-01—05 ຖືກຕັດສິນ.</p>
-        <div className={styles.formalTableWrap}><table className={`${styles.formalTable} ${styles.formalCatalogTable}`}><thead><tr><th>ID</th><th>ຫົວຂໍ້</th><th>ຄຳຖາມຕັດສິນ</th><th>ຄຳແນະນຳ</th></tr></thead><tbody>{reviewDecisions.map(([id, title, question, recommendation]) => <tr key={id}><td><code>{id}</code></td><td><strong>{title}</strong></td><td>{question}</td><td>{recommendation}</td></tr>)}</tbody></table></div>
-        <aside className={styles.formalDraftNotice}><strong>Definition of done for TEC-05 1.0</strong><p>REV-01—05 ຖືກຕັດສິນ; normalization/retrieval/ranking/filter/recommendation/fallback contract ບໍ່ຂັດ PRO-02/03/04 ແລະ TEC-04; 60-query benchmark template ແລະ signal register ກົງກັບເອກະສານ. ການອະນຸມັດ 1.0 ແມ່ນ Design Baseline—QG-S01—08 ຍັງຕ້ອງມີ evidence ກ່ອນ Public Pilot.</p></aside>
+        <h2><span>12</span> ບັນທຶກ 5 ການຕັດສິນທີ່ອະນຸມັດ</h2>
+        <p>Founder ອະນຸມັດ REV-01—05 ໃນວັນທີ 30 ສິງຫາ 2026. ການປ່ຽນ MVP boundary, Organic V1, commercial-integrity rule, privacy boundary ຫຼື AI escalation gate ຫຼັງຈາກນີ້ຕ້ອງມີ Change Decision ແລະຫຼັກຖານປະກອບ.</p>
+        <div className={styles.formalTableWrap}><table className={`${styles.formalTable} ${styles.formalCatalogTable}`}><thead><tr><th>ID</th><th>ຫົວຂໍ້</th><th>ຜົນຕັດສິນ</th><th>ຂອບເຂດທີ່ຖືກລັອກ</th></tr></thead><tbody>{reviewDecisions.map(([id, title, decision, scope]) => <tr key={id}><td><code>{id}</code></td><td><strong>{title}</strong></td><td>{decision}</td><td>{scope}</td></tr>)}</tbody></table></div>
+        <aside className={styles.formalDecision}><strong>TEC-05 1.0 baseline</strong><p>Normalization, retrieval, ranking, filter, recommendation, fallback, 60-query benchmark template ແລະ signal register ຖືກລັອກສຳລັບ Developer Handoff. QG-S01—08 ຍັງຕ້ອງມີ evidence ກ່ອນ Public Pilot; placeholder benchmark ບໍ່ຖືວ່າເປັນຜົນຜ່ານ.</p></aside>
       </section>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">
