@@ -1,0 +1,18 @@
+record_type,id,role_or_control,current_assignee,status,gate,authority,restriction,effective_date
+ROLE,ROLE-01,Product Owner,Founder,ASSIGNED,Validation,"Scope priority and acceptance within approved stage","Cannot waive independent QA Security or Legal gate",2026-08-30
+ROLE,ROLE-02,Budget Owner / Finance Record Owner,Founder,ASSIGNED,Validation,"Approve and record spending inside 25000000 LAK Validation ceiling","Production Build and personal 75000000 LAK are outside authority",2026-08-30
+ROLE,ROLE-03,Delivery Lead,Founder,ASSIGNED,Validation,"Plan 4 productive days per week and enforce WIP","Cannot turn ROM into Launch commitment",2026-08-30
+ROLE,ROLE-04,Tech Lead / Developer,Founder,ASSIGNED,P0-P4,"Implement and collect technical evidence","Cannot independently verify own security or unresolved Critical/High exception",2026-08-30
+ROLE,ROLE-05,Operations Owner,Founder,ASSIGNED,Pilot,"Monitoring backup incident queue and records during coverage","No 24x7 human SLA claim",2026-08-30
+ROLE,ROLE-06,Content / Trust Operator interim,Founder,ASSIGNED,Validation/Pilot,"Create and process Place Source correction and safe-hide","Irreversible action requires independent checkpoint",2026-08-30
+ROLE,ROLE-07,QA Reviewer,VACANT — Gate blocker,VACANT,P1/P4,"Independent verification required","Founder evidence cannot become Verified without this role",2026-08-30
+ROLE,ROLE-08,Security / Infrastructure Reviewer,VACANT — Gate blocker,VACANT,P0/P4,"Security recovery and infrastructure gate review","Public Pilot and G-SEC stay blocked",2026-08-30
+ROLE,ROLE-09,Legal Reviewer,VACANT — Gate blocker,VACANT,Public Pilot,"External content consent privacy and legal acceptance","Optional analytics and Public Pilot stay blocked",2026-08-30
+ROLE,ROLE-10,Accountant / Tax Reviewer,VACANT — Gate blocker,VACANT,Revenue,"Invoice payment and tax readiness","Real revenue operation stays blocked",2026-08-30
+CAPACITY,CAP-01,Weekly productive capacity,Founder,APPROVED,Validation,4 person-days / 32 hours,"1 weekday uncommitted",2026-08-30
+CAPACITY,CAP-02,WIP limit,Founder,APPROVED,Validation,1 Primary Function + 1 Operations/Defect,"New work waits until Done or recorded Blocked",2026-08-30
+BUDGET,BUD-01,Validation Pilot ceiling,Founder,APPROVED,Validation,25000000 LAK for 6 weeks,"Not Production Build authority",2026-08-30
+BUDGET,BUD-02,Expense under or equal 500000 LAK,Founder,APPROVED,Validation,"Receipt or invoice and purpose","Must be inside approved category",2026-08-30
+BUDGET,BUD-03,Expense 500001-999999 LAK,Founder,APPROVED,Validation,"Evidence reason and remaining-budget check","Must be inside approved category",2026-08-30
+BUDGET,BUD-04,Expense at or above 1000000 LAK,Founder,APPROVED,Validation,"At least two price comparisons and selection reason","No advance commitment outside remaining budget",2026-08-30
+BUDGET,BUD-05,Production Build,PENDING NEW APPROVAL,NOT_AUTHORIZED,P0-P4,"No spending authority","Requires post-Validation decision",2026-08-30

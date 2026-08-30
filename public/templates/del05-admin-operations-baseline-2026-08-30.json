@@ -1,9 +1,14 @@
 {
   "documentId": "DEL-05",
-  "version": "0.2",
+  "version": "0.3",
   "status": "review_decisions_approved_pilot_rehearsal_pending",
   "updatedAt": "2026-08-30",
   "title": "Admin & Operations SOP",
+  "currentPeople": {
+    "founderOnly": true,
+    "assignedToFounder": ["Product Owner", "Budget Owner", "Finance Record Owner", "Delivery Lead", "Tech Lead / Developer", "Operations Owner", "Content / Trust Operator interim"],
+    "vacantGateBlockers": ["QA Reviewer", "Security / Infrastructure Reviewer", "Legal Reviewer", "Accountant / Tax Reviewer"]
+  },
   "coverage": {
     "normalQueue": "08:00–22:00 ICT daily",
     "automation": "24x7 alert delivery and approved safe action",
@@ -45,8 +50,18 @@
       "Draft and Review/Decision remain separate states",
       "routine low-risk self-review explicitly flagged and sampled",
       "P0 safe-hide allowed immediately",
-      "irreversible deletion, appeal, security exception and material finance/access decision require independent checkpoint"
+      "irreversible deletion, appeal, security exception and material finance/access decision require independent checkpoint",
+      "Founder cannot create artificial independence by changing active role"
     ]
+  },
+  "slaRehearsal": {
+    "round1": "10 controlled normal-operation cases across OPS-Q01—07",
+    "round2": "incident/trust cases including S1 alert, P0 safe-hide, correction, takedown, failed job and handover",
+    "thresholds": {"s1AlertMinutes": 5, "p0SafeHideMinutes": 15, "s1HumanAcknowledgeMinutesDuringCoverage": 60},
+    "universalPass": "100% required fields; no lost case; no unauthorized irreversible self-approval",
+    "executor": "Founder",
+    "independentVerifier": "VACANT — Gate blocker",
+    "record": "del05-sla-rehearsal-register-2026-08-30.csv"
   },
   "pilotSla": {
     "OPS_Q01": "acknowledge within 1 operating day; target first review within 2 operating days",
@@ -63,12 +78,16 @@
     "monthly": "timed restore/access/secret/patch/cost/incident/SOP",
     "quarterly": "access/break-glass/evidence restore/clean-host/vendor/risk"
   },
-  "evidence": "Every material action records case/task, actor, reason, time, result, audit/evidence and next owner.",
+  "evidence": {
+    "register": "del-execution-evidence-register-2026-08-30.csv",
+    "statuses": ["Planned", "Collected", "Under Review", "Verified", "Rejected", "Expired"],
+    "rule": "Every material action records case/task, actor, reason, time, result, audit/evidence and next owner. Founder-created independent evidence cannot be Verified by Founder."
+  },
   "reviewDecision": {
     "status": "APPROVED",
     "approvedAt": "2026-08-30",
     "items": ["REV-01 Operating hours", "REV-02 Segregation of duties", "REV-03 Queue/SLA", "REV-04 Maintenance cadence", "REV-05 Evidence/handover"]
   },
-  "openInputsBefore1_0": ["named role holders and backup checkpoint", "queue/SLA fixture rehearsal", "monthly timed restore", "handover and incident rehearsal"],
-  "disclaimer": "The Pilot operating decisions are approved. SLA figures are internal targets, not an unconditional customer promise; implementation evidence remains pending."
+  "openInputsBefore1_0": ["fill external reviewer vacancies", "execute and verify queue/SLA fixture rehearsal", "execute and verify monthly timed restore", "execute and verify handover and incident rehearsal"],
+  "disclaimer": "The Pilot operating decisions are approved. Founder is the sole operator and external reviewers are VACANT — Gate blocker. SLA figures are internal targets, not an unconditional customer promise; implementation evidence remains pending."
 }

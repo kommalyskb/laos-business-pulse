@@ -1,6 +1,6 @@
 {
   "documentId": "DEL-03",
-  "version": "0.2",
+  "version": "0.3",
   "status": "review_decisions_approved_execution_pending",
   "updatedAt": "2026-08-30",
   "title": "Deployment, Release & Monitoring",
@@ -39,6 +39,18 @@
   },
   "migration": "Expand/deploy/backfill/contract; backup before destructive change.",
   "rollback": "Previous approved digest/config only when schema compatible; data restore requires incident/recovery authority.",
+  "restoreTest": {
+    "when": "Before Public Pilot and monthly",
+    "target": "Isolated environment; never overwrite active Production",
+    "rpoMaximumHours": 1,
+    "rtoMaximumHours": 8,
+    "requiredChecks": ["schema and migration", "row counts and checksums", "audit/outbox consistency", "OIDC/Admin access", "critical Guest journeys", "cleanup"],
+    "executor": "Founder",
+    "verifier": "VACANT — Gate blocker (Security / Infrastructure Reviewer)",
+    "failureRule": "Missed or failed drill blocks release.",
+    "record": "del03-restore-test-record-2026-08-30.csv"
+  },
+  "evidenceRegister": "del-execution-evidence-register-2026-08-30.csv",
   "noGo": [
     "open S1/Critical",
     "open High without valid exceptional approval",
@@ -53,5 +65,5 @@
     "approvedAt": "2026-08-30",
     "items": ["REV-01 Promotion", "REV-02 Release authority", "REV-03 Migration/rollback", "REV-04 Observability/on-call", "REV-05 Single-host disclosure"]
   },
-  "disclaimer": "The release design is approved for implementation. No release is authorized until build-specific gates and evidence pass."
+  "disclaimer": "The release design is approved for implementation. Security / Infrastructure Reviewer is VACANT — Gate blocker; no Public Pilot release is authorized until build-specific evidence passes and receives independent verification."
 }

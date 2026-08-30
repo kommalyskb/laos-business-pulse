@@ -1,11 +1,11 @@
 {
   "documentId": "DEL-01",
-  "version": "0.2",
-  "status": "review_decisions_approved_inputs_pending",
+  "version": "0.3",
+  "status": "capacity_and_validation_authority_approved_external_gates_vacant_execution_pending",
   "updatedAt": "2026-08-30",
   "title": "Development Plan",
-  "owner": "Delivery / Tech Lead",
-  "approver": "Product Owner",
+  "owner": "Founder acting as Delivery / Tech Lead",
+  "approver": "Founder acting as Product Owner within approved Validation scope",
   "inputs": [
     "PRO-02",
     "PRO-03",
@@ -22,7 +22,22 @@
     "maxPersonDays": 110,
     "calendarCommitment": false,
     "budgetApproved": false,
-    "formula": "calendar weeks = total person-days / approved productive person-days per week + dependency/vendor/leave buffer"
+    "productivePersonDaysPerWeek": 4,
+    "productiveHoursPerWeek": 32,
+    "uncommittedDaysPerWeek": 1,
+    "bufferPercent": 15,
+    "calendarRangeWeeks": "22–32",
+    "calendarCommitmentReason": "Planning range only; Production budget and independent gates are not approved.",
+    "formula": "calendar weeks = (total person-days / 4 productive person-days per week) * 1.15"
+  },
+  "wipLimit": "1 Primary Function + 1 Operations/Defect",
+  "budgetAuthority": {
+    "validationPilotCeilingLak": 25000000,
+    "validationPeriodWeeks": 6,
+    "productionBuildAuthorized": false,
+    "productionRule": "P0–P4 requires a new budget decision after Validation Pilot.",
+    "expenseAtOrAbove1000000Lak": "At least two comparable prices/quotations and a recorded selection reason.",
+    "personalFundsExcluded": "60m LAK living reserve and 15m LAK personal obligations are outside project authority."
   },
   "scopeRule": "Must-only committed baseline; Should/Later requires approved change control.",
   "phases": [
@@ -50,6 +65,15 @@
     "Security / Infrastructure Specialist",
     "Content / Trust Operator"
   ],
+  "currentRoles": {
+    "assignedToFounder": ["Product Owner", "Budget Owner", "Finance Record Owner", "Delivery Lead", "Tech Lead / Developer", "Operations Owner", "Content / Trust Operator interim"],
+    "vacantGateBlockers": ["QA Reviewer", "Security / Infrastructure Reviewer", "Legal Reviewer", "Accountant / Tax Reviewer"],
+    "independenceRule": "Founder-created QA, Security or Legal evidence cannot be Verified by the Founder. The gate remains blocked and the system stays safe/restricted."
+  },
+  "evidenceRegister": {
+    "artifact": "del-execution-evidence-register-2026-08-30.csv",
+    "statuses": ["Planned", "Collected", "Under Review", "Verified", "Rejected", "Expired"]
+  },
   "done": [
     "acceptance and negative/security paths pass",
     "code review and migration compatibility complete",
@@ -63,10 +87,9 @@
     "items": ["REV-01 Calendar model", "REV-02 Team", "REV-03 Scope", "REV-04 Release gates", "REV-05 Budget authority"]
   },
   "openInputsBefore1_0": [
-    "approved productive person-days per week",
-    "named QA and Security/Infrastructure checkpoint availability",
-    "production spend ceiling and purchase authority",
-    "first P0 backlog commitment"
+    "fill QA, Security/Infrastructure, Legal and Accountant/Tax reviewer vacancies",
+    "approve a separate Production Build budget and P0 commitment after Validation Pilot",
+    "collect and independently verify execution evidence"
   ],
-  "disclaimer": "Review decisions are approved. No launch date, named staffing commitment, purchase or production budget is created by this baseline."
+  "disclaimer": "Only the 6-week Validation Pilot and its 25m LAK ceiling are approved. No launch date, Production Build authority or independent gate approval is created by this baseline."
 }

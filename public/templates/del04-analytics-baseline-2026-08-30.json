@@ -1,10 +1,13 @@
 {
   "documentId": "DEL-04",
-  "version": "0.2",
+  "version": "0.3",
   "status": "review_decisions_approved_optional_collection_disabled",
   "updatedAt": "2026-08-30",
   "title": "Analytics Tracking Plan",
   "defaultMode": "EssentialOnly; optional analytics OFF pending consent, withdrawal, vendor, retention and legal gates.",
+  "currentOperator": "Founder",
+  "legalReviewer": "VACANT — Gate blocker",
+  "evidenceRegister": "del-execution-evidence-register-2026-08-30.csv",
   "prohibited": [
     "raw search query",
     "PII beyond essential purpose",
@@ -60,5 +63,5 @@
     "approvedAt": "2026-08-30",
     "items": ["REV-01 Consent gate", "REV-02 Event catalog", "REV-03 Decision Intent", "REV-04 Retention/access", "REV-05 Reporting"]
   },
-  "disclaimer": "The analytics design is approved for implementation. Optional collection remains disabled until every stated gate passes."
+  "disclaimer": "The analytics design is approved for implementation. Legal Reviewer is VACANT — Gate blocker; optional collection remains disabled until every stated gate passes."
 }

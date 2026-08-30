@@ -1,0 +1,10 @@
+evidence_id,gate_id,control_id,requirement_id,evidence_type,environment,commit_sha,image_digest,fixture_version,expected_result,actual_result,status,created_by,verified_by,collected_at,verified_at,artifact_reference,content_hash,expires_at,defect_or_exception,residual_risk
+EV-P0-001,P0,AUTH-AUDIT,FR-ADMIN,automated_test,Pilot/Staging,,,,"Negative authorization and audit rollback pass",,Planned,Founder,,,,,,,"QA and Security reviewers VACANT","Gate blocked"
+EV-P1-001,P1,PUBLISHED-BOUNDARY,FR-PLACE,uat_e2e,Pilot/Staging,,,,"Admin publish to Guest canonical Place passes",,Planned,Founder,,,,,,,"QA Reviewer VACANT","Gate blocked"
+EV-P2-001,P2,PERF-01-04,NFR-02,performance_test,Pilot/Staging,,,,"All four Pilot performance thresholds pass",,Planned,Founder,,,,,,,"QA Reviewer VACANT","Gate blocked"
+EV-P3-001,P3,TRUST-QUEUE,FR-TRUST,sla_rehearsal,Pilot/Staging,,,,"Trust queue and safe-hide rehearsal pass",,Planned,Founder,,,,,,,"QA Reviewer VACANT","Gate blocked"
+EV-P4-001,P4,G-SEC-01-08,NFR-SEC,security_review,Pilot/Staging,,,,"Security gates independently verified",,Planned,Founder,,,,,,,"Security Reviewer VACANT","Gate blocked"
+EV-P4-002,P4,RESTORE,RPO-RTO,restore_test,Isolated Restore,,,,"RPO <=1h and RTO <=8h with integrity checks",,Planned,Founder,,,,,,,"Security Reviewer VACANT","Gate blocked"
+EV-P4-003,P4,UAT-01-07,FR-MUST,uat_result,Pilot/Staging,,,,"All Must UAT pass and Critical/High open count is zero",,Planned,Founder,,,,,,,"QA Reviewer VACANT","Gate blocked"
+EV-P4-004,P4,LEGAL-PILOT,PRIVACY-CONTENT,legal_review,Documentation,,,,"Public Pilot legal boundary accepted",,Planned,Founder,,,,,,,"Legal Reviewer VACANT","Gate blocked"
+EV-REV-001,Revenue,FIN-TAX,COMMERCIAL,finance_review,Documentation,,,,"Invoice payment and tax operation reviewed",,Planned,Founder,,,,,,,"Accountant/Tax Reviewer VACANT","Revenue operation blocked"

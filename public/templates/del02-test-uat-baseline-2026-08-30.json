@@ -1,15 +1,18 @@
 {
   "documentId": "DEL-02",
-  "version": "0.2",
+  "version": "0.3",
   "status": "review_decisions_approved_execution_pending",
   "updatedAt": "2026-08-30",
   "title": "Test & UAT Plan",
   "owners": {
-    "qa": "QA Lead",
-    "technical": "Tech Lead",
-    "operations": "Operations Owner",
-    "finalAcceptance": "Product Owner"
+    "execution": "Founder",
+    "qa": "VACANT — Gate blocker",
+    "technical": "Founder acting as Tech Lead",
+    "operations": "Founder acting as Operations Owner",
+    "finalAcceptance": "Founder acting as Product Owner after independent gates"
   },
+  "independenceRule": "Founder may execute and collect results but cannot independently Verify own QA/Security evidence.",
+  "evidenceRegister": "del-execution-evidence-register-2026-08-30.csv",
   "testLevels": [
     "T1 Unit/rule",
     "T2 Contract/API",
@@ -57,5 +60,5 @@
     "approvedAt": "2026-08-30",
     "items": ["REV-01 Automation boundary", "REV-02 Environment/data", "REV-03 Defect policy", "REV-04 Performance/security/recovery", "REV-05 Acceptance authority"]
   },
-  "disclaimer": "The test design is approved for implementation. No test or UAT result is passed until evidence fields are completed and signed."
+  "disclaimer": "The test design is approved for implementation. QA Reviewer is VACANT — Gate blocker; no test or UAT result is Verified until evidence fields are completed and independently reviewed."
 }
