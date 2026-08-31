@@ -1,7 +1,10 @@
 {
   "documentId": "DEL-03",
-  "version": "0.3",
-  "status": "review_decisions_approved_execution_pending",
+  "version": "1.0",
+  "documentStatus": "approved",
+  "executionStatus": "blocked",
+  "evidenceStatus": "planned",
+  "status": "release_plan_approved_execution_pending",
   "updatedAt": "2026-08-30",
   "title": "Deployment, Release & Monitoring",
   "topology": "OVH Singapore single-host Docker Compose; Caddy public 80/443 only; no HA or zero-downtime claim.",

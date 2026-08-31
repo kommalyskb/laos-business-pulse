@@ -1,7 +1,10 @@
 {
   "documentId": "DEL-04",
-  "version": "0.3",
-  "status": "review_decisions_approved_optional_collection_disabled",
+  "version": "1.0",
+  "documentStatus": "approved",
+  "executionStatus": "blocked",
+  "evidenceStatus": "planned",
+  "status": "analytics_plan_approved_optional_collection_blocked_by_legal_gate",
   "updatedAt": "2026-08-30",
   "title": "Analytics Tracking Plan",
   "defaultMode": "EssentialOnly; optional analytics OFF pending consent, withdrawal, vendor, retention and legal gates.",

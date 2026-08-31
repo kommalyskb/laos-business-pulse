@@ -1,7 +1,10 @@
 {
   "documentId": "DEL-05",
-  "version": "0.3",
-  "status": "review_decisions_approved_pilot_rehearsal_pending",
+  "version": "1.0",
+  "documentStatus": "approved",
+  "executionStatus": "blocked",
+  "evidenceStatus": "planned",
+  "status": "sop_approved_pilot_rehearsal_pending",
   "updatedAt": "2026-08-30",
   "title": "Admin & Operations SOP",
   "currentPeople": {

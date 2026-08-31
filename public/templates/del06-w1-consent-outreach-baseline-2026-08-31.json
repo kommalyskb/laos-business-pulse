@@ -2,6 +2,9 @@
   "documentId": "DEL-06",
   "activityId": "W1",
   "version": "0.1",
+  "parentDocumentVersion": "1.0",
+  "artifactStatus": "approved_template",
+  "executionStatus": "blocked_recruitment_pending",
   "updatedAt": "2026-08-31",
   "consent": {
     "participationVoluntary": true,

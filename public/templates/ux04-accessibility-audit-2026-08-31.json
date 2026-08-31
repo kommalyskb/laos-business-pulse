@@ -1,0 +1,18 @@
+{
+  "auditId": "UX04-A11Y-2026-08-31",
+  "documentVersion": "UX-04 1.0",
+  "surface": "/prototype/",
+  "method": "In-app browser semantic and rendered-dimension audit",
+  "observed": [
+    {"check":"Focusable controls","result":"collected","detail":"14 visible, enabled focusable controls; each reported tabIndex 0"},
+    {"check":"Touch targets","result":"collected","detail":"Observed interactive target heights ranged from 44px to 87px; no observed target below 44px"},
+    {"check":"Semantic structure","result":"collected","detail":"Main, navigation, mobile application region, consent dialog and accessible control labels were exposed in the DOM"}
+  ],
+  "notVerified": [
+    {"check":"Physical keyboard traversal","reason":"Browser automation did not move focus away from BODY; this is recorded as not verified, not as pass or fail"},
+    {"check":"VoiceOver journey","reason":"Requires OS assistive technology and a human listener"},
+    {"check":"Browser zoom 200%","reason":"Requires manual visual and interaction verification"},
+    {"check":"OS reduced motion","reason":"Requires operating-system preference verification"}
+  ],
+  "conclusion": "Design System specification is approved at 1.0 and internal evidence is collected. This evidence is not sufficient to pass the Public Pilot accessibility evidence gate."
+}

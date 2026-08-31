@@ -50,13 +50,13 @@ export default function RequirementsAcceptanceDocument({ basePath }: { basePath:
         <p>PRO-04 · PRODUCT &amp; ANALYSIS</p>
         <h1>Requirements &amp; Acceptance Criteria</h1>
         <h2>ຂໍ້ກຳນົດຂອງລະບົບ ແລະເງື່ອນໄຂການຮັບມອບ</h2>
-        <div className={`${styles.formalStatus} ${styles.formalDraftStatus}`}>ສະບັບ 0.9 · ອະນຸມັດເກນແລ້ວ · ລໍ Consent/Retention Baseline · 27 ສິງຫາ 2026</div>
+        <div className={`${styles.formalStatus} ${styles.formalApprovedStatus}`}>ສະບັບ 1.0 · Approved Acceptance Baseline · Execution Evidence Planned · 31 ສິງຫາ 2026</div>
       </header>
 
       <section className={styles.formalSection} id="rac-control">
         <h2><span>1.</span> ຂໍ້ມູນຄວບຄຸມເອກະສານ</h2>
         <div className={styles.formalTableWrap}><table className={styles.formalTable}><tbody>
-          <tr><th>ລະຫັດເອກະສານ</th><td>PRO-04</td><th>ສະບັບ</th><td>0.9</td></tr>
+          <tr><th>ລະຫັດເອກະສານ</th><td>PRO-04</td><th>ສະບັບ</th><td>1.0</td></tr>
           <tr><th>ຊື່ເອກະສານ</th><td>Requirements &amp; Acceptance Criteria</td><th>ສະຖານະ</th><td>ອະນຸມັດເກນແລ້ວ · ລໍ Consent/Retention Baseline</td></tr>
           <tr><th>ເຈົ້າຂອງເອກະສານ</th><td>Product Owner / System Analyst</td><th>ຜູ້ທົບທວນ</th><td>Tech Lead · QA Lead · Operations</td></tr>
           <tr><th>ເອກະສານຕົ້ນທາງ</th><td colSpan={3}>PRO-01 1.0 · PRO-02 1.0 · PRO-03 1.0</td></tr>
@@ -65,6 +65,7 @@ export default function RequirementsAcceptanceDocument({ basePath }: { basePath:
         <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ສະບັບ</th><th>ວັນທີ</th><th>ລາຍລະອຽດ</th><th>ຜູ້ຈັດທຳ</th></tr></thead><tbody>
           <tr><td>0.1</td><td>26 ສິງຫາ 2026</td><td>ຈັດທຳ 13 Requirements, {acceptanceCount} Acceptance Criteria, Test Policy ແລະ Traceability ສຳລັບທົບທວນ</td><td>System Analyst</td></tr>
           <tr><td>0.9</td><td>27 ສິງຫາ 2026</td><td>ອະນຸມັດ Acceptance Authority, Test Environment/Data, Defect Policy, Pilot Performance Target, UAT Journey ແລະ Evidence Contract</td><td>Product Owner / System Analyst</td></tr>
+          <tr><td>1.0</td><td>31 ສິງຫາ 2026</td><td>ອະນຸມັດເປັນ Acceptance Baseline; ແຍກ Document Approval ອອກຈາກ Test/UAT Execution ແລະ Evidence Verification</td><td>Product Owner / System Analyst</td></tr>
         </tbody></table></div>
       </section>
 
@@ -169,7 +170,7 @@ export default function RequirementsAcceptanceDocument({ basePath }: { basePath:
       </section>
 
       <section className={styles.formalSection} id="rac-review">
-        <h2><span>11.</span> ບັນທຶກຂໍ້ຕັດສິນ ແລະເງື່ອນໄຂກ່ອນ 1.0</h2>
+        <h2><span>11.</span> ບັນທຶກຂໍ້ຕັດສິນ ແລະ Pre-launch Gate</h2>
         <div className={styles.formalTableWrap}><table className={styles.formalTable}><thead><tr><th>ID</th><th>ຫົວຂໍ້</th><th>ຂໍ້ຕັດສິນ</th><th>ສະຖານະ</th></tr></thead><tbody>
           <tr><td>REV-01</td><td><strong>Acceptance Authority</strong></td><td>Product Owner ຮັບ Business/UAT ແລະ Final Go/No-go; Tech Lead ຮັບ Technical Quality; Operations Owner ຮັບ Operational Readiness.</td><td>ອະນຸມັດ</td></tr>
           <tr><td>REV-02</td><td><strong>Test Environment &amp; Data</strong></td><td>ແຍກ Test Environment, ໃຊ້ DATA-01 ຫາ DATA-08 ແລະຫ້າມໃຊ້ Production Personal Data ໂດຍກົງ; ໃຊ້ Synthetic/Anonymized Data.</td><td>ອະນຸມັດ</td></tr>
@@ -177,7 +178,7 @@ export default function RequirementsAcceptanceDocument({ basePath }: { basePath:
           <tr><td>REV-04</td><td><strong>Performance Target</strong></td><td>ອະນຸມັດ PERF-01 ຫາ PERF-04 ເປັນ Pilot Baseline ໃນ Android ລະດັບກາງ ແລະຈຳລອງ 4G.</td><td>ອະນຸມັດ</td></tr>
           <tr><td>REV-05</td><td><strong>UAT &amp; Sign-off Evidence</strong></td><td>ອະນຸມັດ 7 Journey ບັງຄັບ, Sign-off Roles ແລະ Evidence Contract ຕາມຂໍ້ 9.</td><td>ອະນຸມັດ</td></tr>
         </tbody></table></div>
-        <div className={styles.formalDraftNotice}><strong>PRO-04 · ສະບັບ 0.9</strong><p>REV-01 ຫາ REV-05 ຖືກຕັດສິນຄົບແລ້ວ. ຍັງບໍ່ຂຶ້ນ 1.0 ຈົນກວ່າ TEC-06 ແລະ Legal Review ຈະກຳນົດ Analytics Consent/Data Retention ແລະ CON-05 ຂຶ້ນເປັນ 1.0; ຈາກນັ້ນ PRO-04 ຕ້ອງຜູກ Acceptance Criteria ເຂົ້າກັບ Baseline ດັ່ງກ່າວ.</p></div>
+        <div className={styles.formalDraftNotice}><strong>PRO-04 · ສະບັບ 1.0</strong><p>Requirement ແລະ Acceptance Criteria ຖືກອະນຸມັດເປັນ baseline ແລ້ວ. Consent/Retention ແລະ Legal Review ຍັງເປັນ Pre-launch Gate; Test/UAT ຍັງບໍ່ໄດ້ execute ແລະຜົນຕ້ອງເກັບໃນ Evidence Register. ສະຖານະ 1.0 ຈຶ່ງບໍ່ແມ່ນການອ້າງວ່າລະບົບຜ່ານການທົດສອບແລ້ວ.</p></div>
       </section>
 
       <nav className={styles.docPagination} aria-label="ເອກະສານກ່ອນໜ້າ ແລະຕໍ່ໄປ">

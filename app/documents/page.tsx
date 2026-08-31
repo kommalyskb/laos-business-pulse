@@ -16,6 +16,8 @@ export default function DocumentDirectory() {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  const approvedCount = documents.filter((document) => document.status === "approved").length;
+  const reviewCount = documents.length - approvedCount;
 
   const visibleDocuments = useMemo(() => {
     const term = query.trim().toLowerCase();
@@ -45,7 +47,7 @@ export default function DocumentDirectory() {
         <div className={styles.heroCopy}>
           <strong>ແຫຼ່ງຂໍ້ມູນດຽວຂອງໂຄງການ</strong>
           <p>ຈັດລຽງເອກະສານຕັ້ງແຕ່ business, product ແລະ content ໄປຈົນເຖິງ design, engineering ແລະການ launch.</p>
-          <div><b>{documents.length}</b><span>ເອກະສານ</span><b>{categories.length}</b><span>ໝວດ</span></div>
+          <div><b>{documents.length}</b><span>ເອກະສານ</span><b>{approvedCount}</b><span>ອະນຸມັດ 1.0+</span><b>{reviewCount}</b><span>ຍັງທົບທວນ</span></div>
         </div>
       </section>
 
@@ -61,6 +63,11 @@ export default function DocumentDirectory() {
         </aside>
 
         <div className={styles.content}>
+          <aside className={styles.statusLegend}>
+            <strong>ວິທີອ່ານສະຖານະ</strong>
+            <p><b>Document 1.0</b> ໝາຍເຖິງເນື້ອຫາ/ແຜນຖືກອະນຸມັດເປັນ baseline. ບໍ່ໄດ້ໝາຍວ່າໄດ້ລົງມື, ທົດສອບ ຫຼືມີຫຼັກຖານຢືນຢັນແລ້ວ. ແຕ່ລະໜ້າຈຶ່ງແຍກ Document, Execution ແລະ Evidence Status.</p>
+            <a href={`${basePath}/templates/document-status-register-2026-08-31.json`}>ເບິ່ງ Status Register →</a>
+          </aside>
           <div className={styles.tools}>
             <label><span>⌕</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="ຄົ້ນຫາຊື່ ຫຼື ລະຫັດເອກະສານ..." /></label>
             <b>{visibleDocuments.length} DOCUMENTS</b>

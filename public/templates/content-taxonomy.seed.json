@@ -1,14 +1,17 @@
 {
   "document": "CON-01",
-  "version": "0.9",
+  "version": "1.0",
+  "document_status": "approved",
+  "execution_status": "not_started",
+  "evidence_status": "planned",
   "production_ready": false,
   "blocking_items": [
-    "Replace DISTRICT-PENDING-* with approved Pilot district IDs and boundaries.",
-    "Approve min_amount_lak and max_amount_lak for PRICE-LOW, PRICE-MID and PRICE-HIGH from real Pilot price samples."
+    "Collect real price samples from 30 restaurants before approving min_amount_lak and max_amount_lak.",
+    "Keep the public Price Filter disabled and use PRICE-UNKNOWN until calibration passes."
   ],
   "terms": [
     { "id": "CAT-RESTAURANT", "type": "primary_category", "label_lao": "ຮ້ານອາຫານ", "label_en": "Restaurant", "status": "active" },
-    { "id": "CAT-CAFE", "type": "primary_category", "label_lao": "ຮ້ານກາເຟ", "label_en": "Cafe", "status": "active" },
+    { "id": "CAT-CAFE", "type": "primary_category", "label_lao": "ຮ້ານກາເຟ", "label_en": "Cafe", "status": "deferred_not_active_in_initial_pilot" },
     { "id": "CUI-LAO", "type": "cuisine", "label_lao": "ອາຫານລາວ", "label_en": "Lao", "status": "active" },
     { "id": "CUI-THAI", "type": "cuisine", "label_lao": "ອາຫານໄທ", "label_en": "Thai", "status": "active" },
     { "id": "CUI-VIETNAMESE", "type": "cuisine", "label_lao": "ອາຫານຫວຽດນາມ", "label_en": "Vietnamese", "status": "active" },
@@ -21,8 +24,7 @@
     { "id": "PRICE-MID", "type": "price_band", "label_lao": "₭₭", "min_amount_lak": null, "max_amount_lak": null, "status": "pending_threshold" },
     { "id": "PRICE-HIGH", "type": "price_band", "label_lao": "₭₭₭", "min_amount_lak": null, "max_amount_lak": null, "status": "pending_threshold" },
     { "id": "PRICE-UNKNOWN", "type": "price_band", "label_lao": "ຍັງບໍ່ຮູ້ລາຄາ", "status": "active" },
-    { "id": "DISTRICT-PENDING-01", "type": "district", "label_lao": null, "boundary_reference": null, "status": "pending_do_not_publish" },
-    { "id": "DISTRICT-PENDING-02", "type": "district", "label_lao": null, "boundary_reference": null, "status": "pending_do_not_publish" },
-    { "id": "DISTRICT-PENDING-03", "type": "district", "label_lao": null, "boundary_reference": null, "status": "optional_pending_do_not_publish" }
+    { "id": "DIST-CHAN-PRIMARY", "type": "district", "label_lao": "ຈັນທະບູລີ", "label_en": "Chanthabouly", "boundary_reference": "Pilot scope register AREA-01", "status": "active_primary_pilot" },
+    { "id": "DIST-SISA-BACKUP", "type": "district", "label_lao": "ສີສັດຕະນາກ", "label_en": "Sisattanak", "boundary_reference": "Pilot scope register AREA-02", "status": "active_backup_only" }
   ]
 }

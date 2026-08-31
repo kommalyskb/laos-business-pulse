@@ -14,7 +14,7 @@
 .heroCopy { padding:28px 0 4px; border-top:3px solid var(--aqua); }
 .heroCopy > strong { font-size:22px; }
 .heroCopy > p { margin:14px 0 26px; color:rgba(255,255,255,.65); line-height:1.75; }
-.heroCopy > div { display:grid; grid-template-columns:auto 1fr auto 1fr; gap:9px 12px; align-items:baseline; }
+.heroCopy > div { display:grid; grid-template-columns:auto 1fr auto 1fr auto 1fr; gap:9px 12px; align-items:baseline; }
 .heroCopy b { color:var(--aqua); font-size:29px; }
 .heroCopy span { color:rgba(255,255,255,.55); font-size:10px; }
 .directory { display:grid; grid-template-columns:290px minmax(0,1fr); align-items:start; }
@@ -77,6 +77,10 @@
 .statusNext { color:#155c49; background:#d4f4e8; }
 .statusPlanned { color:#6c655c; background:#dcd5c8; }
 .detailMeta > p { margin:38px 0 0; color:#68706f; font-size:11px; line-height:1.75; }
+.statusLegend { margin:0 0 34px; padding:22px 24px; border:1px solid var(--line); border-left:5px solid var(--aqua); background:#f7f4ed; }
+.statusLegend strong { font-size:14px; }
+.statusLegend p { margin:9px 0; color:#515a57; font-size:12px; line-height:1.75; }
+.statusLegend a { color:#0f5c61; font-size:11px; font-weight:900; text-decoration:none; }
 .detailBody { min-width:0; max-width:1050px; padding:70px clamp(25px,7vw,110px) 100px; }
 .detailBody > section { margin-bottom:82px; }
 .detailBody > section > span { color:var(--orange); font-size:8px; font-weight:900; letter-spacing:.14em; }
@@ -1247,6 +1251,7 @@
 .formalDocumentHeader h1 { margin:0; font-size:clamp(34px,4vw,52px); line-height:1.18; letter-spacing:-.035em; }
 .formalDocumentHeader h2 { max-width:800px; margin:13px 0 26px; color:#3f4b47; font-size:clamp(21px,2.4vw,30px); font-weight:700; line-height:1.45; letter-spacing:0; }
 .formalStatus { display:inline-block; padding:8px 12px; color:#0f4e3c; border:1px solid #6cbfa8; background:#e3f5ef; font-size:11px; font-weight:900; }
+.formalApprovedStatus { color:#0f4e3c; border-color:#6cbfa8; background:#e3f5ef; }
 .formalDraftStatus { color:#7a461d; border-color:#d9aa75; background:#fff2df; }
 .formalSection { scroll-margin-top:24px; padding:0 0 46px; border-bottom:1px solid #bfc5c1; }
 .formalDocument .formalSection > h2 { margin:0 0 21px; color:#182521; font-size:25px; line-height:1.4; letter-spacing:-.01em; }

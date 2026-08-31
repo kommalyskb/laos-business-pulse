@@ -1,0 +1,31 @@
+{
+  "registerId": "DOC-STATUS-2026-08-31",
+  "asOf": "2026-08-31",
+  "statusModel": {
+    "documentStatus": "ບອກວ່າເນື້ອຫາ/ແຜນຖືກອະນຸມັດເປັນ baseline ຫຼືຍັງ",
+    "executionStatus": "ບອກວ່າໄດ້ລົງມືຕາມແຜນແລ້ວຫຼືຍັງ",
+    "evidenceStatus": "ບອກວ່າຫຼັກຖານຖືກວາງແຜນ, ເກັບ ຫຼືຢືນຢັນແລ້ວ",
+    "rule": "Document 1.0 does not mean execution completed or evidence verified."
+  },
+  "summary": {
+    "totalDocuments": 32,
+    "approvedDocuments": 30,
+    "documentsInReview": 2,
+    "remainingDocuments": ["UX-03", "CON-05"]
+  },
+  "updatedDocuments": [
+    {"id":"PRO-04","version":"1.0","documentStatus":"approved","executionStatus":"not_started","evidenceStatus":"planned","blocker":"Consent/Retention and Legal remain pre-launch gates; Test/UAT not executed"},
+    {"id":"CON-01","version":"1.0","documentStatus":"approved","executionStatus":"not_started","evidenceStatus":"planned","blocker":"Price threshold calibration waits for real 30-place sample"},
+    {"id":"CON-03","version":"1.0","documentStatus":"approved","executionStatus":"not_started","evidenceStatus":"planned","blocker":"Actual Place and Source ledgers are not populated"},
+    {"id":"CON-05","version":"0.9","documentStatus":"in_progress","executionStatus":"blocked","evidenceStatus":"planned","blocker":"Legal Reviewer is VACANT"},
+    {"id":"UX-03","version":"0.9.4","documentStatus":"in_progress","executionStatus":"blocked","evidenceStatus":"collected","blocker":"External usability evidence from 5 users is missing"},
+    {"id":"UX-04","version":"1.0","documentStatus":"approved","executionStatus":"in_progress","evidenceStatus":"collected","blocker":"Physical keyboard, VoiceOver, browser zoom 200% and OS reduced motion are not verified"},
+    {"id":"UX-05","version":"1.0","documentStatus":"approved","executionStatus":"not_started","evidenceStatus":"collected","blocker":"Production implementation and external usability evidence are pending"},
+    {"id":"DEL-01","version":"1.0","documentStatus":"approved","executionStatus":"blocked","evidenceStatus":"planned","blocker":"QA, Security/Infrastructure, Legal and Accountant/Tax roles are VACANT"},
+    {"id":"DEL-02","version":"1.0","documentStatus":"approved","executionStatus":"blocked","evidenceStatus":"planned","blocker":"Production build/fixtures and independent QA are missing"},
+    {"id":"DEL-03","version":"1.0","documentStatus":"approved","executionStatus":"blocked","evidenceStatus":"planned","blocker":"Restore rehearsal and independent verification are missing"},
+    {"id":"DEL-04","version":"1.0","documentStatus":"approved","executionStatus":"blocked","evidenceStatus":"planned","blocker":"Optional analytics remains disabled until Legal Gate passes"},
+    {"id":"DEL-05","version":"1.0","documentStatus":"approved","executionStatus":"blocked","evidenceStatus":"planned","blocker":"SLA/restore/handover rehearsals and independent review are missing"},
+    {"id":"DEL-06","version":"1.0","documentStatus":"approved","executionStatus":"blocked","evidenceStatus":"planned","blocker":"Named participants, contact details and appointments are missing"}
+  ]
+}

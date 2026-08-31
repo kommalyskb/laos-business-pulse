@@ -1,7 +1,10 @@
 {
   "documentId": "DEL-06",
-  "version": "0.1",
-  "status": "ready_to_execute_actual_results_not_started",
+  "version": "1.0",
+  "documentStatus": "approved",
+  "executionStatus": "blocked",
+  "evidenceStatus": "planned",
+  "status": "execution_plan_approved_recruitment_and_actual_results_not_started",
   "updatedAt": "2026-08-31",
   "title": "Validation Pilot Execution Plan",
   "owner": "Founder",

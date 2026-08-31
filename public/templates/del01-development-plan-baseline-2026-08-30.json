@@ -1,7 +1,10 @@
 {
   "documentId": "DEL-01",
-  "version": "0.3",
-  "status": "capacity_and_validation_authority_approved_external_gates_vacant_execution_pending",
+  "version": "1.0",
+  "documentStatus": "approved",
+  "executionStatus": "blocked",
+  "evidenceStatus": "planned",
+  "status": "plan_approved_external_gates_vacant_execution_pending",
   "updatedAt": "2026-08-30",
   "title": "Development Plan",
   "owner": "Founder acting as Delivery / Tech Lead",

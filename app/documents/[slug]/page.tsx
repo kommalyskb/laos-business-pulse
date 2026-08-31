@@ -57,6 +57,22 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
       : document.status === "next"
         ? { label: "ລຳດັບຕໍ່ໄປ", className: styles.statusNext }
         : { label: "ວາງແຜນ", className: styles.statusPlanned };
+  const executionView = {
+    not_applicable: "ບໍ່ນຳໃຊ້",
+    not_started: "ຍັງບໍ່ເລີ່ມ",
+    in_progress: "ກຳລັງດຳເນີນ",
+    blocked: "ຕິດຂັດ / ລໍປັດໄຈ",
+    completed: "ສຳເລັດ",
+  } as const;
+  const evidenceView = {
+    not_applicable: "ບໍ່ນຳໃຊ້",
+    planned: "ວາງແຜນ",
+    collected: "ເກັບແລ້ວບາງສ່ວນ",
+    verified: "ຢືນຢັນແລ້ວ",
+  } as const;
+  const executionStatus = document.executionStatus ?? "not_applicable";
+  const evidenceStatus = document.evidenceStatus ?? "not_applicable";
+  const version = document.version ?? "1.0";
 
   return (
     <main className={styles.site}>
@@ -79,11 +95,14 @@ export default async function DocumentDetail({ params }: { params: Promise<{ slu
 
       <section className={styles.detailLayout}>
         <aside className={styles.detailMeta}>
-          <div><small>STATUS</small><strong className={status.className}>{status.label}</strong></div>
+          <div><small>DOCUMENT STATUS</small><strong className={status.className}>{status.label}</strong></div>
+          <div><small>VERSION</small><strong>{version}</strong></div>
+          <div><small>EXECUTION STATUS</small><strong>{executionView[executionStatus]}</strong></div>
+          <div><small>EVIDENCE STATUS</small><strong>{evidenceView[evidenceStatus]}</strong></div>
           <div><small>CATEGORY</small><strong>{category?.lao}</strong></div>
           <div><small>DOCUMENT ID</small><strong>{document.code}</strong></div>
           <div><small>FORMAT</small><strong>Living Web Document</strong></div>
-          <p>ເອກະສານນີ້ຈະຖືກປັບປຸງຕາມການຕັດສິນໃຈ ແລະຫຼັກຖານໃໝ່ຂອງໂຄງການ.</p>
+          <p>{document.operationalNote ?? "ເອກະສານນີ້ເປັນ baseline ທີ່ອະນຸມັດແລ້ວ. ສະຖານະການລົງມື ແລະຫຼັກຖານຈະຖືກບັນທຶກແຍກຕ່າງຫາກ."}</p>
         </aside>
 
         {document.slug === "product-vision"

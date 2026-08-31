@@ -1,7 +1,10 @@
 {
   "documentId": "DEL-02",
-  "version": "0.3",
-  "status": "review_decisions_approved_execution_pending",
+  "version": "1.0",
+  "documentStatus": "approved",
+  "executionStatus": "blocked",
+  "evidenceStatus": "planned",
+  "status": "test_plan_approved_execution_pending",
   "updatedAt": "2026-08-30",
   "title": "Test & UAT Plan",
   "owners": {

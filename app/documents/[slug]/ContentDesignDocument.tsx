@@ -36,16 +36,16 @@ type DocumentSpec = {
 const specs: Record<string, DocumentSpec> = {
   "content-taxonomy": {
     code: "CON-01", title: "ມາດຕະຖານການຈັດໝວດ", english: "Content Taxonomy", owner: "Content Lead / System Analyst",
-    version: "0.9", status: "pending", statusLabel: "ອະນຸມັດໂຄງສ້າງ · ລໍ District/Price Registry",
-    approvalNote: "ໂຄງສ້າງ Category, Cuisine, Governance ແລະ Coverage Gate ຖືກອະນຸມັດແລ້ວ. ແຕ່ CON-01 ຍັງບໍ່ຂຶ້ນ 1.0 ຈົນກວ່າຈະລະບຸ Canonical District IDs ຂອງ 2–3 ເຂດ Pilot ແລະຈຳນວນເງິນຂັ້ນຕ່ຳ/ສູງຂອງ Price Band ₭, ₭₭, ₭₭₭. ຫ້າມ Developer ເດົາຄ່າສອງສ່ວນນີ້ເອງ.",
-    sources: ["PRO-01 1.0", "PRO-02 1.0", "PRO-03 1.0", "PRO-04 0.9"],
+    version: "1.0", status: "approved", statusLabel: "ອະນຸມັດ Taxonomy Baseline · Price Calibration ຍັງ Planned",
+    approvalNote: "ອະນຸມັດ Restaurant ເປັນ Primary Category, ຈັນທະບູລີເປັນ Primary Area ແລະສີສັດຕະນາກເປັນ Backup Area. Price Threshold ຍັງບໍ່ຖືກກຳນົດ: ຕ້ອງໃຊ້ PRICE-UNKNOWN ແລະປິດ Price Filter ຈົນເກັບຕົວຢ່າງຈິງ 30 ຮ້ານ. ສະຖານະ 1.0 ແມ່ນການອະນຸມັດກົດ ບໍ່ແມ່ນການອ້າງວ່າ calibration ສຳເລັດ.",
+    sources: ["PRO-01 1.0", "PRO-02 1.0", "PRO-03 1.0", "PRO-04 1.0", "DEL-06 1.0"],
     purpose: [
       "ເອກະສານນີ້ກຳນົດພາສາກາງສຳລັບຈັດໝວດ Place, Content Source ແລະ Search Filter. ຈຸດປະສົງແມ່ນໃຫ້ Content Team, Developer, Designer ແລະຜູ້ໃຊ້ເຂົ້າໃຈຄຳດຽວກັນ ແລະບໍ່ສ້າງ Tag ຊ້ຳຊ້ອນ.",
-      "Pilot ຈຳກັດ Primary Category ເປັນ Restaurant ແລະ Café. Attraction, Accommodation ແລະ Service ຖືກກຳນົດໄວ້ໃນ Model ເພື່ອບໍ່ຕ້ອງຮື້ໂຄງສ້າງພາຍຫຼັງ ແຕ່ຍັງບໍ່ເປີດໃຊ້ໃນ Pilot."
+      "Pilot ຈຳກັດ Primary Category ເປັນ Restaurant. Café, Attraction, Accommodation ແລະ Service ຖືກກຳນົດໄວ້ໃນ Model ເພື່ອບໍ່ຕ້ອງຮື້ໂຄງສ້າງພາຍຫຼັງ ແຕ່ຍັງບໍ່ເປີດໃຊ້ໃນ Pilot."
     ],
     sections: [
       { title: "ໂຄງສ້າງການຈັດໝວດ", intro: "Taxonomy ແບ່ງເປັນ 4 ຊັ້ນ. ຊັ້ນເທິງຕ້ອງຄົງທີ່; ຊັ້ນລຸ່ມສາມາດຂະຫຍາຍຕາມຫຼັກຖານ.", headers: ["ຊັ້ນ", "ຈຸດປະສົງ", "ຕົວຢ່າງ", "ກົດ"], rows: [
-        ["Primary Category", "ກຳນົດປະເພດ Place ຫຼັກ", "Restaurant, Café", "ໜຶ່ງ Place ມີ Primary Category ໜຶ່ງອັນພໍດີ"],
+        ["Primary Category", "ກຳນົດປະເພດ Place ຫຼັກ", "Restaurant", "ໜຶ່ງ Place ມີ Primary Category ໜຶ່ງອັນພໍດີ"],
         ["Subcategory", "ອະທິບາຍຮູບແບບຮ້ານ", "Noodle shop, Bakery, Specialty coffee", "ເລືອກໄດ້ 1–3; ຕ້ອງມີ Canonical ID"],
         ["Attribute", "ຂໍ້ເທັດຈິງທີ່ໃຊ້ກອງ", "District, Price, Cuisine, Setting", "ຕ້ອງມີຄ່າທີ່ຄວບຄຸມ; ຫ້າມ Free-text ສຳລັບ Filter"],
         ["Editorial Tag", "ບໍລິບົດຊ່ວຍຄົ້ນພົບ", "Good for groups, Riverside, Late night", "ຕ້ອງມີ Evidence; ບໍ່ນຳໃຊ້ແທນຂໍ້ເທັດຈິງ"]
@@ -71,30 +71,31 @@ const specs: Record<string, DocumentSpec> = {
       ]},
       { title: "Canonical Term Registry", intro: "Registry ແມ່ນລາຍຊື່ຄຳທີ່ລະບົບອະນຸຍາດໃຫ້ເກັບ. ID ຄົງທີ່ແມ່ນຄ່າທີ່ Database/API ໃຊ້; ປ້າຍລາວ ແລະອັງກິດສາມາດແກ້ຄຳໄດ້ໂດຍບໍ່ປ່ຽນ ID.", headers: ["Canonical ID", "ປະເພດ", "ປ້າຍທີ່ສະແດງ", "ສະຖານະ/ກົດ"], rows: [
         ["CAT-RESTAURANT", "Primary category", "ຮ້ານອາຫານ / Restaurant", "Active ສຳລັບ Pilot"],
-        ["CAT-CAFE", "Primary category", "ຮ້ານກາເຟ / Café", "Active ສຳລັບ Pilot"],
+        ["CAT-CAFE", "Primary category", "ຮ້ານກາເຟ / Café", "Deferred · ບໍ່ເປີດໃນ Pilot ທຳອິດ"],
         ["CUI-LAO · CUI-THAI · CUI-VIETNAMESE · CUI-CHINESE", "Cuisine", "ອາຫານລາວ · ໄທ · ຫວຽດນາມ · ຈີນ", "Active; ຕ້ອງມີຫຼັກຖານຈາກເມນູ/Source"],
         ["CUI-WESTERN · CUI-BAKERY · CUI-COFFEE · CUI-OTHER", "Cuisine/Product", "Western · Bakery · Coffee · ອື່ນໆ", "Active; Other ຕ້ອງມີ note ອະທິບາຍ"],
         ["PRICE-LOW · PRICE-MID · PRICE-HIGH", "Price band", "₭ · ₭₭ · ₭₭₭", "ID ອະນຸມັດ; min/max amount ຍັງ Pending"],
         ["PRICE-UNKNOWN", "Price band", "ຍັງບໍ່ຮູ້ລາຄາ", "ໃຊ້ເມື່ອຫຼັກຖານລາຄາບໍ່ພໍ; ຫ້າມເດົາ"],
-        ["DISTRICT-PENDING-01…03", "District", "ລໍລະບຸ 2–3 ເຂດ Pilot", "Placeholder ເທົ່ານັ້ນ; ຫ້າມ Publish/Filter"]
+        ["DIST-CHAN-PRIMARY", "District", "ຈັນທະບູລີ / Chanthabouly", "Primary Pilot Area"],
+        ["DIST-SISA-BACKUP", "District", "ສີສັດຕະນາກ / Sisattanak", "Backup Area; ໃຊ້ເມື່ອ Primary inventory ບໍ່ພໍ"]
       ]},
       { title: "ຫຼັກການກຳນົດ Price Band", intro: "Price Band ຕ້ອງສະທ້ອນຄ່າໃຊ້ຈ່າຍປົກກະຕິຕໍ່ຄົນ ແລະຕ້ອງຄຳນວນດ້ວຍວິທີດຽວກັນ. ສະບັບນີ້ຍັງບໍ່ກຳນົດຈຳນວນກີບ ເພາະຕ້ອງເກັບຕົວຢ່າງລາຄາຈິງກ່ອນ.", headers: ["ຫົວຂໍ້", "ກົດວັດແທກ", "ຫຼັກຖານ", "ຈຸດທີ່ຍັງຄ້າງ"], rows: [
         ["Unit of measure", "ຄ່າໃຊ້ຈ່າຍທົ່ວໄປຂອງ 1 ຄົນສຳລັບ 1 ຄາບອາຫານ ຫຼື 1 ຄັ້ງເຂົ້າຮ້ານກາເຟ", "ລາຍການເມນູ 3–5 ລາຍການທີ່ເປັນຕົວແທນ", "ຈຳນວນກີບຂອງແຕ່ລະ Band"],
         ["Exclusion", "ບໍ່ນັບເຫຼົ້າ, ຄ່າສົ່ງ, ສ່ວນຫຼຸດຊົ່ວຄາວ ຫຼືງານພິເສດ", "Source URL/ຮູບເມນູ + checked_at", "ກົດສຳລັບ Set menu ແລະ Buffet"],
         ["Assignment", "ຈັດ Band ຈາກ median ຂອງຕົວຢ່າງ; ຖ້າ evidence ບໍ່ພໍໃຫ້ Unknown", "sample_items, calculated_amount, reviewer", "ຕ້ອງອະນຸມັດ Threshold ກ່ອນເປີດ Filter"],
         ["Review cadence", "ທົບທວນຫຼັງ Pilot 6 ອາທິດ ຫຼືເມື່ອລາຄາຕົວຢ່າງປ່ຽນຫຼາຍ", "ປະຫວັດ Price Registry", "ກຳນົດ trigger ຕົວເລກຫຼັງມີ baseline"]
-      ], note: "ກ່ອນອະນຸມັດ Price Threshold ຕ້ອງເກັບລາຄາຈາກ Restaurant ແລະ Café ໃນເຂດ Pilot ຢ່າງໜ້ອຍກຸ່ມລະ 10 Places. ນີ້ເປັນເກນເກັບຫຼັກຖານ ບໍ່ແມ່ນການອະນຸມັດຊ່ວງລາຄາ."}
+      ], note: "ກ່ອນອະນຸມັດ Price Threshold ຕ້ອງເກັບລາຄາຈາກ Restaurant 30 Places ໃນ Primary/Backup Area. ລະຫວ່າງທີ່ຫຼັກຖານບໍ່ຄົບ ໃຫ້ໃຊ້ PRICE-UNKNOWN ແລະປິດ Price Filter; ຫ້າມ Developer ຫຼື Content Operator ເດົາ threshold."}
     ],
     review: ["ອະນຸມັດ Primary Category ຂອງ Pilot ເປັນ Restaurant ແລະ Café ຫຼືບໍ່?", "ອະນຸມັດ Price Band 3 ລະດັບ + Unknown ຫຼືຕ້ອງການຈຳນວນເງິນ?", "District ແລະ Cuisine ໃດຕ້ອງມີກ່ອນ 30 Places ທຳອິດ?", "ໃຜເປັນ Taxonomy Owner ແລະຜູ້ອະນຸມັດ Term?", "ຈະໃຊ້ coverage threshold 90% ກ່ອນເປີດ Public Filter ຫຼືປັບເປັນເທົ່າໃດ?"],
-    reviewDecisions: ["ອະນຸມັດ Restaurant ແລະ Café ເປັນສອງ Primary Category ສຳລັບ Pilot.", "ຍັງຄ້າງ: ອະນຸມັດຮູບແບບ ₭, ₭₭, ₭₭₭ ແລະ Unknown ແລ້ວ ແຕ່ຍັງຕ້ອງກຳນົດຈຳນວນກີບຂັ້ນຕ່ຳ/ສູງຈາກຕົວຢ່າງລາຄາຈິງ.", "ຍັງຄ້າງ: District ໃຊ້ສະເພາະເຂດ Pilot ແຕ່ຍັງບໍ່ລະບຸຊື່; Cuisine ອະນຸມັດ Lao, Thai, Vietnamese, Chinese, Western, Bakery, Coffee ແລະ Other.", "Content Lead ເປັນ Taxonomy Owner; SA ກວດຜົນກະທົບ; Product Owner ອະນຸມັດ Primary Category ແລະ Schema Change.", "ກ່ອນເປີດ Filter: Category ແລະ District ຕ້ອງຄົບ 100%; Price Band ແລະ Cuisine ຕ້ອງຄົບຢ່າງໜ້ອຍ 90%."],
-    artifacts: [{ label: "content-taxonomy.seed.json", path: "/templates/content-taxonomy.seed.json", description: "Seed Registry ສຳລັບ Category, Cuisine, Price Band ແລະ District placeholder; ຄ່າ Pending ຖືກໝາຍໄວ້ຊັດເຈນ." }]
+    reviewDecisions: ["ອະນຸມັດ Restaurant ເປັນ Primary Category ດຽວສຳລັບ Pilot ທຳອິດ; Café ເປັນ Deferred.", "ອະນຸມັດ Price ID ແລະ Unknown; ຍັງບໍ່ກຳນົດຈຳນວນກີບ. Price Filter ປິດຈົນຕົວຢ່າງ 30 ຮ້ານຄົບ.", "ອະນຸມັດຈັນທະບູລີເປັນ Primary Area ແລະສີສັດຕະນາກເປັນ Backup; Cuisine ຮັກສາຕາມ registry.", "Content Lead ເປັນ Taxonomy Owner; SA ກວດຜົນກະທົບ; Product Owner ອະນຸມັດ Primary Category ແລະ Schema Change.", "Category ແລະ District ຕ້ອງຄົບ 100%; Cuisine ≥90%. Price Filter ບໍ່ນຳໃຊ້ຈົນ calibration ຜ່ານ."],
+    artifacts: [{ label: "content-taxonomy.seed.json", path: "/templates/content-taxonomy.seed.json", description: "Seed Registry 1.0 ສຳລັບ Restaurant, Cuisine, Price Unknown, Primary/Backup District ແລະກົດປິດ Price Filter ກ່ອນ calibration." }]
   },
 
   "place-data-standard": {
     code: "CON-02", title: "ມາດຕະຖານຂໍ້ມູນສະຖານທີ່", english: "Place Data Standard", owner: "Data Steward / Content Lead",
     version: "1.0", status: "approved", statusLabel: "ອະນຸມັດແລ້ວ",
     approvalNote: "Baseline ນີ້ບັງຄັບກັບ Place ທຸກອັນກ່ອນ Publish. ຕ້ອງທົບທວນ Freshness Cadence ຫຼັງນຳໃຊ້ Pilot ຄົບ 6 ອາທິດ.",
-    sources: ["CON-01 0.9 approved structure", "PRO-02 Entity Model", "PRO-03 MVP-001/004/008", "PRO-04 0.9"],
+    sources: ["CON-01 1.0", "PRO-02 Entity Model", "PRO-03 MVP-001/004/008", "PRO-04 1.0"],
     purpose: ["ກຳນົດ Field Dictionary, Source Evidence, Verification State, Freshness ແລະ Correction Rule ສຳລັບ Place Record. ເປົ້າໝາຍແມ່ນໃຫ້ Public Place Page ບອກຂໍ້ມູນທີ່ຮູ້, ສິ່ງທີ່ຍັງບໍ່ຮູ້ ແລະວັນທີກວດຄັ້ງລ່າສຸດຢ່າງຊັດເຈນ.", "ມາດຕະຖານນີ້ບັງຄັບກັບ Place ທຸກອັນກ່ອນ Publish. ການຈ່າຍຄ່າ Founding Partner ບໍ່ຫຼຸດຂໍ້ກຳນົດ Data Quality ແລະບໍ່ຊື້ປ້າຍ Verified."],
     sections: [
       { title: "Field Dictionary ແລະ Publish Readiness", intro: "Required Field ຕ້ອງຄົບກ່ອນ Publish; Conditional Field ຕ້ອງຄົບເມື່ອມີສະພາບທີ່ກຳນົດ.", headers: ["Field", "ລະດັບ", "ກົດຂໍ້ມູນ", "Public behavior"], rows: [
@@ -153,13 +154,13 @@ const specs: Record<string, DocumentSpec> = {
 
   "content-acquisition": {
     code: "CON-03", title: "ແຜນຫາ Content ໄລຍະທຳອິດ", english: "Content Acquisition Plan", owner: "Content Lead / Founder",
-    version: "0.9", status: "pending", statusLabel: "ອະນຸມັດເນື້ອຫາ · ລໍລະບຸເຂດ Pilot",
-    approvalNote: "ຂໍ້ຕັດສິນ 4 ໃນ 5 ຂໍ້ຖືກອະນຸມັດແລ້ວ. ເອກະສານຈະຂຶ້ນ 1.0 ໄດ້ເມື່ອລະບຸຊື່ 2–3 ເຂດສຳລັບ 30 Places ທຳອິດ ໂດຍໃຊ້ເກນຄວາມໜາແໜ້ນຂອງຮ້ານ, Source ທີ່ມີ, ເວລາເດີນທາງ ແລະ Category Mix.",
-    sources: ["BUS-04 Pilot Plan", "PRO-03 DEC-01/02/04", "CON-01 0.9", "CON-02 1.0"],
+    version: "1.0", status: "approved", statusLabel: "ອະນຸມັດ Acquisition Plan · Source Ledger Execution Planned",
+    approvalNote: "ອະນຸມັດ Restaurant 30 Places ໃນຈັນທະບູລີເປັນ Primary Scope ແລະສີສັດຕະນາກເປັນ Backup. ເອກະສານ 1.0 ແມ່ນແຜນດຳເນີນງານ; ບໍ່ໄດ້ອ້າງວ່າເກັບ 30 ຮ້ານ, Source Ledger ຫຼື creator outreach ສຳເລັດແລ້ວ.",
+    sources: ["BUS-04 Pilot Plan", "PRO-03 1.0", "PRO-04 1.0", "CON-01 1.0", "CON-02 1.0", "DEL-06 1.0"],
     purpose: ["ກຳນົດວິທີສ້າງ Supply ຈາກ 0 ໄປ 100 Places ໂດຍບໍ່ Copy ຫຼື Re-host ວິດີໂອ. ແຜນລວມ Place Inventory, Review Link, Creator Attribution, Owner Confirmation ແລະຕົ້ນທຶນການດຳເນີນງານ.", "Cold start ຕ້ອງພິສູດວ່າທີມສາມາດສ້າງ ແລະຮັກສາ Content ໄດ້ດ້ວຍກຳລັງຄົນຈິງ. ຫ້າມໃຊ້ຈຳນວນ Link ເປັນຄຸນນະພາບໂດຍບໍ່ກວດ Place Data ແລະ Rights."],
     sections: [
       { title: "Cold-start Inventory 30 → 60 → 100", intro: "ແຕ່ລະຂັ້ນມີຈຸດປະສົງຮຽນຮູ້ຕ່າງກັນ. ຫ້າມຂ້າມ Gate ເພາະຕ້ອງການຕົວເລກ 100 ໄວ.", headers: ["Stage", "ເປົ້າໝາຍ", "ສິ່ງທີ່ຕ້ອງພິສູດ", "Gate"], rows: [
-        ["30 Places", "Restaurant/Café ໃນ 2–3 ເຂດທີ່ຈະລະບຸກ່ອນ 1.0; ສັດສ່ວນ 60:40 ±10%", "Field workflow, source linking, publish review, time-per-place", "≥90% required field; critical fields 100%; no unresolved rights issue"],
+        ["30 Places", "Restaurant ໃນຈັນທະບູລີ; ໃຊ້ສີສັດຕະນາກສະເພາະເມື່ອ Primary inventory ບໍ່ພໍ", "Field workflow, source linking, publish review, time-per-place", "≥90% required field; critical fields 100%; no unresolved rights issue"],
         ["60 Places", "ເພີ່ມຄວາມຫຼາກຫຼາຍ price/cuisine", "Search/filter usefulness, duplicate handling, correction volume", "Core search + place journey tested"],
         ["100 Places", "Inventory ພໍສຳລັບ Validation Pilot", "Freshness workload, owner response, creator/source coverage", "Release Gate G2/G3 evidence"]
       ]},
@@ -182,10 +183,10 @@ const specs: Record<string, DocumentSpec> = {
         ["Manual workload", "hours ທັງໝົດຕໍ່ອາທິດ", "ທົບທວນເມື່ອ >20h/week 2 ອາທິດ", "ຢຸດຂະຫຍາຍ/automate"]
       ]},
       { title: "Pilot Area Selection Register", intro: "ບໍ່ຄວນເລືອກເຂດຈາກຄວາມຄຸ້ນເຄີຍພຽງຢ່າງດຽວ. ຜູ້ກໍ່ຕັ້ງຕ້ອງປຽບທຽບ Candidate ດ້ວຍຫຼັກຖານຊຸດດຽວກັນ ແລະບັນທຶກເຫດຜົນກ່ອນອະນຸມັດ.", headers: ["Register item", "ຫຼັກຖານທີ່ຕ້ອງເກັບ", "ເກນຜ່ານ", "ສະຖານະ"], rows: [
-        ["AREA-01", "ຊື່ເຂດ/ຂອບເຂດ, ຈຳນວນ Candidate Places, active review sources, ເວລາເດີນທາງ, category mix", "ມີ Inventory ພໍສຳລັບແບ່ງ 30 Places; ສາມາດກວດພື້ນທີ່ໄດ້; ບໍ່ມີ rights blocker", "Pending — ລໍຊື່ເຂດ"],
-        ["AREA-02", "ໃຊ້ Field ແລະເກນດຽວກັບ AREA-01", "ບໍ່ຊ້ຳ coverage ທັງໝົດ; ຊ່ວຍທົດສອບ district filter", "Pending — ລໍຊື່ເຂດ"],
-        ["AREA-03", "Optional; ໃຊ້ເມື່ອ 2 ເຂດທຳອິດບໍ່ຄົບ category/source mix", "ຜ່ານເກນດຽວກັນ ແລະບໍ່ເພີ່ມ travel workload ເກີນກຳລັງ", "Pending/Optional"]
-      ], note: "ການໃສ່ຊື່ເຂດໃນ Register ຈະແກ້ CON-03 REV-01 ແລະເປີດໃຫ້ CON-01 ສ້າງ Canonical District IDs. ຫ້າມໃຊ້ຄຳວ່າ ‘ເຂດກາງເມືອງ’ ໂດຍບໍ່ລະບຸຂອບເຂດ."},
+        ["AREA-01", "ຈັນທະບູລີ: Candidate Places, active review sources, ເວລາເດີນທາງ", "ມີ Inventory ພໍສຳລັບ 30 Places; ກວດພື້ນທີ່ໄດ້; ບໍ່ມີ rights blocker", "Approved · Primary"],
+        ["AREA-02", "ສີສັດຕະນາກ: ໃຊ້ Field ແລະເກນດຽວກັບ AREA-01", "ເພີ່ມ inventory ໂດຍບໍ່ໃຫ້ travel workload ເກີນກຳລັງ", "Approved · Backup"],
+        ["AREA-03", "ບໍ່ນຳໃຊ້ໃນ Pilot ທຳອິດ", "ຕ້ອງມີ Change Request ກ່ອນເພີ່ມ", "Deferred"]
+      ], note: "Primary Scope ແມ່ນຈັນທະບູລີ. ສີສັດຕະນາກເປັນ Backup ເມື່ອ Primary inventory ບໍ່ພໍ; ການເພີ່ມເຂດທີສາມຕ້ອງບັນທຶກ Change Request."},
       { title: "Content Source Ledger", intro: "Ledger ແມ່ນທະບຽນຂອງ Link/Embed ທຸກອັນ. ມັນໃຊ້ຕອບວ່າ Content ມາຈາກໃສ, ຜູກກັບ Place ໃດ, ໃຜກວດ, ມີສິດນຳໃຊ້ດ້ວຍວິທີໃດ ແລະຖືກຖອນເມື່ອໃດ.", headers: ["Field group", "Fields", "ກົດ", "ຜົນຕໍ່ workflow"], rows: [
         ["Identity/Match", "source_id, place_id, original_url, provider, media_type", "original_url unique ຕໍ່ source; Place/branch ຕ້ອງຖືກ match", "Match ບໍ່ຊັດ → rejected ຫຼື review queue"],
         ["Creator/Attribution", "creator_display_name, creator_profile_url, attribution_copy", "ອ້າງ original public source; ຫ້າມໃຫ້ຄວາມໝາຍວ່າ creator endorse platform", "ຂາດ attribution → ຫ້າມ publish source"],
@@ -195,7 +196,7 @@ const specs: Record<string, DocumentSpec> = {
       ]}
     ],
     review: ["ເລືອກ 2–3 ເຂດໃດສຳລັບ 30 Places ທຳອິດ?", "ສັດສ່ວນ Restaurant:Café ຈະເປັນ 60:40 ຫຼືແບບໃດ?", "ໃຜຮັບຜິດຊອບ curation, review ແລະ owner outreach?", "Creator outreach ຈະເລີ່ມກ່ອນ ຫຼືຫຼັງ 30 Places?", "ອະນຸມັດ Supply target ແລະ workload threshold ທີ່ລະບຸຫຼືບໍ່?"],
-    reviewDecisions: ["ຍັງຄ້າງ: ຕ້ອງລະບຸຊື່ ແລະຂອບເຂດ 2–3 ເຂດໃນ Pilot Area Selection Register ກ່ອນຂຶ້ນ 1.0.", "ອະນຸມັດ Restaurant:Café 60:40 ໂດຍຍອມໃຫ້ຄາດເຄື່ອນ ±10% ເພື່ອບໍ່ຫຼຸດຄຸນນະພາບ Source.", "Founder/Product Owner ຮັບຜິດຊອບລວມ; Content Operator ຈັດຂໍ້ມູນ; Reviewer ອະນຸມັດ; Founder ຕິດຕໍ່ຮ້ານ. ຖ້າມີຄົນດຽວຕ້ອງແຍກ Work Queue ແລະເວລາກວດ.", "ເລີ່ມ Creator Outreach ເມື່ອມີປະມານ 20 Records.", "ອະນຸມັດ ≥90% completeness, critical fields 100%, active source coverage ≥80% ແລະທົບທວນ Automation ເມື່ອ Manual Workload >20 ຊົ່ວໂມງ/ອາທິດຕິດກັນ 2 ອາທິດ; unresolved rights issue ເປັນ Stop Condition."],
+    reviewDecisions: ["ອະນຸມັດຈັນທະບູລີເປັນ Primary Area ແລະສີສັດຕະນາກເປັນ Backup.", "ອະນຸມັດ Restaurant ເປັນ Category ດຽວສຳລັບ 30 Places ທຳອິດ; Café ເປັນ Deferred.", "Founder/Product Owner ຮັບຜິດຊອບລວມ; Content Operator ຈັດຂໍ້ມູນ; Reviewer ອະນຸມັດ; Founder ຕິດຕໍ່ຮ້ານ. ຖ້າມີຄົນດຽວຕ້ອງແຍກ Work Queue ແລະເວລາກວດ.", "ເລີ່ມ Creator Outreach ເມື່ອມີປະມານ 20 Records.", "ອະນຸມັດ ≥90% completeness, critical fields 100%, active source coverage ≥80% ແລະທົບທວນ Automation ເມື່ອ Manual Workload >20 ຊົ່ວໂມງ/ອາທິດຕິດກັນ 2 ອາທິດ; unresolved rights issue ເປັນ Stop Condition."],
     artifacts: [{ label: "content-source-ledger.template.csv", path: "/templates/content-source-ledger.template.csv", description: "CSV ສຳລັບບັນທຶກ Original URL, Place match, attribution, rights method, disclosure, reviewer ແລະ source state." }]
   },
 
@@ -203,7 +204,7 @@ const specs: Record<string, DocumentSpec> = {
     code: "CON-04", title: "Creator ແລະ Content Moderation", english: "Creator & Moderation Guideline", owner: "Trust & Safety Owner",
     version: "1.0", status: "approved", statusLabel: "ອະນຸມັດແລ້ວ",
     approvalNote: "Founder/Product Owner ເປັນ Trust & Safety Owner ໃນ Pilot. P0–P3 ເປັນເປົ້າໝາຍດຳເນີນງານພາຍໃນ ບໍ່ແມ່ນຄຳຮັບປະກັນທາງກົດໝາຍ.",
-    sources: ["CON-03 0.9", "PRO-02 Trust Workflows", "PRO-03 MVP-011/013", "PRO-04 TRU-01"],
+    sources: ["CON-03 1.0", "PRO-02 Trust Workflows", "PRO-03 MVP-011/013", "PRO-04 1.0 TRU-01"],
     purpose: ["ກຳນົດມາດຕະຖານ Creator Attribution, Content Eligibility, Report, Takedown ແລະ Appeal. Platform ເປັນຜູ້ຈັດລະບຽບ link ແລະຂໍ້ມູນ Place; ບໍ່ໄດ້ເປັນເຈົ້າຂອງວິດີໂອຈາກ Social Platform.", "Moderation ຕ້ອງແຍກລະຫວ່າງ Content ບໍ່ເໝາະສົມ, Source unavailable, Rights complaint, Place data conflict ແລະ Sponsored disclosure. ແຕ່ລະປະເພດມີ workflow ຕ່າງກັນ."],
     sections: [
       { title: "Creator Identity ແລະ Attribution", intro: "Attribution ຕ້ອງຊີ້ໄປຫາ Original Source ແລະບໍ່ສ້າງຄວາມເຂົ້າໃຈວ່າ Creator ຮັບຮອງ Platform.", headers: ["Field/Element", "Required", "ກົດ", "Fallback"], rows: [
@@ -259,7 +260,7 @@ const specs: Record<string, DocumentSpec> = {
     code: "CON-05", title: "ລິຂະສິດ ແລະການເປີດເຜີຍ", english: "Copyright & Sponsored Disclosure", owner: "Product Owner / Legal Reviewer",
     version: "0.9", status: "pending", statusLabel: "ອະນຸມັດດ້ານ Product · ລໍ Legal Review",
     approvalNote: "ນີ້ແມ່ນ Product Policy ບໍ່ແມ່ນຄຳແນະນຳທາງກົດໝາຍ. ກ່ອນຂຶ້ນ 1.0 ແລະກ່ອນ Public MVP ຕ້ອງຜ່ານການກວດຈາກນັກກົດໝາຍທີ່ມີອຳນາດໃນລາວ ພ້ອມກຳນົດ Analytics Consent ແລະ Data Retention ໃຫ້ສຳເລັດ.",
-    sources: ["PRO-03 DEC-02/03", "CON-03 0.9", "CON-04 1.0", "BUS-06 Revenue Model"],
+    sources: ["PRO-03 DEC-02/03", "CON-03 1.0", "CON-04 1.0", "BUS-06 Revenue Model"],
     purpose: ["ກຳນົດ Product Policy ສຳລັບ Linking, Official Embed, Attribution, Takedown, Sponsored Placement ແລະ User Consent. ເອກະສານນີ້ກຳນົດພຶດຕິກຳຂອງ Platform ແຕ່ບໍ່ແທນຄຳແນະນຳທາງກົດໝາຍ.", "ກ່ອນ Public MVP ຕ້ອງໃຫ້ທີ່ປຶກສາກົດໝາຍທີ່ມີອຳນາດໃນລາວກວດ Terms, Privacy Notice, consent, takedown ແລະ commercial disclosure ສະບັບສຸດທ້າຍ."],
     sections: [
       { title: "Linking, Embedding ແລະ Attribution Policy", intro: "Platform ຕ້ອງຊີ້ກັບຫາ Original Source ແລະຫ້າມເກັບສຳເນົາວິດີໂອໂດຍບໍ່ມີສິດ.", headers: ["ການກະທຳ", "ສະຖານະ", "ເງື່ອນໄຂ", "Fallback"], rows: [
@@ -314,7 +315,7 @@ const specs: Record<string, DocumentSpec> = {
     code: "UX-01", title: "ໂຄງສ້າງຂໍ້ມູນ ແລະ User Flow", english: "Information Architecture & User Flow", owner: "Product Designer / System Analyst",
     version: "1.0", status: "approved", statusLabel: "ອະນຸມັດແລ້ວ",
     approvalNote: "UX-01 ເປັນ Product-level navigation ແລະ route baseline. TEC-01/02 ຕ້ອງ map architecture/API ໃຫ້ກົງກັບ Screen ID ເຫຼົ່ານີ້; ຖ້າຈະປ່ຽນ route ຫຼື screen boundary ຕ້ອງມີ Change Record ແລະກວດ traceability ຄືນ.",
-    sources: ["PRO-01 1.0", "PRO-02 1.0 Workflows", "PRO-03 1.0", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-04 1.0"],
+    sources: ["PRO-01 1.0", "PRO-02 1.0 Workflows", "PRO-03 1.0", "PRO-04 1.0", "CON-01 1.0", "CON-02 1.0", "CON-04 1.0"],
     purpose: ["ກຳນົດວ່າຜູ້ໃຊ້ພົບຂໍ້ມູນຢູ່ໃສ, ເຄື່ອນຈາກ Discover → Decide → Act ແນວໃດ ແລະລະບົບຕ້ອງຮັກສາ Context ແນວໃດເມື່ອເກີດ Empty, Error ຫຼື External Link fallback.", "MVP ໃຊ້ Guest-first navigation: ຜູ້ໃຊ້ເປີດ Feed, Search ແລະ Place Page ໄດ້ໂດຍບໍ່ສະໝັກ Account. Admin navigation ແຍກຈາກ Public experience ແລະຕ້ອງມີ authentication."],
     sections: [
       { title: "Navigation Model", intro: "Pilot ໃຊ້ Discover ແລະ Search ເປັນ Public destination ຫຼັກ. Saved ຖືກອອກແບບໄວ້ເປັນ Should-have ແຕ່ບໍ່ສະແດງໃນ navigation ຈົນກວ່າ local-device save ຈະພ້ອມ. Desktop ແລະ Mobile ຕ້ອງໃຊ້ຊື່ destination ດຽວກັນ.", headers: ["Destination", "ຈຸດປະສົງ", "Entry", "ການຮັກສາ Context"], rows: [
@@ -358,7 +359,7 @@ const specs: Record<string, DocumentSpec> = {
     code: "UX-02", title: "ໂຄງຮ່າງ UX/UI", english: "UX/UI Wireframe", owner: "Product Designer",
     version: "1.2", status: "approved", statusLabel: "ອະນຸມັດ Founder Review R2 Revision",
     approvalNote: "Founder Review R2 ວັນທີ 28 ສິງຫາ 2026 ຢືນຢັນວ່າ Video Search, Place decision page, Sponsored/source/freshness ແລະ MVP scope ຜ່ານ. ມີ Minor Revision 1 ຈຸດ: ເພີ່ມຮູບລາຍການໃນເມນູເພື່ອຊ່ວຍສ້າງຄວາມສົນໃຈ; ຖືກນຳໃຊ້ໃນ Prototype R2.1 ແລ້ວ. UX-02 1.2 ເປັນ Wireframe Baseline ທີ່ອະນຸມັດໂດຍ Founder; ບໍ່ແທນ external usability evidence.",
-    sources: ["UX-01 1.0", "PRO-03 1.0", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-04 1.0", "CON-05 0.9"],
+    sources: ["UX-01 1.0", "PRO-03 1.0", "PRO-04 1.0", "CON-01 1.0", "CON-02 1.0", "CON-04 1.0", "CON-05 0.9"],
     purpose: ["ກຳນົດ Layout, Information Hierarchy, Interaction ແລະ System State ກ່ອນເລືອກສີ ຫຼືຮູບພາບສຸດທ້າຍ. Wireframe ເນັ້ນວ່າຜູ້ໃຊ້ເຫັນຫຍັງກ່ອນ, ກົດຢູ່ໃສ ແລະກັບຄືນ Context ໄດ້ແນວໃດ.", "Mobile-first width ເປັນ baseline. Discovery Feed ໃຊ້ວິດີໂອເຕັມ viewport; Place identity, trust label ແລະ action ຕ້ອງອ່ານໄດ້ໂດຍບໍ່ບັງເນື້ອຫາຫຼັກ."],
     sections: [
       { title: "Discovery Feed Wireframe Contract", intro: "ໜຶ່ງ viewport ສະແດງໜຶ່ງ content item. Swipe ປ່ຽນ item; tap Place card ເປີດ Place Page; external source ເປັນ action ແຍກ.", headers: ["Zone", "ຕຳແໜ່ງ", "Content/Action", "ກົດ"], rows: [
@@ -420,7 +421,7 @@ const specs: Record<string, DocumentSpec> = {
     code: "UX-03", title: "ຕົວຢ່າງໂຕ້ຕອບ ແລະການທົດສອບ", english: "Interactive Prototype & Usability Test", owner: "Product Designer / Research Lead",
     version: "0.9.4", status: "pending", statusLabel: "Prototype R2.3 ຜ່ານ Internal QA · ລໍ External Usability Test 5 ຄົນ",
     approvalNote: "Founder Review R2 ວັນທີ 28 ສິງຫາ 2026 ຜ່ານທັງ 5 ຂໍ້ ແລະ Minor Revision ເພີ່ມຮູບເມນູສຳເລັດໃນ R2.1. Prototype R2.3 ເພີ່ມ QA Test Mode ແລະແກ້ 4 ບັນຫາຈາກ Internal Browser QA: ຊື່ Search ສຳລັບ Assistive Technology, selected state ຂອງ filter/view, ຂະໜາດ touch target ແລະ focus restoration ຂອງ QA panel. ຜົນນີ້ເປັນ Internal QA ເທົ່ານັ້ນ; UX-03 ຍັງບໍ່ແມ່ນ 1.0 ເພາະ external usability evidence ຈາກຜູ້ໃຊ້ 5 ຄົນຍັງບໍ່ທັນເລີ່ມ.",
-    sources: ["UX-01 1.0", "UX-02 1.2", "PRO-03 G3", "PRO-04 0.9 UAT", "CON-04 1.0", "CON-05 0.9"],
+    sources: ["UX-01 1.0", "UX-02 1.2", "PRO-03 G3", "PRO-04 1.0 UAT", "CON-04 1.0", "CON-05 0.9"],
     purpose: ["UX-03 ມີໜ້າທີ່ກວດວ່າ Prototype ຊ່ວຍໃຫ້ຄົນຊອກຫາສະຖານທີ່ ແລະຕັດສິນໃຈໄປສະຖານທີ່ໄດ້ຈິງຫຼືບໍ່. ຕອນນີ້ທ່ານບໍ່ຈຳເປັນຕ້ອງອ່ານ Metric ຫຼືຕາຕະລາງທັງໝົດກ່ອນ; ໃຫ້ເລີ່ມຈາກຫົວຂໍ້ ‘ສິ່ງທີ່ທ່ານຕ້ອງເຮັດຕໍ່ໄປ’.", "Founder Review ໃຊ້ເພື່ອກວດວ່າ Prototype ສະທ້ອນ Vision ຂອງ Product ຫຼືບໍ່. ມັນຊ່ວຍປັບແນວຄິດໄດ້ ແຕ່ບໍ່ນັບແທນການທົດສອບຜູ້ໃຊ້ພາຍນອກ."],
     sections: [
       { title: "ເລີ່ມຈາກນີ້ · ສະຖານະ ແລະວຽກຕໍ່ໄປ", intro: "Founder Review R2 ສຳເລັດແລ້ວ. ຕາຕະລາງນີ້ບອກວ່າອັນໃດສຳເລັດ ແລະອັນໃດຍັງລໍ.", headers: ["ລຳດັບ", "ວຽກ", "ຜົນ", "ສະຖານະ"], rows: [
@@ -491,9 +492,9 @@ const specs: Record<string, DocumentSpec> = {
 
   "design-system": {
     code: "UX-04", title: "ລະບົບການອອກແບບ", english: "Design System", owner: "Design System Owner / Frontend Lead",
-    version: "0.9.4", status: "pending", statusLabel: "Internal QA ຜ່ານ · ລໍ Manual Accessibility 4 ລາຍການກ່ອນ 1.0",
-    approvalNote: "ວັນທີ 28 ສິງຫາ 2026 Product Owner ອະນຸມັດໃຫ້ UX-04 1.0 ຄຸ້ມຄອງ Guest/Pilot UI, ຂະຫຍາຍ Component Catalog, ສ້າງ Component Gallery ແລະຮັກສາ Noto Sans Lao/Palette. Prototype R2.3 ຜ່ານ Internal Browser QA ສຳລັບ deterministic states, semantic structure, focus restoration, touch target, responsive layout, Lao long-text stress, media fallback ແລະ console. ແກ້ 4 findings ແລະ retest ຜ່ານແລ້ວ. ແຕ່ສະບັບນີ້ຍັງເປັນ 0.9.4 ຈົນກວ່າ Physical Keyboard, VoiceOver, Browser Zoom 200% ແລະ OS Reduced Motion ຈະຖືກທົດສອບຈິງ ແລະມີຫຼັກຖານ. Admin Design System ແຍກເປັນ UX-04.1 ແລະບໍ່ຂວາງ Pilot.",
-    sources: ["UX-02 1.2", "UX-03 0.9.4", "Prototype R2.3", "PRO-04 0.9 NFR-01/02/04", "CON-02 1.0", "CON-04 1.0", "CON-05 0.9", "Brand direction"],
+    version: "1.0", status: "approved", statusLabel: "Design System Specification ອະນຸມັດ · Accessibility Evidence ຍັງ Collected",
+    approvalNote: "UX-04 1.0 ອະນຸມັດ Guest/Pilot Design System, Component Contract, Noto Sans Lao, Palette ແລະ Accessibility Rules. Internal browser audit ຢືນຢັນ 14 focusable controls ທີ່ visible/enabled ມີ tabIndex 0 ແລະ touch target ທີ່ກວດໄດ້ສູງຢ່າງໜ້ອຍ 44px. Physical Keyboard traversal ບໍ່ສາມາດຢືນຢັນຜ່ານ browser automation; VoiceOver, Browser Zoom 200% ແລະ OS Reduced Motion ຍັງ Not Verified. ລາຍການເຫຼົ່ານີ້ເປັນ Public Pilot Evidence Gate ບໍ່ແມ່ນ Document-version blocker.",
+    sources: ["UX-02 1.2", "UX-03 0.9.4", "Prototype R2.3", "PRO-04 1.0 NFR-01/02/04", "CON-02 1.0", "CON-04 1.0", "CON-05 0.9", "UX-04 accessibility audit 2026-08-31"],
     purpose: ["ເອກະສານນີ້ເປັນສັນຍາການອອກແບບສຳລັບ Designer, Developer ແລະຜູ້ກວດຮັບມອບ. ມັນລະບຸຄ່າ Token, ໂຄງສ້າງ Component, ຂໍ້ມູນທີ່ຕ້ອງຮັບ, State, ພຶດຕິກຳ, Responsive Rule ແລະເກນ Accessibility ເພື່ອບໍ່ໃຫ້ແຕ່ລະໜ້າຖືກສ້າງຄົນລະແບບ.", "UX-04 1.0 ຈຳກັດສະເພາະ Guest Experience ທີ່ຈຳເປັນຕໍ່ Pilot: Discover, Search ແບບ Video/List/Map, Place Page, Review, Menu, Related Place, Contact, Consent ແລະ Feedback State. Admin Component ຈະຈັດທຳໃນ UX-04.1 ເມື່ອເລີ່ມ Admin UI.", "Design System ຕ້ອງຮອງຮັບພາສາລາວ, ຕົວເລກກີບ, ຂໍ້ຄວາມຍາວ, Full-screen Media, Low-bandwidth Fallback, Keyboard ແລະ Screen Reader. ສີບໍ່ສາມາດເປັນວິທີດຽວໃນການບອກ State."],
     sections: [
       { title: "ຂອບເຂດ UX-04 1.0 ແລະ UX-04.1", intro: "ການແຍກຂອບເຂດນີ້ເຮັດໃຫ້ທີມປິດ Guest Experience ສຳລັບ Pilot ໄດ້ໂດຍບໍ່ລໍ Admin UI ທີ່ຍັງບໍ່ເລີ່ມພັດທະນາ.", headers: ["ຂອບເຂດ", "ລວມຫຍັງ", "ບໍ່ລວມຫຍັງ", "ເງື່ອນໄຂປິດ"], rows: [
@@ -581,25 +582,25 @@ const specs: Record<string, DocumentSpec> = {
         ["A11Y-02", "White on Accent", "2.75:1 ບໍ່ຜ່ານ; ແກ້ໂດຍຫ້າມຄູ່ນີ້ ແລະໃຊ້ dark on-accent", "Resolved by token rule"],
         ["A11Y-03", "Consent keyboard/assistive structure", "role=dialog, aria-modal, labelled title, initial focus ແລະ background inert", "Passed internal browser retest"],
         ["A11Y-04", "Focus-visible ແລະ touch", "focus outline 3px; visible Mobile/QA control ≥44px; QA Close/Escape ກັບ Focus ໄປ trigger", "Passed internal browser retest R2.3"],
-        ["A11Y-05", "Reduced motion", "CSS prefers-reduced-motion contract ຖືກກວດແລ້ວ; ຍັງຕ້ອງເປີດ OS Reduce Motion ແລະກວດຈິງ", "CSS verified · manual preference test blocks 1.0"],
-        ["A11Y-06", "Lao text 200%", "Lao long-text ແລະ responsive view 360/390/768/1024/1440px ລວມທັງ 240px stress test ບໍ່ overflow; ຍັງຕ້ອງກວດ actual Browser Zoom 200%", "Responsive stress passed · actual zoom blocks 1.0"],
-        ["A11Y-07", "VoiceOver", "Semantic audit ບໍ່ພົບ visible unnamed button/link/input, duplicate ID ຫຼື image ຂາດ alt; ຍັງຕ້ອງໃຊ້ VoiceOver ກວດ journey ຈິງ", "Semantic audit passed · VoiceOver blocks 1.0"],
+        ["A11Y-05", "Reduced motion", "CSS prefers-reduced-motion contract ຖືກກວດແລ້ວ; ຍັງຕ້ອງເປີດ OS Reduce Motion ແລະກວດຈິງ", "CSS verified · manual preference test blocks Public Pilot evidence gate"],
+        ["A11Y-06", "Lao text 200%", "Lao long-text ແລະ responsive view 360/390/768/1024/1440px ລວມທັງ 240px stress test ບໍ່ overflow; ຍັງຕ້ອງກວດ actual Browser Zoom 200%", "Responsive stress passed · actual zoom blocks Public Pilot evidence gate"],
+        ["A11Y-07", "VoiceOver", "Semantic audit ບໍ່ພົບ visible unnamed button/link/input, duplicate ID ຫຼື image ຂາດ alt; ຍັງຕ້ອງໃຊ້ VoiceOver ກວດ journey ຈິງ", "Semantic audit passed · VoiceOver blocks Public Pilot evidence gate"],
         ["A11Y-08", "NVDA", "ກວດ Windows Screen Reader ກ່ອນ Public/Wider Launch", "Deferred · does not block Pilot 1.0"],
         ["A11Y-09", "Pilot Guest Component States", "Default/Loading/Empty/Error/Disabled with reason/Sponsored/Stale/Long Text ຖືກເປີດ ແລະກວດ deterministic result ໃນ Prototype R2.3", "Passed internal browser retest"],
-        ["A11Y-11", "Physical Keyboard", "Semantic control, focus-visible, initial focus ແລະ focus return ຜ່ານ browser audit; Tab/Shift+Tab/Enter/Space ຕະຫຼອດ journey ຍັງຕ້ອງກວດດ້ວຍ keyboard ຈິງ", "Manual physical keyboard blocks 1.0"],
+        ["A11Y-11", "Physical Keyboard", "14 focusable controls ທີ່ visible/enabled ມີ tabIndex 0; Tab/Shift+Tab/Enter/Space ຕະຫຼອດ journey ຍັງຕ້ອງກວດດ້ວຍ keyboard ຈິງ", "Manual physical keyboard blocks Public Pilot evidence gate"],
         ["A11Y-10", "Admin Component States", "ຈັດທຳໃນ UX-04.1 ເມື່ອ Admin UI ເຂົ້າ Development", "Deferred · does not block Pilot 1.0"]
       ]}
     ],
     review: ["UX-04 1.0 ຄວນຄຸ້ມຄອງ Guest/Pilot UI ແລະແຍກ Admin UI ໄປ UX-04.1 ຫຼືບໍ່?", "ອະນຸມັດເພີ່ມ Component Catalog ໃຫ້ຄົບຕາມ Prototype R2.1 ຫຼືບໍ່?", "ອະນຸມັດສ້າງ Component Gallery ທີ່ພຣີວິວ ແລະປ່ຽນ State ໄດ້ຫຼືບໍ່?", "ຈະຮັກສາ Noto Sans Lao ແລະ Palette ປັດຈຸບັນໃນ Pilot ຫຼືເລີ່ມ Brand Exploration ໃໝ່?", "ອະນຸມັດ VoiceOver, Keyboard, Lao 200%, Reduced Motion ແລະ Contrast ເປັນ Gate ກ່ອນ UX-04 1.0 ຫຼືບໍ່?"],
-    reviewDecisions: ["ອະນຸມັດ Guest/Pilot UI ເປັນຂອບເຂດ UX-04 1.0; Admin UI ແຍກເປັນ UX-04.1 ແລະບໍ່ຂວາງ Pilot.", "ອະນຸມັດ 12 Pilot Component Specifications ຕາມ Prototype R2.1 ແລະຕ້ອງມີ Data, Behavior, Responsive, State ແລະ Acceptance Contract.", "ອະນຸມັດ Component Gallery ເປັນ Web Documentation ສຳລັບກວດ Token, Component ແລະ State; ບໍ່ແມ່ນໜ້າໂຄສະນາ ຫຼື Production Product.", "ອະນຸມັດ Noto Sans Lao Variable ເປັນ Primary Font ແລະຮັກສາ Semantic Palette ປັດຈຸບັນ. ຫ້າມ White on Accent; ໃຊ້ on_accent #17221F.", "ອະນຸມັດ WCAG 2.2 AA Internal Target; VoiceOver, Keyboard, Lao 200%, Reduced Motion, Touch ແລະ Contrast ຂອງ Pilot Flow ຕ້ອງຜ່ານກ່ອນ 1.0. NVDA ຕ້ອງກວດກ່ອນ Wider Launch."],
-    artifacts: [{ label: "Prototype R2.3 · UX-04 QA Test Mode", path: "/prototype", action: "open", description: "ເປີດ Product Flow ແລ້ວກົດ ‘UX-04 · ທົດສອບ’ ເພື່ອເລືອກ Screen/State ແລະບັນທຶກ Pass/Fail." }, { label: "Component Gallery", path: "/design-system", action: "open", description: "ໜ້າ Web Documentation ສຳລັບພຣີວິວ Token ແລະສະຫຼັບ Default/Loading/Empty/Error/Disabled/Sponsored/Stale State." }, { label: "ux04-internal-qa-2026-08-28.json", path: "/templates/ux04-internal-qa-2026-08-28.json", description: "ຫຼັກຖານ Internal Browser QA R2.3 ພ້ອມ evidence boundary, finding, fix, retest ແລະ remaining manual gates." }, { label: "ux04-qa-test-record.template.json", path: "/templates/ux04-qa-test-record.template.json", description: "ແບບຟອມຫຼັກຖານ Manual QA: Environment, Steps, Expected/Actual, Result, Issue ID ແລະ Retest." }, { label: "ux-component-specifications.json", path: "/templates/ux-component-specifications.json", description: "Machine-readable Contract ຂອງ 12 Pilot Components: Purpose, Required Data, Behavior ແລະ Acceptance." }, { label: "ux-design-tokens.json", path: "/templates/ux-design-tokens.json", description: "Token source 0.9.2: Typography, Color, Spacing, Icon, Media Ratio, Breakpoint, Layer, Motion, Focus ແລະ Skeleton." }, { label: "ux-design-tokens.css", path: "/templates/ux-design-tokens.css", description: "CSS Custom Properties ທີ່ກົງກັບ Token 0.9.2 ແລະ Reduced-motion Contract." }, { label: "ux-accessibility-qa.json", path: "/templates/ux-accessibility-qa.json", description: "ຫຼັກຖານທີ່ຜ່ານ, Test Surface ທີ່ພ້ອມ, ລາຍການທີ່ຍັງ Pending ແລະ Gate ກ່ອນ UX-04 1.0." }]
+    reviewDecisions: ["ອະນຸມັດ Guest/Pilot UI ເປັນຂອບເຂດ UX-04 1.0; Admin UI ແຍກເປັນ UX-04.1 ແລະບໍ່ຂວາງ Pilot.", "ອະນຸມັດ 12 Pilot Component Specifications ຕາມ Prototype R2.1 ແລະຕ້ອງມີ Data, Behavior, Responsive, State ແລະ Acceptance Contract.", "ອະນຸມັດ Component Gallery ເປັນ Web Documentation ສຳລັບກວດ Token, Component ແລະ State; ບໍ່ແມ່ນໜ້າໂຄສະນາ ຫຼື Production Product.", "ອະນຸມັດ Noto Sans Lao Variable ເປັນ Primary Font ແລະຮັກສາ Semantic Palette ປັດຈຸບັນ. ຫ້າມ White on Accent; ໃຊ້ on_accent #17221F.", "ອະນຸມັດ WCAG 2.2 AA Internal Target. Document 1.0 ອະນຸມັດແລ້ວ; VoiceOver, Keyboard, Lao 200%, Reduced Motion, Touch ແລະ Contrast ຂອງ Pilot Flow ຕ້ອງຜ່ານ Public Pilot Evidence Gate. NVDA ຕ້ອງກວດກ່ອນ Wider Launch."],
+    artifacts: [{ label: "Prototype R2.3 · UX-04 QA Test Mode", path: "/prototype", action: "open", description: "ເປີດ Product Flow ແລ້ວກົດ ‘UX-04 · ທົດສອບ’ ເພື່ອເລືອກ Screen/State ແລະບັນທຶກ Pass/Fail." }, { label: "Component Gallery", path: "/design-system", action: "open", description: "ໜ້າ Web Documentation ສຳລັບພຣີວິວ Token ແລະສະຫຼັບ Default/Loading/Empty/Error/Disabled/Sponsored/Stale State." }, { label: "ux04-accessibility-audit-2026-08-31.json", path: "/templates/ux04-accessibility-audit-2026-08-31.json", description: "ຫຼັກຖານ browser audit ຂອງ focusable controls, touch target ແລະ semantic structure ພ້ອມລາຍການ OS/manual ທີ່ຍັງ Not Verified." }, { label: "ux04-internal-qa-2026-08-28.json", path: "/templates/ux04-internal-qa-2026-08-28.json", description: "ຫຼັກຖານ Internal Browser QA R2.3 ພ້ອມ evidence boundary, finding, fix, retest ແລະ remaining manual gates." }, { label: "ux04-qa-test-record.template.json", path: "/templates/ux04-qa-test-record.template.json", description: "ແບບຟອມຫຼັກຖານ Manual QA: Environment, Steps, Expected/Actual, Result, Issue ID ແລະ Retest." }, { label: "ux-component-specifications.json", path: "/templates/ux-component-specifications.json", description: "Machine-readable Contract ຂອງ 12 Pilot Components: Purpose, Required Data, Behavior ແລະ Acceptance." }, { label: "ux-design-tokens.json", path: "/templates/ux-design-tokens.json", description: "Token source 0.9.2: Typography, Color, Spacing, Icon, Media Ratio, Breakpoint, Layer, Motion, Focus ແລະ Skeleton." }, { label: "ux-design-tokens.css", path: "/templates/ux-design-tokens.css", description: "CSS Custom Properties ທີ່ກົງກັບ Token 0.9.2 ແລະ Reduced-motion Contract." }, { label: "ux-accessibility-qa.json", path: "/templates/ux-accessibility-qa.json", description: "ຫຼັກຖານທີ່ຜ່ານ, Test Surface ທີ່ພ້ອມ ແລະລາຍການ Manual/OS ທີ່ຍັງ Pending ກ່ອນ Public Pilot." }]
   },
 
   "full-ux-ui": {
     code: "UX-05", title: "ການອອກແບບ UX/UI ສົມບູນ", english: "Full UX/UI Design", owner: "Product Designer / Frontend Lead",
-    version: "0.11.0", status: "pending", statusLabel: "Guest Prototype R2.3 + Admin Workflow Prototype R5.0 Design Handoff ສຳເລັດ · ລໍ Technical/Accessibility/Sign-off Gates ກ່ອນ 1.0",
-    approvalNote: "ສະບັບ 0.11.0 ກຳນົດ Admin Workflow Prototype R5.0 ເປັນ Design Handoff Baseline ສຳລັບ TEC-01/02. R5.0 ຮັກສາ task-first Content intake, guided Place/Review Source flow, 10 Modules, 55 views ແລະ seven workspace modes; ເພີ່ມ module-aware Header Sub-Menu, purpose/start/done guidance, typed session persistence, accessible custom dropdown ທີ່ຮອງຮັບ keyboard/touch ແລະ Lao-readable typography ທີ່ກຳນົດ caption ບໍ່ຕ່ຳກວ່າ 12px, working text 13–14px ແລະ section heading 16px ຂຶ້ນໄປ. Mobile dropdown ໃຊ້ bottom-sheet behavior; form, table, modal, dashboard ແລະ state label ໃຊ້ລຳດັບຕົວໜັງສືດຽວກັນ. Data/Audit ຍັງເປັນ prototype fixtures ແລະ browser-session state; ຍັງບໍ່ມີ backend, authentication, durable multi-user persistence, real integrations, concurrency ຫຼື production permission enforcement. UX-05 ຍັງບໍ່ແມ່ນ 1.0 ຈົນ TEC-01/02, exhaustive failure states, Manual Accessibility Gates, external usability evidence ແລະ final four-role sign-off ສຳເລັດ.",
-    sources: ["UX-01 1.0", "UX-02 1.2", "UX-03 0.9.4", "UX-04 0.9.4", "PRO-04 0.9", "CON-01 0.9", "CON-02 1.0", "CON-03 0.9", "CON-04 1.0", "CON-05 0.9", "TEC-01/02 pending"],
+    version: "1.0", status: "approved", statusLabel: "Design Handoff Baseline ອະນຸມັດ · Production Implementation ຍັງ Not Started",
+    approvalNote: "UX-05 1.0 ອະນຸມັດ Guest Prototype R2.3 ແລະ Admin Workflow Prototype R5.0 ເປັນ Design Handoff Baseline: 10 Modules/55 views, task-first intake, module-aware Sub-Menu, responsive behavior, accessible custom dropdown ແລະ Lao-readable typography. Data/Audit ຍັງເປັນ fixtures/session state; backend, authentication, durable persistence, real integrations ແລະ production permission enforcement ຢູ່ໃນ Technical/Development Execution. External usability ແລະ manual accessibility ເປັນ Evidence Gate ກ່ອນ Public Pilot ບໍ່ແມ່ນ Document 1.0 blocker.",
+    sources: ["UX-01 1.0", "UX-02 1.2", "UX-03 0.9.4", "UX-04 1.0", "PRO-04 1.0", "CON-01 1.0", "CON-02 1.0", "CON-03 1.0", "CON-04 1.0", "CON-05 0.9", "TEC-01/02 1.0"],
     purpose: ["ກຳນົດຂອບເຂດ Final Screen, Responsive Behavior, System State, Prototype Link, Asset ແລະ Developer Handoff ທີ່ຕ້ອງຄົບກ່ອນເລີ່ມ Frontend implementation.", "UX-05 ບໍ່ຄວນຖືກອະນຸມັດຈາກ Happy-path screen ເທົ່ານັ້ນ. Loading, Empty, Error, Stale, Sponsored, Permission, Conflict ແລະ External Fallback ຕ້ອງຖືກອອກແບບ ແລະຜູກກັບ Requirement/Screen ID."],
     sections: [
       { title: "Final Design Baseline R1 · ສິ່ງທີ່ສຳເລັດແລ້ວ", intro: "Final Design Gallery ແມ່ນ Web Documentation ສຳລັບກວດໜ້າຕາ, hierarchy, responsive direction ແລະ failure state. ມັນບໍ່ແມ່ນ Production application ແລະບໍ່ສ້າງ business logic ແຍກຈາກ PRO-02/04.", headers: ["Deliverable", "ຂອບເຂດ", "ວິທີກວດ", "ສະຖານະ"], rows: [
@@ -610,7 +611,7 @@ const specs: Record<string, DocumentSpec> = {
         ["State Coverage Matrix", "Default/Loading/Empty/Error/Stale/Sponsored/Unauthorized/Conflict ແລະ state ສະເພາະ", "ພຣີວິວ CSV ແລະທຽບກັບ Gallery", "Baseline ready"],
         ["Handoff Traceability", "Screen → Route → Requirement → Function → Entity → Event → Policy", "ກວດວ່າ core record ຂອງ 10 Admin Modules ສາມາດ drill-down ແລະ audit ໄດ້", "Admin Portal mapping ready"],
         ["Implementation Phasing", "Information architecture ຄົບ 10 Modules; ການພັດທະນາຈິງແບ່ງ Core/Expansion ຕາມ PRO-03 ແລະ dependency", "ບໍ່ໃຫ້ visual scope ຖືກຕີຄວາມວ່າທຸກ Module ຕ້ອງ launch ພ້ອມກັນ", "Phased delivery required"]
-      ], note: "Decision boundary: Frontend ສາມາດໃຊ້ Baseline R1 ເພື່ອ estimate, ສ້າງ primitive ແລະເລີ່ມ Must Screen ໄດ້. ຫ້າມຖືວ່າ UX-05 1.0 ຫຼື Production sign-off ຈົນ gate ດ້ານ Technical, Privacy/Legal, Manual Accessibility ແລະ 4-role sign-off ຄົບ."},
+      ], note: "Decision boundary: UX-05 1.0 ອະນຸມັດ Design Handoff Baseline ໃຫ້ Frontend estimate, ສ້າງ primitive ແລະເລີ່ມ Must Screen. ມັນບໍ່ແມ່ນ Production sign-off; Technical, Privacy/Legal, Manual Accessibility ແລະ external usability ຍັງເປັນ execution/evidence gates."},
       { title: "Admin R5.0 Functional & Interaction Coverage", intro: "Prototype ໃຊ້ task-first intake, workspace mode ທີ່ຕົງກັບວຽກ ແລະ control/typography contract ດຽວກັນທົ່ວ Portal.", headers: ["Workspace / control", "ໃຊ້ກັບ", "Interaction ທີ່ທົດລອງໄດ້", "Boundary"], rows: [
         ["Task-first Content intake", "Place ແລະ Review Source", "ເລືອກວຽກຈາກພາສາທີ່ເຂົ້າໃຈ, guided form, Place dependency, original URL, Rights path", "Session fixture"],
         ["Register", "case, source, account, compliance ແລະ record review", "filter, search, select, assign, checklist, evidence, advance, create, export", "Session fixture"],
@@ -674,15 +675,15 @@ const specs: Record<string, DocumentSpec> = {
       ]},
       { title: "Approval Gates ແລະ Sign-off", intro: "UX-05 1.0 ແມ່ນຄຳຢືນຢັນວ່າ package ພ້ອມໃຫ້ Developer ສ້າງໂດຍບໍ່ເດົາ. ການມີຮູບ Happy path ສວຍງາມບໍ່ພຽງພໍ.", headers: ["Gate", "ຕ້ອງມີ", "Signer", "ສະຖານະ"], rows: [
         ["G-UX1 Structure", "UX-01 1.0; UX-02 1.2; screen/route/state traceability", "Product Owner + SA", "Passed · UX-01 1.0 / UX-02 1.2"],
-        ["G-UX2 Evidence", "UX-03 1.0; session/task/finding/retest records; pass thresholds", "Research Lead + Product Owner", "Pending real-user testing"],
-        ["G-UX3 System", "UX-04 1.0; tokens/components/accessibility QA", "Design System Owner + Frontend Lead", "Internal QA passed; Physical Keyboard/VoiceOver/actual Zoom 200%/OS Reduced Motion pending"],
-        ["G-UX4 Content/Trust", "PRO-04 1.0; CON-02/04 1.0; UI-impact decisions from CON-01/03/05", "Content/Trust Owner", "Partially pending"],
-        ["G-UX5 Technical", "TEC-01/02 route, auth, external action, media/fallback constraints mapped", "Technical Lead", "Pending TEC-01/02"],
-        ["G-UX6 Final handoff", "final screens, responsive/state variants, controls, typography, assets, copy, annotations, open deviations", "Product Owner + Frontend Lead", "Admin R5.0 Design Handoff ready for TEC-01/02; backend/auth/exhaustive states and final four-role sign-off pending"]
+        ["G-UX2 Evidence", "UX-03 session/task/finding/retest records; pass thresholds", "Research Lead + Product Owner", "External real-user evidence pending; does not invalidate handoff baseline"],
+        ["G-UX3 System", "UX-04 1.0; tokens/components/accessibility QA", "Design System Owner + Frontend Lead", "Specification approved; OS/device manual evidence pending"],
+        ["G-UX4 Content/Trust", "PRO-04 1.0; CON-01—04 1.0; CON-05 disclosure boundary", "Content/Trust Owner", "UI contract approved; Legal Review remains pre-launch gate"],
+        ["G-UX5 Technical", "TEC-01/02 route, auth, external action, media/fallback constraints mapped", "Technical Lead", "TEC-01/02 approved; implementation not started"],
+        ["G-UX6 Final handoff", "final screens, responsive/state variants, controls, typography, assets, copy, annotations, open deviations", "Product Owner + Frontend Lead", "Design Handoff 1.0 approved; production execution/evidence pending"]
       ], note: "Final sign-off roles: Product Owner ຮັບຮອງ scope/design; Frontend Lead ຮັບຮອງ implementation readiness; Content/Trust Owner ຮັບຮອງ copy, source, disclosure ແລະ correction/takedown; Accessibility Reviewer/QA ຮັບຮອງ quality gates. ຄົນດຽວອາດຮັບຫຼາຍບົດບາດໄດ້ ແຕ່ຕ້ອງລົງນາມແຍກບົດບາດ."}
     ],
     review: ["Screen Inventory ຄົບກັບ MVP Must/Should ຫຼືບໍ່?", "ອະນຸມັດ responsive ranges <768, 768–1199, ≥1200 ຫຼືຕ້ອງອີງ device targets ອື່ນ?", "System State ໃດຍັງຂາດຈາກ Requirement/Error Contract?", "ເອກະສານໃດຕ້ອງອະນຸມັດກ່ອນ UX-05 ຂຶ້ນ 1.0—UX-01—04, CON-01—05, TEC-01/02 ຫຼືທັງໝົດ?", "ໃຜລົງນາມ final design, accessibility, content/trust ແລະ developer readiness?"],
-    reviewDecisions: ["ອະນຸມັດ SCR-G01/G02/G03/G05 ເປັນ Guest/Pilot Must. Admin information architecture ຄຸ້ມ SCR-A00—A09; A00/A01/A02/A03/A04/A07/A08/A09 ເປັນ Admin Core ແລະ A05/A06 ເປັນ Admin Expansion. ການມີ visual baseline ຄົບບໍ່ໄດ້ບັງຄັບໃຫ້ launch ພ້ອມກັນ.", "ອະນຸມັດ <768, 768–1199, ≥1200; ຕ້ອງກວດຢ່າງໜ້ອຍ 360, 390, 768, 1024 ແລະ 1440px ພ້ອມ short-landscape/safe-area.", "ເພີ່ມ Consent denied/withdrawn, Source removed/takedown, Map app unavailable, Contact unavailable, Validation failure ແລະ Rate-limited/temporary failure ເຂົ້າ State Coverage.", "ສາມາດເລີ່ມ Final Design ໄດ້ຈາກ baseline ປັດຈຸບັນ; ແຕ່ UX-05 1.0 ຕ້ອງຜ່ານ UX-01—04, PRO-04, CON-02/04, UI-impact decisions ຂອງ CON-01/03/05 ແລະ TEC-01/02.", "Sign-off ແຍກ 4 ບົດບາດ: Product Owner, Frontend Lead, Content/Trust Owner ແລະ Accessibility Reviewer/QA; ຖ້າຄົນດຽວຮັບຫຼາຍບົດບາດຕ້ອງລົງນາມແຍກ."],
+    reviewDecisions: ["ອະນຸມັດ SCR-G01/G02/G03/G05 ເປັນ Guest/Pilot Must. Admin information architecture ຄຸ້ມ SCR-A00—A09; A00/A01/A02/A03/A04/A07/A08/A09 ເປັນ Admin Core ແລະ A05/A06 ເປັນ Admin Expansion. ການມີ visual baseline ຄົບບໍ່ໄດ້ບັງຄັບໃຫ້ launch ພ້ອມກັນ.", "ອະນຸມັດ <768, 768–1199, ≥1200; ຕ້ອງກວດຢ່າງໜ້ອຍ 360, 390, 768, 1024 ແລະ 1440px ພ້ອມ short-landscape/safe-area.", "ເພີ່ມ Consent denied/withdrawn, Source removed/takedown, Map app unavailable, Contact unavailable, Validation failure ແລະ Rate-limited/temporary failure ເຂົ້າ State Coverage.", "ອະນຸມັດ UX-05 1.0 ເປັນ Design Handoff Baseline. Backend/Auth/Persistence, Legal, manual accessibility ແລະ external usability ຖືກຕິດຕາມເປັນ execution/evidence gates.", "Sign-off ສຳລັບ production ແຍກ 4 ບົດບາດ: Product Owner, Frontend Lead, Content/Trust Owner ແລະ Accessibility Reviewer/QA; ຖ້າຄົນດຽວຮັບຫຼາຍບົດບາດຕ້ອງລົງນາມແຍກ."],
     artifacts: [{ label: "Admin Workflow Prototype R5.0", path: "/admin-prototype", action: "open", description: "Standalone functional prototype: task-first Content intake, 10 Modules, 55 views, seven workspace modes, accessible dropdown, readable Lao typography ແລະ typed session persistence." }, { label: "Final Design Gallery 0.11.0", path: "/final-design", action: "open", description: "Guest Prototype R2.3 ແລະ Admin Workflow Prototype R5.0 ຖືກ embed ຈາກ live source ໂດຍກົງ." }, { label: "ux05-admin-design-handoff-r5-2026-08-28.json", path: "/templates/ux05-admin-design-handoff-r5-2026-08-28.json", description: "Authoritative Admin R5.0 interaction, navigation, control, typography, responsive, persistence ແລະ technical handoff contract." }, { label: "ux05-admin-functional-coverage-r4-2026-08-28.json", path: "/templates/ux05-admin-functional-coverage-r4-2026-08-28.json", description: "Historical R4.1 functional coverage; superseded by Admin R5.0 Design Handoff." }, { label: "ux05-admin-workflow-prototype-r3-2026-08-28.json", path: "/templates/ux05-admin-workflow-prototype-r3-2026-08-28.json", description: "Historical navigation baseline; superseded by R5.0." }, { label: "ux05-guest-prototype-parity-2026-08-28.json", path: "/templates/ux05-guest-prototype-parity-2026-08-28.json", description: "ຫຼັກຖານ mapping ວ່າ Guest/Pilot Screen/State ໃນ Gallery ອ້າງ Prototype ໂດຍກົງ ແລະບໍ່ມີ UI ສຳເນົາ." }, { label: "ux-final-screen-specifications.json", path: "/templates/ux-final-screen-specifications.json", description: "Machine-readable purpose, route, required data, states, interactions ແລະ acceptance ຂອງ 4 Guest Screens ແລະ 10 Admin Modules." }, { label: "ux-screen-state-matrix.csv", path: "/templates/ux-screen-state-matrix.csv", description: "Matrix ກວດ state coverage ຂອງ Must ແລະ Should Screens ລວມ Default, Loading, Empty, Error, Stale, Sponsored, Unauthorized ແລະ Conflict." }, { label: "ux-handoff-traceability.csv", path: "/templates/ux-handoff-traceability.csv", description: "Screen-to-development mapping: Route, Requirement, Function, Entity, Event, Policy ແລະ Acceptance Owner." }, { label: "ux-final-handoff-checklist.json", path: "/templates/ux-final-handoff-checklist.json", description: "Gate/checklist ສຳລັບ Screen, responsive, state, traceability, asset, accessibility, open deviation ແລະ 4-role sign-off." }]
   }
 };
