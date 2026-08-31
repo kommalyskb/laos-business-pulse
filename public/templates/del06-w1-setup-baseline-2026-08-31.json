@@ -1,5 +1,6 @@
 {
-  "documentId": "DEL-06.1",
+  "documentId": "DEL-06",
+  "activityId": "W1",
   "parentDocumentId": "DEL-06",
   "version": "0.1",
   "status": "ready_to_start_actual_scope_participants_and_results_pending",
@@ -29,10 +30,10 @@
     "Verbal interest is not revenue, payment, deposit or LOI."
   ],
   "workingFiles": [
-    "del061-start-readiness-checklist-2026-08-31.csv",
-    "del061-pilot-scope-selection-2026-08-31.csv",
-    "del061-interview-register-2026-08-31.csv",
-    "del061-place-candidate-register-2026-08-31.csv"
+    "del06-w1-start-readiness-checklist-2026-08-31.csv",
+    "del06-w1-pilot-scope-selection-2026-08-31.csv",
+    "del06-w1-interview-register-2026-08-31.csv",
+    "del06-w1-place-candidate-register-2026-08-31.csv"
   ],
   "disclaimer": "The W1 procedure and templates are ready. Pilot scope, participants, interviews, evidence and expense are not completed until Founder records actual results."
 }
