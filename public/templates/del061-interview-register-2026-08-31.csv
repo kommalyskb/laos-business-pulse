@@ -1,0 +1,11 @@
+interview_id,subject_code,subject_type,recruitment_eligibility,scheduled_at,completed_at,consent_to_notes,consent_to_audio,audio_used,recent_real_case,current_workflow,missing_information,trust_cues,decision_action_or_owner_channel,key_problem,key_objection,observed_task_result,interpretation,evidence_reference,created_by,status,next_action
+INT-U001,U-001,User,"Recent relevant Place search",,,Pending,No,No,,,,,,,,,,,Founder,Planned,"Recruit and schedule"
+INT-U002,U-002,User,"Recent relevant Place search",,,Pending,No,No,,,,,,,,,,,Founder,Planned,"Recruit and schedule"
+INT-U003,U-003,User,"Recent relevant Place search",,,Pending,No,No,,,,,,,,,,,Founder,Planned,"Recruit and schedule"
+INT-U004,U-004,User,"Recent relevant Place search",,,Pending,No,No,,,,,,,,,,,Founder,Planned,"Recruit and schedule"
+INT-U005,U-005,User,"Recent relevant Place search",,,Pending,No,No,,,,,,,,,,,Founder,Planned,"Recruit and schedule"
+INT-U006,U-006,User,"Recent relevant Place search",,,Pending,No,No,,,,,,,,,,,Founder,Planned,"Recruit and schedule"
+INT-O001,O-001,Owner,"Manages Place information marketing or payment decision",,,Pending,No,No,,,,,,,,,,,Founder,Planned,"Recruit and schedule"
+INT-O002,O-002,Owner,"Manages Place information marketing or payment decision",,,Pending,No,No,,,,,,,,,,,Founder,Planned,"Recruit and schedule"
+INT-O003,O-003,Owner,"Manages Place information marketing or payment decision",,,Pending,No,No,,,,,,,,,,,Founder,Planned,"Recruit and schedule"
+INT-O004,O-004,Owner,"Manages Place information marketing or payment decision",,,Pending,No,No,,,,,,,,,,,Founder,Planned,"Recruit and schedule"

@@ -1,0 +1,38 @@
+{
+  "documentId": "DEL-06.1",
+  "parentDocumentId": "DEL-06",
+  "version": "0.1",
+  "status": "ready_to_start_actual_scope_participants_and_results_pending",
+  "updatedAt": "2026-08-31",
+  "title": "W1 Problem & Operating Setup",
+  "owner": "Founder",
+  "capacity": {"productiveDays": 4, "productiveHours": 32, "uncommittedDays": 1},
+  "outcomes": {
+    "completedUserInterviews": 6,
+    "completedOwnerInterviews": 4,
+    "pilotScope": "One Primary plus one Backup selected through evidence",
+    "placeCandidates": "Enough credible sources to forecast W2 target of 30 Places",
+    "operations": "Actual hours, expense, evidence IDs, blocker and W2 next action recorded"
+  },
+  "dayPlan": [
+    {"day": 1, "hours": 8, "focus": "Scope, script, evidence IDs, recruitment and candidate ledger"},
+    {"day": 2, "hours": 8, "focus": "3 User plus 2 Owner interviews"},
+    {"day": 3, "hours": 8, "focus": "3 User plus 2 Owner interviews"},
+    {"day": 4, "hours": 8, "focus": "Theme coding, candidate forecast, expense and W2 handoff"}
+  ],
+  "interviewRules": [
+    "Ask about recent real behavior before showing the solution.",
+    "Use neutral follow-ups and separate observation from interpretation.",
+    "No audio recording without explicit consent.",
+    "Public registers use U-### and O-### subject codes only.",
+    "Names, contact details, consent originals and recordings remain in restricted storage.",
+    "Verbal interest is not revenue, payment, deposit or LOI."
+  ],
+  "workingFiles": [
+    "del061-start-readiness-checklist-2026-08-31.csv",
+    "del061-pilot-scope-selection-2026-08-31.csv",
+    "del061-interview-register-2026-08-31.csv",
+    "del061-place-candidate-register-2026-08-31.csv"
+  ],
+  "disclaimer": "The W1 procedure and templates are ready. Pilot scope, participants, interviews, evidence and expense are not completed until Founder records actual results."
+}

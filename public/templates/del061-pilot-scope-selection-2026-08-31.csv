@@ -1,0 +1,4 @@
+scope_id,area_name,category,boundary,real_user_frequency_evidence,source_availability_evidence,decision_action_fit,founder_access,commercial_fit,risk_or_rights_issue,estimated_w1_w2_cost_lak,decision,decision_reason,evidence_references,decided_at,decided_by,status
+SCOPE-01,,,,,,,,,,,,,,,Founder,Planned
+SCOPE-02,,,,,,,,,,,,,,,Founder,Planned
+SCOPE-03,,,,,,,,,,,,,,,Founder,Planned
