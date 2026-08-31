@@ -2,7 +2,7 @@ check_id,control,ready_when,current_value,evidence_reference,owner,due_date,stat
 W1-R01,Validation authority,"25m LAK ceiling and Tranche 1 maximum 7.5m LAK recorded","25m total; Tranche 1 max 7.5m","BUS-05; DEL-06",Founder,2026-08-31,Ready,,
 W1-R02,Founder capacity,"32 productive hours and one uncommitted weekday protected","32 hours; 4 productive days; 1 uncommitted day","DEL-01; DEL-06",Founder,2026-08-31,Ready,,
 W1-R03,WIP,"Only W1 Problem/Setup plus Operations/Evidence active","1 Primary Experiment + 1 Operations/Evidence","DEL-01",Founder,2026-08-31,Ready,,
-W1-R04,Pilot scope,"Primary area/category and Backup selected",,,Founder,,Planned,"Actual scope not selected","Complete Scope Selection Register"
+W1-R04,Pilot scope,"Primary area/category and Backup selected","Primary: Chanthabouly urban core + Restaurant + 30 Places; Backup: Sisattanak + Restaurant","Scope Selection Register; Founder approval 2026-08-31",Founder,2026-08-31,Ready,,"Confirm field route and begin recruitment"
 W1-R05,Interview ethics,"Purpose voluntary participation note/audio consent and privacy rule prepared",,,Founder,,Planned,"Actual consent method not recorded","Record consent script and audio default OFF"
 W1-R06,Evidence storage,"Restricted originals separated from public references",,,Founder,,Planned,"Actual storage reference not recorded","Create restricted evidence location and reference convention"
 W1-R07,Recruitment list,"At least 8 User and 6 Owner candidates exist",,,Founder,,Planned,"Candidates not recorded","Recruit candidates and schedule 6 + 4 completed interviews"

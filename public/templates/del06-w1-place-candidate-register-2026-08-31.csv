@@ -1,6 +1,6 @@
 candidate_id,scope_id,place_name,category,area,canonical_public_source_url,source_provider,review_link_available,core_data_available,contact_or_map_available,checked_date,rights_or_attribution_risk,duplicate_candidate,candidate_decision,evidence_reference,created_by,status,next_action
-PLC-C001,,,,,,,,,,,,,,,Founder,Planned,"Add first candidate after scope selection"
-PLC-C002,,,,,,,,,,,,,,,Founder,Planned,"Add first candidate after scope selection"
-PLC-C003,,,,,,,,,,,,,,,Founder,Planned,"Add first candidate after scope selection"
-PLC-C004,,,,,,,,,,,,,,,Founder,Planned,"Add first candidate after scope selection"
-PLC-C005,,,,,,,,,,,,,,,Founder,Planned,"Add first candidate after scope selection"
+PLC-C001,SCOPE-01,,Restaurant,"Chanthabouly urban core, Vientiane Capital",,,,,,,,,,,Founder,Planned,"Identify candidate and verify canonical source"
+PLC-C002,SCOPE-01,,Restaurant,"Chanthabouly urban core, Vientiane Capital",,,,,,,,,,,Founder,Planned,"Identify candidate and verify canonical source"
+PLC-C003,SCOPE-01,,Restaurant,"Chanthabouly urban core, Vientiane Capital",,,,,,,,,,,Founder,Planned,"Identify candidate and verify canonical source"
+PLC-C004,SCOPE-01,,Restaurant,"Chanthabouly urban core, Vientiane Capital",,,,,,,,,,,Founder,Planned,"Identify candidate and verify canonical source"
+PLC-C005,SCOPE-01,,Restaurant,"Chanthabouly urban core, Vientiane Capital",,,,,,,,,,,Founder,Planned,"Identify candidate and verify canonical source"

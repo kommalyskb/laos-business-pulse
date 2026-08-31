@@ -3,15 +3,38 @@
   "activityId": "W1",
   "parentDocumentId": "DEL-06",
   "version": "0.1",
-  "status": "ready_to_start_actual_scope_participants_and_results_pending",
+  "status": "ready_to_start_scope_approved_participants_and_results_pending",
   "updatedAt": "2026-08-31",
   "title": "W1 Problem & Operating Setup",
   "owner": "Founder",
   "capacity": {"productiveDays": 4, "productiveHours": 32, "uncommittedDays": 1},
+  "pilotScope": {
+    "approvedAt": "2026-08-31",
+    "approvedBy": "Founder",
+    "primary": {
+      "area": "Chanthabouly urban core, Vientiane Capital",
+      "category": "Restaurant",
+      "targetPlaces": 30
+    },
+    "backup": {
+      "area": "Sisattanak, Vientiane Capital",
+      "category": "Restaurant",
+      "activationRule": "Use only through a Decision Record when Primary cannot meet recruitment, source-availability or founder-access gate."
+    },
+    "evidenceBoundary": "Selection is an approved test scope, not evidence that demand, content supply or willingness to pay has passed."
+  },
+  "recruitmentPlan": {
+    "userCandidates": 8,
+    "completedUsers": 6,
+    "completedUserMix": "4 Vientiane residents plus 2 recent Vientiane visitors, each with a recent restaurant search",
+    "ownerCandidates": 6,
+    "completedOwners": 4,
+    "completedOwnerMix": "2 Lao-food restaurants plus 1 visitor-oriented restaurant plus 1 new or social-media-active restaurant"
+  },
   "outcomes": {
     "completedUserInterviews": 6,
     "completedOwnerInterviews": 4,
-    "pilotScope": "One Primary plus one Backup selected through evidence",
+    "pilotScope": "Approved: Primary Chanthabouly restaurants with 30-Place target; Backup Sisattanak restaurants",
     "placeCandidates": "Enough credible sources to forecast W2 target of 30 Places",
     "operations": "Actual hours, expense, evidence IDs, blocker and W2 next action recorded"
   },
@@ -35,5 +58,5 @@
     "del06-w1-interview-register-2026-08-31.csv",
     "del06-w1-place-candidate-register-2026-08-31.csv"
   ],
-  "disclaimer": "The W1 procedure and templates are ready. Pilot scope, participants, interviews, evidence and expense are not completed until Founder records actual results."
+  "disclaimer": "The Pilot scope is approved and the W1 procedure/templates are ready. Participants, interviews, Place candidates, evidence and expense are not completed until Founder records actual results."
 }
