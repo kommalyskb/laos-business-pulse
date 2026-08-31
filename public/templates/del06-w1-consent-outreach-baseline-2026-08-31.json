@@ -1,0 +1,48 @@
+{
+  "documentId": "DEL-06",
+  "activityId": "W1",
+  "version": "0.1",
+  "updatedAt": "2026-08-31",
+  "consent": {
+    "participationVoluntary": true,
+    "noteConsentRequired": true,
+    "audioDefault": false,
+    "separateAudioConsentRequired": true,
+    "stopIfNoteConsentIsNo": true,
+    "publicSubjectCodeOnly": true,
+    "minorsExcluded": true,
+    "withdrawalRule": "Stop when consent is withdrawn and remove the related audio evidence.",
+    "laoScript": [
+      "ນີ້ແມ່ນການສຶກສາບັນຫາການຄົ້ນຫາຮ້ານອາຫານ ເພື່ອປັບປຸງແນວຄິດຂອງ Platform; ບໍ່ແມ່ນການຂາຍ.",
+      "ການເຂົ້າຮ່ວມເປັນຄວາມສະໝັກໃຈ. ທ່ານສາມາດບໍ່ຕອບບາງຄຳຖາມ ຫຼືຢຸດໄດ້ທຸກເວລາ.",
+      "ຊື່, ການຕິດຕໍ່, ຄຳຍິນຍອມ ແລະບັນທຶກດິບຈະຢູ່ໃນພື້ນທີ່ຈຳກັດ; ເອກະສານສາທາລະນະໃຊ້ພຽງລະຫັດ.",
+      "ທ່ານຍິນຍອມໃຫ້ຈົດບັນທຶກການສຳພາດບໍ?",
+      "ທ່ານຍິນຍອມໃຫ້ບັນທຶກສຽງບໍ?"
+    ],
+    "recordedFields": ["consent_to_notes", "consent_to_audio", "audio_used"]
+  },
+  "storage": {
+    "restrictedLocalPath": ".private/validation-pilot/w1",
+    "publicReferencePattern": "PRIVATE:W1/{subject_code}/{type}",
+    "restrictedTypes": ["name_and_contact", "consent_original", "raw_notes", "audio", "receipts", "signed_documents"],
+    "publicAllowedFields": ["candidate_or_subject_code", "status", "non_sensitive_summary", "coded_evidence_reference"],
+    "encryptionOrBackupClaim": "Not asserted until separately configured and tested."
+  },
+  "outreach": {
+    "userMessage": "ຂ້ອຍກຳລັງສຶກສາວິທີທີ່ຄົນຄົ້ນຫາ ແລະຕັດສິນໃຈເລືອກຮ້ານອາຫານໃນວຽງຈັນ. ການສຳພາດໃຊ້ເວລາ 20–30 ນາທີ, ເປັນຄວາມສະໝັກໃຈ ແລະບໍ່ແມ່ນການຂາຍ. ທ່ານຫາກໍ່ເຄີຍຄົ້ນຫາຮ້ານອາຫານໃນ 30 ມື້ຜ່ານມາບໍ?",
+    "ownerMessage": "ຂ້ອຍກຳລັງສຶກສາບັນຫາທີ່ຮ້ານອາຫານພົບໃນການໃຫ້ລູກຄ້າຄົ້ນພົບ, ເຫັນຂໍ້ມູນທີ່ຖືກຕ້ອງ ແລະຕິດຕໍ່ຮ້ານ. ການສຳພາດໃຊ້ເວລາ 25–35 ນາທີ, ບໍ່ແມ່ນການສະເໜີຂາຍ. ທ່ານເປັນຜູ້ຈັດການຂໍ້ມູນ, Marketing ຫຼືການຕັດສິນໃຈຈ່າຍຂອງຮ້ານບໍ?",
+    "screeningQuestions": [
+      "Did the user search for a Vientiane restaurant in the last 30 days?",
+      "Is the user a Vientiane resident or recent visitor?",
+      "Is the owner candidate inside the approved area/category?",
+      "Does the owner candidate manage information, marketing or payment decisions?",
+      "Is the candidate available for the required interview duration?"
+    ],
+    "compensationRule": "Do not promise compensation unless it has been separately approved."
+  },
+  "status": {
+    "consentAndStorage": "ready",
+    "recruitment": "candidate_slots_ready_actual_candidates_pending"
+  },
+  "disclaimer": "No real candidate, outreach response, schedule or completed interview is claimed by this baseline."
+}

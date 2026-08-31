@@ -3,7 +3,7 @@
   "activityId": "W1",
   "parentDocumentId": "DEL-06",
   "version": "0.1",
-  "status": "ready_to_start_scope_approved_participants_and_results_pending",
+  "status": "scope_consent_and_storage_ready_recruitment_pending",
   "updatedAt": "2026-08-31",
   "title": "W1 Problem & Operating Setup",
   "owner": "Founder",
@@ -31,6 +31,19 @@
     "completedOwners": 4,
     "completedOwnerMix": "2 Lao-food restaurants plus 1 visitor-oriented restaurant plus 1 new or social-media-active restaurant"
   },
+  "consentMethod": {
+    "noteConsentRequired": true,
+    "audioDefault": false,
+    "separateAudioConsentRequired": true,
+    "stopIfNoteConsentIsNo": true,
+    "minorsExcluded": true
+  },
+  "evidenceStorage": {
+    "restrictedLocalPath": ".private/validation-pilot/w1",
+    "publicReferencePattern": "PRIVATE:W1/{subject_code}/{type}",
+    "publicRegisterRule": "Use subject codes and non-sensitive summaries only.",
+    "encryptionOrBackupClaim": "Not asserted until separately configured and tested."
+  },
   "outcomes": {
     "completedUserInterviews": 6,
     "completedOwnerInterviews": 4,
@@ -55,8 +68,10 @@
   "workingFiles": [
     "del06-w1-start-readiness-checklist-2026-08-31.csv",
     "del06-w1-pilot-scope-selection-2026-08-31.csv",
+    "del06-w1-recruitment-candidate-register-2026-08-31.csv",
+    "del06-w1-consent-outreach-baseline-2026-08-31.json",
     "del06-w1-interview-register-2026-08-31.csv",
     "del06-w1-place-candidate-register-2026-08-31.csv"
   ],
-  "disclaimer": "The Pilot scope is approved and the W1 procedure/templates are ready. Participants, interviews, Place candidates, evidence and expense are not completed until Founder records actual results."
+  "disclaimer": "Pilot scope, consent method, restricted local path and public templates are ready. Real candidates, outreach, schedules, interviews, Place candidates, evidence and expense are not completed until Founder records actual results."
 }
