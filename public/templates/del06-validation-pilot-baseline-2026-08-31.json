@@ -1,0 +1,62 @@
+{
+  "documentId": "DEL-06",
+  "version": "0.1",
+  "status": "ready_to_execute_actual_results_not_started",
+  "updatedAt": "2026-08-31",
+  "title": "Validation Pilot Execution Plan",
+  "owner": "Founder",
+  "durationWeeks": 6,
+  "capacity": {
+    "productivePersonDaysPerWeek": 4,
+    "productiveHoursPerWeek": 32,
+    "uncommittedDaysPerWeek": 1,
+    "wipLimit": "1 Primary Validation Experiment + 1 Operations/Evidence item"
+  },
+  "authority": {
+    "validationPilotApproved": true,
+    "productionBuildApproved": false,
+    "publicPilotApproved": false,
+    "totalCeilingLak": 25000000,
+    "founderLivingLak": 15000000,
+    "validationWorkCeilingLak": 10000000,
+    "plannedNonContingencyWorkLak": 7900000,
+    "contingencyLak": 2100000
+  },
+  "targets": {
+    "places": 100,
+    "users": 20,
+    "placeOwners": 15,
+    "shopsApproached": 30,
+    "paidOrDeposit": 3,
+    "signedLoi": 2,
+    "foundingPartnerPilotPriceLakPerMonth": 200000,
+    "sponsoredCampaignPriceStatus": "1000000 LAK remains a hypothesis and is not offered in this Pilot"
+  },
+  "weeks": [
+    {"id": "W1", "primary": "Problem and operating setup", "cumulative": "6 users, 4 owners, first Place candidates"},
+    {"id": "W2", "primary": "Problem/supply Gate 1", "cumulative": "10 users, 8 owners, 30 Places"},
+    {"id": "W3", "primary": "Clickable value test", "cumulative": "15 users, 12 owners, 60 Places"},
+    {"id": "W4", "primary": "Technical/policy Gate 2", "cumulative": "20 users, 15 owners, 60 Places and critical-journey evidence"},
+    {"id": "W5", "primary": "Supply completion and pre-sell", "cumulative": "100 Places and first 15 shop outreach"},
+    {"id": "W6", "primary": "Commercial proof and final decision", "cumulative": "30 shop outreach and G6 evidence pack"}
+  ],
+  "budgetTranches": [
+    {"gate": "G2", "weeks": "W1-W2", "percent": 30, "maximumLak": 7500000, "livingLak": 5000000, "workCeilingLak": 2500000},
+    {"gate": "G4", "weeks": "W3-W4", "percent": 35, "maximumLak": 8750000, "livingLak": 5000000, "workCeilingLak": 3750000},
+    {"gate": "G6", "weeks": "W5-W6", "percent": 35, "maximumLak": 8750000, "livingLak": 5000000, "workCeilingLak": 3750000}
+  ],
+  "evidenceRules": [
+    "Verbal interest is not revenue or commitment.",
+    "Paid/deposit requires payment evidence; LOI requires signer, date and scope.",
+    "Original restricted evidence stays outside the public repository; public registers contain references and non-sensitive summaries.",
+    "Actual result is never pre-filled as passed.",
+    "GO at G6 only authorizes preparation of a separate Production proposal and budget."
+  ],
+  "workingFiles": [
+    "del06-weekly-execution-register-2026-08-31.csv",
+    "del06-validation-evidence-register-2026-08-31.csv",
+    "del06-expense-register-2026-08-31.csv",
+    "del06-gate-decision-register-2026-08-31.csv"
+  ],
+  "disclaimer": "This plan is ready to execute but contains no actual Pilot result. It does not authorize Production Build, Public Pilot, hiring or long-term vendor commitment."
+}

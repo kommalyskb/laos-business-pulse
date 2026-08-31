@@ -1,0 +1,4 @@
+gate_id,review_date,reviewer,decision_focus,places_target,places_actual,users_target,users_actual,owners_target,owners_actual,shops_approached_target,shops_approached_actual,paid_or_deposit_target,paid_or_deposit_actual,signed_loi_target,signed_loi_actual,work_spent_lak,total_spent_lak,evidence_ids,unresolved_risks,decision,next_authority,decision_reason,status
+G2,,Founder,Problem and first supply proof,30,,10,,8,,0,,0,,0,,,,,,,"GO releases only Tranche 2; PIVOT states bounded retest; NO-GO stops",,Planned
+G4,,Founder,User value and technical policy feasibility,60,,20,,15,,0,,0,,0,,,,,,,"GO releases only Tranche 3; PIVOT states bounded retest; NO-GO stops",,Planned
+G6,,Founder,Full Validation decision,100,,20,,15,,30,,3,,2,,,,,,,"GO prepares separate Production proposal; it does not authorize Production",,Planned

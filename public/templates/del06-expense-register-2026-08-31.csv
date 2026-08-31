@@ -1,0 +1,5 @@
+expense_id,date,week,tranche,cost_class,category,supplier_or_payee_ref,purpose,amount_lak,committed_or_spent,evidence_type,evidence_reference,comparison_1_ref,comparison_2_ref,selection_reason,contingency_decision_id,approved_by,running_work_spent_lak,running_total_spent_lak,remaining_work_ceiling_lak,remaining_total_ceiling_lak,status,notes
+VAL-X001,,W1,Tranche 1,Validation work,Interview and travel,,Pilot interview travel,,,,,,,,,Founder,,,10000000,25000000,Planned,
+VAL-X002,,W1,Tranche 1,Founder living,Essential living,,W1-W2 living allocation,5000000,Committed,Founder approved baseline,,,,,,Founder,,,10000000,25000000,Planned,"Separate from Validation work cost"
+VAL-X003,,W3,Tranche 2,Founder living,Essential living,,W3-W4 living allocation,5000000,Not committed until G2,Founder approved baseline,,,,,,Founder,,,10000000,25000000,Blocked,"Release only after G2 GO"
+VAL-X004,,W5,Tranche 3,Founder living,Essential living,,W5-W6 living allocation,5000000,Not committed until G4,Founder approved baseline,,,,,,Founder,,,10000000,25000000,Blocked,"Release only after G4 GO"

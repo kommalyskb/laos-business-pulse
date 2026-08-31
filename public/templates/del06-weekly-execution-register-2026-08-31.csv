@@ -1,0 +1,7 @@
+week,primary_experiment,planned_hours,actual_hours,cumulative_places_target,cumulative_places_actual,cumulative_users_target,cumulative_users_actual,cumulative_owners_target,cumulative_owners_actual,shops_approached_target,shops_approached_actual,paid_or_deposit_target,paid_or_deposit_actual,signed_loi_target,signed_loi_actual,planned_outcome,actual_result,evidence_ids,expense_total_lak,blocker,next_action,status
+W1,Problem and operating setup,32,,0,,6,,4,,0,,0,,0,,"Interview script scope evidence IDs and first Place candidates",,,,,"Start interviews and candidate ledger",Planned
+W2,Problem and first supply gate,32,,30,,10,,8,,0,,0,,0,,"Problem proof repeatable workflow and cost per Place",,,,,"Record G2 before Tranche 2",Planned
+W3,Clickable value test,32,,60,,15,,12,,0,,0,,0,,"Feed Search Place and Map Call Message task evidence",,,,,"Fix only evidence-backed critical flow issues",Planned
+W4,Technical and policy gate,32,,60,,20,,15,,0,,0,,0,,"Link fallback mobile EssentialOnly and takedown evidence",,,,,"Record G4 before Tranche 3",Planned
+W5,Supply completion and first pre-sell,32,,100,,20,,15,,15,,0,,0,,"100 Places and first 15 Founding Partner offers",,,,,"Continue controlled outreach",Planned
+W6,Commercial proof and final decision,32,,100,,20,,15,,30,,3,,2,,"Complete evidence cost model and GO PIVOT NO-GO",,,,,"Record G6 and stop new spending until decision",Planned
